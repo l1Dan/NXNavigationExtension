@@ -1,0 +1,302 @@
+//
+//  UIViewController+UINavigationExtension.m
+//  UINavigationExtension
+//
+//  Created by lidan on 2020/9/23.
+//
+
+#import <objc/runtime.h>
+
+#import "UINavigationBar+UINavigationExtension.h"
+#import "UINavigationController+UINavigationExtension.h"
+#import "UIViewController+UINavigationExtension.h"
+#import "UEConfiguration.h"
+#import "UENavigationBar.h"
+
+@interface UIViewController (UINavigationExtension)
+
+@property (nonatomic, assign, getter=isUeViewWillDisappear) BOOL ue_viewWillDisappear;
+
+@end
+
+@implementation UIViewController (UINavigationExtension)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewDidLoad), @selector(ue_viewDidLoad));
+        UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewWillAppear:), @selector(ue_viewWillAppear:));
+        UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewDidAppear:), @selector(ue_viewDidAppear:));
+        UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewWillDisappear:), @selector(ue_viewWillDisappear:));
+
+    });
+}
+
+- (void)ue_viewDidLoad {
+    if (self.navigationController && self.navigationController.ue_useNavigationBar) {
+        [self.navigationController configureNavigationBar];
+        
+        self.ue_navigationBar.backgroundColor = self.ue_navigationBarBackgroundColor;
+        self.ue_navigationBar.shadowImageView.image = self.ue_shadowImage;
+        
+        UEConfiguration *configuration = [UEConfiguration defaultConfiguration];
+        if (self.ue_shadowImageTintColor) {
+            self.ue_navigationBar.shadowImageView.image = [configuration imageFromColor: self.ue_shadowImageTintColor];
+        }
+        self.ue_navigationBar.backgroundImageView.image = self.ue_navigationBarBackgroundImage;
+        self.ue_navigationBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, configuration.navigationBarHeight);
+        [self.ue_navigationBar enableBlurEffect:self.ue_useSystemBlurNavigationBar];
+        
+        if ([self.view isKindOfClass:[UIScrollView class]]) {
+            [self.navigationController.view insertSubview:self.ue_navigationBar atIndex:1];
+        } else {
+            [self.view addSubview:self.ue_navigationBar];
+        }
+        
+        if (self.parentViewController && ![self.parentViewController isKindOfClass:[UINavigationController class]] && self.ue_automaticallyHideNavigationBarInChildViewController) {
+            self.ue_navigationBar.hidden = YES;
+        }
+    }
+    
+    [self ue_viewDidLoad];
+}
+
+- (void)ue_viewWillAppear:(BOOL)animated {
+    if (self.navigationController && self.navigationController.ue_useNavigationBar) {
+        self.navigationController.navigationBar.barTintColor = self.ue_barBarTintColor;
+        self.navigationController.navigationBar.tintColor = self.ue_barTintColor;
+        self.navigationController.navigationBar.titleTextAttributes = self.ue_titleTextAttributes;
+        [self.view bringSubviewToFront:self.ue_navigationBar];
+        
+        __weak typeof(self) weakSelf = self;
+        self.navigationController.navigationBar.ue_didUpdateFrameHandler = ^(CGRect frame) {
+            if (weakSelf.isUeViewWillDisappear) { return; }
+            
+            CGRect newFrame = CGRectMake(0, 0, frame.size.width, frame.size.height + frame.origin.y);
+            weakSelf.ue_navigationBar.frame = newFrame;
+        };
+        
+        if (self.isUeHidesNavigationBar) {
+            UEConfiguration *configuration = [UEConfiguration defaultConfiguration];
+            self.ue_navigationBar.shadowImageView.image = [configuration imageFromColor:[UIColor clearColor]];
+            self.ue_navigationBar.backgroundImageView.image = [configuration imageFromColor:[UIColor clearColor]];
+            self.ue_navigationBar.backgroundColor = [UIColor clearColor];
+            self.ue_navigationBar.userInteractionEnabled = NO;
+            self.navigationController.navigationBar.userInteractionEnabled = NO;
+        } else {
+            self.ue_navigationBar.userInteractionEnabled = YES;
+            self.navigationController.navigationBar.userInteractionEnabled = YES;
+        }
+    }
+    
+    self.ue_viewWillDisappear = NO;
+    [self ue_viewWillAppear: animated];
+}
+
+- (void)ue_viewWillDisappear:(BOOL)animated {
+    self.ue_viewWillDisappear = YES;
+    [self ue_viewWillDisappear: animated];
+}
+
+- (void)ue_viewDidAppear:(BOOL)animated {
+    if (self.navigationController && self.navigationController.ue_useNavigationBar) {
+        BOOL interactivePopGestureRecognizerEnabled = self.navigationController.viewControllers.count > 1;
+        self.navigationController.interactivePopGestureRecognizer.enabled = interactivePopGestureRecognizerEnabled;
+    }
+    
+    [self ue_viewDidAppear: animated];
+}
+
+#pragma mark - Private
+- (UENavigationBar *)ue_navigationBar {
+    UENavigationBar *bar = objc_getAssociatedObject(self, _cmd);
+    if (bar && [bar isKindOfClass:[UENavigationBar class]]) {
+        return bar;
+    }
+    bar = [[UENavigationBar alloc] initWithFrame:CGRectZero];
+    objc_setAssociatedObject(self, _cmd, bar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return bar;
+}
+
+- (UIColor *)ue_navigationBarBackgroundColor {
+    UIColor *color = objc_getAssociatedObject(self, _cmd);
+    if (color && [color isKindOfClass:[UIColor class]]) {
+        return color;
+    }
+    color = [UEConfiguration defaultConfiguration].backgorundColor;
+    objc_setAssociatedObject(self, _cmd, color, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return color;
+}
+
+- (UIImage *)ue_navigationBarBackgroundImage {
+    UIImage *image = objc_getAssociatedObject(self, _cmd);
+    if (image && [image isKindOfClass:[UIImage class]]) {
+        return image;
+    }
+    image = [UEConfiguration defaultConfiguration].backgorundImage;
+    objc_setAssociatedObject(self, _cmd, image, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return image;
+}
+
+- (UIColor *)ue_barBarTintColor {
+    UIColor *barBarTintColor = objc_getAssociatedObject(self, _cmd);
+    if (barBarTintColor && [barBarTintColor isKindOfClass:[UIColor class]]) {
+        return barBarTintColor;
+    }
+    barBarTintColor = nil;
+    objc_setAssociatedObject(self, _cmd, barBarTintColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return barBarTintColor;
+}
+
+- (UIColor *)ue_barTintColor {
+    UIColor *barTintColor = objc_getAssociatedObject(self, _cmd);
+    if (barTintColor && [barTintColor isKindOfClass:[UIColor class]]) {
+        return barTintColor;
+    }
+    barTintColor = [UEConfiguration defaultConfiguration].tintColor;
+    objc_setAssociatedObject(self, _cmd, barTintColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return barTintColor;
+}
+
+- (NSDictionary<NSAttributedStringKey,id> *)ue_titleTextAttributes {
+    NSDictionary *titleTextAttributes = objc_getAssociatedObject(self, _cmd);
+    if (titleTextAttributes && [titleTextAttributes isKindOfClass:[NSDictionary class]]) {
+        return titleTextAttributes;
+    }
+    titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
+    objc_setAssociatedObject(self, _cmd, titleTextAttributes, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return titleTextAttributes;
+}
+
+- (UIImage *)ue_shadowImage {
+    UIImage *shadowImage = objc_getAssociatedObject(self, _cmd);
+    if (shadowImage && [shadowImage isKindOfClass:[UIImage class]]) {
+        return shadowImage;
+    }
+    shadowImage = [UEConfiguration defaultConfiguration].shadowImage;
+    objc_setAssociatedObject(self, _cmd, shadowImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return shadowImage;
+}
+
+- (UIColor *)ue_shadowImageTintColor {
+    UIColor *shadowImageTintColor = objc_getAssociatedObject(self, _cmd);
+    if (shadowImageTintColor && [shadowImageTintColor isKindOfClass:[UIColor class]]) {
+        return shadowImageTintColor;
+    }
+    shadowImageTintColor = nil;
+    objc_setAssociatedObject(self, _cmd, shadowImageTintColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return shadowImageTintColor;
+}
+
+- (UIImage *)ue_backImage {
+    UIImage *backImage = objc_getAssociatedObject(self, _cmd);
+    if (backImage && [backImage isKindOfClass:[UIImage class]]) {
+        return backImage;
+    }
+    backImage = [UEConfiguration defaultConfiguration].backImage;
+    objc_setAssociatedObject(self, _cmd, backImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return backImage;
+}
+
+- (UIView *)ue_backButtonCustomView {
+    UIView *backButtonCustomView = objc_getAssociatedObject(self, _cmd);
+    if (backButtonCustomView && [backButtonCustomView isKindOfClass:[UIView class]]) {
+        return backButtonCustomView;
+    }
+    backButtonCustomView = [UEConfiguration defaultConfiguration].backButtonCustomView;
+    objc_setAssociatedObject(self, _cmd, backButtonCustomView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return backButtonCustomView;
+}
+
+- (BOOL)isUeUseSystemBlurNavigationBar {
+    NSNumber *useSystemBlurNavigationBar = objc_getAssociatedObject(self, _cmd);
+    if (useSystemBlurNavigationBar && [useSystemBlurNavigationBar isKindOfClass:[NSNumber class]]) {
+        return [useSystemBlurNavigationBar boolValue];
+    }
+    useSystemBlurNavigationBar = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, useSystemBlurNavigationBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [useSystemBlurNavigationBar boolValue];
+}
+
+- (BOOL)isUeDisableInteractivePopGesture {
+    NSNumber *disableInteractivePopGesture = objc_getAssociatedObject(self, _cmd);
+    if (disableInteractivePopGesture && [disableInteractivePopGesture isKindOfClass:[NSNumber class]]) {
+        return [disableInteractivePopGesture boolValue];
+    }
+    disableInteractivePopGesture = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, disableInteractivePopGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [disableInteractivePopGesture boolValue];
+}
+
+- (BOOL)isUeEnableFullScreenInteractivePopGesture {
+    NSNumber *enableFullScreenInteractivePopGesture = objc_getAssociatedObject(self, _cmd);
+    if (enableFullScreenInteractivePopGesture && [enableFullScreenInteractivePopGesture isKindOfClass:[NSNumber class]]) {
+        return [enableFullScreenInteractivePopGesture boolValue];
+    }
+    enableFullScreenInteractivePopGesture = [NSNumber numberWithBool:[UEConfiguration defaultConfiguration].isFullscreenPopGestureEnable];
+    objc_setAssociatedObject(self, _cmd, enableFullScreenInteractivePopGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [enableFullScreenInteractivePopGesture boolValue];
+}
+
+- (BOOL)isUeAutomaticallyHideNavigationBarInChildViewController {
+    NSNumber *automaticallyHideNavigationBarInChildViewController = objc_getAssociatedObject(self, _cmd);
+    if (automaticallyHideNavigationBarInChildViewController && [automaticallyHideNavigationBarInChildViewController isKindOfClass:[NSNumber class]]) {
+        return [automaticallyHideNavigationBarInChildViewController boolValue];
+    }
+    automaticallyHideNavigationBarInChildViewController = [NSNumber numberWithBool:YES];
+    objc_setAssociatedObject(self, _cmd, automaticallyHideNavigationBarInChildViewController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [automaticallyHideNavigationBarInChildViewController boolValue];
+}
+
+- (BOOL)isUeHidesNavigationBar {
+    NSNumber *hidesNavigationBar = objc_getAssociatedObject(self, _cmd);
+    if (hidesNavigationBar && [hidesNavigationBar isKindOfClass:[NSNumber class]]) {
+        return [hidesNavigationBar boolValue];
+    }
+    hidesNavigationBar = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, hidesNavigationBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [hidesNavigationBar boolValue];
+}
+
+- (BOOL)isUeViewWillDisappear {
+    NSNumber *viewWillDisappear = objc_getAssociatedObject(self, _cmd);
+    if (viewWillDisappear && [viewWillDisappear isKindOfClass:[NSNumber class]]) {
+        return [viewWillDisappear boolValue];
+    }
+    viewWillDisappear = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, viewWillDisappear, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [viewWillDisappear boolValue];
+}
+
+- (void)setUe_viewWillDisappear:(BOOL)ue_viewWillDisappear {
+    objc_setAssociatedObject(self, _cmd, [NSNumber numberWithBool:ue_viewWillDisappear], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CGFloat)ue_interactivePopMaxAllowedDistanceToLeftEdge {
+    NSNumber *interactivePopMaxAllowedDistanceToLeftEdge = objc_getAssociatedObject(self, _cmd);
+    if (interactivePopMaxAllowedDistanceToLeftEdge && [interactivePopMaxAllowedDistanceToLeftEdge isKindOfClass:[NSNumber class]]) {
+#if CGFLOAT_IS_DOUBLE
+        return [interactivePopMaxAllowedDistanceToLeftEdge doubleValue];
+#else
+        return [interactivePopMaxAllowedDistanceToLeftEdge floatValue];
+#endif
+    }
+    return 0.0;
+}
+
+- (void)setUe_interactivePopMaxAllowedDistanceToLeftEdge:(CGFloat)ue_interactivePopMaxAllowedDistanceToLeftEdge {
+    NSNumber *interactivePopMaxAllowedDistanceToLeftEdge;
+#if CGFLOAT_IS_DOUBLE
+    interactivePopMaxAllowedDistanceToLeftEdge = [NSNumber numberWithDouble:MAX(0, ue_interactivePopMaxAllowedDistanceToLeftEdge)];
+#else
+    interactivePopMaxAllowedDistanceToLeftEdge = [NSNumber numberWithFloat:MAX(0, ue_interactivePopMaxAllowedDistanceToLeftEdge)];
+#endif
+    
+    objc_setAssociatedObject(self, @selector(ue_interactivePopMaxAllowedDistanceToLeftEdge), interactivePopMaxAllowedDistanceToLeftEdge, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)ue_ue_triggerSystemBackButtonHandler {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+@end
