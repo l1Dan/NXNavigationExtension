@@ -191,6 +191,10 @@
 
 #pragma mark - UINavigationBarDelegate
 - (BOOL)ue_navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item {
+    if (self.viewControllers.count <= 1) {
+        return [self ue_navigationBar:navigationBar shouldPopItem:item];
+    }
+    
     UIViewController *topViewController = self.ue_willPopViewController;
     if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willJumpToViewControllerUsingInteractivePopGesture:)]) {
         // 已经调用手势滑动
