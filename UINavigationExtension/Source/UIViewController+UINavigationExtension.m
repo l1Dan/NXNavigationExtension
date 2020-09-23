@@ -15,7 +15,7 @@
 
 @interface UIViewController (UINavigationExtension)
 
-@property (nonatomic, assign, getter=isUeViewWillDisappear) BOOL ue_viewWillDisappear;
+@property (nonatomic, assign) BOOL ue_viewWillDisappear;
 
 @end
 
@@ -70,13 +70,13 @@
         
         __weak typeof(self) weakSelf = self;
         self.navigationController.navigationBar.ue_didUpdateFrameHandler = ^(CGRect frame) {
-            if (weakSelf.isUeViewWillDisappear) { return; }
+            if (weakSelf.ue_viewWillDisappear) { return; }
             
             CGRect newFrame = CGRectMake(0, 0, frame.size.width, frame.size.height + frame.origin.y);
             weakSelf.ue_navigationBar.frame = newFrame;
         };
         
-        if (self.isUeHidesNavigationBar) {
+        if (self.ue_hidesNavigationBar) {
             UEConfiguration *configuration = [UEConfiguration defaultConfiguration];
             self.ue_navigationBar.shadowImageView.image = [configuration imageFromColor:[UIColor clearColor]];
             self.ue_navigationBar.backgroundImageView.image = [configuration imageFromColor:[UIColor clearColor]];
@@ -94,6 +94,7 @@
 }
 
 - (void)ue_viewWillDisappear:(BOOL)animated {
+    self.navigationController.ue_willPopViewController = self;
     self.ue_viewWillDisappear = YES;
     [self ue_viewWillDisappear: animated];
 }
@@ -208,7 +209,7 @@
     return backButtonCustomView;
 }
 
-- (BOOL)isUeUseSystemBlurNavigationBar {
+- (BOOL)ue_useSystemBlurNavigationBar {
     NSNumber *useSystemBlurNavigationBar = objc_getAssociatedObject(self, _cmd);
     if (useSystemBlurNavigationBar && [useSystemBlurNavigationBar isKindOfClass:[NSNumber class]]) {
         return [useSystemBlurNavigationBar boolValue];
@@ -218,7 +219,7 @@
     return [useSystemBlurNavigationBar boolValue];
 }
 
-- (BOOL)isUeDisableInteractivePopGesture {
+- (BOOL)ue_disableInteractivePopGesture {
     NSNumber *disableInteractivePopGesture = objc_getAssociatedObject(self, _cmd);
     if (disableInteractivePopGesture && [disableInteractivePopGesture isKindOfClass:[NSNumber class]]) {
         return [disableInteractivePopGesture boolValue];
@@ -228,7 +229,7 @@
     return [disableInteractivePopGesture boolValue];
 }
 
-- (BOOL)isUeEnableFullScreenInteractivePopGesture {
+- (BOOL)ue_enableFullScreenInteractivePopGesture {
     NSNumber *enableFullScreenInteractivePopGesture = objc_getAssociatedObject(self, _cmd);
     if (enableFullScreenInteractivePopGesture && [enableFullScreenInteractivePopGesture isKindOfClass:[NSNumber class]]) {
         return [enableFullScreenInteractivePopGesture boolValue];
@@ -238,7 +239,7 @@
     return [enableFullScreenInteractivePopGesture boolValue];
 }
 
-- (BOOL)isUeAutomaticallyHideNavigationBarInChildViewController {
+- (BOOL)ue_automaticallyHideNavigationBarInChildViewController {
     NSNumber *automaticallyHideNavigationBarInChildViewController = objc_getAssociatedObject(self, _cmd);
     if (automaticallyHideNavigationBarInChildViewController && [automaticallyHideNavigationBarInChildViewController isKindOfClass:[NSNumber class]]) {
         return [automaticallyHideNavigationBarInChildViewController boolValue];
@@ -248,7 +249,7 @@
     return [automaticallyHideNavigationBarInChildViewController boolValue];
 }
 
-- (BOOL)isUeHidesNavigationBar {
+- (BOOL)ue_hidesNavigationBar {
     NSNumber *hidesNavigationBar = objc_getAssociatedObject(self, _cmd);
     if (hidesNavigationBar && [hidesNavigationBar isKindOfClass:[NSNumber class]]) {
         return [hidesNavigationBar boolValue];
@@ -258,7 +259,7 @@
     return [hidesNavigationBar boolValue];
 }
 
-- (BOOL)isUeViewWillDisappear {
+- (BOOL)ue_viewWillDisappear {
     NSNumber *viewWillDisappear = objc_getAssociatedObject(self, _cmd);
     if (viewWillDisappear && [viewWillDisappear isKindOfClass:[NSNumber class]]) {
         return [viewWillDisappear boolValue];
@@ -295,8 +296,8 @@
     objc_setAssociatedObject(self, @selector(ue_interactivePopMaxAllowedDistanceToLeftEdge), interactivePopMaxAllowedDistanceToLeftEdge, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (void)ue_ue_triggerSystemBackButtonHandler {
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)ue_triggerSystemBackButtonHandle {
+    [self.navigationController ue_triggerSystemBackButtonHandle];
 }
 
 @end
