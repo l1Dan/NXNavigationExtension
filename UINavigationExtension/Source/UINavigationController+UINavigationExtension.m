@@ -14,28 +14,6 @@
 #import "UIViewController+UINavigationExtension.h"
 #import "UEConfiguration.h"
 
-@interface UIViewController (UINavigationExtensionPrivate)
-
-@property (nonatomic, assign) BOOL ue_usingInteractivePopGesture;
-
-@end
-
-@implementation UIViewController (UINavigationExtensionPrivate)
-
-- (BOOL)ue_usingInteractivePopGesture {
-    NSNumber *usingInteractivePopGesture = objc_getAssociatedObject(self, _cmd);
-    if (usingInteractivePopGesture && [usingInteractivePopGesture isKindOfClass:[NSNumber class]]) {
-        return [usingInteractivePopGesture boolValue];
-    }
-    return NO;
-}
-
-- (void)setUe_usingInteractivePopGesture:(BOOL)ue_usingInteractivePopGesture {
-    objc_setAssociatedObject(self, @selector(ue_usingInteractivePopGesture), [NSNumber numberWithBool:ue_usingInteractivePopGesture], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-@end
-
 @interface _UENavigationGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) UINavigationController *navigationController;
@@ -62,8 +40,6 @@
     }
 
     if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willJumpToViewControllerUsingInteractivePopGesture:)]) {
-        // 记录是否使用手势滑动
-        topViewController.ue_usingInteractivePopGesture = YES;
         return [(id<UINavigationControllerCustomizable>)topViewController navigationController:self.navigationController willJumpToViewControllerUsingInteractivePopGesture:YES];
     }
     
@@ -120,8 +96,6 @@
     }
 
     if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willJumpToViewControllerUsingInteractivePopGesture:)]) {
-        // 记录是否使用手势滑动
-        topViewController.ue_usingInteractivePopGesture = YES;
         return [(id<UINavigationControllerCustomizable>)topViewController navigationController:self.navigationController willJumpToViewControllerUsingInteractivePopGesture:YES];
     }
     
@@ -144,7 +118,6 @@
     dispatch_once(&onceToken, ^{
         UINavigationExtensionSwizzleMethod([UINavigationController class], @selector(pushViewController:animated:), @selector(ue_pushViewController:animated:));
         UINavigationExtensionSwizzleMethod([UINavigationController class], @selector(setViewControllers:animated:), @selector(ue_setViewControllers:animated:));
-        UINavigationExtensionSwizzleMethod([UINavigationController class], @selector(navigationBar:shouldPopItem:), @selector(ue_navigationBar:shouldPopItem:));
     });
 }
 
@@ -189,27 +162,6 @@
     return self.topViewController;
 }
 
-#pragma mark - UINavigationBarDelegate
-- (BOOL)ue_navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item {
-//    if (self.viewControllers.count <= 1) {
-//        return [self ue_navigationBar:navigationBar shouldPopItem:item];
-//    }
-//
-//    UIViewController *topViewController = self.ue_willPopViewController;
-//    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willJumpToViewControllerUsingInteractivePopGesture:)]) {
-//        // 已经调用手势滑动
-//        if (topViewController.ue_usingInteractivePopGesture) {
-//            return NO;
-//        } else {
-//            if ([(id<UINavigationControllerCustomizable>)topViewController navigationController:self willJumpToViewControllerUsingInteractivePopGesture:NO]) {
-//                return [self ue_navigationBar:navigationBar shouldPopItem:item];
-//            }
-//            return NO;
-//        }
-//    }
-    return [self ue_navigationBar:navigationBar shouldPopItem:item];
-}
-
 #pragma mark - Private
 - (void)configureNavigationBarItemInViewController:(__kindof UIViewController *)viewController {
     UIBarButtonItem *backButtonItem;
@@ -245,37 +197,29 @@
     }
 }
 
-- (NSArray *)insertViewController:(Class)newClass inViewConstrollers:(NSArray *)viewControllers whereNonexistentCreated:(__kindof UIViewController * (^)(void))createdBlock {
-    /*  导航栏插入规则：
+- (NSArray *)findViewController:(Class)className usingCreateViewControllerHandler:(__kindof UIViewController * (^)(void))handler {
+    /*  导航栏查找规则：
      1. 如果传入 viewController 存在于 viewControllers 中，则使用 viewControllers 中的以及存在的。
      2. 如果传入 viewController 不存在 viewControllers 中，则使用传入的 viewController。
      */
-    NSMutableArray<UIViewController *> *elements = [NSMutableArray array];
-    NSString *newClassName = NSStringFromClass(newClass);
-    for (UIViewController *oldViewController in viewControllers) {
-        NSString *oldClassName = NSStringFromClass(oldViewController);
-        if ([oldClassName isEqualToString:newClassName]) {
-            if (elements.count == viewControllers.count - 1) {
-                [elements addObject:oldViewController];
-                [elements addObject:oldViewController];
-            } else {
-                [elements addObject:oldViewController];
-                [elements addObject:[viewControllers lastObject]];
-            }
-            break;
+    
+    NSMutableArray<__kindof UIViewController *> *newViewControllers = [NSMutableArray array];
+    NSArray<__kindof UIViewController *> *oldViewControllers = self.viewControllers;
+    for (__kindof UIViewController *viewController in oldViewControllers) {
+        [newViewControllers addObject:viewController];
+        if ([NSStringFromClass([viewController class]) isEqualToString:NSStringFromClass(className)]) {
+            return newViewControllers;
         } else {
-            if (elements.count == viewControllers.count - 1) {
-                if (createdBlock) {
-                  UIViewController *createdViewController = createdBlock();
-                  if (createdViewController && [createdViewController isKindOfClass:[UIViewController class]]) {
-                      [elements addObject:createdViewController];
-                  }
+            if (newViewControllers.count == oldViewControllers.count) {
+                if (handler) {
+                    __kindof UIViewController *createViewController = handler();
+                    [newViewControllers addObject:createViewController];
+                    return newViewControllers;
                 }
             }
-            [elements addObject:oldViewController];
         }
     }
-    return elements;
+    return newViewControllers;
 }
 
 #pragma mark - Getter & Setter
@@ -309,27 +253,17 @@
     objc_setAssociatedObject(self, @selector(ue_useNavigationBar), [NSNumber numberWithBool:ue_useNavigationBar], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (UIViewController *)ue_willPopViewController {
-    UIViewController *willPopViewController = objc_getAssociatedObject(self, _cmd);
-    if (willPopViewController && [willPopViewController isKindOfClass:[UIViewController class]]) {
-        return willPopViewController;
-    }
-    return nil;
-}
-
-- (void)setUe_willPopViewController:(UIViewController *)ue_willPopViewController {
-    // 使用 OBJC_ASSOCIATION_ASSIGN 可以及时释放对象
-    objc_setAssociatedObject(self, @selector(ue_willPopViewController), ue_willPopViewController, OBJC_ASSOCIATION_ASSIGN);
-}
-
 - (void)ue_triggerSystemBackButtonHandle {
-    [self.topViewController ue_triggerSystemBackButtonHandle];
-//    if (self.viewControllers.count <= 1) { return; }
-//
-//    self.ue_willPopViewController = self.viewControllers.lastObject;
-//    self.ue_willPopViewController.ue_usingInteractivePopGesture = NO;
-//    UINavigationItem *item = self.navigationBar.items.lastObject;
-//    [(id<UINavigationBarDelegate>)self navigationBar:self.navigationBar shouldPopItem:item];
+    if (self.viewControllers.count <= 1) return;
+    
+    UIViewController *topViewController = self.topViewController;
+    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willJumpToViewControllerUsingInteractivePopGesture:)]) {
+        if ([(id<UINavigationControllerCustomizable>)topViewController navigationController:self willJumpToViewControllerUsingInteractivePopGesture:NO]) {
+            [topViewController ue_triggerSystemBackButtonHandle];
+        }
+    } else {
+        [self.topViewController ue_triggerSystemBackButtonHandle];
+    }
 }
 
 #pragma mark - Public
@@ -352,8 +286,9 @@
     self.interactivePopGestureRecognizer.delegate = self.ue_gestureDelegate;
 }
 
-- (void)ue_jumpViewController:(Class)className whereNonexistentCreated:(__kindof UIViewController *(^)(void))created {
-    self.viewControllers = [self insertViewController:className inViewConstrollers:self.viewControllers whereNonexistentCreated:created];
+- (void)ue_jumpViewControllerClass:(Class)className usingCreateViewControllerHandler:(__kindof UIViewController * _Nonnull (^)(void))handler {
+    NSArray<__kindof UIViewController *> *viewControllers = [self findViewController:className usingCreateViewControllerHandler:handler];
+    [self setViewControllers:viewControllers animated:YES];
 }
 
 @end

@@ -82,7 +82,6 @@
 }
 
 - (void)ue_viewWillDisappear:(BOOL)animated {
-    self.navigationController.ue_willPopViewController = self;
     self.ue_viewWillDisappear = YES;
     [self ue_viewWillDisappear: animated];
 }
