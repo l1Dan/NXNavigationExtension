@@ -13,6 +13,46 @@
 #import "UEConfiguration.h"
 #import "UENavigationBar.h"
 
+@interface UINavigationBar (UIViewControllerPrivate)
+
+@property (nonatomic, assign) BOOL ue_userInteractionDisabled;
+
+@end
+
+@implementation UINavigationBar (UIViewControllerPrivate)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        UINavigationExtensionSwizzleMethod([UINavigationBar class], @selector(setUserInteractionEnabled:), @selector(ue_setUserInteractionEnabled:));
+    });
+}
+
+- (void)ue_setUserInteractionEnabled:(BOOL)userInteractionEnabled {
+    if (self.ue_userInteractionDisabled) {
+        [self ue_setUserInteractionEnabled:NO];
+        return;
+    }
+    [self ue_setUserInteractionEnabled:userInteractionEnabled];
+}
+
+#pragma mark - Getter & Setter
+- (BOOL)ue_userInteractionDisabled {
+    NSNumber *userInteractionDisabled = objc_getAssociatedObject(self, _cmd);
+    if (userInteractionDisabled && [userInteractionDisabled isKindOfClass:[NSNumber class]]) {
+        return [userInteractionDisabled boolValue];
+    }
+    userInteractionDisabled = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, userInteractionDisabled, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [userInteractionDisabled boolValue];
+}
+
+- (void)setUe_userInteractionDisabled:(BOOL)ue_userInteractionDisabled {
+    objc_setAssociatedObject(self, @selector(ue_userInteractionDisabled), [NSNumber numberWithBool:ue_userInteractionDisabled], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+@end
+
 @interface UIViewController (UINavigationExtension)
 
 @property (nonatomic, assign) BOOL ue_viewWillDisappear;
@@ -63,18 +103,6 @@
             CGRect newFrame = CGRectMake(0, 0, frame.size.width, frame.size.height + frame.origin.y);
             weakSelf.ue_navigationBar.frame = newFrame;
         };
-        
-        if (self.ue_hidesNavigationBar) {
-            UEConfiguration *configuration = [UEConfiguration defaultConfiguration];
-            self.ue_navigationBar.shadowImageView.image = [configuration imageFromColor:[UIColor clearColor]];
-            self.ue_navigationBar.backgroundImageView.image = [configuration imageFromColor:[UIColor clearColor]];
-            self.ue_navigationBar.backgroundColor = [UIColor clearColor];
-//            self.ue_navigationBar.userInteractionEnabled = NO;
-//            self.navigationController.navigationBar.userInteractionEnabled = NO;
-        } else {
-//            self.ue_navigationBar.userInteractionEnabled = YES;
-//            self.navigationController.navigationBar.userInteractionEnabled = YES;
-        }
     }
     
     self.ue_viewWillDisappear = NO;
@@ -90,6 +118,23 @@
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
         BOOL interactivePopGestureRecognizerEnabled = self.navigationController.viewControllers.count > 1;
         self.navigationController.interactivePopGestureRecognizer.enabled = interactivePopGestureRecognizerEnabled;
+        
+        BOOL hidesNavigationBar = self.ue_hidesNavigationBar;
+        if ([self isKindOfClass:[UIPageViewController class]] && !hidesNavigationBar) {
+            // 处理特殊情况，最后显示的为 UIPageViewController
+            hidesNavigationBar = self.parentViewController;
+        }
+        
+        if (hidesNavigationBar) {
+            UEConfiguration *configuration = [UEConfiguration defaultConfiguration];
+            self.ue_navigationBar.shadowImageView.image = [configuration imageFromColor:[UIColor clearColor]];
+            self.ue_navigationBar.backgroundImageView.image = [configuration imageFromColor:[UIColor clearColor]];
+            self.ue_navigationBar.backgroundColor = [UIColor clearColor];
+        }
+        
+        self.ue_navigationBar.userInteractionEnabled = !hidesNavigationBar;
+        self.navigationController.navigationBar.ue_userInteractionDisabled = hidesNavigationBar;
+        self.navigationController.navigationBar.userInteractionEnabled = !hidesNavigationBar;
     }
     
     [self ue_viewDidAppear: animated];
