@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 获取将要 Pop 的 ViewController
 @property (nonatomic, assign, nullable) UIViewController *ue_willPopViewController;
 
-/// 设置 UENavigationBar 是否可用；默认 YES
+/// 设置 UENavigationBar 是否可用；默认 YES；设置为 NO 时将使用系统导航栏
 @property (nonatomic, assign) BOOL ue_useNavigationBar;
 
 - (void)configureNavigationBar;

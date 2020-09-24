@@ -191,22 +191,22 @@
 
 #pragma mark - UINavigationBarDelegate
 - (BOOL)ue_navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item {
-    if (self.viewControllers.count <= 1) {
-        return [self ue_navigationBar:navigationBar shouldPopItem:item];
-    }
-    
-    UIViewController *topViewController = self.ue_willPopViewController;
-    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willJumpToViewControllerUsingInteractivePopGesture:)]) {
-        // 已经调用手势滑动
-        if (topViewController.ue_usingInteractivePopGesture) {
-            return NO;
-        } else {
-            if ([(id<UINavigationControllerCustomizable>)topViewController navigationController:self willJumpToViewControllerUsingInteractivePopGesture:NO]) {
-                return [self ue_navigationBar:navigationBar shouldPopItem:item];
-            }
-            return NO;
-        }
-    }
+//    if (self.viewControllers.count <= 1) {
+//        return [self ue_navigationBar:navigationBar shouldPopItem:item];
+//    }
+//
+//    UIViewController *topViewController = self.ue_willPopViewController;
+//    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willJumpToViewControllerUsingInteractivePopGesture:)]) {
+//        // 已经调用手势滑动
+//        if (topViewController.ue_usingInteractivePopGesture) {
+//            return NO;
+//        } else {
+//            if ([(id<UINavigationControllerCustomizable>)topViewController navigationController:self willJumpToViewControllerUsingInteractivePopGesture:NO]) {
+//                return [self ue_navigationBar:navigationBar shouldPopItem:item];
+//            }
+//            return NO;
+//        }
+//    }
     return [self ue_navigationBar:navigationBar shouldPopItem:item];
 }
 
@@ -323,12 +323,13 @@
 }
 
 - (void)ue_triggerSystemBackButtonHandle {
-    if (self.viewControllers.count <= 1) { return; }
-
-    self.ue_willPopViewController = self.viewControllers.lastObject;
-    self.ue_willPopViewController.ue_usingInteractivePopGesture = NO;
-    UINavigationItem *item = self.navigationBar.items.lastObject;
-    [(id<UINavigationBarDelegate>)self navigationBar:self.navigationBar shouldPopItem:item];
+    [self.topViewController ue_triggerSystemBackButtonHandle];
+//    if (self.viewControllers.count <= 1) { return; }
+//
+//    self.ue_willPopViewController = self.viewControllers.lastObject;
+//    self.ue_willPopViewController.ue_usingInteractivePopGesture = NO;
+//    UINavigationItem *item = self.navigationBar.items.lastObject;
+//    [(id<UINavigationBarDelegate>)self navigationBar:self.navigationBar shouldPopItem:item];
 }
 
 #pragma mark - Public

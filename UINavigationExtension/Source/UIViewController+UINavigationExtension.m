@@ -16,6 +16,7 @@
 @interface UIViewController (UINavigationExtension)
 
 @property (nonatomic, assign) BOOL ue_viewWillDisappear;
+@property (nonatomic, assign) BOOL ue_navigationBarInitFinished;
 
 @end
 
@@ -33,6 +34,70 @@
 }
 
 - (void)ue_viewDidLoad {
+    self.ue_navigationBarInitFinished = NO;
+    if (self.navigationController && self.navigationController.ue_useNavigationBar) {
+        self.ue_navigationBarInitFinished = YES;
+        
+        [self.navigationController configureNavigationBar];
+        [self configureNavigationBarAppearance];
+    }
+    
+    [self ue_viewDidLoad];
+}
+
+- (void)ue_viewWillAppear:(BOOL)animated {
+    if (!self.ue_navigationBarInitFinished) {
+        [self configureNavigationBarAppearance];
+    }
+    
+    if (self.navigationController && self.navigationController.ue_useNavigationBar) {
+        self.navigationController.navigationBar.barTintColor = self.ue_barBarTintColor;
+        self.navigationController.navigationBar.tintColor = self.ue_barTintColor;
+        self.navigationController.navigationBar.titleTextAttributes = self.ue_titleTextAttributes;
+        [self.view bringSubviewToFront:self.ue_navigationBar];
+        
+        __weak typeof(self) weakSelf = self;
+        self.navigationController.navigationBar.ue_didUpdateFrameHandler = ^(CGRect frame) {
+            if (weakSelf.ue_viewWillDisappear) { return; }
+            
+            CGRect newFrame = CGRectMake(0, 0, frame.size.width, frame.size.height + frame.origin.y);
+            weakSelf.ue_navigationBar.frame = newFrame;
+        };
+        
+        if (self.ue_hidesNavigationBar) {
+            UEConfiguration *configuration = [UEConfiguration defaultConfiguration];
+            self.ue_navigationBar.shadowImageView.image = [configuration imageFromColor:[UIColor clearColor]];
+            self.ue_navigationBar.backgroundImageView.image = [configuration imageFromColor:[UIColor clearColor]];
+            self.ue_navigationBar.backgroundColor = [UIColor clearColor];
+//            self.ue_navigationBar.userInteractionEnabled = NO;
+//            self.navigationController.navigationBar.userInteractionEnabled = NO;
+        } else {
+//            self.ue_navigationBar.userInteractionEnabled = YES;
+//            self.navigationController.navigationBar.userInteractionEnabled = YES;
+        }
+    }
+    
+    self.ue_viewWillDisappear = NO;
+    [self ue_viewWillAppear: animated];
+}
+
+- (void)ue_viewWillDisappear:(BOOL)animated {
+    self.navigationController.ue_willPopViewController = self;
+    self.ue_viewWillDisappear = YES;
+    [self ue_viewWillDisappear: animated];
+}
+
+- (void)ue_viewDidAppear:(BOOL)animated {
+    if (self.navigationController && self.navigationController.ue_useNavigationBar) {
+        BOOL interactivePopGestureRecognizerEnabled = self.navigationController.viewControllers.count > 1;
+        self.navigationController.interactivePopGestureRecognizer.enabled = interactivePopGestureRecognizerEnabled;
+    }
+    
+    [self ue_viewDidAppear: animated];
+}
+
+#pragma mark - Private
+- (void)configureNavigationBarAppearance {
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
         [self.navigationController configureNavigationBar];
         
@@ -57,58 +122,9 @@
             self.ue_navigationBar.hidden = YES;
         }
     }
-    
-    [self ue_viewDidLoad];
 }
 
-- (void)ue_viewWillAppear:(BOOL)animated {
-    if (self.navigationController && self.navigationController.ue_useNavigationBar) {
-        self.navigationController.navigationBar.barTintColor = self.ue_barBarTintColor;
-        self.navigationController.navigationBar.tintColor = self.ue_barTintColor;
-        self.navigationController.navigationBar.titleTextAttributes = self.ue_titleTextAttributes;
-        [self.view bringSubviewToFront:self.ue_navigationBar];
-        
-        __weak typeof(self) weakSelf = self;
-        self.navigationController.navigationBar.ue_didUpdateFrameHandler = ^(CGRect frame) {
-            if (weakSelf.ue_viewWillDisappear) { return; }
-            
-            CGRect newFrame = CGRectMake(0, 0, frame.size.width, frame.size.height + frame.origin.y);
-            weakSelf.ue_navigationBar.frame = newFrame;
-        };
-        
-        if (self.ue_hidesNavigationBar) {
-            UEConfiguration *configuration = [UEConfiguration defaultConfiguration];
-            self.ue_navigationBar.shadowImageView.image = [configuration imageFromColor:[UIColor clearColor]];
-            self.ue_navigationBar.backgroundImageView.image = [configuration imageFromColor:[UIColor clearColor]];
-            self.ue_navigationBar.backgroundColor = [UIColor clearColor];
-            self.ue_navigationBar.userInteractionEnabled = NO;
-            self.navigationController.navigationBar.userInteractionEnabled = NO;
-        } else {
-            self.ue_navigationBar.userInteractionEnabled = YES;
-            self.navigationController.navigationBar.userInteractionEnabled = YES;
-        }
-    }
-    
-    self.ue_viewWillDisappear = NO;
-    [self ue_viewWillAppear: animated];
-}
-
-- (void)ue_viewWillDisappear:(BOOL)animated {
-    self.navigationController.ue_willPopViewController = self;
-    self.ue_viewWillDisappear = YES;
-    [self ue_viewWillDisappear: animated];
-}
-
-- (void)ue_viewDidAppear:(BOOL)animated {
-    if (self.navigationController && self.navigationController.ue_useNavigationBar) {
-        BOOL interactivePopGestureRecognizerEnabled = self.navigationController.viewControllers.count > 1;
-        self.navigationController.interactivePopGestureRecognizer.enabled = interactivePopGestureRecognizerEnabled;
-    }
-    
-    [self ue_viewDidAppear: animated];
-}
-
-#pragma mark - Private
+#pragma mark - Getter & Setter
 - (UENavigationBar *)ue_navigationBar {
     UENavigationBar *bar = objc_getAssociatedObject(self, _cmd);
     if (bar && [bar isKindOfClass:[UENavigationBar class]]) {
@@ -270,7 +286,21 @@
 }
 
 - (void)setUe_viewWillDisappear:(BOOL)ue_viewWillDisappear {
-    objc_setAssociatedObject(self, _cmd, [NSNumber numberWithBool:ue_viewWillDisappear], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(ue_viewWillDisappear), [NSNumber numberWithBool:ue_viewWillDisappear], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)ue_navigationBarInitFinished {
+    NSNumber *navigationBarInitFinished = objc_getAssociatedObject(self, _cmd);
+    if (navigationBarInitFinished && [navigationBarInitFinished isKindOfClass:[NSNumber class]]) {
+        return [navigationBarInitFinished boolValue];
+    }
+    navigationBarInitFinished = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, navigationBarInitFinished, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [navigationBarInitFinished boolValue];
+}
+
+- (void)setUe_navigationBarInitFinished:(BOOL)ue_navigationBarInitFinished {
+    objc_setAssociatedObject(self, @selector(ue_navigationBarInitFinished), [NSNumber numberWithBool:ue_navigationBarInitFinished], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CGFloat)ue_interactivePopMaxAllowedDistanceToLeftEdge {
@@ -297,7 +327,7 @@
 }
 
 - (void)ue_triggerSystemBackButtonHandle {
-    [self.navigationController ue_triggerSystemBackButtonHandle];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

@@ -61,6 +61,7 @@
     self.shadowImageView.frame = CGRectMake(0, size.height - lineHeight, size.width, lineHeight);
 }
 
+#pragma mark - Public
 - (void)enableBlurEffect:(BOOL)enabled {
     if (enabled) {
         self.backgroundColor = [UIColor clearColor];
