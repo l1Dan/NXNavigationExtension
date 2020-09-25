@@ -123,7 +123,6 @@
 
 - (void)ue_pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if (self.viewControllers.count > 0) {
-        viewController.hidesBottomBarWhenPushed = YES;
         [self configureNavigationBarItemInViewController:viewController];
     }
     
@@ -140,7 +139,6 @@
         for (NSUInteger index = 0; index < viewControllers.count; index++) {
             UIViewController *viewController = viewControllers[index];
             if (index != 0) {
-                viewController.hidesBottomBarWhenPushed = YES;
                 [self configureNavigationBarItemInViewController:viewController];
             }
             

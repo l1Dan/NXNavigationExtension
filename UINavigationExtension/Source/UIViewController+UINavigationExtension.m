@@ -79,7 +79,7 @@
         self.ue_navigationBarInitFinished = YES;
         
         [self.navigationController configureNavigationBar];
-        [self configureNavigationBarAppearance];
+        [self updateNavigationBarAppearance];
     }
     
     [self ue_viewDidLoad];
@@ -87,7 +87,7 @@
 
 - (void)ue_viewWillAppear:(BOOL)animated {
     if (!self.ue_navigationBarInitFinished) {
-        [self configureNavigationBarAppearance];
+        [self updateNavigationBarAppearance];
     }
     
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
@@ -103,6 +103,8 @@
             CGRect newFrame = CGRectMake(0, 0, frame.size.width, frame.size.height + frame.origin.y);
             weakSelf.ue_navigationBar.frame = newFrame;
         };
+        
+        [self changeNavigationBarUserInteractionState];
     }
     
     self.ue_viewWillDisappear = NO;
@@ -118,30 +120,15 @@
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
         BOOL interactivePopGestureRecognizerEnabled = self.navigationController.viewControllers.count > 1;
         self.navigationController.interactivePopGestureRecognizer.enabled = interactivePopGestureRecognizerEnabled;
-        
-        BOOL hidesNavigationBar = self.ue_hidesNavigationBar;
-        if ([self isKindOfClass:[UIPageViewController class]] && !hidesNavigationBar) {
-            // 处理特殊情况，最后显示的为 UIPageViewController
-            hidesNavigationBar = self.parentViewController;
-        }
-        
-        if (hidesNavigationBar) {
-            UEConfiguration *configuration = [UEConfiguration defaultConfiguration];
-            self.ue_navigationBar.shadowImageView.image = [configuration imageFromColor:[UIColor clearColor]];
-            self.ue_navigationBar.backgroundImageView.image = [configuration imageFromColor:[UIColor clearColor]];
-            self.ue_navigationBar.backgroundColor = [UIColor clearColor];
-        }
-        
-        self.ue_navigationBar.userInteractionEnabled = !hidesNavigationBar;
-        self.navigationController.navigationBar.ue_userInteractionDisabled = hidesNavigationBar;
-        self.navigationController.navigationBar.userInteractionEnabled = !hidesNavigationBar;
+    
+        [self changeNavigationBarUserInteractionState];
     }
     
     [self ue_viewDidAppear: animated];
 }
 
 #pragma mark - Private
-- (void)configureNavigationBarAppearance {
+- (void)updateNavigationBarAppearance {
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
         [self.navigationController configureNavigationBar];
         
@@ -165,6 +152,28 @@
         if (self.parentViewController && ![self.parentViewController isKindOfClass:[UINavigationController class]] && self.ue_automaticallyHideNavigationBarInChildViewController) {
             self.ue_navigationBar.hidden = YES;
         }
+    }
+}
+
+- (void)changeNavigationBarUserInteractionState {
+    if (self.navigationController && self.navigationController.ue_useNavigationBar) {
+        BOOL hidesNavigationBar = self.ue_hidesNavigationBar;
+        if ([self isKindOfClass:[UIPageViewController class]] && !hidesNavigationBar) {
+            // 处理特殊情况，最后显示的为 UIPageViewController
+            hidesNavigationBar = self.parentViewController;
+        }
+        
+        if (hidesNavigationBar) {
+            UEConfiguration *configuration = [UEConfiguration defaultConfiguration];
+            self.ue_navigationBar.shadowImageView.image = [configuration imageFromColor:[UIColor clearColor]];
+            self.ue_navigationBar.backgroundImageView.image = [configuration imageFromColor:[UIColor clearColor]];
+            self.ue_navigationBar.backgroundColor = [UIColor clearColor];
+            self.navigationController.navigationBar.tintColor = [UIColor clearColor]; // 返回按钮透明
+        }
+        
+        self.ue_navigationBar.userInteractionEnabled = !hidesNavigationBar;
+        self.navigationController.navigationBar.ue_userInteractionDisabled = hidesNavigationBar;
+        self.navigationController.navigationBar.userInteractionEnabled = !hidesNavigationBar;
     }
 }
 
