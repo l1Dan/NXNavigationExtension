@@ -6,7 +6,7 @@
 //
 
 #import "UINavigationBar+UINavigationExtension.h"
-#import "UEConfiguration.h"
+#import "UINavigationExtensionMacro.h"
 
 @implementation UINavigationBar (UINavigationExtension)
 

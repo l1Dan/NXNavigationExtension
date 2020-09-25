@@ -8,11 +8,11 @@
 // https://github.com/forkingdog/FDFullscreenPopGesture
 // https://github.com/l1Dan/NSLNavigationSolution
 
-#import <objc/runtime.h>
-
 #import "UINavigationController+UINavigationExtension.h"
 #import "UIViewController+UINavigationExtension.h"
-#import "UEConfiguration.h"
+#import "UINavigationExtensionMacro.h"
+
+BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
 
 @interface _UENavigationGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
 

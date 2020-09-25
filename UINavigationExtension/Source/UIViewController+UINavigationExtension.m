@@ -7,11 +7,11 @@
 
 #import <objc/runtime.h>
 
+#import "UENavigationBar.h"
 #import "UINavigationBar+UINavigationExtension.h"
 #import "UINavigationController+UINavigationExtension.h"
+#import "UINavigationExtensionMacro.h"
 #import "UIViewController+UINavigationExtension.h"
-#import "UEConfiguration.h"
-#import "UENavigationBar.h"
 
 @interface UINavigationBar (UIViewControllerPrivate)
 
@@ -135,12 +135,12 @@
         self.ue_navigationBar.backgroundColor = self.ue_navigationBarBackgroundColor;
         self.ue_navigationBar.shadowImageView.image = self.ue_shadowImage;
         
-        UEConfiguration *configuration = [UEConfiguration defaultConfiguration];
         if (self.ue_shadowImageTintColor) {
-            self.ue_navigationBar.shadowImageView.image = [configuration imageFromColor: self.ue_shadowImageTintColor];
+            self.ue_navigationBar.shadowImageView.image = UINavigationExtensionImageFromColor(self.ue_shadowImageTintColor);
         }
+        
         self.ue_navigationBar.backgroundImageView.image = self.ue_navigationBarBackgroundImage;
-        self.ue_navigationBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, configuration.navigationBarHeight);
+        self.ue_navigationBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, UINavigationExtensionNavigationBarHeight());
         [self.ue_navigationBar enableBlurEffect:self.ue_useSystemBlurNavigationBar];
         
         if ([self.view isKindOfClass:[UIScrollView class]]) {
@@ -160,13 +160,12 @@
         BOOL hidesNavigationBar = self.ue_hidesNavigationBar;
         if ([self isKindOfClass:[UIPageViewController class]] && !hidesNavigationBar) {
             // 处理特殊情况，最后显示的为 UIPageViewController
-            hidesNavigationBar = self.parentViewController;
+            hidesNavigationBar = self.parentViewController.ue_hidesNavigationBar;
         }
         
         if (hidesNavigationBar) {
-            UEConfiguration *configuration = [UEConfiguration defaultConfiguration];
-            self.ue_navigationBar.shadowImageView.image = [configuration imageFromColor:[UIColor clearColor]];
-            self.ue_navigationBar.backgroundImageView.image = [configuration imageFromColor:[UIColor clearColor]];
+            self.ue_navigationBar.shadowImageView.image = UINavigationExtensionImageFromColor([UIColor clearColor]);
+            self.ue_navigationBar.backgroundImageView.image = UINavigationExtensionImageFromColor([UIColor clearColor]);
             self.ue_navigationBar.backgroundColor = [UIColor clearColor];
             self.navigationController.navigationBar.tintColor = [UIColor clearColor]; // 返回按钮透明
         }
@@ -193,7 +192,7 @@
     if (color && [color isKindOfClass:[UIColor class]]) {
         return color;
     }
-    color = [UEConfiguration defaultConfiguration].backgorundColor;
+    color = [UENavigationBar standardAppearance].backgorundColor;
     objc_setAssociatedObject(self, _cmd, color, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return color;
 }
@@ -203,7 +202,7 @@
     if (image && [image isKindOfClass:[UIImage class]]) {
         return image;
     }
-    image = [UEConfiguration defaultConfiguration].backgorundImage;
+    image = [UENavigationBar standardAppearance].backgorundImage;
     objc_setAssociatedObject(self, _cmd, image, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return image;
 }
@@ -223,7 +222,7 @@
     if (barTintColor && [barTintColor isKindOfClass:[UIColor class]]) {
         return barTintColor;
     }
-    barTintColor = [UEConfiguration defaultConfiguration].tintColor;
+    barTintColor = [UENavigationBar standardAppearance].tintColor;
     objc_setAssociatedObject(self, _cmd, barTintColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return barTintColor;
 }
@@ -243,7 +242,7 @@
     if (shadowImage && [shadowImage isKindOfClass:[UIImage class]]) {
         return shadowImage;
     }
-    shadowImage = [UEConfiguration defaultConfiguration].shadowImage;
+    shadowImage = [UENavigationBar standardAppearance].shadowImage;
     objc_setAssociatedObject(self, _cmd, shadowImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return shadowImage;
 }
@@ -263,7 +262,7 @@
     if (backImage && [backImage isKindOfClass:[UIImage class]]) {
         return backImage;
     }
-    backImage = [UEConfiguration defaultConfiguration].backImage;
+    backImage = [UENavigationBar standardAppearance].backImage;
     objc_setAssociatedObject(self, _cmd, backImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return backImage;
 }
@@ -273,7 +272,7 @@
     if (backButtonCustomView && [backButtonCustomView isKindOfClass:[UIView class]]) {
         return backButtonCustomView;
     }
-    backButtonCustomView = [UEConfiguration defaultConfiguration].backButtonCustomView;
+    backButtonCustomView = [UENavigationBar standardAppearance].backButtonCustomView;
     objc_setAssociatedObject(self, _cmd, backButtonCustomView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return backButtonCustomView;
 }
@@ -303,7 +302,7 @@
     if (enableFullScreenInteractivePopGesture && [enableFullScreenInteractivePopGesture isKindOfClass:[NSNumber class]]) {
         return [enableFullScreenInteractivePopGesture boolValue];
     }
-    enableFullScreenInteractivePopGesture = [NSNumber numberWithBool:[UEConfiguration defaultConfiguration].isFullscreenPopGestureEnable];
+    enableFullScreenInteractivePopGesture = [NSNumber numberWithBool:UINavigationExtensionFullscreenPopGestureEnable];
     objc_setAssociatedObject(self, _cmd, enableFullScreenInteractivePopGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return [enableFullScreenInteractivePopGesture boolValue];
 }

@@ -9,6 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+FOUNDATION_EXPORT BOOL UINavigationExtensionFullscreenPopGestureEnable;
+
 @protocol UINavigationControllerCustomizable <NSObject>
 
 /// 拦截：使用手势滑动返回或点击系统返回按钮时调用
