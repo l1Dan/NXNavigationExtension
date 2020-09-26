@@ -35,7 +35,7 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
     }
     
     UIViewController *topViewController = self.navigationController.viewControllers.lastObject;
-    if (topViewController && topViewController.ue_disableInteractivePopGesture) {
+    if (topViewController && topViewController.ue_interactivePopGestureDisable) {
         return NO;
     }
 
@@ -240,14 +240,14 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
 }
 
 - (BOOL)ue_useNavigationBar {
-    NSNumber *useNavigationBar = objc_getAssociatedObject(self, _cmd);
-    if (useNavigationBar && [useNavigationBar isKindOfClass:[NSNumber class]]) {
-        return [useNavigationBar boolValue];
+    NSNumber *navigationBarEnable = objc_getAssociatedObject(self, _cmd);
+    if (navigationBarEnable && [navigationBarEnable isKindOfClass:[NSNumber class]]) {
+        return [navigationBarEnable boolValue];
     }
     return YES;
 }
 
-- (void)setUe_useNavigationBar:(BOOL)ue_useNavigationBar {
+- (void)setUe_navigationBarEnable:(BOOL)ue_useNavigationBar {
     objc_setAssociatedObject(self, @selector(ue_useNavigationBar), [NSNumber numberWithBool:ue_useNavigationBar], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 

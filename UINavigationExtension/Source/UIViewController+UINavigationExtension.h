@@ -47,8 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否使用系统模糊效果；默认 NO
 @property (nonatomic, assign, readonly) BOOL ue_useSystemBlurNavigationBar;
 
-/// 是否禁用滑动手势（边缘返回和全屏返回都不可用）；默认 NO
-@property (nonatomic, assign, readonly) BOOL ue_disableInteractivePopGesture;
+/// 是否禁用边缘滑动返回手势；默认 NO
+@property (nonatomic, assign, readonly) BOOL ue_interactivePopGestureDisable;
 
 /// 是否使用全屏返回；默认 NO
 @property (nonatomic, assign, readonly) BOOL ue_enableFullScreenInteractivePopGesture;
@@ -57,7 +57,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL ue_automaticallyHideNavigationBarInChildViewController;
 
 /// 是否隐藏导航栏（UINavigationBar 和 UENavigationBar）都会隐藏；默认 NO
+/// 注意⚠️：并不是真正的隐藏，只是将导航栏变成透明，返回按钮透明，导航栏的 item(s) 和 title(view)
+/// 需要自己控制是否显示。这样做的目的是让导航栏下方的视图可以接收到 UIResponder 的事件传递
 @property (nonatomic, assign, readonly) BOOL ue_hidesNavigationBar;
+
+/// UENavigationBar containerView 上面的视图接收到 UIResponder 的事件传递；默认 NO
+/// 注意⚠️：返回按钮点击事件不可用，但是还是显示的，方便自定义返回事件
+@property (nonatomic, assign, readonly) BOOL ue_barContainerViewUserInteractionEnabled;
 
 /// 设置触发全屏手势返回，离左边最大滑动距离
 @property (nonatomic, assign) CGFloat ue_interactivePopMaxAllowedDistanceToLeftEdge;

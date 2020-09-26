@@ -158,22 +158,61 @@
 - (void)changeNavigationBarUserInteractionState {
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
         BOOL hidesNavigationBar = self.ue_hidesNavigationBar;
+        BOOL containerViewUserInteractionEnabled = self.ue_barContainerViewUserInteractionEnabled;
         if ([self isKindOfClass:[UIPageViewController class]] && !hidesNavigationBar) {
             // 处理特殊情况，最后显示的为 UIPageViewController
             hidesNavigationBar = self.parentViewController.ue_hidesNavigationBar;
         }
         
         if (hidesNavigationBar) {
+            containerViewUserInteractionEnabled = NO;
             self.ue_navigationBar.shadowImageView.image = UINavigationExtensionImageFromColor([UIColor clearColor]);
             self.ue_navigationBar.backgroundImageView.image = UINavigationExtensionImageFromColor([UIColor clearColor]);
             self.ue_navigationBar.backgroundColor = [UIColor clearColor];
             self.navigationController.navigationBar.tintColor = [UIColor clearColor]; // 返回按钮透明
         }
         
-        self.ue_navigationBar.userInteractionEnabled = !hidesNavigationBar;
-        self.navigationController.navigationBar.ue_userInteractionDisabled = hidesNavigationBar;
-        self.navigationController.navigationBar.userInteractionEnabled = !hidesNavigationBar;
+        if (containerViewUserInteractionEnabled) {
+            self.ue_navigationBar.userInteractionEnabled = YES;
+            self.ue_navigationBar.containerView.userInteractionEnabled = YES;
+            self.navigationController.navigationBar.ue_userInteractionDisabled = YES;
+            self.navigationController.navigationBar.userInteractionEnabled = NO;
+        } else {
+            self.ue_navigationBar.userInteractionEnabled = !hidesNavigationBar;
+            self.ue_navigationBar.containerView.userInteractionEnabled = containerViewUserInteractionEnabled;
+            self.navigationController.navigationBar.ue_userInteractionDisabled = hidesNavigationBar;
+            self.navigationController.navigationBar.userInteractionEnabled = !hidesNavigationBar;
+        }
     }
+}
+
+#pragma mark - Private Getter & Setter
+- (BOOL)ue_viewWillDisappear {
+    NSNumber *viewWillDisappear = objc_getAssociatedObject(self, _cmd);
+    if (viewWillDisappear && [viewWillDisappear isKindOfClass:[NSNumber class]]) {
+        return [viewWillDisappear boolValue];
+    }
+    viewWillDisappear = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, viewWillDisappear, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [viewWillDisappear boolValue];
+}
+
+- (void)setUe_viewWillDisappear:(BOOL)ue_viewWillDisappear {
+    objc_setAssociatedObject(self, @selector(ue_viewWillDisappear), [NSNumber numberWithBool:ue_viewWillDisappear], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)ue_navigationBarInitFinished {
+    NSNumber *navigationBarInitFinished = objc_getAssociatedObject(self, _cmd);
+    if (navigationBarInitFinished && [navigationBarInitFinished isKindOfClass:[NSNumber class]]) {
+        return [navigationBarInitFinished boolValue];
+    }
+    navigationBarInitFinished = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, navigationBarInitFinished, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [navigationBarInitFinished boolValue];
+}
+
+- (void)setUe_navigationBarInitFinished:(BOOL)ue_navigationBarInitFinished {
+    objc_setAssociatedObject(self, @selector(ue_navigationBarInitFinished), [NSNumber numberWithBool:ue_navigationBarInitFinished], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark - Getter & Setter
@@ -287,14 +326,14 @@
     return [useSystemBlurNavigationBar boolValue];
 }
 
-- (BOOL)ue_disableInteractivePopGesture {
-    NSNumber *disableInteractivePopGesture = objc_getAssociatedObject(self, _cmd);
-    if (disableInteractivePopGesture && [disableInteractivePopGesture isKindOfClass:[NSNumber class]]) {
-        return [disableInteractivePopGesture boolValue];
+- (BOOL)ue_interactivePopGestureDisable {
+    NSNumber *interactivePopGestureDisable = objc_getAssociatedObject(self, _cmd);
+    if (interactivePopGestureDisable && [interactivePopGestureDisable isKindOfClass:[NSNumber class]]) {
+        return [interactivePopGestureDisable boolValue];
     }
-    disableInteractivePopGesture = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, disableInteractivePopGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [disableInteractivePopGesture boolValue];
+    interactivePopGestureDisable = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, interactivePopGestureDisable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [interactivePopGestureDisable boolValue];
 }
 
 - (BOOL)ue_enableFullScreenInteractivePopGesture {
@@ -327,32 +366,14 @@
     return [hidesNavigationBar boolValue];
 }
 
-- (BOOL)ue_viewWillDisappear {
-    NSNumber *viewWillDisappear = objc_getAssociatedObject(self, _cmd);
-    if (viewWillDisappear && [viewWillDisappear isKindOfClass:[NSNumber class]]) {
-        return [viewWillDisappear boolValue];
+- (BOOL)ue_barContainerViewUserInteractionEnabled {
+    NSNumber *barContainerViewUserInteractionEnabled = objc_getAssociatedObject(self, _cmd);
+    if (barContainerViewUserInteractionEnabled && [barContainerViewUserInteractionEnabled isKindOfClass:[NSNumber class]]) {
+        return [barContainerViewUserInteractionEnabled boolValue];
     }
-    viewWillDisappear = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, viewWillDisappear, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [viewWillDisappear boolValue];
-}
-
-- (void)setUe_viewWillDisappear:(BOOL)ue_viewWillDisappear {
-    objc_setAssociatedObject(self, @selector(ue_viewWillDisappear), [NSNumber numberWithBool:ue_viewWillDisappear], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (BOOL)ue_navigationBarInitFinished {
-    NSNumber *navigationBarInitFinished = objc_getAssociatedObject(self, _cmd);
-    if (navigationBarInitFinished && [navigationBarInitFinished isKindOfClass:[NSNumber class]]) {
-        return [navigationBarInitFinished boolValue];
-    }
-    navigationBarInitFinished = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, navigationBarInitFinished, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [navigationBarInitFinished boolValue];
-}
-
-- (void)setUe_navigationBarInitFinished:(BOOL)ue_navigationBarInitFinished {
-    objc_setAssociatedObject(self, @selector(ue_navigationBarInitFinished), [NSNumber numberWithBool:ue_navigationBarInitFinished], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    barContainerViewUserInteractionEnabled = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, barContainerViewUserInteractionEnabled, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [barContainerViewUserInteractionEnabled boolValue];
 }
 
 - (CGFloat)ue_interactivePopMaxAllowedDistanceToLeftEdge {

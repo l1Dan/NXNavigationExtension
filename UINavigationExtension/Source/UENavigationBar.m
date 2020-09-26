@@ -35,6 +35,12 @@ static UENavigationBarAppearance *standardUENavigationBarAppearance;
 
 @end
 
+@interface UENavigationBar ()
+
+@property (nonatomic, assign) UIEdgeInsets containerViewEdgeInsets;
+
+@end
+
 @implementation UENavigationBar
 
 + (UENavigationBarAppearance *)standardAppearance {
@@ -43,6 +49,10 @@ static UENavigationBarAppearance *standardUENavigationBarAppearance;
         standardUENavigationBarAppearance = [[UENavigationBarAppearance alloc] init];
     });
     return standardUENavigationBarAppearance;
+}
+
+- (instancetype)init {
+    return [[[self class] alloc] initWithFrame:CGRectZero];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -56,6 +66,7 @@ static UENavigationBarAppearance *standardUENavigationBarAppearance;
         _backgroundImageView.clipsToBounds = YES;
         
         _containerView = [[UIView alloc] init];
+        _containerViewEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 8);
         
         UIBlurEffect *effect;
         if (@available(iOS 13.0, *)) {
@@ -80,7 +91,17 @@ static UENavigationBarAppearance *standardUENavigationBarAppearance;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+    [self updateNavigationBarContentFrame];
+}
+
+// 及时更新 NavigationBar content frame
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self updateNavigationBarContentFrame];
+}
+
+#pragma mark - Private
+- (void)updateNavigationBarContentFrame {
     self.visualEffectView.frame = self.bounds;
     self.backgroundImageView.frame = self.bounds;
     
@@ -90,8 +111,9 @@ static UENavigationBarAppearance *standardUENavigationBarAppearance;
     }
     
     CGSize size = self.bounds.size;
-    self.containerView.frame = CGRectMake(0, safeAreaTop, size.width, size.height - safeAreaTop);
-    
+    CGRect originalFrame = CGRectMake(0, safeAreaTop, size.width, size.height - safeAreaTop);
+    self.containerView.frame = UIEdgeInsetsInsetRect(originalFrame, self.containerViewEdgeInsets);
+
     CGFloat lineHeight = 1.0 / UIScreen.mainScreen.scale;
     self.shadowImageView.frame = CGRectMake(0, size.height - lineHeight, size.width, lineHeight);
 }
@@ -107,6 +129,11 @@ static UENavigationBarAppearance *standardUENavigationBarAppearance;
 
 - (void)addContainerSubview:(UIView *)view {
     [self.containerView addSubview:view];
+}
+
+- (void)setContainerViewEdgeInsets:(UIEdgeInsets)edgeInsets {
+    _containerViewEdgeInsets = edgeInsets;
+    [self updateNavigationBarContentFrame];
 }
 
 @end

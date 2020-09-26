@@ -52,7 +52,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param enabled 是否使用模糊背景；默认 NO
 - (void)enableBlurEffect:(BOOL)enabled;
 
+/// 添加控件
+/// @param view 子控件
 - (void)addContainerSubview:(UIView *)view;
+
+/// 设置 Container View UIEdgeInsets
+/// @param edgeInsets UIEdgeInsets；默认 UIEdgeInsetsMake(0, 8, 0, 8)
+- (void)setContainerViewEdgeInsets:(UIEdgeInsets)edgeInsets;
 
 @end
 
