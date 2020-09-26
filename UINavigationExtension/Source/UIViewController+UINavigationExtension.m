@@ -178,6 +178,7 @@
             self.navigationController.navigationBar.ue_userInteractionDisabled = YES;
             self.navigationController.navigationBar.userInteractionEnabled = NO;
         } else {
+            self.ue_navigationBar.containerView.hidden = hidesNavigationBar;
             self.ue_navigationBar.userInteractionEnabled = !hidesNavigationBar;
             self.ue_navigationBar.containerView.userInteractionEnabled = containerViewUserInteractionEnabled;
             self.navigationController.navigationBar.ue_userInteractionDisabled = hidesNavigationBar;

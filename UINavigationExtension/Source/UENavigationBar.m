@@ -82,7 +82,6 @@ static UENavigationBarAppearance *standardUENavigationBarAppearance;
         [self addSubview:self.backgroundImageView];
         [self addSubview:self.visualEffectView];
         [self addSubview:self.shadowImageView];
-        [self addSubview:self.containerView];
         
         _backgroundImageView.image = [UENavigationBar standardAppearance].backgorundImage;
     }
@@ -116,6 +115,12 @@ static UENavigationBarAppearance *standardUENavigationBarAppearance;
 
     CGFloat lineHeight = 1.0 / UIScreen.mainScreen.scale;
     self.shadowImageView.frame = CGRectMake(0, size.height - lineHeight, size.width, lineHeight);
+    
+    // 放在所有的 View 前面
+    if (self.superview && self.superview != self.containerView.superview) {
+        [self.superview addSubview:self.containerView];
+    }
+    [self.superview bringSubviewToFront:self.containerView];
 }
 
 #pragma mark - Public
