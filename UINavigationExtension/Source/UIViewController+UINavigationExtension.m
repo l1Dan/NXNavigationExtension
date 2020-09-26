@@ -13,46 +13,6 @@
 #import "UINavigationExtensionMacro.h"
 #import "UIViewController+UINavigationExtension.h"
 
-@interface UINavigationBar (UIViewControllerPrivate)
-
-@property (nonatomic, assign) BOOL ue_userInteractionDisabled;
-
-@end
-
-@implementation UINavigationBar (UIViewControllerPrivate)
-
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        UINavigationExtensionSwizzleMethod([UINavigationBar class], @selector(setUserInteractionEnabled:), @selector(ue_setUserInteractionEnabled:));
-    });
-}
-
-- (void)ue_setUserInteractionEnabled:(BOOL)userInteractionEnabled {
-    if (self.ue_userInteractionDisabled) {
-        [self ue_setUserInteractionEnabled:NO];
-        return;
-    }
-    [self ue_setUserInteractionEnabled:userInteractionEnabled];
-}
-
-#pragma mark - Getter & Setter
-- (BOOL)ue_userInteractionDisabled {
-    NSNumber *userInteractionDisabled = objc_getAssociatedObject(self, _cmd);
-    if (userInteractionDisabled && [userInteractionDisabled isKindOfClass:[NSNumber class]]) {
-        return [userInteractionDisabled boolValue];
-    }
-    userInteractionDisabled = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, userInteractionDisabled, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [userInteractionDisabled boolValue];
-}
-
-- (void)setUe_userInteractionDisabled:(BOOL)ue_userInteractionDisabled {
-    objc_setAssociatedObject(self, @selector(ue_userInteractionDisabled), [NSNumber numberWithBool:ue_userInteractionDisabled], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-@end
-
 @interface UIViewController (UINavigationExtension)
 
 @property (nonatomic, assign) BOOL ue_viewWillDisappear;
@@ -95,6 +55,7 @@
         self.navigationController.navigationBar.tintColor = self.ue_barTintColor;
         self.navigationController.navigationBar.titleTextAttributes = self.ue_titleTextAttributes;
         [self.view bringSubviewToFront:self.ue_navigationBar];
+        [self.view bringSubviewToFront:self.ue_navigationBar.containerView];
         
         __weak typeof(self) weakSelf = self;
         self.navigationController.navigationBar.ue_didUpdateFrameHandler = ^(CGRect frame) {

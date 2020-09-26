@@ -15,6 +15,9 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 
 @property (nonatomic, copy, nullable) UINavigationBarDidUpdateFrameHandler ue_didUpdateFrameHandler;
 
+/// 阻止事件被接受，需要事件穿透传递
+@property (nonatomic, assign) BOOL ue_userInteractionDisabled;
+
 @end
 
 NS_ASSUME_NONNULL_END

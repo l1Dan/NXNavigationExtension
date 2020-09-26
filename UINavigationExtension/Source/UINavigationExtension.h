@@ -10,7 +10,6 @@
 
 #import "UENavigationBar.h"
 #import "UINavigationExtensionMacro.h"
-#import "UINavigationBar+UINavigationExtension.h"
 #import "UINavigationController+UINavigationExtension.h"
 #import "UIViewController+UINavigationExtension.h"
 
