@@ -21,12 +21,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import <UIKit/UIKit.h>
+
 #ifndef UINavigationExtension_h
 #define UINavigationExtension_h
+
+#if __has_include(<UINavigationExtension/UINavigationExtension.h>)
+
+//! Project version number for UINavigationExtension.
+FOUNDATION_EXPORT double UINavigationExtensionVersionNumber;
+
+//! Project version string for UINavigationExtension.
+FOUNDATION_EXPORT const unsigned char UINavigationExtensionVersionString[];
+
+#import <UINavigationExtension/UENavigationBar.h>
+#import <UINavigationExtension/UINavigationExtensionMacro.h>
+#import <UINavigationExtension/UINavigationController+UINavigationExtension.h>
+#import <UINavigationExtension/UIViewController+UINavigationExtension.h>
+#else
 
 #import "UENavigationBar.h"
 #import "UINavigationExtensionMacro.h"
 #import "UINavigationController+UINavigationExtension.h"
 #import "UIViewController+UINavigationExtension.h"
+
+#endif /* __has_include */
 
 #endif /* UINavigationExtension_h */
