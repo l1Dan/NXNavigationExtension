@@ -1,9 +1,25 @@
 //
-//  UIViewController+UINavigationExtension.m
-//  UINavigationExtension
+// UIViewController+UINavigationExtension.m
 //
-//  Created by lidan on 2020/9/23.
+// Copyright (c) 2020 Leo Lee UINavigationExtension (https://github.com/l1Dan/UINavigationExtension)
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 #import <objc/runtime.h>
 
@@ -29,7 +45,7 @@
         UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewWillAppear:), @selector(ue_viewWillAppear:));
         UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewDidAppear:), @selector(ue_viewDidAppear:));
         UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewWillDisappear:), @selector(ue_viewWillDisappear:));
-
+        
     });
 }
 
@@ -47,6 +63,7 @@
 
 - (void)ue_viewWillAppear:(BOOL)animated {
     if (!self.ue_navigationBarInitFinished) {
+        // FIXED: 修复 viewDidLoad 调用时，界面没有显示无法获取到 navigationController 对象问题
         [self updateNavigationBarAppearance];
     }
     
@@ -54,6 +71,7 @@
         self.navigationController.navigationBar.barTintColor = self.ue_barBarTintColor;
         self.navigationController.navigationBar.tintColor = self.ue_barTintColor;
         self.navigationController.navigationBar.titleTextAttributes = self.ue_titleTextAttributes;
+        // FIXED: 修复导航栏 containerView 被遮挡问题
         [self.view bringSubviewToFront:self.ue_navigationBar];
         [self.view bringSubviewToFront:self.ue_navigationBar.containerView];
         
@@ -64,7 +82,6 @@
             CGRect newFrame = CGRectMake(0, 0, frame.size.width, frame.size.height + frame.origin.y);
             weakSelf.ue_navigationBar.frame = newFrame;
         };
-        
         [self changeNavigationBarUserInteractionState];
     }
     
@@ -81,7 +98,6 @@
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
         BOOL interactivePopGestureRecognizerEnabled = self.navigationController.viewControllers.count > 1;
         self.navigationController.interactivePopGestureRecognizer.enabled = interactivePopGestureRecognizerEnabled;
-    
         [self changeNavigationBarUserInteractionState];
     }
     
@@ -97,11 +113,11 @@
         self.ue_navigationBar.shadowImageView.image = self.ue_shadowImage;
         
         if (self.ue_shadowImageTintColor) {
-            self.ue_navigationBar.shadowImageView.image = UINavigationExtensionImageFromColor(self.ue_shadowImageTintColor);
+            self.ue_navigationBar.shadowImageView.image = UINavigationExtensionGetImageFromColor(self.ue_shadowImageTintColor);
         }
         
         self.ue_navigationBar.backgroundImageView.image = self.ue_navigationBarBackgroundImage;
-        self.ue_navigationBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, UINavigationExtensionNavigationBarHeight());
+        self.ue_navigationBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, UINavigationExtensionGetNavigationBarHeight());
         [self.ue_navigationBar enableBlurEffect:self.ue_useSystemBlurNavigationBar];
         
         if ([self.view isKindOfClass:[UIScrollView class]]) {
@@ -121,19 +137,19 @@
         BOOL hidesNavigationBar = self.ue_hidesNavigationBar;
         BOOL containerViewUserInteractionEnabled = self.ue_barContainerViewUserInteractionEnabled;
         if ([self isKindOfClass:[UIPageViewController class]] && !hidesNavigationBar) {
-            // 处理特殊情况，最后显示的为 UIPageViewController
+            // FIXED: 处理特殊情况，最后显示的为 UIPageViewController
             hidesNavigationBar = self.parentViewController.ue_hidesNavigationBar;
         }
         
         if (hidesNavigationBar) {
             containerViewUserInteractionEnabled = NO;
-            self.ue_navigationBar.shadowImageView.image = UINavigationExtensionImageFromColor([UIColor clearColor]);
-            self.ue_navigationBar.backgroundImageView.image = UINavigationExtensionImageFromColor([UIColor clearColor]);
+            self.ue_navigationBar.shadowImageView.image = UINavigationExtensionGetImageFromColor([UIColor clearColor]);
+            self.ue_navigationBar.backgroundImageView.image = UINavigationExtensionGetImageFromColor([UIColor clearColor]);
             self.ue_navigationBar.backgroundColor = [UIColor clearColor];
             self.navigationController.navigationBar.tintColor = [UIColor clearColor]; // 返回按钮透明
         }
         
-        if (containerViewUserInteractionEnabled) {
+        if (containerViewUserInteractionEnabled) { // 添加试图到 containerView 时可以不随 NavigationBar 的 alpha 变化
             self.ue_navigationBar.userInteractionEnabled = YES;
             self.ue_navigationBar.containerView.userInteractionEnabled = YES;
             self.navigationController.navigationBar.ue_userInteractionDisabled = YES;
@@ -357,7 +373,6 @@
 #else
     interactivePopMaxAllowedDistanceToLeftEdge = [NSNumber numberWithFloat:MAX(0, ue_interactivePopMaxAllowedDistanceToLeftEdge)];
 #endif
-    
     objc_setAssociatedObject(self, @selector(ue_interactivePopMaxAllowedDistanceToLeftEdge), interactivePopMaxAllowedDistanceToLeftEdge, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 

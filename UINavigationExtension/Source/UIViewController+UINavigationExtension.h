@@ -1,9 +1,25 @@
 //
-//  UIViewController+UINavigationExtension.h
-//  UINavigationExtension
+// UIViewController+UINavigationExtension.h
 //
-//  Created by lidan on 2020/9/23.
+// Copyright (c) 2020 Leo Lee UINavigationExtension (https://github.com/l1Dan/UINavigationExtension)
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
 
@@ -14,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 页面配置
 @interface UIViewController (UINavigationExtension)
 
-/// 获取 UENavigationBar
+/// 获取当前控制器 UENavigationBar
 @property (nonatomic, strong, readonly) UENavigationBar *ue_navigationBar;
 
 /// 设置 NavigationBar 背景颜色
@@ -26,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置 NavigationBar barTintColor
 @property (nonatomic, strong, readonly, nullable) UIColor *ue_barBarTintColor;
 
-/// 设置 NavigationBar tintColor (可以返回按钮颜色)
+/// 设置 NavigationBar tintColor (可以设置返回按钮颜色)
 @property (nonatomic, strong, readonly, nullable) UIColor *ue_barTintColor;
 
 /// 设置 NavigationBar titleTextAttributes
@@ -56,19 +72,20 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否自动隐藏 NavigationBar；默认 YES
 @property (nonatomic, assign, readonly) BOOL ue_automaticallyHideNavigationBarInChildViewController;
 
-/// 是否隐藏导航栏（UINavigationBar 和 UENavigationBar）都会隐藏；默认 NO
-/// 注意⚠️：并不是真正的隐藏，只是将导航栏变成透明，返回按钮透明，导航栏的 item(s) 和 title(view)
+/// 是否隐藏导航栏（UINavigationBar 和 UENavigationBar 都会隐藏）；默认 NO
+/// 注意⚠️：这里并不是真正的隐藏导航栏，只是将导航栏变成透明，设置返回按钮透明，导航栏的 item(s) 和 title(view)
 /// 需要自己控制是否显示。这样做的目的是让导航栏下方的视图可以接收到 UIResponder 的事件传递
 @property (nonatomic, assign, readonly) BOOL ue_hidesNavigationBar;
 
 /// UENavigationBar containerView 上面的视图接收到 UIResponder 的事件传递；默认 NO
-/// 注意⚠️：返回按钮点击事件不可用，但是还是显示的，方便自定义返回事件
+/// 注意⚠️：返回按钮点击事件不可用，但是还是显示的，可以方便自定义返回事件
 @property (nonatomic, assign, readonly) BOOL ue_barContainerViewUserInteractionEnabled;
 
 /// 设置触发全屏手势返回，离左边最大滑动距离
 @property (nonatomic, assign) CGFloat ue_interactivePopMaxAllowedDistanceToLeftEdge;
 
 /// 拦截点击返回按钮事件
+/// 触发调用 id<UINavigationControllerCustomizable> 方法
 - (void)ue_triggerSystemBackButtonHandle;
 
 @end
