@@ -154,4 +154,8 @@ static UENavigationBarAppearance *standardUENavigationBarAppearance;
     [self updateNavigationBarContentFrame];
 }
 
++ (void)registerNavigationControllerClass:(Class)firstClass forViewControllerClass:(Class)secondClass {
+    
+}
+
 @end

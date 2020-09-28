@@ -38,14 +38,13 @@
 
 @implementation UIViewController (UINavigationExtension)
 
-+ (void)load {
++ (void)ue_registerForViewControllerClass:(Class)aClass {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewDidLoad), @selector(ue_viewDidLoad));
-        UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewWillAppear:), @selector(ue_viewWillAppear:));
-        UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewDidAppear:), @selector(ue_viewDidAppear:));
-        UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewWillDisappear:), @selector(ue_viewWillDisappear:));
-        
+        UINavigationExtensionSwizzleMethod(aClass, @selector(viewDidLoad), @selector(ue_viewDidLoad));
+        UINavigationExtensionSwizzleMethod(aClass, @selector(viewWillAppear:), @selector(ue_viewWillAppear:));
+        UINavigationExtensionSwizzleMethod(aClass, @selector(viewDidAppear:), @selector(ue_viewDidAppear:));
+        UINavigationExtensionSwizzleMethod(aClass, @selector(viewWillDisappear:), @selector(ue_viewWillDisappear:));
     });
 }
 

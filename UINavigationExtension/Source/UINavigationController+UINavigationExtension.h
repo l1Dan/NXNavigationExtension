@@ -40,16 +40,18 @@ FOUNDATION_EXPORT BOOL UINavigationExtensionFullscreenPopGestureEnable;
 
 @interface UINavigationController (UINavigationExtension)
 
-/// 全屏手势 UIPanGestureRecognizer
-@property (nonatomic, strong, readonly) UIPanGestureRecognizer *ue_fullscreenPopGestureRecognizer;
-
 /// 设置 UENavigationBar 是否可用；默认 YES；设置为 NO 时将使用系统导航栏
 @property (nonatomic, assign) BOOL ue_useNavigationBar;
+
+/// 全屏手势 UIPanGestureRecognizer
+@property (nonatomic, strong, readonly) UIPanGestureRecognizer *ue_fullscreenPopGestureRecognizer;
 
 /// 跳到指定 ViewController，如果没有找到就创建一个新的 ViewController
 /// @param className 需要跳转的 ViewController class
 /// @param handler 调用创建 ViewController handler
 - (void)ue_jumpViewControllerClass:(Class)className usingCreateViewControllerHandler:(__kindof UIViewController * (^)(void))handler;
+
++ (void)registerViewControllerClass:(Class)firstClass forNavigationBarClass:(Class)secondClass;
 
 @end
 

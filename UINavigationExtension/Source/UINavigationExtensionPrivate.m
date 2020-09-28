@@ -28,11 +28,11 @@
 
 @implementation UINavigationBar (UINavigationExtensionPrivate)
 
-+ (void)load {
++ (void)ue_registerForNavigationBar:(Class)aClass {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        UINavigationExtensionSwizzleMethod([UINavigationBar class], @selector(layoutSubviews), @selector(ue_layoutSubviews));
-        UINavigationExtensionSwizzleMethod([UINavigationBar class], @selector(setUserInteractionEnabled:), @selector(ue_setUserInteractionEnabled:));
+        UINavigationExtensionSwizzleMethod(aClass, @selector(layoutSubviews), @selector(ue_layoutSubviews));
+        UINavigationExtensionSwizzleMethod(aClass, @selector(setUserInteractionEnabled:), @selector(ue_setUserInteractionEnabled:));
     });
 }
 

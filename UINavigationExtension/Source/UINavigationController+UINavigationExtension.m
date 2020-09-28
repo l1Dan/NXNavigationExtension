@@ -33,11 +33,11 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
 
 @implementation UINavigationController (UINavigationExtension)
 
-+ (void)load {
++ (void)ue_registerForNavigationControllerClass:(Class)aClass {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        UINavigationExtensionSwizzleMethod([UINavigationController class], @selector(pushViewController:animated:), @selector(ue_pushViewController:animated:));
-        UINavigationExtensionSwizzleMethod([UINavigationController class], @selector(setViewControllers:animated:), @selector(ue_setViewControllers:animated:));
+        UINavigationExtensionSwizzleMethod(aClass, @selector(pushViewController:animated:), @selector(ue_pushViewController:animated:));
+        UINavigationExtensionSwizzleMethod(aClass, @selector(setViewControllers:animated:), @selector(ue_setViewControllers:animated:));
     });
 }
 
@@ -153,6 +153,16 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
     objc_setAssociatedObject(self, @selector(ue_useNavigationBar), [NSNumber numberWithBool:ue_useNavigationBar], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (UIPanGestureRecognizer *)ue_fullscreenPopGestureRecognizer {
+    UIPanGestureRecognizer *panGestureRecognizer = objc_getAssociatedObject(self, _cmd);
+    if (panGestureRecognizer && [panGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        return panGestureRecognizer;
+    }
+    panGestureRecognizer = [[UIPanGestureRecognizer alloc] init];
+    objc_setAssociatedObject(self, _cmd, panGestureRecognizer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return panGestureRecognizer;
+}
+
 - (void)ue_triggerSystemBackButtonHandle {
     if (self.viewControllers.count <= 1) return;
     
@@ -167,19 +177,24 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
 }
 
 #pragma mark - Public
-- (UIPanGestureRecognizer *)ue_fullscreenPopGestureRecognizer {
-    UIPanGestureRecognizer *panGestureRecognizer = objc_getAssociatedObject(self, _cmd);
-    if (panGestureRecognizer && [panGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
-        return panGestureRecognizer;
-    }
-    panGestureRecognizer = [[UIPanGestureRecognizer alloc] init];
-    objc_setAssociatedObject(self, _cmd, panGestureRecognizer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return panGestureRecognizer;
-}
-
 - (void)ue_jumpViewControllerClass:(Class)className usingCreateViewControllerHandler:(__kindof UIViewController * _Nonnull (^)(void))handler {
     NSArray<__kindof UIViewController *> *viewControllers = [self findViewController:className usingCreateViewControllerHandler:handler];
     [self setViewControllers:viewControllers animated:YES];
+}
+
++ (void)registerViewControllerClass:(Class)firstClass forNavigationBarClass:(Class)secondClass {
+    NSParameterAssert(firstClass);
+    NSParameterAssert(secondClass);
+    
+    if (![[firstClass new] isKindOfClass:[UINavigationController class]] &&
+        [[firstClass new] isKindOfClass:[UIViewController class]] &&
+        [[secondClass new] isKindOfClass:[UINavigationBar class]]) {
+        [UINavigationController ue_registerForNavigationControllerClass:self];
+        [UIViewController ue_registerForViewControllerClass:firstClass];
+        [UINavigationBar ue_registerForNavigationBar:secondClass];
+    } else {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"类型错误！" userInfo:nil];
+    }
 }
 
 @end

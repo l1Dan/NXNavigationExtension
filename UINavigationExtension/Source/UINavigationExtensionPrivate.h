@@ -51,8 +51,21 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 /// 阻止事件被 NavigationBar 接收，需要将事件穿透传递到下层
 @property (nonatomic, assign) BOOL ue_navigationBarUserInteractionDisabled;
 
++ (void)ue_registerForNavigationBar:(Class)aClass;
+
 @end
 
+@interface UIViewController (UINavigationExtension)
+
++ (void)ue_registerForViewControllerClass:(Class)aClass;
+
+@end
+
+@interface UINavigationController (UINavigationExtension);
+
++ (void)ue_registerForNavigationControllerClass:(Class)aClass;
+
+@end
 
 @interface UINavigationController (UINavigationExtensionPrivate)
 
@@ -63,6 +76,5 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 - (void)ue_configureNavigationBar;
 
 @end
-
 
 NS_ASSUME_NONNULL_END
