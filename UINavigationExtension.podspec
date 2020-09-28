@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "UINavigationExtension"
-  spec.version      = "2.1.3"
+  spec.version      = "2.1.4"
   spec.summary      = "iOS 导航栏处理扩展"
 
   spec.description  = <<-DESC
@@ -14,6 +14,6 @@ Pod::Spec.new do |spec|
 
   spec.ios.deployment_target = "10.0"
   spec.source_files = "UINavigationExtension/Source/*.{h,m}"
-  spec.private_header_files = 'UINavigationExtension/Source/UINavigationBar+UINavigationExtension.h'
+  spec.private_header_files = 'UINavigationExtension/Source/UINavigationExtensionPrivate.h'
 
 end

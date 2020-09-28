@@ -24,9 +24,9 @@
 #import <objc/runtime.h>
 
 #import "UENavigationBar.h"
-#import "UINavigationBar+UINavigationExtension.h"
 #import "UINavigationController+UINavigationExtension.h"
 #import "UINavigationExtensionMacro.h"
+#import "UINavigationExtensionPrivate.h"
 #import "UIViewController+UINavigationExtension.h"
 
 @interface UIViewController (UINavigationExtension)
@@ -54,7 +54,7 @@
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
         self.ue_navigationBarInitFinished = YES;
         
-        [self.navigationController configureNavigationBar];
+        [self.navigationController ue_configureNavigationBar];
         [self updateNavigationBarAppearance];
     }
     
@@ -62,8 +62,9 @@
 }
 
 - (void)ue_viewWillAppear:(BOOL)animated {
-    if (!self.ue_navigationBarInitFinished) {
+    if (self.navigationController && self.navigationController.ue_useNavigationBar && !self.ue_navigationBarInitFinished) {
         // FIXED: 修复 viewDidLoad 调用时，界面没有显示无法获取到 navigationController 对象问题
+        [self.navigationController ue_configureNavigationBar];
         [self updateNavigationBarAppearance];
     }
     
@@ -107,7 +108,7 @@
 #pragma mark - Private
 - (void)updateNavigationBarAppearance {
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
-        [self.navigationController configureNavigationBar];
+        [self.navigationController ue_configureNavigationBar];
         
         self.ue_navigationBar.backgroundColor = self.ue_navigationBarBackgroundColor;
         self.ue_navigationBar.shadowImageView.image = self.ue_shadowImage;
@@ -152,13 +153,13 @@
         if (containerViewUserInteractionEnabled) { // 添加试图到 containerView 时可以不随 NavigationBar 的 alpha 变化
             self.ue_navigationBar.userInteractionEnabled = YES;
             self.ue_navigationBar.containerView.userInteractionEnabled = YES;
-            self.navigationController.navigationBar.ue_userInteractionDisabled = YES;
+            self.navigationController.navigationBar.ue_navigationBarUserInteractionDisabled = YES;
             self.navigationController.navigationBar.userInteractionEnabled = NO;
         } else {
             self.ue_navigationBar.containerView.hidden = hidesNavigationBar;
             self.ue_navigationBar.userInteractionEnabled = !hidesNavigationBar;
             self.ue_navigationBar.containerView.userInteractionEnabled = containerViewUserInteractionEnabled;
-            self.navigationController.navigationBar.ue_userInteractionDisabled = hidesNavigationBar;
+            self.navigationController.navigationBar.ue_navigationBarUserInteractionDisabled = hidesNavigationBar;
             self.navigationController.navigationBar.userInteractionEnabled = !hidesNavigationBar;
         }
     }

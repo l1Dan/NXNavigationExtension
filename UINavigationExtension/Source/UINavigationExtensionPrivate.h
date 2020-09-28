@@ -1,5 +1,5 @@
 //
-// UINavigationBar+UINavigationExtension.h
+// UINavigationExtensionPrivate.h
 //
 // Copyright (c) 2020 Leo Lee UINavigationExtension (https://github.com/l1Dan/UINavigationExtension)
 //
@@ -25,15 +25,44 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^UINavigationExtensionUINavigationBarDidUpdateFrameHandler)(CGRect frame);
+typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 
-@interface UINavigationBar (UINavigationExtension)
+@interface UENavigationGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
 
-@property (nonatomic, copy, nullable) UINavigationExtensionUINavigationBarDidUpdateFrameHandler ue_didUpdateFrameHandler;
+@property (nonatomic, weak) UINavigationController *navigationController;
 
-/// 阻止事件被 NavigationBar 接收，需要将事件穿透传递到下层
-@property (nonatomic, assign) BOOL ue_userInteractionDisabled;
+- (instancetype)initWithNavigationController:(UINavigationController *)navigationController;
 
 @end
+
+
+@interface UEFullscreenPopGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
+
+@property (nonatomic, weak) UINavigationController *navigationController;
+
+- (instancetype)initWithNavigationController:(UINavigationController *)navigationController;
+
+@end
+
+@interface UINavigationBar (UINavigationExtensionPrivate)
+
+@property (nonatomic, copy, nullable) UINavigationBarDidUpdateFrameHandler ue_didUpdateFrameHandler;
+
+/// 阻止事件被 NavigationBar 接收，需要将事件穿透传递到下层
+@property (nonatomic, assign) BOOL ue_navigationBarUserInteractionDisabled;
+
+@end
+
+
+@interface UINavigationController (UINavigationExtensionPrivate)
+
+@property (nonatomic, strong) UENavigationGestureRecognizerDelegate *ue_gestureDelegate;
+
+@property (nonatomic, strong, readonly) UEFullscreenPopGestureRecognizerDelegate *ue_fullscreenPopGestureDelegate;
+
+- (void)ue_configureNavigationBar;
+
+@end
+
 
 NS_ASSUME_NONNULL_END

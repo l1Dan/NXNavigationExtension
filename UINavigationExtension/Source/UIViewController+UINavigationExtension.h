@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL ue_barContainerViewUserInteractionEnabled;
 
 /// 设置触发全屏手势返回，离左边最大滑动距离
-@property (nonatomic, assign) CGFloat ue_interactivePopMaxAllowedDistanceToLeftEdge;
+@property (nonatomic, assign, readonly) CGFloat ue_interactivePopMaxAllowedDistanceToLeftEdge;
 
 /// 拦截点击返回按钮事件
 /// 触发调用 id<UINavigationControllerCustomizable> 方法

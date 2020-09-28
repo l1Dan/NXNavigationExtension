@@ -46,8 +46,6 @@ FOUNDATION_EXPORT BOOL UINavigationExtensionFullscreenPopGestureEnable;
 /// 设置 UENavigationBar 是否可用；默认 YES；设置为 NO 时将使用系统导航栏
 @property (nonatomic, assign) BOOL ue_useNavigationBar;
 
-- (void)configureNavigationBar;
-
 /// 跳到指定 ViewController，如果没有找到就创建一个新的 ViewController
 /// @param className 需要跳转的 ViewController class
 /// @param handler 调用创建 ViewController handler
