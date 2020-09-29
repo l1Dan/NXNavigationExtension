@@ -55,7 +55,6 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
 
 - (void)ue_setViewControllers:(NSArray<UIViewController *> *)viewControllers animated:(BOOL)animated {
     if (viewControllers.count > 1) {
-        NSArray<__kindof UIViewController *> *viewControllers = [self.viewControllers.reverseObjectEnumerator allObjects];
         for (NSUInteger index = 0; index < viewControllers.count; index++) {
             UIViewController *viewController = viewControllers[index];
             if (index != 0) {
