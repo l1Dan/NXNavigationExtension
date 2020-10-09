@@ -24,7 +24,6 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.navigationItem.title = @"Colors";
     
     self.allViewControllers = @[
         @{@"className": NSStringFromClass([BlueViewController class]),  @"backgroundColor": [[UIColor blueColor] colorWithAlphaComponent:0.5]},

@@ -23,7 +23,19 @@
 
 #import "UENavigationBar.h"
 
+static UENavigationBarAppearance *standardNavigationBarAppearance;
+static NSMutableDictionary<NSString *, UENavigationBarAppearance *> *navigationBarAppearanceInfo;
+
 @implementation UENavigationBarAppearance
+
++ (UENavigationBarAppearance *)standardAppearance {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        standardNavigationBarAppearance = [[UENavigationBarAppearance alloc] init];
+        navigationBarAppearanceInfo = [NSMutableDictionary dictionary];
+    });
+    return standardNavigationBarAppearance;
+}
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -49,19 +61,8 @@
 
 @end
 
-
-static UENavigationBarAppearance *standardUENavigationBarAppearance;
-
 @implementation UENavigationBar {
     UIEdgeInsets _containerViewEdgeInsets;
-}
-
-+ (UENavigationBarAppearance *)standardAppearance {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        standardUENavigationBarAppearance = [[UENavigationBarAppearance alloc] init];
-    });
-    return standardUENavigationBarAppearance;
 }
 
 - (instancetype)init {
@@ -154,8 +155,22 @@ static UENavigationBarAppearance *standardUENavigationBarAppearance;
     [self updateNavigationBarContentFrame];
 }
 
-+ (void)registerNavigationControllerClass:(Class)firstClass forViewControllerClass:(Class)secondClass {
++ (UENavigationBarAppearance *)standardAppearance {
+    return [UENavigationBarAppearance standardAppearance];
+}
+
++ (UENavigationBarAppearance *)appearanceForNavigationControllerClass:(Class)aClass {
+    NSParameterAssert(aClass);
     
+    UENavigationBarAppearance *appearance = navigationBarAppearanceInfo[NSStringFromClass(aClass)];
+    NSAssert(appearance, @"请先调用注册方法：（registerAppearance:forNavigationControllerClass）！");
+    return appearance;
+}
+
++ (void)registerAppearance:(UENavigationBarAppearance *)appearance forNavigationControllerClass:(Class)aClass {
+    NSParameterAssert(appearance);
+    NSParameterAssert(aClass);
+    navigationBarAppearanceInfo[NSStringFromClass(aClass)] = appearance;
 }
 
 @end

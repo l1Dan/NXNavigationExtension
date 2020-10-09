@@ -28,6 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 全局外观设置
 @interface UENavigationBarAppearance : NSObject
 
+/// 全局外观设置
+@property (nonatomic, strong, class, readonly) UENavigationBarAppearance *standardAppearance;
+
 /// 自定义返回按钮
 @property (nonatomic, strong, nullable) UIView *backButtonCustomView;
 
@@ -75,6 +78,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置 Container View UIEdgeInsets
 /// @param edgeInsets UIEdgeInsets；默认 UIEdgeInsetsMake(0, 8, 0, 8)
 - (void)setContainerViewEdgeInsets:(UIEdgeInsets)edgeInsets;
+
++ (UENavigationBarAppearance *)appearanceForNavigationControllerClass:(Class)aClass;
+
++ (void)registerAppearance:(UENavigationBarAppearance *)appearance forNavigationControllerClass:(Class)aClass;
 
 @end
 

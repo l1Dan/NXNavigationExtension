@@ -7,11 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D608BBE4252F6833009CC941 /* LightNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D608BBE3252F6833009CC941 /* LightNavigationController.m */; };
+		D608BBEB252F6AAF009CC941 /* DashboardTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D608BBEA252F6AAF009CC941 /* DashboardTabBarController.m */; };
+		D608BBF0252F6B64009CC941 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D608BBEF252F6B64009CC941 /* BaseNavigationController.m */; };
+		D608BBF6252F6CC7009CC941 /* DarkNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D608BBF5252F6CC7009CC941 /* DarkNavigationController.m */; };
+		D608BBFB252F6CD8009CC941 /* AutoNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D608BBFA252F6CD8009CC941 /* AutoNavigationController.m */; };
 		D61CCC00251A13F100A91580 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCBFF251A13F100A91580 /* AppDelegate.m */; };
-		D61CCC09251A13F100A91580 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D61CCC07251A13F100A91580 /* Main.storyboard */; };
-		D61CCC0B251A13F400A91580 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D61CCC0A251A13F400A91580 /* Assets.xcassets */; };
-		D61CCC0E251A13F400A91580 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D61CCC0C251A13F400A91580 /* LaunchScreen.storyboard */; };
 		D61CCC11251A13F400A91580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCC10251A13F400A91580 /* main.m */; };
+		D696862D2530971A00FBC7A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D69686262530971A00FBC7A5 /* Assets.xcassets */; };
+		D696863F253097C100FBC7A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69686382530977F00FBC7A5 /* LaunchScreen.storyboard */; };
+		D6968640253097C100FBC7A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69686362530977F00FBC7A5 /* Main.storyboard */; };
 		D6E40253251FB71C001D7BEE /* UINavigationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E4024C251FB71C001D7BEE /* UINavigationExtension.framework */; };
 		D6E40254251FB71C001D7BEE /* UINavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6E4024C251FB71C001D7BEE /* UINavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6E40279251FBA5A001D7BEE /* UENavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E4E119251A55A500625171 /* UENavigationBar.m */; };
@@ -58,18 +63,28 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D608BBE2252F6833009CC941 /* LightNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LightNavigationController.h; sourceTree = "<group>"; };
+		D608BBE3252F6833009CC941 /* LightNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LightNavigationController.m; sourceTree = "<group>"; };
+		D608BBE9252F6AAF009CC941 /* DashboardTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DashboardTabBarController.h; sourceTree = "<group>"; };
+		D608BBEA252F6AAF009CC941 /* DashboardTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DashboardTabBarController.m; sourceTree = "<group>"; };
+		D608BBEE252F6B64009CC941 /* BaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
+		D608BBEF252F6B64009CC941 /* BaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
+		D608BBF4252F6CC7009CC941 /* DarkNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DarkNavigationController.h; sourceTree = "<group>"; };
+		D608BBF5252F6CC7009CC941 /* DarkNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DarkNavigationController.m; sourceTree = "<group>"; };
+		D608BBF9252F6CD8009CC941 /* AutoNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoNavigationController.h; sourceTree = "<group>"; };
+		D608BBFA252F6CD8009CC941 /* AutoNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoNavigationController.m; sourceTree = "<group>"; };
 		D61CCBFB251A13F100A91580 /* UINavigationExtensionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UINavigationExtensionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D61CCBFE251A13F100A91580 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D61CCBFF251A13F100A91580 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D61CCC08251A13F100A91580 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D61CCC0A251A13F400A91580 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D61CCC0D251A13F400A91580 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D61CCC0F251A13F400A91580 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D61CCC10251A13F400A91580 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D69686232530970400FBC7A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D69686252530971A00FBC7A5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D69686262530971A00FBC7A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D69686372530977F00FBC7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D69686392530977F00FBC7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D6BB8933251FB63700A674F7 /* UINavigationExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationExtension.h; sourceTree = "<group>"; };
 		D6BB8934251FB63700A674F7 /* UINavigationExtensionMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationExtensionMacro.h; sourceTree = "<group>"; };
 		D6E4024C251FB71C001D7BEE /* UINavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UINavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6E4024F251FB71C001D7BEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6E402DC251FC08B001D7BEE /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		D6E402DD251FC08B001D7BEE /* OrangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrangeViewController.m; sourceTree = "<group>"; };
 		D6E402DE251FC08B001D7BEE /* BrownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrownViewController.m; sourceTree = "<group>"; };
@@ -113,6 +128,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D608BBE1252F67B5009CC941 /* Light */ = {
+			isa = PBXGroup;
+			children = (
+				D608BBE2252F6833009CC941 /* LightNavigationController.h */,
+				D608BBE3252F6833009CC941 /* LightNavigationController.m */,
+			);
+			path = Light;
+			sourceTree = "<group>";
+		};
+		D608BBE7252F6A92009CC941 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D608BBEE252F6B64009CC941 /* BaseNavigationController.h */,
+				D608BBEF252F6B64009CC941 /* BaseNavigationController.m */,
+				D608BBE9252F6AAF009CC941 /* DashboardTabBarController.h */,
+				D608BBEA252F6AAF009CC941 /* DashboardTabBarController.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		D608BBF2252F6C9E009CC941 /* Dark */ = {
+			isa = PBXGroup;
+			children = (
+				D608BBF4252F6CC7009CC941 /* DarkNavigationController.h */,
+				D608BBF5252F6CC7009CC941 /* DarkNavigationController.m */,
+			);
+			path = Dark;
+			sourceTree = "<group>";
+		};
+		D608BBF3252F6CA1009CC941 /* Auto */ = {
+			isa = PBXGroup;
+			children = (
+				D608BBF9252F6CD8009CC941 /* AutoNavigationController.h */,
+				D608BBFA252F6CD8009CC941 /* AutoNavigationController.m */,
+			);
+			path = Auto;
+			sourceTree = "<group>";
+		};
 		D61CCBF2251A13F100A91580 = {
 			isa = PBXGroup;
 			children = (
@@ -145,7 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				D6E4E112251A533700625171 /* Source */,
-				D6E4024F251FB71C001D7BEE /* Info.plist */,
+				D69686232530970400FBC7A5 /* Info.plist */,
 			);
 			path = UINavigationExtension;
 			sourceTree = "<group>";
@@ -155,10 +208,10 @@
 			children = (
 				D61CCBFE251A13F100A91580 /* AppDelegate.h */,
 				D61CCBFF251A13F100A91580 /* AppDelegate.m */,
-				D61CCC0A251A13F400A91580 /* Assets.xcassets */,
-				D61CCC0F251A13F400A91580 /* Info.plist */,
-				D61CCC0C251A13F400A91580 /* LaunchScreen.storyboard */,
-				D61CCC07251A13F100A91580 /* Main.storyboard */,
+				D69686262530971A00FBC7A5 /* Assets.xcassets */,
+				D69686252530971A00FBC7A5 /* Info.plist */,
+				D69686382530977F00FBC7A5 /* LaunchScreen.storyboard */,
+				D69686362530977F00FBC7A5 /* Main.storyboard */,
 				D61CCC10251A13F400A91580 /* main.m */,
 			);
 			path = "Supporting Files";
@@ -167,7 +220,11 @@
 		D6E402DB251FC08B001D7BEE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D608BBF3252F6CA1009CC941 /* Auto */,
 				D6E40302251FC6A2001D7BEE /* Colors */,
+				D608BBE7252F6A92009CC941 /* Common */,
+				D608BBF2252F6C9E009CC941 /* Dark */,
+				D608BBE1252F67B5009CC941 /* Light */,
 				D6E402E1251FC08B001D7BEE /* BaseViewController.h */,
 				D6E402DC251FC08B001D7BEE /* BaseViewController.m */,
 				D6E402FE251FC3F8001D7BEE /* MainTableViewController.h */,
@@ -313,9 +370,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D61CCC0E251A13F400A91580 /* LaunchScreen.storyboard in Resources */,
-				D61CCC0B251A13F400A91580 /* Assets.xcassets in Resources */,
-				D61CCC09251A13F100A91580 /* Main.storyboard in Resources */,
+				D696863F253097C100FBC7A5 /* LaunchScreen.storyboard in Resources */,
+				D6968640253097C100FBC7A5 /* Main.storyboard in Resources */,
+				D696862D2530971A00FBC7A5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,11 +394,16 @@
 				D6E402F1251FC08B001D7BEE /* GrayViewController.m in Sources */,
 				D6E402EF251FC08B001D7BEE /* BrownViewController.m in Sources */,
 				D6E402ED251FC08B001D7BEE /* BaseViewController.m in Sources */,
+				D608BBFB252F6CD8009CC941 /* AutoNavigationController.m in Sources */,
 				D6E402EE251FC08B001D7BEE /* OrangeViewController.m in Sources */,
 				D61CCC00251A13F100A91580 /* AppDelegate.m in Sources */,
 				D6E402F2251FC08B001D7BEE /* UIBarButtonItem+Convenience.m in Sources */,
 				D61CCC11251A13F400A91580 /* main.m in Sources */,
+				D608BBF0252F6B64009CC941 /* BaseNavigationController.m in Sources */,
+				D608BBEB252F6AAF009CC941 /* DashboardTabBarController.m in Sources */,
+				D608BBE4252F6833009CC941 /* LightNavigationController.m in Sources */,
 				D6E40300251FC3F8001D7BEE /* MainTableViewController.m in Sources */,
+				D608BBF6252F6CC7009CC941 /* DarkNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,19 +429,19 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D61CCC07251A13F100A91580 /* Main.storyboard */ = {
+		D69686362530977F00FBC7A5 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D61CCC08251A13F100A91580 /* Base */,
+				D69686372530977F00FBC7A5 /* Base */,
 			);
 			name = Main.storyboard;
 			path = .;
 			sourceTree = "<group>";
 		};
-		D61CCC0C251A13F400A91580 /* LaunchScreen.storyboard */ = {
+		D69686382530977F00FBC7A5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D61CCC0D251A13F400A91580 /* Base */,
+				D69686392530977F00FBC7A5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			path = .;
@@ -508,7 +570,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VV54GVQ3K7;
-				INFOPLIST_FILE = UINavigationExtension/Info.plist;
+				INFOPLIST_FILE = "UINavigationExtensionDemo/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -528,7 +590,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VV54GVQ3K7;
-				INFOPLIST_FILE = UINavigationExtension/Info.plist;
+				INFOPLIST_FILE = "UINavigationExtensionDemo/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -559,6 +621,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lidan.UINavigationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -587,6 +650,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lidan.UINavigationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
