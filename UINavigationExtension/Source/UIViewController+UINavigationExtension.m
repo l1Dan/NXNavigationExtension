@@ -45,6 +45,7 @@
         UINavigationExtensionSwizzleMethod(aClass, @selector(viewWillAppear:), @selector(ue_viewWillAppear:));
         UINavigationExtensionSwizzleMethod(aClass, @selector(viewDidAppear:), @selector(ue_viewDidAppear:));
         UINavigationExtensionSwizzleMethod(aClass, @selector(viewWillDisappear:), @selector(ue_viewWillDisappear:));
+        UINavigationExtensionSwizzleMethod(aClass, @selector(viewWillLayoutSubviews), @selector(ue_viewWillLayoutSubviews));
     });
 }
 
@@ -62,7 +63,7 @@
 
 - (void)ue_viewWillAppear:(BOOL)animated {
     if (self.navigationController && self.navigationController.ue_useNavigationBar && !self.ue_navigationBarInitFinished) {
-        // FIXED: 修复 viewDidLoad 调用时，界面没有显示无法获取到 navigationController 对象问题
+        // FIXED: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
         [self.navigationController ue_configureNavigationBar];
         [self updateNavigationBarAppearance];
     }
@@ -71,9 +72,6 @@
         self.navigationController.navigationBar.barTintColor = self.ue_barBarTintColor;
         self.navigationController.navigationBar.tintColor = self.ue_barTintColor;
         self.navigationController.navigationBar.titleTextAttributes = self.ue_titleTextAttributes;
-        // FIXED: 修复导航栏 containerView 被遮挡问题
-        [self.view bringSubviewToFront:self.ue_navigationBar];
-        [self.view bringSubviewToFront:self.ue_navigationBar.containerView];
         
         __weak typeof(self) weakSelf = self;
         self.navigationController.navigationBar.ue_didUpdateFrameHandler = ^(CGRect frame) {
@@ -82,16 +80,13 @@
             CGRect newFrame = CGRectMake(0, 0, frame.size.width, frame.size.height + frame.origin.y);
             weakSelf.ue_navigationBar.frame = newFrame;
         };
+        
+        [self updateNavigationBarHierarchy];
         [self changeNavigationBarUserInteractionState];
     }
     
     self.ue_viewWillDisappear = NO;
     [self ue_viewWillAppear: animated];
-}
-
-- (void)ue_viewWillDisappear:(BOOL)animated {
-    self.ue_viewWillDisappear = YES;
-    [self ue_viewWillDisappear: animated];
 }
 
 - (void)ue_viewDidAppear:(BOOL)animated {
@@ -102,6 +97,16 @@
     }
     
     [self ue_viewDidAppear: animated];
+}
+
+- (void)ue_viewWillDisappear:(BOOL)animated {
+    self.ue_viewWillDisappear = YES;
+    [self ue_viewWillDisappear: animated];
+}
+
+- (void)ue_viewWillLayoutSubviews {
+    [self updateNavigationBarHierarchy];
+    [self ue_viewWillLayoutSubviews];
 }
 
 #pragma mark - Private
@@ -130,6 +135,12 @@
             self.ue_navigationBar.hidden = YES;
         }
     }
+}
+
+- (void)updateNavigationBarHierarchy {
+    // FIXED: 修复导航栏 containerView 被遮挡问题
+    [self.view bringSubviewToFront:self.ue_navigationBar];
+    [self.view bringSubviewToFront:self.ue_navigationBar.containerView];
 }
 
 - (void)changeNavigationBarUserInteractionState {
