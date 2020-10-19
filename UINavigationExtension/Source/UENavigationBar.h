@@ -64,9 +64,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 模糊背景
 @property (nonatomic, strong, readonly) UIVisualEffectView *visualEffectView;
 
-/// 全局外观设置
-@property (nonatomic, strong, class, readonly) UENavigationBarAppearance *standardAppearance;
-
 /// 设置 UENavigationBar 模糊背景，背景穿透效果
 /// @param enabled 是否使用模糊背景；默认 NO
 - (void)enableBlurEffect:(BOOL)enabled;
@@ -79,9 +76,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param edgeInsets UIEdgeInsets；默认 UIEdgeInsetsMake(0, 8, 0, 8)
 - (void)setContainerViewEdgeInsets:(UIEdgeInsets)edgeInsets;
 
-+ (UENavigationBarAppearance *)appearanceForNavigationControllerClass:(Class)aClass;
+/// 获取当前设置的皮肤
+/// @param aClass UINavigationController 或子类类对象
++ (UENavigationBarAppearance *)standardAppearanceInNavigationControllerClass:(Class)aClass;
 
-+ (void)registerAppearance:(UENavigationBarAppearance *)appearance forNavigationControllerClass:(Class)aClass;
+/// 注册默认皮肤
+/// @param aClass UINavigationController 或子类类对象
++ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass;
 
 @end
 

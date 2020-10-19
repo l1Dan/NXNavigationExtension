@@ -23,18 +23,15 @@
 
 #import "UENavigationBar.h"
 
-static UENavigationBarAppearance *standardNavigationBarAppearance;
-static NSMutableDictionary<NSString *, UENavigationBarAppearance *> *navigationBarAppearanceInfo;
-
 @implementation UENavigationBarAppearance
 
 + (UENavigationBarAppearance *)standardAppearance {
+    static UENavigationBarAppearance *instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        standardNavigationBarAppearance = [[UENavigationBarAppearance alloc] init];
-        navigationBarAppearanceInfo = [NSMutableDictionary dictionary];
+        instance = [[UENavigationBarAppearance alloc] init];
     });
-    return standardNavigationBarAppearance;
+    return instance;
 }
 
 - (instancetype)init {
@@ -91,13 +88,12 @@ static NSMutableDictionary<NSString *, UENavigationBarAppearance *> *navigationB
         
         _visualEffectView = [[UIVisualEffectView alloc] initWithEffect:effect];
         _visualEffectView.hidden = YES;
-        _visualEffectView.contentView.backgroundColor = [[UENavigationBar standardAppearance].backgorundColor colorWithAlphaComponent:0.46];
+        _visualEffectView.contentView.backgroundColor = [[UENavigationBarAppearance standardAppearance].backgorundColor colorWithAlphaComponent:0.46];
+        _backgroundImageView.image = [UENavigationBarAppearance standardAppearance].backgorundImage;
         
         [self addSubview:self.backgroundImageView];
         [self addSubview:self.visualEffectView];
-        [self addSubview:self.shadowImageView];
-        
-        _backgroundImageView.image = [UENavigationBar standardAppearance].backgorundImage;
+        [self addSubview:self.shadowImageView];        
     }
     return self;
 }
@@ -137,6 +133,15 @@ static NSMutableDictionary<NSString *, UENavigationBarAppearance *> *navigationB
     [self.superview bringSubviewToFront:self.containerView];
 }
 
++ (NSMutableDictionary<NSString *, UENavigationBarAppearance *> *)appearanceInfo {
+    static NSMutableDictionary<NSString *, UENavigationBarAppearance *> *appearanceInfo;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        appearanceInfo = [NSMutableDictionary dictionary];
+    });
+    return appearanceInfo;
+}
+
 #pragma mark - Public
 - (void)enableBlurEffect:(BOOL)enabled {
     if (enabled) {
@@ -155,22 +160,16 @@ static NSMutableDictionary<NSString *, UENavigationBarAppearance *> *navigationB
     [self updateNavigationBarContentFrame];
 }
 
-+ (UENavigationBarAppearance *)standardAppearance {
-    return [UENavigationBarAppearance standardAppearance];
++ (UENavigationBarAppearance *)standardAppearanceInNavigationControllerClass:(Class)aClass {
+    if (aClass) {
+        return [UENavigationBar appearanceInfo][NSStringFromClass(aClass)];
+    }
+    return nil;
 }
 
-+ (UENavigationBarAppearance *)appearanceForNavigationControllerClass:(Class)aClass {
++ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass {
     NSParameterAssert(aClass);
-    
-    UENavigationBarAppearance *appearance = navigationBarAppearanceInfo[NSStringFromClass(aClass)];
-    NSAssert(appearance, @"请先调用注册方法：（registerAppearance:forNavigationControllerClass）！");
-    return appearance;
-}
-
-+ (void)registerAppearance:(UENavigationBarAppearance *)appearance forNavigationControllerClass:(Class)aClass {
-    NSParameterAssert(appearance);
-    NSParameterAssert(aClass);
-    navigationBarAppearanceInfo[NSStringFromClass(aClass)] = appearance;
+    [UENavigationBar appearanceInfo][NSStringFromClass(aClass)] = [UENavigationBarAppearance standardAppearance];
 }
 
 @end

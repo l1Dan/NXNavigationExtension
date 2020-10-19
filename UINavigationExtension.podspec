@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "UINavigationExtension"
-  spec.version      = "2.2.3"
+  spec.version      = "2.3.0"
   spec.summary      = "iOS 导航栏处理扩展"
 
   spec.description  = <<-DESC

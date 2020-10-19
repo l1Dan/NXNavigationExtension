@@ -26,89 +26,7 @@
 #import "UINavigationController+UINavigationExtension.h"
 #import "UIViewController+UINavigationExtension.h"
 
-@implementation UINavigationBar (UINavigationExtensionPrivate)
-
-+ (void)ue_registerForNavigationBar:(Class)aClass {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        UINavigationExtensionSwizzleMethod(aClass, @selector(layoutSubviews), @selector(ue_layoutSubviews));
-        UINavigationExtensionSwizzleMethod(aClass, @selector(setUserInteractionEnabled:), @selector(ue_setUserInteractionEnabled:));
-    });
-}
-
-- (void)ue_layoutSubviews {
-    UINavigationBarDidUpdateFrameHandler didUpdateFrameHandler = self.ue_didUpdateFrameHandler;
-    if (didUpdateFrameHandler) {
-        didUpdateFrameHandler(self.frame);
-    }
-    [self ue_layoutSubviews];
-}
-
-#pragma mark - Getter & Setter
-- (UINavigationBarDidUpdateFrameHandler)ue_didUpdateFrameHandler {
-    return objc_getAssociatedObject(self, _cmd);
-}
-
-- (void)setUe_didUpdateFrameHandler:(UINavigationBarDidUpdateFrameHandler)ue_didUpdateFrameHandler {
-    objc_setAssociatedObject(self, @selector(ue_didUpdateFrameHandler), ue_didUpdateFrameHandler, OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
-
-- (void)ue_setUserInteractionEnabled:(BOOL)userInteractionEnabled {
-    if (self.ue_navigationBarUserInteractionDisabled) {
-        [self ue_setUserInteractionEnabled:NO];
-        return;
-    }
-    [self ue_setUserInteractionEnabled:userInteractionEnabled];
-}
-
-- (BOOL)ue_navigationBarUserInteractionDisabled {
-    NSNumber *navigationBarUserInteractionDisabled = objc_getAssociatedObject(self, _cmd);
-    if (navigationBarUserInteractionDisabled && [navigationBarUserInteractionDisabled isKindOfClass:[NSNumber class]]) {
-        return [navigationBarUserInteractionDisabled boolValue];
-    }
-    navigationBarUserInteractionDisabled = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, navigationBarUserInteractionDisabled, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [navigationBarUserInteractionDisabled boolValue];
-}
-
-- (void)setUe_navigationBarUserInteractionDisabled:(BOOL)ue_navigationBarUserInteractionDisabled {
-    objc_setAssociatedObject(self, @selector(ue_navigationBarUserInteractionDisabled), [NSNumber numberWithBool:ue_navigationBarUserInteractionDisabled], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-@end
-
-@implementation UINavigationController (UINavigationExtensionPrivate)
-
-- (UENavigationGestureRecognizerDelegate *)ue_gestureDelegate {
-    return objc_getAssociatedObject(self, _cmd);
-}
-
-- (void)setUe_gestureDelegate:(UENavigationGestureRecognizerDelegate *)ue_gestureDelegate {
-    objc_setAssociatedObject(self, @selector(ue_gestureDelegate), ue_gestureDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (UEFullscreenPopGestureRecognizerDelegate *)ue_fullscreenPopGestureDelegate {
-    UEFullscreenPopGestureRecognizerDelegate *delegate = objc_getAssociatedObject(self, _cmd);
-    if (delegate && [delegate isKindOfClass:[UEFullscreenPopGestureRecognizerDelegate class]]) {
-        return delegate;
-    }
-    delegate = [[UEFullscreenPopGestureRecognizerDelegate alloc] initWithNavigationController:self];
-    objc_setAssociatedObject(self, _cmd, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return delegate;
-}
-
-- (void)ue_configureNavigationBar {
-    [self.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationBar setShadowImage:[[UIImage alloc] init]];
-    [self.navigationBar setTranslucent:YES];
-    
-    self.ue_gestureDelegate = [[UENavigationGestureRecognizerDelegate alloc] initWithNavigationController:self];
-    self.interactivePopGestureRecognizer.delegate = self.ue_gestureDelegate;
-}
-
-@end
-
-@implementation UENavigationGestureRecognizerDelegate
+@implementation UEEdgeGestureRecognizerDelegate
 
 - (instancetype)initWithNavigationController:(UINavigationController *)navigationController {
     if (self = [super init]) {
@@ -183,6 +101,96 @@
     }
     
     return YES;
+}
+
+@end
+
+@implementation UINavigationBar (UINavigationExtensionPrivate)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        UINavigationExtensionSwizzleMethod([UINavigationBar class], @selector(layoutSubviews), @selector(ue_layoutSubviews));
+        UINavigationExtensionSwizzleMethod([UINavigationBar class], @selector(setUserInteractionEnabled:), @selector(ue_setUserInteractionEnabled:));
+    });
+}
+
+- (void)ue_layoutSubviews {
+    UINavigationBarDidUpdateFrameHandler didUpdateFrameHandler = self.ue_didUpdateFrameHandler;
+    if (didUpdateFrameHandler) {
+        didUpdateFrameHandler(self.frame);
+    }
+    [self ue_layoutSubviews];
+}
+
+#pragma mark - Getter & Setter
+- (UINavigationBarDidUpdateFrameHandler)ue_didUpdateFrameHandler {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setUe_didUpdateFrameHandler:(UINavigationBarDidUpdateFrameHandler)ue_didUpdateFrameHandler {
+    objc_setAssociatedObject(self, @selector(ue_didUpdateFrameHandler), ue_didUpdateFrameHandler, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (void)ue_setUserInteractionEnabled:(BOOL)userInteractionEnabled {
+    if (self.ue_navigationBarUserInteractionDisabled) {
+        [self ue_setUserInteractionEnabled:NO];
+        return;
+    }
+    [self ue_setUserInteractionEnabled:userInteractionEnabled];
+}
+
+- (BOOL)ue_navigationBarUserInteractionDisabled {
+    NSNumber *navigationBarUserInteractionDisabled = objc_getAssociatedObject(self, _cmd);
+    if (navigationBarUserInteractionDisabled && [navigationBarUserInteractionDisabled isKindOfClass:[NSNumber class]]) {
+        return [navigationBarUserInteractionDisabled boolValue];
+    }
+    navigationBarUserInteractionDisabled = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, navigationBarUserInteractionDisabled, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [navigationBarUserInteractionDisabled boolValue];
+}
+
+- (void)setUe_navigationBarUserInteractionDisabled:(BOOL)ue_navigationBarUserInteractionDisabled {
+    objc_setAssociatedObject(self, @selector(ue_navigationBarUserInteractionDisabled), [NSNumber numberWithBool:ue_navigationBarUserInteractionDisabled], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+@end
+
+@implementation UINavigationController (UINavigationExtensionPrivate)
+
+- (UEEdgeGestureRecognizerDelegate *)ue_gestureDelegate {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setUe_gestureDelegate:(UEEdgeGestureRecognizerDelegate *)ue_gestureDelegate {
+    objc_setAssociatedObject(self, @selector(ue_gestureDelegate), ue_gestureDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (UEFullscreenPopGestureRecognizerDelegate *)ue_fullscreenPopGestureDelegate {
+    UEFullscreenPopGestureRecognizerDelegate *delegate = objc_getAssociatedObject(self, _cmd);
+    if (delegate && [delegate isKindOfClass:[UEFullscreenPopGestureRecognizerDelegate class]]) {
+        return delegate;
+    }
+    delegate = [[UEFullscreenPopGestureRecognizerDelegate alloc] initWithNavigationController:self];
+    objc_setAssociatedObject(self, _cmd, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return delegate;
+}
+
+- (UENavigationBarAppearance *)ue_appearance {
+    return [UENavigationBar standardAppearanceInNavigationControllerClass:[self class]];
+}
+
+- (BOOL)ue_useNavigationBar {
+    return self.ue_appearance != nil;
+}
+
+- (void)ue_configureNavigationBar {
+    [self.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationBar setShadowImage:[[UIImage alloc] init]];
+    [self.navigationBar setTranslucent:YES];
+    
+    self.ue_gestureDelegate = [[UEEdgeGestureRecognizerDelegate alloc] initWithNavigationController:self];
+    self.interactivePopGestureRecognizer.delegate = self.ue_gestureDelegate;
 }
 
 @end

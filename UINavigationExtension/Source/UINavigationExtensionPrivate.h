@@ -22,57 +22,61 @@
 // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import "UENavigationBar.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 
-@interface UENavigationGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
+/// 边缘滑动返回手势代理
+@interface UEEdgeGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
 
+/// 获取当前导航控制器
 @property (nonatomic, weak) UINavigationController *navigationController;
 
+/// 初始化方法
+/// @param navigationController 当前导航控制器
 - (instancetype)initWithNavigationController:(UINavigationController *)navigationController;
 
 @end
 
-
+/// 全屏滑动返回手势代理
 @interface UEFullscreenPopGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
 
+/// 获取当前导航控制器
 @property (nonatomic, weak) UINavigationController *navigationController;
 
+/// 初始化方法
+/// @param navigationController 当前导航控制器
 - (instancetype)initWithNavigationController:(UINavigationController *)navigationController;
 
 @end
 
 @interface UINavigationBar (UINavigationExtensionPrivate)
 
+/// UINavigatoinBar layoutSubviews 时调用
 @property (nonatomic, copy, nullable) UINavigationBarDidUpdateFrameHandler ue_didUpdateFrameHandler;
 
 /// 阻止事件被 NavigationBar 接收，需要将事件穿透传递到下层
 @property (nonatomic, assign) BOOL ue_navigationBarUserInteractionDisabled;
 
-+ (void)ue_registerForNavigationBar:(Class)aClass;
-
-@end
-
-@interface UIViewController (UINavigationExtension)
-
-+ (void)ue_registerForViewControllerClass:(Class)aClass;
-
-@end
-
-@interface UINavigationController (UINavigationExtension);
-
-+ (void)ue_registerForNavigationControllerClass:(Class)aClass;
-
 @end
 
 @interface UINavigationController (UINavigationExtensionPrivate)
 
-@property (nonatomic, strong) UENavigationGestureRecognizerDelegate *ue_gestureDelegate;
+/// 获取当前皮肤设置
+@property (nonatomic, strong) UEEdgeGestureRecognizerDelegate *ue_gestureDelegate;
 
+/// 获取当前皮肤设置
+@property (nonatomic, strong, readonly, nullable) UENavigationBarAppearance *ue_appearance;
+
+/// 全屏收拾代理对象
 @property (nonatomic, strong, readonly) UEFullscreenPopGestureRecognizerDelegate *ue_fullscreenPopGestureDelegate;
 
+/// 设置 UENavigationBar 是否可用；默认 YES；没有注册导航栏时为 NO 时会使用系统导航栏
+@property (nonatomic, assign, readonly) BOOL ue_useNavigationBar;
+
+/// 配置 UENavigationBar
 - (void)ue_configureNavigationBar;
 
 @end

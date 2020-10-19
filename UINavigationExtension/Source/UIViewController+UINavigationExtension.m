@@ -27,25 +27,24 @@
 #import "UINavigationController+UINavigationExtension.h"
 #import "UINavigationExtensionMacro.h"
 #import "UINavigationExtensionPrivate.h"
-#import "UIViewController+UINavigationExtension.h"
 
 @interface UIViewController (UINavigationExtension)
 
-@property (nonatomic, assign) BOOL ue_viewWillDisappear;
+@property (nonatomic, assign) BOOL ue_viewWillDisappearFinished;
 @property (nonatomic, assign) BOOL ue_navigationBarInitFinished;
 
 @end
 
 @implementation UIViewController (UINavigationExtension)
 
-+ (void)ue_registerForViewControllerClass:(Class)aClass {
++ (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        UINavigationExtensionSwizzleMethod(aClass, @selector(viewDidLoad), @selector(ue_viewDidLoad));
-        UINavigationExtensionSwizzleMethod(aClass, @selector(viewWillAppear:), @selector(ue_viewWillAppear:));
-        UINavigationExtensionSwizzleMethod(aClass, @selector(viewDidAppear:), @selector(ue_viewDidAppear:));
-        UINavigationExtensionSwizzleMethod(aClass, @selector(viewWillDisappear:), @selector(ue_viewWillDisappear:));
-        UINavigationExtensionSwizzleMethod(aClass, @selector(viewWillLayoutSubviews), @selector(ue_viewWillLayoutSubviews));
+        UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewDidLoad), @selector(ue_viewDidLoad));
+        UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewWillAppear:), @selector(ue_viewWillAppear:));
+        UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewDidAppear:), @selector(ue_viewDidAppear:));
+        UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewWillDisappear:), @selector(ue_viewWillDisappear:));
+        UINavigationExtensionSwizzleMethod([UIViewController class], @selector(viewWillLayoutSubviews), @selector(ue_viewWillLayoutSubviews));
     });
 }
 
@@ -62,20 +61,20 @@
 }
 
 - (void)ue_viewWillAppear:(BOOL)animated {
-    if (self.navigationController && self.navigationController.ue_useNavigationBar && !self.ue_navigationBarInitFinished) {
-        // FIXED: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
-        [self.navigationController ue_configureNavigationBar];
-        [self updateNavigationBarAppearance];
-    }
-    
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
+        if (!self.ue_navigationBarInitFinished) {
+            // FIXED: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
+            [self.navigationController ue_configureNavigationBar];
+            [self updateNavigationBarAppearance];
+        }
+        
         self.navigationController.navigationBar.barTintColor = self.ue_barBarTintColor;
         self.navigationController.navigationBar.tintColor = self.ue_barTintColor;
         self.navigationController.navigationBar.titleTextAttributes = self.ue_titleTextAttributes;
         
         __weak typeof(self) weakSelf = self;
         self.navigationController.navigationBar.ue_didUpdateFrameHandler = ^(CGRect frame) {
-            if (weakSelf.ue_viewWillDisappear) { return; }
+            if (weakSelf.ue_viewWillDisappearFinished) { return; }
             
             CGRect newFrame = CGRectMake(0, 0, frame.size.width, frame.size.height + frame.origin.y);
             weakSelf.ue_navigationBar.frame = newFrame;
@@ -85,8 +84,8 @@
         [self changeNavigationBarUserInteractionState];
     }
     
-    self.ue_viewWillDisappear = NO;
-    [self ue_viewWillAppear: animated];
+    self.ue_viewWillDisappearFinished = NO;
+    [self ue_viewWillAppear:animated];
 }
 
 - (void)ue_viewDidAppear:(BOOL)animated {
@@ -96,15 +95,15 @@
         [self changeNavigationBarUserInteractionState];
     }
     
-    [self ue_viewDidAppear: animated];
+    [self ue_viewDidAppear:animated];
 }
 
 - (void)ue_viewWillDisappear:(BOOL)animated {
-    self.ue_viewWillDisappear = YES;
-    [self ue_viewWillDisappear: animated];
+    self.ue_viewWillDisappearFinished = YES;
+    [self ue_viewWillDisappear:animated];
 }
 
-- (void)ue_viewWillLayoutSubviews {
+- (void)ue_viewWillLayoutSubviews {    
     [self updateNavigationBarHierarchy];
     [self ue_viewWillLayoutSubviews];
 }
@@ -138,9 +137,11 @@
 }
 
 - (void)updateNavigationBarHierarchy {
-    // FIXED: 修复导航栏 containerView 被遮挡问题
-    [self.view bringSubviewToFront:self.ue_navigationBar];
-    [self.view bringSubviewToFront:self.ue_navigationBar.containerView];
+    if (self.navigationController && self.navigationController.ue_useNavigationBar) {
+        // FIXED: 修复导航栏 containerView 被遮挡问题
+        [self.view bringSubviewToFront:self.ue_navigationBar];
+        [self.view bringSubviewToFront:self.ue_navigationBar.containerView];
+    }
 }
 
 - (void)changeNavigationBarUserInteractionState {
@@ -176,18 +177,18 @@
 }
 
 #pragma mark - Private Getter & Setter
-- (BOOL)ue_viewWillDisappear {
-    NSNumber *viewWillDisappear = objc_getAssociatedObject(self, _cmd);
-    if (viewWillDisappear && [viewWillDisappear isKindOfClass:[NSNumber class]]) {
-        return [viewWillDisappear boolValue];
+- (BOOL)ue_viewWillDisappearFinished {
+    NSNumber *viewWillDisappearFinished = objc_getAssociatedObject(self, _cmd);
+    if (viewWillDisappearFinished && [viewWillDisappearFinished isKindOfClass:[NSNumber class]]) {
+        return [viewWillDisappearFinished boolValue];
     }
-    viewWillDisappear = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, viewWillDisappear, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [viewWillDisappear boolValue];
+    viewWillDisappearFinished = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, viewWillDisappearFinished, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [viewWillDisappearFinished boolValue];
 }
 
-- (void)setUe_viewWillDisappear:(BOOL)ue_viewWillDisappear {
-    objc_setAssociatedObject(self, @selector(ue_viewWillDisappear), [NSNumber numberWithBool:ue_viewWillDisappear], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setUe_viewWillDisappearFinished:(BOOL)ue_viewWillDisappearFinished {
+    objc_setAssociatedObject(self, @selector(ue_viewWillDisappearFinished), [NSNumber numberWithBool:ue_viewWillDisappearFinished], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)ue_navigationBarInitFinished {
@@ -220,7 +221,7 @@
     if (color && [color isKindOfClass:[UIColor class]]) {
         return color;
     }
-    color = [UENavigationBar standardAppearance].backgorundColor;
+    color = self.navigationController.ue_appearance.backgorundColor;
     objc_setAssociatedObject(self, _cmd, color, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return color;
 }
@@ -230,7 +231,7 @@
     if (image && [image isKindOfClass:[UIImage class]]) {
         return image;
     }
-    image = [UENavigationBar standardAppearance].backgorundImage;
+    image = self.navigationController.ue_appearance.backgorundImage;
     objc_setAssociatedObject(self, _cmd, image, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return image;
 }
@@ -250,7 +251,7 @@
     if (barTintColor && [barTintColor isKindOfClass:[UIColor class]]) {
         return barTintColor;
     }
-    barTintColor = [UENavigationBar standardAppearance].tintColor;
+    barTintColor = self.navigationController.ue_appearance.tintColor;
     objc_setAssociatedObject(self, _cmd, barTintColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return barTintColor;
 }
@@ -270,7 +271,7 @@
     if (shadowImage && [shadowImage isKindOfClass:[UIImage class]]) {
         return shadowImage;
     }
-    shadowImage = [UENavigationBar standardAppearance].shadowImage;
+    shadowImage = self.navigationController.ue_appearance.shadowImage;
     objc_setAssociatedObject(self, _cmd, shadowImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return shadowImage;
 }
@@ -290,7 +291,7 @@
     if (backImage && [backImage isKindOfClass:[UIImage class]]) {
         return backImage;
     }
-    backImage = [UENavigationBar standardAppearance].backImage;
+    backImage = self.navigationController.ue_appearance.backImage;
     objc_setAssociatedObject(self, _cmd, backImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return backImage;
 }
@@ -300,7 +301,7 @@
     if (backButtonCustomView && [backButtonCustomView isKindOfClass:[UIView class]]) {
         return backButtonCustomView;
     }
-    backButtonCustomView = [UENavigationBar standardAppearance].backButtonCustomView;
+    backButtonCustomView = self.navigationController.ue_appearance.backButtonCustomView;
     objc_setAssociatedObject(self, _cmd, backButtonCustomView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return backButtonCustomView;
 }

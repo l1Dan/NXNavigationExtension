@@ -10,7 +10,6 @@
 @implementation BaseViewController
 
 - (void)viewDidLoad {
-    [UENavigationBar registerAppearance:[[UENavigationBarAppearance alloc] init] forNavigationControllerClass: [UINavigationController class]];
     
     [super viewDidLoad];
 }

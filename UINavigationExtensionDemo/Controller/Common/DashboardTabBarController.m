@@ -21,16 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UENavigationBarAppearance *lightAppearance = [UENavigationBarAppearance standardAppearance];
-    [UENavigationBar registerAppearance:lightAppearance forNavigationControllerClass:[LightNavigationController class]];
-    
-    UENavigationBarAppearance *darkAppearance = [UENavigationBarAppearance standardAppearance];
-    [UENavigationBar registerAppearance:darkAppearance forNavigationControllerClass:[DarkNavigationController class]];
-    
-    UENavigationBarAppearance *autoAppearance = [UENavigationBarAppearance standardAppearance];
-    [UENavigationBar registerAppearance:autoAppearance forNavigationControllerClass:[AutoNavigationController class]];
-    
-    [LightNavigationController registerViewControllerClass:[UIViewController class] forNavigationBarClass:[UINavigationBar class]];
+    [UENavigationBar registerStandardAppearanceForNavigationControllerClass:[LightNavigationController class]];
+//    [UENavigationBar registerStandardAppearanceForNavigationControllerClass:[DarkNavigationController class]];
+//    [UENavigationBar registerStandardAppearanceForNavigationControllerClass:[AutoNavigationController class]];
     
     self.tabBar.tintColor = [UIColor colorWithRed:25/255.0 green:43/255.0 blue:67/255.0 alpha:1.0];
     

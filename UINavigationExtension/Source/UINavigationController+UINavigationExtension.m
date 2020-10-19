@@ -33,43 +33,48 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
 
 @implementation UINavigationController (UINavigationExtension)
 
-+ (void)ue_registerForNavigationControllerClass:(Class)aClass {
++ (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        UINavigationExtensionSwizzleMethod(aClass, @selector(pushViewController:animated:), @selector(ue_pushViewController:animated:));
-        UINavigationExtensionSwizzleMethod(aClass, @selector(setViewControllers:animated:), @selector(ue_setViewControllers:animated:));
+        UINavigationExtensionSwizzleMethod([UINavigationController class], @selector(pushViewController:animated:), @selector(ue_pushViewController:animated:));
+        UINavigationExtensionSwizzleMethod([UINavigationController class], @selector(setViewControllers:animated:), @selector(ue_setViewControllers:animated:));
     });
 }
 
 - (void)ue_pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    if (self.viewControllers.count > 0) {
-        [self configureNavigationBarItemInViewController:viewController];
-    }
-    
-    if (viewController.ue_enableFullScreenInteractivePopGesture) {
-        [self enableFullscreenPopGesture];
+    if (self.ue_useNavigationBar) {
+        if (self.ue_useNavigationBar) {
+        }
+        if (self.viewControllers.count > 0) {
+            [self configureNavigationBarItemInViewController:viewController];
+        }
+        
+        if (viewController.ue_enableFullScreenInteractivePopGesture) {
+            [self enableFullscreenPopGesture];
+        }
     }
     
     [self ue_pushViewController:viewController animated: animated];
 }
 
 - (void)ue_setViewControllers:(NSArray<UIViewController *> *)viewControllers animated:(BOOL)animated {
-    if (viewControllers.count > 1) {
-        for (NSUInteger index = 0; index < viewControllers.count; index++) {
-            UIViewController *viewController = viewControllers[index];
-            if (index != 0) {
-                [self configureNavigationBarItemInViewController:viewController];
-            }
-            
-            if (viewController.ue_enableFullScreenInteractivePopGesture) {
-                [self enableFullscreenPopGesture];
+    if (self.ue_useNavigationBar) {
+        if (viewControllers.count > 1) {
+            for (NSUInteger index = 0; index < viewControllers.count; index++) {
+                UIViewController *viewController = viewControllers[index];
+                if (index != 0) {
+                    [self configureNavigationBarItemInViewController:viewController];
+                }
+                
+                if (viewController.ue_enableFullScreenInteractivePopGesture) {
+                    [self enableFullscreenPopGesture];
+                }
             }
         }
     }
     
     [self ue_setViewControllers:viewControllers animated: animated];
 }
-
 
 - (UIViewController *)childViewControllerForStatusBarStyle {
     return self.topViewController;
@@ -90,6 +95,9 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
         [customView addGestureRecognizer:tap];
     } else {
         UIImage *backImage = viewController.ue_backImage;
+        if (!backImage) {
+            backImage = [UENavigationBarAppearance standardAppearance].backImage;
+        }
         backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage style:UIBarButtonItemStylePlain target:self action:@selector(ue_triggerSystemBackButtonHandle)];
     }
     viewController.navigationItem.leftBarButtonItem = backButtonItem;
@@ -140,18 +148,6 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
 }
 
 #pragma mark - Getter & Setter
-- (BOOL)ue_useNavigationBar {
-    NSNumber *navigationBarEnable = objc_getAssociatedObject(self, _cmd);
-    if (navigationBarEnable && [navigationBarEnable isKindOfClass:[NSNumber class]]) {
-        return [navigationBarEnable boolValue];
-    }
-    return YES;
-}
-
-- (void)setUe_navigationBarEnable:(BOOL)ue_useNavigationBar {
-    objc_setAssociatedObject(self, @selector(ue_useNavigationBar), [NSNumber numberWithBool:ue_useNavigationBar], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 - (UIPanGestureRecognizer *)ue_fullscreenPopGestureRecognizer {
     UIPanGestureRecognizer *panGestureRecognizer = objc_getAssociatedObject(self, _cmd);
     if (panGestureRecognizer && [panGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
@@ -179,21 +175,6 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
 - (void)ue_jumpViewControllerClass:(Class)className usingCreateViewControllerHandler:(__kindof UIViewController * _Nonnull (^)(void))handler {
     NSArray<__kindof UIViewController *> *viewControllers = [self findViewController:className usingCreateViewControllerHandler:handler];
     [self setViewControllers:viewControllers animated:YES];
-}
-
-+ (void)registerViewControllerClass:(Class)firstClass forNavigationBarClass:(Class)secondClass {
-    NSParameterAssert(firstClass);
-    NSParameterAssert(secondClass);
-    
-    if (![[firstClass new] isKindOfClass:[UINavigationController class]] &&
-        [[firstClass new] isKindOfClass:[UIViewController class]] &&
-        [[secondClass new] isKindOfClass:[UINavigationBar class]]) {
-        [UINavigationController ue_registerForNavigationControllerClass:self];
-        [UIViewController ue_registerForViewControllerClass:firstClass];
-        [UINavigationBar ue_registerForNavigationBar:secondClass];
-    } else {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"类型错误！" userInfo:nil];
-    }
 }
 
 @end
