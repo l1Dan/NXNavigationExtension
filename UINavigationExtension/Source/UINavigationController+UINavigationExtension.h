@@ -44,9 +44,10 @@ FOUNDATION_EXPORT BOOL UINavigationExtensionFullscreenPopGestureEnable;
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *ue_fullscreenPopGestureRecognizer;
 
 /// 跳到指定 ViewController，如果没有找到就创建一个新的 ViewController
-/// @param className 需要跳转的 ViewController class
+/// 注意 handler 不要作异步耗时操作，只用于创建新的 ViewController
+/// @param aClass 需要跳转的 ViewController class
 /// @param handler 调用创建 ViewController handler
-- (void)ue_jumpViewControllerClass:(Class)className usingCreateViewControllerHandler:(__kindof UIViewController * (^)(void))handler;
+- (void)ue_jumpViewControllerClass:(Class)aClass usingCreateViewControllerHandler:(__kindof UIViewController * (^ __nullable)(void))handler;
 
 @end
 

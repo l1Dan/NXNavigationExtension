@@ -146,6 +146,7 @@
 - (void)enableBlurEffect:(BOOL)enabled {
     if (enabled) {
         self.backgroundColor = [UIColor clearColor];
+        self.containerView.backgroundColor = [UIColor clearColor];
         self.backgroundImageView.hidden = YES;
         self.visualEffectView.hidden = NO;
     }

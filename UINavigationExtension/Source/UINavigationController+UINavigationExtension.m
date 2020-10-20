@@ -122,29 +122,32 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
     }
 }
 
-- (NSArray *)findViewController:(Class)className usingCreateViewControllerHandler:(__kindof UIViewController * (^)(void))handler {
-    /*  导航栏查找规则：
-     1. 如果传入 viewController 存在于 viewControllers 中，则使用 viewControllers 中的以及存在的。
-     2. 如果传入 viewController 不存在 viewControllers 中，则使用传入的 viewController。
-     */
+- (NSArray *)findViewControllerClass:(Class)aClass usingCreateViewControllerHandler:(__kindof UIViewController * (^ __nullable)(void))handler {
+    NSArray<__kindof UIViewController *> *viewControllers = self.viewControllers;
+    if (!aClass) return viewControllers;
     
-    NSMutableArray<__kindof UIViewController *> *newViewControllers = [NSMutableArray array];
-    NSArray<__kindof UIViewController *> *oldViewControllers = self.viewControllers;
-    for (__kindof UIViewController *viewController in oldViewControllers) {
-        [newViewControllers addObject:viewController];
-        if ([NSStringFromClass([viewController class]) isEqualToString:NSStringFromClass(className)]) {
-            return newViewControllers;
+    NSMutableArray<__kindof UIViewController *> *collections = [NSMutableArray array];
+    __kindof UIViewController *lastViewController = self.viewControllers.lastObject;
+    for (__kindof UIViewController *viewController in viewControllers) {
+        [collections addObject:viewController];
+        if ([NSStringFromClass([viewController class]) isEqualToString:NSStringFromClass(aClass)]) {
+            if ([NSStringFromClass([lastViewController class]) isEqualToString:NSStringFromClass(aClass)]) {
+                return collections;
+            } else {
+                [collections addObject:lastViewController];
+                return collections;
+            }
         } else {
-            if (newViewControllers.count == oldViewControllers.count) {
-                if (handler) {
-                    __kindof UIViewController *createViewController = handler();
-                    [newViewControllers addObject:createViewController];
-                    return newViewControllers;
+            if (viewController == lastViewController && handler) {
+                __kindof UIViewController *newViewController = handler();
+                if (newViewController) {
+                    [collections insertObject:newViewController atIndex:viewControllers.count - 1];
+                    return collections;
                 }
             }
         }
     }
-    return newViewControllers;
+    return viewControllers;
 }
 
 #pragma mark - Getter & Setter
@@ -172,8 +175,8 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
 }
 
 #pragma mark - Public
-- (void)ue_jumpViewControllerClass:(Class)className usingCreateViewControllerHandler:(__kindof UIViewController * _Nonnull (^)(void))handler {
-    NSArray<__kindof UIViewController *> *viewControllers = [self findViewController:className usingCreateViewControllerHandler:handler];
+- (void)ue_jumpViewControllerClass:(Class)aClass usingCreateViewControllerHandler:(__kindof UIViewController * _Nonnull (^)(void))handler {
+    NSArray<__kindof UIViewController *> *viewControllers = [self findViewControllerClass:aClass usingCreateViewControllerHandler:handler];
     [self setViewControllers:viewControllers animated:YES];
 }
 

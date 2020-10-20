@@ -25,17 +25,17 @@
 #import <objc/runtime.h>
 
 /// 方法交换
-/// @param className 交换方法的类名
+/// @param aClass 交换方法的类名
 /// @param originalSelector 原始交换方法
 /// @param swizzledSelector 需要交换的方法
-static inline void UINavigationExtensionSwizzleMethod(Class className, SEL originalSelector, SEL swizzledSelector)
+static inline void UINavigationExtensionSwizzleMethod(Class aClass, SEL originalSelector, SEL swizzledSelector)
 {
-    Method originalMethod = class_getInstanceMethod(className, originalSelector);
-    Method swizzledMethod = class_getInstanceMethod(className, swizzledSelector);
+    Method originalMethod = class_getInstanceMethod(aClass, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(aClass, swizzledSelector);
     
-    BOOL isSuccess = class_addMethod(className, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
+    BOOL isSuccess = class_addMethod(aClass, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
     if (isSuccess) {
-        class_replaceMethod(className, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+        class_replaceMethod(aClass, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
     } else {
         method_exchangeImplementations(originalMethod, swizzledMethod);
     }

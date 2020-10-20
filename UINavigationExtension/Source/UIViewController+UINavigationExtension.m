@@ -161,7 +161,7 @@
             self.navigationController.navigationBar.tintColor = [UIColor clearColor]; // 返回按钮透明
         }
         
-        if (containerViewUserInteractionEnabled) { // 添加试图到 containerView 时可以不随 NavigationBar 的 alpha 变化
+        if (containerViewUserInteractionEnabled) { // 添加 subView 到 containerView 时可以不随 NavigationBar 的 alpha 变化
             self.ue_navigationBar.userInteractionEnabled = YES;
             self.ue_navigationBar.containerView.userInteractionEnabled = YES;
             self.navigationController.navigationBar.ue_navigationBarUserInteractionDisabled = YES;
