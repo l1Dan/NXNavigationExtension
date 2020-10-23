@@ -388,8 +388,4 @@
     objc_setAssociatedObject(self, @selector(ue_interactivePopMaxAllowedDistanceToLeftEdge), interactivePopMaxAllowedDistanceToLeftEdge, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (void)ue_triggerSystemBackButtonHandle {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 @end

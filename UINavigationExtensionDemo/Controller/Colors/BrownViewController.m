@@ -22,7 +22,7 @@
 
 /// 自定义返回按钮点击返回
 - (void)clickBackItem:(UIBarButtonItem *)item {
-    [self ue_triggerSystemBackButtonHandle];
+    [self.navigationController ue_triggerSystemBackButtonHandle];
 }
 
 #pragma makr - UINavigationControllerCustomizable

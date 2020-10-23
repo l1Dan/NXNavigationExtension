@@ -28,11 +28,10 @@
 /// @param aClass 交换方法的类名
 /// @param originalSelector 原始交换方法
 /// @param swizzledSelector 需要交换的方法
-static inline void UINavigationExtensionSwizzleMethod(Class aClass, SEL originalSelector, SEL swizzledSelector)
-{
+static inline void UINavigationExtensionSwizzleMethod(Class aClass, SEL originalSelector, SEL swizzledSelector) {
     Method originalMethod = class_getInstanceMethod(aClass, originalSelector);
     Method swizzledMethod = class_getInstanceMethod(aClass, swizzledSelector);
-    
+
     BOOL isSuccess = class_addMethod(aClass, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
     if (isSuccess) {
         class_replaceMethod(aClass, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
@@ -43,28 +42,23 @@ static inline void UINavigationExtensionSwizzleMethod(Class aClass, SEL original
 
 /// 将颜色转换成图片
 /// @param color UIColor
-static inline UIImage * UINavigationExtensionGetImageFromColor(UIColor *color)
-{
+static inline UIImage *UINavigationExtensionGetImageFromColor(UIColor *color) {
     CGSize size = CGSizeMake(1.0, 1.0);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     [color setFill];
     UIRectFill(CGRectMake(0, 0, size.width, size.height));
-    
+
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
 }
 
 /// 获取导航栏高度
-static inline CGFloat UINavigationExtensionGetNavigationBarHeight()
-{
-    if (@available(iOS 11.0, *))
-    {
+static inline CGFloat UINavigationExtensionGetNavigationBarHeight() {
+    if (@available(iOS 11.0, *)) {
         UIWindow *keyWindow = nil;
-        for (UIWindow *window in UIApplication.sharedApplication.windows)
-        {
-            if (window.isKeyWindow)
-            {
+        for (UIWindow *window in UIApplication.sharedApplication.windows) {
+            if (window.isKeyWindow) {
                 keyWindow = window;
             }
         }

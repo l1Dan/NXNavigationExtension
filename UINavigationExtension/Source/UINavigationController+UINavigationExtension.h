@@ -43,6 +43,10 @@ FOUNDATION_EXPORT BOOL UINavigationExtensionFullscreenPopGestureEnable;
 /// 全屏手势 UIPanGestureRecognizer
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *ue_fullscreenPopGestureRecognizer;
 
+/// 调用此方法可以触发调用 id<UINavigationControllerCustomizable> 代理方法
+/// 可以在自定义返回按钮中调用这个方法，便于统一处理手势滑动返回和自定义返回按钮点击返回的拦截操作
+- (void)ue_triggerSystemBackButtonHandle;
+
 /// 跳到指定 ViewController，如果没有找到就创建一个新的 ViewController
 /// 注意 handler 不要作异步耗时操作，只用于创建新的 ViewController
 /// @param aClass 需要跳转的 ViewController class
