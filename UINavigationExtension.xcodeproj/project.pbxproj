@@ -14,6 +14,7 @@
 		D608BBFB252F6CD8009CC941 /* AutoNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D608BBFA252F6CD8009CC941 /* AutoNavigationController.m */; };
 		D61CCC00251A13F100A91580 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCBFF251A13F100A91580 /* AppDelegate.m */; };
 		D61CCC11251A13F400A91580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCC10251A13F400A91580 /* main.m */; };
+		D61F5CA6254471CD0099D825 /* BlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402DF251FC08B001D7BEE /* BlueViewController.m */; };
 		D696862D2530971A00FBC7A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D69686262530971A00FBC7A5 /* Assets.xcassets */; };
 		D696863F253097C100FBC7A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69686382530977F00FBC7A5 /* LaunchScreen.storyboard */; };
 		D6968640253097C100FBC7A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69686362530977F00FBC7A5 /* Main.storyboard */; };
@@ -30,7 +31,6 @@
 		D6E402ED251FC08B001D7BEE /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402DC251FC08B001D7BEE /* BaseViewController.m */; };
 		D6E402EE251FC08B001D7BEE /* OrangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402DD251FC08B001D7BEE /* OrangeViewController.m */; };
 		D6E402EF251FC08B001D7BEE /* BrownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402DE251FC08B001D7BEE /* BrownViewController.m */; };
-		D6E402F0251FC08B001D7BEE /* BlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402DF251FC08B001D7BEE /* BlueViewController.m */; };
 		D6E402F1251FC08B001D7BEE /* GrayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402E0251FC08B001D7BEE /* GrayViewController.m */; };
 		D6E402F2251FC08B001D7BEE /* UIBarButtonItem+Convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402E7251FC08B001D7BEE /* UIBarButtonItem+Convenience.m */; };
 		D6E40300251FC3F8001D7BEE /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402FF251FC3F8001D7BEE /* MainTableViewController.m */; };
@@ -142,8 +142,12 @@
 			children = (
 				D608BBEE252F6B64009CC941 /* BaseNavigationController.h */,
 				D608BBEF252F6B64009CC941 /* BaseNavigationController.m */,
+				D6E402E1251FC08B001D7BEE /* BaseViewController.h */,
+				D6E402DC251FC08B001D7BEE /* BaseViewController.m */,
 				D608BBE9252F6AAF009CC941 /* DashboardTabBarController.h */,
 				D608BBEA252F6AAF009CC941 /* DashboardTabBarController.m */,
+				D6E402FE251FC3F8001D7BEE /* MainTableViewController.h */,
+				D6E402FF251FC3F8001D7BEE /* MainTableViewController.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -225,10 +229,6 @@
 				D608BBE7252F6A92009CC941 /* Common */,
 				D608BBF2252F6C9E009CC941 /* Dark */,
 				D608BBE1252F67B5009CC941 /* Light */,
-				D6E402E1251FC08B001D7BEE /* BaseViewController.h */,
-				D6E402DC251FC08B001D7BEE /* BaseViewController.m */,
-				D6E402FE251FC3F8001D7BEE /* MainTableViewController.h */,
-				D6E402FF251FC3F8001D7BEE /* MainTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -337,6 +337,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1200;
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					D61CCBFA251A13F100A91580 = {
 						CreatedOnToolsVersion = 12.0;
@@ -390,11 +391,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6E402F0251FC08B001D7BEE /* BlueViewController.m in Sources */,
 				D6E402F1251FC08B001D7BEE /* GrayViewController.m in Sources */,
 				D6E402EF251FC08B001D7BEE /* BrownViewController.m in Sources */,
 				D6E402ED251FC08B001D7BEE /* BaseViewController.m in Sources */,
 				D608BBFB252F6CD8009CC941 /* AutoNavigationController.m in Sources */,
+				D61F5CA6254471CD0099D825 /* BlueViewController.m in Sources */,
 				D6E402EE251FC08B001D7BEE /* OrangeViewController.m in Sources */,
 				D61CCC00251A13F100A91580 /* AppDelegate.m in Sources */,
 				D6E402F2251FC08B001D7BEE /* UIBarButtonItem+Convenience.m in Sources */,
