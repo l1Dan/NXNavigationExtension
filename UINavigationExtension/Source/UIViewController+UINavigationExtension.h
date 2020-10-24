@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL ue_useSystemBlurNavigationBar;
 
 /// 是否禁用边缘滑动返回手势；默认 NO
-@property (nonatomic, assign, readonly) BOOL ue_interactivePopGestureDisable;
+@property (nonatomic, assign, readonly) BOOL ue_disableInteractivePopGesture;
 
 /// 是否使用全屏返回；默认 NO
 @property (nonatomic, assign, readonly) BOOL ue_enableFullScreenInteractivePopGesture;
@@ -77,9 +77,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 需要自己控制是否显示。这样做的目的是让导航栏下方的视图可以接收到 UIResponder 的事件传递
 @property (nonatomic, assign, readonly) BOOL ue_hidesNavigationBar;
 
-/// UENavigationBar containerView 上面的视图接收到 UIResponder 的事件传递；默认 NO
+/// UENavigationBar containerView 特性；默认 NO
+/// 1. containerView 可以接收点击事件；2. 可以不跟随导航栏的透明度变化而变化
 /// 注意⚠️：返回按钮点击事件不可用，但是还是显示的，可以方便自定义返回事件
-@property (nonatomic, assign, readonly) BOOL ue_barContainerViewUserInteractionEnabled;
+@property (nonatomic, assign, readonly) BOOL ue_enableContainerViewFeature;
 
 /// 设置触发全屏手势返回，离左边最大滑动距离
 @property (nonatomic, assign, readonly) CGFloat ue_interactivePopMaxAllowedDistanceToLeftEdge;

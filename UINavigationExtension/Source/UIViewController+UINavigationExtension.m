@@ -124,9 +124,7 @@
         self.ue_navigationBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, UINavigationExtensionGetNavigationBarHeight());
         [self.ue_navigationBar enableBlurEffect:self.ue_useSystemBlurNavigationBar];
         
-        if ([self.view isKindOfClass:[UIScrollView class]]) {
-            [self.navigationController.view insertSubview:self.ue_navigationBar atIndex:1];
-        } else {
+        if (![self.view isKindOfClass:[UIScrollView class]]) {
             [self.view addSubview:self.ue_navigationBar];
         }
         
@@ -138,6 +136,14 @@
 
 - (void)updateNavigationBarHierarchy {
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
+        // 添加到 self.view superview 上面
+        if ([self.view isKindOfClass:[UIScrollView class]]) {
+            if (self.view.superview != self.ue_navigationBar.superview) {
+                [self.ue_navigationBar removeFromSuperview];
+                [self.view.superview addSubview:self.ue_navigationBar];
+            }
+        }
+        
         // FIXED: 修复导航栏 containerView 被遮挡问题
         [self.view bringSubviewToFront:self.ue_navigationBar];
         [self.view bringSubviewToFront:self.ue_navigationBar.containerView];
@@ -147,21 +153,21 @@
 - (void)changeNavigationBarUserInteractionState {
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
         BOOL hidesNavigationBar = self.ue_hidesNavigationBar;
-        BOOL containerViewUserInteractionEnabled = self.ue_barContainerViewUserInteractionEnabled;
+        BOOL enableContainerViewFeature = self.ue_enableContainerViewFeature;
         if ([self isKindOfClass:[UIPageViewController class]] && !hidesNavigationBar) {
             // FIXED: 处理特殊情况，最后显示的为 UIPageViewController
             hidesNavigationBar = self.parentViewController.ue_hidesNavigationBar;
         }
         
         if (hidesNavigationBar) {
-            containerViewUserInteractionEnabled = NO;
+            enableContainerViewFeature = NO;
             self.ue_navigationBar.shadowImageView.image = UINavigationExtensionGetImageFromColor([UIColor clearColor]);
             self.ue_navigationBar.backgroundImageView.image = UINavigationExtensionGetImageFromColor([UIColor clearColor]);
             self.ue_navigationBar.backgroundColor = [UIColor clearColor];
             self.navigationController.navigationBar.tintColor = [UIColor clearColor]; // 返回按钮透明
         }
         
-        if (containerViewUserInteractionEnabled) { // 添加 subView 到 containerView 时可以不随 NavigationBar 的 alpha 变化
+        if (enableContainerViewFeature) { // 添加 subView 到 containerView 时可以不随 NavigationBar 的 alpha 变化
             self.ue_navigationBar.userInteractionEnabled = YES;
             self.ue_navigationBar.containerView.userInteractionEnabled = YES;
             self.navigationController.navigationBar.ue_navigationBarUserInteractionDisabled = YES;
@@ -169,7 +175,7 @@
         } else {
             self.ue_navigationBar.containerView.hidden = hidesNavigationBar;
             self.ue_navigationBar.userInteractionEnabled = !hidesNavigationBar;
-            self.ue_navigationBar.containerView.userInteractionEnabled = containerViewUserInteractionEnabled;
+            self.ue_navigationBar.containerView.userInteractionEnabled = enableContainerViewFeature;
             self.navigationController.navigationBar.ue_navigationBarUserInteractionDisabled = hidesNavigationBar;
             self.navigationController.navigationBar.userInteractionEnabled = !hidesNavigationBar;
         }
@@ -316,14 +322,14 @@
     return [useSystemBlurNavigationBar boolValue];
 }
 
-- (BOOL)ue_interactivePopGestureDisable {
-    NSNumber *interactivePopGestureDisable = objc_getAssociatedObject(self, _cmd);
-    if (interactivePopGestureDisable && [interactivePopGestureDisable isKindOfClass:[NSNumber class]]) {
-        return [interactivePopGestureDisable boolValue];
+- (BOOL)ue_disableInteractivePopGesture {
+    NSNumber *disableInteractivePopGesture = objc_getAssociatedObject(self, _cmd);
+    if (disableInteractivePopGesture && [disableInteractivePopGesture isKindOfClass:[NSNumber class]]) {
+        return [disableInteractivePopGesture boolValue];
     }
-    interactivePopGestureDisable = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, interactivePopGestureDisable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [interactivePopGestureDisable boolValue];
+    disableInteractivePopGesture = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, disableInteractivePopGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [disableInteractivePopGesture boolValue];
 }
 
 - (BOOL)ue_enableFullScreenInteractivePopGesture {
@@ -356,14 +362,14 @@
     return [hidesNavigationBar boolValue];
 }
 
-- (BOOL)ue_barContainerViewUserInteractionEnabled {
-    NSNumber *barContainerViewUserInteractionEnabled = objc_getAssociatedObject(self, _cmd);
-    if (barContainerViewUserInteractionEnabled && [barContainerViewUserInteractionEnabled isKindOfClass:[NSNumber class]]) {
-        return [barContainerViewUserInteractionEnabled boolValue];
+- (BOOL)ue_enableContainerViewFeature {
+    NSNumber *enableContainerViewFeature = objc_getAssociatedObject(self, _cmd);
+    if (enableContainerViewFeature && [enableContainerViewFeature isKindOfClass:[NSNumber class]]) {
+        return [enableContainerViewFeature boolValue];
     }
-    barContainerViewUserInteractionEnabled = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, barContainerViewUserInteractionEnabled, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [barContainerViewUserInteractionEnabled boolValue];
+    enableContainerViewFeature = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, enableContainerViewFeature, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [enableContainerViewFeature boolValue];
 }
 
 - (CGFloat)ue_interactivePopMaxAllowedDistanceToLeftEdge {

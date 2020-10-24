@@ -41,7 +41,7 @@
     }
 
     UIViewController *topViewController = self.navigationController.viewControllers.lastObject;
-    if (topViewController && topViewController.ue_interactivePopGestureDisable) {
+    if (topViewController && topViewController.ue_disableInteractivePopGesture) {
         return NO;
     }
 
