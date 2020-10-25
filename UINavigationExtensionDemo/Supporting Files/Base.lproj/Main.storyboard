@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +20,6 @@
                     <connections>
                         <segue destination="Lww-O7-2lc" kind="relationship" relationship="viewControllers" id="JEw-E0-Wxu"/>
                         <segue destination="6LP-hC-93z" kind="relationship" relationship="viewControllers" id="yBR-QJ-tfP"/>
-                        <segue destination="uiy-Pe-r1Z" kind="relationship" relationship="viewControllers" id="2UO-pK-F56"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TSZ-jg-c0k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -44,7 +43,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MGK-OS-I53" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-252" y="-564"/>
+            <point key="canvasLocation" x="-252" y="-232"/>
         </scene>
         <!--Light-->
         <scene sceneID="m4n-Xn-j6C">
@@ -73,7 +72,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gz7-R4-oJN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="587" y="-565"/>
+            <point key="canvasLocation" x="587" y="-232"/>
         </scene>
         <!--Dark-->
         <scene sceneID="zqZ-4k-iMl">
@@ -92,19 +91,19 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rk0-F9-A7z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-252.17391304347828" y="137.94642857142856"/>
+            <point key="canvasLocation" x="-252" y="488"/>
         </scene>
         <!--Dark-->
         <scene sceneID="EqQ-6n-LTP">
             <objects>
                 <tableViewController id="ArN-tq-Lmx" customClass="MainTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="h14-5w-hcx">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="h14-5w-hcx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainTableViewCellIdentifer" id="L93-6l-7ev">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L93-6l-7ev" id="TPc-Sl-Rnt">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -121,55 +120,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpZ-0K-6IQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="587" y="138"/>
-        </scene>
-        <!--Auto-->
-        <scene sceneID="ALN-ZE-Phz">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uiy-Pe-r1Z" customClass="AutoNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Auto" id="2OK-Pc-6ue"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sYb-Q8-BuU">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="her-dM-wXc" kind="relationship" relationship="rootViewController" id="4pi-bp-byE"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qfQ-sX-K0W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-252.17391304347828" y="864.50892857142856"/>
-        </scene>
-        <!--Auto-->
-        <scene sceneID="mB1-nh-Veg">
-            <objects>
-                <tableViewController id="her-dM-wXc" customClass="MainTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="c76-YI-eoD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainTableViewCellIdentifer" id="a6e-pd-9Vj">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a6e-pd-9Vj" id="KUe-fG-xDo">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="her-dM-wXc" id="ab7-aL-Msd"/>
-                            <outlet property="delegate" destination="her-dM-wXc" id="ZUG-qT-nIq"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Auto" id="MeL-YN-NRK"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5DG-Me-N9Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="587" y="865"/>
+            <point key="canvasLocation" x="587" y="488"/>
         </scene>
     </scenes>
     <resources>

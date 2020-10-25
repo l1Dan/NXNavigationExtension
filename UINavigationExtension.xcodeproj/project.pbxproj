@@ -11,13 +11,36 @@
 		D608BBEB252F6AAF009CC941 /* DashboardTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D608BBEA252F6AAF009CC941 /* DashboardTabBarController.m */; };
 		D608BBF0252F6B64009CC941 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D608BBEF252F6B64009CC941 /* BaseNavigationController.m */; };
 		D608BBF6252F6CC7009CC941 /* DarkNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D608BBF5252F6CC7009CC941 /* DarkNavigationController.m */; };
-		D608BBFB252F6CD8009CC941 /* AutoNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D608BBFA252F6CD8009CC941 /* AutoNavigationController.m */; };
 		D61CCC00251A13F100A91580 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCBFF251A13F100A91580 /* AppDelegate.m */; };
 		D61CCC11251A13F400A91580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCC10251A13F400A91580 /* main.m */; };
-		D61F5CA6254471CD0099D825 /* BlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402DF251FC08B001D7BEE /* BlueViewController.m */; };
+		D62007A82544899F003D19A8 /* TableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = D62007A72544899F003D19A8 /* TableViewSection.m */; };
+		D6469AE025449F4D00C583FF /* UIColor+RandomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D6469ADF25449F4D00C583FF /* UIColor+RandomColor.m */; };
+		D6469AE42544A27200C583FF /* ViewController01_BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D6469AE32544A27200C583FF /* ViewController01_BackgroundColor.m */; };
+		D6627BF725472D8600DB2F55 /* ViewController1_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = D6627BF625472D8600DB2F55 /* ViewController1_Test.m */; };
+		D6627C002547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D6627BFF2547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.m */; };
+		D6627C052547338800DB2F55 /* FakeNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D6627C042547338800DB2F55 /* FakeNavigationBar.m */; };
+		D6627C0B2547486200DB2F55 /* ViewController04_JumpToViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6627C0A2547486200DB2F55 /* ViewController04_JumpToViewController.m */; };
+		D6627C10254748C900DB2F55 /* ViewController08_WebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6627C0F254748C900DB2F55 /* ViewController08_WebView.m */; };
 		D696862D2530971A00FBC7A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D69686262530971A00FBC7A5 /* Assets.xcassets */; };
 		D696863F253097C100FBC7A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69686382530977F00FBC7A5 /* LaunchScreen.storyboard */; };
 		D6968640253097C100FBC7A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69686362530977F00FBC7A5 /* Main.storyboard */; };
+		D69F7AB22545E86F0097BB28 /* ViewController05_ShadowColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7AB12545E86F0097BB28 /* ViewController05_ShadowColor.m */; };
+		D69F7AB62545E9090097BB28 /* ViewController06_ShadowImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7AB52545E9090097BB28 /* ViewController06_ShadowImage.m */; };
+		D69F7ABA2545EADD0097BB28 /* ViewController12_ScrollViewWithFullScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7AB92545EADD0097BB28 /* ViewController12_ScrollViewWithFullScreen.m */; };
+		D69F7ABE2545ECAA0097BB28 /* ViewController11_ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7ABD2545ECAA0097BB28 /* ViewController11_ScrollView.m */; };
+		D69F7AC72545EFDD0097BB28 /* ViewController01_DisablePopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7AC62545EFDD0097BB28 /* ViewController01_DisablePopGesture.m */; };
+		D69F7ACB2545F0730097BB28 /* ViewController02_FullPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7ACA2545F0730097BB28 /* ViewController02_FullPopGesture.m */; };
+		D69F7AD42545F3940097BB28 /* ViewController03_BackEventIntercept.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7AD32545F3940097BB28 /* ViewController03_BackEventIntercept.m */; };
+		D69F7AD82545FB850097BB28 /* ViewController05_Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7AD72545FB850097BB28 /* ViewController05_Custom.m */; };
+		D69F7AFD25460C0B0097BB28 /* ViewController06_ClickEventHitToBack.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7AFC25460C0B0097BB28 /* ViewController06_ClickEventHitToBack.m */; };
+		D6A9B2902545D66E000E4405 /* ViewController02_BackgroundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A9B28F2545D66E000E4405 /* ViewController02_BackgroundImage.m */; };
+		D6A9B2972545D6EE000E4405 /* UIImage+NavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A9B2962545D6EE000E4405 /* UIImage+NavigationBar.m */; };
+		D6A9B29D2545DAD5000E4405 /* ViewController03_Transparent.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A9B29C2545DAD5000E4405 /* ViewController03_Transparent.m */; };
+		D6A9B2A12545DB5A000E4405 /* ViewController04_Translucent.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A9B2A02545DB5A000E4405 /* ViewController04_Translucent.m */; };
+		D6A9B2A52545DFBA000E4405 /* ViewController07_CustomBackButtonImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A9B2A42545DFBA000E4405 /* ViewController07_CustomBackButtonImage.m */; };
+		D6A9B2A92545E069000E4405 /* ViewController08_CustomBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A9B2A82545E069000E4405 /* ViewController08_CustomBackButton.m */; };
+		D6B8A8FF2545E25D0038F92D /* ViewController09_Modal.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B8A8FE2545E25D0038F92D /* ViewController09_Modal.m */; };
+		D6B8A9092545E7120038F92D /* ViewController10_FullScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B8A9082545E7120038F92D /* ViewController10_FullScreen.m */; };
 		D6E40253251FB71C001D7BEE /* UINavigationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E4024C251FB71C001D7BEE /* UINavigationExtension.framework */; };
 		D6E40254251FB71C001D7BEE /* UINavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6E4024C251FB71C001D7BEE /* UINavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6E40279251FBA5A001D7BEE /* UENavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E4E119251A55A500625171 /* UENavigationBar.m */; };
@@ -29,10 +52,6 @@
 		D6E40298251FBABA001D7BEE /* UINavigationExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = D6BB8933251FB63700A674F7 /* UINavigationExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D6E4029A251FBABF001D7BEE /* UIViewController+UINavigationExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E4E11F251A5FF900625171 /* UIViewController+UINavigationExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D6E402ED251FC08B001D7BEE /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402DC251FC08B001D7BEE /* BaseViewController.m */; };
-		D6E402EE251FC08B001D7BEE /* OrangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402DD251FC08B001D7BEE /* OrangeViewController.m */; };
-		D6E402EF251FC08B001D7BEE /* BrownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402DE251FC08B001D7BEE /* BrownViewController.m */; };
-		D6E402F1251FC08B001D7BEE /* GrayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402E0251FC08B001D7BEE /* GrayViewController.m */; };
-		D6E402F2251FC08B001D7BEE /* UIBarButtonItem+Convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402E7251FC08B001D7BEE /* UIBarButtonItem+Convenience.m */; };
 		D6E40300251FC3F8001D7BEE /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E402FF251FC3F8001D7BEE /* MainTableViewController.m */; };
 		D6EEC1162522529E004F243E /* UINavigationExtensionPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EEC1142522529E004F243E /* UINavigationExtensionPrivate.m */; };
 		D6EEC1172522529E004F243E /* UINavigationExtensionPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = D6EEC1152522529E004F243E /* UINavigationExtensionPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -71,32 +90,70 @@
 		D608BBEF252F6B64009CC941 /* BaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		D608BBF4252F6CC7009CC941 /* DarkNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DarkNavigationController.h; sourceTree = "<group>"; };
 		D608BBF5252F6CC7009CC941 /* DarkNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DarkNavigationController.m; sourceTree = "<group>"; };
-		D608BBF9252F6CD8009CC941 /* AutoNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoNavigationController.h; sourceTree = "<group>"; };
-		D608BBFA252F6CD8009CC941 /* AutoNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoNavigationController.m; sourceTree = "<group>"; };
 		D61CCBFB251A13F100A91580 /* UINavigationExtensionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UINavigationExtensionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D61CCBFE251A13F100A91580 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D61CCBFF251A13F100A91580 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D61CCC10251A13F400A91580 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D62007A62544899F003D19A8 /* TableViewSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewSection.h; sourceTree = "<group>"; };
+		D62007A72544899F003D19A8 /* TableViewSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewSection.m; sourceTree = "<group>"; };
+		D6469ADE25449F4D00C583FF /* UIColor+RandomColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+RandomColor.h"; sourceTree = "<group>"; };
+		D6469ADF25449F4D00C583FF /* UIColor+RandomColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RandomColor.m"; sourceTree = "<group>"; };
+		D6469AE22544A27200C583FF /* ViewController01_BackgroundColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController01_BackgroundColor.h; sourceTree = "<group>"; };
+		D6469AE32544A27200C583FF /* ViewController01_BackgroundColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController01_BackgroundColor.m; sourceTree = "<group>"; };
+		D6627BF525472D8600DB2F55 /* ViewController1_Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController1_Test.h; sourceTree = "<group>"; };
+		D6627BF625472D8600DB2F55 /* ViewController1_Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController1_Test.m; sourceTree = "<group>"; };
+		D6627BFE2547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController07_ScrollChangeNavigationBar.h; sourceTree = "<group>"; };
+		D6627BFF2547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController07_ScrollChangeNavigationBar.m; sourceTree = "<group>"; };
+		D6627C032547338800DB2F55 /* FakeNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FakeNavigationBar.h; sourceTree = "<group>"; };
+		D6627C042547338800DB2F55 /* FakeNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FakeNavigationBar.m; sourceTree = "<group>"; };
+		D6627C092547486200DB2F55 /* ViewController04_JumpToViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController04_JumpToViewController.h; sourceTree = "<group>"; };
+		D6627C0A2547486200DB2F55 /* ViewController04_JumpToViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController04_JumpToViewController.m; sourceTree = "<group>"; };
+		D6627C0E254748C900DB2F55 /* ViewController08_WebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController08_WebView.h; sourceTree = "<group>"; };
+		D6627C0F254748C900DB2F55 /* ViewController08_WebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController08_WebView.m; sourceTree = "<group>"; };
 		D69686232530970400FBC7A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D69686252530971A00FBC7A5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D69686262530971A00FBC7A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D69686372530977F00FBC7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D69686392530977F00FBC7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D69F7AB02545E86F0097BB28 /* ViewController05_ShadowColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController05_ShadowColor.h; sourceTree = "<group>"; };
+		D69F7AB12545E86F0097BB28 /* ViewController05_ShadowColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController05_ShadowColor.m; sourceTree = "<group>"; };
+		D69F7AB42545E9090097BB28 /* ViewController06_ShadowImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController06_ShadowImage.h; sourceTree = "<group>"; };
+		D69F7AB52545E9090097BB28 /* ViewController06_ShadowImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController06_ShadowImage.m; sourceTree = "<group>"; };
+		D69F7AB82545EADD0097BB28 /* ViewController12_ScrollViewWithFullScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController12_ScrollViewWithFullScreen.h; sourceTree = "<group>"; };
+		D69F7AB92545EADD0097BB28 /* ViewController12_ScrollViewWithFullScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController12_ScrollViewWithFullScreen.m; sourceTree = "<group>"; };
+		D69F7ABC2545ECAA0097BB28 /* ViewController11_ScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController11_ScrollView.h; sourceTree = "<group>"; };
+		D69F7ABD2545ECAA0097BB28 /* ViewController11_ScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController11_ScrollView.m; sourceTree = "<group>"; };
+		D69F7AC52545EFDD0097BB28 /* ViewController01_DisablePopGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController01_DisablePopGesture.h; sourceTree = "<group>"; };
+		D69F7AC62545EFDD0097BB28 /* ViewController01_DisablePopGesture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController01_DisablePopGesture.m; sourceTree = "<group>"; };
+		D69F7AC92545F0730097BB28 /* ViewController02_FullPopGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController02_FullPopGesture.h; sourceTree = "<group>"; };
+		D69F7ACA2545F0730097BB28 /* ViewController02_FullPopGesture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController02_FullPopGesture.m; sourceTree = "<group>"; };
+		D69F7AD22545F3940097BB28 /* ViewController03_BackEventIntercept.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController03_BackEventIntercept.h; sourceTree = "<group>"; };
+		D69F7AD32545F3940097BB28 /* ViewController03_BackEventIntercept.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController03_BackEventIntercept.m; sourceTree = "<group>"; };
+		D69F7AD62545FB850097BB28 /* ViewController05_Custom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController05_Custom.h; sourceTree = "<group>"; };
+		D69F7AD72545FB850097BB28 /* ViewController05_Custom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController05_Custom.m; sourceTree = "<group>"; };
+		D69F7AFB25460C0B0097BB28 /* ViewController06_ClickEventHitToBack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController06_ClickEventHitToBack.h; sourceTree = "<group>"; };
+		D69F7AFC25460C0B0097BB28 /* ViewController06_ClickEventHitToBack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController06_ClickEventHitToBack.m; sourceTree = "<group>"; };
+		D6A9B28E2545D66E000E4405 /* ViewController02_BackgroundImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController02_BackgroundImage.h; sourceTree = "<group>"; };
+		D6A9B28F2545D66E000E4405 /* ViewController02_BackgroundImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController02_BackgroundImage.m; sourceTree = "<group>"; };
+		D6A9B2952545D6EE000E4405 /* UIImage+NavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+NavigationBar.h"; sourceTree = "<group>"; };
+		D6A9B2962545D6EE000E4405 /* UIImage+NavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+NavigationBar.m"; sourceTree = "<group>"; };
+		D6A9B29B2545DAD5000E4405 /* ViewController03_Transparent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController03_Transparent.h; sourceTree = "<group>"; };
+		D6A9B29C2545DAD5000E4405 /* ViewController03_Transparent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController03_Transparent.m; sourceTree = "<group>"; };
+		D6A9B29F2545DB5A000E4405 /* ViewController04_Translucent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController04_Translucent.h; sourceTree = "<group>"; };
+		D6A9B2A02545DB5A000E4405 /* ViewController04_Translucent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController04_Translucent.m; sourceTree = "<group>"; };
+		D6A9B2A32545DFBA000E4405 /* ViewController07_CustomBackButtonImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController07_CustomBackButtonImage.h; sourceTree = "<group>"; };
+		D6A9B2A42545DFBA000E4405 /* ViewController07_CustomBackButtonImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController07_CustomBackButtonImage.m; sourceTree = "<group>"; };
+		D6A9B2A72545E069000E4405 /* ViewController08_CustomBackButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController08_CustomBackButton.h; sourceTree = "<group>"; };
+		D6A9B2A82545E069000E4405 /* ViewController08_CustomBackButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController08_CustomBackButton.m; sourceTree = "<group>"; };
+		D6B8A8FD2545E25D0038F92D /* ViewController09_Modal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController09_Modal.h; sourceTree = "<group>"; };
+		D6B8A8FE2545E25D0038F92D /* ViewController09_Modal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController09_Modal.m; sourceTree = "<group>"; };
+		D6B8A9072545E7120038F92D /* ViewController10_FullScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController10_FullScreen.h; sourceTree = "<group>"; };
+		D6B8A9082545E7120038F92D /* ViewController10_FullScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController10_FullScreen.m; sourceTree = "<group>"; };
 		D6BB8933251FB63700A674F7 /* UINavigationExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationExtension.h; sourceTree = "<group>"; };
 		D6BB8934251FB63700A674F7 /* UINavigationExtensionMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationExtensionMacro.h; sourceTree = "<group>"; };
 		D6E4024C251FB71C001D7BEE /* UINavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UINavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6E402DC251FC08B001D7BEE /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		D6E402DD251FC08B001D7BEE /* OrangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrangeViewController.m; sourceTree = "<group>"; };
-		D6E402DE251FC08B001D7BEE /* BrownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrownViewController.m; sourceTree = "<group>"; };
-		D6E402DF251FC08B001D7BEE /* BlueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueViewController.m; sourceTree = "<group>"; };
-		D6E402E0251FC08B001D7BEE /* GrayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrayViewController.m; sourceTree = "<group>"; };
 		D6E402E1251FC08B001D7BEE /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		D6E402E2251FC08B001D7BEE /* OrangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrangeViewController.h; sourceTree = "<group>"; };
-		D6E402E3251FC08B001D7BEE /* GrayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrayViewController.h; sourceTree = "<group>"; };
-		D6E402E4251FC08B001D7BEE /* BlueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueViewController.h; sourceTree = "<group>"; };
-		D6E402E5251FC08B001D7BEE /* BrownViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrownViewController.h; sourceTree = "<group>"; };
-		D6E402E7251FC08B001D7BEE /* UIBarButtonItem+Convenience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Convenience.m"; sourceTree = "<group>"; };
-		D6E402E8251FC08B001D7BEE /* UIBarButtonItem+Convenience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Convenience.h"; sourceTree = "<group>"; };
 		D6E402FE251FC3F8001D7BEE /* MainTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
 		D6E402FF251FC3F8001D7BEE /* MainTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 		D6E4E118251A55A500625171 /* UENavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UENavigationBar.h; sourceTree = "<group>"; };
@@ -131,8 +188,7 @@
 		D608BBE1252F67B5009CC941 /* Light */ = {
 			isa = PBXGroup;
 			children = (
-				D608BBE2252F6833009CC941 /* LightNavigationController.h */,
-				D608BBE3252F6833009CC941 /* LightNavigationController.m */,
+				D659E4C525449C340081DA9D /* Controllers */,
 			);
 			path = Light;
 			sourceTree = "<group>";
@@ -140,14 +196,8 @@
 		D608BBE7252F6A92009CC941 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				D608BBEE252F6B64009CC941 /* BaseNavigationController.h */,
-				D608BBEF252F6B64009CC941 /* BaseNavigationController.m */,
-				D6E402E1251FC08B001D7BEE /* BaseViewController.h */,
-				D6E402DC251FC08B001D7BEE /* BaseViewController.m */,
-				D608BBE9252F6AAF009CC941 /* DashboardTabBarController.h */,
-				D608BBEA252F6AAF009CC941 /* DashboardTabBarController.m */,
-				D6E402FE251FC3F8001D7BEE /* MainTableViewController.h */,
-				D6E402FF251FC3F8001D7BEE /* MainTableViewController.m */,
+				D62007A425448931003D19A8 /* Models */,
+				D69F7B052546138D0097BB28 /* ViewControllers */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -155,19 +205,9 @@
 		D608BBF2252F6C9E009CC941 /* Dark */ = {
 			isa = PBXGroup;
 			children = (
-				D608BBF4252F6CC7009CC941 /* DarkNavigationController.h */,
-				D608BBF5252F6CC7009CC941 /* DarkNavigationController.m */,
+				D659E4C425449C260081DA9D /* Controllers */,
 			);
 			path = Dark;
-			sourceTree = "<group>";
-		};
-		D608BBF3252F6CA1009CC941 /* Auto */ = {
-			isa = PBXGroup;
-			children = (
-				D608BBF9252F6CD8009CC941 /* AutoNavigationController.h */,
-				D608BBFA252F6CD8009CC941 /* AutoNavigationController.m */,
-			);
-			path = Auto;
 			sourceTree = "<group>";
 		};
 		D61CCBF2251A13F100A91580 = {
@@ -191,11 +231,166 @@
 		D61CCBFD251A13F100A91580 /* UINavigationExtensionDemo */ = {
 			isa = PBXGroup;
 			children = (
-				D6E402E6251FC08B001D7BEE /* Category */,
-				D6E402DB251FC08B001D7BEE /* Controller */,
+				D6469ADD25449F2B00C583FF /* Category */,
+				D608BBE7252F6A92009CC941 /* Common */,
+				D608BBF2252F6C9E009CC941 /* Dark */,
+				D69F7B06254613E70097BB28 /* Details */,
+				D608BBE1252F67B5009CC941 /* Light */,
 				D6E402D8251FC02B001D7BEE /* Supporting Files */,
 			);
 			path = UINavigationExtensionDemo;
+			sourceTree = "<group>";
+		};
+		D62007A425448931003D19A8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D62007A62544899F003D19A8 /* TableViewSection.h */,
+				D62007A72544899F003D19A8 /* TableViewSection.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D6469ADD25449F2B00C583FF /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				D6469ADE25449F4D00C583FF /* UIColor+RandomColor.h */,
+				D6469ADF25449F4D00C583FF /* UIColor+RandomColor.m */,
+				D6A9B2952545D6EE000E4405 /* UIImage+NavigationBar.h */,
+				D6A9B2962545D6EE000E4405 /* UIImage+NavigationBar.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		D659E4C225449BFA0081DA9D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D69F7AC42545EFB30097BB28 /* Advanced */,
+				D6A9B2AB2545E072000E4405 /* Basic */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D659E4C425449C260081DA9D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D608BBF4252F6CC7009CC941 /* DarkNavigationController.h */,
+				D608BBF5252F6CC7009CC941 /* DarkNavigationController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D659E4C525449C340081DA9D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D608BBE2252F6833009CC941 /* LightNavigationController.h */,
+				D608BBE3252F6833009CC941 /* LightNavigationController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D6627BF325472D5400DB2F55 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D6627BF525472D8600DB2F55 /* ViewController1_Test.h */,
+				D6627BF625472D8600DB2F55 /* ViewController1_Test.m */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		D6627BF425472D6400DB2F55 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				D608BBEE252F6B64009CC941 /* BaseNavigationController.h */,
+				D608BBEF252F6B64009CC941 /* BaseNavigationController.m */,
+				D6E402E1251FC08B001D7BEE /* BaseViewController.h */,
+				D6E402DC251FC08B001D7BEE /* BaseViewController.m */,
+				D608BBE9252F6AAF009CC941 /* DashboardTabBarController.h */,
+				D608BBEA252F6AAF009CC941 /* DashboardTabBarController.m */,
+				D6E402FE251FC3F8001D7BEE /* MainTableViewController.h */,
+				D6E402FF251FC3F8001D7BEE /* MainTableViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		D6627C022547337600DB2F55 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D6627C032547338800DB2F55 /* FakeNavigationBar.h */,
+				D6627C042547338800DB2F55 /* FakeNavigationBar.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D69F7AC42545EFB30097BB28 /* Advanced */ = {
+			isa = PBXGroup;
+			children = (
+				D69F7AC52545EFDD0097BB28 /* ViewController01_DisablePopGesture.h */,
+				D69F7AC62545EFDD0097BB28 /* ViewController01_DisablePopGesture.m */,
+				D69F7AC92545F0730097BB28 /* ViewController02_FullPopGesture.h */,
+				D69F7ACA2545F0730097BB28 /* ViewController02_FullPopGesture.m */,
+				D69F7AD22545F3940097BB28 /* ViewController03_BackEventIntercept.h */,
+				D69F7AD32545F3940097BB28 /* ViewController03_BackEventIntercept.m */,
+				D6627C092547486200DB2F55 /* ViewController04_JumpToViewController.h */,
+				D6627C0A2547486200DB2F55 /* ViewController04_JumpToViewController.m */,
+				D69F7AD62545FB850097BB28 /* ViewController05_Custom.h */,
+				D69F7AD72545FB850097BB28 /* ViewController05_Custom.m */,
+				D69F7AFB25460C0B0097BB28 /* ViewController06_ClickEventHitToBack.h */,
+				D69F7AFC25460C0B0097BB28 /* ViewController06_ClickEventHitToBack.m */,
+				D6627BFE2547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.h */,
+				D6627BFF2547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.m */,
+				D6627C0E254748C900DB2F55 /* ViewController08_WebView.h */,
+				D6627C0F254748C900DB2F55 /* ViewController08_WebView.m */,
+			);
+			path = Advanced;
+			sourceTree = "<group>";
+		};
+		D69F7B052546138D0097BB28 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D6627BF425472D6400DB2F55 /* Base */,
+				D6627BF325472D5400DB2F55 /* Tests */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D69F7B06254613E70097BB28 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				D6627C022547337600DB2F55 /* Views */,
+				D659E4C225449BFA0081DA9D /* Controllers */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		D6A9B2AB2545E072000E4405 /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				D6469AE22544A27200C583FF /* ViewController01_BackgroundColor.h */,
+				D6469AE32544A27200C583FF /* ViewController01_BackgroundColor.m */,
+				D6A9B28E2545D66E000E4405 /* ViewController02_BackgroundImage.h */,
+				D6A9B28F2545D66E000E4405 /* ViewController02_BackgroundImage.m */,
+				D6A9B29B2545DAD5000E4405 /* ViewController03_Transparent.h */,
+				D6A9B29C2545DAD5000E4405 /* ViewController03_Transparent.m */,
+				D6A9B29F2545DB5A000E4405 /* ViewController04_Translucent.h */,
+				D6A9B2A02545DB5A000E4405 /* ViewController04_Translucent.m */,
+				D69F7AB02545E86F0097BB28 /* ViewController05_ShadowColor.h */,
+				D69F7AB12545E86F0097BB28 /* ViewController05_ShadowColor.m */,
+				D69F7AB42545E9090097BB28 /* ViewController06_ShadowImage.h */,
+				D69F7AB52545E9090097BB28 /* ViewController06_ShadowImage.m */,
+				D6A9B2A32545DFBA000E4405 /* ViewController07_CustomBackButtonImage.h */,
+				D6A9B2A42545DFBA000E4405 /* ViewController07_CustomBackButtonImage.m */,
+				D6A9B2A72545E069000E4405 /* ViewController08_CustomBackButton.h */,
+				D6A9B2A82545E069000E4405 /* ViewController08_CustomBackButton.m */,
+				D6B8A8FD2545E25D0038F92D /* ViewController09_Modal.h */,
+				D6B8A8FE2545E25D0038F92D /* ViewController09_Modal.m */,
+				D6B8A9072545E7120038F92D /* ViewController10_FullScreen.h */,
+				D6B8A9082545E7120038F92D /* ViewController10_FullScreen.m */,
+				D69F7ABC2545ECAA0097BB28 /* ViewController11_ScrollView.h */,
+				D69F7ABD2545ECAA0097BB28 /* ViewController11_ScrollView.m */,
+				D69F7AB82545EADD0097BB28 /* ViewController12_ScrollViewWithFullScreen.h */,
+				D69F7AB92545EADD0097BB28 /* ViewController12_ScrollViewWithFullScreen.m */,
+			);
+			path = Basic;
 			sourceTree = "<group>";
 		};
 		D6E4024D251FB71C001D7BEE /* UINavigationExtension */ = {
@@ -219,42 +414,6 @@
 				D61CCC10251A13F400A91580 /* main.m */,
 			);
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D6E402DB251FC08B001D7BEE /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				D608BBF3252F6CA1009CC941 /* Auto */,
-				D6E40302251FC6A2001D7BEE /* Colors */,
-				D608BBE7252F6A92009CC941 /* Common */,
-				D608BBF2252F6C9E009CC941 /* Dark */,
-				D608BBE1252F67B5009CC941 /* Light */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		D6E402E6251FC08B001D7BEE /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				D6E402E8251FC08B001D7BEE /* UIBarButtonItem+Convenience.h */,
-				D6E402E7251FC08B001D7BEE /* UIBarButtonItem+Convenience.m */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
-		D6E40302251FC6A2001D7BEE /* Colors */ = {
-			isa = PBXGroup;
-			children = (
-				D6E402E4251FC08B001D7BEE /* BlueViewController.h */,
-				D6E402DF251FC08B001D7BEE /* BlueViewController.m */,
-				D6E402E5251FC08B001D7BEE /* BrownViewController.h */,
-				D6E402DE251FC08B001D7BEE /* BrownViewController.m */,
-				D6E402E3251FC08B001D7BEE /* GrayViewController.h */,
-				D6E402E0251FC08B001D7BEE /* GrayViewController.m */,
-				D6E402E2251FC08B001D7BEE /* OrangeViewController.h */,
-				D6E402DD251FC08B001D7BEE /* OrangeViewController.m */,
-			);
-			path = Colors;
 			sourceTree = "<group>";
 		};
 		D6E4E112251A533700625171 /* Source */ = {
@@ -391,18 +550,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6E402F1251FC08B001D7BEE /* GrayViewController.m in Sources */,
-				D6E402EF251FC08B001D7BEE /* BrownViewController.m in Sources */,
+				D69F7ABA2545EADD0097BB28 /* ViewController12_ScrollViewWithFullScreen.m in Sources */,
+				D69F7AC72545EFDD0097BB28 /* ViewController01_DisablePopGesture.m in Sources */,
+				D6627C0B2547486200DB2F55 /* ViewController04_JumpToViewController.m in Sources */,
+				D6A9B2A12545DB5A000E4405 /* ViewController04_Translucent.m in Sources */,
+				D69F7AB62545E9090097BB28 /* ViewController06_ShadowImage.m in Sources */,
+				D6627C10254748C900DB2F55 /* ViewController08_WebView.m in Sources */,
+				D6469AE025449F4D00C583FF /* UIColor+RandomColor.m in Sources */,
+				D6A9B2A52545DFBA000E4405 /* ViewController07_CustomBackButtonImage.m in Sources */,
+				D69F7AB22545E86F0097BB28 /* ViewController05_ShadowColor.m in Sources */,
+				D6A9B29D2545DAD5000E4405 /* ViewController03_Transparent.m in Sources */,
 				D6E402ED251FC08B001D7BEE /* BaseViewController.m in Sources */,
-				D608BBFB252F6CD8009CC941 /* AutoNavigationController.m in Sources */,
-				D61F5CA6254471CD0099D825 /* BlueViewController.m in Sources */,
-				D6E402EE251FC08B001D7BEE /* OrangeViewController.m in Sources */,
+				D6A9B2902545D66E000E4405 /* ViewController02_BackgroundImage.m in Sources */,
+				D69F7ABE2545ECAA0097BB28 /* ViewController11_ScrollView.m in Sources */,
+				D6469AE42544A27200C583FF /* ViewController01_BackgroundColor.m in Sources */,
+				D6B8A8FF2545E25D0038F92D /* ViewController09_Modal.m in Sources */,
+				D69F7AD82545FB850097BB28 /* ViewController05_Custom.m in Sources */,
+				D62007A82544899F003D19A8 /* TableViewSection.m in Sources */,
+				D69F7ACB2545F0730097BB28 /* ViewController02_FullPopGesture.m in Sources */,
+				D69F7AD42545F3940097BB28 /* ViewController03_BackEventIntercept.m in Sources */,
+				D6627BF725472D8600DB2F55 /* ViewController1_Test.m in Sources */,
+				D6627C052547338800DB2F55 /* FakeNavigationBar.m in Sources */,
 				D61CCC00251A13F100A91580 /* AppDelegate.m in Sources */,
-				D6E402F2251FC08B001D7BEE /* UIBarButtonItem+Convenience.m in Sources */,
+				D6A9B2972545D6EE000E4405 /* UIImage+NavigationBar.m in Sources */,
 				D61CCC11251A13F400A91580 /* main.m in Sources */,
 				D608BBF0252F6B64009CC941 /* BaseNavigationController.m in Sources */,
+				D6B8A9092545E7120038F92D /* ViewController10_FullScreen.m in Sources */,
 				D608BBEB252F6AAF009CC941 /* DashboardTabBarController.m in Sources */,
 				D608BBE4252F6833009CC941 /* LightNavigationController.m in Sources */,
+				D6A9B2A92545E069000E4405 /* ViewController08_CustomBackButton.m in Sources */,
+				D6627C002547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.m in Sources */,
+				D69F7AFD25460C0B0097BB28 /* ViewController06_ClickEventHitToBack.m in Sources */,
 				D6E40300251FC3F8001D7BEE /* MainTableViewController.m in Sources */,
 				D608BBF6252F6CC7009CC941 /* DarkNavigationController.m in Sources */,
 			);
