@@ -105,6 +105,42 @@
 
 @end
 
+@implementation UIView (UINavigationExtensionPrivate)
+
+- (UENavigationBar *)ue_navigationBar {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setUe_navigationBar:(UENavigationBar *)ue_navigationBar {
+    objc_setAssociatedObject(self, @selector(ue_navigationBar), ue_navigationBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        UINavigationExtensionSwizzleMethod([UIView class], @selector(removeFromSuperview), @selector(ue_removeFromSuperview));
+        UINavigationExtensionSwizzleMethod([UIView class], @selector(didMoveToSuperview), @selector(ue_didMoveToSuperview));
+    });
+}
+
+- (void)ue_removeFromSuperview {
+    [self ue_removeFromSuperview];
+    if (self.ue_navigationBar) {
+        [self.ue_navigationBar removeFromSuperview];
+    }
+}
+
+- (void)ue_didMoveToSuperview {
+    [self ue_didMoveToSuperview];
+    if (self.ue_navigationBar) {
+        [self.superview addSubview:self.ue_navigationBar];
+        [self.superview bringSubviewToFront:self.ue_navigationBar];
+        [self.superview bringSubviewToFront:self.ue_navigationBar.containerView];
+    }
+}
+
+@end
+
 @implementation UINavigationBar (UINavigationExtensionPrivate)
 
 + (void)load {

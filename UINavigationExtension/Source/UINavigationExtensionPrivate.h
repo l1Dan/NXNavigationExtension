@@ -52,6 +52,12 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 
 @end
 
+@interface UIView (UINavigationExtensionPrivate)
+
+@property (nonatomic, strong) UENavigationBar *ue_navigationBar;
+
+@end
+
 @interface UINavigationBar (UINavigationExtensionPrivate)
 
 /// UINavigatoinBar layoutSubviews 时调用
