@@ -11,6 +11,7 @@
         <!--Dashboard Tab Bar Controller-->
         <scene sceneID="PUH-Vn-ZVK">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TSZ-jg-c0k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="2pQ-Z8-lFQ" customClass="DashboardTabBarController" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="82W-AP-9pa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -22,15 +23,15 @@
                         <segue destination="6LP-hC-93z" kind="relationship" relationship="viewControllers" id="yBR-QJ-tfP"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TSZ-jg-c0k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1249" y="138"/>
         </scene>
-        <!--Light-->
+        <!--UENavigationBar-->
         <scene sceneID="fbo-R7-pRr">
             <objects>
-                <navigationController title="Light" automaticallyAdjustsScrollViewInsets="NO" id="Lww-O7-2lc" customClass="LightNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Light" id="qVm-cp-ipY"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MGK-OS-I53" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lww-O7-2lc" customClass="FeatureNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="UENavigationBar" id="qVm-cp-ipY"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4cf-Io-9jG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -38,23 +39,23 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="xYL-4O-GXq" kind="relationship" relationship="rootViewController" id="jhl-tt-HxH"/>
+                        <segue destination="xYL-4O-GXq" kind="relationship" relationship="rootViewController" id="nUX-3w-Dti"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MGK-OS-I53" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-252" y="-232"/>
         </scene>
-        <!--Light-->
+        <!--UENavigationBar-->
         <scene sceneID="m4n-Xn-j6C">
             <objects>
-                <tableViewController id="xYL-4O-GXq" customClass="MainTableViewController" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gz7-R4-oJN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tableViewController id="xYL-4O-GXq" customClass="FeatureTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WaI-WH-bpa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainTableViewCellIdentifer" id="fPx-VA-nU8">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeatureTableViewCellIdentifer" id="fPx-VA-nU8">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fPx-VA-nU8" id="VXx-JE-yJO">
@@ -68,17 +69,17 @@
                             <outlet property="delegate" destination="xYL-4O-GXq" id="3DT-2l-EPF"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Light" id="Unt-dD-RJt"/>
+                    <navigationItem key="navigationItem" title="UENavigationBar" id="Unt-dD-RJt"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gz7-R4-oJN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="587" y="-232"/>
         </scene>
-        <!--Dark-->
+        <!--UINavigationBar-->
         <scene sceneID="zqZ-4k-iMl">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6LP-hC-93z" customClass="DarkNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Dark" id="63r-vi-ajO"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rk0-F9-A7z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6LP-hC-93z" customClass="BaseNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="UINavigationBar" id="63r-vi-ajO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="km8-ic-klB">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -89,20 +90,20 @@
                         <segue destination="ArN-tq-Lmx" kind="relationship" relationship="rootViewController" id="CZL-W3-63L"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rk0-F9-A7z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-252" y="488"/>
         </scene>
-        <!--Dark-->
+        <!--UINavigationBar-->
         <scene sceneID="EqQ-6n-LTP">
             <objects>
-                <tableViewController id="ArN-tq-Lmx" customClass="MainTableViewController" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fpZ-0K-6IQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tableViewController id="ArN-tq-Lmx" customClass="FeatureTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="h14-5w-hcx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainTableViewCellIdentifer" id="L93-6l-7ev">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeatureTableViewCellIdentifer" id="L93-6l-7ev">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L93-6l-7ev" id="TPc-Sl-Rnt">
@@ -116,9 +117,8 @@
                             <outlet property="delegate" destination="ArN-tq-Lmx" id="Rre-zM-cB2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Dark" id="1Pq-Mh-I6L"/>
+                    <navigationItem key="navigationItem" title="UINavigationBar" id="1Pq-Mh-I6L"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fpZ-0K-6IQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="587" y="488"/>
         </scene>
