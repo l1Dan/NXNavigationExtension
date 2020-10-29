@@ -8,7 +8,7 @@
 #import <UINavigationExtension/UINavigationExtension.h>
 
 #import "BaseTableViewController.h"
-#import "ViewController01_Test.h"
+#import "ViewController04_JumpToViewController.h"
 #import "UIColor+RandomColor.h"
 
 @interface BaseTableViewController ()
@@ -62,7 +62,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.navigationController pushViewController:[[ViewController01_Test alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[ViewController04_JumpToViewController alloc] init] animated:YES];
 }
 
 @end

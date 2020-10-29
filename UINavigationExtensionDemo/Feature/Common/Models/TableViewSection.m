@@ -56,13 +56,13 @@
     section1.title = @"基础功能";
     
     NSMutableArray *items2 = [NSMutableArray arrayWithObjects:
-                              [TableViewSectionItem itemWithTitle:@"禁用手势滑动" itemType:TableViewSectionItemTypeNavigationBarDisablePopGesture],
-                              [TableViewSectionItem itemWithTitle:@"使用全屏滑动手势" itemType:TableViewSectionItemTypeNavigationBarFullPopGesture],
+                              [TableViewSectionItem itemWithTitle:@"禁用边缘手势滑动返回" itemType:TableViewSectionItemTypeNavigationBarDisablePopGesture],
+                              [TableViewSectionItem itemWithTitle:@"使用全屏手势滑动返回" itemType:TableViewSectionItemTypeNavigationBarFullPopGesture],
                               [TableViewSectionItem itemWithTitle:@"导航栏返回事件拦截" itemType:TableViewSectionItemTypeNavigationBarBackEventIntercept],
-                              [TableViewSectionItem itemWithTitle:@"自定义跳转到目标控制器" itemType:TableViewSectionItemTypeNavigationBarJumpToViewController],
+                              [TableViewSectionItem itemWithTitle:@"自定义任一控制器跳转" itemType:TableViewSectionItemTypeNavigationBarJumpToViewController],
                               [TableViewSectionItem itemWithTitle:@"完全自定义导航栏" itemType:TableViewSectionItemTypeNavigationBarCustom],
                               [TableViewSectionItem itemWithTitle:@"导航栏点击事件穿透到底部试图" itemType:TableViewSectionItemTypeNavigationBarClickEventHitToBack],
-                              [TableViewSectionItem itemWithTitle:@"滑动改变导航栏背景" itemType:TableViewSectionItemTypeNavigationBarScrollChangeNavigationBar],
+                              [TableViewSectionItem itemWithTitle:@"滑动改变导航栏样式" itemType:TableViewSectionItemTypeNavigationBarScrollChangeNavigationBar],
                               [TableViewSectionItem itemWithTitle:@"WKWebView with UENavigationBar" itemType:TableViewSectionItemTypeNavigationBarWebView],
                               nil];
     TableViewSection *section2 = [TableViewSection sectionWithItems:items2];

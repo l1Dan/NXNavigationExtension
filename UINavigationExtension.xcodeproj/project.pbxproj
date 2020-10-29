@@ -34,9 +34,15 @@
 		D6627C002547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D6627BFF2547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.m */; };
 		D6627C0B2547486200DB2F55 /* ViewController04_JumpToViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6627C0A2547486200DB2F55 /* ViewController04_JumpToViewController.m */; };
 		D6627C10254748C900DB2F55 /* ViewController08_WebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6627C0F254748C900DB2F55 /* ViewController08_WebView.m */; };
+		D67BADC5254B1825008822D6 /* ViewController02_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = D67BADC4254B1825008822D6 /* ViewController02_Test.m */; };
+		D67BADC9254B1838008822D6 /* ViewController03_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = D67BADC8254B1838008822D6 /* ViewController03_Test.m */; };
+		D67BADCE254B1858008822D6 /* ViewController04_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = D67BADCD254B1858008822D6 /* ViewController04_Test.m */; };
+		D67BADD2254B1865008822D6 /* ViewController05_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = D67BADD1254B1865008822D6 /* ViewController05_Test.m */; };
 		D696862D2530971A00FBC7A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D69686262530971A00FBC7A5 /* Assets.xcassets */; };
 		D696863F253097C100FBC7A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69686382530977F00FBC7A5 /* LaunchScreen.storyboard */; };
 		D6968640253097C100FBC7A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69686362530977F00FBC7A5 /* Main.storyboard */; };
+		D69BDD76254B24B100599E27 /* EventInterceptModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D69BDD75254B24B100599E27 /* EventInterceptModel.m */; };
+		D69BDD7D254B2B7A00599E27 /* ChooseJumpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D69BDD7C254B2B7A00599E27 /* ChooseJumpViewController.m */; };
 		D69F7AC72545EFDD0097BB28 /* ViewController01_DisablePopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7AC62545EFDD0097BB28 /* ViewController01_DisablePopGesture.m */; };
 		D69F7ACB2545F0730097BB28 /* ViewController02_FullPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7ACA2545F0730097BB28 /* ViewController02_FullPopGesture.m */; };
 		D69F7AD42545F3940097BB28 /* ViewController03_BackEventIntercept.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7AD32545F3940097BB28 /* ViewController03_BackEventIntercept.m */; };
@@ -136,11 +142,23 @@
 		D6627C0A2547486200DB2F55 /* ViewController04_JumpToViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController04_JumpToViewController.m; sourceTree = "<group>"; };
 		D6627C0E254748C900DB2F55 /* ViewController08_WebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController08_WebView.h; sourceTree = "<group>"; };
 		D6627C0F254748C900DB2F55 /* ViewController08_WebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController08_WebView.m; sourceTree = "<group>"; };
+		D67BADC3254B1825008822D6 /* ViewController02_Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController02_Test.h; sourceTree = "<group>"; };
+		D67BADC4254B1825008822D6 /* ViewController02_Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController02_Test.m; sourceTree = "<group>"; };
+		D67BADC7254B1838008822D6 /* ViewController03_Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController03_Test.h; sourceTree = "<group>"; };
+		D67BADC8254B1838008822D6 /* ViewController03_Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController03_Test.m; sourceTree = "<group>"; };
+		D67BADCC254B1858008822D6 /* ViewController04_Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController04_Test.h; sourceTree = "<group>"; };
+		D67BADCD254B1858008822D6 /* ViewController04_Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController04_Test.m; sourceTree = "<group>"; };
+		D67BADD0254B1865008822D6 /* ViewController05_Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController05_Test.h; sourceTree = "<group>"; };
+		D67BADD1254B1865008822D6 /* ViewController05_Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController05_Test.m; sourceTree = "<group>"; };
 		D69686232530970400FBC7A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D69686252530971A00FBC7A5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D69686262530971A00FBC7A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D69686372530977F00FBC7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D69686392530977F00FBC7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D69BDD74254B24B100599E27 /* EventInterceptModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventInterceptModel.h; sourceTree = "<group>"; };
+		D69BDD75254B24B100599E27 /* EventInterceptModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventInterceptModel.m; sourceTree = "<group>"; };
+		D69BDD7B254B2B7A00599E27 /* ChooseJumpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseJumpViewController.h; sourceTree = "<group>"; };
+		D69BDD7C254B2B7A00599E27 /* ChooseJumpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseJumpViewController.m; sourceTree = "<group>"; };
 		D69F7AC52545EFDD0097BB28 /* ViewController01_DisablePopGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController01_DisablePopGesture.h; sourceTree = "<group>"; };
 		D69F7AC62545EFDD0097BB28 /* ViewController01_DisablePopGesture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController01_DisablePopGesture.m; sourceTree = "<group>"; };
 		D69F7AC92545F0730097BB28 /* ViewController02_FullPopGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController02_FullPopGesture.h; sourceTree = "<group>"; };
@@ -188,6 +206,8 @@
 		62328868972D09900AC57067 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D69BDD74254B24B100599E27 /* EventInterceptModel.h */,
+				D69BDD75254B24B100599E27 /* EventInterceptModel.m */,
 				6232857730E562322EFE5A1F /* TableViewSection.h */,
 				623280A17984EA00522BA09E /* TableViewSection.m */,
 			);
@@ -258,8 +278,7 @@
 		62328E19C0F129D2786B6F68 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				623285A54A53660FF600C1E0 /* ViewController01_Test.h */,
-				62328FC452B93B333DB44E1E /* ViewController01_Test.m */,
+				D67BADD4254B1B2E008822D6 /* Controllers */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -328,12 +347,31 @@
 		D65FA14F254A929200DA1EFE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D69BDD7B254B2B7A00599E27 /* ChooseJumpViewController.h */,
+				D69BDD7C254B2B7A00599E27 /* ChooseJumpViewController.m */,
 				62328E0B45FA4B330E2C2544 /* DashboardTabBarController.h */,
 				623286BC037C2A5DD480E0E1 /* DashboardTabBarController.m */,
 				6232875BC8B8277820F984E9 /* FeatureNavigationController.h */,
 				62328B7102AF6804D412443D /* FeatureNavigationController.m */,
 				62328065722F7989C8D6D5BF /* FeatureTableViewController.h */,
 				623286DFEE494520CB578F38 /* FeatureTableViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D67BADD4254B1B2E008822D6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				623285A54A53660FF600C1E0 /* ViewController01_Test.h */,
+				62328FC452B93B333DB44E1E /* ViewController01_Test.m */,
+				D67BADC3254B1825008822D6 /* ViewController02_Test.h */,
+				D67BADC4254B1825008822D6 /* ViewController02_Test.m */,
+				D67BADC7254B1838008822D6 /* ViewController03_Test.h */,
+				D67BADC8254B1838008822D6 /* ViewController03_Test.m */,
+				D67BADCC254B1858008822D6 /* ViewController04_Test.h */,
+				D67BADCD254B1858008822D6 /* ViewController04_Test.m */,
+				D67BADD0254B1865008822D6 /* ViewController05_Test.h */,
+				D67BADD1254B1865008822D6 /* ViewController05_Test.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -538,14 +576,20 @@
 				D6A9B2972545D6EE000E4405 /* UIImage+NavigationBar.m in Sources */,
 				D61CCC11251A13F400A91580 /* main.m in Sources */,
 				D6627C002547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.m in Sources */,
+				D67BADCE254B1858008822D6 /* ViewController04_Test.m in Sources */,
 				D69F7AFD25460C0B0097BB28 /* ViewController06_ClickEventHitToBack.m in Sources */,
 				D65FA15C254A98C600DA1EFE /* BaseViewController.m in Sources */,
+				D69BDD7D254B2B7A00599E27 /* ChooseJumpViewController.m in Sources */,
+				D67BADD2254B1865008822D6 /* ViewController05_Test.m in Sources */,
 				623286CBF5E0EA4B5885BD07 /* ViewController01_BackgroundColor.m in Sources */,
 				62328F7E74BB15BC703C2DA9 /* ViewController02_BackgroundImage.m in Sources */,
+				D67BADC9254B1838008822D6 /* ViewController03_Test.m in Sources */,
 				623280C7B099D126C9178BE7 /* ViewController03_Transparent.m in Sources */,
 				62328CAD9ACA94143A850D85 /* ViewController04_Translucent.m in Sources */,
 				623287E375F8E155422960F4 /* ViewController05_ShadowColor.m in Sources */,
+				D69BDD76254B24B100599E27 /* EventInterceptModel.m in Sources */,
 				6232845E8FE19AE157304073 /* ViewController06_ShadowImage.m in Sources */,
+				D67BADC5254B1825008822D6 /* ViewController02_Test.m in Sources */,
 				6232837A16D1037A702A93F9 /* ViewController07_CustomBackButtonImage.m in Sources */,
 				62328C2F2723129FC7C8DA8D /* ViewController08_CustomBackButton.m in Sources */,
 				6232871008F360281CE6BE8E /* ViewController12_Modal.m in Sources */,

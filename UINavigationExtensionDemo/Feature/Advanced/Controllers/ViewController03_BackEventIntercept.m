@@ -8,51 +8,12 @@
 #import <UINavigationExtension/UINavigationExtension.h>
 
 #import "ViewController03_BackEventIntercept.h"
-
-typedef NS_ENUM(NSUInteger, EventInterceptItemType) {
-    EventInterceptItemTypeBoth,
-    EventInterceptItemTypeBackButton,
-    EventInterceptItemTypePopGesture
-};
-
-@interface EventInterceptItem : NSObject
-
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, assign) EventInterceptItemType itemType;
-@property (nonatomic, assign, getter=isSelected) BOOL selected;
-
-@end
-
-@implementation EventInterceptItem
-
-- (instancetype)initWithTitle:(NSString *)title itemType:(EventInterceptItemType)itemType {
-    if (self = [super init]) {
-        _title = title;
-        _itemType = itemType;
-    }
-    return self;
-}
-
-+ (instancetype)itemWithTitle:(NSString *)title itemType:(EventInterceptItemType)itemType {
-    return [[self alloc] initWithTitle:title itemType:itemType];
-}
-
-+ (NSArray<EventInterceptItem*> *)allItems {
-    EventInterceptItem *interceptBoth = [EventInterceptItem itemWithTitle:@"拦截手势滑动&点击返回按钮事件" itemType:EventInterceptItemTypeBoth];
-    interceptBoth.selected = YES;
-    
-    EventInterceptItem *interceptPopGesture = [EventInterceptItem itemWithTitle:@"拦截手势滑动事件" itemType:EventInterceptItemTypePopGesture];
-    EventInterceptItem *interceptBackEvent = [EventInterceptItem itemWithTitle:@"拦截返回按钮事件" itemType:EventInterceptItemTypeBackButton];
-    return @[interceptBoth, interceptPopGesture, interceptBackEvent];
-}
-
-@end
-
+#import "EventInterceptModel.h"
 
 
 @interface ViewController03_BackEventIntercept () <UINavigationControllerCustomizable>
 
-@property (nonatomic, strong) NSArray<EventInterceptItem *> *allItems;
+@property (nonatomic, strong) NSArray<EventInterceptModel *> *allModels;
 @property (nonatomic, assign) EventInterceptItemType currentItemType;
 
 @end
@@ -62,6 +23,8 @@ typedef NS_ENUM(NSUInteger, EventInterceptItemType) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.tableHeaderView = [[UIView alloc] init];
+    self.tableView.tableFooterView = [[UIView alloc] init];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
 }
 
@@ -79,17 +42,17 @@ typedef NS_ENUM(NSUInteger, EventInterceptItemType) {
 
 #pragma mark - Getter
 
-- (NSArray<EventInterceptItem *> *)allItems {
-    if (!_allItems) {
-        _allItems = [EventInterceptItem allItems];
+- (NSArray<EventInterceptModel *> *)allModels {
+    if (!_allModels) {
+        _allModels = [EventInterceptModel makeAllModels];
     }
-    return _allItems;
+    return _allModels;
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.allItems.count;
+    return self.allModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -98,7 +61,7 @@ typedef NS_ENUM(NSUInteger, EventInterceptItemType) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
     
-    EventInterceptItem *item = self.allItems[indexPath.row];
+    EventInterceptModel *item = self.allModels[indexPath.row];
     cell.textLabel.text = item.title;
     cell.accessoryType = item.isSelected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     
@@ -111,11 +74,11 @@ typedef NS_ENUM(NSUInteger, EventInterceptItemType) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    for (EventInterceptItem *item in self.allItems) {
+    for (EventInterceptModel *item in self.allModels) {
         item.selected = NO;
     }
     
-    self.allItems[indexPath.row].selected = YES;
+    self.allModels[indexPath.row].selected = YES;
     [tableView reloadData];
 }
 

@@ -5,11 +5,11 @@
 //  Created by lidan on 2020/10/27.
 //
 
-#import "BaseViewController.h"
+#import "ViewController04_JumpToViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ViewController01_Test : BaseViewController
+@interface ViewController01_Test : ViewController04_JumpToViewController
 
 @end
 
