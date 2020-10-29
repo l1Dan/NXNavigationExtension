@@ -30,6 +30,12 @@
     UITabBarItem *darkItem = self.tabBar.items[1];
     darkItem.image = [[UIImage imageNamed:@"Dark-Normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     darkItem.selectedImage = [[UIImage imageNamed:@"Dark-Selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    // ⚠️Warning!!!
+    UIViewController *systemNavigationController = self.viewControllers.lastObject;
+    systemNavigationController.view.layer.borderWidth = 3.0;
+    systemNavigationController.view.layer.cornerRadius = 40;
+    systemNavigationController.view.layer.borderColor = [UIColor redColor].CGColor;
 }
 
 @end
