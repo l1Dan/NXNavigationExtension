@@ -5,12 +5,12 @@
       "scale" : "1x"
     },
     {
-      "filename" : "Dark-Selected@2x.png",
+      "filename" : "SystemSelected@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Dark-Selected@3x.png",
+      "filename" : "SystemSelected@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

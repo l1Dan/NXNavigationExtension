@@ -18,10 +18,10 @@ typedef NS_ENUM(NSUInteger, TableViewSectionItemType) {
     TableViewSectionItemTypeNavigationBarShadowImage, // 导航栏底部线条图片
     TableViewSectionItemTypeNavigationBarCustomBackButtonImage, // 自定义返回按钮图片
     TableViewSectionItemTypeNavigationBarCustomBackButton, // 自定义返回按钮
-    TableViewSectionItemTypeNavigationBarModal, // 模态窗口
     TableViewSectionItemTypeNavigationBarFullScreen, // 全屏背景色
     TableViewSectionItemTypeNavigationBarScrollView, // ScrollView(self.view) 添加 UENavigationBar
     TableViewSectionItemTypeNavigationBarScrollViewWithFullScreen, // ScrollView(self.view) 全屏背景色
+    TableViewSectionItemTypeNavigationBarModal, // 模态窗口
     
     TableViewSectionItemTypeNavigationBarDisablePopGesture, // 禁用手势滑动
     TableViewSectionItemTypeNavigationBarFullPopGesture, // 使用全屏滑动手势

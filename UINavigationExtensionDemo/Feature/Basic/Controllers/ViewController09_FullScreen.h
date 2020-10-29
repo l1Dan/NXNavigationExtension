@@ -1,15 +1,15 @@
 //
-//  ViewController09_Modal.h
+//  ViewController10_FullScreen.h
 //  UINavigationExtensionDemo
 //
 //  Created by lidan on 2020/10/26.
 //
 
-#import "BaseTableViewController.h"
+#import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ViewController09_Modal : BaseTableViewController
+@interface ViewController09_FullScreen : BaseViewController
 
 @end
 

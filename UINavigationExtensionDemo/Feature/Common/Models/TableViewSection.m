@@ -47,10 +47,10 @@
                               [TableViewSectionItem itemWithTitle:@"导航栏底部线条图片" itemType:TableViewSectionItemTypeNavigationBarShadowImage],
                               [TableViewSectionItem itemWithTitle:@"自定义返回按钮图片" itemType:TableViewSectionItemTypeNavigationBarCustomBackButtonImage],
                               [TableViewSectionItem itemWithTitle:@"自定义返回按钮" itemType:TableViewSectionItemTypeNavigationBarCustomBackButton],
-                              [TableViewSectionItem itemWithTitle:@"模态窗口" itemType:TableViewSectionItemTypeNavigationBarModal],
                               [TableViewSectionItem itemWithTitle:@"全屏背景色" itemType:TableViewSectionItemTypeNavigationBarFullScreen],
                               [TableViewSectionItem itemWithTitle:@"ScrollView(self.view) with UENavigationBar" itemType:TableViewSectionItemTypeNavigationBarScrollView],
                               [TableViewSectionItem itemWithTitle:@"ScrollView(self.view) 全屏背景色" itemType:TableViewSectionItemTypeNavigationBarScrollViewWithFullScreen],
+                              [TableViewSectionItem itemWithTitle:@"模态窗口" itemType:TableViewSectionItemTypeNavigationBarModal],
                               nil];
     TableViewSection *section1 = [TableViewSection sectionWithItems:items1];
     section1.title = @"基础功能";
@@ -67,7 +67,7 @@
                               nil];
     TableViewSection *section2 = [TableViewSection sectionWithItems:items2];
     section2.title = @"高级功能";
-
+    
     return [NSMutableArray arrayWithObjects:section1, section2, nil];
 }
 

@@ -5,8 +5,6 @@
 //  Created by lidan on 2020/10/29.
 //
 
-#import <UINavigationExtension/UINavigationExtension.h>
-
 #import "BaseViewController.h"
 #import "UIColor+RandomColor.h"
 
@@ -19,10 +17,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = self.randomColor;
-}
-
-- (UIColor *)ue_navigationBarBackgroundColor {
-    return [UIColor customLightGrayColor];
 }
 
 #pragma mark - Getter

@@ -1,5 +1,5 @@
 //
-//  ViewController12_ScrollViewWithFullScreen.m
+//  ViewController11_ScrollViewWithFullScreen.m
 //  UINavigationExtensionDemo
 //
 //  Created by lidan on 2020/10/26.
@@ -7,13 +7,13 @@
 
 #import <UINavigationExtension/UINavigationExtension.h>
 
-#import "ViewController12_ScrollViewWithFullScreen.h"
+#import "ViewController11_ScrollViewWithFullScreen.h"
 
-@interface ViewController12_ScrollViewWithFullScreen ()
+@interface ViewController11_ScrollViewWithFullScreen ()
 
 @end
 
-@implementation ViewController12_ScrollViewWithFullScreen
+@implementation ViewController11_ScrollViewWithFullScreen
 
 - (void)viewDidLoad {
     [super viewDidLoad];

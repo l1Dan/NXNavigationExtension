@@ -9,6 +9,7 @@
 
 #import "DashboardTabBarController.h"
 #import "FeatureNavigationController.h"
+#import "UIColor+RandomColor.h"
 
 @interface DashboardTabBarController ()
 
@@ -21,15 +22,16 @@
     
     [UENavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
 
-    self.tabBar.tintColor = [UIColor colorWithRed:25/255.0 green:43/255.0 blue:67/255.0 alpha:1.0];
+    self.tabBar.tintColor = [UIColor customDarkGrayColor];
+    self.tabBar.unselectedItemTintColor = [UIColor customLightGrayColor];
     
     UITabBarItem *lightItem = self.tabBar.items[0];
-    lightItem.image = [[UIImage imageNamed:@"Light-Normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    lightItem.selectedImage = [[UIImage imageNamed:@"Light-Selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    lightItem.image = [[UIImage imageNamed:@"CustomNormal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    lightItem.selectedImage = [[UIImage imageNamed:@"CustomSelected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     UITabBarItem *darkItem = self.tabBar.items[1];
-    darkItem.image = [[UIImage imageNamed:@"Dark-Normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    darkItem.selectedImage = [[UIImage imageNamed:@"Dark-Selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    darkItem.image = [[UIImage imageNamed:@"SystemNormal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    darkItem.selectedImage = [[UIImage imageNamed:@"SystemSelected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     // ⚠️Warning!!!
     UIViewController *systemNavigationController = self.viewControllers.lastObject;

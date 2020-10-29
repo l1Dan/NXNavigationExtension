@@ -1,5 +1,5 @@
 //
-//  ViewController09_Modal.m
+//  ViewController12_Modal.m
 //  UINavigationExtensionDemo
 //
 //  Created by lidan on 2020/10/26.
@@ -7,18 +7,17 @@
 
 #import <UINavigationExtension/UINavigationExtension.h>
 
-#import "ViewController09_Modal.h"
+#import "ViewController12_Modal.h"
 #import "UIImage+NavigationBar.h"
 
-@interface ViewController09_Modal ()
+@interface ViewController12_Modal ()
 
 @end
 
-@implementation ViewController09_Modal
+@implementation ViewController12_Modal
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     closeButton.frame = CGRectMake(0, 0, 44, 40);

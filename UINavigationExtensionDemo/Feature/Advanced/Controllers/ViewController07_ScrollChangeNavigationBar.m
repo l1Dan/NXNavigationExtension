@@ -9,7 +9,7 @@
 
 #import "ViewController07_ScrollChangeNavigationBar.h"
 #import "FakeNavigationBar.h"
-#import "ViewController09_Modal.h"
+#import "ViewController12_Modal.h"
 
 @interface ViewController07_ScrollChangeNavigationBar () <FakeNavigationBarDelegate>
 
@@ -108,7 +108,7 @@
             [self.navigationController ue_triggerSystemBackButtonHandle];
         } break;
         case FakeNavigationItemTypeAddButton: {
-            UINavigationController *controller = [[[self.navigationController class] alloc] initWithRootViewController:[[ViewController09_Modal alloc] init]];
+            UINavigationController *controller = [[[self.navigationController class] alloc] initWithRootViewController:[[ViewController12_Modal alloc] init]];
             [self presentViewController:controller animated:YES completion:NULL];
         } break;
     }

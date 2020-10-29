@@ -5,8 +5,9 @@
 //  Created by Leo Lee on 2020/9/27.
 //
 
-#import "FeatureTableViewController.h"
+#import <UINavigationExtension/UINavigationExtension.h>
 
+#import "FeatureTableViewController.h"
 #import "ViewController01_BackgroundColor.h"
 #import "ViewController02_BackgroundImage.h"
 #import "ViewController03_Transparent.h"
@@ -15,10 +16,10 @@
 #import "ViewController06_ShadowImage.h"
 #import "ViewController07_CustomBackButtonImage.h"
 #import "ViewController08_CustomBackButton.h"
-#import "ViewController09_Modal.h"
-#import "ViewController10_FullScreen.h"
-#import "ViewController12_ScrollViewWithFullScreen.h"
-#import "ViewController11_ScrollView.h"
+#import "ViewController12_Modal.h"
+#import "ViewController09_FullScreen.h"
+#import "ViewController11_ScrollViewWithFullScreen.h"
+#import "ViewController10_ScrollView.h"
 
 #import "ViewController01_DisablePopGesture.h"
 #import "ViewController02_FullPopGesture.h"
@@ -30,6 +31,7 @@
 #import "ViewController08_WebView.h"
 
 #import "TableViewSection.h"
+#import "UIColor+RandomColor.h"
 
 @interface FeatureTableViewController ()
 
@@ -47,7 +49,11 @@
 }
 
 - (UIColor *)ue_navigationBarBackgroundColor {
-    return [UIColor systemGrayColor];
+    return [UIColor whiteColor];
+}
+
+- (NSDictionary<NSAttributedStringKey,id> *)ue_titleTextAttributes {
+    return @{NSForegroundColorAttributeName: [UIColor customDarkGrayColor]};
 }
 
 #pragma mark - Getter
@@ -78,14 +84,14 @@
             return [[ViewController07_CustomBackButtonImage alloc] init];
         case TableViewSectionItemTypeNavigationBarCustomBackButton:
             return [[ViewController08_CustomBackButton alloc] init];
-        case TableViewSectionItemTypeNavigationBarModal:
-            return [[ViewController09_Modal alloc] init];
         case TableViewSectionItemTypeNavigationBarFullScreen:
-            return [[ViewController10_FullScreen alloc] init];
+            return [[ViewController09_FullScreen alloc] init];
         case TableViewSectionItemTypeNavigationBarScrollView:
-            return [[ViewController11_ScrollView alloc] init];
+            return [[ViewController10_ScrollView alloc] init];
         case TableViewSectionItemTypeNavigationBarScrollViewWithFullScreen:
-            return [[ViewController12_ScrollViewWithFullScreen alloc] init];
+            return [[ViewController11_ScrollViewWithFullScreen alloc] init];
+        case TableViewSectionItemTypeNavigationBarModal:
+            return [[ViewController12_Modal alloc] init];
             // Advanced
         case TableViewSectionItemTypeNavigationBarDisablePopGesture:
             return [[ViewController01_DisablePopGesture alloc] init];
@@ -121,6 +127,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FeatureTableViewCellIdentifer"];
+    cell.textLabel.textColor = [UIColor customDarkGrayColor];
     TableViewSectionItem *item = self.sections[indexPath.section].items[indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%02zd: %@", indexPath.row + 1, item.title];
     cell.accessoryType = item.showDisclosureIndicator ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
@@ -140,7 +147,7 @@
     if (!viewController) return;
     
     viewController.title = item.title;
-    if ([viewController isKindOfClass:[ViewController09_Modal class]]) {
+    if ([viewController isKindOfClass:[ViewController12_Modal class]]) {
         UINavigationController *controller = [[[self.navigationController class] alloc] initWithRootViewController:viewController];
         [self presentViewController:controller animated:YES completion:NULL];
     } else if ([viewController isKindOfClass:[ViewController08_WebView class]]) {

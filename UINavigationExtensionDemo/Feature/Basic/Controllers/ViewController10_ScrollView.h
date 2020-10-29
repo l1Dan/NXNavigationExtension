@@ -1,5 +1,5 @@
 //
-//  ViewController11_ScrollView.h
+//  ViewController10_ScrollView.h
 //  UINavigationExtensionDemo
 //
 //  Created by lidan on 2020/10/26.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ViewController11_ScrollView : UITableViewController
+@interface ViewController10_ScrollView : UITableViewController
 
 @end
 

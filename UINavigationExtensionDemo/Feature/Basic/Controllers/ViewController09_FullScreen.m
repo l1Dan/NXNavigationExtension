@@ -7,13 +7,13 @@
 
 #import <UINavigationExtension/UINavigationExtension.h>
 
-#import "ViewController10_FullScreen.h"
+#import "ViewController09_FullScreen.h"
 
-@interface ViewController10_FullScreen ()
+@interface ViewController09_FullScreen ()
 
 @end
 
-@implementation ViewController10_FullScreen
+@implementation ViewController09_FullScreen
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;

@@ -8,7 +8,7 @@
 #import <UINavigationExtension/UINavigationExtension.h>
 
 #import "ViewController05_Custom.h"
-#import "ViewController09_Modal.h"
+#import "ViewController12_Modal.h"
 #import "UIImage+NavigationBar.h"
 #import "UIColor+RandomColor.h"
 
@@ -91,7 +91,7 @@
 
 #pragma mark - Action
 - (void)clickAddButton:(UIButton *)button {
-    UINavigationController *controller = [[[self.navigationController class] alloc] initWithRootViewController:[[ViewController09_Modal alloc] init]];
+    UINavigationController *controller = [[[self.navigationController class] alloc] initWithRootViewController:[[ViewController12_Modal alloc] init]];
     [self presentViewController:controller animated:YES completion:NULL];
 }
 
