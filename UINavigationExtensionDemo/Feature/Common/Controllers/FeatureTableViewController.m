@@ -108,7 +108,7 @@
         case TableViewSectionItemTypeNavigationBarScrollChangeNavigationBar:
             return [[ViewController07_ScrollChangeNavigationBar alloc] init];
         case TableViewSectionItemTypeNavigationBarWebView:
-            return [[ViewController08_WebView alloc] initWithURL:[NSURL URLWithString:@"https://cn.bing.com/"]];
+            return [[ViewController08_WebView alloc] initWithURL:[NSURL URLWithString:@"https://www.apple.com.cn/"]];
         default:
             break;
     }
@@ -150,8 +150,6 @@
     if ([viewController isKindOfClass:[ViewController12_Modal class]]) {
         UINavigationController *controller = [[[self.navigationController class] alloc] initWithRootViewController:viewController];
         [self presentViewController:controller animated:YES completion:NULL];
-    } else if ([viewController isKindOfClass:[ViewController08_WebView class]]) {
-        [self presentViewController:viewController animated:YES completion:NULL];
     } else {
         [self.navigationController pushViewController:viewController animated:YES];
     }

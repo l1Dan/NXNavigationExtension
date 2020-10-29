@@ -5,11 +5,13 @@
 //  Created by lidan on 2020/10/27.
 //
 
-#import <SafariServices/SafariServices.h>
+#import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ViewController08_WebView : SFSafariViewController
+@interface ViewController08_WebView : BaseViewController
+
+- (instancetype)initWithURL:(NSURL *)URL;
 
 @end
 

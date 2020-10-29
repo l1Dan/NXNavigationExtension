@@ -9,6 +9,7 @@
 
 #import "ViewController12_Modal.h"
 #import "UIImage+NavigationBar.h"
+#import "UIColor+RandomColor.h"
 
 @interface ViewController12_Modal ()
 
@@ -21,7 +22,7 @@
     
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     closeButton.frame = CGRectMake(0, 0, 44, 40);
-    closeButton.backgroundColor = [UIColor whiteColor];
+    closeButton.backgroundColor = [UIColor clearColor];
     [closeButton setImage:[UIImage imageNamed:@"NavigationBarClose"] forState:UIControlStateNormal];
     [closeButton addTarget:self action:@selector(clickCloseButton:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
@@ -31,16 +32,12 @@
     return UIStatusBarStyleLightContent;
 }
 
-- (UIColor *)ue_barTintColor {
-    return [UIColor whiteColor];
-}
-
 - (NSDictionary<NSAttributedStringKey,id> *)ue_titleTextAttributes {
     return @{NSForegroundColorAttributeName: [UIColor whiteColor]};
 }
 
-- (UIImage *)ue_navigationBarBackgroundImage {
-    return UIImage.navigationBarBackgorundImage;
+- (UIColor *)ue_navigationBarBackgroundColor {
+    return [UIColor customLightGrayColor];
 }
 
 - (void)clickCloseButton:(UIButton *)button {

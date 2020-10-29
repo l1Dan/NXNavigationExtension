@@ -48,8 +48,8 @@
                               [TableViewSectionItem itemWithTitle:@"自定义返回按钮图片" itemType:TableViewSectionItemTypeNavigationBarCustomBackButtonImage],
                               [TableViewSectionItem itemWithTitle:@"自定义返回按钮" itemType:TableViewSectionItemTypeNavigationBarCustomBackButton],
                               [TableViewSectionItem itemWithTitle:@"全屏背景色" itemType:TableViewSectionItemTypeNavigationBarFullScreen],
-                              [TableViewSectionItem itemWithTitle:@"ScrollView(self.view) with UENavigationBar" itemType:TableViewSectionItemTypeNavigationBarScrollView],
-                              [TableViewSectionItem itemWithTitle:@"ScrollView(self.view) 全屏背景色" itemType:TableViewSectionItemTypeNavigationBarScrollViewWithFullScreen],
+                              [TableViewSectionItem itemWithTitle:@"UIScrollView with UENavigationBar" itemType:TableViewSectionItemTypeNavigationBarScrollView],
+                              [TableViewSectionItem itemWithTitle:@"UIScrollView 全屏背景色" itemType:TableViewSectionItemTypeNavigationBarScrollViewWithFullScreen],
                               [TableViewSectionItem itemWithTitle:@"模态窗口" itemType:TableViewSectionItemTypeNavigationBarModal],
                               nil];
     TableViewSection *section1 = [TableViewSection sectionWithItems:items1];
@@ -63,7 +63,7 @@
                               [TableViewSectionItem itemWithTitle:@"完全自定义导航栏" itemType:TableViewSectionItemTypeNavigationBarCustom],
                               [TableViewSectionItem itemWithTitle:@"导航栏点击事件穿透到底部试图" itemType:TableViewSectionItemTypeNavigationBarClickEventHitToBack],
                               [TableViewSectionItem itemWithTitle:@"滑动改变导航栏背景" itemType:TableViewSectionItemTypeNavigationBarScrollChangeNavigationBar],
-                              [TableViewSectionItem itemWithTitle:@"使用 WebView 结合 UENavigationBar" itemType:TableViewSectionItemTypeNavigationBarWebView],
+                              [TableViewSectionItem itemWithTitle:@"WKWebView with UENavigationBar" itemType:TableViewSectionItemTypeNavigationBarWebView],
                               nil];
     TableViewSection *section2 = [TableViewSection sectionWithItems:items2];
     section2.title = @"高级功能";
