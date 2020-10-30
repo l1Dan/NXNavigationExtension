@@ -200,7 +200,7 @@
     UIView *customView = self.ue_backButtonCustomView;
     if (customView) {
         backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customView];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self.navigationController action:@selector(ue_triggerSystemBackButtonHandle)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ue_triggerSystemPopViewController)];
         customView.userInteractionEnabled = YES;
         [customView addGestureRecognizer:tap];
     } else {
@@ -208,9 +208,13 @@
         if (!backImage) {
             backImage = [UENavigationBarAppearance standardAppearance].backImage;
         }
-        backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage style:UIBarButtonItemStylePlain target:self.navigationController action:@selector(ue_triggerSystemBackButtonHandle)];
+        backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage style:UIBarButtonItemStylePlain target:self action:@selector(ue_triggerSystemPopViewController)];
     }
     self.navigationItem.leftBarButtonItem = backButtonItem;
+}
+
+- (void)ue_triggerSystemPopViewController {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

@@ -167,10 +167,10 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
     UIViewController *topViewController = self.topViewController;
     if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willJumpToViewControllerUsingInteractivePopGesture:)]) {
         if ([(id<UINavigationControllerCustomizable>)topViewController navigationController:self willJumpToViewControllerUsingInteractivePopGesture:NO]) {
-            [topViewController.navigationController popViewControllerAnimated:YES];
+            [topViewController ue_triggerSystemPopViewController];
         }
     } else {
-        [self.topViewController.navigationController popViewControllerAnimated:YES];
+        [self.topViewController ue_triggerSystemPopViewController];
     }
 }
 

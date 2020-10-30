@@ -73,6 +73,9 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 /// 设置 UINavigationBarItem
 - (void)ue_configureNavigationBarItem;
 
+/// 调用 popViewControllerAnimated: 方法
+- (void)ue_triggerSystemPopViewController;
+
 @end
 
 @interface UINavigationController (UINavigationExtensionPrivate)
