@@ -33,6 +33,10 @@
     [self.ue_navigationBar addContainerSubview:self.addButton];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 - (UIColor *)ue_barTintColor {
     return [UIColor clearColor];
 }

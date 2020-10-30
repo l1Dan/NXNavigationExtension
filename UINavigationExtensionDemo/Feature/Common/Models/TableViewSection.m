@@ -61,9 +61,10 @@
                               [TableViewSectionItem itemWithTitle:@"导航栏返回事件拦截" itemType:TableViewSectionItemTypeNavigationBarBackEventIntercept],
                               [TableViewSectionItem itemWithTitle:@"自定义任一控制器跳转" itemType:TableViewSectionItemTypeNavigationBarJumpToViewController],
                               [TableViewSectionItem itemWithTitle:@"完全自定义导航栏" itemType:TableViewSectionItemTypeNavigationBarCustom],
-                              [TableViewSectionItem itemWithTitle:@"导航栏点击事件穿透到底部试图" itemType:TableViewSectionItemTypeNavigationBarClickEventHitToBack],
+                              [TableViewSectionItem itemWithTitle:@"导航栏点击事件穿透到底部视图" itemType:TableViewSectionItemTypeNavigationBarClickEventHitToBack],
                               [TableViewSectionItem itemWithTitle:@"滑动改变导航栏样式" itemType:TableViewSectionItemTypeNavigationBarScrollChangeNavigationBar],
                               [TableViewSectionItem itemWithTitle:@"WKWebView with UENavigationBar" itemType:TableViewSectionItemTypeNavigationBarWebView],
+                              [TableViewSectionItem itemWithTitle:@"更新导航栏样式" itemType:TableViewSectionItemTypeNavigationBarUpdateNavigationBar],
                               nil];
     TableViewSection *section2 = [TableViewSection sectionWithItems:items2];
     section2.title = @"高级功能";

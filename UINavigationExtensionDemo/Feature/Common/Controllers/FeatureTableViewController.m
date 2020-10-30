@@ -29,6 +29,7 @@
 #import "ViewController06_ClickEventHitToBack.h"
 #import "ViewController07_ScrollChangeNavigationBar.h"
 #import "ViewController08_WebView.h"
+#import "RandomColorViewController.h"
 
 #import "TableViewSection.h"
 #import "UIColor+RandomColor.h"
@@ -109,6 +110,8 @@
             return [[ViewController07_ScrollChangeNavigationBar alloc] init];
         case TableViewSectionItemTypeNavigationBarWebView:
             return [[ViewController08_WebView alloc] initWithURL:[NSURL URLWithString:@"https://www.apple.com.cn/"]];
+        case TableViewSectionItemTypeNavigationBarUpdateNavigationBar:
+            return [[RandomColorViewController alloc] init];
         default:
             break;
     }

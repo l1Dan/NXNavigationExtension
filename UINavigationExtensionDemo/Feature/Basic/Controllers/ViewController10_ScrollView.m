@@ -8,9 +8,12 @@
 #import <UINavigationExtension/UINavigationExtension.h>
 
 #import "ViewController10_ScrollView.h"
-#import "ViewController04_JumpToViewController.h"
+#import "RandomColorViewController.h"
+#import "UIColor+RandomColor.h"
 
 @interface ViewController10_ScrollView ()
+
+@property (nonatomic, strong) UIColor *randomColor;
 
 @end
 
@@ -19,11 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.randomColor = [UIColor randomColor];
 }
 
 #pragma mark - Table view data source
@@ -38,13 +37,14 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"Row: %zd with UIScrollView", indexPath.row];
-    cell.contentView.backgroundColor = [UIColor brownColor];
+    cell.textLabel.textColor = [UIColor customDarkGrayColor];
+    cell.contentView.backgroundColor = self.randomColor;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.navigationController pushViewController:[[ViewController04_JumpToViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[RandomColorViewController alloc] init] animated:YES];
 }
 
 @end

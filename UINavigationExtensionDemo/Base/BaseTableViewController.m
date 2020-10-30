@@ -8,7 +8,7 @@
 #import <UINavigationExtension/UINavigationExtension.h>
 
 #import "BaseTableViewController.h"
-#import "ViewController04_JumpToViewController.h"
+#import "RandomColorViewController.h"
 #import "UIColor+RandomColor.h"
 
 @interface BaseTableViewController ()
@@ -56,13 +56,14 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"Row: %zd", indexPath.row];
+    cell.textLabel.textColor = [UIColor customDarkGrayColor];
     cell.contentView.backgroundColor = self.randomColor;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.navigationController pushViewController:[[ViewController04_JumpToViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[RandomColorViewController alloc] init] animated:YES];
 }
 
 @end

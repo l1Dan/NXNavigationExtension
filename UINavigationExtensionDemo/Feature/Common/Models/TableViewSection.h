@@ -28,9 +28,10 @@ typedef NS_ENUM(NSUInteger, TableViewSectionItemType) {
     TableViewSectionItemTypeNavigationBarBackEventIntercept, // 导航栏返回事件拦截
     TableViewSectionItemTypeNavigationBarJumpToViewController, // 自定义跳转到目标控制器
     TableViewSectionItemTypeNavigationBarCustom, // 完全自定义导航栏
-    TableViewSectionItemTypeNavigationBarClickEventHitToBack, // 导航栏点击事件穿透到底部试图
+    TableViewSectionItemTypeNavigationBarClickEventHitToBack, // 导航栏点击事件穿透到底部视图
     TableViewSectionItemTypeNavigationBarScrollChangeNavigationBar, // 滑动改变导航栏背景
     TableViewSectionItemTypeNavigationBarWebView, // 使用 WebView 结合 UENavigationBar
+    TableViewSectionItemTypeNavigationBarUpdateNavigationBar, // 更新导航栏样式
 };
 
 @interface TableViewSectionItem : NSObject

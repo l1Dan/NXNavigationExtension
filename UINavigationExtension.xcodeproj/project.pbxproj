@@ -26,6 +26,7 @@
 		62328CAD9ACA94143A850D85 /* ViewController04_Translucent.m in Sources */ = {isa = PBXBuildFile; fileRef = 62328E5176465C00861EF5E7 /* ViewController04_Translucent.m */; };
 		62328F02808BD9C6F127B810 /* ViewController11_ScrollViewWithFullScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 62328FEA4332688CDCBABEE6 /* ViewController11_ScrollViewWithFullScreen.m */; };
 		62328F7E74BB15BC703C2DA9 /* ViewController02_BackgroundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 623288B5E508F2A5D15B0AC8 /* ViewController02_BackgroundImage.m */; };
+		D61633D8254C4594007584E4 /* RandomColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D61633D7254C4594007584E4 /* RandomColorViewController.m */; };
 		D61CCC00251A13F100A91580 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCBFF251A13F100A91580 /* AppDelegate.m */; };
 		D61CCC11251A13F400A91580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCC10251A13F400A91580 /* main.m */; };
 		D6469AE025449F4D00C583FF /* UIColor+RandomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D6469ADF25449F4D00C583FF /* UIColor+RandomColor.m */; };
@@ -128,6 +129,8 @@
 		62328FB207DDBB4D0FB5CAF0 /* ViewController03_Transparent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController03_Transparent.m; sourceTree = "<group>"; };
 		62328FC452B93B333DB44E1E /* ViewController01_Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController01_Test.m; sourceTree = "<group>"; };
 		62328FEA4332688CDCBABEE6 /* ViewController11_ScrollViewWithFullScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController11_ScrollViewWithFullScreen.m; sourceTree = "<group>"; };
+		D61633D6254C4594007584E4 /* RandomColorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RandomColorViewController.h; sourceTree = "<group>"; };
+		D61633D7254C4594007584E4 /* RandomColorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RandomColorViewController.m; sourceTree = "<group>"; };
 		D61CCBFB251A13F100A91580 /* UINavigationExtensionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UINavigationExtensionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D61CCBFE251A13F100A91580 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D61CCBFF251A13F100A91580 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -365,6 +368,8 @@
 				623286DFEE494520CB578F38 /* FeatureTableViewController.m */,
 				D69BDD7B254B2B7A00599E27 /* HierarchyViewController.h */,
 				D69BDD7C254B2B7A00599E27 /* HierarchyViewController.m */,
+				D61633D6254C4594007584E4 /* RandomColorViewController.h */,
+				D61633D7254C4594007584E4 /* RandomColorViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -608,6 +613,7 @@
 				6232837E6D5C74E81D1F7144 /* ViewController10_ScrollView.m in Sources */,
 				62328F02808BD9C6F127B810 /* ViewController11_ScrollViewWithFullScreen.m in Sources */,
 				D650624F254C280700597B05 /* JumpViewControllerModel.m in Sources */,
+				D61633D8254C4594007584E4 /* RandomColorViewController.m in Sources */,
 				6232871302FCFE8BD3B7811D /* BaseTableViewController.m in Sources */,
 				623284051B86593DC823CF2F /* DashboardTabBarController.m in Sources */,
 				623280C88D935B89D798D507 /* FeatureNavigationController.m in Sources */,

@@ -8,6 +8,7 @@
 #import <UINavigationExtension/UINavigationExtension.h>
 
 #import "ViewController04_Translucent.h"
+#import "UIColor+RandomColor.h"
 
 @interface ViewController04_Translucent ()
 
@@ -22,6 +23,10 @@
 
 - (BOOL)ue_useSystemBlurNavigationBar {
     return YES;
+}
+
+- (UIColor *)randomColor {
+    return [UIColor randomColor];
 }
 
 @end

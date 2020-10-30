@@ -107,7 +107,9 @@
         [weakSelf setJumpViewControllerCellClickEnabled:NO];
         [weakSelf.navigationController ue_jumpViewControllerClass:[selectedViewController class]
                                  usingCreateViewControllerHandler:^__kindof UIViewController * _Nonnull {
-            return [[[selectedViewController class] alloc] init];
+            UIViewController *vc = [[[selectedViewController class] alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            return vc;
         }];
     }];
 }

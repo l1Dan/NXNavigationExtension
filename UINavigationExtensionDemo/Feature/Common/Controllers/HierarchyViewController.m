@@ -6,32 +6,11 @@
 //
 
 #import "HierarchyViewController.h"
-#import "ViewController04_JumpToViewController.h"
+#import "RandomColorViewController.h"
+
 #import "UIColor+RandomColor.h"
 
 static CGFloat const ChooseJumpTableViewHeight = 44.0;
-
-@interface TempViewController : UIViewController
-
-@end
-
-@implementation TempViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.bounds = CGRectMake(0, 0, 200, 80);
-    label.center = self.view.center;
-    label.backgroundColor = [UIColor redColor];
-    label.textColor = [UIColor whiteColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = NSStringFromClass([self class]);
-    
-    [self.view addSubview:label];
-}
-
-@end
 
 @interface HierarchyViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -106,8 +85,8 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
         __kindof UIViewController *viewController = self.chooseViewControllers[indexPath.row];
         cell.textLabel.text = NSStringFromClass([viewController class]);
         cell.textLabel.textColor = [UIColor customDarkGrayColor];
-        if ([viewController isKindOfClass:[ViewController04_JumpToViewController class]]) {
-            cell.contentView.backgroundColor = [(ViewController04_JumpToViewController *)viewController randomColor];
+        if ([viewController isKindOfClass:[BaseViewController class]]) {
+            cell.contentView.backgroundColor = [(BaseViewController *)viewController randomColor];
         }
     } else {
         cell.textLabel.text = @"创建一个新的 UIViewController";
@@ -120,7 +99,7 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    __kindof UIViewController *viewController = [[TempViewController alloc] init];
+    __kindof UIViewController *viewController = [[RandomColorViewController alloc] init];
     if (indexPath.row < self.chooseViewControllers.count) {
         viewController = self.chooseViewControllers[indexPath.row];
     }
