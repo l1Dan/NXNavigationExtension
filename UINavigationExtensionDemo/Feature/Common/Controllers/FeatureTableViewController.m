@@ -151,6 +151,7 @@
         UINavigationController *controller = [[[self.navigationController class] alloc] initWithRootViewController:viewController];
         [self presentViewController:controller animated:YES completion:NULL];
     } else {
+        viewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:viewController animated:YES];
     }
 }
