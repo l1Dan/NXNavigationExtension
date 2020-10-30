@@ -1,16 +1,39 @@
 //
-//  ChooseJumpViewController.m
+//  HierarchyViewController.m
 //  UINavigationExtensionDemo
 //
 //  Created by lidan on 2020/10/30.
 //
 
-#import "ChooseJumpViewController.h"
+#import "HierarchyViewController.h"
 #import "ViewController04_JumpToViewController.h"
+#import "UIColor+RandomColor.h"
 
 static CGFloat const ChooseJumpTableViewHeight = 44.0;
 
-@interface ChooseJumpViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface TempViewController : UIViewController
+
+@end
+
+@implementation TempViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.bounds = CGRectMake(0, 0, 200, 80);
+    label.center = self.view.center;
+    label.backgroundColor = [UIColor redColor];
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = NSStringFromClass([self class]);
+    
+    [self.view addSubview:label];
+}
+
+@end
+
+@interface HierarchyViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray<__kindof UIViewController *> *chooseViewControllers;
@@ -18,7 +41,7 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
 
 @end
 
-@implementation ChooseJumpViewController
+@implementation HierarchyViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -68,7 +91,8 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.chooseViewControllers.count;
+    // Note: + 1 添加一行“创建一个新的 UIViewController”
+    return self.chooseViewControllers.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -77,19 +101,29 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
     
-    __kindof UIViewController *viewController = self.chooseViewControllers[indexPath.row];
-    cell.textLabel.text = NSStringFromClass([viewController class]);
     cell.contentView.backgroundColor = [UIColor whiteColor];
-    if ([viewController isKindOfClass:[ViewController04_JumpToViewController class]]) {
-        cell.contentView.backgroundColor = [(ViewController04_JumpToViewController *)viewController randomColor];
+    if (indexPath.row < self.chooseViewControllers.count) {
+        __kindof UIViewController *viewController = self.chooseViewControllers[indexPath.row];
+        cell.textLabel.text = NSStringFromClass([viewController class]);
+        cell.textLabel.textColor = [UIColor customDarkGrayColor];
+        if ([viewController isKindOfClass:[ViewController04_JumpToViewController class]]) {
+            cell.contentView.backgroundColor = [(ViewController04_JumpToViewController *)viewController randomColor];
+        }
+    } else {
+        cell.textLabel.text = @"创建一个新的 UIViewController";
+        cell.textLabel.textColor = [UIColor blueColor];
     }
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    __kindof UIViewController *viewController = self.chooseViewControllers[indexPath.row];
     
+    __kindof UIViewController *viewController = [[TempViewController alloc] init];
+    if (indexPath.row < self.chooseViewControllers.count) {
+        viewController = self.chooseViewControllers[indexPath.row];
+    }
     __weak typeof(self) weakSelf = self;
     [self dismissViewControllerAnimated:NO completion:^{
         if (weakSelf.completionHandler) {
@@ -108,10 +142,10 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
 
 #pragma mark - Public
 
-+ (void)showViewControllerFromViewController:(__kindof UIViewController *)viewController
-                         withViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers
-                           completionHandler:(void (^)(__kindof UIViewController * _Nullable selectedViewController))completionHandler {
-    ChooseJumpViewController *vc = [[ChooseJumpViewController alloc] init];
++ (void)showFromViewController:(__kindof UIViewController *)viewController
+           withViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers
+             completionHandler:(void (^)(__kindof UIViewController * _Nullable selectedViewController))completionHandler {
+    HierarchyViewController *vc = [[HierarchyViewController alloc] init];
     vc.chooseViewControllers = viewControllers;
     vc.completionHandler = completionHandler;
     vc.modalPresentationStyle = UIModalPresentationCustom;

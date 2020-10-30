@@ -29,6 +29,8 @@
 		D61CCC00251A13F100A91580 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCBFF251A13F100A91580 /* AppDelegate.m */; };
 		D61CCC11251A13F400A91580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCC10251A13F400A91580 /* main.m */; };
 		D6469AE025449F4D00C583FF /* UIColor+RandomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D6469ADF25449F4D00C583FF /* UIColor+RandomColor.m */; };
+		D650624F254C280700597B05 /* JumpViewControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D650624E254C280700597B05 /* JumpViewControllerModel.m */; };
+		D6506254254C312200597B05 /* UITableViewCell+Enabled.m in Sources */ = {isa = PBXBuildFile; fileRef = D6506253254C312200597B05 /* UITableViewCell+Enabled.m */; };
 		D65FA154254A933900DA1EFE /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D65FA153254A933900DA1EFE /* BaseNavigationController.m */; };
 		D65FA15C254A98C600DA1EFE /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D65FA15B254A98C600DA1EFE /* BaseViewController.m */; };
 		D6627C002547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D6627BFF2547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.m */; };
@@ -42,7 +44,7 @@
 		D696863F253097C100FBC7A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69686382530977F00FBC7A5 /* LaunchScreen.storyboard */; };
 		D6968640253097C100FBC7A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69686362530977F00FBC7A5 /* Main.storyboard */; };
 		D69BDD76254B24B100599E27 /* EventInterceptModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D69BDD75254B24B100599E27 /* EventInterceptModel.m */; };
-		D69BDD7D254B2B7A00599E27 /* ChooseJumpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D69BDD7C254B2B7A00599E27 /* ChooseJumpViewController.m */; };
+		D69BDD7D254B2B7A00599E27 /* HierarchyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D69BDD7C254B2B7A00599E27 /* HierarchyViewController.m */; };
 		D69F7AC72545EFDD0097BB28 /* ViewController01_DisablePopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7AC62545EFDD0097BB28 /* ViewController01_DisablePopGesture.m */; };
 		D69F7ACB2545F0730097BB28 /* ViewController02_FullPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7ACA2545F0730097BB28 /* ViewController02_FullPopGesture.m */; };
 		D69F7AD42545F3940097BB28 /* ViewController03_BackEventIntercept.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7AD32545F3940097BB28 /* ViewController03_BackEventIntercept.m */; };
@@ -132,6 +134,10 @@
 		D61CCC10251A13F400A91580 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D6469ADE25449F4D00C583FF /* UIColor+RandomColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+RandomColor.h"; sourceTree = "<group>"; };
 		D6469ADF25449F4D00C583FF /* UIColor+RandomColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RandomColor.m"; sourceTree = "<group>"; };
+		D650624D254C280700597B05 /* JumpViewControllerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JumpViewControllerModel.h; sourceTree = "<group>"; };
+		D650624E254C280700597B05 /* JumpViewControllerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JumpViewControllerModel.m; sourceTree = "<group>"; };
+		D6506252254C312200597B05 /* UITableViewCell+Enabled.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Enabled.h"; sourceTree = "<group>"; };
+		D6506253254C312200597B05 /* UITableViewCell+Enabled.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Enabled.m"; sourceTree = "<group>"; };
 		D65FA152254A933900DA1EFE /* BaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		D65FA153254A933900DA1EFE /* BaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		D65FA15A254A98C600DA1EFE /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -157,8 +163,8 @@
 		D69686392530977F00FBC7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D69BDD74254B24B100599E27 /* EventInterceptModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventInterceptModel.h; sourceTree = "<group>"; };
 		D69BDD75254B24B100599E27 /* EventInterceptModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventInterceptModel.m; sourceTree = "<group>"; };
-		D69BDD7B254B2B7A00599E27 /* ChooseJumpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseJumpViewController.h; sourceTree = "<group>"; };
-		D69BDD7C254B2B7A00599E27 /* ChooseJumpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseJumpViewController.m; sourceTree = "<group>"; };
+		D69BDD7B254B2B7A00599E27 /* HierarchyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HierarchyViewController.h; sourceTree = "<group>"; };
+		D69BDD7C254B2B7A00599E27 /* HierarchyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HierarchyViewController.m; sourceTree = "<group>"; };
 		D69F7AC52545EFDD0097BB28 /* ViewController01_DisablePopGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController01_DisablePopGesture.h; sourceTree = "<group>"; };
 		D69F7AC62545EFDD0097BB28 /* ViewController01_DisablePopGesture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController01_DisablePopGesture.m; sourceTree = "<group>"; };
 		D69F7AC92545F0730097BB28 /* ViewController02_FullPopGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController02_FullPopGesture.h; sourceTree = "<group>"; };
@@ -208,6 +214,8 @@
 			children = (
 				D69BDD74254B24B100599E27 /* EventInterceptModel.h */,
 				D69BDD75254B24B100599E27 /* EventInterceptModel.m */,
+				D650624D254C280700597B05 /* JumpViewControllerModel.h */,
+				D650624E254C280700597B05 /* JumpViewControllerModel.m */,
 				6232857730E562322EFE5A1F /* TableViewSection.h */,
 				623280A17984EA00522BA09E /* TableViewSection.m */,
 			);
@@ -330,6 +338,8 @@
 				D6469ADF25449F4D00C583FF /* UIColor+RandomColor.m */,
 				D6A9B2952545D6EE000E4405 /* UIImage+NavigationBar.h */,
 				D6A9B2962545D6EE000E4405 /* UIImage+NavigationBar.m */,
+				D6506252254C312200597B05 /* UITableViewCell+Enabled.h */,
+				D6506253254C312200597B05 /* UITableViewCell+Enabled.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -347,14 +357,14 @@
 		D65FA14F254A929200DA1EFE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D69BDD7B254B2B7A00599E27 /* ChooseJumpViewController.h */,
-				D69BDD7C254B2B7A00599E27 /* ChooseJumpViewController.m */,
 				62328E0B45FA4B330E2C2544 /* DashboardTabBarController.h */,
 				623286BC037C2A5DD480E0E1 /* DashboardTabBarController.m */,
 				6232875BC8B8277820F984E9 /* FeatureNavigationController.h */,
 				62328B7102AF6804D412443D /* FeatureNavigationController.m */,
 				62328065722F7989C8D6D5BF /* FeatureTableViewController.h */,
 				623286DFEE494520CB578F38 /* FeatureTableViewController.m */,
+				D69BDD7B254B2B7A00599E27 /* HierarchyViewController.h */,
+				D69BDD7C254B2B7A00599E27 /* HierarchyViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -579,10 +589,11 @@
 				D67BADCE254B1858008822D6 /* ViewController04_Test.m in Sources */,
 				D69F7AFD25460C0B0097BB28 /* ViewController06_ClickEventHitToBack.m in Sources */,
 				D65FA15C254A98C600DA1EFE /* BaseViewController.m in Sources */,
-				D69BDD7D254B2B7A00599E27 /* ChooseJumpViewController.m in Sources */,
+				D69BDD7D254B2B7A00599E27 /* HierarchyViewController.m in Sources */,
 				D67BADD2254B1865008822D6 /* ViewController05_Test.m in Sources */,
 				623286CBF5E0EA4B5885BD07 /* ViewController01_BackgroundColor.m in Sources */,
 				62328F7E74BB15BC703C2DA9 /* ViewController02_BackgroundImage.m in Sources */,
+				D6506254254C312200597B05 /* UITableViewCell+Enabled.m in Sources */,
 				D67BADC9254B1838008822D6 /* ViewController03_Test.m in Sources */,
 				623280C7B099D126C9178BE7 /* ViewController03_Transparent.m in Sources */,
 				62328CAD9ACA94143A850D85 /* ViewController04_Translucent.m in Sources */,
@@ -596,6 +607,7 @@
 				623281E242A278B7AB8F7055 /* ViewController09_FullScreen.m in Sources */,
 				6232837E6D5C74E81D1F7144 /* ViewController10_ScrollView.m in Sources */,
 				62328F02808BD9C6F127B810 /* ViewController11_ScrollViewWithFullScreen.m in Sources */,
+				D650624F254C280700597B05 /* JumpViewControllerModel.m in Sources */,
 				6232871302FCFE8BD3B7811D /* BaseTableViewController.m in Sources */,
 				623284051B86593DC823CF2F /* DashboardTabBarController.m in Sources */,
 				623280C88D935B89D798D507 /* FeatureNavigationController.m in Sources */,

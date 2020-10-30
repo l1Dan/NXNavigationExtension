@@ -13,22 +13,15 @@
 #import "ViewController03_Test.h"
 #import "ViewController04_Test.h"
 #import "ViewController05_Test.h"
-#import "ChooseJumpViewController.h"
+#import "HierarchyViewController.h"
+#import "JumpViewControllerModel.h"
 
-typedef NS_ENUM(NSUInteger, JumpViewControllerType) {
-    JumpViewControllerTypeTest1,
-    JumpViewControllerTypeTest2,
-    JumpViewControllerTypeTest3,
-    JumpViewControllerTypeTest4,
-    JumpViewControllerTypeTest5,
-    JumpViewControllerTypeChoose,
-    JumpViewControllerTypeJump,
-};
+#import "UITableViewCell+Enabled.h"
 
 @interface ViewController04_JumpToViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray<NSNumber *> *allTypes;
+@property (nonatomic, strong) NSArray<JumpViewControllerModel *> *allModels;
 
 @end
 
@@ -76,38 +69,53 @@ typedef NS_ENUM(NSUInteger, JumpViewControllerType) {
     return _tableView;
 }
 
-- (NSArray<NSNumber *> *)allTypes {
-    if (!_allTypes) {
-        _allTypes = @[
-            @(JumpViewControllerTypeTest1), @(JumpViewControllerTypeTest2), @(JumpViewControllerTypeTest3), @(JumpViewControllerTypeTest4),
-            @(JumpViewControllerTypeTest5), @(JumpViewControllerTypeChoose), @(JumpViewControllerTypeJump),
+- (NSArray<JumpViewControllerModel *> *)allModels {
+    if (!_allModels) {
+        _allModels = @[
+            [JumpViewControllerModel modelWithTitle:NSStringFromClass([ViewController01_Test class]) type:JumpViewControllerTypeTest1],
+            [JumpViewControllerModel modelWithTitle:NSStringFromClass([ViewController02_Test class]) type:JumpViewControllerTypeTest2],
+            [JumpViewControllerModel modelWithTitle:NSStringFromClass([ViewController03_Test class]) type:JumpViewControllerTypeTest3],
+            [JumpViewControllerModel modelWithTitle:NSStringFromClass([ViewController04_Test class]) type:JumpViewControllerTypeTest4],
+            [JumpViewControllerModel modelWithTitle:NSStringFromClass([ViewController05_Test class]) type:JumpViewControllerTypeTest5],
+            [JumpViewControllerModel modelWithTitle:@"选择需要跳转的目标控制器" type:JumpViewControllerTypeChoose],
+            [JumpViewControllerModel modelWithTitle:@"跳转到目标控制器" type:JumpViewControllerTypeJump],
         ];
     }
-    return _allTypes;
+    return _allModels;
 }
 
 #pragma mark - Private
 
-- (NSString *)titleForType:(JumpViewControllerType)type {
-    switch (type) {
-        case JumpViewControllerTypeTest1: return [NSString stringWithFormat:@"点击跳转到: %@", NSStringFromClass([ViewController01_Test class])];
-        case JumpViewControllerTypeTest2: return [NSString stringWithFormat:@"点击跳转到: %@", NSStringFromClass([ViewController02_Test class])];
-        case JumpViewControllerTypeTest3: return [NSString stringWithFormat:@"点击跳转到: %@", NSStringFromClass([ViewController03_Test class])];
-        case JumpViewControllerTypeTest4: return [NSString stringWithFormat:@"点击跳转到: %@", NSStringFromClass([ViewController04_Test class])];
-        case JumpViewControllerTypeTest5: return [NSString stringWithFormat:@"点击跳转到: %@", NSStringFromClass([ViewController05_Test class])];
-        case JumpViewControllerTypeChoose: return @"选择需要跳转的目标控制器";
-        case JumpViewControllerTypeJump: return @"跳转到目标控制器";
+- (void)setJumpViewControllerCellClickEnabled:(BOOL)enabled {
+    for (JumpViewControllerModel *model in self.allModels) {
+        if (model.type == JumpViewControllerTypeJump) {
+            model.clickEnabled = YES;
+        } else {
+            model.clickEnabled = enabled;
+        }
     }
+    [self.tableView reloadData];
+}
+
+- (void)showChooseJumpViewController {
+    __weak typeof(self) weakSelf = self;
+    [HierarchyViewController showFromViewController:self
+                                withViewControllers:self.navigationController.viewControllers
+                                  completionHandler:^(__kindof UIViewController * _Nullable selectedViewController) {
+        if (!selectedViewController || ![selectedViewController isKindOfClass:[UIViewController class]]) return;
+        // 设置 Cell 不能点击
+        [weakSelf setJumpViewControllerCellClickEnabled:NO];
+        [weakSelf.navigationController ue_jumpViewControllerClass:[selectedViewController class]
+                                 usingCreateViewControllerHandler:^__kindof UIViewController * _Nonnull {
+            return [[[selectedViewController class] alloc] init];
+        }];
+    }];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.allTypes.count;
+    return self.allModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -116,11 +124,14 @@ typedef NS_ENUM(NSUInteger, JumpViewControllerType) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
     
-    JumpViewControllerType type = self.allTypes[indexPath.row].unsignedIntegerValue;
-    cell.textLabel.text = [self titleForType:type];
-    if (type == JumpViewControllerTypeChoose || type == JumpViewControllerTypeJump) {
+    JumpViewControllerModel *model = self.allModels[indexPath.row];
+    [cell setCellClickEnabled:model.clickEnabled];
+    
+    if (model.type == JumpViewControllerTypeChoose || model.type == JumpViewControllerTypeJump) {
+        cell.textLabel.text = model.title;
         cell.accessoryType = UITableViewCellAccessoryNone;
     } else {
+        cell.textLabel.text = [NSString stringWithFormat:@"点击跳转到: %@", model.title];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
@@ -130,26 +141,17 @@ typedef NS_ENUM(NSUInteger, JumpViewControllerType) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    JumpViewControllerType type = self.allTypes[indexPath.row].unsignedIntegerValue;
-    if (type == JumpViewControllerTypeChoose) {
-        __weak typeof(self) weakSelf = self;
-        [ChooseJumpViewController showViewControllerFromViewController:self withViewControllers:self.navigationController.viewControllers completionHandler:^(__kindof UIViewController * _Nullable selectedViewController) {
-            if (!selectedViewController || ![selectedViewController isKindOfClass:[UIViewController class]]) return;
-        
-            [weakSelf.navigationController ue_jumpViewControllerClass:[selectedViewController class] usingCreateViewControllerHandler:^__kindof UIViewController * _Nonnull{
-                return [[[selectedViewController class] alloc] init];
-            }];
-        }];
-    } else if (type == JumpViewControllerTypeJump) {
+    JumpViewControllerModel *model = self.allModels[indexPath.row];
+    if (model.type == JumpViewControllerTypeChoose) {
+        [self showChooseJumpViewController];
+    } else if (model.type == JumpViewControllerTypeJump) {
+        // 设置 Cell 不能点击
+        [self setJumpViewControllerCellClickEnabled:YES];
         // 如果 selectedViewController ！= nil 就会跳转到对应的视图控制器，反之则返回上一个控制器
         [self.navigationController popViewControllerAnimated:YES];
     } else {
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        NSString *className = [[cell.textLabel.text componentsSeparatedByString:@": "] lastObject];
-        if (className) {
-            ViewController04_JumpToViewController *viewController = [[NSClassFromString(className) alloc] init];
-            [self.navigationController pushViewController:viewController animated:YES];
-        }
+        ViewController04_JumpToViewController *viewController = [[NSClassFromString(model.title) alloc] init];
+        [self.navigationController pushViewController:viewController animated:YES];
     }
 }
 
