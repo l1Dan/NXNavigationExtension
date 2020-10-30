@@ -10,6 +10,8 @@
 #import "RandomColorViewController.h"
 #import "UIColor+RandomColor.h"
 
+static CGFloat RandomColorButtonWidthAndHeight = 160.0;
+
 @interface RandomColorViewController ()
 
 @property (nonatomic, strong) UIColor *changeColor;
@@ -32,6 +34,12 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = self.navigationItem.title ?: NSStringFromClass([self class]);
     [self.view addSubview:self.randomColorButton];
+    
+    self.randomColorButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.randomColorButton.widthAnchor constraintEqualToConstant:RandomColorButtonWidthAndHeight].active = YES;
+    [self.randomColorButton.heightAnchor constraintEqualToConstant:RandomColorButtonWidthAndHeight].active = YES;
+    [self.randomColorButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.randomColorButton.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
 }
 
 - (UIColor *)randomColor {
@@ -75,12 +83,9 @@
 
 - (UIButton *)randomColorButton {
     if (!_randomColorButton) {
-        CGFloat wh = 160.0;
         _randomColorButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _randomColorButton.bounds = CGRectMake(0, 0, wh, wh);
-        _randomColorButton.center = self.view.center;
         _randomColorButton.backgroundColor = [UIColor clearColor];
-        _randomColorButton.layer.cornerRadius = wh * 0.5;
+        _randomColorButton.layer.cornerRadius = RandomColorButtonWidthAndHeight * 0.5;
         _randomColorButton.layer.borderWidth = 5.0;
         _randomColorButton.layer.borderColor = self.changeColor.CGColor;
         [_randomColorButton setTitleColor:self.changeColor forState:UIControlStateNormal];

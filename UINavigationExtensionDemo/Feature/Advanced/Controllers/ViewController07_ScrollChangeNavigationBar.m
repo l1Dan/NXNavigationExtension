@@ -19,6 +19,11 @@
 
 @property (nonatomic, assign) UIStatusBarStyle barStyle;
 
+@property (nonatomic, strong) NSLayoutConstraint *topConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *leftConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *bottomConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *rightConstraint;
+
 @end
 
 @implementation ViewController07_ScrollChangeNavigationBar
@@ -42,6 +47,31 @@
     self.barStyle = UIStatusBarStyleLightContent;
     
     [self setNeedsStatusBarAppearanceUpdate];
+    
+    UIView *containerView = self.ue_navigationBar.containerView;
+
+    self.fakeNavigationBar.translatesAutoresizingMaskIntoConstraints = NO;
+    self.topConstraint = [self.fakeNavigationBar.topAnchor constraintEqualToAnchor:containerView.topAnchor];
+    self.topConstraint.active = YES;
+    
+    self.leftConstraint = [self.fakeNavigationBar.leftAnchor constraintEqualToAnchor:containerView.leftAnchor];
+    self.leftConstraint.active = YES;
+    
+    self.bottomConstraint = [self.fakeNavigationBar.bottomAnchor constraintEqualToAnchor:containerView.bottomAnchor];
+    self.bottomConstraint.active = YES;
+    
+    self.rightConstraint = [self.fakeNavigationBar.rightAnchor constraintEqualToAnchor:containerView.rightAnchor];
+    self.rightConstraint.active = YES;
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
+    UIEdgeInsets safeAreaInsets = self.navigationController.navigationBar.safeAreaInsets;
+    self.topConstraint.constant = safeAreaInsets.top;
+    self.leftConstraint.constant = safeAreaInsets.left;
+    self.bottomConstraint.constant = safeAreaInsets.bottom;
+    self.rightConstraint.constant = -safeAreaInsets.right;
 }
 
 - (UIColor *)ue_navigationBarBackgroundColor {
@@ -94,7 +124,7 @@
 
 - (FakeNavigationBar *)fakeNavigationBar {
     if (!_fakeNavigationBar) {
-        _fakeNavigationBar = [[FakeNavigationBar alloc] initWithFrame:self.ue_navigationBar.containerView.bounds];
+        _fakeNavigationBar = [[FakeNavigationBar alloc] initWithFrame:CGRectZero];
         _fakeNavigationBar.delegate = self;
     }
     return _fakeNavigationBar;

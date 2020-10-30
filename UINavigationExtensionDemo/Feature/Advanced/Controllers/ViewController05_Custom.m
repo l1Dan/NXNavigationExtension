@@ -18,6 +18,9 @@
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *addButton;
 
+@property (nonatomic, strong) NSLayoutConstraint *leftConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *rightConstraint;
+
 @end
 
 @implementation ViewController05_Custom
@@ -31,6 +34,38 @@
     [self.ue_navigationBar addContainerSubview:self.searchTextField];
     [self.ue_navigationBar addContainerSubview:self.backButton];
     [self.ue_navigationBar addContainerSubview:self.addButton];
+    
+    UIView *containerView = self.ue_navigationBar.containerView;
+    self.backButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.leftConstraint = [self.backButton.leftAnchor constraintEqualToAnchor:containerView.leftAnchor];
+    self.leftConstraint.active = YES;
+    
+    [self.backButton.topAnchor constraintEqualToAnchor:containerView.topAnchor constant:2.0].active = YES;
+    [self.backButton.bottomAnchor constraintEqualToAnchor:containerView.bottomAnchor constant:-2.0].active = YES;
+    [self.backButton.widthAnchor constraintEqualToConstant:44].active = YES;
+        
+    self.searchTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.searchTextField.topAnchor constraintEqualToAnchor:containerView.topAnchor constant:2.0].active = YES;
+    [self.searchTextField.bottomAnchor constraintEqualToAnchor:containerView.bottomAnchor constant:-2.0].active = YES;
+    [self.searchTextField.leftAnchor constraintEqualToAnchor:self.backButton.rightAnchor constant:8.0].active = YES;
+    [self.searchTextField.rightAnchor constraintEqualToAnchor:self.addButton.leftAnchor constant:-8.0].active = YES;
+        
+    self.addButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.rightConstraint = [self.addButton.rightAnchor constraintEqualToAnchor:containerView.rightAnchor];
+    self.rightConstraint.active = YES;
+    
+    [self.addButton.topAnchor constraintEqualToAnchor:containerView.topAnchor constant:2.0].active = YES;
+    [self.addButton.bottomAnchor constraintEqualToAnchor:containerView.bottomAnchor constant:-2.0].active = YES;
+    [self.addButton.widthAnchor constraintEqualToConstant:44].active = YES;
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
+    UIEdgeInsets safeAreaInsets = self.navigationController.navigationBar.safeAreaInsets;
+    self.leftConstraint.constant = safeAreaInsets.left;
+    self.rightConstraint.constant = -safeAreaInsets.right;
+    self.searchTextField.layer.cornerRadius = CGRectGetHeight(self.ue_navigationBar.containerView.frame) * 0.5 - 2;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -54,14 +89,12 @@
 
 - (UITextField *)searchTextField {
     if (!_searchTextField) {
-        CGRect rect = self.ue_navigationBar.containerView.frame;
         UIImage *image = [[UIImage imageNamed:@"NavigationBarSearch"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
         imageView.tintColor = [UIColor customDarkGrayColor];
         [imageView sizeToFit];
         
-        _searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(44 + 8, 2, rect.size.width - (44 + 8) * 2, 40)];
-        _searchTextField.layer.cornerRadius = 20;
+        _searchTextField = [[UITextField alloc] initWithFrame:CGRectZero];
         _searchTextField.leftViewMode = UITextFieldViewModeAlways;
         _searchTextField.leftView = imageView;
         _searchTextField.tintColor = [UIColor customDarkGrayColor];
@@ -73,7 +106,6 @@
 - (UIButton *)backButton {
     if (!_backButton) {
         _backButton = [[UIButton alloc] init];
-        _backButton.frame = CGRectMake(0, 2, 44, 40);
         _backButton.backgroundColor = [UIColor greenColor];
         [_backButton setImage:[UIImage imageNamed:@"NavigationBarBack"] forState:UIControlStateNormal];
         [_backButton addTarget:self.navigationController action:@selector(ue_triggerSystemBackButtonHandle) forControlEvents:UIControlEventTouchUpInside];
@@ -83,9 +115,7 @@
 
 - (UIButton *)addButton {
     if (!_addButton) {
-        CGRect rect = self.ue_navigationBar.containerView.frame;
         _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _addButton.frame = CGRectMake(rect.size.width - 44, 2, 44, 40);
         _addButton.backgroundColor = [UIColor orangeColor];
         [_addButton setImage:[UIImage imageNamed:@"NavigationBarAdd"] forState:UIControlStateNormal];
         [_addButton addTarget:self action:@selector(clickAddButton:) forControlEvents:UIControlEventTouchUpInside];

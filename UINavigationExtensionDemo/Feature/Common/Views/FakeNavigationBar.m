@@ -34,6 +34,24 @@
     [self addSubview:self.backButton];
     [self addSubview:self.titleLabel];
     [self addSubview:self.rightButton];
+    
+    self.backButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.backButton.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
+    [self.backButton.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
+    [self.backButton.leftAnchor constraintEqualToAnchor:self.leftAnchor].active = YES;
+    [self.backButton.widthAnchor constraintEqualToConstant:44].active = YES;
+    
+    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.titleLabel.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
+    [self.titleLabel.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
+    [self.titleLabel.leftAnchor constraintEqualToAnchor:self.backButton.rightAnchor].active = YES;
+    [self.titleLabel.rightAnchor constraintEqualToAnchor:self.rightButton.leftAnchor].active = YES;
+    
+    self.rightButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.rightButton.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
+    [self.rightButton.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
+    [self.rightButton.rightAnchor constraintEqualToAnchor:self.rightAnchor].active = YES;
+    [self.rightButton.widthAnchor constraintEqualToConstant:44].active = YES;
 }
 
 #pragma mark - Setter
@@ -63,7 +81,6 @@
     if (!_backButton) {
         UIImage *image = [[UIImage imageNamed:@"NavigationBarBack"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _backButton.frame = CGRectMake(0, 0, 44, 44);
         [_backButton setImage:image forState:UIControlStateNormal];
         [_backButton addTarget:self action:@selector(ue_triggerSystemBackButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -74,7 +91,6 @@
     if (!_rightButton) {
         UIImage *image = [[UIImage imageNamed:@"NavigationBarAdd"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _rightButton.frame = CGRectMake(CGRectGetMaxX(self.titleLabel.frame) + 8, 0, 44, 44);
         [_rightButton setImage:image forState:UIControlStateNormal];
         [_rightButton addTarget:self action:@selector(clickRightButton:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -83,9 +99,7 @@
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
-        CGFloat padding = 44 + 8;
-        CGFloat width = CGRectGetWidth(self.frame) - padding * 2.0;
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, 0, width, 44)];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.font = [UIFont systemFontOfSize:18];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.textColor = [UIColor customDarkGrayColor];
