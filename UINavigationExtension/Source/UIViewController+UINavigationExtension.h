@@ -85,6 +85,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置触发全屏手势返回，离左边最大滑动距离
 @property (nonatomic, assign, readonly) CGFloat ue_interactivePopMaxAllowedDistanceToLeftEdge;
 
+/// 更新导航栏外观
+- (void)ue_setNeedsNavigationBarAppearanceUpdate;
+
 @end
 
 NS_ASSUME_NONNULL_END

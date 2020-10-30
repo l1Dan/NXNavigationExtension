@@ -46,7 +46,7 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
         if (self.ue_useNavigationBar) {
         }
         if (self.viewControllers.count > 0) {
-            [self configureNavigationBarItemInViewController:viewController];
+            [viewController ue_configureNavigationBarItem];
         }
         
         if (viewController.ue_enableFullScreenInteractivePopGesture) {
@@ -63,7 +63,7 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
             for (NSUInteger index = 0; index < viewControllers.count; index++) {
                 UIViewController *viewController = viewControllers[index];
                 if (index != 0) {
-                    [self configureNavigationBarItemInViewController:viewController];
+                    [viewController ue_configureNavigationBarItem];
                 }
                 
                 if (viewController.ue_enableFullScreenInteractivePopGesture) {

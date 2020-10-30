@@ -54,6 +54,7 @@
         self.ue_navigationBarInitFinished = YES;
         
         [self.navigationController ue_configureNavigationBar];
+        [self setupNavigationBar];
         [self updateNavigationBarAppearance];
     }
     
@@ -65,12 +66,10 @@
         if (!self.ue_navigationBarInitFinished) {
             // FIXED: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
             [self.navigationController ue_configureNavigationBar];
-            [self updateNavigationBarAppearance];
+            [self setupNavigationBar];
         }
-        
-        self.navigationController.navigationBar.barTintColor = self.ue_barBarTintColor;
-        self.navigationController.navigationBar.tintColor = self.ue_barTintColor;
-        self.navigationController.navigationBar.titleTextAttributes = self.ue_titleTextAttributes;
+        // 还原上一个视图控制器对导航栏的修改
+        [self updateNavigationBarAppearance];
         
         __weak typeof(self) weakSelf = self;
         self.navigationController.navigationBar.ue_didUpdateFrameHandler = ^(CGRect frame) {
@@ -109,8 +108,18 @@
 }
 
 #pragma mark - Private
+- (void)setupNavigationBar {
+    self.ue_navigationBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, UINavigationExtensionGetNavigationBarHeight());
+    if (![self.view isKindOfClass:[UIScrollView class]]) {
+        [self.view addSubview:self.ue_navigationBar];
+    }
+}
+
 - (void)updateNavigationBarAppearance {
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
+        self.navigationController.navigationBar.barTintColor = self.ue_barBarTintColor;
+        self.navigationController.navigationBar.tintColor = self.ue_barTintColor;
+        self.navigationController.navigationBar.titleTextAttributes = self.ue_titleTextAttributes;
         [self.navigationController ue_configureNavigationBar];
         
         self.ue_navigationBar.backgroundColor = self.ue_navigationBarBackgroundColor;
@@ -121,12 +130,7 @@
         }
         
         self.ue_navigationBar.backgroundImageView.image = self.ue_navigationBarBackgroundImage;
-        self.ue_navigationBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, UINavigationExtensionGetNavigationBarHeight());
         [self.ue_navigationBar enableBlurEffect:self.ue_useSystemBlurNavigationBar];
-        
-        if (![self.view isKindOfClass:[UIScrollView class]]) {
-            [self.view addSubview:self.ue_navigationBar];
-        }
         
         if (self.parentViewController && ![self.parentViewController isKindOfClass:[UINavigationController class]] && self.ue_automaticallyHideNavigationBarInChildViewController) {
             self.ue_navigationBar.hidden = YES;
@@ -390,6 +394,13 @@
     interactivePopMaxAllowedDistanceToLeftEdge = [NSNumber numberWithFloat:MAX(0, ue_interactivePopMaxAllowedDistanceToLeftEdge)];
 #endif
     objc_setAssociatedObject(self, @selector(ue_interactivePopMaxAllowedDistanceToLeftEdge), interactivePopMaxAllowedDistanceToLeftEdge, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)ue_setNeedsNavigationBarAppearanceUpdate {
+    [self ue_configureNavigationBarItem];
+    [self updateNavigationBarAppearance];
+    [self updateNavigationBarHierarchy];
+    [self changeNavigationBarUserInteractionState];
 }
 
 @end

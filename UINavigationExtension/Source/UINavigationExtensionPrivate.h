@@ -68,6 +68,13 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 
 @end
 
+@interface UIViewController (UINavigationExtensionPrivate)
+
+/// 设置 UINavigationBarItem
+- (void)ue_configureNavigationBarItem;
+
+@end
+
 @interface UINavigationController (UINavigationExtensionPrivate)
 
 /// 获取当前皮肤设置

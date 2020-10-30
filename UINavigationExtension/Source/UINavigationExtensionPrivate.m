@@ -193,6 +193,28 @@
 
 @end
 
+@implementation UIViewController (UINavigationExtensionPrivate)
+
+- (void)ue_configureNavigationBarItem {
+    UIBarButtonItem *backButtonItem;
+    UIView *customView = self.ue_backButtonCustomView;
+    if (customView) {
+        backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customView];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self.navigationController action:@selector(ue_triggerSystemBackButtonHandle)];
+        customView.userInteractionEnabled = YES;
+        [customView addGestureRecognizer:tap];
+    } else {
+        UIImage *backImage = self.ue_backImage;
+        if (!backImage) {
+            backImage = [UENavigationBarAppearance standardAppearance].backImage;
+        }
+        backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage style:UIBarButtonItemStylePlain target:self.navigationController action:@selector(ue_triggerSystemBackButtonHandle)];
+    }
+    self.navigationItem.leftBarButtonItem = backButtonItem;
+}
+
+@end
+
 @implementation UINavigationController (UINavigationExtensionPrivate)
 
 - (UEEdgeGestureRecognizerDelegate *)ue_gestureDelegate {
