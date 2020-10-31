@@ -124,7 +124,7 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
 
 - (NSArray *)findViewControllerClass:(Class)aClass createViewControllerUsingBlock:(__kindof UIViewController * (^ __nullable)(void))block {
     NSArray<__kindof UIViewController *> *viewControllers = self.viewControllers;
-    if (!aClass || (viewControllers.count <= 2)) return viewControllers;
+    if (!aClass || (viewControllers.count <= 1)) return viewControllers;
     
     NSMutableArray<__kindof UIViewController *> *collections = [NSMutableArray array];
     __kindof UIViewController *lastViewController = self.viewControllers.lastObject;
@@ -132,8 +132,7 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
         [collections addObject:viewController];
         if ([NSStringFromClass([viewController class]) isEqualToString:NSStringFromClass(aClass)]) {
             if ([NSStringFromClass([lastViewController class]) isEqualToString:NSStringFromClass(aClass)]) {
-                // 处理需要跳转的 ViewController 与最后一个 ViewController 的 `Class` 相同，但是最后一个已经显示在界面上的情况
-                if (viewController != lastViewController) {
+                if (viewController != lastViewController) { // 处理最后一个 ViewController 已经在界面显示的情况
                     [collections addObject:lastViewController];
                 }
                 return collections;
