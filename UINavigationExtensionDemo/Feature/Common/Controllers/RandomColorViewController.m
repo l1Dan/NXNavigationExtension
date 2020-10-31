@@ -89,7 +89,7 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
         _randomColorButton.layer.borderWidth = 5.0;
         _randomColorButton.layer.borderColor = self.changeColor.CGColor;
         [_randomColorButton setTitleColor:self.changeColor forState:UIControlStateNormal];
-        [_randomColorButton setTitle:@"Updated" forState:UIControlStateNormal];
+        [_randomColorButton setTitle:@"Update" forState:UIControlStateNormal];
         [_randomColorButton addTarget:self action:@selector(clickRandomColorButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _randomColorButton;

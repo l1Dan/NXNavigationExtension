@@ -13,8 +13,11 @@
 @interface ViewController06_ClickEventHitToBack ()
 
 @property (nonatomic, strong) UIView *tableHeaderView;
+@property (nonatomic, strong) UISegmentedControl *segmentedControl;
+
+@property (nonatomic, strong) NSLayoutConstraint *leftConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *rightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *heightConstraint;
-@property (nonatomic, assign) CGFloat navigationBarHeight;
 
 @end
 
@@ -22,57 +25,76 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
-    CGFloat maxHeight = CGRectGetHeight(self.ue_navigationBar.frame);
-    self.tableView.contentInset = UIEdgeInsetsMake(-maxHeight, 0, 0, 0);
-    self.tableView.tableHeaderView = self.tableHeaderView;
-    self.navigationItem.title = nil;
     
-    self.navigationBarHeight = CGRectGetHeight(self.ue_navigationBar.frame) - CGRectGetHeight(UIApplication.sharedApplication.statusBarFrame);
+    self.navigationItem.title = nil;
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    
+    [self.tableHeaderView addSubview:self.segmentedControl];
+    
+    self.segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.segmentedControl.bottomAnchor constraintEqualToAnchor:self.tableHeaderView.bottomAnchor].active = YES;
+    
+    self.leftConstraint = [self.segmentedControl.leftAnchor constraintEqualToAnchor:self.tableHeaderView.leftAnchor];
+    self.leftConstraint.active = YES;
+    
+    self.rightConstraint = [self.segmentedControl.rightAnchor constraintEqualToAnchor:self.tableHeaderView.rightAnchor];
+    self.rightConstraint.active = YES;
+    
+    self.heightConstraint = [self.segmentedControl.heightAnchor constraintEqualToConstant:0];
+    self.heightConstraint.active = YES;
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+
+    CGRect navigationBarFrame = self.navigationController.navigationBar.frame;
+    CGFloat tableHeaderViewX = navigationBarFrame.origin.x;
+    CGFloat tableHeaderViewY = navigationBarFrame.origin.y;
+    CGFloat tableHeaderViewWidth = navigationBarFrame.size.width;
+    CGFloat tableHeaderViewHeight = tableHeaderViewY + navigationBarFrame.size.height;
+
+    self.tableHeaderView.frame = CGRectMake(tableHeaderViewX, tableHeaderViewY, tableHeaderViewWidth, tableHeaderViewHeight);
+    self.tableView.tableHeaderView = self.tableHeaderView;
+    
+    UIEdgeInsets safeAreaInsets = self.navigationController.navigationBar.safeAreaInsets;
+    self.heightConstraint.constant = navigationBarFrame.size.height;
+    self.leftConstraint.constant = safeAreaInsets.left;
+    self.rightConstraint.constant = -safeAreaInsets.right;
 }
 
 - (BOOL)ue_hidesNavigationBar {
     return YES;
 }
 
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-
-    self.navigationBarHeight = CGRectGetHeight(self.ue_navigationBar.frame) - CGRectGetHeight(UIApplication.sharedApplication.statusBarFrame);
-    self.heightConstraint.constant = self.navigationBarHeight;
+- (BOOL)ue_enableFullScreenInteractivePopGesture {
+    return YES;
 }
 
 #pragma mark - Getter
 
 - (UIView *)tableHeaderView {
     if (!_tableHeaderView) {
-        CGRect rect = self.ue_navigationBar.frame;
-        _tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
+        _tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
         _tableHeaderView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-
-        UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"First", @"Second"]];
-        [segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor customDarkGrayColor]} forState:UIControlStateNormal];
-        [segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor customLightGrayColor]} forState:UIControlStateSelected];
-        segmentedControl.backgroundColor = [UIColor customLightGrayColor];
-        if (@available(iOS 13.0, *)) {
-            segmentedControl.selectedSegmentTintColor = [UIColor customDarkGrayColor];
-        } else {
-            segmentedControl.tintColor = [UIColor customDarkGrayColor];
-        }
-        
-        segmentedControl.selectedSegmentIndex = 0;
-        [segmentedControl addTarget:self action:@selector(changeSegmentedControl:) forControlEvents:UIControlEventValueChanged];
-        [_tableHeaderView addSubview:segmentedControl];
-        
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
-        [segmentedControl.leftAnchor constraintEqualToAnchor:_tableHeaderView.leftAnchor].active = YES;
-        [segmentedControl.bottomAnchor constraintEqualToAnchor:_tableHeaderView.bottomAnchor].active = YES;
-        [segmentedControl.rightAnchor constraintEqualToAnchor:_tableHeaderView.rightAnchor].active = YES;
-        
-        _heightConstraint = [segmentedControl.heightAnchor constraintEqualToConstant:self.navigationBarHeight];
-        _heightConstraint.active = YES;
     }
     return _tableHeaderView;
+}
+
+- (UISegmentedControl *)segmentedControl {
+    if (!_segmentedControl) {
+        _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"First", @"Second"]];
+        _segmentedControl.selectedSegmentIndex = 0;
+        [_segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor customDarkGrayColor]} forState:UIControlStateNormal];
+        [_segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor customLightGrayColor]} forState:UIControlStateSelected];
+        _segmentedControl.backgroundColor = [UIColor customLightGrayColor];
+        [_segmentedControl addTarget:self action:@selector(changeSegmentedControl:) forControlEvents:UIControlEventValueChanged];
+        if (@available(iOS 13.0, *)) {
+            _segmentedControl.selectedSegmentTintColor = [UIColor customDarkGrayColor];
+        } else {
+            _segmentedControl.tintColor = [UIColor customDarkGrayColor];
+        }
+    }
+    return _segmentedControl;
 }
 
 - (void)changeSegmentedControl:(UISegmentedControl *)segmentedControl {
