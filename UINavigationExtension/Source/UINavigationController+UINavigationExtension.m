@@ -90,7 +90,7 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
     UIView *customView = viewController.ue_backButtonCustomView;
     if (customView) {
         backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customView];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ue_triggerSystemBackButtonHandle)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ue_triggerSystemBackButtonHandler)];
         customView.userInteractionEnabled = YES;
         [customView addGestureRecognizer:tap];
     } else {
@@ -98,7 +98,7 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
         if (!backImage) {
             backImage = [UENavigationBarAppearance standardAppearance].backImage;
         }
-        backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage style:UIBarButtonItemStylePlain target:self action:@selector(ue_triggerSystemBackButtonHandle)];
+        backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage style:UIBarButtonItemStylePlain target:self action:@selector(ue_triggerSystemBackButtonHandler)];
     }
     viewController.navigationItem.leftBarButtonItem = backButtonItem;
 }
@@ -122,9 +122,9 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
     }
 }
 
-- (NSArray *)findViewControllerClass:(Class)aClass usingCreateViewControllerHandler:(__kindof UIViewController * (^ __nullable)(void))handler {
+- (NSArray *)findViewControllerClass:(Class)aClass createViewControllerUsingBlock:(__kindof UIViewController * (^ __nullable)(void))block {
     NSArray<__kindof UIViewController *> *viewControllers = self.viewControllers;
-    if (!aClass) return viewControllers;
+    if (!aClass || (viewControllers.count <= 2)) return viewControllers;
     
     NSMutableArray<__kindof UIViewController *> *collections = [NSMutableArray array];
     __kindof UIViewController *lastViewController = self.viewControllers.lastObject;
@@ -132,14 +132,18 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
         [collections addObject:viewController];
         if ([NSStringFromClass([viewController class]) isEqualToString:NSStringFromClass(aClass)]) {
             if ([NSStringFromClass([lastViewController class]) isEqualToString:NSStringFromClass(aClass)]) {
+                // 处理需要跳转的 ViewController 与最后一个 ViewController 的 `Class` 相同，但是最后一个已经显示在界面上的情况
+                if (viewController != lastViewController) {
+                    [collections addObject:lastViewController];
+                }
                 return collections;
             } else {
                 [collections addObject:lastViewController];
                 return collections;
             }
         } else {
-            if (viewController == lastViewController && handler) {
-                __kindof UIViewController *newViewController = handler();
+            if (viewController == lastViewController && block) {
+                __kindof UIViewController *newViewController = block();
                 if (newViewController) {
                     [collections insertObject:newViewController atIndex:viewControllers.count - 1];
                     return collections;
@@ -161,12 +165,13 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
     return panGestureRecognizer;
 }
 
-- (void)ue_triggerSystemBackButtonHandle {
+#pragma mark - Public
+- (void)ue_triggerSystemBackButtonHandler {
     if (self.viewControllers.count <= 1) return;
     
     UIViewController *topViewController = self.topViewController;
-    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willJumpToViewControllerUsingInteractivePopGesture:)]) {
-        if ([(id<UINavigationControllerCustomizable>)topViewController navigationController:self willJumpToViewControllerUsingInteractivePopGesture:NO]) {
+    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willPopViewControllerUsingInteractiveGesture:)]) {
+        if ([(id<UINavigationControllerCustomizable>)topViewController navigationController:self willPopViewControllerUsingInteractiveGesture:NO]) {
             [topViewController.navigationController popViewControllerAnimated:YES];
         }
     } else {
@@ -174,9 +179,8 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
     }
 }
 
-#pragma mark - Public
-- (void)ue_jumpViewControllerClass:(Class)aClass usingCreateViewControllerHandler:(__kindof UIViewController * _Nonnull (^)(void))handler {
-    NSArray<__kindof UIViewController *> *viewControllers = [self findViewControllerClass:aClass usingCreateViewControllerHandler:handler];
+- (void)ue_redirectViewControllerClass:(Class)aClass createViewControllerUsingBlock:(__kindof UIViewController * _Nonnull (^)(void))block {
+    NSArray<__kindof UIViewController *> *viewControllers = [self findViewControllerClass:aClass createViewControllerUsingBlock:block];
     [self setViewControllers:viewControllers animated:YES];
 }
 

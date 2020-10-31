@@ -45,8 +45,8 @@
         return NO;
     }
 
-    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willJumpToViewControllerUsingInteractivePopGesture:)]) {
-        return [(id<UINavigationControllerCustomizable>)topViewController navigationController:self.navigationController willJumpToViewControllerUsingInteractivePopGesture:YES];
+    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willPopViewControllerUsingInteractiveGesture:)]) {
+        return [(id<UINavigationControllerCustomizable>)topViewController navigationController:self.navigationController willPopViewControllerUsingInteractiveGesture:YES];
     }
 
     return YES;
@@ -96,8 +96,8 @@
         return NO;
     }
 
-    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willJumpToViewControllerUsingInteractivePopGesture:)]) {
-        return [(id<UINavigationControllerCustomizable>)topViewController navigationController:self.navigationController willJumpToViewControllerUsingInteractivePopGesture:YES];
+    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willPopViewControllerUsingInteractiveGesture:)]) {
+        return [(id<UINavigationControllerCustomizable>)topViewController navigationController:self.navigationController willPopViewControllerUsingInteractiveGesture:YES];
     }
 
     return YES;
@@ -215,7 +215,7 @@
 
 /// 保证 self.navigationController 不为 nil
 - (void)ue_triggerSystemPopViewController {
-    [self.navigationController ue_triggerSystemBackButtonHandle];
+    [self.navigationController ue_triggerSystemBackButtonHandler];
 }
 
 @end

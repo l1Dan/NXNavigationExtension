@@ -155,21 +155,21 @@
 - (void)changeNavigationBarUserInteractionState {
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
         BOOL hidesNavigationBar = self.ue_hidesNavigationBar;
-        BOOL enableContainerViewFeature = self.ue_enableContainerViewFeature;
+        BOOL containerViewWithoutNavigtionBar = self.ue_containerViewWithoutNavigtionBar;
         if ([self isKindOfClass:[UIPageViewController class]] && !hidesNavigationBar) {
             // FIXED: 处理特殊情况，最后显示的为 UIPageViewController
             hidesNavigationBar = self.parentViewController.ue_hidesNavigationBar;
         }
         
         if (hidesNavigationBar) {
-            enableContainerViewFeature = NO;
+            containerViewWithoutNavigtionBar = NO;
             self.ue_navigationBar.shadowImageView.image = UINavigationExtensionGetImageFromColor([UIColor clearColor]);
             self.ue_navigationBar.backgroundImageView.image = UINavigationExtensionGetImageFromColor([UIColor clearColor]);
             self.ue_navigationBar.backgroundColor = [UIColor clearColor];
             self.navigationController.navigationBar.tintColor = [UIColor clearColor]; // 返回按钮透明
         }
         
-        if (enableContainerViewFeature) { // 添加 subView 到 containerView 时可以不随 NavigationBar 的 alpha 变化
+        if (containerViewWithoutNavigtionBar) { // 添加 subView 到 containerView 时可以不随 NavigationBar 的 alpha 变化
             self.ue_navigationBar.userInteractionEnabled = YES;
             self.ue_navigationBar.containerView.userInteractionEnabled = YES;
             self.navigationController.navigationBar.ue_navigationBarUserInteractionDisabled = YES;
@@ -177,7 +177,7 @@
         } else {
             self.ue_navigationBar.containerView.hidden = hidesNavigationBar;
             self.ue_navigationBar.userInteractionEnabled = !hidesNavigationBar;
-            self.ue_navigationBar.containerView.userInteractionEnabled = enableContainerViewFeature;
+            self.ue_navigationBar.containerView.userInteractionEnabled = containerViewWithoutNavigtionBar;
             self.navigationController.navigationBar.ue_navigationBarUserInteractionDisabled = hidesNavigationBar;
             self.navigationController.navigationBar.userInteractionEnabled = !hidesNavigationBar;
         }
@@ -364,14 +364,14 @@
     return [hidesNavigationBar boolValue];
 }
 
-- (BOOL)ue_enableContainerViewFeature {
-    NSNumber *enableContainerViewFeature = objc_getAssociatedObject(self, _cmd);
-    if (enableContainerViewFeature && [enableContainerViewFeature isKindOfClass:[NSNumber class]]) {
-        return [enableContainerViewFeature boolValue];
+- (BOOL)ue_containerViewWithoutNavigtionBar {
+    NSNumber *containerViewWithoutNavigtionBar = objc_getAssociatedObject(self, _cmd);
+    if (containerViewWithoutNavigtionBar && [containerViewWithoutNavigtionBar isKindOfClass:[NSNumber class]]) {
+        return [containerViewWithoutNavigtionBar boolValue];
     }
-    enableContainerViewFeature = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, enableContainerViewFeature, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [enableContainerViewFeature boolValue];
+    containerViewWithoutNavigtionBar = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, containerViewWithoutNavigtionBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [containerViewWithoutNavigtionBar boolValue];
 }
 
 - (CGFloat)ue_interactivePopMaxAllowedDistanceToLeftEdge {
