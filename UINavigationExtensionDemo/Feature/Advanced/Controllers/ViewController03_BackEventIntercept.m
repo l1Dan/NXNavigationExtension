@@ -84,7 +84,7 @@
 
 #pragma mark - UINavigationControllerCustomizable
 
-- (BOOL)navigationController:(__kindof UINavigationController *)navigationController willJumpToViewControllerUsingInteractivePopGesture:(BOOL)usingGesture {
+- (BOOL)navigationController:(__kindof UINavigationController *)navigationController willPopViewControllerUsingInteractiveGesture:(BOOL)usingGesture {
     if (self.currentItemType == EventInterceptItemTypeBoth) {
         [self showAlertController];
         return NO;

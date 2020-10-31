@@ -1,5 +1,5 @@
 //
-//  ViewController04_JumpToViewController.h
+//  ViewController04_RedirectViewController.h
 //  UINavigationExtensionDemo
 //
 //  Created by Leo Lee on 2020/10/27.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ViewController04_JumpToViewController : BaseViewController
+@interface ViewController04_RedirectViewController : BaseViewController
 
 @end
 

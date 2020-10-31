@@ -24,7 +24,7 @@
 #import "ViewController01_DisablePopGesture.h"
 #import "ViewController02_FullPopGesture.h"
 #import "ViewController03_BackEventIntercept.h"
-#import "ViewController04_JumpToViewController.h"
+#import "ViewController04_RedirectViewController.h"
 #import "ViewController05_Custom.h"
 #import "ViewController06_ClickEventHitToBack.h"
 #import "ViewController07_ScrollChangeNavigationBar.h"
@@ -100,8 +100,8 @@
             return [[ViewController02_FullPopGesture alloc] init];
         case TableViewSectionItemTypeNavigationBarBackEventIntercept:
             return [[ViewController03_BackEventIntercept alloc] init];
-        case TableViewSectionItemTypeNavigationBarJumpToViewController:
-            return [[ViewController04_JumpToViewController alloc] init];
+        case TableViewSectionItemTypeNavigationBarRedirectViewController:
+            return [[ViewController04_RedirectViewController alloc] init];
         case TableViewSectionItemTypeNavigationBarCustom:
             return [[ViewController05_Custom alloc] init];
         case TableViewSectionItemTypeNavigationBarClickEventHitToBack:

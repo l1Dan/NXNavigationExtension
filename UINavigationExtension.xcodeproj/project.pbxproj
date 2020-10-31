@@ -30,12 +30,12 @@
 		D61CCC00251A13F100A91580 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCBFF251A13F100A91580 /* AppDelegate.m */; };
 		D61CCC11251A13F400A91580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCC10251A13F400A91580 /* main.m */; };
 		D6469AE025449F4D00C583FF /* UIColor+RandomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D6469ADF25449F4D00C583FF /* UIColor+RandomColor.m */; };
-		D650624F254C280700597B05 /* JumpViewControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D650624E254C280700597B05 /* JumpViewControllerModel.m */; };
+		D650624F254C280700597B05 /* RedirectViewControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D650624E254C280700597B05 /* RedirectViewControllerModel.m */; };
 		D6506254254C312200597B05 /* UITableViewCell+Enabled.m in Sources */ = {isa = PBXBuildFile; fileRef = D6506253254C312200597B05 /* UITableViewCell+Enabled.m */; };
 		D65FA154254A933900DA1EFE /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D65FA153254A933900DA1EFE /* BaseNavigationController.m */; };
 		D65FA15C254A98C600DA1EFE /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D65FA15B254A98C600DA1EFE /* BaseViewController.m */; };
 		D6627C002547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D6627BFF2547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.m */; };
-		D6627C0B2547486200DB2F55 /* ViewController04_JumpToViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6627C0A2547486200DB2F55 /* ViewController04_JumpToViewController.m */; };
+		D6627C0B2547486200DB2F55 /* ViewController04_RedirectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6627C0A2547486200DB2F55 /* ViewController04_RedirectViewController.m */; };
 		D6627C10254748C900DB2F55 /* ViewController08_WebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6627C0F254748C900DB2F55 /* ViewController08_WebView.m */; };
 		D67BADC5254B1825008822D6 /* ViewController02_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = D67BADC4254B1825008822D6 /* ViewController02_Test.m */; };
 		D67BADC9254B1838008822D6 /* ViewController03_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = D67BADC8254B1838008822D6 /* ViewController03_Test.m */; };
@@ -137,8 +137,8 @@
 		D61CCC10251A13F400A91580 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D6469ADE25449F4D00C583FF /* UIColor+RandomColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+RandomColor.h"; sourceTree = "<group>"; };
 		D6469ADF25449F4D00C583FF /* UIColor+RandomColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RandomColor.m"; sourceTree = "<group>"; };
-		D650624D254C280700597B05 /* JumpViewControllerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JumpViewControllerModel.h; sourceTree = "<group>"; };
-		D650624E254C280700597B05 /* JumpViewControllerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JumpViewControllerModel.m; sourceTree = "<group>"; };
+		D650624D254C280700597B05 /* RedirectViewControllerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedirectViewControllerModel.h; sourceTree = "<group>"; };
+		D650624E254C280700597B05 /* RedirectViewControllerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedirectViewControllerModel.m; sourceTree = "<group>"; };
 		D6506252254C312200597B05 /* UITableViewCell+Enabled.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Enabled.h"; sourceTree = "<group>"; };
 		D6506253254C312200597B05 /* UITableViewCell+Enabled.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Enabled.m"; sourceTree = "<group>"; };
 		D65FA152254A933900DA1EFE /* BaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
@@ -147,8 +147,8 @@
 		D65FA15B254A98C600DA1EFE /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		D6627BFE2547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController07_ScrollChangeNavigationBar.h; sourceTree = "<group>"; };
 		D6627BFF2547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController07_ScrollChangeNavigationBar.m; sourceTree = "<group>"; };
-		D6627C092547486200DB2F55 /* ViewController04_JumpToViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController04_JumpToViewController.h; sourceTree = "<group>"; };
-		D6627C0A2547486200DB2F55 /* ViewController04_JumpToViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController04_JumpToViewController.m; sourceTree = "<group>"; };
+		D6627C092547486200DB2F55 /* ViewController04_RedirectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController04_RedirectViewController.h; sourceTree = "<group>"; };
+		D6627C0A2547486200DB2F55 /* ViewController04_RedirectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController04_RedirectViewController.m; sourceTree = "<group>"; };
 		D6627C0E254748C900DB2F55 /* ViewController08_WebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController08_WebView.h; sourceTree = "<group>"; };
 		D6627C0F254748C900DB2F55 /* ViewController08_WebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController08_WebView.m; sourceTree = "<group>"; };
 		D67BADC3254B1825008822D6 /* ViewController02_Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController02_Test.h; sourceTree = "<group>"; };
@@ -217,8 +217,8 @@
 			children = (
 				D69BDD74254B24B100599E27 /* EventInterceptModel.h */,
 				D69BDD75254B24B100599E27 /* EventInterceptModel.m */,
-				D650624D254C280700597B05 /* JumpViewControllerModel.h */,
-				D650624E254C280700597B05 /* JumpViewControllerModel.m */,
+				D650624D254C280700597B05 /* RedirectViewControllerModel.h */,
+				D650624E254C280700597B05 /* RedirectViewControllerModel.m */,
 				6232857730E562322EFE5A1F /* TableViewSection.h */,
 				623280A17984EA00522BA09E /* TableViewSection.m */,
 			);
@@ -408,8 +408,8 @@
 				D69F7ACA2545F0730097BB28 /* ViewController02_FullPopGesture.m */,
 				D69F7AD22545F3940097BB28 /* ViewController03_BackEventIntercept.h */,
 				D69F7AD32545F3940097BB28 /* ViewController03_BackEventIntercept.m */,
-				D6627C092547486200DB2F55 /* ViewController04_JumpToViewController.h */,
-				D6627C0A2547486200DB2F55 /* ViewController04_JumpToViewController.m */,
+				D6627C092547486200DB2F55 /* ViewController04_RedirectViewController.h */,
+				D6627C0A2547486200DB2F55 /* ViewController04_RedirectViewController.m */,
 				D69F7AD62545FB850097BB28 /* ViewController05_Custom.h */,
 				D69F7AD72545FB850097BB28 /* ViewController05_Custom.m */,
 				D69F7AFB25460C0B0097BB28 /* ViewController06_ClickEventHitToBack.h */,
@@ -580,7 +580,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D69F7AC72545EFDD0097BB28 /* ViewController01_DisablePopGesture.m in Sources */,
-				D6627C0B2547486200DB2F55 /* ViewController04_JumpToViewController.m in Sources */,
+				D6627C0B2547486200DB2F55 /* ViewController04_RedirectViewController.m in Sources */,
 				D6627C10254748C900DB2F55 /* ViewController08_WebView.m in Sources */,
 				D6469AE025449F4D00C583FF /* UIColor+RandomColor.m in Sources */,
 				D65FA154254A933900DA1EFE /* BaseNavigationController.m in Sources */,
@@ -612,7 +612,7 @@
 				623281E242A278B7AB8F7055 /* ViewController09_FullScreen.m in Sources */,
 				6232837E6D5C74E81D1F7144 /* ViewController10_ScrollView.m in Sources */,
 				62328F02808BD9C6F127B810 /* ViewController11_ScrollViewWithFullScreen.m in Sources */,
-				D650624F254C280700597B05 /* JumpViewControllerModel.m in Sources */,
+				D650624F254C280700597B05 /* RedirectViewControllerModel.m in Sources */,
 				D61633D8254C4594007584E4 /* RandomColorViewController.m in Sources */,
 				6232871302FCFE8BD3B7811D /* BaseTableViewController.m in Sources */,
 				623284051B86593DC823CF2F /* DashboardTabBarController.m in Sources */,

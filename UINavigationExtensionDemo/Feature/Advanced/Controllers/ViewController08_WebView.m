@@ -96,7 +96,7 @@
 #pragma mark - Action
 
 - (void)ue_triggerSystemBackButtonHandler:(UIButton *)button {
-    [self.navigationController ue_triggerSystemBackButtonHandle];
+    [self.navigationController ue_triggerSystemBackButtonHandler];
 }
 
 - (void)clickCloseButton:(UIButton *)button {
@@ -169,7 +169,7 @@
 
 #pragma mark - UINavigationControllerCustomizable
 
-- (BOOL)navigationController:(__kindof UINavigationController *)navigationController willJumpToViewControllerUsingInteractivePopGesture:(BOOL)usingGesture {
+- (BOOL)navigationController:(__kindof UINavigationController *)navigationController willPopViewControllerUsingInteractiveGesture:(BOOL)usingGesture {
     if (!usingGesture && self.webView.canGoBack) {
         [self.webView goBack];
         return NO;

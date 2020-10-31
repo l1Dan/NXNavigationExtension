@@ -89,7 +89,7 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
             cell.contentView.backgroundColor = [(BaseViewController *)viewController randomColor];
         }
     } else {
-        cell.textLabel.text = @"创建一个新的 UIViewController";
+        cell.textLabel.text = @"创建新的 UIViewController 实例对象";
         cell.textLabel.textColor = [UIColor blueColor];
     }
     
@@ -116,7 +116,7 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"选择一个控制器跳转";
+    return @"选择需要跳转的视图控制器类型";
 }
 
 #pragma mark - Public

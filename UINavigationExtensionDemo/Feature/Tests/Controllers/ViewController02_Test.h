@@ -5,11 +5,11 @@
 //  Created by Leo Lee on 2020/10/29.
 //
 
-#import "ViewController04_JumpToViewController.h"
+#import "ViewController04_RedirectViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ViewController02_Test : ViewController04_JumpToViewController
+@interface ViewController02_Test : ViewController04_RedirectViewController
 
 @end
 

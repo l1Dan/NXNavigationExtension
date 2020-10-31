@@ -26,7 +26,7 @@ typedef NS_ENUM(NSUInteger, TableViewSectionItemType) {
     TableViewSectionItemTypeNavigationBarDisablePopGesture, // 禁用手势滑动
     TableViewSectionItemTypeNavigationBarFullPopGesture, // 使用全屏滑动手势
     TableViewSectionItemTypeNavigationBarBackEventIntercept, // 导航栏返回事件拦截
-    TableViewSectionItemTypeNavigationBarJumpToViewController, // 自定义跳转到目标控制器
+    TableViewSectionItemTypeNavigationBarRedirectViewController, // 重定向任一视图控制器跳转
     TableViewSectionItemTypeNavigationBarCustom, // 完全自定义导航栏
     TableViewSectionItemTypeNavigationBarClickEventHitToBack, // 导航栏点击事件穿透到底部视图
     TableViewSectionItemTypeNavigationBarScrollChangeNavigationBar, // 滑动改变导航栏背景

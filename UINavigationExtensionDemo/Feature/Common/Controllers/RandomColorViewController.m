@@ -14,7 +14,7 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
 
 @interface RandomColorViewController ()
 
-@property (nonatomic, strong) UIColor *changeColor;
+@property (nonatomic, strong) UIColor *currentRandomColor;
 @property (nonatomic, strong) UIButton *randomColorButton;
 
 @end
@@ -23,7 +23,7 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        _changeColor = [self randomColor];
+        _currentRandomColor = [UIColor randomColor];
     }
     return self;
 }
@@ -43,7 +43,7 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
 }
 
 - (UIColor *)randomColor {
-    return [UIColor randomColor];
+    return self.currentRandomColor;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -55,7 +55,7 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
 }
 
 - (UIColor *)ue_navigationBarBackgroundColor {
-    return self.changeColor ?: [UIColor customLightGrayColor];
+    return self.currentRandomColor ?: [UIColor customLightGrayColor];
 }
 
 - (UIColor *)ue_barTintColor {
@@ -71,9 +71,9 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
 - (void)clickRandomColorButton:(UIButton *)button {
     button.tag += 1;
     
-    self.changeColor = [self randomColor];
-    self.randomColorButton.layer.borderColor = self.changeColor.CGColor;
-    [self.randomColorButton setTitleColor:self.changeColor forState:UIControlStateNormal];
+    self.currentRandomColor = [UIColor randomColor];
+    self.randomColorButton.layer.borderColor = self.currentRandomColor.CGColor;
+    [self.randomColorButton setTitleColor:self.currentRandomColor forState:UIControlStateNormal];
     
     [self ue_setNeedsNavigationBarAppearanceUpdate];
     [self setNeedsStatusBarAppearanceUpdate];
@@ -87,8 +87,8 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
         _randomColorButton.backgroundColor = [UIColor clearColor];
         _randomColorButton.layer.cornerRadius = RandomColorButtonWidthAndHeight * 0.5;
         _randomColorButton.layer.borderWidth = 5.0;
-        _randomColorButton.layer.borderColor = self.changeColor.CGColor;
-        [_randomColorButton setTitleColor:self.changeColor forState:UIControlStateNormal];
+        _randomColorButton.layer.borderColor = self.currentRandomColor.CGColor;
+        [_randomColorButton setTitleColor:self.currentRandomColor forState:UIControlStateNormal];
         [_randomColorButton setTitle:@"Update" forState:UIControlStateNormal];
         [_randomColorButton addTarget:self action:@selector(clickRandomColorButton:) forControlEvents:UIControlEventTouchUpInside];
     }

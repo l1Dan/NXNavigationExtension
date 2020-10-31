@@ -81,7 +81,7 @@
 }
 
 // 点击导航栏控件事件可以由 ContainerView 响应
-- (BOOL)ue_enableContainerViewFeature {
+- (BOOL)ue_containerViewWithoutNavigtionBar {
     return YES;
 }
 
@@ -108,7 +108,7 @@
         _backButton = [[UIButton alloc] init];
         _backButton.backgroundColor = [UIColor greenColor];
         [_backButton setImage:[UIImage imageNamed:@"NavigationBarBack"] forState:UIControlStateNormal];
-        [_backButton addTarget:self.navigationController action:@selector(ue_triggerSystemBackButtonHandle) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton addTarget:self.navigationController action:@selector(ue_triggerSystemBackButtonHandler) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backButton;
 }

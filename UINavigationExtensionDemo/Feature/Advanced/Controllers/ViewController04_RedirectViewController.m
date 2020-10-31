@@ -1,5 +1,5 @@
 //
-//  ViewController04_JumpToViewController.m
+//  ViewController04_RedirectViewController.m
 //  UINavigationExtensionDemo
 //
 //  Created by Leo Lee on 2020/10/27.
@@ -7,32 +7,32 @@
 
 #import <UINavigationExtension/UINavigationExtension.h>
 
-#import "ViewController04_JumpToViewController.h"
+#import "ViewController04_RedirectViewController.h"
 #import "ViewController01_Test.h"
 #import "ViewController02_Test.h"
 #import "ViewController03_Test.h"
 #import "ViewController04_Test.h"
 #import "ViewController05_Test.h"
 #import "HierarchyViewController.h"
-#import "JumpViewControllerModel.h"
+#import "RedirectViewControllerModel.h"
 
 #import "UITableViewCell+Enabled.h"
 
-@interface ViewController04_JumpToViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ViewController04_RedirectViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray<JumpViewControllerModel *> *allModels;
+@property (nonatomic, strong) NSArray<RedirectViewControllerModel *> *allModels;
 
 @end
 
-@implementation ViewController04_JumpToViewController
+@implementation ViewController04_RedirectViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    if (![NSStringFromClass([self class]) isEqualToString:NSStringFromClass([ViewController04_JumpToViewController class])]) {
+    if (![NSStringFromClass([self class]) isEqualToString:NSStringFromClass([ViewController04_RedirectViewController class])]) {
         self.navigationItem.title = NSStringFromClass([self class]);
     }
     
@@ -75,16 +75,16 @@
     return _tableView;
 }
 
-- (NSArray<JumpViewControllerModel *> *)allModels {
+- (NSArray<RedirectViewControllerModel *> *)allModels {
     if (!_allModels) {
         _allModels = @[
-            [JumpViewControllerModel modelWithTitle:NSStringFromClass([ViewController01_Test class]) type:JumpViewControllerTypeTest1],
-            [JumpViewControllerModel modelWithTitle:NSStringFromClass([ViewController02_Test class]) type:JumpViewControllerTypeTest2],
-            [JumpViewControllerModel modelWithTitle:NSStringFromClass([ViewController03_Test class]) type:JumpViewControllerTypeTest3],
-            [JumpViewControllerModel modelWithTitle:NSStringFromClass([ViewController04_Test class]) type:JumpViewControllerTypeTest4],
-            [JumpViewControllerModel modelWithTitle:NSStringFromClass([ViewController05_Test class]) type:JumpViewControllerTypeTest5],
-            [JumpViewControllerModel modelWithTitle:@"选择需要跳转的目标控制器" type:JumpViewControllerTypeChoose],
-            [JumpViewControllerModel modelWithTitle:@"跳转到目标控制器" type:JumpViewControllerTypeJump],
+            [RedirectViewControllerModel modelWithTitle:NSStringFromClass([ViewController01_Test class]) type:RedirectViewControllerTypeTest1],
+            [RedirectViewControllerModel modelWithTitle:NSStringFromClass([ViewController02_Test class]) type:RedirectViewControllerTypeTest2],
+            [RedirectViewControllerModel modelWithTitle:NSStringFromClass([ViewController03_Test class]) type:RedirectViewControllerTypeTest3],
+            [RedirectViewControllerModel modelWithTitle:NSStringFromClass([ViewController04_Test class]) type:RedirectViewControllerTypeTest4],
+            [RedirectViewControllerModel modelWithTitle:NSStringFromClass([ViewController05_Test class]) type:RedirectViewControllerTypeTest5],
+            [RedirectViewControllerModel modelWithTitle:@"选择需要跳转的控制器类型" type:RedirectViewControllerTypeChoose],
+            [RedirectViewControllerModel modelWithTitle:@"⭐️重定向到：" type:RedirectViewControllerTypeJump],
         ];
     }
     return _allModels;
@@ -93,8 +93,8 @@
 #pragma mark - Private
 
 - (void)setJumpViewControllerCellClickEnabled:(BOOL)enabled {
-    for (JumpViewControllerModel *model in self.allModels) {
-        if (model.type == JumpViewControllerTypeJump) {
+    for (RedirectViewControllerModel *model in self.allModels) {
+        if (model.type == RedirectViewControllerTypeJump) {
             model.clickEnabled = YES;
         } else {
             model.clickEnabled = enabled;
@@ -111,8 +111,7 @@
         if (!selectedViewController || ![selectedViewController isKindOfClass:[UIViewController class]]) return;
         // 设置 Cell 不能点击
         [weakSelf setJumpViewControllerCellClickEnabled:NO];
-        [weakSelf.navigationController ue_jumpViewControllerClass:[selectedViewController class]
-                                 usingCreateViewControllerHandler:^__kindof UIViewController * _Nonnull {
+        [weakSelf.navigationController ue_redirectViewControllerClass:[selectedViewController class] createViewControllerUsingBlock:^__kindof UIViewController * _Nonnull{
             UIViewController *vc = [[[selectedViewController class] alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             return vc;
@@ -132,14 +131,23 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
     
-    JumpViewControllerModel *model = self.allModels[indexPath.row];
+    RedirectViewControllerModel *model = self.allModels[indexPath.row];
     [cell setCellClickEnabled:model.clickEnabled];
     
-    if (model.type == JumpViewControllerTypeChoose || model.type == JumpViewControllerTypeJump) {
+    cell.contentView.backgroundColor = nil;
+    if (model.type == RedirectViewControllerTypeChoose) {
         cell.textLabel.text = model.title;
         cell.accessoryType = UITableViewCellAccessoryNone;
+    } else if (model.type == RedirectViewControllerTypeJump) {
+        NSArray<__kindof UIViewController *> *viewControllers = self.navigationController.viewControllers;
+        __kindof UIViewController *redirectToViewController = viewControllers[viewControllers.count - 2];
+        if ([redirectToViewController isKindOfClass:[BaseViewController class]]) {
+            cell.contentView.backgroundColor = [(BaseViewController *)redirectToViewController randomColor];
+        }
+        cell.textLabel.text = [NSString stringWithFormat:@"%@%@", model.title, NSStringFromClass([redirectToViewController class])];
+        cell.accessoryType = UITableViewCellAccessoryNone;
     } else {
-        cell.textLabel.text = [NSString stringWithFormat:@"点击跳转到: %@", model.title];
+        cell.textLabel.text = [NSString stringWithFormat:@"点击跳转: %@", model.title];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
@@ -149,22 +157,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    JumpViewControllerModel *model = self.allModels[indexPath.row];
-    if (model.type == JumpViewControllerTypeChoose) {
+    RedirectViewControllerModel *model = self.allModels[indexPath.row];
+    if (model.type == RedirectViewControllerTypeChoose) {
         [self showChooseJumpViewController];
-    } else if (model.type == JumpViewControllerTypeJump) {
+    } else if (model.type == RedirectViewControllerTypeJump) {
         // 设置 Cell 不能点击
         [self setJumpViewControllerCellClickEnabled:YES];
         // 如果 selectedViewController ！= nil 就会跳转到对应的视图控制器，反之则返回上一个控制器
         [self.navigationController popViewControllerAnimated:YES];
     } else {
-        ViewController04_JumpToViewController *viewController = [[NSClassFromString(model.title) alloc] init];
+        ViewController04_RedirectViewController *viewController = [[NSClassFromString(model.title) alloc] init];
         [self.navigationController pushViewController:viewController animated:YES];
     }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    return @"功能💉:\n1.自定义跳转到指定目标控制器。\n2.跳转的目标控制器如果不存在则创建一个新的控制器。\n3.目标控制器选择好之后可以点击返回、手势返回和点击按钮跳转 3 种方式都可以回到目标控制器。\n\n注意⚠️:\n1.控制器查找规则是从栈（ViewControllers）前面往后面查找的，只会判断是否为同一个“类”，而非同一个“实例对象”，查找到则返回对应的“类”，查找不到则创建一个“新的控制器对象实例”。\n2.在不同的导航栏控制器之间不能跳转，只有在同一个导航栏控制器中跳转功能才会生效。";
+    return @"功能💉:\n1.自定义跳转到指定控制器类型。\n2.如果跳转的控制器类型不存在则会创建一个新的控制器对象。\n3.目标控制器类型选择好之后可以点击“返回按钮返回”、“手势返回”和点击“⭐️开始跳转按钮”，这 3 种方式都可以回到选择类型的所对应的查找到的第一个视图控制器的实例中。\n\n注意⚠️:\n1.控制器类型的查找规则是从栈（ViewControllers）前面往后面查找的，只会判断是否为同一个“类”，而非同一个“实例对象”。查找到则返回对应的“类”，查找不到则创建一个“新的控制器对象实例”。\n2.在不同的导航栏控制器之间不能跳转，只有在同一个导航栏控制器中跳转功能才会生效。";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

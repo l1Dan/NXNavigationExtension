@@ -82,7 +82,7 @@
     return [UIColor clearColor];
 }
 
-- (BOOL)ue_enableContainerViewFeature {
+- (BOOL)ue_containerViewWithoutNavigtionBar {
     return YES;
 }
 
@@ -135,7 +135,7 @@
 - (void)fakeNavigationBar:(FakeNavigationBar *)navigationBar didClickNavigationItemwithItemType:(FakeNavigationItemType)itemType {
     switch (itemType) {
         case FakeNavigationItemTypeBackButton: {
-            [self.navigationController ue_triggerSystemBackButtonHandle];
+            [self.navigationController ue_triggerSystemBackButtonHandler];
         } break;
         case FakeNavigationItemTypeAddButton: {
             UINavigationController *controller = [[[self.navigationController class] alloc] initWithRootViewController:[[ViewController12_Modal alloc] init]];
