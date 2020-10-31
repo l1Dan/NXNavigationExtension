@@ -2,7 +2,7 @@
 //  ViewController07_ScrollChangeNavigationBar.m
 //  UINavigationExtensionDemo
 //
-//  Created by lidan on 2020/10/27.
+//  Created by Leo Lee on 2020/10/27.
 //
 
 #import <UINavigationExtension/UINavigationExtension.h>
