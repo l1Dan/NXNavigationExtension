@@ -213,8 +213,9 @@
     self.navigationItem.leftBarButtonItem = backButtonItem;
 }
 
+/// 保证 self.navigationController 不为 nil
 - (void)ue_triggerSystemPopViewController {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController ue_triggerSystemBackButtonHandle];
 }
 
 @end
