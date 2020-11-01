@@ -4,15 +4,15 @@
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/UINavigationExtension.svg?style=flat)](https://img.shields.io/cocoapods/v/UINavigationExtension.svg) ![Language](https://img.shields.io/github/languages/top/l1dan/UINavigationExtension.svg?style=flat) [![MIT Licence](https://img.shields.io/github/license/l1dan/UINavigationExtension.svg?style=flat)](https://opensource.org/licenses/mit-license.php) [![Platform](https://img.shields.io/cocoapods/p/UINavigationExtension.svg?style=flat)](https://github.com/l1Dan/UINavigationExtension/blob/master/README.md) [![GitHub last commit](https://img.shields.io/github/last-commit/l1Dan/UINavigationExtension.svg?style=flat)](https://img.shields.io/github/last-commit/l1Dan/UINavigationExtension) 
 
-UINavigationExtension 是为 iOS 应用设计的一个简单、易用的导航栏处理框架。框架对现有代码入侵非常小，只需要简单的几个 API 调用就可以满足大部分的应用场景。
+UINavigationExtension 是为 iOS 应用设计的一个简单、易用的导航栏处理框架。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。
 
 ## 预览
 
 ![Preview](https://raw.githubusercontent.com/l1Dan/UINavigationExtension/master/Snapshots/Preview.png)
 
-## 开始
+## 开始使用
 
-[下载 UINavigationExtension](https://github.com/l1Dan/UINavigationExtension/archive/master.zip) 里面包含示例代码。
+[下载 UINavigationExtension](https://github.com/l1Dan/UINavigationExtension/archive/master.zip) 示例程序代码。
 
 ## 使用 CocoaPods 安装
 
@@ -20,6 +20,7 @@ UINavigationExtension 是为 iOS 应用设计的一个简单、易用的导航�
 
 ```ruby
 pod 'UINavigationExtension'
+
 # 或者
 pod 'UINavigationExtension', ~> 2.3.4
 ```
@@ -56,7 +57,7 @@ pod 'UINavigationExtension', ~> 2.3.4
 - `更新导航栏样式`
 
 ## 使用
-所有对导航栏外观的修改都是基于视图控制器 `UIViewController`，而不是基于导航控制器 `UINavigationController`，这种设计逻辑更加符合大部分应用场景。
+所有对导航栏外观的修改都是基于视图控制器 `UIViewController` 修改的，而不是基于导航控制器 `UINavigationController` 修改，这种设计逻辑更加符合实际应用场景。也就是自己所在的导航栏的外观自己管理就好。
 
 1. 导入头文件 `#import <UINavigationExtension/UINavigationExtension.h>`
 2. 使用之前需要先注册需要修改的导航控制器，以 `FeatureNavigationController` 为例：
@@ -65,16 +66,16 @@ pod 'UINavigationExtension', ~> 2.3.4
 ```
 
 **注意**：
-- 只有注册的导航栏才会生效，衍生类（子类）都不会生效，这样可以有效避免污染其他框架的导航控制器，保持谁使用谁注册的原则。
-- 如果注册为 `UINavigationController` 则所有使用 `UINavigationController` 的导航栏都会生效，同样子类也不会生效。
-- 不要使用系统导航栏隐藏显示方法
-- 不要使用系统导航栏修改透明度
-- 不要使用系统导航栏或导航控制器 `appearance` API 修改
-- 不要使用全局 `edgesForExtendedLayout` 修改
-- 不要使用 `<UIGestureRecognizerDelegate>` 禁用返回
-- 一句话“不要直接操、修改作导航栏或者导航控制器”，现在全都可以交给 `UINavigationExtension` 处理
+- 使用之前需要先注册导航控制器，注册之后对导航栏的修改才会生效，也仅限于修改本类所管理的视图控制器，对于子类导航控制器所管理的视图控制器是不会生效的，这样可以有效避免框架污染到其他的导航控制器，保持“谁使用，谁注册”的原则。
+- 不要直接注册 `UINavigationController`，这个影响范围比较太广，建议创建一个 `UINavigationController` 的子类，对这个类进行注册。
+- 不要使用系统导航栏隐藏、显示方法, `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:`。
+- 不要使用系统导航栏修改透明度。
+- 不要使用系统导航栏或导航控制器 `appearance` 相关属性修改。
+- 不要使用全局 `edgesForExtendedLayout` 修改。
+- 不要使用 `<UIGestureRecognizerDelegate>` 相关方法禁用手势返回。
+- 一句话“不要直接操作导航栏或者导航控制器，把这些都交给 `UINavigationExtension` 处理吧“。
 
-建议：除非你非常明白修改全局性东西的后果，否则不要修改。
+建议：除非你非常明白修改全局性东西的后果，否则不要修改，这么做的原因就是为了减少走一些弯路！
 
 ## 基本功能
 ### 修改返回按钮箭头颜色
@@ -286,6 +287,17 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 
 ```objective-c
 [self ue_setNeedsNavigationBarAppearanceUpdate];
+```
+
+如果**状态栏**样式没有发生变化，请检查是否需要调用方法 `[self setNeedsStatusBarAppearanceUpdate]`，或者在 `UINavigationController` 的子类中设置如下代码：
+```objective-c
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    return self.topViewController;
+}
+
+- (UIViewController *)childViewControllerForStatusBarHidden {
+    return self.topViewController;
+}
 ```
 
 ## 协议
