@@ -7,11 +7,7 @@
 UINavigationExtension 是为 iOS 应用设计的一个简单、易用的导航栏处理框架。框架代码入侵非常小，只需要简单的几个 API 调用就可以满足大部分的应用场景。
 
 ## 预览
-![01](https://raw.githubusercontent.com/l1Dan/UINavigationExtension/master/Snapshots/01.png)
-![02](https://raw.githubusercontent.com/l1Dan/UINavigationExtension/master/Snapshots/02.png)
-![03](https://raw.githubusercontent.com/l1Dan/UINavigationExtension/master/Snapshots/03.png)
-![04](https://raw.githubusercontent.com/l1Dan/UINavigationExtension/master/Snapshots/04.png)
-![05](https://raw.githubusercontent.com/l1Dan/UINavigationExtension/master/Snapshots/05.png)
+![Preview](https://raw.githubusercontent.com/l1Dan/UINavigationExtension/master/Snapshots/Preview.png)
 
 ## 开始
 
