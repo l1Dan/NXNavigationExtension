@@ -39,12 +39,12 @@
 
 + (NSArray<TableViewSection *> *)makeAllSections {
     NSMutableArray *items1 = [NSMutableArray arrayWithObjects:
-                              [TableViewSectionItem itemWithTitle:@"导航栏背景色" itemType:TableViewSectionItemTypeNavigationBarBackgroundColor],
-                              [TableViewSectionItem itemWithTitle:@"导航栏背景图片" itemType:TableViewSectionItemTypeNavigationBarBackgroundImage],
-                              [TableViewSectionItem itemWithTitle:@"导航栏透明" itemType:TableViewSectionItemTypeNavigationBarTransparent],
-                              [TableViewSectionItem itemWithTitle:@"导航栏半透明" itemType:TableViewSectionItemTypeNavigationBarTranslucent],
-                              [TableViewSectionItem itemWithTitle:@"导航栏底部线条颜色" itemType:TableViewSectionItemTypeNavigationBarShadowColor],
-                              [TableViewSectionItem itemWithTitle:@"导航栏底部线条图片" itemType:TableViewSectionItemTypeNavigationBarShadowImage],
+                              [TableViewSectionItem itemWithTitle:@"修改导航栏背景颜色" itemType:TableViewSectionItemTypeNavigationBarBackgroundColor],
+                              [TableViewSectionItem itemWithTitle:@"修改导航栏背景图片" itemType:TableViewSectionItemTypeNavigationBarBackgroundImage],
+                              [TableViewSectionItem itemWithTitle:@"设置导航栏透明" itemType:TableViewSectionItemTypeNavigationBarTransparent],
+                              [TableViewSectionItem itemWithTitle:@"设置导航栏半透明" itemType:TableViewSectionItemTypeNavigationBarTranslucent],
+                              [TableViewSectionItem itemWithTitle:@"设置导航栏底部线条颜色" itemType:TableViewSectionItemTypeNavigationBarShadowColor],
+                              [TableViewSectionItem itemWithTitle:@"设置导航栏底部线条图片" itemType:TableViewSectionItemTypeNavigationBarShadowImage],
                               [TableViewSectionItem itemWithTitle:@"自定义返回按钮图片" itemType:TableViewSectionItemTypeNavigationBarCustomBackButtonImage],
                               [TableViewSectionItem itemWithTitle:@"自定义返回按钮" itemType:TableViewSectionItemTypeNavigationBarCustomBackButton],
                               [TableViewSectionItem itemWithTitle:@"全屏背景色" itemType:TableViewSectionItemTypeNavigationBarFullScreen],

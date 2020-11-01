@@ -10,12 +10,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, TableViewSectionItemType) {
-    TableViewSectionItemTypeNavigationBarBackgroundColor, // 导航栏背景颜色
-    TableViewSectionItemTypeNavigationBarBackgroundImage, // 导航栏背景图片
-    TableViewSectionItemTypeNavigationBarTransparent, // 导航栏透明
-    TableViewSectionItemTypeNavigationBarTranslucent, // 导航栏半透明
-    TableViewSectionItemTypeNavigationBarShadowColor, // 导航栏底部线条颜色
-    TableViewSectionItemTypeNavigationBarShadowImage, // 导航栏底部线条图片
+    TableViewSectionItemTypeNavigationBarBackgroundColor, // 修改导航栏背景颜色
+    TableViewSectionItemTypeNavigationBarBackgroundImage, // 修改导航栏背景图片
+    TableViewSectionItemTypeNavigationBarTransparent, // 设置导航栏透明
+    TableViewSectionItemTypeNavigationBarTranslucent, // 设置导航栏半透明
+    TableViewSectionItemTypeNavigationBarShadowColor, // 修改导航栏底部线条颜色
+    TableViewSectionItemTypeNavigationBarShadowImage, // 修改导航栏底部线条图片
     TableViewSectionItemTypeNavigationBarCustomBackButtonImage, // 自定义返回按钮图片
     TableViewSectionItemTypeNavigationBarCustomBackButton, // 自定义返回按钮
     TableViewSectionItemTypeNavigationBarFullScreen, // 全屏背景色
@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, TableViewSectionItemType) {
     TableViewSectionItemTypeNavigationBarModal, // 模态窗口
     
     TableViewSectionItemTypeNavigationBarDisablePopGesture, // 禁用手势滑动
-    TableViewSectionItemTypeNavigationBarFullPopGesture, // 使用全屏滑动手势
+    TableViewSectionItemTypeNavigationBarFullPopGesture, // 启用全屏滑动手势
     TableViewSectionItemTypeNavigationBarBackEventIntercept, // 导航栏返回事件拦截
     TableViewSectionItemTypeNavigationBarRedirectViewController, // 重定向任一视图控制器跳转
     TableViewSectionItemTypeNavigationBarCustom, // 完全自定义导航栏

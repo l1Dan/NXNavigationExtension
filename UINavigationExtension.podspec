@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
   spec.name         = "UINavigationExtension"
   spec.version      = "2.3.4"
-  spec.summary      = "iOS 导航栏处理扩展"
+  spec.summary      = "UINavigationExtension 是为 iOS 应用设计的一个简单、易用的导航栏处理框架。"
 
   spec.description  = <<-DESC
-  "UINavigationExtension 是一个 iOS 导航栏处理扩展"
+  "UINavigationExtension 是为 iOS 应用设计的一个简单、易用的导航栏处理框架。框架代码入侵非常小，只需要简单的几个 API 调用就可以满足大部分的应用场景。"
                    DESC
 
   spec.homepage     = "https://github.com/l1Dan/UINavigationExtension"
