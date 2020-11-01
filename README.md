@@ -51,7 +51,7 @@ pod 'UINavigationExtension'
 - `更新导航栏样式`
 
 ## 使用
-所有对导航栏的修改都是基于视图控制器 `UIViewController`，而不是基于导航控制器 `UINavigationController`。这种设计逻辑更加符合大部分应用场景。
+所有对导航栏外观的修改都是基于视图控制器 `UIViewController`，而不是基于导航控制器 `UINavigationController`，这种设计逻辑更加符合大部分应用场景。
 
 1. 导入头文件 `#import <UINavigationExtension/UINavigationExtension.h>`
 2. 使用之前需要先注册需要修改的导航控制器，以 `FeatureNavigationController` 为例：
@@ -59,8 +59,8 @@ pod 'UINavigationExtension'
 [UENavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
 ```
 **注意**：
-- 只有注册的导航栏才会生效，衍生类（子类）都不会生效，原因是避免注册污染其他框架的导航控制器。保存自己需要自己注册的原则。
-- 如果注册为 `UINavigationController` 则所有使用 `UINavigationController` 的导航栏都会生效，子类也不会生效。
+- 只有注册的导航栏才会生效，衍生类（子类）都不会生效，这样可以有效避免污染其他框架的导航控制器，保持谁使用谁注册的原则。
+- 如果注册为 `UINavigationController` 则所有使用 `UINavigationController` 的导航栏都会生效，同样子类也不会生效。
 - 不要使用系统导航栏隐藏显示方法
 - 不要使用系统导航栏修改透明度
 - 不要使用系统导航栏或导航控制器 `appearance` API 修改
