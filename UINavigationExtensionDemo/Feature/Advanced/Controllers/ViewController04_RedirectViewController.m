@@ -16,6 +16,7 @@
 #import "HierarchyViewController.h"
 #import "RedirectViewControllerModel.h"
 
+#import "UIColor+RandomColor.h"
 #import "UITableViewCell+Enabled.h"
 
 @interface ViewController04_RedirectViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -30,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.view.backgroundColor = [UIColor customGroupedBackgroundColor];
     
     if (![NSStringFromClass([self class]) isEqualToString:NSStringFromClass([ViewController04_RedirectViewController class])]) {
         self.navigationItem.title = NSStringFromClass([self class]);

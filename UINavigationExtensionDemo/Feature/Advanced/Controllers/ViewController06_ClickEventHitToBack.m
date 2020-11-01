@@ -75,7 +75,7 @@
 - (UIView *)tableHeaderView {
     if (!_tableHeaderView) {
         _tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
-        _tableHeaderView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        _tableHeaderView.backgroundColor = [UIColor customGroupedBackgroundColor];
     }
     return _tableHeaderView;
 }

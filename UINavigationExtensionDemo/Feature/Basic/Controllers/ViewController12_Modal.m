@@ -29,15 +29,19 @@
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+    if (@available(iOS 13.0, *)) {
+        return UIStatusBarStyleDarkContent;
+    } else {
+        return UIStatusBarStyleDefault;
+    }
 }
 
 - (NSDictionary<NSAttributedStringKey,id> *)ue_titleTextAttributes {
-    return @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    return @{NSForegroundColorAttributeName: [UIColor customDarkGrayColor]};
 }
 
 - (UIColor *)ue_navigationBarBackgroundColor {
-    return [UIColor customLightGrayColor];
+    return [UIColor customGroupedBackgroundColor];
 }
 
 - (void)clickCloseButton:(UIButton *)button {

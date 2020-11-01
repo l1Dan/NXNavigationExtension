@@ -4,26 +4,31 @@
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/UINavigationExtension.svg?style=flat)](https://img.shields.io/cocoapods/v/UINavigationExtension.svg) ![Language](https://img.shields.io/github/languages/top/l1dan/UINavigationExtension.svg?style=flat) [![MIT Licence](https://img.shields.io/github/license/l1dan/UINavigationExtension.svg?style=flat)](https://opensource.org/licenses/mit-license.php) [![Platform](https://img.shields.io/cocoapods/p/UINavigationExtension.svg?style=flat)](https://github.com/l1Dan/UINavigationExtension/blob/master/README.md) [![GitHub last commit](https://img.shields.io/github/last-commit/l1Dan/UINavigationExtension.svg?style=flat)](https://img.shields.io/github/last-commit/l1Dan/UINavigationExtension) 
 
-UINavigationExtension 是为 iOS 应用设计的一个简单、易用的导航栏处理框架。框架代码入侵非常小，只需要简单的几个 API 调用就可以满足大部分的应用场景。
+UINavigationExtension 是为 iOS 应用设计的一个简单、易用的导航栏处理框架。框架对现有代码入侵非常小，只需要简单的几个 API 调用就可以满足大部分的应用场景。
 
 ## 预览
+
 ![Preview](https://raw.githubusercontent.com/l1Dan/UINavigationExtension/master/Snapshots/Preview.png)
 
 ## 开始
 
-- [下载 UINavigationExtension](https://github.com/l1Dan/UINavigationExtension/archive/master.zip) 里面包含示例代码。
+[下载 UINavigationExtension](https://github.com/l1Dan/UINavigationExtension/archive/master.zip) 里面包含示例代码。
 
 ## 使用 CocoaPods 安装
+
 使用 CocoaPods 将 UINavigationExtension 集成到 Xcode 项目中，需要在 `Podfile` 中指定：
+
 ```ruby
 pod 'UINavigationExtension'
+# 或者
+pod 'UINavigationExtension', ~> 2.3.4
 ```
 
 ## 要求
 
 | UINavigationExtension Version | Minimum iOS Target  | Minimum macOS Target  | Minimum watchOS Target  | Minimum tvOS Target  |                                   Notes                                   |
 |:--------------------:|:---------------------------:|:----------------------------:|:----------------------------:|:----------------------------:|:-------------------------------------------------------------------------:|
-| 2.x | iOS 11 | n/a | n/a | n/a |
+| 2.x | iOS 11 | macOS 10.15 | n/a | n/a | macOS: macCatalyst
 
 ## 功能
 
@@ -58,6 +63,7 @@ pod 'UINavigationExtension'
 ```objective-c
 [UENavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
 ```
+
 **注意**：
 - 只有注册的导航栏才会生效，衍生类（子类）都不会生效，这样可以有效避免污染其他框架的导航控制器，保持谁使用谁注册的原则。
 - 如果注册为 `UINavigationController` 则所有使用 `UINavigationController` 的导航栏都会生效，同样子类也不会生效。
@@ -74,7 +80,13 @@ pod 'UINavigationExtension'
 ### 修改返回按钮箭头颜色
 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
 
+**导航栏返回按钮颜色默认使用系统蓝色 `[UIColor systemBlueColor]`，要改变返回按钮颜色可以使用以下方式配合：**
+
 ```objective-c
+// 全局统一修改，不会覆盖基于视图控制器修改
+UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
+
+// 基于视图控制器修改
 - (UIColor *)ue_barTintColor {
     return self.isDarkMode ? [UIColor whiteColor] : [UIColor blackColor];
 }
@@ -246,7 +258,7 @@ pod 'UINavigationExtension'
 ### 重定向任一控制器跳转
 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController04_RedirectViewController.m)
 
-- 以重定向到 `RandomColorViewController` 为例，如果之前有 Push 过 `RandomColorViewController` 的实例，则最后会跳转到实例中，如果没有则会调用 `Block`，如果 `block == NULL` 或者 `return nil;` 则重定向跳转不会发生。
+- 以重定向到 `RandomColorViewController` 为例，如果之前有 Push 过 `RandomColorViewController` 的实例，则最后会跳转到实例中，如果没有则会调用 `block`，如果 `block == NULL` 或者 `return nil;` 则重定向跳转不会发生。
 - 执行重定向操作之后，并不会直接跳转到对应的视图控制器，如果需要 `跳转` 操作，可以调用 `popViewControllerAnimated:` 、`使用手势返回`、`点击返回按钮返回`。
 
 ### 导航栏点击事件穿透到底部

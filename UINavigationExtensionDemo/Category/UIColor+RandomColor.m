@@ -24,6 +24,14 @@
     return [UIColor colorWithRed:167 / 255.0 green:167 / 255.0 blue:167 / 255.0 alpha:1.0];
 }
 
++ (UIColor *)customBlueColor {
+    return [UIColor colorWithRed:0.0 green:122 / 255.0 blue:1.0 alpha:1.0]; // [UIColor systemBlueColor]
+}
+
++ (UIColor *)customGroupedBackgroundColor {
+    return [UIColor colorWithRed:239 / 255.0 green:239 / 255.0 blue:244 / 255.0 alpha:1.0]; // [UIColor groupTableViewBackgroundColor];
+}
+
 + (UIColor *)mixColor1:(UIColor*)color1 color2:(UIColor *)color2 ratio:(CGFloat)ratio {
     if(ratio > 1) ratio = 1;
     
@@ -36,6 +44,5 @@
     
     return [UIColor colorWithRed:r green:g blue:b alpha:1];
 }
-
 
 @end

@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UENavigationBarAppearance.standardAppearance.tintColor = [UIColor customDarkGrayColor];
     [UENavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
 
     self.tabBar.tintColor = [UIColor customDarkGrayColor];
