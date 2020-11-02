@@ -38,6 +38,7 @@
     self.leftConstraint.active = YES;
     
     self.rightConstraint = [self.segmentedControl.rightAnchor constraintEqualToAnchor:self.tableHeaderView.rightAnchor];
+    self.rightConstraint.priority = UILayoutPriorityDefaultHigh;
     self.rightConstraint.active = YES;
     
     self.heightConstraint = [self.segmentedControl.heightAnchor constraintEqualToConstant:0];

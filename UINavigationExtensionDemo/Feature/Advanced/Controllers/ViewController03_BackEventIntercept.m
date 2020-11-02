@@ -27,6 +27,10 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
 }
 
+- (UIColor *)ue_navigationBarBackgroundColor {
+    return [UIColor systemGrayColor];
+}
+
 #pragma mark - Private
 
 - (void)showAlertController {

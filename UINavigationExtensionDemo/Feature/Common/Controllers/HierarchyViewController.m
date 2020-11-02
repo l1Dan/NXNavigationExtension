@@ -15,6 +15,9 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
 @interface HierarchyViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSLayoutConstraint *widthConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *heightConstraint;
+
 @property (nonatomic, strong) NSArray<__kindof UIViewController *> *chooseViewControllers;
 @property (nonatomic, copy) void (^completionHandler)(__kindof UIViewController * _Nullable selectedViewController);
 
@@ -27,6 +30,28 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
     
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     [self.view addSubview:self.tableView];
+    
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
+    
+    self.widthConstraint = [self.tableView.widthAnchor constraintEqualToConstant:0.0];
+    self.widthConstraint.active = YES;
+
+    self.heightConstraint = [self.tableView.heightAnchor constraintEqualToConstant:0.0];
+    self.heightConstraint.active = YES;
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
+    CGSize size = [UIScreen mainScreen].bounds.size;
+    CGFloat height = self.chooseViewControllers.count * ChooseJumpTableViewHeight + 88;
+    
+    CGFloat maxHeight = MIN(height, size.height - 150.0);
+    CGFloat maxWidth = size.width * 0.8;
+    self.widthConstraint.constant = maxWidth;
+    self.heightConstraint.constant = maxHeight;
 }
 
 - (void)dealloc {
@@ -48,14 +73,7 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        CGFloat height = self.chooseViewControllers.count * ChooseJumpTableViewHeight + 88;
-        CGFloat maxHeight = [UIScreen mainScreen].bounds.size.height - 150.0;
-        CGFloat finalHeight = MIN(height, maxHeight);
-        
-        CGRect bounds = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width * 0.8, finalHeight);
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _tableView.bounds = bounds;
-        _tableView.center = self.view.center;
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         _tableView.tableHeaderView = [[UIView alloc] init];
         _tableView.tableFooterView = [[UIView alloc] init];
