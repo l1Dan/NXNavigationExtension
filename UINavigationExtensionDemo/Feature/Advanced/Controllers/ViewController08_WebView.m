@@ -95,7 +95,7 @@
 
 #pragma mark - Action
 
-- (void)ue_triggerSystemBackButtonHandler:(UIButton *)button {
+- (void)clickBackButton:(UIButton *)button {
     [self.navigationController ue_triggerSystemBackButtonHandler];
 }
 
@@ -140,7 +140,7 @@
         UIButton *customView = [UIButton buttonWithType:UIButtonTypeCustom];
         [customView setImage:[UIImage imageNamed:@"NavigationBarBack"] forState:UIControlStateNormal];
         [customView sizeToFit];
-        [customView addTarget:self action:@selector(ue_triggerSystemBackButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
+        [customView addTarget:self action:@selector(clickBackButton:) forControlEvents:UIControlEventTouchUpInside];
         _backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customView];
     }
     return _backBarButtonItem;

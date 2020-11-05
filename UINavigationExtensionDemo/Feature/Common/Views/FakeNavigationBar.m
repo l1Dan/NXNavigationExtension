@@ -63,7 +63,7 @@
 
 #pragma mark - Private
 
-- (void)ue_triggerSystemBackButtonHandler:(UIButton *)button {
+- (void)clickBackButton:(UIButton *)button {
     if (self.delegate && [self.delegate respondsToSelector:@selector(fakeNavigationBar:didClickNavigationItemwithItemType:)]) {
         [self.delegate fakeNavigationBar:self didClickNavigationItemwithItemType:FakeNavigationItemTypeBackButton];
     }
@@ -82,7 +82,7 @@
         UIImage *image = [[UIImage imageNamed:@"NavigationBarBack"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_backButton setImage:image forState:UIControlStateNormal];
-        [_backButton addTarget:self action:@selector(ue_triggerSystemBackButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton addTarget:self action:@selector(clickBackButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backButton;
 }
