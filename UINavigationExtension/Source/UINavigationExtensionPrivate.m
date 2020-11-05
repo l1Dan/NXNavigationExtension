@@ -170,25 +170,25 @@
 }
 
 - (void)ue_setUserInteractionEnabled:(BOOL)userInteractionEnabled {
-    if (self.ue_navigationBarUserInteractionDisabled) {
+    if (self.ue_disableUserInteraction) {
         [self ue_setUserInteractionEnabled:NO];
         return;
     }
     [self ue_setUserInteractionEnabled:userInteractionEnabled];
 }
 
-- (BOOL)ue_navigationBarUserInteractionDisabled {
-    NSNumber *navigationBarUserInteractionDisabled = objc_getAssociatedObject(self, _cmd);
-    if (navigationBarUserInteractionDisabled && [navigationBarUserInteractionDisabled isKindOfClass:[NSNumber class]]) {
-        return [navigationBarUserInteractionDisabled boolValue];
+- (BOOL)ue_disableUserInteraction {
+    NSNumber *disableUserInteraction = objc_getAssociatedObject(self, _cmd);
+    if (disableUserInteraction && [disableUserInteraction isKindOfClass:[NSNumber class]]) {
+        return [disableUserInteraction boolValue];
     }
-    navigationBarUserInteractionDisabled = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, navigationBarUserInteractionDisabled, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [navigationBarUserInteractionDisabled boolValue];
+    disableUserInteraction = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, disableUserInteraction, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [disableUserInteraction boolValue];
 }
 
-- (void)setUe_navigationBarUserInteractionDisabled:(BOOL)ue_navigationBarUserInteractionDisabled {
-    objc_setAssociatedObject(self, @selector(ue_navigationBarUserInteractionDisabled), [NSNumber numberWithBool:ue_navigationBarUserInteractionDisabled], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setUe_disableUserInteraction:(BOOL)ue_disableUserInteraction {
+    objc_setAssociatedObject(self, @selector(ue_disableUserInteraction), [NSNumber numberWithBool:ue_disableUserInteraction], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
@@ -196,7 +196,7 @@
 @implementation UIViewController (UINavigationExtensionPrivate)
 
 - (void)ue_configureNavigationBarItem {
-    UIBarButtonItem *backButtonItem;
+    UIBarButtonItem *backButtonItem = self.navigationItem.leftBarButtonItem;
     UIView *customView = self.ue_backButtonCustomView;
     if (customView) {
         backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customView];
@@ -204,11 +204,14 @@
         customView.userInteractionEnabled = YES;
         [customView addGestureRecognizer:tap];
     } else {
-        UIImage *backImage = self.ue_backImage;
-        if (!backImage) {
-            backImage = [UENavigationBarAppearance standardAppearance].backImage;
+        // 如果 leftBarButtonItem(s) 为空则添加 backButtonItem
+        if (!backButtonItem) {
+            UIImage *backImage = self.ue_backImage;
+            if (!backImage) {
+                backImage = [UENavigationBarAppearance standardAppearance].backImage;
+            }
+            backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage style:UIBarButtonItemStylePlain target:self action:@selector(ue_triggerSystemPopViewController)];            
         }
-        backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage style:UIBarButtonItemStylePlain target:self action:@selector(ue_triggerSystemPopViewController)];
     }
     self.navigationItem.leftBarButtonItem = backButtonItem;
 }

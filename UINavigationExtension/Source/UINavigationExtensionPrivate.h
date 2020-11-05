@@ -64,7 +64,7 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 @property (nonatomic, copy, nullable) UINavigationBarDidUpdateFrameHandler ue_didUpdateFrameHandler;
 
 /// 阻止事件被 NavigationBar 接收，需要将事件穿透传递到下层
-@property (nonatomic, assign) BOOL ue_navigationBarUserInteractionDisabled;
+@property (nonatomic, assign) BOOL ue_disableUserInteraction;
 
 @end
 
@@ -89,7 +89,7 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 /// 全屏收拾代理对象
 @property (nonatomic, strong, readonly) UEFullscreenPopGestureRecognizerDelegate *ue_fullscreenPopGestureDelegate;
 
-/// 设置 UENavigationBar 是否可用；默认 YES；没有注册导航栏时为 NO 时会使用系统导航栏
+/// UENavigationBar 是否可用；默认 YES；没有注册导航栏时为 NO 时会使用系统导航栏
 @property (nonatomic, assign, readonly) BOOL ue_useNavigationBar;
 
 /// 配置 UENavigationBar

@@ -43,14 +43,12 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
 
 - (void)ue_pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if (self.ue_useNavigationBar) {
-        if (self.ue_useNavigationBar) {
-        }
         if (self.viewControllers.count > 0) {
             [viewController ue_configureNavigationBarItem];
         }
         
         if (viewController.ue_enableFullScreenInteractivePopGesture) {
-            [self enableFullscreenPopGesture];
+            [self ue_configureFullscreenPopGesture];
         }
     }
     
@@ -67,7 +65,7 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
                 }
                 
                 if (viewController.ue_enableFullScreenInteractivePopGesture) {
-                    [self enableFullscreenPopGesture];
+                    [self ue_configureFullscreenPopGesture];
                 }
             }
         }
@@ -85,25 +83,7 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
 }
 
 #pragma mark - Private
-- (void)configureNavigationBarItemInViewController:(__kindof UIViewController *)viewController {
-    UIBarButtonItem *backButtonItem;
-    UIView *customView = viewController.ue_backButtonCustomView;
-    if (customView) {
-        backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customView];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ue_triggerSystemBackButtonHandler)];
-        customView.userInteractionEnabled = YES;
-        [customView addGestureRecognizer:tap];
-    } else {
-        UIImage *backImage = viewController.ue_backImage;
-        if (!backImage) {
-            backImage = [UENavigationBarAppearance standardAppearance].backImage;
-        }
-        backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage style:UIBarButtonItemStylePlain target:self action:@selector(ue_triggerSystemBackButtonHandler)];
-    }
-    viewController.navigationItem.leftBarButtonItem = backButtonItem;
-}
-
-- (void)enableFullscreenPopGesture {
+- (void)ue_configureFullscreenPopGesture {
     if (![self.interactivePopGestureRecognizer.view.gestureRecognizers containsObject:self.ue_fullscreenPopGestureRecognizer]) {
         
         // Add our own gesture recognizer to where the onboard screen edge pan gesture recognizer is attached to.
@@ -122,7 +102,7 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
     }
 }
 
-- (NSArray *)findViewControllerClass:(Class)aClass createViewControllerUsingBlock:(__kindof UIViewController * (^ __nullable)(void))block {
+- (NSArray *)ue_findViewControllerClass:(Class)aClass createViewControllerUsingBlock:(__kindof UIViewController * (^ __nullable)(void))block {
     NSArray<__kindof UIViewController *> *viewControllers = self.viewControllers;
     if (!aClass || (viewControllers.count <= 1)) return viewControllers;
     
@@ -179,7 +159,7 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
 }
 
 - (void)ue_redirectViewControllerClass:(Class)aClass createViewControllerUsingBlock:(__kindof UIViewController * _Nonnull (^)(void))block {
-    NSArray<__kindof UIViewController *> *viewControllers = [self findViewControllerClass:aClass createViewControllerUsingBlock:block];
+    NSArray<__kindof UIViewController *> *viewControllers = [self ue_findViewControllerClass:aClass createViewControllerUsingBlock:block];
     [self setViewControllers:viewControllers animated:YES];
 }
 

@@ -31,7 +31,7 @@
 @interface UIViewController (UINavigationExtension)
 
 @property (nonatomic, assign) BOOL ue_viewWillDisappearFinished;
-@property (nonatomic, assign) BOOL ue_navigationBarInitFinished;
+@property (nonatomic, assign) BOOL ue_navigationBarDidLoadFinished;
 
 @end
 
@@ -49,13 +49,13 @@
 }
 
 - (void)ue_viewDidLoad {
-    self.ue_navigationBarInitFinished = NO;
+    self.ue_navigationBarDidLoadFinished = NO;
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
-        self.ue_navigationBarInitFinished = YES;
+        self.ue_navigationBarDidLoadFinished = YES;
         
         [self.navigationController ue_configureNavigationBar];
-        [self setupNavigationBar];
-        [self updateNavigationBarAppearance];
+        [self ue_setupNavigationBar];
+        [self ue_updateNavigationBarAppearance];
     }
     
     [self ue_viewDidLoad];
@@ -63,13 +63,13 @@
 
 - (void)ue_viewWillAppear:(BOOL)animated {
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
-        if (!self.ue_navigationBarInitFinished) {
+        if (!self.ue_navigationBarDidLoadFinished) {
             // FIXED: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
             [self.navigationController ue_configureNavigationBar];
-            [self setupNavigationBar];
+            [self ue_setupNavigationBar];
         }
         // 还原上一个视图控制器对导航栏的修改
-        [self updateNavigationBarAppearance];
+        [self ue_updateNavigationBarAppearance];
         
         __weak typeof(self) weakSelf = self;
         self.navigationController.navigationBar.ue_didUpdateFrameHandler = ^(CGRect frame) {
@@ -79,8 +79,8 @@
             weakSelf.ue_navigationBar.frame = newFrame;
         };
         
-        [self updateNavigationBarHierarchy];
-        [self changeNavigationBarUserInteractionState];
+        [self ue_updateNavigationBarHierarchy];
+        [self ue_updateNavigationBarSubviewState];
     }
     
     self.ue_viewWillDisappearFinished = NO;
@@ -91,7 +91,7 @@
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
         BOOL interactivePopGestureRecognizerEnabled = self.navigationController.viewControllers.count > 1;
         self.navigationController.interactivePopGestureRecognizer.enabled = interactivePopGestureRecognizerEnabled;
-        [self changeNavigationBarUserInteractionState];
+        [self ue_updateNavigationBarSubviewState];
     }
     
     [self ue_viewDidAppear:animated];
@@ -103,19 +103,19 @@
 }
 
 - (void)ue_viewWillLayoutSubviews {    
-    [self updateNavigationBarHierarchy];
+    [self ue_updateNavigationBarHierarchy];
     [self ue_viewWillLayoutSubviews];
 }
 
 #pragma mark - Private
-- (void)setupNavigationBar {
+- (void)ue_setupNavigationBar {
     self.ue_navigationBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, UINavigationExtensionGetNavigationBarHeight());
     if (![self.view isKindOfClass:[UIScrollView class]]) {
         [self.view addSubview:self.ue_navigationBar];
     }
 }
 
-- (void)updateNavigationBarAppearance {
+- (void)ue_updateNavigationBarAppearance {
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
         self.navigationController.navigationBar.barTintColor = self.ue_barBarTintColor;
         self.navigationController.navigationBar.tintColor = self.ue_barTintColor;
@@ -138,7 +138,7 @@
     }
 }
 
-- (void)updateNavigationBarHierarchy {
+- (void)ue_updateNavigationBarHierarchy {
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
         // FIXED: 修复导航栏 containerView 被遮挡问题
         if (![self.view isKindOfClass:[UIScrollView class]]) {
@@ -152,7 +152,7 @@
     }
 }
 
-- (void)changeNavigationBarUserInteractionState {
+- (void)ue_updateNavigationBarSubviewState {
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
         BOOL hidesNavigationBar = self.ue_hidesNavigationBar;
         BOOL containerViewWithoutNavigtionBar = self.ue_containerViewWithoutNavigtionBar;
@@ -172,13 +172,13 @@
         if (containerViewWithoutNavigtionBar) { // 添加 subView 到 containerView 时可以不随 NavigationBar 的 alpha 变化
             self.ue_navigationBar.userInteractionEnabled = YES;
             self.ue_navigationBar.containerView.userInteractionEnabled = YES;
-            self.navigationController.navigationBar.ue_navigationBarUserInteractionDisabled = YES;
+            self.navigationController.navigationBar.ue_disableUserInteraction = YES;
             self.navigationController.navigationBar.userInteractionEnabled = NO;
         } else {
             self.ue_navigationBar.containerView.hidden = hidesNavigationBar;
             self.ue_navigationBar.userInteractionEnabled = !hidesNavigationBar;
             self.ue_navigationBar.containerView.userInteractionEnabled = containerViewWithoutNavigtionBar;
-            self.navigationController.navigationBar.ue_navigationBarUserInteractionDisabled = hidesNavigationBar;
+            self.navigationController.navigationBar.ue_disableUserInteraction = hidesNavigationBar;
             self.navigationController.navigationBar.userInteractionEnabled = !hidesNavigationBar;
         }
     }
@@ -199,18 +199,18 @@
     objc_setAssociatedObject(self, @selector(ue_viewWillDisappearFinished), [NSNumber numberWithBool:ue_viewWillDisappearFinished], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (BOOL)ue_navigationBarInitFinished {
-    NSNumber *navigationBarInitFinished = objc_getAssociatedObject(self, _cmd);
-    if (navigationBarInitFinished && [navigationBarInitFinished isKindOfClass:[NSNumber class]]) {
-        return [navigationBarInitFinished boolValue];
+- (BOOL)ue_navigationBarDidLoadFinished {
+    NSNumber *navigationBarDidLoadFinished = objc_getAssociatedObject(self, _cmd);
+    if (navigationBarDidLoadFinished && [navigationBarDidLoadFinished isKindOfClass:[NSNumber class]]) {
+        return [navigationBarDidLoadFinished boolValue];
     }
-    navigationBarInitFinished = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, navigationBarInitFinished, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [navigationBarInitFinished boolValue];
+    navigationBarDidLoadFinished = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, navigationBarDidLoadFinished, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [navigationBarDidLoadFinished boolValue];
 }
 
-- (void)setUe_navigationBarInitFinished:(BOOL)ue_navigationBarInitFinished {
-    objc_setAssociatedObject(self, @selector(ue_navigationBarInitFinished), [NSNumber numberWithBool:ue_navigationBarInitFinished], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setUe_navigationBarDidLoadFinished:(BOOL)ue_navigationBarDidLoadFinished {
+    objc_setAssociatedObject(self, @selector(ue_navigationBarDidLoadFinished), [NSNumber numberWithBool:ue_navigationBarDidLoadFinished], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark - Getter & Setter
@@ -398,9 +398,9 @@
 
 - (void)ue_setNeedsNavigationBarAppearanceUpdate {
     [self ue_configureNavigationBarItem];
-    [self updateNavigationBarAppearance];
-    [self updateNavigationBarHierarchy];
-    [self changeNavigationBarUserInteractionState];
+    [self ue_updateNavigationBarAppearance];
+    [self ue_updateNavigationBarHierarchy];
+    [self ue_updateNavigationBarSubviewState];
 }
 
 @end
