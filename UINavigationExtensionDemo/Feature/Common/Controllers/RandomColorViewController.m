@@ -40,6 +40,11 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
     [self.randomColorButton.heightAnchor constraintEqualToConstant:RandomColorButtonWidthAndHeight].active = YES;
     [self.randomColorButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
     [self.randomColorButton.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
+    
+    [self.navigationController ue_redirectViewControllerClass:[RandomColorViewController class] createViewControllerUsingBlock:^__kindof UIViewController * _Nonnull {
+        return [[RandomColorViewController alloc] init];
+    }];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (UIColor *)randomColor {

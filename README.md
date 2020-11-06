@@ -20,9 +20,21 @@ UINavigationExtension 是为 iOS 应用设计的一个简单、易用的导航�
 
 ```ruby
 pod 'UINavigationExtension'
+```
+或者
+```ruby
+pod 'UINavigationExtension', ~> 2.3.7
+```
 
-# 或者
-pod 'UINavigationExtension', ~> 2.3.4
+### 使用 Carthage 安装
+
+[Carthage](https://github.com/Carthage/Carthage) 是一个去中心化的包管理器，它构建依赖项并为您提供二进制框架。 要集成 UINavigationExtension，请将以下内容添加到您的 `Cartfile` 中文件中：
+```ogdl
+github "l1Dan/UINavigationExtension"
+```
+或者
+```ogdl
+github "l1Dan/UINavigationExtension" ~> 2.3.7
 ```
 
 ## 要求
@@ -261,6 +273,22 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 
 - 以重定向到 `RandomColorViewController` 为例，如果之前有 Push 过 `RandomColorViewController` 的实例，则最后会跳转到实例中，如果没有则会调用 `block`，如果 `block == NULL` 或者 `return nil;` 则重定向跳转不会发生。
 - 执行重定向操作之后，并不会直接跳转到对应的视图控制器，如果需要 `跳转` 操作，可以调用 `popViewControllerAnimated:` 、`使用手势返回`、`点击返回按钮返回`。
+
+```objective-c
+[self.navigationController ue_redirectViewControllerClass:[RandomColorViewController class] createViewControllerUsingBlock:^__kindof UIViewController * _Nonnull {
+    return [[RandomColorViewController alloc] init];
+}];
+```
+
+**注意**：
+执行上面代码之后并不会立即跳转，下面代码可以实现立即跳转：
+```objective-c
+[self.navigationController ue_redirectViewControllerClass:[RandomColorViewController class] createViewControllerUsingBlock:^__kindof UIViewController * _Nonnull {
+    return [[RandomColorViewController alloc] init];
+}];
+[self.navigationController popViewControllerAnimated:YES];
+```
+上面代码大意为：首先查找 `self.navigationController.ViewConrollers` 是否存在一个类型为 `[RandomColorViewController class]` 的实例对象，如果存在则重定向到此视图控制器，没有则使用 `[[RandomColorViewController alloc] init]` 来创建一个新的 `[RandomColorViewController class]` 的实例对象。
 
 ### 导航栏点击事件穿透到底部
 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController06_ClickEventHitToBack.m)
