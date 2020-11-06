@@ -28,7 +28,7 @@ pod 'UINavigationExtension', ~> 2.3.7
 
 ### 使用 Carthage 安装
 
-[Carthage](https://github.com/Carthage/Carthage) 是一个去中心化的包管理器，它构建依赖项并为您提供二进制框架。 要集成 UINavigationExtension，请将以下内容添加到您的 `Cartfile` 中文件中：
+[Carthage](https://github.com/Carthage/Carthage) 是一个去中心化的包管理器，它构建依赖项并为您提供二进制框架。 要集成 UINavigationExtension，请将以下内容添加到您的 `Cartfile` 文件中：
 ```ogdl
 github "l1Dan/UINavigationExtension"
 ```
@@ -311,7 +311,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 可以动态调整 ContainerView 透明度实现：`self.ue_navigationBar.containerView.alpha = value`
 
 ### 更新导航栏样式
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
+[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Common/Controllers/RandomColorViewController.m)
 
 ```objective-c
 [self ue_setNeedsNavigationBarAppearanceUpdate];
