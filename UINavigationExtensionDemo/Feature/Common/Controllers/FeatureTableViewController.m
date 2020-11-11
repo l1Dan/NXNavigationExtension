@@ -46,7 +46,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor customGroupedBackgroundColor];
+    self.tableView.backgroundColor = [UIColor customGroupedBackgroundColor];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"FeatureTableViewCellIdentifer"];
 }
 
 - (UIColor *)ue_navigationBarBackgroundColor {
@@ -109,7 +110,7 @@
         case TableViewSectionItemTypeNavigationBarScrollChangeNavigationBar:
             return [[ViewController07_ScrollChangeNavigationBar alloc] init];
         case TableViewSectionItemTypeNavigationBarWebView:
-            return [[ViewController08_WebView alloc] initWithURL:[NSURL URLWithString:@"https://www.apple.com.cn/"]];
+            return [[ViewController08_WebView alloc] init];
         case TableViewSectionItemTypeNavigationBarUpdateNavigationBar:
             return [[RandomColorViewController alloc] init];
         default:
@@ -150,12 +151,19 @@
     if (!viewController) return;
     
     viewController.title = item.title;
+    UINavigationController *controller = [[[self.navigationController class] alloc] initWithRootViewController:viewController];
     if ([viewController isKindOfClass:[ViewController12_Modal class]]) {
-        UINavigationController *controller = [[[self.navigationController class] alloc] initWithRootViewController:viewController];
         [self presentViewController:controller animated:YES completion:NULL];
     } else {
-        viewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:viewController animated:YES];
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+            viewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:viewController animated:YES];
+        } else {
+            UINavigationController *detailNavigationController = (UINavigationController *)self.splitViewController.viewControllers.lastObject;
+            if (![detailNavigationController.viewControllers.lastObject isMemberOfClass:[viewController class]]) {
+                [self showDetailViewController:controller sender:nil];
+            }
+        }
     }
 }
 

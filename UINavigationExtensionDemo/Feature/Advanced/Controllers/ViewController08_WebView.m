@@ -23,9 +23,9 @@
 
 @implementation ViewController08_WebView
 
-- (instancetype)initWithURL:(NSURL *)URL {
-    if (self = [super initWithNibName:nil bundle:nil]) {
-        _requestURL = URL;
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        _requestURL = [NSURL URLWithString:@"https://www.apple.com.cn/"];
     }
     return self;
 }
@@ -34,7 +34,10 @@
     [super viewDidLoad];
     
     self.navigationItem.title = nil;
-    self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem];
+    
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem];
+    }
     [self.view addSubview:self.webView];
     [self.ue_navigationBar addSubview:self.progressView];
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.requestURL]];
@@ -96,7 +99,13 @@
 #pragma mark - Action
 
 - (void)clickBackButton:(UIButton *)button {
-    [self.navigationController ue_triggerSystemBackButtonHandler];
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        [self.navigationController ue_triggerSystemBackButtonHandler];
+    } else {
+        if ([self.webView canGoBack]) {
+            [self.webView goBack];
+        }
+    }
 }
 
 - (void)clickCloseButton:(UIButton *)button {
@@ -124,7 +133,6 @@
         configuration.preferences.javaScriptEnabled = YES;
         
         _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
-//        _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
         _webView.scrollView.contentInset = UIEdgeInsetsMake(CGRectGetHeight(self.ue_navigationBar.frame), 0, 0, 0);
         _webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
         _webView.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
@@ -160,10 +168,18 @@
 #pragma mark - WKNavigationDelegate
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    if (webView.canGoBack) {
-        self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem, self.closeBarButtonItem];
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        if (webView.canGoBack) {
+            self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem, self.closeBarButtonItem];
+        } else {
+            self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem];
+        }
     } else {
-        self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem];
+        if (webView.canGoBack) {
+            self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem];
+        } else {
+            self.navigationItem.leftBarButtonItems = nil;
+        }
     }
 }
 

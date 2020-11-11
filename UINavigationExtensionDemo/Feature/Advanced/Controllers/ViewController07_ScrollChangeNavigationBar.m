@@ -31,8 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CGFloat maxHeight = CGRectGetHeight(self.ue_navigationBar.frame);
-    self.tableView.contentInset = UIEdgeInsetsMake(-maxHeight, 0, 0, 0);
     self.tableView.tableHeaderView = self.imageView;
     
     self.navigationBarTitle = self.navigationItem.title;
@@ -66,6 +64,9 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
+    
+    CGFloat maxHeight = CGRectGetHeight(self.ue_navigationBar.frame);
+    self.tableView.contentInset = UIEdgeInsetsMake(-maxHeight, 0, 0, 0);
     
     UIEdgeInsets safeAreaInsets = self.navigationController.navigationBar.safeAreaInsets;
     self.topConstraint.constant = safeAreaInsets.top;

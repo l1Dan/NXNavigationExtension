@@ -40,6 +40,7 @@
     [self.view addSubview:self.tableView];
     
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
     [self.tableView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
     [self.tableView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
     [self.tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
@@ -71,7 +72,6 @@
         _tableView.tableFooterView = [[UIView alloc] init];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
     return _tableView;
 }
@@ -141,11 +141,16 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
     } else if (model.type == RedirectViewControllerTypeJump) {
         NSArray<__kindof UIViewController *> *viewControllers = self.navigationController.viewControllers;
-        __kindof UIViewController *redirectToViewController = viewControllers[viewControllers.count - 2];
-        if ([redirectToViewController isKindOfClass:[BaseViewController class]]) {
-            cell.contentView.backgroundColor = [(BaseViewController *)redirectToViewController randomColor];
+        if (viewControllers.count < 2) {
+            cell.contentView.backgroundColor = [UIColor whiteColor];
+            cell.textLabel.text = model.title;
+        } else {
+            __kindof UIViewController *redirectToViewController = viewControllers[viewControllers.count - 2];
+            if ([redirectToViewController isKindOfClass:[BaseViewController class]]) {
+                cell.contentView.backgroundColor = [(BaseViewController *)redirectToViewController randomColor];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@%@", model.title, NSStringFromClass([redirectToViewController class])];
+            }
         }
-        cell.textLabel.text = [NSString stringWithFormat:@"%@%@", model.title, NSStringFromClass([redirectToViewController class])];
         cell.accessoryType = UITableViewCellAccessoryNone;
     } else {
         cell.textLabel.text = [NSString stringWithFormat:@"点击跳转: %@", model.title];

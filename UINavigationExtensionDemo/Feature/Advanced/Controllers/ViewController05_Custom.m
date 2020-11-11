@@ -42,7 +42,13 @@
     
     [self.backButton.topAnchor constraintEqualToAnchor:containerView.topAnchor constant:2.0].active = YES;
     [self.backButton.bottomAnchor constraintEqualToAnchor:containerView.bottomAnchor constant:-2.0].active = YES;
-    [self.backButton.widthAnchor constraintEqualToConstant:44].active = YES;
+    
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        [self.backButton.widthAnchor constraintEqualToConstant:44].active = YES;
+    } else {
+        self.backButton.hidden = YES;
+        [self.backButton.widthAnchor constraintEqualToConstant:0].active = YES;
+    }
         
     self.searchTextField.translatesAutoresizingMaskIntoConstraints = NO;
     [self.searchTextField.topAnchor constraintEqualToAnchor:containerView.topAnchor constant:2.0].active = YES;

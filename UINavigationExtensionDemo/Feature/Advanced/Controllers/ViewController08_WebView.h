@@ -11,8 +11,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ViewController08_WebView : BaseViewController
 
-- (instancetype)initWithURL:(NSURL *)URL;
-
 @end
 
 NS_ASSUME_NONNULL_END

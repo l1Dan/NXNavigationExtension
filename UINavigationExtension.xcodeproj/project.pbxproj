@@ -29,6 +29,7 @@
 		D61633D8254C4594007584E4 /* RandomColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D61633D7254C4594007584E4 /* RandomColorViewController.m */; };
 		D61CCC00251A13F100A91580 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCBFF251A13F100A91580 /* AppDelegate.m */; };
 		D61CCC11251A13F400A91580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCC10251A13F400A91580 /* main.m */; };
+		D63445C4255D774F002817C7 /* BaseSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D63445C3255D774F002817C7 /* BaseSplitViewController.m */; };
 		D6469AE025449F4D00C583FF /* UIColor+RandomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D6469ADF25449F4D00C583FF /* UIColor+RandomColor.m */; };
 		D650624F254C280700597B05 /* RedirectViewControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D650624E254C280700597B05 /* RedirectViewControllerModel.m */; };
 		D6506254254C312200597B05 /* UITableViewCell+Enabled.m in Sources */ = {isa = PBXBuildFile; fileRef = D6506253254C312200597B05 /* UITableViewCell+Enabled.m */; };
@@ -43,7 +44,6 @@
 		D67BADD2254B1865008822D6 /* ViewController05_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = D67BADD1254B1865008822D6 /* ViewController05_Test.m */; };
 		D696862D2530971A00FBC7A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D69686262530971A00FBC7A5 /* Assets.xcassets */; };
 		D696863F253097C100FBC7A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69686382530977F00FBC7A5 /* LaunchScreen.storyboard */; };
-		D6968640253097C100FBC7A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69686362530977F00FBC7A5 /* Main.storyboard */; };
 		D69BDD76254B24B100599E27 /* EventInterceptModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D69BDD75254B24B100599E27 /* EventInterceptModel.m */; };
 		D69BDD7D254B2B7A00599E27 /* HierarchyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D69BDD7C254B2B7A00599E27 /* HierarchyViewController.m */; };
 		D69F7AC72545EFDD0097BB28 /* ViewController01_DisablePopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7AC62545EFDD0097BB28 /* ViewController01_DisablePopGesture.m */; };
@@ -135,6 +135,8 @@
 		D61CCBFE251A13F100A91580 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D61CCBFF251A13F100A91580 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D61CCC10251A13F400A91580 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D63445C2255D774F002817C7 /* BaseSplitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseSplitViewController.h; sourceTree = "<group>"; };
+		D63445C3255D774F002817C7 /* BaseSplitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseSplitViewController.m; sourceTree = "<group>"; };
 		D6469ADE25449F4D00C583FF /* UIColor+RandomColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+RandomColor.h"; sourceTree = "<group>"; };
 		D6469ADF25449F4D00C583FF /* UIColor+RandomColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RandomColor.m"; sourceTree = "<group>"; };
 		D650624D254C280700597B05 /* RedirectViewControllerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedirectViewControllerModel.h; sourceTree = "<group>"; };
@@ -163,7 +165,6 @@
 		D69686232530970400FBC7A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D69686252530971A00FBC7A5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D69686262530971A00FBC7A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D69686372530977F00FBC7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D69686392530977F00FBC7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D69BDD74254B24B100599E27 /* EventInterceptModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventInterceptModel.h; sourceTree = "<group>"; };
 		D69BDD75254B24B100599E27 /* EventInterceptModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventInterceptModel.m; sourceTree = "<group>"; };
@@ -279,6 +280,8 @@
 			children = (
 				D65FA152254A933900DA1EFE /* BaseNavigationController.h */,
 				D65FA153254A933900DA1EFE /* BaseNavigationController.m */,
+				D63445C2255D774F002817C7 /* BaseSplitViewController.h */,
+				D63445C3255D774F002817C7 /* BaseSplitViewController.m */,
 				62328E0E88F7E4C811B5423C /* BaseTableViewController.h */,
 				623289393F42BCB80D1E467F /* BaseTableViewController.m */,
 				D65FA15A254A98C600DA1EFE /* BaseViewController.h */,
@@ -441,7 +444,6 @@
 				D69686262530971A00FBC7A5 /* Assets.xcassets */,
 				D69686252530971A00FBC7A5 /* Info.plist */,
 				D69686382530977F00FBC7A5 /* LaunchScreen.storyboard */,
-				D69686362530977F00FBC7A5 /* Main.storyboard */,
 				D61CCC10251A13F400A91580 /* main.m */,
 			);
 			path = "Supporting Files";
@@ -562,7 +564,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D696863F253097C100FBC7A5 /* LaunchScreen.storyboard in Resources */,
-				D6968640253097C100FBC7A5 /* Main.storyboard in Resources */,
 				D696862D2530971A00FBC7A5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -614,6 +615,7 @@
 				623281E242A278B7AB8F7055 /* ViewController09_FullScreen.m in Sources */,
 				6232837E6D5C74E81D1F7144 /* ViewController10_ScrollView.m in Sources */,
 				62328F02808BD9C6F127B810 /* ViewController11_ScrollViewWithFullScreen.m in Sources */,
+				D63445C4255D774F002817C7 /* BaseSplitViewController.m in Sources */,
 				D650624F254C280700597B05 /* RedirectViewControllerModel.m in Sources */,
 				D61633D8254C4594007584E4 /* RandomColorViewController.m in Sources */,
 				6232871302FCFE8BD3B7811D /* BaseTableViewController.m in Sources */,
@@ -648,15 +650,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D69686362530977F00FBC7A5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D69686372530977F00FBC7A5 /* Base */,
-			);
-			name = Main.storyboard;
-			path = .;
-			sourceTree = "<group>";
-		};
 		D69686382530977F00FBC7A5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

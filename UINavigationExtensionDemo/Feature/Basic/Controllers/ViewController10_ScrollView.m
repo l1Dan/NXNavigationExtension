@@ -24,6 +24,7 @@
     [super viewDidLoad];
     
     self.randomColor = [UIColor randomColor];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
 }
 
 #pragma mark - Table view data source

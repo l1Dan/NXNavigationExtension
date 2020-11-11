@@ -17,10 +17,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
+    
+    self.navigationItem.title = nil;
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
     CGFloat maxHeight = CGRectGetHeight(self.ue_navigationBar.frame);
     self.tableView.contentInset = UIEdgeInsetsMake(-maxHeight, 0, 0, 0);
-    self.navigationItem.title = nil;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

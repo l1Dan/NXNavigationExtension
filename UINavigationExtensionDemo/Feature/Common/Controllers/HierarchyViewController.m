@@ -32,6 +32,7 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
     [self.view addSubview:self.tableView];
     
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
     [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
     [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
     
