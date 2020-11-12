@@ -70,15 +70,6 @@
         }
         // 还原上一个视图控制器对导航栏的修改
         [self ue_updateNavigationBarAppearance];
-        
-        __weak typeof(self) weakSelf = self;
-        self.navigationController.navigationBar.ue_didUpdateFrameHandler = ^(CGRect frame) {
-            if (weakSelf.ue_viewWillDisappearFinished) { return; }
-            
-            CGRect newFrame = CGRectMake(0, 0, frame.size.width, frame.size.height + frame.origin.y);
-            weakSelf.ue_navigationBar.frame = newFrame;
-        };
-        
         [self ue_updateNavigationBarHierarchy];
         [self ue_updateNavigationBarSubviewState];
     }
@@ -102,14 +93,16 @@
     [self ue_viewWillDisappear:animated];
 }
 
-- (void)ue_viewWillLayoutSubviews {    
+- (void)ue_viewWillLayoutSubviews {
     [self ue_updateNavigationBarHierarchy];
     [self ue_viewWillLayoutSubviews];
 }
 
 #pragma mark - Private
 - (void)ue_setupNavigationBar {
-    self.ue_navigationBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, UINavigationExtensionGetNavigationBarHeight());
+    CGFloat navigationBarWidth = CGRectGetWidth(self.navigationController.navigationBar.frame);
+    CGFloat navigationBarHeight = CGRectGetMaxY(self.navigationController.navigationBar.frame);
+    self.ue_navigationBar.frame = CGRectMake(0, 0, navigationBarWidth, navigationBarHeight);
     if (![self.view isKindOfClass:[UIScrollView class]]) {
         [self.view addSubview:self.ue_navigationBar];
     }
@@ -135,6 +128,14 @@
         if (self.parentViewController && ![self.parentViewController isKindOfClass:[UINavigationController class]] && self.ue_automaticallyHideNavigationBarInChildViewController) {
             self.ue_navigationBar.hidden = YES;
         }
+        
+        __weak typeof(self) weakSelf = self;
+        self.navigationController.navigationBar.ue_didUpdateFrameHandler = ^(CGRect frame) {
+            if (weakSelf.ue_viewWillDisappearFinished) { return; }
+            
+            CGRect newFrame = CGRectMake(0, 0, frame.size.width, frame.size.height + frame.origin.y);
+            weakSelf.ue_navigationBar.frame = newFrame;
+        };
     }
 }
 

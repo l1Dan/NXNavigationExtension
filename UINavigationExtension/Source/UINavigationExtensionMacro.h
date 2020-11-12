@@ -52,18 +52,3 @@ static inline UIImage *UINavigationExtensionGetImageFromColor(UIColor *color) {
     UIGraphicsEndImageContext();
     return image;
 }
-
-/// 获取导航栏高度
-static inline CGFloat UINavigationExtensionGetNavigationBarHeight() {
-    if (@available(iOS 11.0, *)) {
-        UIWindow *keyWindow = nil;
-        for (UIWindow *window in UIApplication.sharedApplication.windows) {
-            if (window.isKeyWindow) {
-                keyWindow = window;
-            }
-        }
-        CGFloat top = keyWindow.safeAreaInsets.top;
-        return top > 20.0 ? 88.0 : 64.0;
-    }
-    return 64.0;
-}
