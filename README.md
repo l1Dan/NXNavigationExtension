@@ -23,7 +23,7 @@ pod 'UINavigationExtension'
 ```
 或者
 ```ruby
-pod 'UINavigationExtension', ~> 2.3.7
+pod 'UINavigationExtension', ~> 2.3.8
 ```
 
 ### 使用 Carthage 安装
@@ -34,7 +34,7 @@ github "l1Dan/UINavigationExtension"
 ```
 或者
 ```ogdl
-github "l1Dan/UINavigationExtension" ~> 2.3.7
+github "l1Dan/UINavigationExtension" ~> 2.3.8
 ```
 
 ## 要求
