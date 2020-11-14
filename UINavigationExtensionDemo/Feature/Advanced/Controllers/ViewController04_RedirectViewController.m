@@ -136,6 +136,7 @@
     [cell setCellClickEnabled:model.clickEnabled];
     
     cell.contentView.backgroundColor = nil;
+    cell.textLabel.textColor = [UIColor customDarkGrayColor];
     if (model.type == RedirectViewControllerTypeChoose) {
         cell.textLabel.text = model.title;
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -148,6 +149,9 @@
             __kindof UIViewController *redirectToViewController = viewControllers[viewControllers.count - 2];
             if ([redirectToViewController isKindOfClass:[BaseViewController class]]) {
                 cell.contentView.backgroundColor = [(BaseViewController *)redirectToViewController randomColor];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@%@", model.title, NSStringFromClass([redirectToViewController class])];
+            } else {
+                cell.contentView.backgroundColor = [UIColor whiteColor];
                 cell.textLabel.text = [NSString stringWithFormat:@"%@%@", model.title, NSStringFromClass([redirectToViewController class])];
             }
         }

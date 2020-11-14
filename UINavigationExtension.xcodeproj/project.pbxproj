@@ -44,6 +44,7 @@
 		D67BADD2254B1865008822D6 /* ViewController05_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = D67BADD1254B1865008822D6 /* ViewController05_Test.m */; };
 		D696862D2530971A00FBC7A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D69686262530971A00FBC7A5 /* Assets.xcassets */; };
 		D696863F253097C100FBC7A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69686382530977F00FBC7A5 /* LaunchScreen.storyboard */; };
+		D6968C2C25602BA900E9C7BA /* UIDevice+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = D6968C2B25602BA900E9C7BA /* UIDevice+Additions.m */; };
 		D69BDD76254B24B100599E27 /* EventInterceptModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D69BDD75254B24B100599E27 /* EventInterceptModel.m */; };
 		D69BDD7D254B2B7A00599E27 /* HierarchyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D69BDD7C254B2B7A00599E27 /* HierarchyViewController.m */; };
 		D69F7AC72545EFDD0097BB28 /* ViewController01_DisablePopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = D69F7AC62545EFDD0097BB28 /* ViewController01_DisablePopGesture.m */; };
@@ -166,6 +167,8 @@
 		D69686252530971A00FBC7A5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D69686262530971A00FBC7A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D69686392530977F00FBC7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D6968C2A25602BA900E9C7BA /* UIDevice+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Additions.h"; sourceTree = "<group>"; };
+		D6968C2B25602BA900E9C7BA /* UIDevice+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Additions.m"; sourceTree = "<group>"; };
 		D69BDD74254B24B100599E27 /* EventInterceptModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventInterceptModel.h; sourceTree = "<group>"; };
 		D69BDD75254B24B100599E27 /* EventInterceptModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventInterceptModel.m; sourceTree = "<group>"; };
 		D69BDD7B254B2B7A00599E27 /* HierarchyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HierarchyViewController.h; sourceTree = "<group>"; };
@@ -278,14 +281,7 @@
 		62328D4CB38AD77A2EFE868F /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				D65FA152254A933900DA1EFE /* BaseNavigationController.h */,
-				D65FA153254A933900DA1EFE /* BaseNavigationController.m */,
-				D63445C2255D774F002817C7 /* BaseSplitViewController.h */,
-				D63445C3255D774F002817C7 /* BaseSplitViewController.m */,
-				62328E0E88F7E4C811B5423C /* BaseTableViewController.h */,
-				623289393F42BCB80D1E467F /* BaseTableViewController.m */,
-				D65FA15A254A98C600DA1EFE /* BaseViewController.h */,
-				D65FA15B254A98C600DA1EFE /* BaseViewController.m */,
+				D6968C2625602AE500E9C7BA /* Controllers */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -342,12 +338,7 @@
 		D6469ADD25449F2B00C583FF /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				D6469ADE25449F4D00C583FF /* UIColor+RandomColor.h */,
-				D6469ADF25449F4D00C583FF /* UIColor+RandomColor.m */,
-				D6A9B2952545D6EE000E4405 /* UIImage+NavigationBar.h */,
-				D6A9B2962545D6EE000E4405 /* UIImage+NavigationBar.m */,
-				D6506252254C312200597B05 /* UITableViewCell+Enabled.h */,
-				D6506253254C312200597B05 /* UITableViewCell+Enabled.m */,
+				D6968C2725602AF700E9C7BA /* UIKit */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -394,6 +385,36 @@
 				D67BADD1254B1865008822D6 /* ViewController05_Test.m */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D6968C2625602AE500E9C7BA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D65FA152254A933900DA1EFE /* BaseNavigationController.h */,
+				D65FA153254A933900DA1EFE /* BaseNavigationController.m */,
+				D63445C2255D774F002817C7 /* BaseSplitViewController.h */,
+				D63445C3255D774F002817C7 /* BaseSplitViewController.m */,
+				62328E0E88F7E4C811B5423C /* BaseTableViewController.h */,
+				623289393F42BCB80D1E467F /* BaseTableViewController.m */,
+				D65FA15A254A98C600DA1EFE /* BaseViewController.h */,
+				D65FA15B254A98C600DA1EFE /* BaseViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D6968C2725602AF700E9C7BA /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				D6469ADE25449F4D00C583FF /* UIColor+RandomColor.h */,
+				D6469ADF25449F4D00C583FF /* UIColor+RandomColor.m */,
+				D6968C2A25602BA900E9C7BA /* UIDevice+Additions.h */,
+				D6968C2B25602BA900E9C7BA /* UIDevice+Additions.m */,
+				D6A9B2952545D6EE000E4405 /* UIImage+NavigationBar.h */,
+				D6A9B2962545D6EE000E4405 /* UIImage+NavigationBar.m */,
+				D6506252254C312200597B05 /* UITableViewCell+Enabled.h */,
+				D6506253254C312200597B05 /* UITableViewCell+Enabled.m */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		D69F7AC42545EFB30097BB28 /* Advanced */ = {
@@ -593,6 +614,7 @@
 				D61CCC00251A13F100A91580 /* AppDelegate.m in Sources */,
 				D6A9B2972545D6EE000E4405 /* UIImage+NavigationBar.m in Sources */,
 				D61CCC11251A13F400A91580 /* main.m in Sources */,
+				D6968C2C25602BA900E9C7BA /* UIDevice+Additions.m in Sources */,
 				D6627C002547301300DB2F55 /* ViewController07_ScrollChangeNavigationBar.m in Sources */,
 				D67BADCE254B1858008822D6 /* ViewController04_Test.m in Sources */,
 				D69F7AFD25460C0B0097BB28 /* ViewController06_ClickEventHitToBack.m in Sources */,

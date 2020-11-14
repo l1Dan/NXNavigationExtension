@@ -2,7 +2,7 @@
 //  BaseSplitViewController.h
 //  UINavigationExtensionDemo
 //
-//  Created by lidan on 2020/11/12.
+//  Created by Leo Lee on 2020/11/12.
 //
 
 #import <UIKit/UIKit.h>

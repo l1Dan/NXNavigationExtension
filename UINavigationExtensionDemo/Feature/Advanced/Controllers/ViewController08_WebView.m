@@ -9,7 +9,9 @@
 #import <UINavigationExtension/UINavigationExtension.h>
 
 #import "ViewController08_WebView.h"
+
 #import "UIColor+RandomColor.h"
+#import "UIDevice+Additions.h"
 
 @interface ViewController08_WebView () <WKNavigationDelegate, UINavigationControllerCustomizable>
 
@@ -35,7 +37,7 @@
     
     self.navigationItem.title = nil;
     
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+    if (UIDevice.isPhoneDevice) {
         self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem];
     }
     [self.view addSubview:self.webView];
@@ -99,7 +101,7 @@
 #pragma mark - Action
 
 - (void)clickBackButton:(UIButton *)button {
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+    if (UIDevice.isPhoneDevice) {
         [self.navigationController ue_triggerSystemBackButtonHandler];
     } else {
         if ([self.webView canGoBack]) {
@@ -168,7 +170,7 @@
 #pragma mark - WKNavigationDelegate
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+    if (UIDevice.isPhoneDevice) {
         if (webView.canGoBack) {
             self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem, self.closeBarButtonItem];
         } else {

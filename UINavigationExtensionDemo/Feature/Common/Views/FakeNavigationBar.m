@@ -6,7 +6,9 @@
 //
 
 #import "FakeNavigationBar.h"
+
 #import "UIColor+RandomColor.h"
+#import "UIDevice+Additions.h"
 
 @interface FakeNavigationBar ()
 
@@ -40,7 +42,7 @@
     [self.backButton.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
     [self.backButton.leftAnchor constraintEqualToAnchor:self.leftAnchor].active = YES;
     
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+    if (UIDevice.isPhoneDevice) {
         [self.backButton.widthAnchor constraintEqualToConstant:44].active = YES;
     } else {
         self.backButton.hidden = YES;

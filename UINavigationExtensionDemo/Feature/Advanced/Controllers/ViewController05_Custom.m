@@ -10,7 +10,9 @@
 #import "ViewController05_Custom.h"
 #import "ViewController12_Modal.h"
 #import "UIImage+NavigationBar.h"
+
 #import "UIColor+RandomColor.h"
+#import "UIDevice+Additions.h"
 
 @interface ViewController05_Custom ()
 
@@ -43,7 +45,7 @@
     [self.backButton.topAnchor constraintEqualToAnchor:containerView.topAnchor constant:2.0].active = YES;
     [self.backButton.bottomAnchor constraintEqualToAnchor:containerView.bottomAnchor constant:-2.0].active = YES;
     
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+    if (UIDevice.isPhoneDevice) {
         [self.backButton.widthAnchor constraintEqualToConstant:44].active = YES;
     } else {
         self.backButton.hidden = YES;

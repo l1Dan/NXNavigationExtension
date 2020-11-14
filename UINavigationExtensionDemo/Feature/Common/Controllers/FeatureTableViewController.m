@@ -33,6 +33,7 @@
 
 #import "TableViewSection.h"
 #import "UIColor+RandomColor.h"
+#import "UIDevice+Additions.h"
 
 @interface FeatureTableViewController ()
 
@@ -155,7 +156,7 @@
     if ([viewController isKindOfClass:[ViewController12_Modal class]]) {
         [self presentViewController:controller animated:YES completion:NULL];
     } else {
-        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        if (UIDevice.isPhoneDevice) {
             viewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:viewController animated:YES];
         } else {

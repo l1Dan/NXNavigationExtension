@@ -10,7 +10,9 @@
 #import "DashboardTabBarController.h"
 #import "FeatureNavigationController.h"
 #import "FeatureTableViewController.h"
+
 #import "UIColor+RandomColor.h"
+#import "UIDevice+Additions.h"
 
 @interface DashboardTabBarController () <UITabBarControllerDelegate>
 
@@ -46,6 +48,7 @@
     self.viewControllers = @[navigationController1, navigationController2];
     self.tabBar.tintColor = [UIColor customDarkGrayColor];
     self.tabBar.unselectedItemTintColor = [UIColor customLightGrayColor];
+    self.tabBar.translucent = NO; // FIXED: iOS Modal -> Dismiss -> Push, TabBar BUG
     
     // ⚠️Warning!!!
     navigationController2.view.layer.borderWidth = 3.0;
@@ -54,9 +57,7 @@
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        return;
-    }
+    if (UIDevice.isPhoneDevice) return;
     
     NSMutableArray<__kindof UIViewController *> *viewControllers = [NSMutableArray arrayWithArray:self.splitViewController.viewControllers];
     if ([viewController isMemberOfClass:[viewControllers.lastObject class]]) {
@@ -64,8 +65,11 @@
     }
     
     UINavigationController *oldDetailNavigationController = viewControllers.lastObject;
-    UIViewController *contentViewController = [[[oldDetailNavigationController.viewControllers.lastObject class] alloc] init];
-    UINavigationController *detailNavigationController =  [[[viewController class] alloc] initWithRootViewController:contentViewController];
+    UIViewController *oldDetailViewController = oldDetailNavigationController.viewControllers.lastObject;
+    
+    UIViewController *detailViewController = [[[oldDetailViewController class] alloc] init];
+    detailViewController.navigationItem.title = oldDetailViewController.navigationItem.title;
+    UINavigationController *detailNavigationController =  [[[viewController class] alloc] initWithRootViewController:detailViewController];
     
     [viewControllers removeObject:oldDetailNavigationController];
     [viewControllers addObject:detailNavigationController];

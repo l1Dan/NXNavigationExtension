@@ -19,13 +19,20 @@
     [super viewDidLoad];
     
     self.navigationItem.title = nil;
+    
+#if TARGET_OS_MACCATALYST
+    CGFloat maxHeight = CGRectGetHeight(self.ue_navigationBar.frame);
+    self.tableView.contentInset = UIEdgeInsetsMake(-maxHeight, 0, 0, 0);
+#endif
 }
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
+#if !TARGET_OS_MACCATALYST
     CGFloat maxHeight = CGRectGetHeight(self.ue_navigationBar.frame);
     self.tableView.contentInset = UIEdgeInsetsMake(-maxHeight, 0, 0, 0);
+#endif
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
