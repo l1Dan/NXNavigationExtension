@@ -52,7 +52,7 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 
 @end
 
-@interface UIView (UINavigationExtensionPrivate)
+@interface UIScrollView (UINavigationExtensionPrivate)
 
 @property (nonatomic, strong) UENavigationBar *ue_navigationBar;
 

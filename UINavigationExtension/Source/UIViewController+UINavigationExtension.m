@@ -142,13 +142,16 @@
 - (void)ue_updateNavigationBarHierarchy {
     if (self.navigationController && self.navigationController.ue_useNavigationBar) {
         // FIXED: 修复导航栏 containerView 被遮挡问题
-        if (![self.view isKindOfClass:[UIScrollView class]]) {
+        if ([self.view isKindOfClass:[UIScrollView class]]) {
+            UIScrollView *view = (UIScrollView *)self.view;
+            [view.ue_navigationBar removeFromSuperview];
+            [self.ue_navigationBar removeFromSuperview];
+            
+            view.ue_navigationBar = self.ue_navigationBar;
+            [self.view.superview addSubview:self.ue_navigationBar];
+        } else {
             [self.view bringSubviewToFront:self.ue_navigationBar];
             [self.view bringSubviewToFront:self.ue_navigationBar.containerView];
-        } else {
-            self.view.ue_navigationBar = self.ue_navigationBar;
-            [self.ue_navigationBar removeFromSuperview];
-            [self.view.superview addSubview:self.ue_navigationBar];
         }
     }
 }
@@ -398,7 +401,9 @@
 }
 
 - (void)ue_setNeedsNavigationBarAppearanceUpdate {
-    [self ue_configureNavigationBarItem];
+    if (self.navigationController && self.navigationController.ue_useNavigationBar && self.navigationController.viewControllers.count > 1) {
+        [self ue_configureNavigationBarItem];
+    }
     [self ue_updateNavigationBarAppearance];
     [self ue_updateNavigationBarHierarchy];
     [self ue_updateNavigationBarSubviewState];

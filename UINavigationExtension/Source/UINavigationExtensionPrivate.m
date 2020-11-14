@@ -105,7 +105,7 @@
 
 @end
 
-@implementation UIView (UINavigationExtensionPrivate)
+@implementation UIScrollView (UINavigationExtensionPrivate)
 
 - (UENavigationBar *)ue_navigationBar {
     return objc_getAssociatedObject(self, _cmd);
@@ -118,8 +118,8 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        UINavigationExtensionSwizzleMethod([UIView class], @selector(removeFromSuperview), @selector(ue_removeFromSuperview));
-        UINavigationExtensionSwizzleMethod([UIView class], @selector(didMoveToSuperview), @selector(ue_didMoveToSuperview));
+        UINavigationExtensionSwizzleMethod([UIScrollView class], @selector(removeFromSuperview), @selector(ue_removeFromSuperview));
+        UINavigationExtensionSwizzleMethod([UIScrollView class], @selector(didMoveToSuperview), @selector(ue_didMoveToSuperview));
     });
 }
 
