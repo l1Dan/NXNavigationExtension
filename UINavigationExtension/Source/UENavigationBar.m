@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import "UENavigationBar.h"
+#import "UINavigationExtensionMacro.h"
 
 @implementation UENavigationBarAppearance
 
@@ -37,7 +38,11 @@
 - (instancetype)init {
     if (self = [super init]) {
         _tintColor = [UIColor systemBlueColor];
-        _backgorundColor = [UIColor whiteColor];
+        if (@available(iOS 13.0, *)) {
+            _backgorundColor = [UIColor systemBackgroundColor];
+        } else {
+            _backgorundColor = [UIColor whiteColor];
+        }
     }
     return self;
 }
@@ -84,7 +89,6 @@
 
         _visualEffectView = [[UIVisualEffectView alloc] initWithEffect:effect];
         _visualEffectView.hidden = YES;
-        _visualEffectView.contentView.backgroundColor = [[UENavigationBarAppearance standardAppearance].backgorundColor colorWithAlphaComponent:0.46];
         _backgroundImageView.image = [UENavigationBarAppearance standardAppearance].backgorundImage;
 
         [self addSubview:self.backgroundImageView];

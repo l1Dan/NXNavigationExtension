@@ -269,12 +269,20 @@
 }
 
 - (NSDictionary<NSAttributedStringKey,id> *)ue_titleTextAttributes {
-    NSDictionary *titleTextAttributes = objc_getAssociatedObject(self, _cmd);
-    if (titleTextAttributes && [titleTextAttributes isKindOfClass:[NSDictionary class]]) {
-        return titleTextAttributes;
+    UIColor *color = [UIColor blackColor];
+    if (@available(iOS 13.0, *)) {
+        color = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                return [UIColor whiteColor];
+            }
+            return [UIColor blackColor];
+        }];
     }
-    titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
-    objc_setAssociatedObject(self, _cmd, titleTextAttributes, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+    NSDictionary *titleTextAttributes = @{NSForegroundColorAttributeName: color};
+    if (@available(iOS 13.0, *)) {
+        titleTextAttributes = @{NSForegroundColorAttributeName: [color resolvedColorWithTraitCollection:self.view.traitCollection]};
+    }
     return titleTextAttributes;
 }
 
