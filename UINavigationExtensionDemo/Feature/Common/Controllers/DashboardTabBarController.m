@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UENavigationBarAppearance.standardAppearance.tintColor = [UIColor customDarkGrayColor];
+    UENavigationBarAppearance.standardAppearance.tintColor = [UIColor customTitleColor];
     [UENavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
     
     [UENavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
@@ -46,14 +46,29 @@
     
     self.delegate = self;
     self.viewControllers = @[navigationController1, navigationController2];
-    self.tabBar.tintColor = [UIColor customDarkGrayColor];
-    self.tabBar.unselectedItemTintColor = [UIColor customLightGrayColor];
+    
+    self.tabBar.tintColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor customDarkGrayColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        return [UIColor customLightGrayColor];
+    }];
+    
+    self.tabBar.unselectedItemTintColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor customLightGrayColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        return [UIColor customDarkGrayColor];
+    }];
+    
     self.tabBar.translucent = NO; // FIXED: iOS Modal -> Dismiss -> Push, TabBar BUG
     
     // ⚠️Warning!!!
     navigationController2.view.layer.borderWidth = 3.0;
     navigationController2.view.layer.cornerRadius = 40;
-    navigationController2.view.layer.borderColor = [UIColor redColor].CGColor;    
+    navigationController2.view.layer.borderColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor redColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        return [[UIColor redColor] colorWithAlphaComponent:0.5];
+    }].CGColor;
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {

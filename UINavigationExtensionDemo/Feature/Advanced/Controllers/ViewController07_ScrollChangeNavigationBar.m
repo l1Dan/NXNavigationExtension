@@ -75,10 +75,6 @@
     self.rightConstraint.constant = -safeAreaInsets.right;
 }
 
-- (UIColor *)ue_navigationBarBackgroundColor {
-    return [UIColor whiteColor];
-}
-
 - (UIColor *)ue_barTintColor {
     return [UIColor clearColor];
 }
@@ -105,7 +101,11 @@
     self.ue_navigationBar.alpha = alpha;
     
     if (@available(iOS 13.0, *)) {
-        self.barStyle = alpha > 0.0 ? UIStatusBarStyleDarkContent : UIStatusBarStyleLightContent;
+        if (self.view.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+            self.barStyle = UIStatusBarStyleLightContent;
+        } else {
+            self.barStyle = alpha > 0.0 ? UIStatusBarStyleDarkContent : UIStatusBarStyleLightContent;
+        }
     } else {
         self.barStyle = alpha > 0.0 ? UIStatusBarStyleDefault : UIStatusBarStyleLightContent;
     }

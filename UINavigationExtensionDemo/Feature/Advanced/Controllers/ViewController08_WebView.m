@@ -148,7 +148,8 @@
 - (UIBarButtonItem *)backBarButtonItem {
     if (!_backBarButtonItem) {
         UIButton *customView = [UIButton buttonWithType:UIButtonTypeCustom];
-        [customView setImage:[UIImage imageNamed:@"NavigationBarBack"] forState:UIControlStateNormal];
+        [customView setImage:[[UIImage imageNamed:@"NavigationBarBack"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [customView setTintColor:UIColor.customTitleColor];
         [customView sizeToFit];
         [customView addTarget:self action:@selector(clickBackButton:) forControlEvents:UIControlEventTouchUpInside];
         _backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customView];
@@ -159,7 +160,8 @@
 - (UIBarButtonItem *)closeBarButtonItem {
     if (!_closeBarButtonItem) {
         UIButton *customView = [UIButton buttonWithType:UIButtonTypeCustom];
-        [customView setImage:[UIImage imageNamed:@"NavigationBarClose"] forState:UIControlStateNormal];
+        [customView setImage:[[UIImage imageNamed:@"NavigationBarClose"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [customView setTintColor:UIColor.customTitleColor];
         [customView sizeToFit];
         [customView addTarget:self action:@selector(clickCloseButton:) forControlEvents:UIControlEventTouchUpInside];
         _closeBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customView];

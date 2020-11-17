@@ -11,7 +11,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIColor (RandomColor)
 
-+ (UIColor *)randomColor;
++ (UIColor *)randomLightColor;
+
++ (UIColor *)randomDarkColor;
+
++ (UIColor *)customTitleColor;
+
++ (UIColor *)customTextColor;
 
 + (UIColor *)customLightGrayColor;
 
@@ -19,9 +25,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIColor *)customBlueColor;
 
++ (UIColor *)customBackgroundColor;
+
 + (UIColor *)customGroupedBackgroundColor;
 
 + (UIColor *)mixColor1:(UIColor*)color1 color2:(UIColor *)color2 ratio:(CGFloat)ratio;
+
++ (UIColor *)customColorWithLightModeColor:(UIColor *(^)(void))lightModeColor darkModeColor:(UIColor *(^)(void))darkModeColor;
 
 @end
 

@@ -23,7 +23,8 @@
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     closeButton.frame = CGRectMake(0, 0, 44, 40);
     closeButton.backgroundColor = [UIColor clearColor];
-    [closeButton setImage:[UIImage imageNamed:@"NavigationBarClose"] forState:UIControlStateNormal];
+    [closeButton setImage:[[UIImage imageNamed:@"NavigationBarClose"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [closeButton setTintColor:UIColor.customTitleColor];
     [closeButton addTarget:self action:@selector(clickCloseButton:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
 }
@@ -34,14 +35,6 @@
     } else {
         return UIStatusBarStyleDefault;
     }
-}
-
-- (NSDictionary<NSAttributedStringKey,id> *)ue_titleTextAttributes {
-    return @{NSForegroundColorAttributeName: [UIColor customDarkGrayColor]};
-}
-
-- (UIColor *)ue_navigationBarBackgroundColor {
-    return [UIColor customGroupedBackgroundColor];
 }
 
 - (void)clickCloseButton:(UIButton *)button {

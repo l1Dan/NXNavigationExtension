@@ -23,8 +23,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.randomColor = [UIColor randomColor];
+    self.randomColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor randomLightColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        return [UIColor randomDarkColor];
+    }];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
+}
+
+- (UIColor *)ue_shadowImageTintColor {
+    return [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor lightGrayColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        return [[UIColor lightGrayColor] colorWithAlphaComponent:0.65];
+    }];
 }
 
 #pragma mark - Table view data source
@@ -39,7 +51,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"Row: %zd with UIScrollView", indexPath.row];
-    cell.textLabel.textColor = [UIColor customDarkGrayColor];
+    cell.textLabel.textColor = [UIColor customTextColor];
     cell.contentView.backgroundColor = self.randomColor;
     return cell;
 }

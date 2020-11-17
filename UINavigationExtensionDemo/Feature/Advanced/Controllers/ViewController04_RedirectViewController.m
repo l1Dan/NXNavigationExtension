@@ -31,8 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor customGroupedBackgroundColor];
-    
     if (![NSStringFromClass([self class]) isEqualToString:NSStringFromClass([ViewController04_RedirectViewController class])]) {
         self.navigationItem.title = NSStringFromClass([self class]);
     }
@@ -60,7 +58,7 @@
 }
 
 - (NSDictionary<NSAttributedStringKey,id> *)ue_titleTextAttributes {
-    return @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    return @{NSForegroundColorAttributeName: [self ue_barTintColor]};
 }
 
 #pragma mark - Getter
@@ -136,14 +134,13 @@
     [cell setCellClickEnabled:model.clickEnabled];
     
     cell.contentView.backgroundColor = nil;
-    cell.textLabel.textColor = [UIColor customDarkGrayColor];
+    cell.textLabel.textColor = [UIColor customTextColor];
     if (model.type == RedirectViewControllerTypeChoose) {
         cell.textLabel.text = model.title;
         cell.accessoryType = UITableViewCellAccessoryNone;
     } else if (model.type == RedirectViewControllerTypeJump) {
         NSArray<__kindof UIViewController *> *viewControllers = self.navigationController.viewControllers;
         if (viewControllers.count < 2) {
-            cell.contentView.backgroundColor = [UIColor whiteColor];
             cell.textLabel.text = model.title;
         } else {
             __kindof UIViewController *redirectToViewController = viewControllers[viewControllers.count - 2];
@@ -151,7 +148,7 @@
                 cell.contentView.backgroundColor = [(BaseViewController *)redirectToViewController randomColor];
                 cell.textLabel.text = [NSString stringWithFormat:@"%@%@", model.title, NSStringFromClass([redirectToViewController class])];
             } else {
-                cell.contentView.backgroundColor = [UIColor whiteColor];
+                cell.contentView.backgroundColor = nil;
                 cell.textLabel.text = [NSString stringWithFormat:@"%@%@", model.title, NSStringFromClass([redirectToViewController class])];
             }
         }

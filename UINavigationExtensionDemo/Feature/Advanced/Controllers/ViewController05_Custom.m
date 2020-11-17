@@ -106,7 +106,13 @@
         _searchTextField.leftViewMode = UITextFieldViewModeAlways;
         _searchTextField.leftView = imageView;
         _searchTextField.tintColor = [UIColor customDarkGrayColor];
-        _searchTextField.backgroundColor = [UIColor whiteColor];
+        _searchTextField.textColor = [UIColor customDarkGrayColor];
+        _searchTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入关键字" attributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor]}];
+        _searchTextField.backgroundColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+            return [UIColor whiteColor];
+        } darkModeColor:^UIColor * _Nonnull{
+            return [UIColor systemGrayColor];
+        }];
     }
     return _searchTextField;
 }
@@ -114,7 +120,11 @@
 - (UIButton *)backButton {
     if (!_backButton) {
         _backButton = [[UIButton alloc] init];
-        _backButton.backgroundColor = [UIColor greenColor];
+        _backButton.backgroundColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+            return [UIColor greenColor];
+        } darkModeColor:^UIColor * _Nonnull{
+            return [[UIColor greenColor] colorWithAlphaComponent:0.5];
+        }];
         [_backButton setImage:[UIImage imageNamed:@"NavigationBarBack"] forState:UIControlStateNormal];
         [_backButton addTarget:self.navigationController action:@selector(ue_triggerSystemBackButtonHandler) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -124,7 +134,11 @@
 - (UIButton *)addButton {
     if (!_addButton) {
         _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _addButton.backgroundColor = [UIColor orangeColor];
+        _addButton.backgroundColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+            return [UIColor orangeColor];
+        } darkModeColor:^UIColor * _Nonnull{
+            return [[UIColor orangeColor] colorWithAlphaComponent:0.5];
+        }];
         [_addButton setImage:[UIImage imageNamed:@"NavigationBarAdd"] forState:UIControlStateNormal];
         [_addButton addTarget:self action:@selector(clickAddButton:) forControlEvents:UIControlEventTouchUpInside];
     }

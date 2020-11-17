@@ -43,7 +43,7 @@
 }
 
 - (NSDictionary<NSAttributedStringKey,id> *)ue_titleTextAttributes {
-    return @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    return @{NSForegroundColorAttributeName: [self ue_barTintColor]};
 }
 
 - (UIColor *)ue_navigationBarBackgroundColor {

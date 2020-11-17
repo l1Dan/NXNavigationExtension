@@ -18,11 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
-}
-
-- (UIColor *)ue_navigationBarBackgroundColor {
-    return [UIColor whiteColor];
 }
 
 - (UIColor *)ue_shadowImageTintColor {

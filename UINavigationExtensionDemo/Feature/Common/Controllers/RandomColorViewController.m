@@ -15,6 +15,8 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
 @interface RandomColorViewController ()
 
 @property (nonatomic, strong) UIColor *currentRandomColor;
+@property (nonatomic, strong) UIColor *lightRandomColor;
+@property (nonatomic, strong) UIColor *darkRandomColor;
 @property (nonatomic, strong) UIButton *randomColorButton;
 
 @end
@@ -23,7 +25,14 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        _currentRandomColor = [UIColor randomColor];
+        _lightRandomColor = [UIColor randomLightColor];
+        _darkRandomColor = [UIColor randomDarkColor];
+        
+        _currentRandomColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+            return self.lightRandomColor;
+        } darkModeColor:^UIColor * _Nonnull{
+            return self.darkRandomColor;
+        }];
     }
     return self;
 }
@@ -31,7 +40,6 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = self.navigationItem.title ?: NSStringFromClass([self class]);
     [self.view addSubview:self.randomColorButton];
     
@@ -71,9 +79,14 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
 - (void)clickRandomColorButton:(UIButton *)button {
     button.tag += 1;
     
-    self.currentRandomColor = [UIColor randomColor];
+    self.lightRandomColor = [UIColor randomLightColor];
+    self.darkRandomColor = [UIColor randomDarkColor];
+    
     self.randomColorButton.layer.borderColor = self.currentRandomColor.CGColor;
     [self.randomColorButton setTitleColor:self.currentRandomColor forState:UIControlStateNormal];
+    if (@available(iOS 13.0, *)) {
+        [self.randomColorButton setTitleColor:[self.currentRandomColor resolvedColorWithTraitCollection:self.view.traitCollection] forState:UIControlStateNormal];
+    }
     
     [self ue_setNeedsNavigationBarAppearanceUpdate];
     [self setNeedsStatusBarAppearanceUpdate];

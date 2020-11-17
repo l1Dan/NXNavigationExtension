@@ -26,7 +26,11 @@
 }
 
 - (UIColor *)randomColor {
-    return [UIColor randomColor];
+    return [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor randomLightColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        return [UIColor randomDarkColor];
+    }];
 }
 
 @end

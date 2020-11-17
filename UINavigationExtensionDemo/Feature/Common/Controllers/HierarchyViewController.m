@@ -99,17 +99,21 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
     
-    cell.contentView.backgroundColor = [UIColor whiteColor];
+    cell.contentView.backgroundColor = nil;
     if (indexPath.row < self.chooseViewControllers.count) {
         __kindof UIViewController *viewController = self.chooseViewControllers[indexPath.row];
         cell.textLabel.text = NSStringFromClass([viewController class]);
-        cell.textLabel.textColor = [UIColor customDarkGrayColor];
+        cell.textLabel.textColor = [UIColor customTextColor];
         if ([viewController isKindOfClass:[BaseViewController class]]) {
             cell.contentView.backgroundColor = [(BaseViewController *)viewController randomColor];
         }
     } else {
         cell.textLabel.text = @"创建新的 UIViewController 实例对象";
-        cell.textLabel.textColor = [UIColor blueColor];
+        cell.textLabel.textColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+            return  [UIColor blueColor];
+        } darkModeColor:^UIColor * _Nonnull{
+            return [[UIColor blueColor] colorWithAlphaComponent:0.5];
+        }];
     }
     
     return cell;

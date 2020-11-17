@@ -7,6 +7,7 @@
 
 #import "AppDelegate.h"
 #import "BaseSplitViewController.h"
+#import "UIColor+RandomColor.h"
 
 @interface AppDelegate ()
 
@@ -17,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor customBackgroundColor];
     self.window.rootViewController = [[BaseSplitViewController alloc] init];
     
     [self.window makeKeyAndVisible];

@@ -22,7 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
     
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -31,10 +30,6 @@
     [self.tableView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
     [self.tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
     [self.tableView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = YES;
-}
-
-- (UIColor *)ue_shadowImageTintColor {
-    return [UIColor customLightGrayColor];
 }
 
 #pragma mark - Getter
@@ -62,8 +57,12 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"Row: %zd", indexPath.row];
-    cell.textLabel.textColor = [UIColor customDarkGrayColor];
-    cell.contentView.backgroundColor = self.randomColor;
+    cell.textLabel.textColor = [UIColor customTextColor];
+    cell.contentView.backgroundColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor randomLightColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        return [UIColor randomDarkColor];
+    }];
     return cell;
 }
 

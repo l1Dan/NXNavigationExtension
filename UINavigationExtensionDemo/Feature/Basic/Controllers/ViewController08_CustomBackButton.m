@@ -24,8 +24,9 @@
 - (UIView *)ue_backButtonCustomView {
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setTitle:@"😋" forState:UIControlStateNormal];
-    [backButton setImage:[UIImage imageNamed:@"NavigationBarBack"] forState:UIControlStateNormal];
+    [backButton setImage:[[UIImage imageNamed:@"NavigationBarBack"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [backButton setTitleColor:UIColor.customDarkGrayColor forState:UIControlStateNormal];
+    [backButton setTintColor:UIColor.customTitleColor];
     return backButton;
 }
 

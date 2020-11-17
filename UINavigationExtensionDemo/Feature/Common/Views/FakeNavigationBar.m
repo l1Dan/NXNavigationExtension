@@ -110,7 +110,6 @@
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.font = [UIFont systemFontOfSize:18];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.textColor = [UIColor customDarkGrayColor];
         _titleLabel.backgroundColor = [UIColor clearColor];
     }
     return _titleLabel;
@@ -119,8 +118,8 @@
 #pragma mark - Public
 - (void)updateNavigationBarAlpha:(CGFloat)alpha {
     UIColor *whiteColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]; // 不要使用 [UIColor whiteColor]
-    self.backButton.tintColor = [UIColor mixColor1:[UIColor customDarkGrayColor] color2:whiteColor ratio:alpha];
-    self.rightButton.tintColor = [UIColor mixColor1:[UIColor customDarkGrayColor] color2:whiteColor ratio:alpha];
+    self.backButton.tintColor = [UIColor mixColor1:[UIColor customTitleColor] color2:whiteColor ratio:alpha];
+    self.rightButton.tintColor = [UIColor mixColor1:[UIColor customTitleColor] color2:whiteColor ratio:alpha];
     self.titleLabel.alpha = alpha;
 }
 

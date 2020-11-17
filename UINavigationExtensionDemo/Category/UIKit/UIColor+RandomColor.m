@@ -9,11 +9,34 @@
 
 @implementation UIColor (RandomColor)
 
-+ (UIColor *)randomColor {
++ (UIColor *)randomLightColor {
     CGFloat hue = arc4random() % 256 / 256.0;
     CGFloat saturation = arc4random() % 128 / 256.0 + 0.5;
     CGFloat brightness = arc4random() % 128 / 256.0 + 0.5;
     return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1.0];
+}
+
++ (UIColor *)randomDarkColor {
+    CGFloat hue = arc4random() % 256 / 256.0;
+    CGFloat saturation = arc4random() % 128 / 256.0;
+    CGFloat brightness = arc4random() % 128 / 256.0;
+    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1.0];
+}
+
++ (UIColor *)customTitleColor {
+    return [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]; // ![UIColor blackColor]
+    } darkModeColor:^UIColor * _Nonnull{
+        return [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]; // ![UIColor whiteColor]
+    }];
+}
+
++ (UIColor *)customTextColor {
+    return [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor customDarkGrayColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        return [UIColor customLightGrayColor];
+    }];
 }
 
 + (UIColor *)customDarkGrayColor {
@@ -28,8 +51,28 @@
     return [UIColor colorWithRed:0.0 green:122 / 255.0 blue:1.0 alpha:1.0]; // [UIColor systemBlueColor]
 }
 
++ (UIColor *)customBackgroundColor {
+    return [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor whiteColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        if (@available(iOS 13.0, *)) {
+            return [UIColor systemBackgroundColor];
+        } else {
+            return [UIColor whiteColor];
+        }
+    }];
+}
+
 + (UIColor *)customGroupedBackgroundColor {
-    return [UIColor colorWithRed:239 / 255.0 green:239 / 255.0 blue:244 / 255.0 alpha:1.0]; // [UIColor groupTableViewBackgroundColor];
+    return [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor colorWithRed:239 / 255.0 green:239 / 255.0 blue:244 / 255.0 alpha:1.0]; // [UIColor groupTableViewBackgroundColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        if (@available(iOS 13.0, *)) {
+            return [UIColor systemGroupedBackgroundColor];
+        } else {
+            return [UIColor colorWithRed:239 / 255.0 green:239 / 255.0 blue:244 / 255.0 alpha:1.0]; // [UIColor groupTableViewBackgroundColor];
+        }
+    }];
 }
 
 + (UIColor *)mixColor1:(UIColor*)color1 color2:(UIColor *)color2 ratio:(CGFloat)ratio {
@@ -43,6 +86,18 @@
     CGFloat b = components1[2] * ratio + components2[2] * (1 - ratio);
     
     return [UIColor colorWithRed:r green:g blue:b alpha:1];
+}
+
++ (UIColor *)customColorWithLightModeColor:(UIColor *(^)(void))lightModeColor darkModeColor:(UIColor *(^)(void))darkModeColor {
+    if (@available(iOS 13.0, *)) {
+        return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                return darkModeColor();
+            }
+            return lightModeColor();
+        }];
+    }
+    return lightModeColor();
 }
 
 @end

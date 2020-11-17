@@ -47,16 +47,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.backgroundColor = [UIColor customGroupedBackgroundColor];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"FeatureTableViewCellIdentifer"];
 }
 
-- (UIColor *)ue_navigationBarBackgroundColor {
-    return [UIColor whiteColor];
+- (NSDictionary<NSAttributedStringKey,id> *)ue_titleTextAttributes {
+    return @{NSForegroundColorAttributeName: [UIColor customTitleColor]};
 }
 
-- (NSDictionary<NSAttributedStringKey,id> *)ue_titleTextAttributes {
-    return @{NSForegroundColorAttributeName: [UIColor customDarkGrayColor]};
+- (UIColor *)ue_shadowImageTintColor {
+    return [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor lightGrayColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        return [[UIColor lightGrayColor] colorWithAlphaComponent:0.65];
+    }];
+}
+
+- (BOOL)ue_useSystemBlurNavigationBar {
+    return YES;
 }
 
 #pragma mark - Getter
@@ -132,7 +139,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FeatureTableViewCellIdentifer"];
-    cell.textLabel.textColor = [UIColor customDarkGrayColor];
+    cell.textLabel.textColor = [UIColor customTextColor];
     TableViewSectionItem *item = self.sections[indexPath.section].items[indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%02zd: %@", indexPath.row + 1, item.title];
     cell.accessoryType = item.showDisclosureIndicator ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;

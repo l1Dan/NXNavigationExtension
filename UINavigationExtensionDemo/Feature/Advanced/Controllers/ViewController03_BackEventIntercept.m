@@ -9,6 +9,7 @@
 
 #import "ViewController03_BackEventIntercept.h"
 #import "EventInterceptModel.h"
+#import "UIColor+RandomColor.h"
 
 @interface ViewController03_BackEventIntercept () <UINavigationControllerCustomizable>
 
@@ -27,8 +28,12 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
 }
 
-- (UIColor *)ue_navigationBarBackgroundColor {
-    return [UIColor systemGrayColor];
+- (UIColor *)ue_shadowImageTintColor {
+    return [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor lightGrayColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        return [[UIColor lightGrayColor] colorWithAlphaComponent:0.65];
+    }];
 }
 
 #pragma mark - Private
@@ -67,6 +72,11 @@
     EventInterceptModel *item = self.allModels[indexPath.row];
     cell.textLabel.text = item.title;
     cell.accessoryType = item.isSelected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    if (@available(iOS 13.0, *)) {
+        cell.contentView.backgroundColor = [UIColor secondarySystemGroupedBackgroundColor];
+    } else {
+        cell.contentView.backgroundColor = [UIColor customGroupedBackgroundColor];
+    }
     
     if (item.isSelected) {
         self.currentItemType = item.itemType;
