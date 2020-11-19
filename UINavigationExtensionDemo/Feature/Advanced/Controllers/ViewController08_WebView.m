@@ -49,6 +49,20 @@
     [self.webView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
     [self.webView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
     [self.webView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = YES;
+    
+    if (@available(iOS 13.0, *)) {
+        self.webView.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            if (self.view.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                self.webView.opaque = NO;
+                return [UIColor clearColor];
+            }
+            self.webView.opaque = YES;
+            return [UIColor whiteColor];
+        }];
+    } else {
+        self.webView.opaque = YES;
+        self.webView.backgroundColor = nil;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -194,7 +208,6 @@
         [self.webView goBack];
         return NO;
     }
-    
     return YES;
 }
 

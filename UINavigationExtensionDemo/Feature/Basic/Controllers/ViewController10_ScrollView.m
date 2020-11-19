@@ -14,7 +14,6 @@
 
 @interface ViewController10_ScrollView ()
 
-@property (nonatomic, strong) UIColor *randomColor;
 
 @end
 
@@ -23,11 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.randomColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
-        return [UIColor randomLightColor];
-    } darkModeColor:^UIColor * _Nonnull{
-        return [UIColor randomDarkColor];
-    }];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
 }
 
@@ -52,7 +46,11 @@
     }
     cell.textLabel.text = [NSString stringWithFormat:@"Row: %zd with UIScrollView", indexPath.row];
     cell.textLabel.textColor = [UIColor customTextColor];
-    cell.contentView.backgroundColor = self.randomColor;
+    cell.contentView.backgroundColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor randomLightColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        return [UIColor randomDarkColor];
+    }];;
     return cell;
 }
 

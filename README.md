@@ -4,13 +4,13 @@
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/UINavigationExtension.svg?style=flat)](https://img.shields.io/cocoapods/v/UINavigationExtension.svg) ![Language](https://img.shields.io/github/languages/top/l1dan/UINavigationExtension.svg?style=flat) [![MIT Licence](https://img.shields.io/github/license/l1dan/UINavigationExtension.svg?style=flat)](https://opensource.org/licenses/mit-license.php) [![Platform](https://img.shields.io/cocoapods/p/UINavigationExtension.svg?style=flat)](https://github.com/l1Dan/UINavigationExtension/blob/master/README.md) [![GitHub last commit](https://img.shields.io/github/last-commit/l1Dan/UINavigationExtension.svg?style=flat)](https://img.shields.io/github/last-commit/l1Dan/UINavigationExtension) 
 
-UINavigationExtension 是为 iOS 应用设计的一个简单、易用的导航栏处理框架。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。
+UINavigationExtension 是为 iOS 应用设计的一个简单、易用的导航栏处理框架。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。UINavigationExtension 和 [示例程序代码](https://github.com/l1Dan/UINavigationExtension/archive/master.zip) 都已经适配暗黑模式（Dark Mode）。
 
-## 预览
+## 🎉 [预览](https://raw.githubusercontent.com/l1Dan/UINavigationExtension/master/Snapshots/PreviewLightMode.png) & [暗黑模式](https://raw.githubusercontent.com/l1Dan/UINavigationExtension/master/Snapshots/PreviewDarkMode.png)
 
-![Preview](https://raw.githubusercontent.com/l1Dan/UINavigationExtension/master/Snapshots/Preview.png)
+![Preview](https://raw.githubusercontent.com/l1Dan/UINavigationExtension/master/Snapshots/PreviewLightMode.png)
 
-## 开始使用
+## 🌟 开始使用
 
 [下载 UINavigationExtension](https://github.com/l1Dan/UINavigationExtension/archive/master.zip) 示例程序代码。
 
@@ -37,13 +37,13 @@ github "l1Dan/UINavigationExtension"
 github "l1Dan/UINavigationExtension" ~> 2.3.10
 ```
 
-## 要求
+## 🌈 要求
 
 | UINavigationExtension Version | Minimum iOS Target  | Minimum macOS Target  | Minimum watchOS Target  | Minimum tvOS Target  |                                   Notes                                   |
 |:--------------------:|:---------------------------:|:----------------------------:|:----------------------------:|:----------------------------:|:-------------------------------------------------------------------------:|
 | 2.x | iOS 11 | macOS 10.15 | n/a | n/a | macOS: macCatalyst
 
-## 功能
+## 👏 功能
 
 ### 基本功能
 
@@ -68,7 +68,7 @@ github "l1Dan/UINavigationExtension" ~> 2.3.10
 - `动态修改导航栏样式`
 - `更新导航栏样式`
 
-## 使用
+## 🍽 使用
 所有对导航栏外观的修改都是基于视图控制器 `UIViewController` 修改的，而不是基于导航控制器 `UINavigationController` 修改，这种设计逻辑更加符合实际应用场景。也就是自己所在的导航栏的外观自己管理就好。
 
 1. 导入头文件 `#import <UINavigationExtension/UINavigationExtension.h>`
@@ -89,7 +89,7 @@ github "l1Dan/UINavigationExtension" ~> 2.3.10
 
 建议：除非你非常明白修改全局性东西的后果，否则不要修改，这么做的原因就是为了减少走一些弯路！
 
-## 基本功能
+## 🍻 基本功能
 ### 修改返回按钮箭头颜色
 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
 
@@ -201,7 +201,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 
 ---
 
-## 高级功能
+## 🍺 高级功能
 #### 禁用滑动返回手势
 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController01_DisablePopGesture.m)
 
@@ -328,6 +328,6 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 }
 ```
 
-## 协议
+## 📄 协议
 
 UINavigationExtension 框架是在 MIT 许可下发布的。详情请参见 [LICE*N*SE](https://github.com/l1Dan/UINavigationExtension/blob/master/LICENSE)。
