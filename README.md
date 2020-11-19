@@ -47,51 +47,51 @@ github "l1Dan/UINavigationExtension" ~> 2.3.10
 
 ### 基本功能
 
-- `修改返回按钮箭头颜色`
-- `修改导航栏标题颜色`
-- `修改导航栏背景颜色`
-- `修改导航栏背景图片`
-- `设置导航栏透明`
-- `设置导航栏半透明`
-- `修改导航栏底部线条颜色`
-- `修改导航栏底部线条颜色图片`
-- `自定义返回按钮图片`
-- `自定义返回按钮`
+- ✅` 修改返回按钮箭头颜色`
+- ✅` 修改导航栏标题颜色`
+- ✅` 修改导航栏背景颜色`
+- ✅` 修改导航栏背景图片`
+- ✅` 设置导航栏透明`
+- ✅` 设置导航栏半透明`
+- ✅` 修改导航栏底部线条颜色`
+- ✅` 修改导航栏底部线条颜色图片`
+- ✅` 自定义返回按钮图片`
+- ✅` 自定义返回按钮`
 
 ### 高级功能
 
-- `禁用滑动返回手势`
-- `启用全屏滑动返回手势`
-- `导航栏返回事件拦截`
-- `重定向任一控制器跳转`
-- `导航栏点击事件穿透到底部`
-- `动态修改导航栏样式`
-- `更新导航栏样式`
+- ✅` 禁用滑动返回手势`
+- ✅` 启用全屏滑动返回手势`
+- ✅` 导航栏返回事件拦截`
+- ✅` 重定向任一控制器跳转`
+- ✅` 导航栏点击事件穿透到底部`
+- ✅` 动态修改导航栏样式`
+- ✅` 更新导航栏样式`
 
 ## 🍽 使用
 所有对导航栏外观的修改都是基于视图控制器 `UIViewController` 修改的，而不是基于导航控制器 `UINavigationController` 修改，这种设计逻辑更加符合实际应用场景。也就是自己所在的导航栏的外观自己管理就好。
 
-1. 导入头文件 `#import <UINavigationExtension/UINavigationExtension.h>`
-2. 使用之前需要先注册需要修改的导航控制器，以 `FeatureNavigationController` 为例：
+1. 💉 导入头文件 `#import <UINavigationExtension/UINavigationExtension.h>`
+2. 💉 使用之前需要先注册需要修改的导航控制器，以 `FeatureNavigationController` 为例：
 ```objective-c
 [UENavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
 ```
 
 **注意**：
-- 使用之前需要先注册导航控制器，注册之后对导航栏的修改才会生效，也仅限于修改本类所管理的视图控制器，对于子类导航控制器所管理的视图控制器是不会生效的，这样可以有效避免框架污染到其他的导航控制器，保持“谁使用，谁注册”的原则。
-- 不要直接注册 `UINavigationController`，这个影响范围比较太广，建议创建一个 `UINavigationController` 的子类，对这个类进行注册。
-- 不要使用系统导航栏隐藏、显示方法, `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:`。
-- 不要使用系统导航栏修改透明度。
-- 不要使用系统导航栏或导航控制器 `appearance` 相关属性修改。
-- 不要使用全局 `edgesForExtendedLayout` 修改。
-- 不要使用 `<UIGestureRecognizerDelegate>` 相关方法禁用手势返回。
-- 一句话“不要直接操作导航栏或者导航控制器，把这些都交给 `UINavigationExtension` 处理吧“。
+- 👉 使用之前需要先注册导航控制器，注册之后对导航栏的修改才会生效，也仅限于修改本类所管理的视图控制器，对于子类导航控制器所管理的视图控制器是不会生效的，这样可以有效避免框架污染到其他的导航控制器，保持“谁使用，谁注册”的原则。
+- 🚫 不要直接注册 `UINavigationController`，这个影响范围比较太广，建议创建一个 `UINavigationController` 的子类，对这个类进行注册。
+- 🚫 不要使用系统导航栏隐藏、显示方法, `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:`。
+- 🚫 不要使用系统导航栏修改透明度。
+- 🚫 不要使用系统导航栏或导航控制器 `appearance` 相关属性修改。
+- 🚫 不要使用全局 `edgesForExtendedLayout` 修改。
+- 🚫 不要使用 `<UIGestureRecognizerDelegate>` 相关方法禁用手势返回。
+- 💉 一句话“不要直接操作导航栏或者导航控制器，把这些都交给 `UINavigationExtension` 处理吧“。
 
 建议：除非你非常明白修改全局性东西的后果，否则不要修改，这么做的原因就是为了减少走一些弯路！
 
 ## 🍻 基本功能
 ### 修改返回按钮箭头颜色
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
 
 **导航栏返回按钮颜色默认使用系统蓝色 `[UIColor systemBlueColor]`，要改变返回按钮颜色可以使用以下方式配合：**
 
@@ -106,7 +106,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 ```
 
 ## 修改导航栏标题颜色
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
 
 ```objective-c
 - (NSDictionary<NSAttributedStringKey,id> *)ue_titleTextAttributes {
@@ -115,7 +115,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 ```
 
 #### 修改导航栏背景颜色
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController01_BackgroundColor.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController01_BackgroundColor.m)
 
 ```objective-c
 - (UIColor *)ue_navigationBarBackgroundColor {
@@ -124,7 +124,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 ```
 
 #### 修改导航栏背景图片
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController02_BackgroundImage.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController02_BackgroundImage.m)
 
 ```objective-c
 - (UIImage *)ue_navigationBarBackgroundImage {
@@ -133,7 +133,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 ```
 
 #### 设置导航栏透明
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController03_Transparent.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController03_Transparent.m)
 
 ```objective-c
 - (UIColor *)ue_navigationBarBackgroundColor {
@@ -142,7 +142,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 ```
 
 #### 设置导航栏半透明
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController04_Translucent.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController04_Translucent.m)
 
 ```objective-c
 - (BOOL)ue_useSystemBlurNavigationBar {
@@ -151,7 +151,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 ```
 
 ### 修改导航栏底部线条颜色
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController05_ShadowColor.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController05_ShadowColor.m)
 
 ```objective-c
 - (UIColor *)ue_shadowImageTintColor {
@@ -160,7 +160,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 ```
 
 ### 修改导航栏底部线条颜色图片
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController06_ShadowImage.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController06_ShadowImage.m)
 
 ```objective-c
 - (UIColor *)ue_shadowImageTintColor {
@@ -169,7 +169,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 ```
 
 ### 修改导航栏底部线条颜色图片
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController06_ShadowImage.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController06_ShadowImage.m)
 
 ```objective-c
 - (UIImage *)ue_shadowImage {
@@ -178,7 +178,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 ```
 
 ### 自定义返回按钮图片
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController07_CustomBackButtonImage.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController07_CustomBackButtonImage.m)
 
 ```objective-c
 - (UIImage *)ue_backImage {
@@ -187,7 +187,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 ```
 
 ### 自定义返回按钮
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController08_CustomBackButton.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Basic/Controllers/ViewController08_CustomBackButton.m)
 
 ```objective-c
 - (UIView *)ue_backButtonCustomView {
@@ -203,7 +203,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 
 ## 🍺 高级功能
 #### 禁用滑动返回手势
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController01_DisablePopGesture.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController01_DisablePopGesture.m)
 
 ```objective-c
 - (BOOL)ue_disableInteractivePopGesture {
@@ -212,7 +212,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 ```
 
 #### 启用全屏滑动返回手势
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController02_FullPopGesture.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController02_FullPopGesture.m)
 
 - 局部有效（在所处页面设置）
 ```objective-c
@@ -227,7 +227,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 ```
 
 #### 导航栏返回事件拦截
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController03_BackEventIntercept.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController03_BackEventIntercept.m)
 
 需要遵守协议 `<UINavigationControllerCustomizable>`，实现代理方法：
 ```objective-c
@@ -269,7 +269,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 自定义返回按钮事件拦截需要调用方法：`[self.navigationController ue_triggerSystemBackButtonHandler];`
 
 ### 重定向任一控制器跳转
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController04_RedirectViewController.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController04_RedirectViewController.m)
 
 - 以重定向到 `RandomColorViewController` 为例，如果之前有 Push 过 `RandomColorViewController` 的实例，则最后会跳转到实例中，如果没有则会调用 `block`，如果 `block == NULL` 或者 `return nil;` 则重定向跳转不会发生。
 - 执行重定向操作之后，并不会直接跳转到对应的视图控制器，如果需要 `跳转` 操作，可以调用 `popViewControllerAnimated:` 、`使用手势返回`、`点击返回按钮返回`。
@@ -291,7 +291,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 上面代码大意为：首先查找 `self.navigationController.ViewConrollers` 是否存在一个类型为 `[RandomColorViewController class]` 的实例对象，如果存在则重定向到此视图控制器，没有则使用 `[[RandomColorViewController alloc] init]` 来创建一个新的 `[RandomColorViewController class]` 的实例对象。
 
 ### 导航栏点击事件穿透到底部
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController06_ClickEventHitToBack.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController06_ClickEventHitToBack.m)
 
 ```objective-c
 - (BOOL)ue_hidesNavigationBar {
@@ -300,7 +300,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 ```
 
 ### 动态修改导航栏样式
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
 
 ```objective-c
 - (BOOL)ue_containerViewWithoutNavigtionBar {
@@ -311,7 +311,7 @@ UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 可以动态调整 ContainerView 透明度实现：`self.ue_navigationBar.containerView.alpha = value`
 
 ### 更新导航栏样式
-[示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Common/Controllers/RandomColorViewController.m)
+📝 [示例代码](https://github.com/l1Dan/UINavigationExtension/blob/master/UINavigationExtensionDemo/Feature/Common/Controllers/RandomColorViewController.m)
 
 ```objective-c
 [self ue_setNeedsNavigationBarAppearanceUpdate];
