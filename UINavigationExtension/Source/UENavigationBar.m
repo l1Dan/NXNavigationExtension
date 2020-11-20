@@ -64,11 +64,13 @@
 @end
 
 @implementation UENavigationBar {
+    CGRect _originalNavigationBarFrame;
     UIEdgeInsets _containerViewEdgeInsets;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        _originalNavigationBarFrame = CGRectZero;
         _shadowImageView = [[UIImageView alloc] init];
         _shadowImageView.contentMode = UIViewContentModeScaleAspectFill;
         _shadowImageView.clipsToBounds = YES;
@@ -103,32 +105,26 @@
     [self updateNavigationBarContentFrame];
 }
 
-// 及时更新 NavigationBar content frame
 - (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
+    _originalNavigationBarFrame = frame;
+    
+    // 重新设置 NavigationBar frame
+    [super setFrame:CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetMaxY(frame))];
     [self updateNavigationBarContentFrame];
 }
 
 #pragma mark - Private
 
 - (void)updateNavigationBarContentFrame {
-    self.visualEffectView.frame = self.bounds;
-    self.backgroundImageView.frame = self.bounds;
+    CGRect navigationBarFrame = CGRectMake(0, 0, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame));
+    self.visualEffectView.frame = navigationBarFrame;
+    self.backgroundImageView.frame = navigationBarFrame;
 
-    __kindof UIWindow *keyWindow = UIApplication.sharedApplication.windows.firstObject;
-    for (__kindof UIWindow *window in UIApplication.sharedApplication.windows) {
-        if (window.isKeyWindow) {
-            keyWindow = window;
-        }
-    }
+    CGRect containerViewFrame = CGRectMake(0, CGRectGetMinY(_originalNavigationBarFrame), CGRectGetWidth(_originalNavigationBarFrame), CGRectGetHeight(_originalNavigationBarFrame));
+    self.containerView.frame = UIEdgeInsetsInsetRect(containerViewFrame, _containerViewEdgeInsets);
     
-    CGFloat safeAreaTop = keyWindow.safeAreaInsets.top;
-    CGSize size = self.bounds.size;
-    CGRect originalFrame = CGRectMake(0, safeAreaTop, size.width, size.height - safeAreaTop);
-    self.containerView.frame = UIEdgeInsetsInsetRect(originalFrame, _containerViewEdgeInsets);
-
-    CGFloat lineHeight = 1.0 / UIScreen.mainScreen.scale;
-    self.shadowImageView.frame = CGRectMake(0, size.height - lineHeight, size.width, lineHeight);
+    CGFloat shadowImageViewHeight = 1.0 / UIScreen.mainScreen.scale;
+    self.shadowImageView.frame = CGRectMake(0, CGRectGetMaxY(_originalNavigationBarFrame) - shadowImageViewHeight, CGRectGetWidth(navigationBarFrame), shadowImageViewHeight);
 
     // 放在所有的 View 前面，防止 containerView 被遮挡
     if (self.superview && self.superview != self.containerView.superview) {

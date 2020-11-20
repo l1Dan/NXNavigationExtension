@@ -100,9 +100,7 @@
 
 #pragma mark - Private
 - (void)ue_setupNavigationBar {
-    CGFloat navigationBarWidth = CGRectGetWidth(self.navigationController.navigationBar.frame);
-    CGFloat navigationBarHeight = CGRectGetMaxY(self.navigationController.navigationBar.frame);
-    self.ue_navigationBar.frame = CGRectMake(0, 0, navigationBarWidth, navigationBarHeight);
+    self.ue_navigationBar.frame = self.navigationController.navigationBar.frame;
     if (![self.view isKindOfClass:[UIScrollView class]]) {
         [self.view addSubview:self.ue_navigationBar];
     }
@@ -132,9 +130,7 @@
         __weak typeof(self) weakSelf = self;
         self.navigationController.navigationBar.ue_didUpdateFrameHandler = ^(CGRect frame) {
             if (weakSelf.ue_viewWillDisappearFinished) { return; }
-            
-            CGRect newFrame = CGRectMake(0, 0, frame.size.width, frame.size.height + frame.origin.y);
-            weakSelf.ue_navigationBar.frame = newFrame;
+            weakSelf.ue_navigationBar.frame = frame;
         };
     }
 }
