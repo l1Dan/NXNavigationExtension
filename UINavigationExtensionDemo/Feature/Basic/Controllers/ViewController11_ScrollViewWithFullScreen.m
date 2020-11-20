@@ -47,4 +47,8 @@
     return [UIColor clearColor];
 }
 
+- (UIColor *)ue_shadowImageTintColor {
+    return [UIColor clearColor];
+}
+
 @end
