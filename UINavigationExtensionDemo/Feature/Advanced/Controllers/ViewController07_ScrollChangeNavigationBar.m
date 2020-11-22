@@ -133,7 +133,7 @@
 
 #pragma mark - FakeNavigationBarDelegate
 
-- (void)fakeNavigationBar:(FakeNavigationBar *)navigationBar didClickNavigationItemwithItemType:(FakeNavigationItemType)itemType {
+- (void)fakeNavigationBar:(FakeNavigationBar *)navigationBar didClickNavigationItemWithItemType:(FakeNavigationItemType)itemType {
     switch (itemType) {
         case FakeNavigationItemTypeBackButton: {
             [self.navigationController ue_triggerSystemBackButtonHandler];

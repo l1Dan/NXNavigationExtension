@@ -29,7 +29,7 @@
     [UENavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
     
     FeatureTableViewController *featureTableViewController1 = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    featureTableViewController1.navigationItem.title =  @"UENavigationBar 🎉 🎉 🎉";
+    featureTableViewController1.navigationItem.title = @"UENavigationBar 🎉 🎉 🎉";
 
     UIImage *customNormal = [UIImage imageNamed:@"TabBarCustomNormal"];
     UIImage *customSelected = [UIImage imageNamed:@"TabBarCustomSelected"];
@@ -37,7 +37,7 @@
     navigationController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"UENavigationBar" image:customNormal selectedImage:customSelected];
     
     FeatureTableViewController *featureTableViewController2 = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    featureTableViewController2.navigationItem.title =  @"UINavigationBar⚠️⚠️⚠️";
+    featureTableViewController2.navigationItem.title = @"UINavigationBar⚠️⚠️⚠️";
 
     UIImage *systemNormal = [UIImage imageNamed:@"TabBarSystemNormal"];
     UIImage *systemSelected = [UIImage imageNamed:@"TabBarSystemSelected"];
@@ -84,7 +84,7 @@
     
     UIViewController *detailViewController = [[[oldDetailViewController class] alloc] init];
     detailViewController.navigationItem.title = oldDetailViewController.navigationItem.title;
-    UINavigationController *detailNavigationController =  [[[viewController class] alloc] initWithRootViewController:detailViewController];
+    UINavigationController *detailNavigationController = [[[viewController class] alloc] initWithRootViewController:detailViewController];
     
     [viewControllers removeObject:oldDetailNavigationController];
     [viewControllers addObject:detailNavigationController];

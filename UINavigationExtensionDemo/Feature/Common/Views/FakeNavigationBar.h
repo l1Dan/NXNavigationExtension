@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, FakeNavigationItemType) {
 @class FakeNavigationBar;
 @protocol FakeNavigationBarDelegate <NSObject>
 
-- (void)fakeNavigationBar:(FakeNavigationBar *)navigationBar didClickNavigationItemwithItemType:(FakeNavigationItemType)itemType;
+- (void)fakeNavigationBar:(FakeNavigationBar *)navigationBar didClickNavigationItemWithItemType:(FakeNavigationItemType)itemType;
 
 @end
 

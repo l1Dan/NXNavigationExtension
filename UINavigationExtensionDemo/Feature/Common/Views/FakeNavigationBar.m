@@ -72,14 +72,14 @@
 #pragma mark - Private
 
 - (void)clickBackButton:(UIButton *)button {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(fakeNavigationBar:didClickNavigationItemwithItemType:)]) {
-        [self.delegate fakeNavigationBar:self didClickNavigationItemwithItemType:FakeNavigationItemTypeBackButton];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(fakeNavigationBar:didClickNavigationItemWithItemType:)]) {
+        [self.delegate fakeNavigationBar:self didClickNavigationItemWithItemType:FakeNavigationItemTypeBackButton];
     }
 }
 
 - (void)clickRightButton:(UIButton *)button {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(fakeNavigationBar:didClickNavigationItemwithItemType:)]) {
-        [self.delegate fakeNavigationBar:self didClickNavigationItemwithItemType:FakeNavigationItemTypeAddButton];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(fakeNavigationBar:didClickNavigationItemWithItemType:)]) {
+        [self.delegate fakeNavigationBar:self didClickNavigationItemWithItemType:FakeNavigationItemTypeAddButton];
     }
 }
 
