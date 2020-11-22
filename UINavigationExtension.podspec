@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "https://github.com/l1Dan/UINavigationExtension.git", :tag => "#{spec.version}" }
 
   spec.ios.deployment_target = "11.0"
-  spec.source_files = "UINavigationExtension/Source/*.{h,m}"
-  spec.private_header_files = 'UINavigationExtension/Source/UINavigationExtensionPrivate.h'
+  spec.source_files = "UINavigationExtension/Sources/*.{h,m}"
+  spec.private_header_files = 'UINavigationExtension/Sources/UINavigationExtensionPrivate.h', 'UINavigationExtension/Sources/UINavigationExtensionMacro.h'
 
 end

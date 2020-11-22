@@ -26,6 +26,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 全局外观设置
+NS_SWIFT_NAME(UENavigationBar.Appearance)
 @interface UENavigationBarAppearance : NSObject
 
 /// 全局外观设置

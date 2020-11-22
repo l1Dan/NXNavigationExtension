@@ -35,14 +35,12 @@ FOUNDATION_EXPORT double UINavigationExtensionVersionNumber;
 FOUNDATION_EXPORT const unsigned char UINavigationExtensionVersionString[];
 
 #import <UINavigationExtension/UENavigationBar.h>
-#import <UINavigationExtension/UINavigationExtensionMacro.h>
 #import <UINavigationExtension/UIViewController+UINavigationExtension.h>
 #import <UINavigationExtension/UINavigationController+UINavigationExtension.h>
 
 #else
 
 #import "UENavigationBar.h"
-#import "UINavigationExtensionMacro.h"
 #import "UIViewController+UINavigationExtension.h"
 #import "UINavigationController+UINavigationExtension.h"
 

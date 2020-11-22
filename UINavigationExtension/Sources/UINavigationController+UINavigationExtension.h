@@ -25,8 +25,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT BOOL UINavigationExtensionFullscreenPopGestureEnable;
-
 @protocol UINavigationControllerCustomizable <NSObject>
 
 /// 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
@@ -39,6 +37,9 @@ FOUNDATION_EXPORT BOOL UINavigationExtensionFullscreenPopGestureEnable;
 @end
 
 @interface UINavigationController (UINavigationExtension)
+
+/// 开启全局全屏手势；默认为 NO
+@property (nonatomic, assign, class) BOOL ue_fullscreenPopGestureEnabled;
 
 /// 全屏手势 UIPanGestureRecognizer
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *ue_fullscreenPopGestureRecognizer;

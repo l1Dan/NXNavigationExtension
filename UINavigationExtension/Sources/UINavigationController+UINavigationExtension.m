@@ -29,8 +29,6 @@
 #import "UINavigationExtensionMacro.h"
 #import "UINavigationExtensionPrivate.h"
 
-BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
-
 @implementation UINavigationController (UINavigationExtension)
 
 + (void)load {
@@ -39,6 +37,19 @@ BOOL UINavigationExtensionFullscreenPopGestureEnable = NO;
         UINavigationExtensionSwizzleMethod([UINavigationController class], @selector(pushViewController:animated:), @selector(ue_pushViewController:animated:));
         UINavigationExtensionSwizzleMethod([UINavigationController class], @selector(setViewControllers:animated:), @selector(ue_setViewControllers:animated:));
     });
+}
+
++ (BOOL)ue_fullscreenPopGestureEnabled {
+    NSNumber *number = objc_getAssociatedObject(self, _cmd);
+    if (number && [number isKindOfClass:[NSNumber class]]) {
+        return [number boolValue];
+    }
+    return NO;
+}
+
++ (void)setUe_fullscreenPopGestureEnabled:(BOOL)ue_fullscreenPopGestureEnabled {
+    NSNumber *number = [NSNumber numberWithBool:ue_fullscreenPopGestureEnabled];
+    objc_setAssociatedObject(self, @selector(ue_fullscreenPopGestureEnabled), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)ue_pushViewController:(UIViewController *)viewController animated:(BOOL)animated {

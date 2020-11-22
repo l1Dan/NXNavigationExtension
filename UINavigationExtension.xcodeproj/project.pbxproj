@@ -56,7 +56,7 @@
 		D6E40253251FB71C001D7BEE /* UINavigationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E4024C251FB71C001D7BEE /* UINavigationExtension.framework */; };
 		D6E40254251FB71C001D7BEE /* UINavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6E4024C251FB71C001D7BEE /* UINavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6E40279251FBA5A001D7BEE /* UENavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E4E119251A55A500625171 /* UENavigationBar.m */; };
-		D6E40284251FBA7D001D7BEE /* UINavigationExtensionMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = D6BB8934251FB63700A674F7 /* UINavigationExtensionMacro.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6E40284251FBA7D001D7BEE /* UINavigationExtensionMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = D6BB8934251FB63700A674F7 /* UINavigationExtensionMacro.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D6E40289251FBA8C001D7BEE /* UINavigationController+UINavigationExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E4E128251A75A800625171 /* UINavigationController+UINavigationExtension.m */; };
 		D6E40290251FBA9D001D7BEE /* UIViewController+UINavigationExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E4E120251A5FF900625171 /* UIViewController+UINavigationExtension.m */; };
 		D6E40292251FBAB0001D7BEE /* UENavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E4E118251A55A500625171 /* UENavigationBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -451,7 +451,7 @@
 		D6E4024D251FB71C001D7BEE /* UINavigationExtension */ = {
 			isa = PBXGroup;
 			children = (
-				D6E4E112251A533700625171 /* Source */,
+				D6E4E112251A533700625171 /* Sources */,
 				D69686232530970400FBC7A5 /* Info.plist */,
 			);
 			path = UINavigationExtension;
@@ -470,7 +470,7 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D6E4E112251A533700625171 /* Source */ = {
+		D6E4E112251A533700625171 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				D6E4E118251A55A500625171 /* UENavigationBar.h */,
@@ -484,7 +484,7 @@
 				D6E4E11F251A5FF900625171 /* UIViewController+UINavigationExtension.h */,
 				D6E4E120251A5FF900625171 /* UIViewController+UINavigationExtension.m */,
 			);
-			path = Source;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

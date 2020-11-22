@@ -22,7 +22,6 @@
 // THE SOFTWARE.
 
 #import "UENavigationBar.h"
-#import "UINavigationExtensionMacro.h"
 
 @implementation UENavigationBarAppearance
 

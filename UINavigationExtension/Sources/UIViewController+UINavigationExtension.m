@@ -347,7 +347,7 @@
     if (enableFullScreenInteractivePopGesture && [enableFullScreenInteractivePopGesture isKindOfClass:[NSNumber class]]) {
         return [enableFullScreenInteractivePopGesture boolValue];
     }
-    enableFullScreenInteractivePopGesture = [NSNumber numberWithBool:UINavigationExtensionFullscreenPopGestureEnable];
+    enableFullScreenInteractivePopGesture = [NSNumber numberWithBool:UINavigationController.ue_fullscreenPopGestureEnabled];
     objc_setAssociatedObject(self, _cmd, enableFullScreenInteractivePopGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return [enableFullScreenInteractivePopGesture boolValue];
 }
