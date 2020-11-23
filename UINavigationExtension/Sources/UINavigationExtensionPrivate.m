@@ -46,7 +46,7 @@
     }
 
     if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willPopViewControllerUsingInteractiveGesture:)]) {
-        return [(id<UINavigationControllerCustomizable>)topViewController navigationController:self.navigationController willPopViewControllerUsingInteractiveGesture:YES];
+        return [(id<UINavigationExtensionInteractable>)topViewController navigationController:self.navigationController willPopViewControllerUsingInteractiveGesture:YES];
     }
 
     return YES;
@@ -97,7 +97,7 @@
     }
 
     if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willPopViewControllerUsingInteractiveGesture:)]) {
-        return [(id<UINavigationControllerCustomizable>)topViewController navigationController:self.navigationController willPopViewControllerUsingInteractiveGesture:YES];
+        return [(id<UINavigationExtensionInteractable>)topViewController navigationController:self.navigationController willPopViewControllerUsingInteractiveGesture:YES];
     }
 
     return YES;

@@ -13,7 +13,7 @@
 #import "UIColor+RandomColor.h"
 #import "UIDevice+Additions.h"
 
-@interface ViewController08_WebView () <WKNavigationDelegate, UINavigationControllerCustomizable>
+@interface ViewController08_WebView () <WKNavigationDelegate, UINavigationExtensionInteractable>
 
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) UIProgressView *progressView;
@@ -201,7 +201,7 @@
     }
 }
 
-#pragma mark - UINavigationControllerCustomizable
+#pragma mark - UINavigationExtensionInteractable
 
 - (BOOL)navigationController:(__kindof UINavigationController *)navigationController willPopViewControllerUsingInteractiveGesture:(BOOL)usingGesture {
     if (!usingGesture && self.webView.canGoBack) {

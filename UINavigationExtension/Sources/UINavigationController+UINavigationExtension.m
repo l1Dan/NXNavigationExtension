@@ -161,7 +161,7 @@
     
     UIViewController *topViewController = self.topViewController;
     if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willPopViewControllerUsingInteractiveGesture:)]) {
-        if ([(id<UINavigationControllerCustomizable>)topViewController navigationController:self willPopViewControllerUsingInteractiveGesture:NO]) {
+        if ([(id<UINavigationExtensionInteractable>)topViewController navigationController:self willPopViewControllerUsingInteractiveGesture:NO]) {
             [topViewController.navigationController popViewControllerAnimated:YES];
         }
     } else {

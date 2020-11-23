@@ -11,7 +11,7 @@
 #import "EventInterceptModel.h"
 #import "UIColor+RandomColor.h"
 
-@interface ViewController03_BackEventIntercept () <UINavigationControllerCustomizable>
+@interface ViewController03_BackEventIntercept () <UINavigationExtensionInteractable>
 
 @property (nonatomic, strong) NSArray<EventInterceptModel *> *allModels;
 @property (nonatomic, assign) EventInterceptItemType currentItemType;
@@ -95,7 +95,7 @@
     [tableView reloadData];
 }
 
-#pragma mark - UINavigationControllerCustomizable
+#pragma mark - UINavigationExtensionInteractable
 
 - (BOOL)navigationController:(__kindof UINavigationController *)navigationController willPopViewControllerUsingInteractiveGesture:(BOOL)usingGesture {
     if (self.currentItemType == EventInterceptItemTypeBoth) {

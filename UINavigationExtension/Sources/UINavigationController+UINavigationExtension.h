@@ -25,7 +25,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol UINavigationControllerCustomizable <NSObject>
+@protocol UINavigationExtensionInteractable <NSObject>
 
 /// 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
 /// 执行 `ue_triggerSystemBackButtonHandler` 方法后也会触发以下回调
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 全屏手势 UIPanGestureRecognizer
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *ue_fullscreenPopGestureRecognizer;
 
-/// 调用此方法可以触发调用 id<UINavigationControllerCustomizable> 代理方法
+/// 调用此方法可以触发调用 id<UINavigationExtensionInteractable> 代理方法
 /// 可以在自定义返回按钮中调用这个方法，便于统一处理手势滑动返回和自定义返回按钮点击返回的拦截操作
 - (void)ue_triggerSystemBackButtonHandler;
 
