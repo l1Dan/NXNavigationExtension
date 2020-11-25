@@ -73,9 +73,9 @@
     cell.textLabel.text = item.title;
     cell.accessoryType = item.isSelected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     if (@available(iOS 13.0, *)) {
-        cell.contentView.backgroundColor = [UIColor secondarySystemGroupedBackgroundColor];
+        cell.backgroundColor = [UIColor secondarySystemGroupedBackgroundColor];
     } else {
-        cell.contentView.backgroundColor = [UIColor customGroupedBackgroundColor];
+        cell.backgroundColor = [UIColor customGroupedBackgroundColor];
     }
     
     if (item.isSelected) {

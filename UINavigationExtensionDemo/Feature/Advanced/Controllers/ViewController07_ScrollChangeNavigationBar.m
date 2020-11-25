@@ -14,9 +14,9 @@
 @interface ViewController07_ScrollChangeNavigationBar () <FakeNavigationBarDelegate>
 
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) NSString *navigationBarTitle;
 @property (nonatomic, strong) FakeNavigationBar *fakeNavigationBar;
 
+@property (nonatomic, copy) NSString *navigationBarTitle;
 @property (nonatomic, assign) UIStatusBarStyle barStyle;
 
 @property (nonatomic, strong) NSLayoutConstraint *topConstraint;

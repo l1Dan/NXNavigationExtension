@@ -144,9 +144,6 @@
     cell.textLabel.text = [NSString stringWithFormat:@"%02zd: %@", indexPath.row + 1, item.title];
     cell.accessoryType = item.showDisclosureIndicator ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     
-    if (item.itemType == TableViewSectionItemTypeNavigationBarModal) {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
     return cell;
 }
 

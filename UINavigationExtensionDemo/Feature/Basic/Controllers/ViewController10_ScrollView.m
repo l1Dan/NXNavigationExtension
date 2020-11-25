@@ -44,13 +44,15 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"Row: %zd with UIScrollView", indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"Row: %02zd with UIScrollView", indexPath.row + 1];
     cell.textLabel.textColor = [UIColor customTextColor];
-    cell.contentView.backgroundColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.backgroundColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
         return [UIColor randomLightColor];
     } darkModeColor:^UIColor * _Nonnull{
         return [UIColor randomDarkColor];
     }];;
+    
     return cell;
 }
 

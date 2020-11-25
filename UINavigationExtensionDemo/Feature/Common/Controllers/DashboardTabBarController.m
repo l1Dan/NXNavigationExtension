@@ -26,8 +26,6 @@
     UENavigationBarAppearance.standardAppearance.tintColor = [UIColor customTitleColor];
     [UENavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
     
-    [UENavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
-    
     FeatureTableViewController *featureTableViewController1 = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     featureTableViewController1.navigationItem.title = @"UENavigationBar 🎉 🎉 🎉";
 
