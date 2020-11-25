@@ -25,7 +25,6 @@
     [self.view addSubview:self.tableView];
     
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
     [self.tableView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
     [self.tableView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
     [self.tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
@@ -41,6 +40,7 @@
         _tableView.tableFooterView = [[UIView alloc] init];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
     return _tableView;
 }
@@ -56,13 +56,15 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"Row: %zd", indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"Row: %02zd", indexPath.row + 1];
     cell.textLabel.textColor = [UIColor customTextColor];
-    cell.contentView.backgroundColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.backgroundColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
         return [UIColor randomLightColor];
     } darkModeColor:^UIColor * _Nonnull{
         return [UIColor randomDarkColor];
     }];
+    
     return cell;
 }
 

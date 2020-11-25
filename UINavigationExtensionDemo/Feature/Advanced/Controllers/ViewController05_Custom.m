@@ -38,19 +38,14 @@
     [self.ue_navigationBar addContainerSubview:self.addButton];
     
     UIView *containerView = self.ue_navigationBar.containerView;
+    self.backButton.hidden = !UIDevice.isPhoneDevice;
     self.backButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.leftConstraint = [self.backButton.leftAnchor constraintEqualToAnchor:containerView.leftAnchor];
     self.leftConstraint.active = YES;
     
     [self.backButton.topAnchor constraintEqualToAnchor:containerView.topAnchor constant:2.0].active = YES;
     [self.backButton.bottomAnchor constraintEqualToAnchor:containerView.bottomAnchor constant:-2.0].active = YES;
-    
-    if (UIDevice.isPhoneDevice) {
-        [self.backButton.widthAnchor constraintEqualToConstant:44].active = YES;
-    } else {
-        self.backButton.hidden = YES;
-        [self.backButton.widthAnchor constraintEqualToConstant:0].active = YES;
-    }
+    [self.backButton.widthAnchor constraintEqualToConstant:UIDevice.isPhoneDevice ? 44.0 : 0].active = YES;
         
     self.searchTextField.translatesAutoresizingMaskIntoConstraints = NO;
     [self.searchTextField.topAnchor constraintEqualToAnchor:containerView.topAnchor constant:2.0].active = YES;

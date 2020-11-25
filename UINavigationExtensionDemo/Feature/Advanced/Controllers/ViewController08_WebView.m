@@ -82,12 +82,12 @@
     [self.progressView setHidden:YES];
 }
 
-- (void)dealloc {
-    NSLog(@"%s", __FUNCTION__);
-}
-
 - (BOOL)ue_useSystemBlurNavigationBar {
     return YES;
+}
+
+- (void)dealloc {
+    NSLog(@"%s", __FUNCTION__);
 }
 
 #pragma mark - Observer

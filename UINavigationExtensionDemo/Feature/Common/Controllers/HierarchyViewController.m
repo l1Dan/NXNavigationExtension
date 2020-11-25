@@ -32,7 +32,6 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
     [self.view addSubview:self.tableView];
     
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
     [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
     [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
     
@@ -99,13 +98,13 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
     
-    cell.contentView.backgroundColor = nil;
+    cell.backgroundColor = nil;
     if (indexPath.row < self.chooseViewControllers.count) {
         __kindof UIViewController *viewController = self.chooseViewControllers[indexPath.row];
         cell.textLabel.text = NSStringFromClass([viewController class]);
         cell.textLabel.textColor = [UIColor customTextColor];
         if ([viewController isKindOfClass:[BaseViewController class]]) {
-            cell.contentView.backgroundColor = [(BaseViewController *)viewController randomColor];
+            cell.backgroundColor = [(BaseViewController *)viewController randomColor];
         }
     } else {
         cell.textLabel.text = @"创建新的 UIViewController 实例对象";

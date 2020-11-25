@@ -13,7 +13,7 @@
     if (self = [super init]) {
         _title = title;
         _itemType = itemType;
-        _disclosureIndicator = YES;
+        _disclosureIndicator = itemType == TableViewSectionItemTypeNavigationBarModal ? NO : YES;
     }
     return self;
 }

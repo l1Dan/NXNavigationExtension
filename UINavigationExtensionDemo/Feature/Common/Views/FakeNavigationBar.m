@@ -37,17 +37,12 @@
     [self addSubview:self.titleLabel];
     [self addSubview:self.rightButton];
     
+    self.backButton.hidden = !UIDevice.isPhoneDevice;
     self.backButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.backButton.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
     [self.backButton.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
     [self.backButton.leftAnchor constraintEqualToAnchor:self.leftAnchor].active = YES;
-    
-    if (UIDevice.isPhoneDevice) {
-        [self.backButton.widthAnchor constraintEqualToConstant:44].active = YES;
-    } else {
-        self.backButton.hidden = YES;
-        [self.backButton.widthAnchor constraintEqualToConstant:0].active = YES;
-    }
+    [self.backButton.widthAnchor constraintEqualToConstant:UIDevice.isPhoneDevice ? 44 : 0].active = YES;
     
     self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self.titleLabel.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
