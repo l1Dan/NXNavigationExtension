@@ -27,7 +27,7 @@
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        _requestURL = [NSURL URLWithString:@"https://www.apple.com.cn/"];
+        _requestURL = [NSURL URLWithString:@"https://l1dan.gitee.io/"];
     }
     return self;
 }
@@ -44,7 +44,6 @@
     [self.ue_navigationBar addSubview:self.progressView];
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.requestURL]];
     
-    self.webView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.webView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
     [self.webView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
     [self.webView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
@@ -149,7 +148,7 @@
         configuration.preferences.javaScriptEnabled = YES;
         
         _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
-        _webView.scrollView.contentInset = UIEdgeInsetsMake(CGRectGetHeight(self.ue_navigationBar.frame), 0, 0, 0);
+        _webView.translatesAutoresizingMaskIntoConstraints = NO;
         _webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
         _webView.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         _webView.allowsBackForwardNavigationGestures = YES;

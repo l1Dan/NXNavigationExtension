@@ -48,7 +48,6 @@
     
     UIView *containerView = self.ue_navigationBar.containerView;
 
-    self.fakeNavigationBar.translatesAutoresizingMaskIntoConstraints = NO;
     self.topConstraint = [self.fakeNavigationBar.topAnchor constraintEqualToAnchor:containerView.topAnchor];
     self.topConstraint.active = YES;
     
@@ -126,6 +125,7 @@
 - (FakeNavigationBar *)fakeNavigationBar {
     if (!_fakeNavigationBar) {
         _fakeNavigationBar = [[FakeNavigationBar alloc] initWithFrame:CGRectZero];
+        _fakeNavigationBar.translatesAutoresizingMaskIntoConstraints = NO;
         _fakeNavigationBar.delegate = self;
     }
     return _fakeNavigationBar;

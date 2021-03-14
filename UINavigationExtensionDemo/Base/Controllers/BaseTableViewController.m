@@ -24,7 +24,6 @@
     
     [self.view addSubview:self.tableView];
     
-    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.tableView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
     [self.tableView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
     [self.tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
@@ -40,6 +39,7 @@
         _tableView.tableFooterView = [[UIView alloc] init];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.translatesAutoresizingMaskIntoConstraints = NO;
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
     return _tableView;

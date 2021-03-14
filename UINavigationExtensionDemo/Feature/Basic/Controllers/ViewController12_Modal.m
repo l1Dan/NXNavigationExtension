@@ -21,7 +21,7 @@
     [super viewDidLoad];
     
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    closeButton.frame = CGRectMake(0, 0, 44, 40);
+    closeButton.frame = CGRectMake(0, 0, 36, 36);
     closeButton.backgroundColor = [UIColor clearColor];
     [closeButton setImage:[[UIImage imageNamed:@"NavigationBarClose"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [closeButton setTintColor:UIColor.customTitleColor];

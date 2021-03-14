@@ -31,7 +31,6 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     [self.view addSubview:self.tableView];
     
-    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
     [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
     
@@ -74,6 +73,7 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView.translatesAutoresizingMaskIntoConstraints = NO;
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         _tableView.tableHeaderView = [[UIView alloc] init];
         _tableView.tableFooterView = [[UIView alloc] init];

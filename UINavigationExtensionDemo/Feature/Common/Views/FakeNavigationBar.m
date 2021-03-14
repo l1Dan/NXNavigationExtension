@@ -38,19 +38,16 @@
     [self addSubview:self.rightButton];
     
     self.backButton.hidden = !UIDevice.isPhoneDevice;
-    self.backButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.backButton.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
     [self.backButton.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
     [self.backButton.leftAnchor constraintEqualToAnchor:self.leftAnchor].active = YES;
     [self.backButton.widthAnchor constraintEqualToConstant:UIDevice.isPhoneDevice ? 44 : 0].active = YES;
     
-    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self.titleLabel.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
     [self.titleLabel.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
     [self.titleLabel.leftAnchor constraintEqualToAnchor:self.backButton.rightAnchor].active = YES;
     [self.titleLabel.rightAnchor constraintEqualToAnchor:self.rightButton.leftAnchor].active = YES;
     
-    self.rightButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.rightButton.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
     [self.rightButton.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
     [self.rightButton.rightAnchor constraintEqualToAnchor:self.rightAnchor].active = YES;
@@ -84,6 +81,7 @@
     if (!_backButton) {
         UIImage *image = [[UIImage imageNamed:@"NavigationBarBack"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _backButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_backButton setImage:image forState:UIControlStateNormal];
         [_backButton addTarget:self action:@selector(clickBackButton:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -94,6 +92,7 @@
     if (!_rightButton) {
         UIImage *image = [[UIImage imageNamed:@"NavigationBarAdd"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _rightButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_rightButton setImage:image forState:UIControlStateNormal];
         [_rightButton addTarget:self action:@selector(clickRightButton:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -103,6 +102,7 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _titleLabel.font = [UIFont systemFontOfSize:18];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.backgroundColor = [UIColor clearColor];

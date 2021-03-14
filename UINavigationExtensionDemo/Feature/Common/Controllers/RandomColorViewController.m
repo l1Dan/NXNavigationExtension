@@ -43,7 +43,6 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
     self.navigationItem.title = self.navigationItem.title ?: NSStringFromClass([self class]);
     [self.view addSubview:self.randomColorButton];
     
-    self.randomColorButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.randomColorButton.widthAnchor constraintEqualToConstant:RandomColorButtonWidthAndHeight].active = YES;
     [self.randomColorButton.heightAnchor constraintEqualToConstant:RandomColorButtonWidthAndHeight].active = YES;
     [self.randomColorButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
@@ -98,6 +97,7 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
     if (!_randomColorButton) {
         _randomColorButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _randomColorButton.backgroundColor = [UIColor clearColor];
+        _randomColorButton.translatesAutoresizingMaskIntoConstraints = NO;
         _randomColorButton.layer.cornerRadius = RandomColorButtonWidthAndHeight * 0.5;
         _randomColorButton.layer.borderWidth = 5.0;
         _randomColorButton.layer.borderColor = self.currentRandomColor.CGColor;

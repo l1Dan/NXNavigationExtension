@@ -37,7 +37,6 @@
     
     [self.view addSubview:self.tableView];
     
-    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.tableView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
     [self.tableView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
     [self.tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
@@ -65,6 +64,7 @@
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView.translatesAutoresizingMaskIntoConstraints = NO;
         _tableView.tableHeaderView = [[UIView alloc] init];
         _tableView.tableFooterView = [[UIView alloc] init];
         _tableView.delegate = self;
