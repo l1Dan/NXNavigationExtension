@@ -51,6 +51,7 @@
                               [TableViewSectionItem itemWithTitle:@"UIScrollView with UENavigationBar" itemType:TableViewSectionItemTypeNavigationBarScrollView],
                               [TableViewSectionItem itemWithTitle:@"UIScrollView 全屏背景色" itemType:TableViewSectionItemTypeNavigationBarScrollViewWithFullScreen],
                               [TableViewSectionItem itemWithTitle:@"模态窗口" itemType:TableViewSectionItemTypeNavigationBarModal],
+                              [TableViewSectionItem itemWithTitle:@"自定义导航栏模糊背景" itemType:TableViewSectionItemTypeNavigationBarBlur],
                               nil];
     TableViewSection *section1 = [TableViewSection sectionWithItems:items1];
     section1.title = @"基础功能";

@@ -16,10 +16,11 @@
 #import "ViewController06_ShadowImage.h"
 #import "ViewController07_CustomBackButtonImage.h"
 #import "ViewController08_CustomBackButton.h"
-#import "ViewController12_Modal.h"
 #import "ViewController09_FullScreen.h"
-#import "ViewController11_ScrollViewWithFullScreen.h"
 #import "ViewController10_ScrollView.h"
+#import "ViewController11_ScrollViewWithFullScreen.h"
+#import "ViewController12_Modal.h"
+#import "ViewController13_Blur.h"
 
 #import "ViewController01_DisablePopGesture.h"
 #import "ViewController02_FullPopGesture.h"
@@ -102,6 +103,8 @@
             return [[ViewController11_ScrollViewWithFullScreen alloc] init];
         case TableViewSectionItemTypeNavigationBarModal:
             return [[ViewController12_Modal alloc] init];
+        case TableViewSectionItemTypeNavigationBarBlur:
+            return [[ViewController13_Blur alloc] init];
             // Advanced
         case TableViewSectionItemTypeNavigationBarDisablePopGesture:
             return [[ViewController01_DisablePopGesture alloc] init];

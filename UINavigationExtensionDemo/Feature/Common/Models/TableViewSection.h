@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, TableViewSectionItemType) {
     TableViewSectionItemTypeNavigationBarScrollView, // UIScrollView with UENavigationBar
     TableViewSectionItemTypeNavigationBarScrollViewWithFullScreen, // UIScrollView 全屏背景色
     TableViewSectionItemTypeNavigationBarModal, // 模态窗口
+    TableViewSectionItemTypeNavigationBarBlur, // 自定义导航栏模糊背景
     
     TableViewSectionItemTypeNavigationBarDisablePopGesture, // 禁用边缘手势滑动返回
     TableViewSectionItemTypeNavigationBarFullPopGesture, // 启用全屏手势滑动返回

@@ -65,6 +65,7 @@
 		D6E4029A251FBABF001D7BEE /* UIViewController+UINavigationExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E4E11F251A5FF900625171 /* UIViewController+UINavigationExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D6EEC1162522529E004F243E /* UINavigationExtensionPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EEC1142522529E004F243E /* UINavigationExtensionPrivate.m */; };
 		D6EEC1172522529E004F243E /* UINavigationExtensionPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = D6EEC1152522529E004F243E /* UINavigationExtensionPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D6F9A86926418ECA009DB183 /* ViewController13_Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = D6F9A86826418ECA009DB183 /* ViewController13_Blur.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +197,8 @@
 		D6E4E128251A75A800625171 /* UINavigationController+UINavigationExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+UINavigationExtension.m"; sourceTree = "<group>"; };
 		D6EEC1142522529E004F243E /* UINavigationExtensionPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavigationExtensionPrivate.m; sourceTree = "<group>"; };
 		D6EEC1152522529E004F243E /* UINavigationExtensionPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationExtensionPrivate.h; sourceTree = "<group>"; };
+		D6F9A86726418ECA009DB183 /* ViewController13_Blur.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController13_Blur.h; sourceTree = "<group>"; };
+		D6F9A86826418ECA009DB183 /* ViewController13_Blur.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController13_Blur.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +260,8 @@
 				62328FEA4332688CDCBABEE6 /* ViewController11_ScrollViewWithFullScreen.m */,
 				6232811A03F4767F6DCA2CF6 /* ViewController12_Modal.h */,
 				623281B618D74E57A6F2D4B3 /* ViewController12_Modal.m */,
+				D6F9A86726418ECA009DB183 /* ViewController13_Blur.h */,
+				D6F9A86826418ECA009DB183 /* ViewController13_Blur.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -632,6 +637,7 @@
 				6232845E8FE19AE157304073 /* ViewController06_ShadowImage.m in Sources */,
 				D67BADC5254B1825008822D6 /* ViewController02_Test.m in Sources */,
 				6232837A16D1037A702A93F9 /* ViewController07_CustomBackButtonImage.m in Sources */,
+				D6F9A86926418ECA009DB183 /* ViewController13_Blur.m in Sources */,
 				62328C2F2723129FC7C8DA8D /* ViewController08_CustomBackButton.m in Sources */,
 				6232871008F360281CE6BE8E /* ViewController12_Modal.m in Sources */,
 				623281E242A278B7AB8F7055 /* ViewController09_FullScreen.m in Sources */,
