@@ -18,7 +18,7 @@
 
 + (UIColor *)randomDarkColor {
     CGFloat hue = arc4random() % 256 / 256.0;
-    CGFloat saturation = arc4random() % 128 / 256.0;
+    CGFloat saturation = arc4random() % 128 / 256.0 + 0.5;
     CGFloat brightness = arc4random() % 128 / 256.0;
     return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1.0];
 }
@@ -56,7 +56,7 @@
         return [UIColor whiteColor];
     } darkModeColor:^UIColor * _Nonnull{
         if (@available(iOS 13.0, *)) {
-            return [UIColor systemBackgroundColor];
+            return [UIColor systemGray6Color];
         } else {
             return [UIColor whiteColor];
         }

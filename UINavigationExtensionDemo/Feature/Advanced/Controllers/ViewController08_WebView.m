@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = nil;
+    self.navigationItem.title = @"Loading...";
     
     if (UIDevice.isPhoneDevice) {
         self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem];
@@ -43,6 +43,11 @@
     [self.view addSubview:self.webView];
     [self.ue_navigationBar addSubview:self.progressView];
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.requestURL]];
+    
+    [self.progressView.topAnchor constraintEqualToAnchor:self.ue_navigationBar.bottomAnchor].active = YES;
+    [self.progressView.leftAnchor constraintEqualToAnchor:self.ue_navigationBar.leftAnchor].active = YES;
+    [self.progressView.rightAnchor constraintEqualToAnchor:self.ue_navigationBar.rightAnchor].active = YES;
+    [self.progressView.heightAnchor constraintEqualToConstant:1.0 / [UIScreen mainScreen].scale].active = YES;
     
     [self.webView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
     [self.webView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
@@ -131,12 +136,10 @@
 
 - (UIProgressView *)progressView {
     if (!_progressView) {
-        CGFloat progressBarHeight = 2.0;
-        CGRect barFrame = CGRectMake(0, CGRectGetMaxY(self.ue_navigationBar.frame) - progressBarHeight, CGRectGetWidth(self.ue_navigationBar.frame), progressBarHeight);
-        _progressView = [[UIProgressView alloc] initWithFrame:barFrame];
+        _progressView = [[UIProgressView alloc] init];
         _progressView.trackTintColor = [UIColor customLightGrayColor];
         _progressView.progressTintColor = [UIColor customDarkGrayColor];
-        _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+        _progressView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _progressView;
 }

@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *rightButton;
 @property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, assign) CGFloat navigationBarAlpha;
 
 @end
 
@@ -52,6 +53,11 @@
     [self.rightButton.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
     [self.rightButton.rightAnchor constraintEqualToAnchor:self.rightAnchor].active = YES;
     [self.rightButton.widthAnchor constraintEqualToConstant:44].active = YES;
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    [self updateNavigationBarAlpha:self.navigationBarAlpha];
 }
 
 #pragma mark - Setter
@@ -112,10 +118,17 @@
 
 #pragma mark - Public
 - (void)updateNavigationBarAlpha:(CGFloat)alpha {
+    self.navigationBarAlpha = alpha;
     UIColor *whiteColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]; // 不要使用 [UIColor whiteColor]
-    self.backButton.tintColor = [UIColor mixColor1:[UIColor customTitleColor] color2:whiteColor ratio:alpha];
-    self.rightButton.tintColor = [UIColor mixColor1:[UIColor customTitleColor] color2:whiteColor ratio:alpha];
+    UIColor *changeColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]; // ![UIColor blackColor]
+    } darkModeColor:^UIColor * _Nonnull{
+        return [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0]; // ![UIColor redColor]
+    }];
+    self.backButton.tintColor = [UIColor mixColor1:changeColor color2:whiteColor ratio:alpha];
+    self.rightButton.tintColor = [UIColor mixColor1:changeColor color2:whiteColor ratio:alpha];
     self.titleLabel.alpha = alpha;
+    self.titleLabel.textColor = changeColor;
 }
 
 @end

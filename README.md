@@ -12,7 +12,7 @@ UINavigationExtension 是为 iOS 应用设计的一个简单、易用的导航�
 
 ## 🌟 开始使用
 
-[下载 UINavigationExtension](https://github.com/l1Dan/UINavigationExtension/archive/master.zip) 示例程序代码。
+下载 [UINavigationExtension](https://github.com/l1Dan/UINavigationExtension/archive/master.zip) 示例程序代码。
 
 ## 使用 CocoaPods 安装
 
@@ -69,7 +69,7 @@ github "l1Dan/UINavigationExtension" ~> 2.3.14
 - ✅` 更新导航栏样式`
 
 ## 🍽 使用
-所有对导航栏外观的修改都是基于视图控制器 `UIViewController` 修改的，而不是基于导航控制器 `UINavigationController` 修改，这种设计逻辑更加符合实际应用场景。也就是自己所在的导航栏的外观自己管理就好。
+所有对导航栏外观的修改都是基于视图控制器 `UIViewController` 修改的，而不是基于导航控制器 `UINavigationController` 修改，这种设计逻辑更加符合实际应用场景。也就是自己所在的导航栏的外观自己管理。
 
 1. 💉 导入头文件 `#import <UINavigationExtension/UINavigationExtension.h>`
 2. 💉 使用之前需要先注册需要修改的导航控制器，以 `FeatureNavigationController` 为例：
@@ -78,8 +78,8 @@ github "l1Dan/UINavigationExtension" ~> 2.3.14
 ```
 
 **注意**：
-- 👉 使用之前需要先注册导航控制器，注册之后对导航栏的修改才会生效，也仅限于修改本类所管理的视图控制器，对于子类导航控制器所管理的视图控制器是不会生效的，这样可以有效避免框架污染到其他的导航控制器，保持“谁使用，谁注册”的原则。
-- 🚫 不要直接注册 `UINavigationController`，这个影响范围比较太广，建议创建一个 `UINavigationController` 的子类，对这个类进行注册。
+- 👉 使用之前需要先注册导航控制器，注册之后对导航栏的修改才会生效，也仅限于修改注册的导航控制器所管理的视图控制器，对于子类导航控制器所管理的视图控制器是不会生效的，这样可以有效避免框架污染到其他的导航控制器，保持“谁使用，谁注册”的原则。
+- 🚫 不要直接注册 `UINavigationController`，这个影响全局导航栏的外观，建议创建一个 `UINavigationController` 的子类，对这个类进行注册。
 - 🚫 不要使用系统导航栏隐藏、显示方法, `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:`。
 - 🚫 不要使用系统导航栏修改透明度。
 - 🚫 不要使用系统导航栏或导航控制器 `appearance` 相关属性修改。
