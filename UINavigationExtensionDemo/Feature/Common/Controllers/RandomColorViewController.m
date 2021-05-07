@@ -43,14 +43,11 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
     self.navigationItem.title = self.navigationItem.title ?: NSStringFromClass([self class]);
     [self.view addSubview:self.randomColorButton];
     
+    [self updateRandomColorButtonState];
     [self.randomColorButton.widthAnchor constraintEqualToConstant:RandomColorButtonWidthAndHeight].active = YES;
     [self.randomColorButton.heightAnchor constraintEqualToConstant:RandomColorButtonWidthAndHeight].active = YES;
     [self.randomColorButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
     [self.randomColorButton.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
-}
-
-- (UIColor *)randomColor {
-    return self.currentRandomColor;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -59,6 +56,15 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
     } else {
         return self.isDarkMode ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
     }
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    [self updateRandomColorButtonState];
+}
+
+- (UIColor *)randomColor {
+    return self.currentRandomColor;
 }
 
 - (UIColor *)ue_navigationBarBackgroundColor {
@@ -73,6 +79,16 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
     return @{NSForegroundColorAttributeName: [self ue_barTintColor]};
 }
 
+#pragma mark - Private
+
+- (void)updateRandomColorButtonState {
+    self.randomColorButton.layer.borderColor = self.currentRandomColor.CGColor;
+    [self.randomColorButton setTitleColor:self.currentRandomColor forState:UIControlStateNormal];
+    if (@available(iOS 13.0, *)) {
+        [self.randomColorButton setTitleColor:[self.currentRandomColor resolvedColorWithTraitCollection:self.view.traitCollection] forState:UIControlStateNormal];
+    }
+}
+
 #pragma mark - Action
 
 - (void)clickRandomColorButton:(UIButton *)button {
@@ -80,13 +96,7 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
     
     self.lightRandomColor = [UIColor randomLightColor];
     self.darkRandomColor = [UIColor randomDarkColor];
-    
-    self.randomColorButton.layer.borderColor = self.currentRandomColor.CGColor;
-    [self.randomColorButton setTitleColor:self.currentRandomColor forState:UIControlStateNormal];
-    if (@available(iOS 13.0, *)) {
-        [self.randomColorButton setTitleColor:[self.currentRandomColor resolvedColorWithTraitCollection:self.view.traitCollection] forState:UIControlStateNormal];
-    }
-    
+    [self updateRandomColorButtonState];
     [self ue_setNeedsNavigationBarAppearanceUpdate];
     [self setNeedsStatusBarAppearanceUpdate];
 }
@@ -100,8 +110,6 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
         _randomColorButton.translatesAutoresizingMaskIntoConstraints = NO;
         _randomColorButton.layer.cornerRadius = RandomColorButtonWidthAndHeight * 0.5;
         _randomColorButton.layer.borderWidth = 5.0;
-        _randomColorButton.layer.borderColor = self.currentRandomColor.CGColor;
-        [_randomColorButton setTitleColor:self.currentRandomColor forState:UIControlStateNormal];
         [_randomColorButton setTitle:@"Update" forState:UIControlStateNormal];
         [_randomColorButton addTarget:self action:@selector(clickRandomColorButton:) forControlEvents:UIControlEventTouchUpInside];
     }

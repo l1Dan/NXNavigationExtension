@@ -47,6 +47,7 @@
         _gaussianBlurView.translatesAutoresizingMaskIntoConstraints = NO;
         
         UIView *contentView = [[UIView alloc] init];
+        contentView.translatesAutoresizingMaskIntoConstraints = NO;
         contentView.backgroundColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
             return [UIColor redColor];
         } darkModeColor:^UIColor * _Nonnull{
@@ -55,7 +56,6 @@
         [_gaussianBlurView.contentView addSubview:contentView];
         [_gaussianBlurView.contentView setAlpha:0.5];
         
-        contentView.translatesAutoresizingMaskIntoConstraints = NO;
         [contentView.topAnchor constraintEqualToAnchor:self.gaussianBlurView.topAnchor].active = YES;
         [contentView.leftAnchor constraintEqualToAnchor:self.gaussianBlurView.leftAnchor].active = YES;
         [contentView.bottomAnchor constraintEqualToAnchor:self.gaussianBlurView.bottomAnchor].active = YES;
