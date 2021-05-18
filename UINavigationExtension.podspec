@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "UINavigationExtension"
-  spec.version      = "2.3.14"
+  spec.version      = "2.3.15"
   spec.summary      = "UINavigationExtension 是为 iOS 应用设计的一个简单、易用的导航栏处理框架。"
 
   spec.description  = <<-DESC
@@ -15,5 +15,8 @@ Pod::Spec.new do |spec|
   spec.ios.deployment_target = "11.0"
   spec.source_files = "UINavigationExtension/Sources/*.{h,m}"
   spec.private_header_files = 'UINavigationExtension/Sources/UINavigationExtensionPrivate.h', 'UINavigationExtension/Sources/UINavigationExtensionMacro.h'
+  
+  spec.deprecated = true
+  spec.deprecated_in_favor_of = 'UNXNavigator'
 
 end
