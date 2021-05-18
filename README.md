@@ -42,6 +42,7 @@ github "l1Dan/UNXNavigator" ~> 3.0
 | UNXNavigator Version | Minimum iOS Target  | Minimum macOS Target  | Minimum watchOS Target  | Minimum tvOS Target  |                                   Notes                                   |
 |:--------------------:|:---------------------------:|:----------------------------:|:----------------------------:|:----------------------------:|:-------------------------------------------------------------------------:|
 | 2.x | iOS 11 | macOS 10.15 | n/a | n/a | macOS: macCatalyst
+| 3.x | iOS 11 | macOS 10.15 | n/a | n/a | macOS: macCatalyst
 
 ## 👏 功能
 
