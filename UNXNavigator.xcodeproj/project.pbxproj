@@ -29,6 +29,10 @@
 		D61633D8254C4594007584E4 /* RandomColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D61633D7254C4594007584E4 /* RandomColorViewController.m */; };
 		D61CCC00251A13F100A91580 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCBFF251A13F100A91580 /* AppDelegate.m */; };
 		D61CCC11251A13F400A91580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D61CCC10251A13F400A91580 /* main.m */; };
+		D624E8C32654D16500CC96E6 /* UINavigationController+UNXNavigator.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E4E127251A75A800625171 /* UINavigationController+UNXNavigator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D624E8C42654D16500CC96E6 /* UIViewController+UNXNavigator.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E4E11F251A5FF900625171 /* UIViewController+UNXNavigator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D624E8C52654D16500CC96E6 /* UNXNavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E4E118251A55A500625171 /* UNXNavigationBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D624E8C62654D16500CC96E6 /* UNXNavigator.h in Headers */ = {isa = PBXBuildFile; fileRef = D6BB8933251FB63700A674F7 /* UNXNavigator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D63445C4255D774F002817C7 /* BaseSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D63445C3255D774F002817C7 /* BaseSplitViewController.m */; };
 		D6469AE025449F4D00C583FF /* UIColor+RandomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D6469ADF25449F4D00C583FF /* UIColor+RandomColor.m */; };
 		D650624F254C280700597B05 /* RedirectViewControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D650624E254C280700597B05 /* RedirectViewControllerModel.m */; };
@@ -59,10 +63,6 @@
 		D6E40284251FBA7D001D7BEE /* UNXNavigatorMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = D6BB8934251FB63700A674F7 /* UNXNavigatorMacro.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D6E40289251FBA8C001D7BEE /* UINavigationController+UNXNavigator.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E4E128251A75A800625171 /* UINavigationController+UNXNavigator.m */; };
 		D6E40290251FBA9D001D7BEE /* UIViewController+UNXNavigator.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E4E120251A5FF900625171 /* UIViewController+UNXNavigator.m */; };
-		D6E40292251FBAB0001D7BEE /* UNXNavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E4E118251A55A500625171 /* UNXNavigationBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D6E40296251FBAB7001D7BEE /* UINavigationController+UNXNavigator.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E4E127251A75A800625171 /* UINavigationController+UNXNavigator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D6E40298251FBABA001D7BEE /* UNXNavigator.h in Headers */ = {isa = PBXBuildFile; fileRef = D6BB8933251FB63700A674F7 /* UNXNavigator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D6E4029A251FBABF001D7BEE /* UIViewController+UNXNavigator.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E4E11F251A5FF900625171 /* UIViewController+UNXNavigator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D6EEC1162522529E004F243E /* UNXNavigatorPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EEC1142522529E004F243E /* UNXNavigatorPrivate.m */; };
 		D6EEC1172522529E004F243E /* UNXNavigatorPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = D6EEC1152522529E004F243E /* UNXNavigatorPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D6F9A86926418ECA009DB183 /* ViewController13_Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = D6F9A86826418ECA009DB183 /* ViewController13_Blur.m */; };
@@ -499,10 +499,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6E40296251FBAB7001D7BEE /* UINavigationController+UNXNavigator.h in Headers */,
-				D6E40292251FBAB0001D7BEE /* UNXNavigationBar.h in Headers */,
-				D6E4029A251FBABF001D7BEE /* UIViewController+UNXNavigator.h in Headers */,
-				D6E40298251FBABA001D7BEE /* UNXNavigator.h in Headers */,
+				D624E8C32654D16500CC96E6 /* UINavigationController+UNXNavigator.h in Headers */,
+				D624E8C42654D16500CC96E6 /* UIViewController+UNXNavigator.h in Headers */,
+				D624E8C52654D16500CC96E6 /* UNXNavigationBar.h in Headers */,
+				D624E8C62654D16500CC96E6 /* UNXNavigator.h in Headers */,
 				D6E40284251FBA7D001D7BEE /* UNXNavigatorMacro.h in Headers */,
 				D6EEC1172522529E004F243E /* UNXNavigatorPrivate.h in Headers */,
 			);
@@ -660,10 +660,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6E40279251FBA5A001D7BEE /* UNXNavigationBar.m in Sources */,
 				D6E40289251FBA8C001D7BEE /* UINavigationController+UNXNavigator.m in Sources */,
-				D6EEC1162522529E004F243E /* UNXNavigatorPrivate.m in Sources */,
 				D6E40290251FBA9D001D7BEE /* UIViewController+UNXNavigator.m in Sources */,
+				D6E40279251FBA5A001D7BEE /* UNXNavigationBar.m in Sources */,
+				D6EEC1162522529E004F243E /* UNXNavigatorPrivate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,7 +865,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lidan.UNXNavigator;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -894,7 +894,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lidan.UNXNavigator;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

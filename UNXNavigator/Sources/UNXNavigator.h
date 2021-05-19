@@ -34,15 +34,15 @@ FOUNDATION_EXPORT double UNXNavigatorVersionNumber;
 //! Project version string for UNXNavigator.
 FOUNDATION_EXPORT const unsigned char UNXNavigatorVersionString[];
 
-#import <UNXNavigator/UNXNavigationBar.h>
-#import <UNXNavigator/UIViewController+UNXNavigator.h>
 #import <UNXNavigator/UINavigationController+UNXNavigator.h>
+#import <UNXNavigator/UIViewController+UNXNavigator.h>
+#import <UNXNavigator/UNXNavigationBar.h>
 
 #else
 
-#import "UNXNavigationBar.h"
-#import "UIViewController+UNXNavigator.h"
 #import "UINavigationController+UNXNavigator.h"
+#import "UIViewController+UNXNavigator.h"
+#import "UNXNavigationBar.h"
 
 #endif /* __has_include */
 

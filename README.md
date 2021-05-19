@@ -6,7 +6,7 @@
 
 UNXNavigator（UINavigation Extension）是为 iOS 应用设计的一个简单、易用的导航栏处理框架。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。UNXNavigator 和 [示例程序代码](https://github.com/l1Dan/UNXNavigator/archive/master.zip) 都已经适配暗黑模式（Dark Mode）。
 
-## 🎉 [预览](https://raw.githubusercontent.com/l1Dan/UNXNavigator/master/Snapshots/Preview.png)
+## 🎉 预览
 
 ![Preview](https://raw.githubusercontent.com/l1Dan/UNXNavigator/master/Snapshots/Preview.png)
 
@@ -23,7 +23,7 @@ pod 'UNXNavigator'
 ```
 或者
 ```ruby
-pod 'UNXNavigator', ~> 3.0
+pod 'UNXNavigator', ~> 3.1
 ```
 
 ### 使用 Carthage 安装
@@ -34,7 +34,7 @@ github "l1Dan/UNXNavigator"
 ```
 或者
 ```ogdl
-github "l1Dan/UNXNavigator" ~> 3.0
+github "l1Dan/UNXNavigator" ~> 3.1
 ```
 
 ## 🌈 要求
@@ -75,7 +75,7 @@ github "l1Dan/UNXNavigator" ~> 3.0
 1. 💉 导入头文件 `#import <UNXNavigator/UNXNavigator.h>`
 2. 💉 使用之前需要先注册需要修改的导航控制器，以 `FeatureNavigationController` 为例：
 ```objective-c
-[UENavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
+[UNXNavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
 ```
 
 **注意**：
@@ -98,7 +98,7 @@ github "l1Dan/UNXNavigator" ~> 3.0
 
 ```objective-c
 // 全局统一修改，不会覆盖基于视图控制器修改
-UENavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
+UNXNavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 
 // 基于视图控制器修改
 - (UIColor *)unx_barTintColor {

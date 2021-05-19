@@ -26,7 +26,7 @@
 #import "UINavigationController+UNXNavigator.h"
 #import "UIViewController+UNXNavigator.h"
 
-@implementation UEEdgeGestureRecognizerDelegate
+@implementation UNXEdgeGestureRecognizerDelegate
 
 - (instancetype)initWithNavigationController:(UINavigationController *)navigationController {
     if (self = [super init]) {
@@ -55,7 +55,7 @@
 @end
 
 
-@implementation UEFullscreenPopGestureRecognizerDelegate
+@implementation UNXFullscreenPopGestureRecognizerDelegate
 
 - (instancetype)initWithNavigationController:(UINavigationController *)navigationController {
     if (self = [super init]) {
@@ -225,20 +225,20 @@
 
 @implementation UINavigationController (UNXNavigatorPrivate)
 
-- (UEEdgeGestureRecognizerDelegate *)unx_gestureDelegate {
+- (UNXEdgeGestureRecognizerDelegate *)unx_gestureDelegate {
     return objc_getAssociatedObject(self, _cmd);
 }
 
-- (void)setUnx_gestureDelegate:(UEEdgeGestureRecognizerDelegate *)unx_gestureDelegate {
+- (void)setUnx_gestureDelegate:(UNXEdgeGestureRecognizerDelegate *)unx_gestureDelegate {
     objc_setAssociatedObject(self, @selector(unx_gestureDelegate), unx_gestureDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (UEFullscreenPopGestureRecognizerDelegate *)unx_fullscreenPopGestureDelegate {
-    UEFullscreenPopGestureRecognizerDelegate *delegate = objc_getAssociatedObject(self, _cmd);
-    if (delegate && [delegate isKindOfClass:[UEFullscreenPopGestureRecognizerDelegate class]]) {
+- (UNXFullscreenPopGestureRecognizerDelegate *)unx_fullscreenPopGestureDelegate {
+    UNXFullscreenPopGestureRecognizerDelegate *delegate = objc_getAssociatedObject(self, _cmd);
+    if (delegate && [delegate isKindOfClass:[UNXFullscreenPopGestureRecognizerDelegate class]]) {
         return delegate;
     }
-    delegate = [[UEFullscreenPopGestureRecognizerDelegate alloc] initWithNavigationController:self];
+    delegate = [[UNXFullscreenPopGestureRecognizerDelegate alloc] initWithNavigationController:self];
     objc_setAssociatedObject(self, _cmd, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return delegate;
 }
@@ -256,7 +256,7 @@
     [self.navigationBar setShadowImage:[[UIImage alloc] init]];
     [self.navigationBar setTranslucent:YES];
 
-    self.unx_gestureDelegate = [[UEEdgeGestureRecognizerDelegate alloc] initWithNavigationController:self];
+    self.unx_gestureDelegate = [[UNXEdgeGestureRecognizerDelegate alloc] initWithNavigationController:self];
     self.interactivePopGestureRecognizer.delegate = self.unx_gestureDelegate;
 }
 

@@ -85,14 +85,6 @@
     [self unx_setViewControllers:viewControllers animated: animated];
 }
 
-- (UIViewController *)childViewControllerForStatusBarStyle {
-    return self.topViewController;
-}
-
-- (UIViewController *)childViewControllerForStatusBarHidden {
-    return self.topViewController;
-}
-
 #pragma mark - Private
 - (void)unx_configureFullscreenPopGesture {
     if (![self.interactivePopGestureRecognizer.view.gestureRecognizers containsObject:self.unx_fullscreenPopGestureRecognizer]) {

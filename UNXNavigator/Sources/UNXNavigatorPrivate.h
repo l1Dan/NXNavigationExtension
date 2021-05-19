@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 
 /// 边缘滑动返回手势代理
-@interface UEEdgeGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
+@interface UNXEdgeGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
 
 /// 获取当前导航控制器
 @property (nonatomic, weak) UINavigationController *navigationController;
@@ -41,7 +41,7 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 @end
 
 /// 全屏滑动返回手势代理
-@interface UEFullscreenPopGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
+@interface UNXFullscreenPopGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
 
 /// 获取当前导航控制器
 @property (nonatomic, weak) UINavigationController *navigationController;
@@ -81,13 +81,13 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 @interface UINavigationController (UNXNavigatorPrivate)
 
 /// 获取当前皮肤设置
-@property (nonatomic, strong) UEEdgeGestureRecognizerDelegate *unx_gestureDelegate;
+@property (nonatomic, strong) UNXEdgeGestureRecognizerDelegate *unx_gestureDelegate;
 
 /// 获取当前皮肤设置
 @property (nonatomic, strong, readonly, nullable) UNXNavigationBarAppearance *unx_appearance;
 
 /// 全屏收拾代理对象
-@property (nonatomic, strong, readonly) UEFullscreenPopGestureRecognizerDelegate *unx_fullscreenPopGestureDelegate;
+@property (nonatomic, strong, readonly) UNXFullscreenPopGestureRecognizerDelegate *unx_fullscreenPopGestureDelegate;
 
 /// UNXNavigationBar 是否可用；默认 YES；没有注册导航栏时为 NO 时会使用系统导航栏
 @property (nonatomic, assign, readonly) BOOL unx_useNavigationBar;

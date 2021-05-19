@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "UNXNavigator"
-  spec.version      = "3.0"
+  spec.version      = "3.0.1"
   spec.summary      = "UNXNavigator（UINavigation Extension）是为 iOS 应用设计的一个简单、易用的导航栏处理框架。"
 
   spec.description  = <<-DESC
