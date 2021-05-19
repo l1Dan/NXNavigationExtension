@@ -24,6 +24,8 @@
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /// 方法交换
 /// @param aClass 交换方法的类名
 /// @param originalSelector 原始交换方法
@@ -52,3 +54,5 @@ static inline UIImage *UNXNavigatorGetImageFromColor(UIColor *color) {
     UIGraphicsEndImageContext();
     return image;
 }
+
+NS_ASSUME_NONNULL_END
