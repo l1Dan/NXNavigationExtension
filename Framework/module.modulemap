@@ -1,0 +1,5 @@
+framework module UNXNavigator {
+    umbrella header "UNXNavigator.h"
+    export *
+    module * { export * }
+}

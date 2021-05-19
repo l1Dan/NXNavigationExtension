@@ -4,7 +4,7 @@
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/UNXNavigator.svg?style=flat)](https://img.shields.io/cocoapods/v/UNXNavigator.svg) ![Language](https://img.shields.io/github/languages/top/l1dan/UNXNavigator.svg?style=flat) [![MIT Licence](https://img.shields.io/github/license/l1dan/UNXNavigator.svg?style=flat)](https://opensource.org/licenses/mit-license.php) [![Platform](https://img.shields.io/cocoapods/p/UNXNavigator.svg?style=flat)](https://github.com/l1Dan/UNXNavigator/blob/master/README.md) [![GitHub last commit](https://img.shields.io/github/last-commit/l1Dan/UNXNavigator.svg?style=flat)](https://img.shields.io/github/last-commit/l1Dan/UNXNavigator) 
 
-UNXNavigator（UINavigation Extension）是为 iOS 应用设计的一个简单、易用的导航栏处理框架。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。UNXNavigator 和 [示例程序代码](https://github.com/l1Dan/UNXNavigator/archive/master.zip) 都已经适配暗黑模式（Dark Mode）。
+🔥 UNXNavigator（UINavigationBar Extensions）是为 iOS 应用设计的一个简单、易用的导航栏处理框架。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。UNXNavigator 和 [示例程序代码](https://github.com/l1Dan/UNXNavigator/archive/master.zip) 都已经适配暗黑模式（Dark Mode）。
 
 ## 🎉 预览
 
@@ -37,27 +37,38 @@ github "l1Dan/UNXNavigator"
 github "l1Dan/UNXNavigator" ~> 3.1
 ```
 
+### 使用 Swift Package Manager 安装
+
+添加 `UNXNavigator` 依赖库到  `Package.swift` 的  `dependencies` 中。
+```swift
+dependencies: [
+    .package(url: "https://github.com/l1Dan/UNXNavigator.git", .upToNextMajor(from: "3.1"))
+]
+```
+
 ## 🌈 要求
 
 | UNXNavigator Version | Minimum iOS Target  | Minimum macOS Target  | Minimum watchOS Target  | Minimum tvOS Target  |                                   Notes                                   |
 |:--------------------:|:---------------------------:|:----------------------------:|:----------------------------:|:----------------------------:|:-------------------------------------------------------------------------:|
-| 2.x | iOS 11 | macOS 10.15 | n/a | n/a | macOS: macCatalyst
 | 3.x | iOS 11 | macOS 10.15 | n/a | n/a | macOS: macCatalyst
+| 2.x | iOS 11 | macOS 10.15 | n/a | n/a | macOS: macCatalyst
 
 ## 👏 功能
+特别实用的功能，总有一款适合你的项目
 
 ### 基本功能
 
+- ✅` 设置导航栏透明`
+- ✅` 设置导航栏半透明`
+- ✅` 自定义返回按钮图片`
+- ✅` 自定义返回按钮`
+- ✅` 自定义导航栏模糊背景`
 - ✅` 修改返回按钮箭头颜色`
 - ✅` 修改导航栏标题颜色`
 - ✅` 修改导航栏背景颜色`
 - ✅` 修改导航栏背景图片`
-- ✅` 设置导航栏透明`
-- ✅` 设置导航栏半透明`
 - ✅` 修改导航栏底部线条颜色`
 - ✅` 修改导航栏底部线条颜色图片`
-- ✅` 自定义返回按钮图片`
-- ✅` 自定义返回按钮`
 
 ### 高级功能
 

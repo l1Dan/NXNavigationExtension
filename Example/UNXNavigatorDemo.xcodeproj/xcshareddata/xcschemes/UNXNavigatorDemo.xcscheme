@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D61CCBFA251A13F100A91580"
+               BlueprintIdentifier = "D624E8E12654F60500CC96E6"
                BuildableName = "UNXNavigatorDemo.app"
                BlueprintName = "UNXNavigatorDemo"
-               ReferencedContainer = "container:UNXNavigator.xcodeproj">
+               ReferencedContainer = "container:UNXNavigatorDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,10 +44,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D61CCBFA251A13F100A91580"
+            BlueprintIdentifier = "D624E8E12654F60500CC96E6"
             BuildableName = "UNXNavigatorDemo.app"
             BlueprintName = "UNXNavigatorDemo"
-            ReferencedContainer = "container:UNXNavigator.xcodeproj">
+            ReferencedContainer = "container:UNXNavigatorDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -61,10 +61,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D61CCBFA251A13F100A91580"
+            BlueprintIdentifier = "D624E8E12654F60500CC96E6"
             BuildableName = "UNXNavigatorDemo.app"
             BlueprintName = "UNXNavigatorDemo"
-            ReferencedContainer = "container:UNXNavigator.xcodeproj">
+            ReferencedContainer = "container:UNXNavigatorDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

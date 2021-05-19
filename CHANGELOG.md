@@ -1,5 +1,10 @@
 # Change Log
 
+## 3.1
+---
+- 项目结构调整
+- 添加 Swift Package Manager 支持
+
 ## 3.0.1
 ---
 - 重命名：UEEdgeGestureRecognizerDelegate 为 UNXEdgeGestureRecognizerDelegate；
