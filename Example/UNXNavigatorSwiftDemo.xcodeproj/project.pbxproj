@@ -41,10 +41,10 @@
 		D65F1004265548E300C702B7 /* FeatureTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65F0FE1265548E300C702B7 /* FeatureTableViewController.swift */; };
 		D65F1005265548E300C702B7 /* FakeNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65F0FE3265548E300C702B7 /* FakeNavigationBar.swift */; };
 		D65F1006265548E300C702B7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65F0FE5265548E300C702B7 /* Extensions.swift */; };
-		D6923A9626554AE200580292 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6923A9226554AE200580292 /* Assets.xcassets */; };
-		D6923A9726554AE200580292 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6923A9326554AE200580292 /* LaunchScreen.storyboard */; };
 		D6923A9B26554B2500580292 /* UNXNavigator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6923A9A26554B2500580292 /* UNXNavigator.framework */; };
 		D6923A9C26554B2500580292 /* UNXNavigator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6923A9A26554B2500580292 /* UNXNavigator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6923AB326554EF300580292 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6923AAF26554EF300580292 /* Assets.xcassets */; };
+		D6923AB426554EF300580292 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6923AB026554EF300580292 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -97,10 +97,10 @@
 		D65F0FE1265548E300C702B7 /* FeatureTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureTableViewController.swift; sourceTree = "<group>"; };
 		D65F0FE3265548E300C702B7 /* FakeNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNavigationBar.swift; sourceTree = "<group>"; };
 		D65F0FE5265548E300C702B7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		D6923A9226554AE200580292 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D6923A9426554AE200580292 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D6923A9526554AE200580292 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6923A9A26554B2500580292 /* UNXNavigator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UNXNavigator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6923AAF26554EF300580292 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D6923AB126554EF300580292 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D6923AB226554EF300580292 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,8 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				D65F0FA32655486700C702B7 /* UNXNavigatorSwiftDemo */,
-				D65F0FA22655486700C702B7 /* Products */,
 				D6923A9926554B2500580292 /* Frameworks */,
+				D65F0FA22655486700C702B7 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,7 +140,7 @@
 				D65F0FE4265548E300C702B7 /* Category */,
 				D65F0FD5265548E300C702B7 /* Common */,
 				D6923A8826554A4400580292 /* Other */,
-				D6923A9126554AE200580292 /* Supporting Files */,
+				D6923AAE26554EF300580292 /* Supporting Files */,
 			);
 			path = UNXNavigatorSwiftDemo;
 			sourceTree = "<group>";
@@ -148,19 +148,19 @@
 		D65F0FBE265548E200C702B7 /* Basic */ = {
 			isa = PBXGroup;
 			children = (
-				D65F0FBF265548E200C702B7 /* ViewController11_ScrollViewWithFullScreen.swift */,
-				D65F0FC0265548E200C702B7 /* ViewController04_Translucent.swift */,
-				D65F0FC1265548E200C702B7 /* ViewController06_ShadowImage.swift */,
-				D65F0FC2265548E200C702B7 /* ViewController12_Modal.swift */,
-				D65F0FC3265548E200C702B7 /* ViewController08_CustomBackButton.swift */,
-				D65F0FC4265548E200C702B7 /* ViewController02_BackgroundImage.swift */,
 				D65F0FC5265548E200C702B7 /* ViewController01_BackgroundColor.swift */,
+				D65F0FC4265548E200C702B7 /* ViewController02_BackgroundImage.swift */,
 				D65F0FC6265548E200C702B7 /* ViewController03_Transparent.swift */,
-				D65F0FC7265548E200C702B7 /* ViewController13_Blur.swift */,
-				D65F0FC8265548E200C702B7 /* ViewController09_FullScreen.swift */,
-				D65F0FC9265548E200C702B7 /* ViewController07_CustomBackButtonImage.swift */,
+				D65F0FC0265548E200C702B7 /* ViewController04_Translucent.swift */,
 				D65F0FCA265548E200C702B7 /* ViewController05_ShadowColor.swift */,
+				D65F0FC1265548E200C702B7 /* ViewController06_ShadowImage.swift */,
+				D65F0FC9265548E200C702B7 /* ViewController07_CustomBackButtonImage.swift */,
+				D65F0FC3265548E200C702B7 /* ViewController08_CustomBackButton.swift */,
+				D65F0FC8265548E200C702B7 /* ViewController09_FullScreen.swift */,
 				D65F0FCB265548E200C702B7 /* ViewController10_ScrollView.swift */,
+				D65F0FBF265548E200C702B7 /* ViewController11_ScrollViewWithFullScreen.swift */,
+				D65F0FC2265548E200C702B7 /* ViewController12_Modal.swift */,
+				D65F0FC7265548E200C702B7 /* ViewController13_Blur.swift */,
 			);
 			path = Basic;
 			sourceTree = "<group>";
@@ -169,13 +169,13 @@
 			isa = PBXGroup;
 			children = (
 				D65F0FCD265548E200C702B7 /* ViewController01_DisablePopGesture.swift */,
+				D65F0FD4265548E200C702B7 /* ViewController02_FullPopGesture.swift */,
 				D65F0FCE265548E200C702B7 /* ViewController03_BackEventIntercept.swift */,
-				D65F0FCF265548E200C702B7 /* ViewController06_ClickEventHitToBack.swift */,
-				D65F0FD0265548E200C702B7 /* ViewController08_WebView.swift */,
 				D65F0FD1265548E200C702B7 /* ViewController04_RedirectViewController.swift */,
 				D65F0FD2265548E200C702B7 /* ViewController05_Custom.swift */,
+				D65F0FCF265548E200C702B7 /* ViewController06_ClickEventHitToBack.swift */,
 				D65F0FD3265548E200C702B7 /* ViewController07_ScrollChangeNavigationBar.swift */,
-				D65F0FD4265548E200C702B7 /* ViewController02_FullPopGesture.swift */,
+				D65F0FD0265548E200C702B7 /* ViewController08_WebView.swift */,
 			);
 			path = Advanced;
 			sourceTree = "<group>";
@@ -183,8 +183,8 @@
 		D65F0FD5265548E300C702B7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				D65F0FD6265548E300C702B7 /* Models */,
 				D65F0FD8265548E300C702B7 /* Comtrollers */,
+				D65F0FD6265548E300C702B7 /* Models */,
 				D65F0FE2265548E300C702B7 /* Views */,
 			);
 			path = Common;
@@ -201,15 +201,15 @@
 		D65F0FD8265548E300C702B7 /* Comtrollers */ = {
 			isa = PBXGroup;
 			children = (
-				D65F0FD9265548E300C702B7 /* FeatureNavigationController.swift */,
-				D65F0FDA265548E300C702B7 /* DashboardTabBarController.swift */,
-				D65F0FDB265548E300C702B7 /* BaseViewController.swift */,
-				D65F0FDC265548E300C702B7 /* HierarchyViewController.swift */,
-				D65F0FDD265548E300C702B7 /* RandomColorViewController.swift */,
-				D65F0FDE265548E300C702B7 /* BaseTableViewController.swift */,
 				D65F0FDF265548E300C702B7 /* BaseNavigationController.swift */,
-				D65F0FE0265548E300C702B7 /* MainSplitViewController.swift */,
+				D65F0FDE265548E300C702B7 /* BaseTableViewController.swift */,
+				D65F0FDB265548E300C702B7 /* BaseViewController.swift */,
+				D65F0FDA265548E300C702B7 /* DashboardTabBarController.swift */,
+				D65F0FD9265548E300C702B7 /* FeatureNavigationController.swift */,
 				D65F0FE1265548E300C702B7 /* FeatureTableViewController.swift */,
+				D65F0FDC265548E300C702B7 /* HierarchyViewController.swift */,
+				D65F0FE0265548E300C702B7 /* MainSplitViewController.swift */,
+				D65F0FDD265548E300C702B7 /* RandomColorViewController.swift */,
 			);
 			path = Comtrollers;
 			sourceTree = "<group>";
@@ -238,16 +238,6 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
-		D6923A9126554AE200580292 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D6923A9226554AE200580292 /* Assets.xcassets */,
-				D6923A9326554AE200580292 /* LaunchScreen.storyboard */,
-				D6923A9526554AE200580292 /* Info.plist */,
-			);
-			path = "Supporting Files";
-			sourceTree = SOURCE_ROOT;
-		};
 		D6923A9926554B2500580292 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +245,16 @@
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
+		};
+		D6923AAE26554EF300580292 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D6923AAF26554EF300580292 /* Assets.xcassets */,
+				D6923AB026554EF300580292 /* LaunchScreen.storyboard */,
+				D6923AB226554EF300580292 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -314,8 +314,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6923A9626554AE200580292 /* Assets.xcassets in Resources */,
-				D6923A9726554AE200580292 /* LaunchScreen.storyboard in Resources */,
+				D6923AB326554EF300580292 /* Assets.xcassets in Resources */,
+				D6923AB426554EF300580292 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,10 +366,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D6923A9326554AE200580292 /* LaunchScreen.storyboard */ = {
+		D6923AB026554EF300580292 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D6923A9426554AE200580292 /* Base */,
+				D6923AB126554EF300580292 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

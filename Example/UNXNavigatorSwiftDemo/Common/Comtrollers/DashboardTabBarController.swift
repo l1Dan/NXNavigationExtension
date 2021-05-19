@@ -17,12 +17,13 @@ class DashboardTabBarController: UITabBarController {
         UNXNavigationBar.registerStandardAppearance(forNavigationControllerClass: FeatureNavigationController.self)
         
         let featureTableViewController1 = FeatureTableViewController(style: .grouped)
-        featureTableViewController1.navigationItem.title = "UNXNavigationBar 🎉 🎉 🎉"
+        let name = (Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String)?.components(separatedBy: ".").last ?? ""
+        featureTableViewController1.navigationItem.title = "\(name) 🎉 🎉 🎉"
         
         let customNormal = UIImage(named: "TabBarCustomNormal")
         let customSelected = UIImage(named: "TabBarCustomSelected")
         let navigationController1 = FeatureNavigationController(rootViewController: featureTableViewController1)
-        navigationController1.tabBarItem = UITabBarItem(title: "UNXNavigationBar", image: customNormal, selectedImage: customSelected)
+        navigationController1.tabBarItem = UITabBarItem(title: "Custom", image: customNormal, selectedImage: customSelected)
         
         let featureTableViewController2 = FeatureTableViewController(style: .grouped)
         featureTableViewController2.navigationItem.title = "UINavigationBar⚠️⚠️⚠️"
@@ -30,7 +31,7 @@ class DashboardTabBarController: UITabBarController {
         let systemNormal = UIImage(named: "TabBarSystemNormal")
         let systemSelected = UIImage(named: "TabBarSystemSelected")
         let navigationController2 = BaseNavigationController(rootViewController: featureTableViewController2)
-        navigationController2.tabBarItem = UITabBarItem(title: "UINavigationBar", image: systemNormal, selectedImage: systemSelected)
+        navigationController2.tabBarItem = UITabBarItem(title: "System", image: systemNormal, selectedImage: systemSelected)
         
         delegate = self;
         viewControllers = [navigationController1, navigationController2]

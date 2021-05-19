@@ -27,12 +27,13 @@
     [UNXNavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
     
     FeatureTableViewController *featureTableViewController1 = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    featureTableViewController1.navigationItem.title = @"UNXNavigationBar 🎉 🎉 🎉";
+    NSString *name = [[NSBundle mainBundle].infoDictionary[(NSString *)kCFBundleIdentifierKey] componentsSeparatedByString:@"."].lastObject;
+    featureTableViewController1.navigationItem.title = [NSString stringWithFormat:@"%@ 🎉 🎉 🎉", name];
 
     UIImage *customNormal = [UIImage imageNamed:@"TabBarCustomNormal"];
     UIImage *customSelected = [UIImage imageNamed:@"TabBarCustomSelected"];
     FeatureNavigationController *navigationController1 = [[FeatureNavigationController alloc] initWithRootViewController:featureTableViewController1];
-    navigationController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"UNXNavigationBar" image:customNormal selectedImage:customSelected];
+    navigationController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Custom" image:customNormal selectedImage:customSelected];
     
     FeatureTableViewController *featureTableViewController2 = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     featureTableViewController2.navigationItem.title = @"UINavigationBar⚠️⚠️⚠️";
@@ -40,7 +41,7 @@
     UIImage *systemNormal = [UIImage imageNamed:@"TabBarSystemNormal"];
     UIImage *systemSelected = [UIImage imageNamed:@"TabBarSystemSelected"];
     BaseNavigationController *navigationController2 = [[BaseNavigationController alloc] initWithRootViewController:featureTableViewController2];
-    navigationController2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"UINavigationBar" image:systemNormal selectedImage:systemSelected];
+    navigationController2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"System" image:systemNormal selectedImage:systemSelected];
     
     self.delegate = self;
     self.viewControllers = @[navigationController1, navigationController2];
