@@ -15,8 +15,6 @@
 		D624E9772654F71200CC96E6 /* UITableViewCell+Enabled.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9142654F71100CC96E6 /* UITableViewCell+Enabled.m */; };
 		D624E9782654F71200CC96E6 /* UIColor+RandomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9152654F71100CC96E6 /* UIColor+RandomColor.m */; };
 		D624E9792654F71200CC96E6 /* UIImage+NavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9172654F71100CC96E6 /* UIImage+NavigationBar.m */; };
-		D624E97A2654F71200CC96E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D624E91A2654F71200CC96E6 /* Assets.xcassets */; };
-		D624E97B2654F71200CC96E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D624E91B2654F71200CC96E6 /* LaunchScreen.storyboard */; };
 		D624E97C2654F71200CC96E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E91D2654F71200CC96E6 /* main.m */; };
 		D624E97D2654F71200CC96E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E91E2654F71200CC96E6 /* AppDelegate.m */; };
 		D624E97F2654F71200CC96E6 /* ViewController03_BackEventIntercept.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9272654F71200CC96E6 /* ViewController03_BackEventIntercept.m */; };
@@ -56,6 +54,8 @@
 		D624E9A12654F71200CC96E6 /* FakeNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9712654F71200CC96E6 /* FakeNavigationBar.m */; };
 		D624E9B32654F89D00CC96E6 /* UNXNavigator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D624E9B22654F89D00CC96E6 /* UNXNavigator.framework */; };
 		D624E9B42654F89D00CC96E6 /* UNXNavigator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D624E9B22654F89D00CC96E6 /* UNXNavigator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6923A8E26554A7400580292 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6923A8A26554A7400580292 /* Assets.xcassets */; };
+		D6923A8F26554A7400580292 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6923A8B26554A7400580292 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -91,12 +91,8 @@
 		D624E9162654F71100CC96E6 /* UIDevice+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Additions.h"; sourceTree = "<group>"; };
 		D624E9172654F71100CC96E6 /* UIImage+NavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+NavigationBar.m"; sourceTree = "<group>"; };
 		D624E9192654F71200CC96E6 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		D624E91A2654F71200CC96E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D624E91C2654F71200CC96E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D624E91D2654F71200CC96E6 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D624E91E2654F71200CC96E6 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D624E91F2654F71200CC96E6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D624E9202654F71200CC96E6 /* UNXNavigatorDemo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = UNXNavigatorDemo.entitlements; sourceTree = "<group>"; };
 		D624E9242654F71200CC96E6 /* ViewController04_RedirectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController04_RedirectViewController.h; sourceTree = "<group>"; };
 		D624E9252654F71200CC96E6 /* ViewController08_WebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController08_WebView.h; sourceTree = "<group>"; };
 		D624E9262654F71200CC96E6 /* ViewController05_Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController05_Custom.h; sourceTree = "<group>"; };
@@ -168,6 +164,9 @@
 		D624E9702654F71200CC96E6 /* FakeNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeNavigationBar.h; sourceTree = "<group>"; };
 		D624E9712654F71200CC96E6 /* FakeNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeNavigationBar.m; sourceTree = "<group>"; };
 		D624E9B22654F89D00CC96E6 /* UNXNavigator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UNXNavigator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6923A8A26554A7400580292 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D6923A8C26554A7400580292 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D6923A8D26554A7400580292 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,8 +204,8 @@
 				D624E9042654F71100CC96E6 /* Base */,
 				D624E90E2654F71100CC96E6 /* Category */,
 				D624E9212654F71200CC96E6 /* Feature */,
-				D624E9182654F71100CC96E6 /* Supporting Files */,
-				D624E9202654F71200CC96E6 /* UNXNavigatorDemo.entitlements */,
+				D6923A8726554A1A00580292 /* Other */,
+				D6923A8926554A7400580292 /* Supporting Files */,
 			);
 			path = UNXNavigatorDemo;
 			sourceTree = "<group>";
@@ -255,19 +254,6 @@
 				D624E9172654F71100CC96E6 /* UIImage+NavigationBar.m */,
 			);
 			path = UIKit;
-			sourceTree = "<group>";
-		};
-		D624E9182654F71100CC96E6 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D624E9192654F71200CC96E6 /* AppDelegate.h */,
-				D624E91A2654F71200CC96E6 /* Assets.xcassets */,
-				D624E91B2654F71200CC96E6 /* LaunchScreen.storyboard */,
-				D624E91D2654F71200CC96E6 /* main.m */,
-				D624E91E2654F71200CC96E6 /* AppDelegate.m */,
-				D624E91F2654F71200CC96E6 /* Info.plist */,
-			);
-			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		D624E9212654F71200CC96E6 /* Feature */ = {
@@ -435,6 +421,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D6923A8726554A1A00580292 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				D624E9192654F71200CC96E6 /* AppDelegate.h */,
+				D624E91D2654F71200CC96E6 /* main.m */,
+				D624E91E2654F71200CC96E6 /* AppDelegate.m */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		D6923A8926554A7400580292 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D6923A8A26554A7400580292 /* Assets.xcassets */,
+				D6923A8B26554A7400580292 /* LaunchScreen.storyboard */,
+				D6923A8D26554A7400580292 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -492,8 +498,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D624E97A2654F71200CC96E6 /* Assets.xcassets in Resources */,
-				D624E97B2654F71200CC96E6 /* LaunchScreen.storyboard in Resources */,
+				D6923A8E26554A7400580292 /* Assets.xcassets in Resources */,
+				D6923A8F26554A7400580292 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,10 +561,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D624E91B2654F71200CC96E6 /* LaunchScreen.storyboard */ = {
+		D6923A8B26554A7400580292 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D624E91C2654F71200CC96E6 /* Base */,
+				D6923A8C26554A7400580292 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -685,7 +691,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BHD34642BX;
-				INFOPLIST_FILE = "$(SRCROOT)/UNXNavigatorDemo/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)//Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -704,7 +710,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BHD34642BX;
-				INFOPLIST_FILE = "$(SRCROOT)/UNXNavigatorDemo/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)//Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
