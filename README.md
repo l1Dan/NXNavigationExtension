@@ -1,63 +1,63 @@
 <p align="center" >
-  <img src="https://raw.githubusercontent.com/l1Dan/UNXNavigator/master/Snapshots/Slogan.png" alt="UNXNavigator" title="UNXNavigator">
+  <img src="https://raw.githubusercontent.com/l1Dan/NXNavigationExtension/master/Snapshots/Slogan.png" alt="NXNavigationExtension" title="NXNavigationExtension">
 </p>
 
-[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/UNXNavigator.svg?style=flat)](https://img.shields.io/cocoapods/v/UNXNavigator.svg) ![Language](https://img.shields.io/github/languages/top/l1dan/UNXNavigator.svg?style=flat) [![MIT Licence](https://img.shields.io/github/license/l1dan/UNXNavigator.svg?style=flat)](https://opensource.org/licenses/mit-license.php) [![Platform](https://img.shields.io/cocoapods/p/UNXNavigator.svg?style=flat)](https://github.com/l1Dan/UNXNavigator/blob/master/README.md) [![GitHub last commit](https://img.shields.io/github/last-commit/l1Dan/UNXNavigator.svg?style=flat)](https://img.shields.io/github/last-commit/l1Dan/UNXNavigator)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/NXNavigationExtension.svg?style=flat)](https://img.shields.io/cocoapods/v/NXNavigationExtension.svg) ![Language](https://img.shields.io/github/languages/top/l1dan/NXNavigationExtension.svg?style=flat) [![MIT Licence](https://img.shields.io/github/license/l1dan/NXNavigationExtension.svg?style=flat)](https://opensource.org/licenses/mit-license.php) [![Platform](https://img.shields.io/cocoapods/p/NXNavigationExtension.svg?style=flat)](https://github.com/l1Dan/NXNavigationExtension/blob/master/README.md) [![GitHub last commit](https://img.shields.io/github/last-commit/l1Dan/NXNavigationExtension.svg?style=flat)](https://img.shields.io/github/last-commit/l1Dan/NXNavigationExtension)
 
-🔥 UNXNavigator（UINavigationBar Extensions）是为 iOS 应用设计的一个简单、易用的导航栏处理框架。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。UNXNavigator 和 [示例程序代码](https://github.com/l1Dan/UNXNavigator/archive/master.zip) 都已经适配暗黑模式（Dark Mode）。
+🔥 NXNavigationExtension 是为 iOS 应用设计的一个简单、易用的导航栏处理框架。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。NXNavigationExtension 和 [示例程序代码](https://github.com/l1Dan/NXNavigationExtension/archive/master.zip) 都已经适配暗黑模式（Dark Mode）。
 
 ## 🎉 预览
 
-![Preview](https://raw.githubusercontent.com/l1Dan/UNXNavigator/master/Snapshots/Preview.png)
+![Preview](https://raw.githubusercontent.com/l1Dan/NXNavigationExtension/master/Snapshots/Preview.png)
 
 ## 🌟 开始使用
 
-下载 [UNXNavigator](https://github.com/l1Dan/UNXNavigator/archive/master.zip) 示例程序代码。
+下载 [NXNavigationExtension](https://github.com/l1Dan/NXNavigationExtension/archive/master.zip) 示例程序代码。
 
 ## 使用 CocoaPods 安装
 
-使用 CocoaPods 将 UNXNavigator 集成到 Xcode 项目中，需要在 `Podfile` 中指定：
+使用 CocoaPods 将 NXNavigationExtension 集成到 Xcode 项目中，需要在 `Podfile` 中指定：
 
 ```ruby
-pod 'UNXNavigator'
+pod 'NXNavigationExtension'
 ```
 
 或者
 
 ```ruby
-pod 'UNXNavigator', ~> 3.1
+pod 'NXNavigationExtension', ~> 3.0.0
 ```
 
 ### 使用 Carthage 安装
 
-[Carthage](https://github.com/Carthage/Carthage) 是一个去中心化的包管理器，它构建依赖项并为您提供二进制框架。 要集成 UNXNavigator，请将以下内容添加到您的 `Cartfile` 文件中：
+[Carthage](https://github.com/Carthage/Carthage) 是一个去中心化的包管理器，它构建依赖项并为您提供二进制框架。 要集成 NXNavigationExtension，请将以下内容添加到您的 `Cartfile` 文件中：
 
 ```ogdl
-github "l1Dan/UNXNavigator"
+github "l1Dan/NXNavigationExtension"
 ```
 
 或者
 
 ```ogdl
-github "l1Dan/UNXNavigator" ~> 3.1
+github "l1Dan/NXNavigationExtension" ~> 3.0.0
 ```
 
 ### 使用 Swift Package Manager 安装
 
-添加 `UNXNavigator` 依赖库到 `Package.swift` 的 `dependencies` 中。
+添加 `NXNavigationExtension` 依赖库到 `Package.swift` 的 `dependencies` 中。
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/l1Dan/UNXNavigator.git", .upToNextMajor(from: "3.1"))
+    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "3.0.0"))
 ]
 ```
 
 ## 🌈 要求
 
-| UNXNavigator Version | Minimum iOS Target | Minimum macOS Target | Minimum watchOS Target | Minimum tvOS Target |       Notes        |
-| :------------------: | :----------------: | :------------------: | :--------------------: | :-----------------: | :----------------: |
-|         3.x          |       iOS 11       |     macOS 10.15      |          n/a           |         n/a         | macOS: macCatalyst |
-|         2.x          |       iOS 11       |     macOS 10.15      |          n/a           |         n/a         | macOS: macCatalyst |
+| NXNavigationExtension Version | Minimum iOS Target | Minimum macOS Target | Minimum watchOS Target | Minimum tvOS Target |       Notes        |
+| :---------------------------: | :----------------: | :------------------: | :--------------------: | :-----------------: | :----------------: |
+|              3.x              |       iOS 11       |     macOS 10.15      |          n/a           |         n/a         | macOS: macCatalyst |
+|              2.x              |       iOS 11       |     macOS 10.15      |          n/a           |         n/a         | macOS: macCatalyst |
 
 ## 优点
 
@@ -100,11 +100,11 @@ dependencies: [
 
 所有对导航栏外观的修改都是基于视图控制器 `UIViewController` 修改的，而不是基于导航控制器 `UINavigationController` 修改，这种设计逻辑更加符合实际应用场景。也就是自己所在的导航栏的外观自己管理。
 
-1. 💉 导入头文件 `#import <UNXNavigator/UNXNavigator.h>`
+1. 💉 导入头文件 `#import <NXNavigationExtension/NXNavigationExtension.h>`
 2. 💉 使用之前需要先注册需要修改的导航控制器，以 `FeatureNavigationController` 为例：
 
 ```objc
-[UNXNavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
+[NXNavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
 ```
 
 **注意**：
@@ -116,7 +116,7 @@ dependencies: [
 - 🚫 不要使用系统导航栏或导航控制器 `appearance` 相关属性修改。
 - 🚫 不要使用全局 `edgesForExtendedLayout` 修改。
 - 🚫 不要使用 `<UIGestureRecognizerDelegate>` 相关方法禁用手势返回。
-- 💉 一句话“不要直接操作导航栏或者导航控制器，把这些都交给 `UNXNavigator` 处理吧“。
+- 💉 一句话“不要直接操作导航栏或者导航控制器，把这些都交给 `NXNavigationExtension` 处理吧“。
 
 建议：除非你非常明白修改全局性东西的后果，否则不要修改，这么做的原因就是为了减少走一些弯路！
 
@@ -124,116 +124,116 @@ dependencies: [
 
 ### 修改返回按钮箭头颜色
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
 
 **导航栏返回按钮颜色默认使用系统蓝色 `[UIColor systemBlueColor]`，要改变返回按钮颜色可以使用以下方式配合：**
 
 ```objc
 // 全局统一修改，不会覆盖基于视图控制器修改
-UNXNavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
+NXNavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 
 // 基于视图控制器修改
-- (UIColor *)unx_barTintColor {
+- (UIColor *)nx_barTintColor {
     return self.isDarkMode ? [UIColor whiteColor] : [UIColor blackColor];
 }
 ```
 
 ## 修改导航栏标题颜色
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
 
 ```objc
-- (NSDictionary<NSAttributedStringKey,id> *)unx_titleTextAttributes {
-    return @{NSForegroundColorAttributeName: [self unx_barTintColor]};
+- (NSDictionary<NSAttributedStringKey,id> *)nx_titleTextAttributes {
+    return @{NSForegroundColorAttributeName: [self nx_barTintColor]};
 }
 ```
 
 #### 修改导航栏背景颜色
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Basic/Controllers/ViewController01_BackgroundColor.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Basic/Controllers/ViewController01_BackgroundColor.m)
 
 ```objc
-- (UIColor *)unx_navigationBarBackgroundColor {
+- (UIColor *)nx_navigationBarBackgroundColor {
     return [UIColor customDarkGrayColor];
 }
 ```
 
 #### 修改导航栏背景图片
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Basic/Controllers/ViewController02_BackgroundImage.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Basic/Controllers/ViewController02_BackgroundImage.m)
 
 ```objc
-- (UIImage *)unx_navigationBarBackgroundImage {
+- (UIImage *)nx_navigationBarBackgroundImage {
     return UIImage.navigationBarBackgorundImage;
 }
 ```
 
 #### 设置导航栏透明
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Basic/Controllers/ViewController03_Transparent.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Basic/Controllers/ViewController03_Transparent.m)
 
 ```objc
-- (UIColor *)unx_navigationBarBackgroundColor {
+- (UIColor *)nx_navigationBarBackgroundColor {
     return [UIColor clearColor];
 }
 ```
 
 #### 设置导航栏半透明
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Basic/Controllers/ViewController04_Translucent.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Basic/Controllers/ViewController04_Translucent.m)
 
 ```objc
-- (BOOL)unx_useSystemBlurNavigationBar {
+- (BOOL)nx_useSystemBlurNavigationBar {
     return YES;
 }
 ```
 
 ### 修改导航栏底部线条颜色
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Basic/Controllers/ViewController05_ShadowColor.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Basic/Controllers/ViewController05_ShadowColor.m)
 
 ```objc
-- (UIColor *)unx_shadowImageTintColor {
+- (UIColor *)nx_shadowImageTintColor {
     return [UIColor redColor];
 }
 ```
 
 ### 修改导航栏底部线条颜色图片
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Basic/Controllers/ViewController06_ShadowImage.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Basic/Controllers/ViewController06_ShadowImage.m)
 
 ```objc
-- (UIColor *)unx_shadowImageTintColor {
+- (UIColor *)nx_shadowImageTintColor {
     return [UIColor redColor];
 }
 ```
 
 ### 修改导航栏底部线条颜色图片
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Basic/Controllers/ViewController06_ShadowImage.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Basic/Controllers/ViewController06_ShadowImage.m)
 
 ```objc
-- (UIImage *)unx_shadowImage {
+- (UIImage *)nx_shadowImage {
     return [UIImage imageNamed:@"NavigationBarShadowImage"];
 }
 ```
 
 ### 自定义返回按钮图片
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Basic/Controllers/ViewController07_CustomBackButtonImage.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Basic/Controllers/ViewController07_CustomBackButtonImage.m)
 
 ```objc
-- (UIImage *)unx_backImage {
+- (UIImage *)nx_backImage {
     return [UIImage imageNamed:@"NavigationBarBack"];
 }
 ```
 
 ### 自定义返回按钮
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Basic/Controllers/ViewController08_CustomBackButton.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Basic/Controllers/ViewController08_CustomBackButton.m)
 
 ```objc
-- (UIView *)unx_backButtonCustomView {
+- (UIView *)nx_backButtonCustomView {
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setTitle:@"😋" forState:UIControlStateNormal];
     [backButton setImage:[UIImage imageNamed:@"NavigationBarBack"] forState:UIControlStateNormal];
@@ -248,22 +248,22 @@ UNXNavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 
 #### 禁用滑动返回手势
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Advanced/Controllers/ViewController01_DisablePopGesture.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController01_DisablePopGesture.m)
 
 ```objc
-- (BOOL)unx_disableInteractivePopGesture {
+- (BOOL)nx_disableInteractivePopGesture {
     return YES;
 }
 ```
 
 #### 启用全屏滑动返回手势
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Advanced/Controllers/ViewController02_FullPopGesture.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController02_FullPopGesture.m)
 
 - 局部有效（在所处页面设置）
 
 ```objc
-- (BOOL)unx_enableFullScreenInteractivePopGesture {
+- (BOOL)nx_enableFullScreenInteractivePopGesture {
     return YES;
 }
 ```
@@ -271,12 +271,12 @@ UNXNavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 - 全局有效（在注册导航栏之前设置）
 
 ```objc
-UNXNavigatorFullscreenPopGestureEnable = YES;
+NXNavigationExtensionFullscreenPopGestureEnable = YES;
 ```
 
 #### 导航栏返回事件拦截
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Advanced/Controllers/ViewController03_BackEventIntercept.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController03_BackEventIntercept.m)
 
 需要遵守协议 `<UINavigationControllerCustomizable>`，实现代理方法：
 
@@ -316,17 +316,17 @@ UNXNavigatorFullscreenPopGestureEnable = YES;
 }
 ```
 
-自定义返回按钮事件拦截需要调用方法：`[self.navigationController unx_triggerSystemBackButtonHandler];`
+自定义返回按钮事件拦截需要调用方法：`[self.navigationController nx_triggerSystemBackButtonHandler];`
 
 ### 重定向任一控制器跳转
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Advanced/Controllers/ViewController04_RedirectViewController.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController04_RedirectViewController.m)
 
 - 以重定向到 `RandomColorViewController` 为例，如果之前有 Push 过 `RandomColorViewController` 的实例，则最后会跳转到实例中，如果没有则会调用 `block`，如果 `block == NULL` 或者 `return nil;` 则重定向跳转不会发生。
 - 执行重定向操作之后，并不会直接跳转到对应的视图控制器，如果需要 `跳转` 操作，可以调用 `popViewControllerAnimated:` 、`使用手势返回`、`点击返回按钮返回`。
 
 ```objc
-[self.navigationController unx_redirectViewControllerClass:[RandomColorViewController class] createViewControllerUsingBlock:^__kindof UIViewController * _Nonnull {
+[self.navigationController nx_redirectViewControllerClass:[RandomColorViewController class] createViewControllerUsingBlock:^__kindof UIViewController * _Nonnull {
     return [[RandomColorViewController alloc] init];
 }];
 ```
@@ -335,7 +335,7 @@ UNXNavigatorFullscreenPopGestureEnable = YES;
 执行上面代码之后并不会立即跳转，下面代码可以实现立即跳转：
 
 ```objc
-[self.navigationController unx_redirectViewControllerClass:[RandomColorViewController class] createViewControllerUsingBlock:^__kindof UIViewController * _Nonnull {
+[self.navigationController nx_redirectViewControllerClass:[RandomColorViewController class] createViewControllerUsingBlock:^__kindof UIViewController * _Nonnull {
     return [[RandomColorViewController alloc] init];
 }];
 [self.navigationController popViewControllerAnimated:YES];
@@ -345,32 +345,32 @@ UNXNavigatorFullscreenPopGestureEnable = YES;
 
 ### 导航栏点击事件穿透到底部
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Advanced/Controllers/ViewController06_ClickEventHitToBack.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController06_ClickEventHitToBack.m)
 
 ```objc
-- (BOOL)unx_hidesNavigationBar {
+- (BOOL)nx_hidesNavigationBar {
     return YES;
 }
 ```
 
 ### 动态修改导航栏样式
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
 
 ```objc
-- (BOOL)unx_containerViewWithoutNavigtionBar {
+- (BOOL)nx_containerViewWithoutNavigtionBar {
     return YES;
 }
 ```
 
-可以动态调整 ContainerView 透明度实现：`self.unx_navigationBar.containerView.alpha = value`
+可以动态调整 ContainerView 透明度实现：`self.nx_navigationBar.containerView.alpha = value`
 
 ### 更新导航栏样式
 
-📝 [示例代码](https://github.com/l1Dan/UNXNavigator/blob/master/UNXNavigatorDemo/Feature/Common/Controllers/RandomColorViewController.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Common/Controllers/RandomColorViewController.m)
 
 ```objc
-[self unx_setNeedsNavigationBarAppearanceUpdate];
+[self nx_setNeedsNavigationBarAppearanceUpdate];
 ```
 
 如果**状态栏**样式没有发生变化，请检查是否需要调用方法 `[self setNeedsStatusBarAppearanceUpdate]`，或者在 `UINavigationController` 的子类中设置如下代码：
@@ -387,4 +387,4 @@ UNXNavigatorFullscreenPopGestureEnable = YES;
 
 ## 📄 协议
 
-UNXNavigator 框架是在 MIT 许可下发布的。详情请参见 [LICE*N*SE](https://github.com/l1Dan/UNXNavigator/blob/master/LICENSE)。
+NXNavigationExtension 框架是在 MIT 许可下发布的。详情请参见 [LICE*N*SE](https://github.com/l1Dan/NXNavigationExtension/blob/master/LICENSE)。

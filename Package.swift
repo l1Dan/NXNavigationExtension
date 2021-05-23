@@ -1,7 +1,7 @@
 // swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 //
-// Copyright (c) 2021 Leo Lee UNXNavigator (https://github.com/l1Dan/UNXNavigator)
+// Copyright (c) 2021 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +23,11 @@
 
 import PackageDescription
 
-let package = Package(name: "UNXNavigator",
+let package = Package(name: "NXNavigationExtension",
                       platforms: [.macOS(.v10_15),
                                   .iOS(.v11)],
-                      products: [.library(name: "UNXNavigator",
-                                          targets: ["UNXNavigator"])],
-                      targets: [.target(name: "UNXNavigator",
-                                        path: "UNXNavigator",
+                      products: [.library(name: "NXNavigationExtension",
+                                          targets: ["NXNavigationExtension"])],
+                      targets: [.target(name: "NXNavigationExtension",
+                                        path: "NXNavigationExtension",
                                         publicHeadersPath: "")])
