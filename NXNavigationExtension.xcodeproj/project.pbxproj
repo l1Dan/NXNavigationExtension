@@ -16,7 +16,7 @@
 		D624E8D62654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E8CD2654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m */; };
 		D624E8D72654F41400CC96E6 /* UIViewController+NXNavigationExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E8CE2654F41400CC96E6 /* UIViewController+NXNavigationExtension.m */; };
 		D624E8D82654F41400CC96E6 /* NXNavigationExtensionMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = D624E8CF2654F41400CC96E6 /* NXNavigationExtensionMacro.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		D6367593265ADE7D00FD7C2C /* NXNavigationExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = D6367591265ADE7D00FD7C2C /* NXNavigationExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D69F2E0F2663505F004A02C8 /* NXNavigationExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = D69F2E0C2663505F004A02C8 /* NXNavigationExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,12 +29,14 @@
 		D624E8CD2654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+NXNavigationExtension.m"; sourceTree = "<group>"; };
 		D624E8CE2654F41400CC96E6 /* UIViewController+NXNavigationExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NXNavigationExtension.m"; sourceTree = "<group>"; };
 		D624E8CF2654F41400CC96E6 /* NXNavigationExtensionMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXNavigationExtensionMacro.h; sourceTree = "<group>"; };
-		D6367590265ADE7D00FD7C2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Framework/Info.plist; sourceTree = SOURCE_ROOT; };
-		D6367591265ADE7D00FD7C2C /* NXNavigationExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NXNavigationExtension.h; path = Framework/NXNavigationExtension.h; sourceTree = SOURCE_ROOT; };
-		D681414F265ADD4600E257AE /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		D6814150265ADD4600E257AE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		D6814151265ADD4600E257AE /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
-		D6814152265ADD4600E257AE /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
+		D69F2E0226635046004A02C8 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		D69F2E0326635046004A02C8 /* NXNavigationExtension.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NXNavigationExtension.podspec; sourceTree = "<group>"; };
+		D69F2E0426635046004A02C8 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		D69F2E0526635046004A02C8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D69F2E0626635046004A02C8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D69F2E0C2663505F004A02C8 /* NXNavigationExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NXNavigationExtension.h; path = Framework/NXNavigationExtension.h; sourceTree = "<group>"; };
+		D69F2E0D2663505F004A02C8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Framework/Info.plist; sourceTree = "<group>"; };
+		D69F2E0E2663505F004A02C8 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = Framework/module.modulemap; sourceTree = "<group>"; };
 		D6E4024C251FB71C001D7BEE /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -53,8 +55,8 @@
 			isa = PBXGroup;
 			children = (
 				D6E4024D251FB71C001D7BEE /* NXNavigationExtension */,
+				D69F2E0126635026004A02C8 /* Supporting Files */,
 				D61CCBFC251A13F100A91580 /* Products */,
-				D681414E265ADD0100E257AE /* Supporting Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,17 +68,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D681414E265ADD0100E257AE /* Supporting Files */ = {
+		D69F2E0126635026004A02C8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D6814151265ADD4600E257AE /* CHANGELOG.md */,
-				D6367590265ADE7D00FD7C2C /* Info.plist */,
-				D681414F265ADD4600E257AE /* LICENSE */,
-				D6814152265ADD4600E257AE /* Package.swift */,
-				D6814150265ADD4600E257AE /* README.md */,
-				D6367591265ADE7D00FD7C2C /* NXNavigationExtension.h */,
+				D69F2E0226635046004A02C8 /* CHANGELOG.md */,
+				D69F2E0D2663505F004A02C8 /* Info.plist */,
+				D69F2E0E2663505F004A02C8 /* module.modulemap */,
+				D69F2E0626635046004A02C8 /* LICENSE */,
+				D69F2E0C2663505F004A02C8 /* NXNavigationExtension.h */,
+				D69F2E0326635046004A02C8 /* NXNavigationExtension.podspec */,
+				D69F2E0426635046004A02C8 /* Package.swift */,
+				D69F2E0526635046004A02C8 /* README.md */,
 			);
-			path = "Supporting Files";
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		D6E4024D251FB71C001D7BEE /* NXNavigationExtension */ = {
@@ -103,7 +107,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D624E8D22654F41400CC96E6 /* NXNavigationBar.h in Headers */,
-				D6367593265ADE7D00FD7C2C /* NXNavigationExtension.h in Headers */,
+				D69F2E0F2663505F004A02C8 /* NXNavigationExtension.h in Headers */,
 				D624E8D02654F41400CC96E6 /* UINavigationController+NXNavigationExtension.h in Headers */,
 				D624E8D12654F41400CC96E6 /* UIViewController+NXNavigationExtension.h in Headers */,
 				D624E8D42654F41400CC96E6 /* NXNavigationExtensionPrivate.h in Headers */,
@@ -322,7 +326,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.1.0;
 				MODULEMAP_FILE = "$(PROJECT_DIR)/Framework/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lidan.NXNavigationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -355,7 +359,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.1.0;
 				MODULEMAP_FILE = "$(PROJECT_DIR)/Framework/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lidan.NXNavigationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";

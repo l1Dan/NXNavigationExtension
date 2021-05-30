@@ -25,6 +25,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol NXNavigationExtensionInteractable <NSObject>
+
+/// 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
+/// 执行 `nx_triggerSystemBackButtonHandler` 方法后也会触发以下回调
+/// @param navigationController 当前使用的导航控制器
+/// @param interactingGesture 是否为手势滑动返回
+/// @return `YES` 表示不中断返回操作继续执行；`NO` 表示中断返回操作
+- (BOOL)navigationController:(__kindof UINavigationController *)navigationController willPopViewControllerUsingInteractingGesture:(BOOL)interactingGesture;
+
+@end
+
 /// 全局外观设置
 NS_SWIFT_NAME(NXNavigationBar.Appearance)
 @interface NXNavigationBarAppearance : NSObject

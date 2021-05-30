@@ -25,7 +25,7 @@ pod 'NXNavigationExtension'
 或者
 
 ```ruby
-pod 'NXNavigationExtension', ~> 3.0.0
+pod 'NXNavigationExtension', ~> 3.1.0
 ```
 
 ### 使用 Carthage 安装
@@ -39,7 +39,7 @@ github "l1Dan/NXNavigationExtension"
 或者
 
 ```ogdl
-github "l1Dan/NXNavigationExtension" ~> 3.0.0
+github "l1Dan/NXNavigationExtension" ~> 3.1.0
 ```
 
 ### 使用 Swift Package Manager 安装
@@ -48,7 +48,7 @@ github "l1Dan/NXNavigationExtension" ~> 3.0.0
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "3.0.0"))
+    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "3.1.0"))
 ]
 ```
 
@@ -326,7 +326,7 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 - 执行重定向操作之后，并不会直接跳转到对应的视图控制器，如果需要 `跳转` 操作，可以调用 `popViewControllerAnimated:` 、`使用手势返回`、`点击返回按钮返回`。
 
 ```objc
-[self.navigationController nx_redirectViewControllerClass:[RandomColorViewController class] createViewControllerUsingBlock:^__kindof UIViewController * _Nonnull {
+[self.navigationController nx_redirectViewControllerClass:[RandomColorViewController class] initializeStandbyViewControllerBlock:^__kindof UIViewController * _Nonnull {
     return [[RandomColorViewController alloc] init];
 }];
 ```
@@ -335,7 +335,7 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 执行上面代码之后并不会立即跳转，下面代码可以实现立即跳转：
 
 ```objc
-[self.navigationController nx_redirectViewControllerClass:[RandomColorViewController class] createViewControllerUsingBlock:^__kindof UIViewController * _Nonnull {
+[self.navigationController nx_redirectViewControllerClass:[RandomColorViewController class] initializeStandbyViewControllerBlock:^__kindof UIViewController * _Nonnull {
     return [[RandomColorViewController alloc] init];
 }];
 [self.navigationController popViewControllerAnimated:YES];

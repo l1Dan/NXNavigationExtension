@@ -110,7 +110,7 @@
         if (!selectedViewController || ![selectedViewController isKindOfClass:[UIViewController class]]) return;
         // 设置 Cell 不能点击
         [weakSelf setJumpViewControllerCellClickEnabled:NO];
-        [weakSelf.navigationController nx_redirectViewControllerClass:[selectedViewController class] createViewControllerUsingBlock:^__kindof UIViewController * _Nonnull{
+        [weakSelf.navigationController nx_redirectViewControllerClass:[selectedViewController class] initializeStandbyViewControllerBlock:^__kindof UIViewController * _Nonnull{
             UIViewController *vc = [[[selectedViewController class] alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             return vc;

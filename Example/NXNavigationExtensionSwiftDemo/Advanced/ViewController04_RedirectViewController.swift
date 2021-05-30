@@ -84,7 +84,7 @@ extension ViewController04_RedirectViewController {
         HierarchyViewController.showFromViewController(self, withViewControllers: self.navigationController?.viewControllers) { selectedViewController in
             guard let selectedViewController = selectedViewController else { return }
             self.jumpViewControllerCellClick(enabled: false)
-            self.navigationController?.nx_redirectViewControllerClass(type(of: selectedViewController), createViewControllerUsing: { () -> UIViewController in
+            self.navigationController?.nx_redirectViewControllerClass(type(of: selectedViewController), initializeStandbyViewControllerBlock: { () -> UIViewController in
                 let vc = type(of: selectedViewController.self).init()
                 vc.hidesBottomBarWhenPushed = true
                 return vc

@@ -2,12 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/lidan/Sources/NXNavigationExtension/NXNavigationExtension/NXNavigationExtension.xcodeproj">
+      location = "group:NXNavigationExtension.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/lidan/Sources/NXNavigationExtension/NXNavigationExtension/Example/NXNavigationExtensionDemo.xcodeproj">
+      location = "group:Example/NXNavigationExtensionDemo.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/lidan/Sources/NXNavigationExtension/NXNavigationExtension/Example/NXNavigationExtensionSwiftDemo.xcodeproj">
+      location = "group:Example/NXNavigationExtensionSwiftDemo.xcodeproj">
    </FileRef>
 </Workspace>

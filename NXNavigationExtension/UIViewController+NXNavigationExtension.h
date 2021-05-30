@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign, readonly) BOOL nx_containerViewWithoutNavigtionBar;
 
 /// 设置触发全屏手势返回，离左边最大滑动距离
-@property(nonatomic, assign, readonly) CGFloat nx_interactivePopMaxAllowedDistanceToLeftEdge;
+@property(nonatomic, assign) CGFloat nx_interactivePopMaxAllowedDistanceToLeftEdge;
 
 /// 更新导航栏外观
 - (void)nx_setNeedsNavigationBarAppearanceUpdate;

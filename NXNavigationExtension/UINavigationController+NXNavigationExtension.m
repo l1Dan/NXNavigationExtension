@@ -105,7 +105,7 @@
     }
 }
 
-- (NSArray *)nx_findViewControllerClass:(Class)aClass createViewControllerUsingBlock:(__kindof UIViewController * (^ __nullable)(void))block {
+- (NSArray *)nx_findViewControllerClass:(Class)aClass initializeStandbyViewControllerBlock:(__kindof UIViewController * (^ __nullable)(void))block {
     NSArray<__kindof UIViewController *> *viewControllers = self.viewControllers;
     if (!aClass || (viewControllers.count <= 1)) return viewControllers;
     
@@ -161,8 +161,8 @@
     }
 }
 
-- (void)nx_redirectViewControllerClass:(Class)aClass createViewControllerUsingBlock:(__kindof UIViewController * _Nonnull (^)(void))block {
-    NSArray<__kindof UIViewController *> *viewControllers = [self nx_findViewControllerClass:aClass createViewControllerUsingBlock:block];
+- (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerBlock:(__kindof UIViewController * _Nonnull (^)(void))block {
+    NSArray<__kindof UIViewController *> *viewControllers = [self nx_findViewControllerClass:aClass initializeStandbyViewControllerBlock:block];
     [self setViewControllers:viewControllers animated:YES];
 }
 
