@@ -14,22 +14,6 @@ class BaseViewController: UIViewController {
     private lazy var lightColor: UIColor = UIColor.randomLight
     private lazy var darkColor: UIColor = UIColor.randomDark
     
-    
-    //#pragma mark - Getter
-    //- (UIColor *)lightColor {
-    //    if (!_lightColor) {
-    //        _lightColor = [UIColor randomLightColor];
-    //    }
-    //    return _lightColor;
-    //}
-    //
-    //- (UIColor *)darkColor {
-    //    if (!_darkColor) {
-    //        _darkColor = [UIColor randomDarkColor];
-    //    }
-    //    return _darkColor;
-    //}
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,20 +41,3 @@ class BaseViewController: UIViewController {
     }
 
 }
-
-
-
-//
-//- (UIColor *)randomColor {
-//    if (!_randomColor) {
-//        _randomColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
-//            return self.lightColor;
-//        } darkModeColor:^UIColor * _Nonnull{
-//            return self.darkColor;
-//        }];
-//    }
-//    return _randomColor;
-//}
-//
-//@end
-

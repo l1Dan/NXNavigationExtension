@@ -48,7 +48,6 @@ extension ViewController03_BackEventIntercept {
 extension ViewController03_BackEventIntercept {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return items.count
     }
     
