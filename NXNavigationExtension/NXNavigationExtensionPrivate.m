@@ -21,6 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import "NXNavigationBackButton.h"
 #import "NXNavigationExtensionPrivate.h"
 #import "NXNavigationExtensionMacro.h"
 #import "UINavigationController+NXNavigationExtension.h"
@@ -141,22 +142,45 @@
 
 @end
 
-@implementation UINavigationBar (NXNavigationExtensionPrivate)
+@implementation UIView (NXNavigationExtensionPrivate)
 
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NXNavigationExtensionSwizzleMethod([UINavigationBar class], @selector(layoutSubviews), @selector(nx_layoutSubviews));
-        NXNavigationExtensionSwizzleMethod([UINavigationBar class], @selector(setUserInteractionEnabled:), @selector(nx_setUserInteractionEnabled:));
+        NXNavigationExtensionSwizzleMethod([UIView class], @selector(layoutSubviews), @selector(nx_layoutSubviews));
+        NXNavigationExtensionSwizzleMethod([UIView class], @selector(setUserInteractionEnabled:), @selector(nx_setUserInteractionEnabled:));
     });
 }
 
 - (void)nx_layoutSubviews {
-    UINavigationBarDidUpdateFrameHandler didUpdateFrameHandler = self.nx_didUpdateFrameHandler;
-    if (didUpdateFrameHandler) {
-        didUpdateFrameHandler(self.frame);
+    if ([self isKindOfClass:[UINavigationBar class]]) {
+        UINavigationBarDidUpdateFrameHandler didUpdateFrameHandler = self.nx_didUpdateFrameHandler;
+        if (didUpdateFrameHandler) {
+            didUpdateFrameHandler(self.frame);
+        }
+    } else if ([self isKindOfClass:NSClassFromString(@"_UIContextMenuContainerView")]) {
+        UIWindow *window = NXNavigationExtensionGetKeyWindow();
+        if (window.nx_showingBackButtonMenu) {
+            [self nx_findContextMenuActionsListView:self];
+        }
     }
+    
     [self nx_layoutSubviews];
+}
+
+- (void)nx_findContextMenuActionsListView:(UIView *)subview {
+    if ([subview isKindOfClass:NSClassFromString(@"_UIContextMenuActionsListView")]) {
+        // (8 106.333; 250 109.667) => (8 47; 250 43.6667)
+        CGRect rect = subview.frame;
+        CGFloat offset = rect.origin.y - 59.333; // BackButton menu, Actions:(Push/Modal->Push)
+        rect.origin.y = offset > 0 ? offset : 8;
+        subview.frame = rect;
+        return;
+    }
+
+    for (UIView *v in subview.subviews) {
+        [self nx_findContextMenuActionsListView:v];
+    }
 }
 
 #pragma mark - Getter & Setter
@@ -191,28 +215,77 @@
     objc_setAssociatedObject(self, @selector(nx_disableUserInteraction), [NSNumber numberWithBool:nx_disableUserInteraction], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (BOOL)nx_showingBackButtonMenu {
+    NSNumber *showingBackButtonMenu = objc_getAssociatedObject(self, _cmd);
+    if (showingBackButtonMenu && [showingBackButtonMenu isKindOfClass:[NSNumber class]]) {
+        return [showingBackButtonMenu boolValue];
+    }
+    showingBackButtonMenu = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, showingBackButtonMenu, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [showingBackButtonMenu boolValue];
+}
+
+- (void)setNx_showingBackButtonMenu:(BOOL)nx_showingBackButtonMenu {
+    objc_setAssociatedObject(self, @selector(nx_showingBackButtonMenu), [NSNumber numberWithBool:nx_showingBackButtonMenu], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 @end
 
 @implementation UIViewController (NXNavigationExtensionPrivate)
 
-- (void)nx_configureNavigationBarItem {
+- (void)nx_configureNavigationBarItemWithViewConstrollers:(NSArray<__kindof UIViewController *> *)viewControllers {
+    if (!viewControllers && !viewControllers.count) {
+        return;
+    }
+    
+    NSMutableArray<UIViewController *> *controllers = [NSMutableArray arrayWithArray:viewControllers];
+    if (viewControllers.lastObject == self) {
+        [controllers removeLastObject];
+    }
+    
+    // 是否开启
+    if (@available(iOS 14.0, *)) {
+        controllers = self.nx_backButtonMenuEnabled ? controllers : nil;
+    } else {
+        controllers = nil;
+    }
+    
     UIBarButtonItem *backButtonItem = self.navigationItem.leftBarButtonItem;
-    UIView *customView = self.nx_backButtonCustomView;
-    if (customView) {
-        backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customView];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nx_triggerSystemPopViewController)];
-        customView.userInteractionEnabled = YES;
-        [customView addGestureRecognizer:tap];
+    if (backButtonItem && backButtonItem.customView && [backButtonItem.customView isKindOfClass:[UIButton class]]) {
+        NXNavigationBackButton *backButton = (NXNavigationBackButton *)backButtonItem.customView;
+        if (backButton.imageView && backButton.imageView.image) {
+            UIImage *image = [backButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            [backButton setImage:image forState:UIControlStateNormal];
+            backButton.tintColor = self.nx_barTintColor;
+        }
+        
+        // Updated menu
+        if ([backButton isKindOfClass:[NXNavigationBackButton class]]) {
+            [backButton setViewControllers:controllers];
+        }
     } else {
         // 如果 leftBarButtonItem(s) 为空则添加 backButtonItem
-        if (!backButtonItem) {
-            UIImage *backImage = self.nx_backImage;
-            if (!backImage) {
-                backImage = [NXNavigationBarAppearance standardAppearance].backImage;
-            }
-            backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage style:UIBarButtonItemStylePlain target:self action:@selector(nx_triggerSystemPopViewController)];            
+        UIImage *backImage = self.nx_backImage;
+        if (!backImage) {
+            backImage = [NXNavigationBarAppearance standardAppearance].backImage;
         }
+        backImage = [backImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        NXNavigationBackButton *backButton = [NXNavigationBackButton buttonWithImage:backImage viewControllers:controllers];
+
+        UIView *customView = self.nx_backButtonCustomView;
+        if (customView) {
+            backButton = [NXNavigationBackButton buttonWithCustomView:customView viewControllers:controllers];
+        }
+        
+        CGFloat navigationBarHeight = CGRectGetHeight(controllers.lastObject.navigationController.navigationBar.frame);
+        backButton.frame = CGRectMake(0, 0, 36, navigationBarHeight);
+        backButton.backgroundColor = [UIColor clearColor];
+        backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        backButton.tintColor = self.nx_barTintColor;
+        [backButton addTarget:self action:@selector(nx_triggerSystemPopViewController) forControlEvents:UIControlEventTouchUpInside];
+        backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     }
+    
     self.navigationItem.leftBarButtonItem = backButtonItem;
 }
 
@@ -244,7 +317,7 @@
 }
 
 - (NXNavigationBarAppearance *)nx_appearance {
-    return [NXNavigationBar standardAppearanceInNavigationControllerClass:[self class]];
+    return [NXNavigationBar standardAppearanceForNavigationControllerClass:[self class]];
 }
 
 - (BOOL)nx_useNavigationBar {

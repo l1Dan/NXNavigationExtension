@@ -152,8 +152,8 @@
     }
 }
 
-- (void)addContainerSubview:(UIView *)view {
-    [self.containerView addSubview:view];
+- (void)addContainerViewSubview:(UIView *)subview {
+    [self.containerView addSubview:subview];
 }
 
 - (void)setContainerViewEdgeInsets:(UIEdgeInsets)edgeInsets {
@@ -161,7 +161,7 @@
     [self updateNavigationBarContentFrame];
 }
 
-+ (NXNavigationBarAppearance *)standardAppearanceInNavigationControllerClass:(Class)aClass {
++ (NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass {
     if (aClass) {
         return [NXNavigationBar appearanceInfo][NSStringFromClass(aClass)];
     }
@@ -170,7 +170,7 @@
 
 + (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass {
     if (!aClass) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"NavigationClass cannot be nil" userInfo:nil];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"NavigationClass can‘t be nil" userInfo:nil];
     }
     [NXNavigationBar appearanceInfo][NSStringFromClass(aClass)] = [NXNavigationBarAppearance standardAppearance];
 }

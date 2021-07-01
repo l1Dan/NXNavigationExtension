@@ -25,7 +25,7 @@ pod 'NXNavigationExtension'
 或者
 
 ```ruby
-pod 'NXNavigationExtension', ~> 3.1.0
+pod 'NXNavigationExtension', ~> 3.2.0
 ```
 
 ### 使用 Carthage 安装
@@ -39,7 +39,7 @@ github "l1Dan/NXNavigationExtension"
 或者
 
 ```ogdl
-github "l1Dan/NXNavigationExtension" ~> 3.1.0
+github "l1Dan/NXNavigationExtension" ~> 3.2.0
 ```
 
 ### 使用 Swift Package Manager 安装
@@ -48,7 +48,7 @@ github "l1Dan/NXNavigationExtension" ~> 3.1.0
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "3.1.0"))
+    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "3.2.0"))
 ]
 ```
 

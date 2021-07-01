@@ -24,6 +24,7 @@
 // https://github.com/forkingdog/FDFullscreenPopGesture
 // https://github.com/l1Dan/NSLNavigationSolution
 
+#import "NXNavigationBackButton.h"
 #import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
 #import "NXNavigationExtensionMacro.h"
@@ -39,23 +40,10 @@
     });
 }
 
-+ (BOOL)nx_fullscreenPopGestureEnabled {
-    NSNumber *number = objc_getAssociatedObject(self, _cmd);
-    if (number && [number isKindOfClass:[NSNumber class]]) {
-        return [number boolValue];
-    }
-    return NO;
-}
-
-+ (void)setNx_fullscreenPopGestureEnabled:(BOOL)nx_fullscreenPopGestureEnabled {
-    NSNumber *number = [NSNumber numberWithBool:nx_fullscreenPopGestureEnabled];
-    objc_setAssociatedObject(self, @selector(nx_fullscreenPopGestureEnabled), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 - (void)nx_pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if (self.nx_useNavigationBar) {
         if (self.viewControllers.count > 0) {
-            [viewController nx_configureNavigationBarItem];
+            [viewController nx_configureNavigationBarItemWithViewConstrollers:self.viewControllers];
         }
         
         if (viewController.nx_enableFullScreenInteractivePopGesture) {
@@ -71,8 +59,10 @@
         if (viewControllers.count > 1) {
             for (NSUInteger index = 0; index < viewControllers.count; index++) {
                 UIViewController *viewController = viewControllers[index];
+                // Back button menu controllers
+                NSArray<UIViewController *> *controllers = [viewControllers subarrayWithRange:NSMakeRange(0, index + 1)];
                 if (index != 0) {
-                    [viewController nx_configureNavigationBarItem];
+                    [viewController nx_configureNavigationBarItemWithViewConstrollers:controllers];
                 }
                 
                 if (viewController.nx_enableFullScreenInteractivePopGesture) {
@@ -86,6 +76,7 @@
 }
 
 #pragma mark - Private
+
 - (void)nx_configureFullscreenPopGesture {
     if (![self.interactivePopGestureRecognizer.view.gestureRecognizers containsObject:self.nx_fullscreenPopGestureRecognizer]) {
         
@@ -137,6 +128,7 @@
 }
 
 #pragma mark - Getter & Setter
+
 - (UIPanGestureRecognizer *)nx_fullscreenPopGestureRecognizer {
     UIPanGestureRecognizer *panGestureRecognizer = objc_getAssociatedObject(self, _cmd);
     if (panGestureRecognizer && [panGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
@@ -148,6 +140,33 @@
 }
 
 #pragma mark - Public
+
++ (BOOL)nx_fullscreenPopGestureEnabled {
+    NSNumber *number = objc_getAssociatedObject(self, _cmd);
+    if (number && [number isKindOfClass:[NSNumber class]]) {
+        return [number boolValue];
+    }
+    return NO;
+}
+
++ (void)setNx_fullscreenPopGestureEnabled:(BOOL)nx_fullscreenPopGestureEnabled {
+    NSNumber *number = [NSNumber numberWithBool:nx_fullscreenPopGestureEnabled];
+    objc_setAssociatedObject(self, @selector(nx_fullscreenPopGestureEnabled), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
++ (BOOL)nx_globalBackButtonMenuEnabled {
+    NSNumber *number = objc_getAssociatedObject(self, _cmd);
+    if (number && [number isKindOfClass:[NSNumber class]]) {
+        return [number boolValue];
+    }
+    return NO;
+}
+
++ (void)setNx_globalBackButtonMenuEnabled:(BOOL)nx_globalBackButtonMenuEnabled {
+    NSNumber *number = [NSNumber numberWithBool:nx_globalBackButtonMenuEnabled];
+    objc_setAssociatedObject(self, @selector(nx_globalBackButtonMenuEnabled), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 - (void)nx_triggerSystemBackButtonHandler {
     if (self.viewControllers.count <= 1) return;
     

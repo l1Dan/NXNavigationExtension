@@ -99,6 +99,7 @@
 }
 
 #pragma mark - Private
+
 - (void)nx_setupNavigationBar {
     self.nx_navigationBar.frame = self.navigationController.navigationBar.frame;
     if (![self.view isKindOfClass:[UIScrollView class]]) {
@@ -185,6 +186,7 @@
 }
 
 #pragma mark - Private Getter & Setter
+
 - (BOOL)nx_viewWillDisappearFinished {
     NSNumber *viewWillDisappearFinished = objc_getAssociatedObject(self, _cmd);
     if (viewWillDisappearFinished && [viewWillDisappearFinished isKindOfClass:[NSNumber class]]) {
@@ -214,6 +216,7 @@
 }
 
 #pragma mark - Getter & Setter
+
 - (NXNavigationBar *)nx_navigationBar {
     NXNavigationBar *bar = objc_getAssociatedObject(self, _cmd);
     if (bar && [bar isKindOfClass:[NXNavigationBar class]]) {
@@ -382,6 +385,16 @@
     return [containerViewWithoutNavigtionBar boolValue];
 }
 
+- (BOOL)nx_backButtonMenuEnabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) {
+    NSNumber *backButtonMenuEnabled = objc_getAssociatedObject(self, _cmd);
+    if (backButtonMenuEnabled && [backButtonMenuEnabled isKindOfClass:[NSNumber class]]) {
+        return [backButtonMenuEnabled boolValue];
+    }
+    backButtonMenuEnabled = [NSNumber numberWithBool:UINavigationController.nx_globalBackButtonMenuEnabled];
+    objc_setAssociatedObject(self, _cmd, backButtonMenuEnabled, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [backButtonMenuEnabled boolValue];
+}
+
 - (CGFloat)nx_interactivePopMaxAllowedDistanceToLeftEdge {
     NSNumber *interactivePopMaxAllowedDistanceToLeftEdge = objc_getAssociatedObject(self, _cmd);
     if (interactivePopMaxAllowedDistanceToLeftEdge && [interactivePopMaxAllowedDistanceToLeftEdge isKindOfClass:[NSNumber class]]) {
@@ -406,7 +419,9 @@
 
 - (void)nx_setNeedsNavigationBarAppearanceUpdate {
     if (self.navigationController && self.navigationController.nx_useNavigationBar && self.navigationController.viewControllers.count > 1) {
-        [self nx_configureNavigationBarItem];
+        NSMutableArray< __kindof UIViewController *> *viewControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+        [viewControllers removeLastObject];
+        [self nx_configureNavigationBarItemWithViewConstrollers:viewControllers];
     }
     [self nx_updateNavigationBarAppearance];
     [self nx_updateNavigationBarHierarchy];

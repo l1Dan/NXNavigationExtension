@@ -55,4 +55,15 @@ static inline UIImage *NXNavigationExtensionGetImageFromColor(UIColor *color) {
     return image;
 }
 
+/// 获取 Key window
+static inline UIWindow *NXNavigationExtensionGetKeyWindow(void) {
+    NSArray<UIWindow *> *windows = UIApplication.sharedApplication.windows;
+    for (UIWindow *window in windows) {
+        if (window.isKeyWindow) {
+            return window;
+        }
+    }
+    return windows.firstObject;
+}
+
 NS_ASSUME_NONNULL_END

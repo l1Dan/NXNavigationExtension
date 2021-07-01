@@ -80,17 +80,17 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance)
 /// @param enabled 是否使用模糊背景；默认 NO
 - (void)enableBlurEffect:(BOOL)enabled;
 
-/// 添加控件
-/// @param view 子控件
-- (void)addContainerSubview:(UIView *)view;
+/// 添加控件到 `containerView`
+/// @param subview 子控件
+- (void)addContainerViewSubview:(UIView *)subview;
 
-/// 设置 Container View UIEdgeInsets
+/// 设置 `containerView` UIEdgeInsets
 /// @param edgeInsets UIEdgeInsets；默认 UIEdgeInsetsMake(0, 8, 0, 8)
 - (void)setContainerViewEdgeInsets:(UIEdgeInsets)edgeInsets;
 
 /// 获取当前设置的皮肤
 /// @param aClass UINavigationController 或子类类对象
-+ (NXNavigationBarAppearance *)standardAppearanceInNavigationControllerClass:(Class)aClass;
++ (NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass;
 
 /// 注册默认皮肤
 /// @param aClass UINavigationController 或子类类对象
