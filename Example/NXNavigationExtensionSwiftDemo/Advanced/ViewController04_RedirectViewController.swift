@@ -65,6 +65,10 @@ class ViewController04_RedirectViewController: BaseViewController {
         return [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
+    override var nx_backButtonMenuEnabled: Bool {
+        return true
+    }
+    
 }
 
 extension ViewController04_RedirectViewController {
@@ -122,7 +126,7 @@ extension ViewController04_RedirectViewController: UITableViewDelegate, UITableV
                 } else {
                     cell.backgroundColor = nil
                 }
-                cell.textLabel?.text = item.title + String(describing: type(of: redirectToViewController))
+                cell.textLabel?.text = item.title + (redirectToViewController.navigationItem.title ?? "")
             }
             cell.accessoryType = .none
         } else {

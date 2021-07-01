@@ -59,6 +59,10 @@
     return @{NSForegroundColorAttributeName: [self nx_barTintColor]};
 }
 
+- (BOOL)nx_backButtonMenuEnabled {
+    return YES;
+}
+
 #pragma mark - Getter
 
 - (UITableView *)tableView {
@@ -149,7 +153,7 @@
             } else {
                 cell.backgroundColor = nil;
             }
-            cell.textLabel.text = [NSString stringWithFormat:@"%@%@", model.title, NSStringFromClass([redirectToViewController class])];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@%@", model.title, redirectToViewController.navigationItem.title];
         }
         cell.accessoryType = UITableViewCellAccessoryNone;
     } else {

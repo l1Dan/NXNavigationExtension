@@ -42,6 +42,7 @@
 }
 
 #pragma mark - Getter
+
 - (UIColor *)lightColor {
     if (!_lightColor) {
         _lightColor = [UIColor randomLightColor];

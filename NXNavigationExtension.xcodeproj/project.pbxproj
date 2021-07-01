@@ -17,6 +17,8 @@
 		D624E8D72654F41400CC96E6 /* UIViewController+NXNavigationExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E8CE2654F41400CC96E6 /* UIViewController+NXNavigationExtension.m */; };
 		D624E8D82654F41400CC96E6 /* NXNavigationExtensionMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = D624E8CF2654F41400CC96E6 /* NXNavigationExtensionMacro.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D69F2E0F2663505F004A02C8 /* NXNavigationExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = D69F2E0C2663505F004A02C8 /* NXNavigationExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6E5AF42268CD9A6007A0C77 /* NXNavigationBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E5AF3F268CCA75007A0C77 /* NXNavigationBackButton.m */; };
+		D6E5AF43268CD9B6007A0C77 /* NXNavigationBackButton.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E5AF40268CCA75007A0C77 /* NXNavigationBackButton.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		D69F2E0D2663505F004A02C8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Framework/Info.plist; sourceTree = "<group>"; };
 		D69F2E0E2663505F004A02C8 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = Framework/module.modulemap; sourceTree = "<group>"; };
 		D6E4024C251FB71C001D7BEE /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6E5AF3F268CCA75007A0C77 /* NXNavigationBackButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXNavigationBackButton.m; sourceTree = "<group>"; };
+		D6E5AF40268CCA75007A0C77 /* NXNavigationBackButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXNavigationBackButton.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 		D6E4024D251FB71C001D7BEE /* NXNavigationExtension */ = {
 			isa = PBXGroup;
 			children = (
+				D6E5AF40268CCA75007A0C77 /* NXNavigationBackButton.h */,
+				D6E5AF3F268CCA75007A0C77 /* NXNavigationBackButton.m */,
 				D624E8C92654F41400CC96E6 /* NXNavigationBar.h */,
 				D624E8CC2654F41400CC96E6 /* NXNavigationBar.m */,
 				D624E8CF2654F41400CC96E6 /* NXNavigationExtensionMacro.h */,
@@ -110,6 +116,7 @@
 				D69F2E0F2663505F004A02C8 /* NXNavigationExtension.h in Headers */,
 				D624E8D02654F41400CC96E6 /* UINavigationController+NXNavigationExtension.h in Headers */,
 				D624E8D12654F41400CC96E6 /* UIViewController+NXNavigationExtension.h in Headers */,
+				D6E5AF43268CD9B6007A0C77 /* NXNavigationBackButton.h in Headers */,
 				D624E8D42654F41400CC96E6 /* NXNavigationExtensionPrivate.h in Headers */,
 				D624E8D82654F41400CC96E6 /* NXNavigationExtensionMacro.h in Headers */,
 			);
@@ -188,6 +195,7 @@
 				D624E8D32654F41400CC96E6 /* NXNavigationExtensionPrivate.m in Sources */,
 				D624E8D62654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m in Sources */,
 				D624E8D72654F41400CC96E6 /* UIViewController+NXNavigationExtension.m in Sources */,
+				D6E5AF42268CD9A6007A0C77 /* NXNavigationBackButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,7 +334,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.2.0;
 				MODULEMAP_FILE = "$(PROJECT_DIR)/Framework/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lidan.NXNavigationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -359,7 +367,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.2.0;
 				MODULEMAP_FILE = "$(PROJECT_DIR)/Framework/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lidan.NXNavigationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";

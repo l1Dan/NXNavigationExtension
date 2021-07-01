@@ -167,6 +167,7 @@
 		D644096C265AC73C00BCE890 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D644096E265AC73C00BCE890 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D644096F265AC73C00BCE890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6625A16268E28AB006FE470 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -416,6 +417,7 @@
 		D624E9B12654F89D00CC96E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D6625A16268E28AB006FE470 /* NetworkExtension.framework */,
 				D6440965265AC67D00BCE890 /* NXNavigationExtension.framework */,
 			);
 			name = Frameworks;

@@ -37,9 +37,9 @@ typedef NS_ENUM(NSUInteger, TableViewSectionItemType) {
 
 @interface TableViewSectionItem : NSObject
 
-@property(nonatomic, copy) NSString *title;
-@property(nonatomic, assign) TableViewSectionItemType itemType;
-@property(nonatomic, assign, getter=showDisclosureIndicator) BOOL disclosureIndicator; // Default: YES
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, assign) TableViewSectionItemType itemType;
+@property (nonatomic, assign, getter=showDisclosureIndicator) BOOL disclosureIndicator; // Default: YES
 
 - (instancetype)initWithTitle:(NSString *)title itemType:(TableViewSectionItemType)itemType;
 
@@ -49,8 +49,8 @@ typedef NS_ENUM(NSUInteger, TableViewSectionItemType) {
 
 @interface TableViewSection : NSObject
 
-@property(nonatomic, copy) NSString *title;
-@property(nonatomic, strong) NSArray<TableViewSectionItem *> *items;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, strong) NSArray<TableViewSectionItem *> *items;
 
 - (instancetype)initWithItems:(NSArray<TableViewSectionItem *> *)items;
 

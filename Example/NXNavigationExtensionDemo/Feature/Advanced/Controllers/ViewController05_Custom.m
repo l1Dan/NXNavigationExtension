@@ -33,9 +33,9 @@
     self.navigationItem.title = nil;
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
-    [self.nx_navigationBar addContainerSubview:self.searchBar];
-    [self.nx_navigationBar addContainerSubview:self.backButton];
-    [self.nx_navigationBar addContainerSubview:self.addButton];
+    [self.nx_navigationBar addContainerViewSubview:self.searchBar];
+    [self.nx_navigationBar addContainerViewSubview:self.backButton];
+    [self.nx_navigationBar addContainerViewSubview:self.addButton];
     
     UIView *containerView = self.nx_navigationBar.containerView;
     self.backButton.hidden = !UIDevice.isPhoneDevice;
@@ -131,6 +131,7 @@
 }
 
 #pragma mark - Action
+
 - (void)clickAddButton:(UIButton *)button {
     UINavigationController *controller = [[[self.navigationController class] alloc] initWithRootViewController:[[ViewController12_Modal alloc] init]];
     [self presentViewController:controller animated:YES completion:NULL];

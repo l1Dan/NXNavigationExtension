@@ -17,9 +17,9 @@ typedef NS_ENUM(NSUInteger, EventInterceptItemType) {
 
 @interface EventInterceptModel : NSObject
 
-@property(nonatomic, copy) NSString *title;
-@property(nonatomic, assign) EventInterceptItemType itemType;
-@property(nonatomic, assign, getter=isSelected) BOOL selected;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, assign) EventInterceptItemType itemType;
+@property (nonatomic, assign, getter=isSelected) BOOL selected;
 
 - (instancetype)initWithTitle:(NSString *)title itemType:(EventInterceptItemType)itemType;
 

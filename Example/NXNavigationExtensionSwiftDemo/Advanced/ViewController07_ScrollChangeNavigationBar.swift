@@ -41,7 +41,7 @@ class ViewController07_ScrollChangeNavigationBar: BaseTableViewController {
         
         let view = UIView(frame: CGRect(x: 10, y: 40, width: 44, height: 44))
         view.backgroundColor = .red
-        nx_navigationBar.addContainerSubview(fakeNavigationBar)
+        nx_navigationBar.addContainerViewSubview(fakeNavigationBar)
         
         nx_navigationBar.alpha = 0.0
         barStyle = .lightContent

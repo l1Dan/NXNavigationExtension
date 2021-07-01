@@ -17,8 +17,7 @@ class DashboardTabBarController: UITabBarController {
         NXNavigationBar.registerStandardAppearance(forNavigationControllerClass: FeatureNavigationController.self)
         
         let featureTableViewController1 = FeatureTableViewController(style: .grouped)
-        let name = (Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String)?.components(separatedBy: ".").last ?? ""
-        featureTableViewController1.navigationItem.title = "\(name.replacingOccurrences(of: "Demo", with: "")) 🎉 🎉 🎉"
+        featureTableViewController1.navigationItem.title = "NXNavigationBar🎉🎉🎉"
         
         let customNormal = UIImage(named: "TabBarCustomNormal")
         let customSelected = UIImage(named: "TabBarCustomSelected")

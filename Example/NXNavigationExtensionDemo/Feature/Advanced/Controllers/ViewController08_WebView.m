@@ -27,7 +27,7 @@
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        _requestURL = [NSURL URLWithString:@"https://l1dan.gitee.io/"];
+        _requestURL = [NSURL URLWithString:@"https://l1dan.github.io/"];
     }
     return self;
 }

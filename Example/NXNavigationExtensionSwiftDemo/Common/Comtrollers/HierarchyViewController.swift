@@ -89,15 +89,16 @@ extension HierarchyViewController: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = nil
 
         if let chooseViewControllers = chooseViewControllers, indexPath.row < chooseViewControllers.count {
-            let viewController = chooseViewControllers[indexPath.row]
-            cell.textLabel?.text = String(describing: type(of: viewController))
+            let index = (chooseViewControllers.count - 1) - indexPath.row
+            let viewController = chooseViewControllers[index]
+            cell.textLabel?.text = "(\(index))" + (viewController.navigationItem.title ?? "")
             cell.textLabel?.textColor = .customText
 
             if let vc = viewController as? BaseViewController {
                 cell.backgroundColor = vc.randomColor
             }
         } else {
-            cell.textLabel?.text = "创建新的 UIViewController 实例对象"
+            cell.textLabel?.text = "(#)Insert ViewController to back"
             cell.textLabel?.textColor = UIColor.customDynamic(lightMode: { UIColor.blue }, darkMode: { UIColor.blue.withAlphaComponent(0.5) })
         }
 
@@ -110,7 +111,8 @@ extension HierarchyViewController: UITableViewDelegate, UITableViewDataSource {
         guard let chooseViewControllers = chooseViewControllers  else { return }
         var viewController: UIViewController?
         if indexPath.row < chooseViewControllers.count {
-            viewController = chooseViewControllers[indexPath.row]
+            let index = (chooseViewControllers.count - 1) - indexPath.row
+            viewController = chooseViewControllers[index]
         } else {
             viewController = RandomColorViewController()
         }
@@ -125,7 +127,7 @@ extension HierarchyViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "选择需要跳转的视图控制器类型"
+        return "Selected ViewController for jump"
     }
     
 }

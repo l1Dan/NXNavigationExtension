@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIDevice (Additions)
 
-@property(nonatomic, assign, readonly, class, getter=isPhoneDevice) BOOL phoneDevice;
+@property (nonatomic, assign, readonly, class, getter=isPhoneDevice) BOOL phoneDevice;
 
 @end
 

@@ -100,14 +100,15 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
     
     cell.backgroundColor = nil;
     if (indexPath.row < self.chooseViewControllers.count) {
-        __kindof UIViewController *viewController = self.chooseViewControllers[indexPath.row];
-        cell.textLabel.text = NSStringFromClass([viewController class]);
+        NSUInteger index = (self.chooseViewControllers.count - 1) - indexPath.row;
+        __kindof UIViewController *viewController = self.chooseViewControllers[index];
+        cell.textLabel.text = [NSString stringWithFormat:@"(%zd)%@", index, viewController.navigationItem.title];
         cell.textLabel.textColor = [UIColor customTextColor];
         if ([viewController isKindOfClass:[BaseViewController class]]) {
             cell.backgroundColor = [(BaseViewController *)viewController randomColor];
         }
     } else {
-        cell.textLabel.text = @"创建新的 UIViewController 实例对象";
+        cell.textLabel.text = @"(#)Insert ViewController to back";
         cell.textLabel.textColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
             return  [UIColor blueColor];
         } darkModeColor:^UIColor * _Nonnull{
@@ -123,7 +124,8 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
     
     __kindof UIViewController *viewController = [[RandomColorViewController alloc] init];
     if (indexPath.row < self.chooseViewControllers.count) {
-        viewController = self.chooseViewControllers[indexPath.row];
+        NSUInteger index = (self.chooseViewControllers.count - 1) - indexPath.row;
+        viewController = self.chooseViewControllers[index];
     }
     __weak typeof(self) weakSelf = self;
     [self dismissViewControllerAnimated:NO completion:^{
@@ -138,7 +140,7 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"选择需要跳转的视图控制器类型";
+    return @"Selected ViewController for jump";
 }
 
 #pragma mark - Public
@@ -146,6 +148,10 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
 + (void)showFromViewController:(__kindof UIViewController *)viewController
            withViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers
              completionHandler:(void (^)(__kindof UIViewController * _Nullable selectedViewController))completionHandler {
+    if (!viewController || !viewControllers || !viewControllers.count) {
+        return;
+    }
+    
     HierarchyViewController *vc = [[HierarchyViewController alloc] init];
     vc.chooseViewControllers = viewControllers;
     vc.completionHandler = completionHandler;

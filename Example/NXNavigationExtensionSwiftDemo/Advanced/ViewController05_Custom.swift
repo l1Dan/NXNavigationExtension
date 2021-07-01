@@ -48,9 +48,9 @@ class ViewController05_Custom: BaseTableViewController {
         navigationItem.title = nil;
         tableView.keyboardDismissMode = .onDrag
         
-        nx_navigationBar.addContainerSubview(searchBar)
-        nx_navigationBar.addContainerSubview(backButton)
-        nx_navigationBar.addContainerSubview(addButton)
+        nx_navigationBar.addContainerViewSubview(searchBar)
+        nx_navigationBar.addContainerViewSubview(backButton)
+        nx_navigationBar.addContainerViewSubview(addButton)
         
         let containerView = nx_navigationBar.containerView
         backButton.isHidden = !UIDevice.isPhone

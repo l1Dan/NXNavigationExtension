@@ -56,7 +56,7 @@ class ViewController08_WebView: BaseViewController {
         return UIBarButtonItem(customView: customView)
     }()
     
-    private lazy var requestURL: URL = URL(string: "https://l1dan.gitee.io/")!
+    private lazy var requestURL: URL = URL(string: "https://l1dan.github.io/")!
 
     override func viewDidLoad() {
         super.viewDidLoad()

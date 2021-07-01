@@ -9,6 +9,6 @@
 
 @interface BaseTableViewController : BaseViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property(nonatomic, strong, readonly) UITableView *tableView;
+@property (nonatomic, strong, readonly) UITableView *tableView;
 
 @end

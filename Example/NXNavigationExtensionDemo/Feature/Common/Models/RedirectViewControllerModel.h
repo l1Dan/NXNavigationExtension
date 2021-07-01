@@ -21,9 +21,9 @@ typedef NS_ENUM(NSUInteger, RedirectViewControllerType) {
 
 @interface RedirectViewControllerModel : NSObject
 
-@property(nonatomic, copy, readonly) NSString *title;
-@property(nonatomic, assign, readonly) RedirectViewControllerType type;
-@property(nonatomic, assign, getter=isClickEnabled) BOOL clickEnabled;
+@property (nonatomic, copy, readonly) NSString *title;
+@property (nonatomic, assign, readonly) RedirectViewControllerType type;
+@property (nonatomic, assign, getter=isClickEnabled) BOOL clickEnabled;
 
 - (instancetype)initWithTitle:(NSString *)title type:(RedirectViewControllerType)type;
 

@@ -27,8 +27,7 @@
     [NXNavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
     
     FeatureTableViewController *featureTableViewController1 = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    NSString *name = [[NSBundle mainBundle].infoDictionary[(NSString *)kCFBundleIdentifierKey] componentsSeparatedByString:@"."].lastObject;
-    featureTableViewController1.navigationItem.title = [NSString stringWithFormat:@"%@ 🎉 🎉 🎉", [name stringByReplacingOccurrencesOfString:@"Demo" withString:@""]];
+    featureTableViewController1.navigationItem.title = @"NXNavigationBar🎉🎉🎉";
 
     UIImage *customNormal = [UIImage imageNamed:@"TabBarCustomNormal"];
     UIImage *customSelected = [UIImage imageNamed:@"TabBarCustomSelected"];

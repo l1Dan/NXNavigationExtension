@@ -23,8 +23,8 @@ typedef NS_ENUM(NSUInteger, FakeNavigationItemType) {
 
 @interface FakeNavigationBar : UIView
 
-@property(nonatomic, copy, nullable) NSString *title;
-@property(nonatomic, weak, nullable) id<FakeNavigationBarDelegate> delegate;
+@property (nonatomic, copy, nullable) NSString *title;
+@property (nonatomic, weak, nullable) id<FakeNavigationBarDelegate> delegate;
 
 - (void)updateNavigationBarAlpha:(CGFloat)alpha;
 

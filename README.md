@@ -95,6 +95,7 @@ dependencies: [
 - ✅` 导航栏点击事件穿透到底部`
 - ✅` 动态修改导航栏样式`
 - ✅` 更新导航栏样式`
+- ✅` 长按返回按钮显示菜单功能`
 
 ## 🍽 使用
 
@@ -384,6 +385,24 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
     return self.topViewController;
 }
 ```
+
+### 长按返回按钮显示菜单功能
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController04_RedirectViewController.m)
+
+
+- 全局控制
+```objc
+UINavigationController.nx_globalBackButtonMenuEnabled = YES;
+```
+
+- 页面内控制
+```objc
+- (BOOL)nx_backButtonMenuEnabled {
+    return YES;
+}
+```
+![BackButtonMenu](https://raw.githubusercontent.com/l1Dan/NXNavigationExtension/master/Snapshots/BackButtonMenu.png)
 
 ## 📄 协议
 
