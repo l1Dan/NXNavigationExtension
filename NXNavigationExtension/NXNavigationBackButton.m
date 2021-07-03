@@ -24,6 +24,7 @@
 #import "NXNavigationBackButton.h"
 #import "NXNavigationExtensionMacro.h"
 #import "NXNavigationExtensionPrivate.h"
+#import "UINavigationController+NXNavigationExtension.h"
 
 @interface NXNavigationBackButton ()
 
@@ -77,7 +78,7 @@
                 NSUInteger index = [action.identifier integerValue];
                 if (index < viewControllers.count) {
                     __kindof UIViewController *vc = viewControllers[index];
-                    [vc.navigationController popToViewController:vc animated:YES];
+                    [vc.navigationController nx_popToViewController:vc animated:YES];
                 }
             }];
             [actions addObject:action];

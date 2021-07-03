@@ -127,6 +127,20 @@
     return viewControllers;
 }
 
+- (id)nx_triggerSystemPopViewControllerWithCompletionHandler:(id (^)(UINavigationController *navigationController))completionHandler {
+    if (self.viewControllers.count <= 1) return nil;
+    
+    UIViewController *topViewController = self.topViewController;
+    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willPopViewControllerUsingInteractingGesture:)]) {
+        if ([(id<NXNavigationExtensionInteractable>)topViewController navigationController:self willPopViewControllerUsingInteractingGesture:NO]) {
+            return completionHandler(topViewController.navigationController);
+        }
+    } else {
+        return completionHandler(topViewController.navigationController);
+    }
+    return nil;
+}
+
 #pragma mark - Getter & Setter
 
 - (UIPanGestureRecognizer *)nx_fullscreenPopGestureRecognizer {
@@ -168,16 +182,25 @@
 }
 
 - (void)nx_triggerSystemBackButtonHandler {
-    if (self.viewControllers.count <= 1) return;
-    
-    UIViewController *topViewController = self.topViewController;
-    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willPopViewControllerUsingInteractingGesture:)]) {
-        if ([(id<NXNavigationExtensionInteractable>)topViewController navigationController:self willPopViewControllerUsingInteractingGesture:NO]) {
-            [topViewController.navigationController popViewControllerAnimated:YES];
-        }
-    } else {
-        [topViewController.navigationController popViewControllerAnimated:YES];
-    }
+    [self nx_popViewControllerAnimated:YES];
+}
+
+- (UIViewController *)nx_popViewControllerAnimated:(BOOL)animated {
+    return [self nx_triggerSystemPopViewControllerWithCompletionHandler:^id(UINavigationController *navigationController) {
+        return [navigationController popViewControllerAnimated:animated];
+    }];
+}
+
+- (NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    return [self nx_triggerSystemPopViewControllerWithCompletionHandler:^id(UINavigationController *navigationController) {
+        return [navigationController popToViewController:viewController animated:animated];
+    }];
+}
+
+- (NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerAnimated:(BOOL)animated {
+    return [self nx_triggerSystemPopViewControllerWithCompletionHandler:^id(UINavigationController *navigationController) {
+        return [navigationController popToRootViewControllerAnimated:animated];
+    }];
 }
 
 - (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerBlock:(__kindof UIViewController * _Nonnull (^)(void))block {

@@ -289,9 +289,9 @@
     self.navigationItem.leftBarButtonItem = backButtonItem;
 }
 
-/// 保证 self.navigationController 不为 nil
+/// 保证 self.navigationController 不为 nil，不要直接调研 navigationController 方法
 - (void)nx_triggerSystemPopViewController {
-    [self.navigationController nx_triggerSystemBackButtonHandler];
+    [self.navigationController nx_popViewControllerAnimated:YES];
 }
 
 @end

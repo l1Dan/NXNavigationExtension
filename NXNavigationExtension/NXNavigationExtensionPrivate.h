@@ -76,9 +76,6 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 /// 设置 UINavigationBarItem
 - (void)nx_configureNavigationBarItemWithViewConstrollers:(NSArray<__kindof UIViewController *> *)viewControllers;
 
-/// 调用 popViewControllerAnimated: 方法
-- (void)nx_triggerSystemPopViewController;
-
 @end
 
 @interface UINavigationController (NXNavigationExtensionPrivate)
