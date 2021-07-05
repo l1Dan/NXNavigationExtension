@@ -25,7 +25,7 @@ pod 'NXNavigationExtension'
 或者
 
 ```ruby
-pod 'NXNavigationExtension', ~> 3.2.0
+pod 'NXNavigationExtension', ~> 3.3.0
 ```
 
 ### 使用 Carthage 安装
@@ -39,17 +39,7 @@ github "l1Dan/NXNavigationExtension"
 或者
 
 ```ogdl
-github "l1Dan/NXNavigationExtension" ~> 3.2.0
-```
-
-### 使用 Swift Package Manager 安装
-
-添加 `NXNavigationExtension` 依赖库到 `Package.swift` 的 `dependencies` 中。
-
-```swift
-dependencies: [
-    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "3.2.0"))
-]
+github "l1Dan/NXNavigationExtension" ~> 3.3.0
 ```
 
 ## 🌈 要求
@@ -66,7 +56,7 @@ dependencies: [
 - 按需注册需要控制的 `UINavigationController` 子类，不会影响全局外观。
 - 没有对原生导航栏视图层级进行修改，无需担心升级系统兼容性问题。
 - 适配 iOS、iPadOS、macOS，Dark Mode。
-- 支持 CocoaPods、Carthage、SPM（Swift5.x）、Project 方式集成。
+- 支持 CocoaPods、Carthage、Project 方式集成。
 
 ## 👏 功能
 

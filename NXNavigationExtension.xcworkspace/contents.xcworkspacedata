@@ -5,9 +5,6 @@
       location = "group:NXNavigationExtension.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Example/NXNavigationExtensionDemo.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Example/NXNavigationExtensionSwiftDemo.xcodeproj">
+      location = "group:NXNavigationExtensionDemo.xcodeproj">
    </FileRef>
 </Workspace>

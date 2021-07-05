@@ -1,12 +1,19 @@
 # Change Log
 
+## 3.3.0
+- 修复：返回按钮菜单无法拦截返回事件问题。
+- 修复：返回按钮菜单位置显示不正确问题。
+- 移除 Swift Demo
+- 移除 Swift Package Manager 支持
+- 文件夹目录调整。
+
 ## 3.2.0
 
-- 新增：NXNavigationBackButton 文件
-- 新增：nx_globalBackButtonMenuEnabled 和 nx_backButtonMenuEnabled API，为 iOS14 及以上系统提供长按返回按钮显示菜单的功能
+- 新增：NXNavigationMenuBackControl 类。
+- 新增：nx_globalBackButtonMenuEnabled 和 nx_backButtonMenuEnabled API，为 iOS14 及以上系统提供长按返回按钮显示菜单的功能。
 - 重命名：addContainerSubview: 为 addContainerViewSubview:
 - 重命名：standardAppearanceInNavigationControllerClass: 为 standardAppearanceForNavigationControllerClass:
-- 优化：代码格式化、Demo 代码更新
+- 优化：代码格式化、Demo 代码更新。
 
 ## 3.1.0
 
@@ -15,7 +22,6 @@
 ## 3.0.0
 
 - 项目结构调整
-- 添加 Swift Package Manager 支持
 - 重命名：ue 前缀为 nx，防止与第三方库冲突；
 - 重命名：-navigationController:willPopViewControllerUsingInteractiveGesture 为 -navigationController:willPopViewControllerUsingInteractingGesture；
 - 重命名：UINavigationController+UINavigationExtension 为 UINavigationController+NXNavigationExtension；

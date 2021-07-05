@@ -1,6 +1,7 @@
 Pod::Spec.new do |spec|
+
   spec.name         = "NXNavigationExtension"
-  spec.version      = "3.2.0"
+  spec.version      = "3.3.0"
   spec.summary      = "🔥 NXNavigationExtension 是为 iOS 应用设计的一个简单、易用的导航栏处理框架。"
 
   spec.description  = <<-DESC
@@ -12,7 +13,9 @@ Pod::Spec.new do |spec|
   spec.author       = { "Leo Lee" => "l1dan@hotmail.com" }
   spec.source       = { :git => "https://github.com/l1Dan/NXNavigationExtension.git", :tag => "#{spec.version}" }
 
-  spec.ios.deployment_target = "11.0"
-  spec.source_files = "NXNavigationExtension/*.{h,m}", "Framework/*.{h,m}"
-  spec.private_header_files = "NXNavigationExtension/NXNavigationExtensionPrivate.h", "NXNavigationExtension/NXNavigationExtensionMacro.h"
+  spec.ios.deployment_target  = "11.0"
+  spec.source_files           = "NXNavigationExtension/**/*.{h,m}"
+  spec.module_map             = "NXNavigationExtension/module.modulemap"
+  spec.public_header_files    = "NXNavigationExtension/Core/*.h", "NXNavigationExtension/NXNavigationExtension.h"
+
 end

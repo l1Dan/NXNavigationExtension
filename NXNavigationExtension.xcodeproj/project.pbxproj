@@ -11,14 +11,14 @@
 		D624E8D12654F41400CC96E6 /* UIViewController+NXNavigationExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = D624E8C82654F41400CC96E6 /* UIViewController+NXNavigationExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D624E8D22654F41400CC96E6 /* NXNavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = D624E8C92654F41400CC96E6 /* NXNavigationBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D624E8D32654F41400CC96E6 /* NXNavigationExtensionPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E8CA2654F41400CC96E6 /* NXNavigationExtensionPrivate.m */; };
-		D624E8D42654F41400CC96E6 /* NXNavigationExtensionPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = D624E8CB2654F41400CC96E6 /* NXNavigationExtensionPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D624E8D42654F41400CC96E6 /* NXNavigationExtensionPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = D624E8CB2654F41400CC96E6 /* NXNavigationExtensionPrivate.h */; };
 		D624E8D52654F41400CC96E6 /* NXNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E8CC2654F41400CC96E6 /* NXNavigationBar.m */; };
 		D624E8D62654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E8CD2654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m */; };
 		D624E8D72654F41400CC96E6 /* UIViewController+NXNavigationExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E8CE2654F41400CC96E6 /* UIViewController+NXNavigationExtension.m */; };
-		D624E8D82654F41400CC96E6 /* NXNavigationExtensionMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = D624E8CF2654F41400CC96E6 /* NXNavigationExtensionMacro.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D624E8D82654F41400CC96E6 /* NXNavigationExtensionMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = D624E8CF2654F41400CC96E6 /* NXNavigationExtensionMacro.h */; };
+		D642776D26936A1E00D6D582 /* NXNavigationMenuBackControl.m in Sources */ = {isa = PBXBuildFile; fileRef = D642776B26936A1E00D6D582 /* NXNavigationMenuBackControl.m */; };
+		D642776E26936A1E00D6D582 /* NXNavigationMenuBackControl.h in Headers */ = {isa = PBXBuildFile; fileRef = D642776C26936A1E00D6D582 /* NXNavigationMenuBackControl.h */; };
 		D69F2E0F2663505F004A02C8 /* NXNavigationExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = D69F2E0C2663505F004A02C8 /* NXNavigationExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D6E5AF42268CD9A6007A0C77 /* NXNavigationBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E5AF3F268CCA75007A0C77 /* NXNavigationBackButton.m */; };
-		D6E5AF43268CD9B6007A0C77 /* NXNavigationBackButton.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E5AF40268CCA75007A0C77 /* NXNavigationBackButton.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,17 +31,12 @@
 		D624E8CD2654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+NXNavigationExtension.m"; sourceTree = "<group>"; };
 		D624E8CE2654F41400CC96E6 /* UIViewController+NXNavigationExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NXNavigationExtension.m"; sourceTree = "<group>"; };
 		D624E8CF2654F41400CC96E6 /* NXNavigationExtensionMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXNavigationExtensionMacro.h; sourceTree = "<group>"; };
-		D69F2E0226635046004A02C8 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
-		D69F2E0326635046004A02C8 /* NXNavigationExtension.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NXNavigationExtension.podspec; sourceTree = "<group>"; };
-		D69F2E0426635046004A02C8 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		D69F2E0526635046004A02C8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D69F2E0626635046004A02C8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		D69F2E0C2663505F004A02C8 /* NXNavigationExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NXNavigationExtension.h; path = Framework/NXNavigationExtension.h; sourceTree = "<group>"; };
-		D69F2E0D2663505F004A02C8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Framework/Info.plist; sourceTree = "<group>"; };
-		D69F2E0E2663505F004A02C8 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = Framework/module.modulemap; sourceTree = "<group>"; };
+		D642774226934BCD00D6D582 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		D642776B26936A1E00D6D582 /* NXNavigationMenuBackControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXNavigationMenuBackControl.m; sourceTree = "<group>"; };
+		D642776C26936A1E00D6D582 /* NXNavigationMenuBackControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXNavigationMenuBackControl.h; sourceTree = "<group>"; };
+		D69F2E0C2663505F004A02C8 /* NXNavigationExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXNavigationExtension.h; sourceTree = "<group>"; };
+		D69F2E0D2663505F004A02C8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6E4024C251FB71C001D7BEE /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6E5AF3F268CCA75007A0C77 /* NXNavigationBackButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXNavigationBackButton.m; sourceTree = "<group>"; };
-		D6E5AF40268CCA75007A0C77 /* NXNavigationBackButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXNavigationBackButton.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +50,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D608C791269340E4009D0DEA /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D624E8C92654F41400CC96E6 /* NXNavigationBar.h */,
+				D624E8CC2654F41400CC96E6 /* NXNavigationBar.m */,
+				D624E8C72654F41300CC96E6 /* UINavigationController+NXNavigationExtension.h */,
+				D624E8CD2654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m */,
+				D624E8C82654F41400CC96E6 /* UIViewController+NXNavigationExtension.h */,
+				D624E8CE2654F41400CC96E6 /* UIViewController+NXNavigationExtension.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		D608C792269340E8009D0DEA /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				D624E8CF2654F41400CC96E6 /* NXNavigationExtensionMacro.h */,
+				D624E8CB2654F41400CC96E6 /* NXNavigationExtensionPrivate.h */,
+				D624E8CA2654F41400CC96E6 /* NXNavigationExtensionPrivate.m */,
+				D642776C26936A1E00D6D582 /* NXNavigationMenuBackControl.h */,
+				D642776B26936A1E00D6D582 /* NXNavigationMenuBackControl.m */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
 		D61CCBF2251A13F100A91580 = {
 			isa = PBXGroup;
 			children = (
 				D6E4024D251FB71C001D7BEE /* NXNavigationExtension */,
-				D69F2E0126635026004A02C8 /* Supporting Files */,
 				D61CCBFC251A13F100A91580 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,35 +91,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D69F2E0126635026004A02C8 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D69F2E0226635046004A02C8 /* CHANGELOG.md */,
-				D69F2E0D2663505F004A02C8 /* Info.plist */,
-				D69F2E0E2663505F004A02C8 /* module.modulemap */,
-				D69F2E0626635046004A02C8 /* LICENSE */,
-				D69F2E0C2663505F004A02C8 /* NXNavigationExtension.h */,
-				D69F2E0326635046004A02C8 /* NXNavigationExtension.podspec */,
-				D69F2E0426635046004A02C8 /* Package.swift */,
-				D69F2E0526635046004A02C8 /* README.md */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		D6E4024D251FB71C001D7BEE /* NXNavigationExtension */ = {
 			isa = PBXGroup;
 			children = (
-				D6E5AF40268CCA75007A0C77 /* NXNavigationBackButton.h */,
-				D6E5AF3F268CCA75007A0C77 /* NXNavigationBackButton.m */,
-				D624E8C92654F41400CC96E6 /* NXNavigationBar.h */,
-				D624E8CC2654F41400CC96E6 /* NXNavigationBar.m */,
-				D624E8CF2654F41400CC96E6 /* NXNavigationExtensionMacro.h */,
-				D624E8CB2654F41400CC96E6 /* NXNavigationExtensionPrivate.h */,
-				D624E8CA2654F41400CC96E6 /* NXNavigationExtensionPrivate.m */,
-				D624E8C72654F41300CC96E6 /* UINavigationController+NXNavigationExtension.h */,
-				D624E8CD2654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m */,
-				D624E8C82654F41400CC96E6 /* UIViewController+NXNavigationExtension.h */,
-				D624E8CE2654F41400CC96E6 /* UIViewController+NXNavigationExtension.m */,
+				D608C791269340E4009D0DEA /* Core */,
+				D608C792269340E8009D0DEA /* Private */,
+				D69F2E0D2663505F004A02C8 /* Info.plist */,
+				D69F2E0C2663505F004A02C8 /* NXNavigationExtension.h */,
+				D642774226934BCD00D6D582 /* module.modulemap */,
 			);
 			path = NXNavigationExtension;
 			sourceTree = "<group>";
@@ -116,9 +114,9 @@
 				D69F2E0F2663505F004A02C8 /* NXNavigationExtension.h in Headers */,
 				D624E8D02654F41400CC96E6 /* UINavigationController+NXNavigationExtension.h in Headers */,
 				D624E8D12654F41400CC96E6 /* UIViewController+NXNavigationExtension.h in Headers */,
-				D6E5AF43268CD9B6007A0C77 /* NXNavigationBackButton.h in Headers */,
-				D624E8D42654F41400CC96E6 /* NXNavigationExtensionPrivate.h in Headers */,
 				D624E8D82654F41400CC96E6 /* NXNavigationExtensionMacro.h in Headers */,
+				D624E8D42654F41400CC96E6 /* NXNavigationExtensionPrivate.h in Headers */,
+				D642776E26936A1E00D6D582 /* NXNavigationMenuBackControl.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,10 +190,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D624E8D52654F41400CC96E6 /* NXNavigationBar.m in Sources */,
+				D642776D26936A1E00D6D582 /* NXNavigationMenuBackControl.m in Sources */,
 				D624E8D32654F41400CC96E6 /* NXNavigationExtensionPrivate.m in Sources */,
 				D624E8D62654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m in Sources */,
 				D624E8D72654F41400CC96E6 /* UIViewController+NXNavigationExtension.m in Sources */,
-				D6E5AF42268CD9A6007A0C77 /* NXNavigationBackButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +316,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -326,7 +325,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EXCLUDED_ARCHS = "";
-				INFOPLIST_FILE = "$(SRCROOT)/Framework/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/NXNavigationExtension/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -334,9 +333,9 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.0;
-				MODULEMAP_FILE = "$(PROJECT_DIR)/Framework/module.modulemap";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lidan.NXNavigationExtension;
+				MARKETING_VERSION = 3.3.0;
+				MODULEMAP_FILE = "$(SRCROOT)/NXNavigationExtension/module.modulemap";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.l1dan.NXNavigationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -351,6 +350,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -359,7 +359,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EXCLUDED_ARCHS = "";
-				INFOPLIST_FILE = "$(SRCROOT)/Framework/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/NXNavigationExtension/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -367,9 +367,9 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.0;
-				MODULEMAP_FILE = "$(PROJECT_DIR)/Framework/module.modulemap";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lidan.NXNavigationExtension;
+				MARKETING_VERSION = 3.3.0;
+				MODULEMAP_FILE = "$(SRCROOT)/NXNavigationExtension/module.modulemap";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.l1dan.NXNavigationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
