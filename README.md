@@ -308,7 +308,7 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 }
 ```
 
-自定义返回按钮事件拦截需要调用方法：`[self.navigationController nx_triggerSystemBackButtonHandler];`
+自定义返回按钮事件拦截可以调用方法：`nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:`等方法来触发上面的代理
 
 ### 重定向任一控制器跳转
 

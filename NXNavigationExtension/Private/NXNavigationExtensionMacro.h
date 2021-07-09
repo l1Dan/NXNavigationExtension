@@ -26,10 +26,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 方法交换
-/// @param aClass 交换方法的类名
-/// @param originalSelector 原始交换方法
-/// @param swizzledSelector 需要交换的方法
+/// 方法实现交换
+/// @param aClass 需要交换方法实现的类型
+/// @param originalSelector Original Selector
+/// @param swizzledSelector Swizzled Selector
 static inline void NXNavigationExtensionSwizzleMethod(Class aClass, SEL originalSelector, SEL swizzledSelector) {
     Method originalMethod = class_getInstanceMethod(aClass, originalSelector);
     Method swizzledMethod = class_getInstanceMethod(aClass, swizzledSelector);

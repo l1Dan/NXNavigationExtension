@@ -113,7 +113,7 @@
             return [[UIColor whiteColor] colorWithAlphaComponent:0.25];
         }];
         [_backButton setImage:[UIImage imageNamed:@"NavigationBarBack"] forState:UIControlStateNormal];
-        [_backButton addTarget:self.navigationController action:@selector(nx_triggerSystemBackButtonHandler) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton addTarget:self action:@selector(clickBackButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backButton;
 }
@@ -139,6 +139,10 @@
 - (void)clickAddButton:(UIButton *)button {
     UINavigationController *controller = [[[self.navigationController class] alloc] initWithRootViewController:[[ViewController12_Modal alloc] init]];
     [self presentViewController:controller animated:YES completion:NULL];
+}
+
+- (void)clickBackButton:(UIButton *)button {
+    [self.navigationController nx_popViewControllerAnimated:YES];
 }
 
 @end

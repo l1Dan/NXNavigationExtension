@@ -27,10 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UINavigationController (NXNavigationExtension)
 
-/// 开启全局全屏手势；默认为 NO
+/// 开启全局全屏手势；默认：NO
 @property (nonatomic, assign, class) BOOL nx_fullscreenPopGestureEnabled;
 
-/// 开启全局返回按钮菜单（iOS14 长按返回按钮会出现返回控制器列表）; 默认为 NO
+/// 开启全局返回按钮菜单（iOS14 长按返回按钮会出现返回控制器列表）; 默认：NO
 @property (nonatomic, assign, class) BOOL nx_globalBackButtonMenuEnabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 /// 全屏手势 UIPanGestureRecognizer
