@@ -240,16 +240,22 @@
     
     NSMutableArray<UIViewController *> *controllers = [NSMutableArray arrayWithArray:viewControllers];
     if (viewControllers.lastObject == self) {
-        [controllers removeLastObject];
+        [controllers removeLastObject]; // 返回按钮菜单不需要显示自己
     }
         
     UIBarButtonItem *backButtonItem = self.navigationItem.leftBarButtonItem;
-    if (backButtonItem && backButtonItem.customView && [backButtonItem.customView isKindOfClass:[UIButton class]]) {
-        NXNavigationMenuBackControl *menuBackControl = (NXNavigationMenuBackControl *)backButtonItem.customView;
-        // Updated menu
-        if ([menuBackControl isKindOfClass:[NXNavigationMenuBackControl class]]) {
-            [menuBackControl setViewControllers:controllers];
-            menuBackControl.tintColor = self.nx_barTintColor;
+    if (backButtonItem) {
+        if (backButtonItem.customView && [backButtonItem.customView isKindOfClass:[NXNavigationMenuBackControl class]]) {
+            NXNavigationMenuBackControl *menuBackControl = (NXNavigationMenuBackControl *)backButtonItem.customView;
+            // Updated menu
+            if ([menuBackControl isKindOfClass:[NXNavigationMenuBackControl class]]) {
+                [menuBackControl setViewControllers:controllers];
+                menuBackControl.tintColor = self.nx_hidesNavigationBar ? [UIColor clearColor] : self.nx_barTintColor;
+                // 检查 menu 是否可用
+                if (@available(iOS 14.0, *)) {
+                    menuBackControl.contextMenuInteractionEnabled = self.nx_backButtonMenuEnabled;
+                }
+            }
         }
     } else {
         // 如果 leftBarButtonItem(s) 为空则添加 backButtonItem
@@ -257,8 +263,8 @@
         if (!backImage) {
             backImage = [NXNavigationBarAppearance standardAppearance].backImage;
         }
+        
         NXNavigationMenuBackControl *menuBackControl = [[NXNavigationMenuBackControl alloc] initWithImage:backImage];
-
         UIView *customView = self.nx_backButtonCustomView;
         if (customView) {
             menuBackControl = [[NXNavigationMenuBackControl alloc] initWithCustomView:customView];
@@ -269,7 +275,7 @@
         menuBackControl.menuTintColor = self.nx_hidesNavigationBar ? [UIColor clearColor] : self.nx_barTintColor;
         [menuBackControl setViewControllers:controllers];
         [menuBackControl addTarget:self action:@selector(nx_triggerSystemPopViewController) forControlEvents:UIControlEventTouchUpInside];
-        
+        // 检查 menu 是否可用
         if (@available(iOS 14.0, *)) {
             menuBackControl.contextMenuInteractionEnabled = self.nx_backButtonMenuEnabled;
         }

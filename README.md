@@ -25,7 +25,7 @@ pod 'NXNavigationExtension'
 或者
 
 ```ruby
-pod 'NXNavigationExtension', ~> 3.3.0
+pod 'NXNavigationExtension', ~> 3.3.1
 ```
 
 ### 使用 Carthage 安装
@@ -39,15 +39,16 @@ github "l1Dan/NXNavigationExtension"
 或者
 
 ```ogdl
-github "l1Dan/NXNavigationExtension" ~> 3.3.0
+github "l1Dan/NXNavigationExtension" ~> 3.3.1
 ```
 
 ## 🌈 要求
+最新版本最低支持 iOS 9.0
 
 | NXNavigationExtension Version | Minimum iOS Target | Minimum macOS Target | Minimum watchOS Target | Minimum tvOS Target |       Notes        |
 | :---------------------------: | :----------------: | :------------------: | :--------------------: | :-----------------: | :----------------: |
-|              3.x              |       iOS 11       |     macOS 10.15      |          n/a           |         n/a         | macOS: macCatalyst |
-|              2.x              |       iOS 11       |     macOS 10.15      |          n/a           |         n/a         | macOS: macCatalyst |
+|              3.x              |       iOS 9.0       |     macOS 10.15      |          n/a           |         n/a         | macOS: macCatalyst |
+|              2.x              |       iOS 11        |     macOS 10.15      |          n/a           |         n/a         | macOS: macCatalyst |
 
 ## 优点
 

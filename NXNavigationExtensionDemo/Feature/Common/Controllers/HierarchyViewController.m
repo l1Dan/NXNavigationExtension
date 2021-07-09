@@ -31,6 +31,12 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     [self.view addSubview:self.tableView];
     
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
     [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
     [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
     
@@ -44,11 +50,11 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    CGSize size = [UIScreen mainScreen].bounds.size;
+    CGSize size = self.view.bounds.size;
     CGFloat height = self.chooseViewControllers.count * ChooseJumpTableViewHeight + 88;
     
     CGFloat maxHeight = MIN(height, size.height - 150.0);
-    CGFloat maxWidth = size.width * 0.8;
+    CGFloat maxWidth = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad ? size.width * 0.5 :size.width * 0.8;
     self.widthConstraint.constant = maxWidth;
     self.heightConstraint.constant = maxHeight;
 }
@@ -74,7 +80,6 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.translatesAutoresizingMaskIntoConstraints = NO;
-        _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         _tableView.tableHeaderView = [[UIView alloc] init];
         _tableView.tableFooterView = [[UIView alloc] init];
         _tableView.delegate = self;

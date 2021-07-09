@@ -62,7 +62,11 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    UIEdgeInsets safeAreaInsets = self.navigationController.navigationBar.safeAreaInsets;
+    UIEdgeInsets safeAreaInsets = self.navigationController.navigationBar.layoutMargins;
+    if (@available(iOS 11.0, *)) {
+        safeAreaInsets = self.navigationController.navigationBar.safeAreaInsets;
+    }
+
     self.leftConstraint.constant = safeAreaInsets.left;
     self.rightConstraint.constant = -safeAreaInsets.right;
 }

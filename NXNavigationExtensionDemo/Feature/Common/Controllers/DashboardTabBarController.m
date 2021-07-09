@@ -51,11 +51,13 @@
         return [UIColor customLightGrayColor];
     }];
     
-    self.tabBar.unselectedItemTintColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
-        return [UIColor customLightGrayColor];
-    } darkModeColor:^UIColor * _Nonnull{
-        return [UIColor customDarkGrayColor];
-    }];
+    if (@available(iOS 10.0, *)) {
+        self.tabBar.unselectedItemTintColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+            return [UIColor customLightGrayColor];
+        } darkModeColor:^UIColor * _Nonnull{
+            return [UIColor customDarkGrayColor];
+        }];
+    }
     
     self.tabBar.translucent = NO; // FIXED: iOS Modal -> Dismiss -> Push, TabBar BUG
     

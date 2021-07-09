@@ -153,7 +153,8 @@
             } else {
                 cell.backgroundColor = nil;
             }
-            cell.textLabel.text = [NSString stringWithFormat:@"%@%@", model.title, redirectToViewController.navigationItem.title];
+            NSString *title = redirectToViewController.navigationItem.title ?: NSStringFromClass([redirectToViewController class]);
+            cell.textLabel.text = [NSString stringWithFormat:@"%@%@", model.title, title];
         }
         cell.accessoryType = UITableViewCellAccessoryNone;
     } else {

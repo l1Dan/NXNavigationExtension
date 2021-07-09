@@ -19,19 +19,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.largeTitleTextAttributes = [self nx_titleTextAttributes];
+    if (@available(iOS 11.0, *)) {
+        self.navigationController.navigationBar.largeTitleTextAttributes = [self nx_titleTextAttributes];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAutomatic;
-    self.navigationController.navigationBar.prefersLargeTitles = YES;
+    if (@available(iOS 11.0, *)) {
+        self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAutomatic;
+        self.navigationController.navigationBar.prefersLargeTitles = YES;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
-    self.navigationController.navigationBar.prefersLargeTitles = NO;
+    if (@available(iOS 11.0, *)) {
+        self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
+        self.navigationController.navigationBar.prefersLargeTitles = NO;
+    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

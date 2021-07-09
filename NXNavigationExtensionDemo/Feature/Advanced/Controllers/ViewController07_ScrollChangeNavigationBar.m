@@ -67,7 +67,10 @@
     CGFloat maxHeight = CGRectGetHeight(self.nx_navigationBar.frame);
     self.tableView.contentInset = UIEdgeInsetsMake(-maxHeight, 0, 0, 0);
     
-    UIEdgeInsets safeAreaInsets = self.navigationController.navigationBar.safeAreaInsets;
+    UIEdgeInsets safeAreaInsets = self.navigationController.navigationBar.layoutMargins;
+    if (@available(iOS 11.0, *)) {
+        safeAreaInsets = self.navigationController.navigationBar.safeAreaInsets;
+    }
     self.topConstraint.constant = safeAreaInsets.top;
     self.leftConstraint.constant = safeAreaInsets.left;
     self.bottomConstraint.constant = safeAreaInsets.bottom;

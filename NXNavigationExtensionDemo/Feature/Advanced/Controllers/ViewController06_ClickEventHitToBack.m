@@ -27,7 +27,11 @@
     [super viewDidLoad];
     
     self.navigationItem.title = nil;
-    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     
     [self.tableHeaderView addSubview:self.segmentedControl];
     
@@ -56,7 +60,10 @@
     self.tableHeaderView.frame = CGRectMake(tableHeaderViewX, tableHeaderViewY, tableHeaderViewWidth, tableHeaderViewHeight);
     self.tableView.tableHeaderView = self.tableHeaderView;
     
-    UIEdgeInsets safeAreaInsets = self.navigationController.navigationBar.safeAreaInsets;
+    UIEdgeInsets safeAreaInsets = self.navigationController.navigationBar.layoutMargins;
+    if (@available(iOS 11.0, *)) {
+        safeAreaInsets = self.navigationController.navigationBar.safeAreaInsets;
+    }
     self.heightConstraint.constant = navigationBarFrame.size.height * 0.8;
     self.leftConstraint.constant = safeAreaInsets.left;
     self.rightConstraint.constant = -safeAreaInsets.right;
