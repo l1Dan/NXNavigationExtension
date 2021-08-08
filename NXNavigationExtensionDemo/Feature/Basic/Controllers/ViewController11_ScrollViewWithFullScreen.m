@@ -17,22 +17,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.navigationItem.title = nil;
-    
-#if TARGET_OS_MACCATALYST
-    CGFloat maxHeight = CGRectGetHeight(self.nx_navigationBar.frame);
-    self.tableView.contentInset = UIEdgeInsetsMake(-maxHeight, 0, 0, 0);
-#endif
-}
 
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
+    self.navigationItem.title = nil;
+
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;        
+    }
     
-#if !TARGET_OS_MACCATALYST
-    CGFloat maxHeight = CGRectGetHeight(self.nx_navigationBar.frame);
-    self.tableView.contentInset = UIEdgeInsetsMake(-maxHeight, 0, 0, 0);
-#endif
+    if (@available(iOS 13.0, *)) {
+        self.tableView.automaticallyAdjustsScrollIndicatorInsets = NO;
+    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

@@ -1,7 +1,7 @@
 //
 // NXNavigationBar.h
 //
-// Copyright (c) 2021 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
+// Copyright (c) 2020 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -49,6 +49,9 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance)
 /// 设置返回按钮图片
 @property (nonatomic, strong, nullable) UIImage *backImage;
 
+/// 设置横屏时显示的图片
+@property (nonatomic, strong, nullable) UIImage *landscapeBackImage;
+
 /// 设置 NavigationBar 背景图片
 @property (nonatomic, strong, nullable) UIImage *backgorundImage;
 
@@ -60,6 +63,17 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance)
 
 /// 设置 NavigationBar 背景颜色
 @property (nonatomic, strong) UIColor *backgorundColor;
+
+/// 设置返回按钮图片 `backImage` 的 insets，默认：UIEdgeInsetsZero
+/// 当 `backButtonMenuSupported = YES` 时 backImageInsets = {0, -8, 0, 0}
+@property (nonatomic, assign) UIEdgeInsets backImageInsets;
+
+/// 设置横屏时显示的图片 `landscapeBackImage` 的 insets，默认：UIEdgeInsetsZero
+/// 当 `backButtonMenuSupported = YES` 时 landscapeBackImageInsets = {0, -8, 0, 0}
+@property (nonatomic, assign) UIEdgeInsets landscapeBackImageInsets;
+
+/// 是否支持返回按钮菜单（iOS14 长按返回按钮会出现返回控制器列表）; 默认：NO
+@property (nonatomic, assign, getter=isBackButtonMenuSupported) BOOL backButtonMenuSupported API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

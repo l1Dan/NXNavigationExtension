@@ -22,24 +22,12 @@
 pod 'NXNavigationExtension'
 ```
 
-或者
-
-```ruby
-pod 'NXNavigationExtension', ~> 3.3.1
-```
-
 ### 使用 Carthage 安装
 
 [Carthage](https://github.com/Carthage/Carthage) 是一个去中心化的包管理器，它构建依赖项并为您提供二进制框架。 要集成 NXNavigationExtension，请将以下内容添加到您的 `Cartfile` 文件中：
 
 ```ogdl
 github "l1Dan/NXNavigationExtension"
-```
-
-或者
-
-```ogdl
-github "l1Dan/NXNavigationExtension" ~> 3.3.1
 ```
 
 ## 🌈 要求
@@ -382,9 +370,11 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController04_RedirectViewController.m)
 
 
-- 全局控制
+- 设置 backButtonMenuSupported 属性
 ```objc
-UINavigationController.nx_globalBackButtonMenuEnabled = YES;
+if (@available(iOS 14.0, *)) {
+    NXNavigationBarAppearance.standardAppearance.backButtonMenuSupported = YES;
+}
 ```
 
 - 页面内控制

@@ -21,6 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (!self.nx_navigationBar) {
+        return;
+    }
     [self.nx_navigationBar addSubview:self.gaussianBlurView];
     
     [self.gaussianBlurView.topAnchor constraintEqualToAnchor:self.nx_navigationBar.topAnchor].active = YES;

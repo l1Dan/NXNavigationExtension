@@ -1,7 +1,7 @@
 //
 // UINavigationController+NXNavigationExtension.h
 //
-// Copyright (c) 2021 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
+// Copyright (c) 2020 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,9 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 开启全局全屏手势；默认：NO
 @property (nonatomic, assign, class) BOOL nx_fullscreenPopGestureEnabled;
-
-/// 开启全局返回按钮菜单（iOS14 长按返回按钮会出现返回控制器列表）; 默认：NO
-@property (nonatomic, assign, class) BOOL nx_globalBackButtonMenuEnabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 /// 全屏手势 UIPanGestureRecognizer
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *nx_fullscreenPopGestureRecognizer;

@@ -33,6 +33,9 @@
     self.navigationItem.title = nil;
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
+    if (!self.nx_navigationBar) {
+        return;
+    }
     [self.nx_navigationBar addContainerViewSubview:self.searchBar];
     [self.nx_navigationBar addContainerViewSubview:self.backButton];
     [self.nx_navigationBar addContainerViewSubview:self.addButton];

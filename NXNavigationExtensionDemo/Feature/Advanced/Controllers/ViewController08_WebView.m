@@ -41,18 +41,17 @@
         self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem];
     }
     [self.view addSubview:self.webView];
-    [self.nx_navigationBar addSubview:self.progressView];
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.requestURL]];
-    
-    [self.progressView.topAnchor constraintEqualToAnchor:self.nx_navigationBar.bottomAnchor].active = YES;
-    [self.progressView.leftAnchor constraintEqualToAnchor:self.nx_navigationBar.leftAnchor].active = YES;
-    [self.progressView.rightAnchor constraintEqualToAnchor:self.nx_navigationBar.rightAnchor].active = YES;
-    [self.progressView.heightAnchor constraintEqualToConstant:1.0 / [UIScreen mainScreen].scale].active = YES;
-    
     [self.webView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
     [self.webView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
     [self.webView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
     [self.webView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = YES;
+    
+    [self.navigationController.navigationBar addSubview:self.progressView];
+    [self.progressView.topAnchor constraintEqualToAnchor:self.navigationController.navigationBar.bottomAnchor].active = YES;
+    [self.progressView.leftAnchor constraintEqualToAnchor:self.navigationController.navigationBar.leftAnchor].active = YES;
+    [self.progressView.rightAnchor constraintEqualToAnchor:self.navigationController.navigationBar.rightAnchor].active = YES;
+    [self.progressView.heightAnchor constraintEqualToConstant:1.0 / [UIScreen mainScreen].scale].active = YES;
     
     if (@available(iOS 13.0, *)) {
         self.webView.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {

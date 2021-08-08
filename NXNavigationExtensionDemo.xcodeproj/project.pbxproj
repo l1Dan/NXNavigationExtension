@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D615E1A226C40FEA00505C80 /* NXNavigationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6440965265AC67D00BCE890 /* NXNavigationExtension.framework */; };
+		D615E1A326C40FEA00505C80 /* NXNavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6440965265AC67D00BCE890 /* NXNavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D624E9722654F71200CC96E6 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9062654F71100CC96E6 /* BaseTableViewController.m */; };
 		D624E9732654F71200CC96E6 /* BaseSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9072654F71100CC96E6 /* BaseSplitViewController.m */; };
 		D624E9742654F71200CC96E6 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9082654F71100CC96E6 /* BaseViewController.m */; };
@@ -52,20 +54,18 @@
 		D624E99F2654F71200CC96E6 /* DashboardTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E96C2654F71200CC96E6 /* DashboardTabBarController.m */; };
 		D624E9A02654F71200CC96E6 /* FeatureTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E96D2654F71200CC96E6 /* FeatureTableViewController.m */; };
 		D624E9A12654F71200CC96E6 /* FakeNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9712654F71200CC96E6 /* FakeNavigationBar.m */; };
-		D6440966265AC67D00BCE890 /* NXNavigationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6440965265AC67D00BCE890 /* NXNavigationExtension.framework */; };
-		D6440967265AC67D00BCE890 /* NXNavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6440965265AC67D00BCE890 /* NXNavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6440970265AC73C00BCE890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D644096C265AC73C00BCE890 /* Assets.xcassets */; };
 		D6440971265AC73C00BCE890 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D644096D265AC73C00BCE890 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D6323487265AC12300723608 /* Embed Frameworks */ = {
+		D615E1A426C40FEA00505C80 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D6440967265AC67D00BCE890 /* NXNavigationExtension.framework in Embed Frameworks */,
+				D615E1A326C40FEA00505C80 /* NXNavigationExtension.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,7 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6440966265AC67D00BCE890 /* NXNavigationExtension.framework in Frameworks */,
+				D615E1A226C40FEA00505C80 /* NXNavigationExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,7 +453,7 @@
 				D624E8DE2654F60500CC96E6 /* Sources */,
 				D624E8DF2654F60500CC96E6 /* Frameworks */,
 				D624E8E02654F60500CC96E6 /* Resources */,
-				D6323487265AC12300723608 /* Embed Frameworks */,
+				D615E1A426C40FEA00505C80 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

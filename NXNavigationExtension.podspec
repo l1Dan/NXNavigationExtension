@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name     = 'NXNavigationExtension'
-  spec.version  = '3.3.1'
+  spec.version  = '3.4.0'
   spec.summary  = '🔥 NXNavigationExtension 是为 iOS 应用设计的一个简单、易用的导航栏处理框架。'
 
   spec.description  = <<-DESC

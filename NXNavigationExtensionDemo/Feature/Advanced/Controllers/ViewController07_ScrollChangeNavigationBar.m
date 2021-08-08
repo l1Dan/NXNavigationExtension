@@ -39,12 +39,16 @@
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, 40, 44, 44)];
     view.backgroundColor = [UIColor redColor];
-    [self.nx_navigationBar addContainerViewSubview:self.fakeNavigationBar];
-    
-    self.nx_navigationBar.alpha = 0.0;
     self.barStyle = UIStatusBarStyleLightContent;
     
     [self setNeedsStatusBarAppearanceUpdate];
+    
+    if (!self.nx_navigationBar) {
+        return;
+    }
+    
+    [self.nx_navigationBar addContainerViewSubview:self.fakeNavigationBar];
+    self.nx_navigationBar.alpha = 0.0;
     
     UIView *containerView = self.nx_navigationBar.containerView;
 

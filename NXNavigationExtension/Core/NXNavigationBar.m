@@ -1,7 +1,7 @@
 //
 // NXNavigationBar.m
 //
-// Copyright (c) 2021 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
+// Copyright (c) 2020 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,8 @@
 
 #import "NXNavigationBar.h"
 
+static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSUhEUgAAABgAAAAoCAMAAADT08pnAAAAhFBMVEUAAAAAg/8Ae/8AfP8Aev8Aev8Aev8Aev8Aev8Aev8Ae/8Aev8Aev8Ae/8AfP8Ae/8Aff8Afv8Ag/8Ahv8AiP8AjP8Aev8Aev8Ae/8Aev8Aev8Ae/8Ae/8Aff8Ae/8Af/8Afv8Aev8Aev8Ae/8Aev8Ae/8Ae/8Aev8Ae/8AfP8Aff8Aev+lPeVOAAAAK3RSTlMABv1G+fXr4dvW0cvAtTw4JSAWEg4K8u/mxrp1XEExKxuvpKB5b2ljUk1WM3boWAAAAMVJREFUKM9109cWgjAMBuAqigwZboaAIg7s+7+fI+3JaUL+yy8XhQzFMxviypvyq/4m5Z7oX27UD5X+p6e+1hDyyN56Tbw0fnd9Fxt/EI+A50/Xt9bPxMNpvwTgi5frG+sj8RX40nM9l7wAPzaud9ZT4j74KSP9D8H9VrnJjHdKKLRslJF5glXyAh+nv4efKzSkYZUAWyI0fWSVEMchDPCNxkdOlweXRF4reRHF1ZWWfZDOQ3vCQelePDXhOOcpAqYuk0Z9AKe5MI4L1d4yAAAAAElFTkSuQmCC";
+
 @implementation NXNavigationBarAppearance
 
 + (NXNavigationBarAppearance *)standardAppearance {
@@ -42,6 +44,10 @@
         } else {
             _backgorundColor = [UIColor whiteColor];
         }
+        
+        if (@available(iOS 14.0, *)) {
+            self.backButtonMenuSupported = NO;
+        }
     }
     return self;
 }
@@ -50,14 +56,35 @@
 
 - (UIImage *)backImage {
     if (!_backImage) {
-        NSString *backImageBase64 = @"iVBORw0KGgoAAAANSUhEUgAAACQAAAA/BAMAAAB6P3fzAAAAJ1BMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADdEvm1AAAADHRSTlMA+KsWv9WainhiTDxlDsoeAAAA80lEQVQ4y43SPw4BURDH8QnibyUR/7KFAyhE6CVaHaXCARQOoHAABb1iFQ7gCCu7y27mUGY6837keeU3n7zkzTzyn/EqdEqjybmT7gG3AHECiNsWSeGlSVcpzdFnqX9HiUUM6AKohjedpcQW6U1zexOgqqKZQUdF5EF7KQ9TKoGkgQ8xoK2U1JSyoo0HFRTtTBpKef6DOnZ3ig7w4JTI3UsU2raW1rdpiqyoLEfGJ7ytZ9MEWXEhKbOshC8gZV0/03G8yDM0GC0wWBMs08MqyPD74P/Rc0RW/cFihwXwr+mCA6lJSghYTA4LOCPn3KIduWdEb+D7yB4mCTyrAAAAAElFTkSuQmCC";
-        NSData *data = [[NSData alloc] initWithBase64EncodedString:backImageBase64 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        NSData *data = [[NSData alloc] initWithBase64EncodedString:NXNavigationBarAppearanceNackImageBase64 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        if (data) {
+            return [UIImage imageWithData:data scale:2.0];
+        }
+        return nil;
+    }
+    return _backImage;
+}
+
+- (UIImage *)landscapeBackImage {
+    if (!_landscapeBackImage) {
+        NSData *data = [[NSData alloc] initWithBase64EncodedString:NXNavigationBarAppearanceNackImageBase64 options:NSDataBase64DecodingIgnoreUnknownCharacters];
         if (data) {
             return [UIImage imageWithData:data scale:3.0];
         }
         return nil;
     }
-    return _backImage;
+    return _landscapeBackImage;
+}
+
+- (void)setBackButtonMenuSupported:(BOOL)backButtonMenuSupported {
+    _backButtonMenuSupported = backButtonMenuSupported;
+    if (backButtonMenuSupported) {
+        _backImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+        _landscapeBackImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+    } else {
+        _backImageInsets = UIEdgeInsetsZero;
+        _landscapeBackImageInsets = UIEdgeInsetsZero;
+    }
 }
 
 @end
@@ -73,25 +100,25 @@
         _shadowImageView = [[UIImageView alloc] init];
         _shadowImageView.contentMode = UIViewContentModeScaleAspectFill;
         _shadowImageView.clipsToBounds = YES;
-
+        
         _backgroundImageView = [[UIImageView alloc] init];
         _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
         _backgroundImageView.clipsToBounds = YES;
-
+        
         _containerView = [[UIView alloc] init];
         _containerViewEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 8);
-
+        
         UIBlurEffect *effect;
         if (@available(iOS 13.0, *)) {
             effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemChromeMaterial];
         } else {
             effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
         }
-
+        
         _visualEffectView = [[UIVisualEffectView alloc] initWithEffect:effect];
         _visualEffectView.hidden = YES;
         _backgroundImageView.image = [NXNavigationBarAppearance standardAppearance].backgorundImage;
-
+        
         [self addSubview:self.backgroundImageView];
         [self addSubview:self.visualEffectView];
         [self addSubview:self.shadowImageView];
@@ -118,15 +145,15 @@
     CGRect navigationBarFrame = CGRectMake(0, 0, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame));
     self.visualEffectView.frame = navigationBarFrame;
     self.backgroundImageView.frame = navigationBarFrame;
-
+    
     CGRect containerViewFrame = CGRectMake(0, CGRectGetMinY(_originalNavigationBarFrame), CGRectGetWidth(_originalNavigationBarFrame), CGRectGetHeight(_originalNavigationBarFrame));
     self.containerView.frame = UIEdgeInsetsInsetRect(containerViewFrame, _containerViewEdgeInsets);
     
     CGFloat shadowImageViewHeight = 1.0 / UIScreen.mainScreen.scale;
     self.shadowImageView.frame = CGRectMake(0, CGRectGetMaxY(_originalNavigationBarFrame) - shadowImageViewHeight, CGRectGetWidth(navigationBarFrame), shadowImageViewHeight);
-
+    
     // 放在所有的 View 前面，防止 containerView 被遮挡
-    if (self.superview && self.superview != self.containerView.superview) {
+    if (self.superview && self.superview != self.containerView && self.superview != self.containerView.superview) {
         [self.superview addSubview:self.containerView];
     }
     [self.superview bringSubviewToFront:self.containerView];
@@ -153,7 +180,9 @@
 }
 
 - (void)addContainerViewSubview:(UIView *)subview {
-    [self.containerView addSubview:subview];
+    if (subview != self.containerView) {
+        [self.containerView addSubview:subview];
+    }
 }
 
 - (void)setContainerViewEdgeInsets:(UIEdgeInsets)edgeInsets {

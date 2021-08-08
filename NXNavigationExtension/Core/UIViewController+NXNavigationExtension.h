@@ -1,7 +1,7 @@
 //
 // UIViewController+NXNavigationExtension.h
 //
-// Copyright (c) 2021 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
+// Copyright (c) 2020 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIViewController (NXNavigationExtension)
 
 /// 获取当前控制器 NXNavigationBar
-@property (nonatomic, strong, readonly) NXNavigationBar *nx_navigationBar;
+@property (nonatomic, strong, readonly, nullable) NXNavigationBar *nx_navigationBar;
 
 /// 设置 NavigationBar 背景颜色
 @property (nonatomic, strong, readonly, nullable) UIColor *nx_navigationBarBackgroundColor;
@@ -48,17 +48,29 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置 NavigationBar titleTextAttributes
 @property (nonatomic, strong, readonly, nullable) NSDictionary<NSAttributedStringKey, id> *nx_titleTextAttributes;
 
+/// 设置 NavigationBar largeTitleTextAttributes
+@property (nonatomic, strong, readonly, nullable) NSDictionary<NSAttributedStringKey, id> *nx_largeTitleTextAttributes API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
+
 /// 设置 NavigationBar 底部阴影图片
 @property (nonatomic, strong, readonly, nullable) UIImage *nx_shadowImage;
 
 /// 设置返回按钮图片
 @property (nonatomic, strong, readonly, nullable) UIImage *nx_backImage;
 
+/// 设置横屏时显示的图片
+@property (nonatomic, strong, readonly, nullable) UIImage *nx_landscapeBackImage;
+
 /// 设置 NavigationBar 底部阴影颜色
 @property (nonatomic, strong, readonly, nullable) UIColor *nx_shadowImageTintColor;
 
 /// 自定义返回按钮
 @property (nonatomic, strong, readonly, nullable) UIView *nx_backButtonCustomView;
+
+/// 设置返回按钮图片 `backImage` 的 insets，默认：UIEdgeInsetsZero
+@property (nonatomic, assign, readonly) UIEdgeInsets nx_backImageInsets;
+
+/// 设置横屏时显示的图片 `landscapeBackImage` 的 insets，默认：UIEdgeInsetsZero
+@property (nonatomic, assign, readonly) UIEdgeInsets nx_landscapeBackImageInsets;
 
 /// 是否使用系统模糊效果；默认 NO
 @property (nonatomic, assign, readonly) BOOL nx_useSystemBlurNavigationBar;
@@ -82,13 +94,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 也可以通过 `nx_barTintColor` 修改返回按钮颜色
 @property (nonatomic, assign, readonly) BOOL nx_containerViewWithoutNavigtionBar;
 
-/// 是否开启返回按钮菜单；默认与 nx_globalBackButtonMenuEnabled 相同
+/// 是否开启返回按钮菜单，默认 `NO`。如果设置为 `YES`需要同时设置 NXNavigationBarAppearance 属性 `backButtonMenuSupported = YES`
 @property (nonatomic, assign, readonly) BOOL nx_backButtonMenuEnabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 /// 设置触发全屏手势返回，离左边最大滑动距离
 @property (nonatomic, assign) CGFloat nx_interactivePopMaxAllowedDistanceToLeftEdge;
 
-/// 更新导航栏外观
+/// 触发导航栏外观更新
 - (void)nx_setNeedsNavigationBarAppearanceUpdate;
 
 @end

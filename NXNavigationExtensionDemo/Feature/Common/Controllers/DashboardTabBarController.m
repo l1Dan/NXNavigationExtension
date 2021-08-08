@@ -24,6 +24,9 @@
     [super viewDidLoad];
     
     NXNavigationBarAppearance.standardAppearance.tintColor = [UIColor customTitleColor];
+    if (@available(iOS 14.0, *)) {
+        NXNavigationBarAppearance.standardAppearance.backButtonMenuSupported = YES;
+    }
     [NXNavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
     
     FeatureTableViewController *featureTableViewController1 = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];

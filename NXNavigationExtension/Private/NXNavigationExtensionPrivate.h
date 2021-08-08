@@ -1,7 +1,7 @@
 //
 // NXNavigationExtensionPrivate.h
 //
-// Copyright (c) 2021 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
+// Copyright (c) 2020 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -54,11 +54,11 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 
 @interface UIScrollView (NXNavigationExtensionPrivate)
 
-@property (nonatomic, strong) NXNavigationBar *nx_navigationBar;
+@property (nonatomic, strong, nullable) NXNavigationBar *nx_navigationBar;
 
 @end
 
-@interface UIView (NXNavigationExtensionPrivate)
+@interface UINavigationBar (NXNavigationExtensionPrivate)
 
 /// UINavigatoinBar layoutSubviews 时调用
 @property (nonatomic, copy, nullable) UINavigationBarDidUpdateFrameHandler nx_didUpdateFrameHandler;
@@ -66,15 +66,13 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 /// 阻止事件被 NavigationBar 接收，需要将事件穿透传递到下层
 @property (nonatomic, assign) BOOL nx_disableUserInteraction;
 
-/// 正在显示返回按钮历史菜单
-@property (nonatomic, assign) BOOL nx_showingBackButtonMenu;
-
 @end
 
 @interface UIViewController (NXNavigationExtensionPrivate)
 
 /// 设置 UINavigationBarItem
-- (void)nx_configureNavigationBarItemWithViewConstrollers:(NSArray<__kindof UIViewController *> *)viewControllers;
+/// @param supported 是否支持使用系统返回菜单按钮
+- (void)nx_configureNavigationBarItemWithBackButtonMenuSupported:(BOOL)supported;
 
 @end
 

@@ -16,30 +16,6 @@
 
 @implementation ViewController01_BackgroundColor
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    if (@available(iOS 11.0, *)) {
-        self.navigationController.navigationBar.largeTitleTextAttributes = [self nx_titleTextAttributes];
-    }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (@available(iOS 11.0, *)) {
-        self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAutomatic;
-        self.navigationController.navigationBar.prefersLargeTitles = YES;
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    if (@available(iOS 11.0, *)) {
-        self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
-        self.navigationController.navigationBar.prefersLargeTitles = NO;
-    }
-}
-
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }

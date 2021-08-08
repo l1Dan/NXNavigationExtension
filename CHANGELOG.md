@@ -1,5 +1,14 @@
 # CHANGELOG.md
 
+## 3.4.0
+- 使用新的方式支持 iOS14 系统导航栏返回按钮显示菜单的功能，支持拦截系统返回按钮点击返回事件和拦截系统返回按钮菜单长按返回事件；
+- 新增: NXNavigationExtensionRuntime 类；
+- 新增: 导航栏全局属性 `backImageInsets`，`landscapeBackImageInsets`，`backButtonMenuSupported`；
+- 新增: UIViewController+NXNavigationExtension 属性 `nx_largeTitleTextAttributes`;
+- 移除: NXNavigationMenuBackControl 类；
+- 移除: NXNavigationExtensionMacro 文件；
+- 优化: 代码格式化、Demo 代码更新。
+
 ## 3.3.1
 - NXNavigationExtension 最低支持到 iOS 9.0；
 - 示例代码优化。

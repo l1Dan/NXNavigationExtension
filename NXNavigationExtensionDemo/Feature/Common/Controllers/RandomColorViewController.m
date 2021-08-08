@@ -79,6 +79,10 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
     return @{NSForegroundColorAttributeName: [self nx_barTintColor]};
 }
 
+- (BOOL)nx_backButtonMenuEnabled {
+    return YES;
+}
+
 #pragma mark - Private
 
 - (void)updateRandomColorButtonState {

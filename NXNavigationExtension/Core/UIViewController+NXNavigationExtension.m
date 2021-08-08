@@ -1,7 +1,7 @@
 //
 // UIViewController+NXNavigationExtension.m
 //
-// Copyright (c) 2021 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
+// Copyright (c) 2020 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,9 +24,9 @@
 #import <objc/runtime.h>
 
 #import "NXNavigationBar.h"
-#import "UINavigationController+NXNavigationExtension.h"
-#import "NXNavigationExtensionMacro.h"
 #import "NXNavigationExtensionPrivate.h"
+#import "NXNavigationExtensionRuntime.h"
+#import "UINavigationController+NXNavigationExtension.h"
 
 @interface UIViewController (NXNavigationExtension)
 
@@ -40,69 +40,55 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NXNavigationExtensionSwizzleMethod([UIViewController class], @selector(viewDidLoad), @selector(nx_viewDidLoad));
-        NXNavigationExtensionSwizzleMethod([UIViewController class], @selector(viewWillAppear:), @selector(nx_viewWillAppear:));
-        NXNavigationExtensionSwizzleMethod([UIViewController class], @selector(viewDidAppear:), @selector(nx_viewDidAppear:));
-        NXNavigationExtensionSwizzleMethod([UIViewController class], @selector(viewWillDisappear:), @selector(nx_viewWillDisappear:));
-        NXNavigationExtensionSwizzleMethod([UIViewController class], @selector(viewWillLayoutSubviews), @selector(nx_viewWillLayoutSubviews));
-    });
-}
-
-- (void)nx_viewDidLoad {
-    self.nx_navigationBarDidLoadFinished = NO;
-    if (self.navigationController && self.navigationController.nx_useNavigationBar) {
-        self.nx_navigationBarDidLoadFinished = YES;
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIViewController class], @selector(viewDidLoad), ^(__kindof UIViewController * _Nonnull selfObject) {
+            selfObject.nx_navigationBarDidLoadFinished = NO;
+            if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
+                selfObject.nx_navigationBarDidLoadFinished = YES;
+                
+                [selfObject.navigationController nx_configureNavigationBar];
+                [selfObject nx_setupNavigationBar];
+                [selfObject nx_updateNavigationBarAppearance];
+            }
+        });
         
-        [self.navigationController nx_configureNavigationBar];
-        [self nx_setupNavigationBar];
-        [self nx_updateNavigationBarAppearance];
-    }
-    
-    [self nx_viewDidLoad];
-}
-
-- (void)nx_viewWillAppear:(BOOL)animated {
-    if (self.navigationController && self.navigationController.nx_useNavigationBar) {
-        if (!self.nx_navigationBarDidLoadFinished) {
-            // FIXED: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
-            [self.navigationController nx_configureNavigationBar];
-            [self nx_setupNavigationBar];
-        }
-        // 还原上一个视图控制器对导航栏的修改
-        [self nx_updateNavigationBarAppearance];
-        [self nx_updateNavigationBarHierarchy];
-        [self nx_updateNavigationBarSubviewState];
-    }
-    
-    self.nx_viewWillDisappearFinished = NO;
-    [self nx_viewWillAppear:animated];
-}
-
-- (void)nx_viewDidAppear:(BOOL)animated {
-    if (self.navigationController && self.navigationController.nx_useNavigationBar) {
-        BOOL interactivePopGestureRecognizerEnabled = self.navigationController.viewControllers.count > 1;
-        self.navigationController.interactivePopGestureRecognizer.enabled = interactivePopGestureRecognizerEnabled;
-        [self nx_updateNavigationBarSubviewState];
-    }
-    
-    [self nx_viewDidAppear:animated];
-}
-
-- (void)nx_viewWillDisappear:(BOOL)animated {
-    self.nx_viewWillDisappearFinished = YES;
-    [self nx_viewWillDisappear:animated];
-}
-
-- (void)nx_viewWillLayoutSubviews {
-    [self nx_updateNavigationBarHierarchy];
-    [self nx_viewWillLayoutSubviews];
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIViewController class], @selector(viewWillLayoutSubviews), ^(__kindof UIViewController * _Nonnull selfObject) {
+            [selfObject nx_updateNavigationBarHierarchy];
+        });
+        
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewWillAppear:), BOOL, ^(__kindof UIViewController * _Nonnull selfObject, BOOL animated) {
+            if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
+                if (!selfObject.nx_navigationBarDidLoadFinished) {
+                    // FIXED: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
+                    [selfObject.navigationController nx_configureNavigationBar];
+                    [selfObject nx_setupNavigationBar];
+                }
+                // 还原上一个视图控制器对导航栏的修改
+                [selfObject nx_updateNavigationBarAppearance];
+                [selfObject nx_updateNavigationBarHierarchy];
+                [selfObject nx_updateNavigationBarSubviewState];
+            }
+            selfObject.nx_viewWillDisappearFinished = NO;
+        });
+        
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewDidAppear:), BOOL, ^(__kindof UIViewController * _Nonnull selfObject, BOOL animated) {
+            if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
+                BOOL interactivePopGestureRecognizerEnabled = selfObject.navigationController.viewControllers.count > 1;
+                selfObject.navigationController.interactivePopGestureRecognizer.enabled = interactivePopGestureRecognizerEnabled;
+                [selfObject nx_updateNavigationBarSubviewState];
+            }
+        });
+        
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewWillDisappear:), BOOL, ^(__kindof UIViewController * _Nonnull selfObject, BOOL animated) {
+            selfObject.nx_viewWillDisappearFinished = YES;
+        });
+    });
 }
 
 #pragma mark - Private
 
 - (void)nx_setupNavigationBar {
     self.nx_navigationBar.frame = self.navigationController.navigationBar.frame;
-    if (![self.view isKindOfClass:[UIScrollView class]]) {
+    if (![self.view isKindOfClass:[UIScrollView class]] && self.nx_navigationBar) {
         [self.view addSubview:self.nx_navigationBar];
     }
 }
@@ -112,6 +98,9 @@
         self.navigationController.navigationBar.barTintColor = self.nx_barBarTintColor;
         self.navigationController.navigationBar.tintColor = self.nx_barTintColor;
         self.navigationController.navigationBar.titleTextAttributes = self.nx_titleTextAttributes;
+        if (@available(iOS 11.0, *)) {
+            self.navigationController.navigationBar.largeTitleTextAttributes = self.nx_largeTitleTextAttributes;
+        }
         [self.navigationController nx_configureNavigationBar];
         
         self.nx_navigationBar.backgroundColor = self.nx_navigationBarBackgroundColor;
@@ -218,6 +207,10 @@
 #pragma mark - Getter & Setter
 
 - (NXNavigationBar *)nx_navigationBar {
+    if (!self.navigationController || ![NXNavigationBar standardAppearanceForNavigationControllerClass:[self.navigationController class]]) {
+        return nil;
+    }
+    
     NXNavigationBar *bar = objc_getAssociatedObject(self, _cmd);
     if (bar && [bar isKindOfClass:[NXNavigationBar class]]) {
         return bar;
@@ -277,12 +270,30 @@
             return [UIColor blackColor];
         }];
     }
-
+    
     NSDictionary *titleTextAttributes = @{NSForegroundColorAttributeName: color};
     if (@available(iOS 13.0, *)) {
         titleTextAttributes = @{NSForegroundColorAttributeName: [color resolvedColorWithTraitCollection:self.view.traitCollection]};
     }
     return titleTextAttributes;
+}
+
+- (NSDictionary<NSAttributedStringKey,id> *)nx_largeTitleTextAttributes {
+    UIColor *color = [UIColor blackColor];
+    if (@available(iOS 13.0, *)) {
+        color = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                return [UIColor whiteColor];
+            }
+            return [UIColor blackColor];
+        }];
+    }
+    
+    NSDictionary *largeTitleTextAttributes = @{NSForegroundColorAttributeName: color};
+    if (@available(iOS 13.0, *)) {
+        largeTitleTextAttributes = @{NSForegroundColorAttributeName: [color resolvedColorWithTraitCollection:self.view.traitCollection]};
+    }
+    return largeTitleTextAttributes;
 }
 
 - (UIImage *)nx_shadowImage {
@@ -315,6 +326,16 @@
     return backImage;
 }
 
+- (UIImage *)nx_landscapeBackImage {
+    UIImage *landscapeBackImage = objc_getAssociatedObject(self, _cmd);
+    if (landscapeBackImage && [landscapeBackImage isKindOfClass:[UIImage class]]) {
+        return landscapeBackImage;
+    }
+    landscapeBackImage = self.navigationController.nx_appearance.landscapeBackImage;
+    objc_setAssociatedObject(self, _cmd, landscapeBackImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return landscapeBackImage;
+}
+
 - (UIView *)nx_backButtonCustomView {
     UIView *backButtonCustomView = objc_getAssociatedObject(self, _cmd);
     if (backButtonCustomView && [backButtonCustomView isKindOfClass:[UIView class]]) {
@@ -323,6 +344,27 @@
     backButtonCustomView = self.navigationController.nx_appearance.backButtonCustomView;
     objc_setAssociatedObject(self, _cmd, backButtonCustomView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return backButtonCustomView;
+}
+
+- (UIEdgeInsets)nx_backImageInsets {
+    NSString *insetsValue = objc_getAssociatedObject(self, _cmd);
+    if (insetsValue && [insetsValue isKindOfClass:[NSString class]]) {
+        return UIEdgeInsetsFromString(insetsValue);
+    }
+    
+    UIEdgeInsets insets = self.navigationController.nx_appearance.backImageInsets;
+    objc_setAssociatedObject(self, _cmd, NSStringFromUIEdgeInsets(insets), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return insets;
+}
+
+- (UIEdgeInsets)nx_landscapeBackImageInsets {
+    NSString *insetsValue = objc_getAssociatedObject(self, _cmd);
+    if (insetsValue && [insetsValue isKindOfClass:[NSString class]]) {
+        return UIEdgeInsetsFromString(insetsValue);
+    }
+    UIEdgeInsets insets = self.navigationController.nx_appearance.landscapeBackImageInsets;
+    objc_setAssociatedObject(self, _cmd, NSStringFromUIEdgeInsets(insets), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return insets;
 }
 
 - (BOOL)nx_useSystemBlurNavigationBar {
@@ -390,7 +432,7 @@
     if (backButtonMenuEnabled && [backButtonMenuEnabled isKindOfClass:[NSNumber class]]) {
         return [backButtonMenuEnabled boolValue];
     }
-    backButtonMenuEnabled = [NSNumber numberWithBool:UINavigationController.nx_globalBackButtonMenuEnabled];
+    backButtonMenuEnabled = [NSNumber numberWithBool:NO];
     objc_setAssociatedObject(self, _cmd, backButtonMenuEnabled, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return [backButtonMenuEnabled boolValue];
 }
@@ -419,9 +461,12 @@
 
 - (void)nx_setNeedsNavigationBarAppearanceUpdate {
     if (self.navigationController && self.navigationController.nx_useNavigationBar && self.navigationController.viewControllers.count > 1) {
-        NSMutableArray< __kindof UIViewController *> *viewControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
-        [viewControllers removeLastObject];
-        [self nx_configureNavigationBarItemWithViewConstrollers:viewControllers];
+        BOOL backButtonMenuSupported = NO;
+        if (@available(iOS 14.0, *)) {
+            backButtonMenuSupported = self.navigationController.nx_appearance.backButtonMenuSupported;
+            self.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal;
+        }
+        [self nx_configureNavigationBarItemWithBackButtonMenuSupported:backButtonMenuSupported];
     }
     [self nx_updateNavigationBarAppearance];
     [self nx_updateNavigationBarHierarchy];
