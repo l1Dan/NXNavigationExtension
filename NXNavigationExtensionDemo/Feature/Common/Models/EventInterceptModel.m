@@ -22,12 +22,14 @@
 }
 
 + (NSArray<EventInterceptModel*> *)makeAllModels {
-    EventInterceptModel *interceptBoth = [EventInterceptModel itemWithTitle:@"拦截手势滑动&点击返回按钮事件" itemType:EventInterceptItemTypeBoth];
-    interceptBoth.selected = YES;
+    EventInterceptModel *interceptAll = [EventInterceptModel itemWithTitle:@"拦截所有返回页面途径" itemType:EventInterceptItemTypeAll];
+    interceptAll.selected = YES;
     
-    EventInterceptModel *interceptPopGesture = [EventInterceptModel itemWithTitle:@"拦截手势滑动事件" itemType:EventInterceptItemTypePopGesture];
-    EventInterceptModel *interceptBackEvent = [EventInterceptModel itemWithTitle:@"拦截返回按钮事件" itemType:EventInterceptItemTypeBackButton];
-    return @[interceptBoth, interceptPopGesture, interceptBackEvent];
+    EventInterceptModel *interceptBackEvent = [EventInterceptModel itemWithTitle:@"拦截返回按钮点击事件" itemType:EventInterceptItemTypeBackButtonAction];
+    EventInterceptModel *interceptBackMenuEvent = [EventInterceptModel itemWithTitle:@"拦截返回按钮长按选择事件" itemType:EventInterceptItemTypeBackButtonMenuAction];
+    EventInterceptModel *interceptPopGesture = [EventInterceptModel itemWithTitle:@"拦截手势滑动返回事件" itemType:EventInterceptItemTypePopGestureRecognizer];
+    EventInterceptModel *interceptNXPopMethod = [EventInterceptModel itemWithTitle:@"拦截调用 nx_pop 方法返回事件" itemType:EventInterceptItemTypeCallNXPopMethod];
+    return @[interceptAll, interceptBackEvent, interceptBackMenuEvent, interceptPopGesture, interceptNXPopMethod];
 }
 
 @end

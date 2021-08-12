@@ -25,14 +25,31 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol NXNavigationExtensionInteractable <NSObject>
+/// 返回页面使用的交互方式
+/// `NXNavigationInteractiveTypeCallNXPopMethod` 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 回调方式
+/// `NXNavigationInteractiveTypeBackButtonMenuAction` 需要设置 NXNavigationBarAppearance 属性 `backButtonMenuSupported = YES`
+typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
+    NXNavigationInteractiveTypeCallNXPopMethod, // 调用 `nx_pop` 系列方法返回
+    NXNavigationInteractiveTypeBackButtonAction, // 点击返回按钮返回
+    NXNavigationInteractiveTypeBackButtonMenuAction, // 长按返回按钮选择菜单返回
+    NXNavigationInteractiveTypePopGestureRecognizer, // 使用手势交互返回
+};
+
+@protocol NXNavigationInteractable <NSObject>
 
 /// 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
-/// 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:`等方法后也会触发这个代理回调
+/// 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 等方法后也会触发这个代理回调
 /// @param navigationController 当前使用的导航控制器
-/// @param interactingGesture 是否为手势滑动返回
+/// @param viewController 即将要 Pop 的视图控制器
+/// @param interactiveType 返回页面使用的交互方式
 /// @return `YES` 表示不中断返回操作继续执行；`NO` 表示中断返回操作
-- (BOOL)navigationController:(__kindof UINavigationController *)navigationController willPopViewControllerUsingInteractingGesture:(BOOL)interactingGesture;
+- (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController willPopViewController:(__kindof UIViewController *)viewController interactiveType:(NXNavigationInteractiveType)interactiveType;
+
+@end
+
+API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protocol NXNavigationExtensionInteractable <NSObject>
+
+- (BOOL)navigationController:(__kindof UINavigationController *)navigationController willPopViewControllerUsingInteractingGesture:(BOOL)interactingGesture API_DEPRECATED("Use nx_navigationController:willPopViewController:interactiveType: instead.", ios(2.0, 2.0));
 
 @end
 

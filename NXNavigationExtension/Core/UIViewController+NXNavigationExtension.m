@@ -23,7 +23,6 @@
 
 #import <objc/runtime.h>
 
-#import "NXNavigationBar.h"
 #import "NXNavigationExtensionPrivate.h"
 #import "NXNavigationExtensionRuntime.h"
 #import "UINavigationController+NXNavigationExtension.h"

@@ -93,6 +93,14 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 /// 配置 NXNavigationBar
 - (void)nx_configureNavigationBar;
 
+/// 控制器返回页面统一逻辑跳转逻辑
+/// @param viewController 跳转到的目的地视图控制器
+/// @param interactiveType 当前返回执行的交互方式
+/// @param handler 处理跳转的回调
+- (id)nx_triggerSystemPopViewController:(__kindof UIViewController *)viewController
+                        interactiveType:(NXNavigationInteractiveType)interactiveType
+                                handler:(id (^)(UINavigationController *navigationController))handler;
+
 @end
 
 NS_ASSUME_NONNULL_END

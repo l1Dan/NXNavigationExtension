@@ -10,9 +10,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, EventInterceptItemType) {
-    EventInterceptItemTypeBoth,
-    EventInterceptItemTypeBackButton,
-    EventInterceptItemTypePopGesture
+    EventInterceptItemTypeAll,
+    EventInterceptItemTypeCallNXPopMethod,
+    EventInterceptItemTypeBackButtonAction,
+    EventInterceptItemTypeBackButtonMenuAction,
+    EventInterceptItemTypePopGestureRecognizer,
 };
 
 @interface EventInterceptModel : NSObject

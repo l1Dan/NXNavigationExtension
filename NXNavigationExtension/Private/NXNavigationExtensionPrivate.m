@@ -23,7 +23,7 @@
 
 #import "NXNavigationExtensionPrivate.h"
 #import "NXNavigationExtensionRuntime.h"
-#import "UINavigationController+NXNavigationExtension.h"
+//#import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
 
 @implementation NXEdgeGestureRecognizerDelegate
@@ -45,8 +45,12 @@
         return NO;
     }
     
-    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willPopViewControllerUsingInteractingGesture:)]) {
-        return [(id<NXNavigationExtensionInteractable>)topViewController navigationController:self.navigationController willPopViewControllerUsingInteractingGesture:YES];
+    NSArray<UIViewController *> *viewControllers = self.navigationController.viewControllers;
+    UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : topViewController;
+    if (self.navigationController.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
+        return [(id<NXNavigationInteractable>)topViewController nx_navigationController:self.navigationController
+                                                                  willPopViewController:destinationViewController
+                                                                        interactiveType:NXNavigationInteractiveTypePopGestureRecognizer];
     }
     
     return YES;
@@ -96,8 +100,12 @@
         return NO;
     }
     
-    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willPopViewControllerUsingInteractingGesture:)]) {
-        return [(id<NXNavigationExtensionInteractable>)topViewController navigationController:self.navigationController willPopViewControllerUsingInteractingGesture:YES];
+    NSArray<UIViewController *> *viewControllers = self.navigationController.viewControllers;
+    UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : topViewController;
+    if (self.navigationController.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
+        return [(id<NXNavigationInteractable>)topViewController nx_navigationController:self.navigationController
+                                                                  willPopViewController:destinationViewController
+                                                                        interactiveType:NXNavigationInteractiveTypePopGestureRecognizer];
     }
     
     return YES;
@@ -228,7 +236,15 @@
 
 /// 保证 self.navigationController 不为 nil，不要直接调研 navigationController 方法
 - (void)nx_triggerSystemPopViewController {
-    [self.navigationController nx_popViewControllerAnimated:YES];
+    if (self.navigationController) {
+        NSArray<UIViewController *> *viewControllers = self.navigationController.viewControllers;
+        UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : nil;
+        [self.navigationController nx_triggerSystemPopViewController:destinationViewController
+                                                     interactiveType:NXNavigationInteractiveTypeBackButtonAction
+                                                             handler:^id _Nonnull(UINavigationController * _Nonnull navigationController) {
+            return [navigationController popViewControllerAnimated:YES];
+        }];
+    }
 }
 
 @end
@@ -268,6 +284,25 @@
     
     self.nx_gestureDelegate = [[NXEdgeGestureRecognizerDelegate alloc] initWithNavigationController:self];
     self.interactivePopGestureRecognizer.delegate = self.nx_gestureDelegate;
+}
+
+- (id)nx_triggerSystemPopViewController:(__kindof UIViewController *)viewController
+                        interactiveType:(NXNavigationInteractiveType)interactiveType
+                                handler:(id (^)(UINavigationController *navigationController))handler {
+    if (self.viewControllers.count <= 1) return nil;
+    
+    UIViewController *topViewController = self.topViewController;
+    if (self.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
+        UIViewController *destinationViewController = viewController ?: topViewController;
+        if ([(id<NXNavigationInteractable>)topViewController nx_navigationController:self
+                                                               willPopViewController:destinationViewController
+                                                                     interactiveType:interactiveType]) {
+            return handler(topViewController.navigationController);
+        }
+    } else {
+        return handler(topViewController.navigationController);
+    }
+    return nil;
 }
 
 @end

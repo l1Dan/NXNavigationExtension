@@ -11,8 +11,11 @@
 #import "EventInterceptModel.h"
 #import "UIColor+RandomColor.h"
 
-@interface ViewController03_BackEventIntercept () <NXNavigationExtensionInteractable>
+static CGFloat HeightForFooterInSection = 60.0;
 
+@interface ViewController03_BackEventIntercept () <NXNavigationInteractable>
+
+@property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) NSArray<EventInterceptModel *> *allModels;
 @property (nonatomic, assign) EventInterceptItemType currentItemType;
 
@@ -42,17 +45,46 @@
 
 #pragma mark - Private
 
-- (void)showAlertController {
+- (void)showAlertControllerWithViewController:(UIViewController *)viewController {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否继续返回？" preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:NULL]];
     [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToViewController:viewController animated:YES];
     }]];
-    
+
     [self presentViewController:alertController animated:YES completion:NULL];
 }
 
+- (void)clickPopViewControllerButton:(UIButton *)button {
+    [self.navigationController nx_popViewControllerAnimated:YES];
+}
+
 #pragma mark - Getter
+
+- (UIView *)footerView {
+    if (!_footerView) {
+        CGFloat height = HeightForFooterInSection;
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+        _footerView.backgroundColor = [UIColor clearColor];
+        
+        CGFloat buttonHeight = height * 0.8;
+        CGFloat buttonWidth = width * 0.8;
+        
+        CGFloat buttonY = (height - buttonHeight) * 0.5;
+        CGFloat buttonX = (width - buttonWidth) * 0.5;
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(buttonX, buttonY, buttonWidth, buttonHeight)];
+        button.layer.borderColor = [UIColor purpleColor].CGColor;
+        button.layer.borderWidth = 2.0;
+        button.layer.cornerRadius = buttonHeight * 0.5;
+        button.titleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
+        [button setTitle:@"调用 “nx_pop” 方法返回" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor randomLightColor] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(clickPopViewControllerButton:) forControlEvents:UIControlEventTouchUpInside];
+        [_footerView addSubview:button];
+    }
+    return _footerView;
+}
 
 - (NSArray<EventInterceptModel *> *)allModels {
     if (!_allModels) {
@@ -99,26 +131,42 @@
     [tableView reloadData];
 }
 
-#pragma mark - NXNavigationExtensionInteractable
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return self.footerView;
+}
 
-- (BOOL)navigationController:(__kindof UINavigationController *)navigationController willPopViewControllerUsingInteractingGesture:(BOOL)interactingGesture {
-    if (self.currentItemType == EventInterceptItemTypeBoth) {
-        [self showAlertController];
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return HeightForFooterInSection;
+}
+
+#pragma mark - NXNavigationInteractable
+
+- (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController willPopViewController:(__kindof UIViewController *)viewController interactiveType:(NXNavigationInteractiveType)interactiveType {
+    NSLog(@"interactiveType: %zd %@", interactiveType, viewController);
+    
+    if (self.currentItemType == EventInterceptItemTypeBackButtonAction && interactiveType == NXNavigationInteractiveTypeBackButtonAction) {
+        [self showAlertControllerWithViewController:viewController];
         return NO;
     }
     
-    if (self.currentItemType == EventInterceptItemTypeBackButton) {
-        if (!interactingGesture) {
-            [self showAlertController];
-            return NO;
-        }
+    if (self.currentItemType == EventInterceptItemTypeBackButtonMenuAction && interactiveType == NXNavigationInteractiveTypeBackButtonMenuAction) {
+        [self showAlertControllerWithViewController:viewController];
+        return NO;
     }
     
-    if (self.currentItemType == EventInterceptItemTypePopGesture) {
-        if (interactingGesture) {
-            [self showAlertController];
-            return NO;
-        }
+    if (self.currentItemType == EventInterceptItemTypePopGestureRecognizer && interactiveType == NXNavigationInteractiveTypePopGestureRecognizer) {
+        [self showAlertControllerWithViewController:viewController];
+        return NO;
+    }
+    
+    if (self.currentItemType == EventInterceptItemTypeCallNXPopMethod && interactiveType == NXNavigationInteractiveTypeCallNXPopMethod) {
+        [self showAlertControllerWithViewController:viewController];
+        return NO;
+    }
+    
+    if (self.currentItemType == EventInterceptItemTypeAll) {
+        [self showAlertControllerWithViewController:viewController];
+        return NO;
     }
     
     return YES;

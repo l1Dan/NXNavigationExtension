@@ -258,10 +258,10 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController03_BackEventIntercept.m)
 
-需要遵守协议 `<UINavigationControllerCustomizable>`，实现代理方法：
+需要遵守协议 `<NXNavigationInteractable>`，实现代理方法：
 
 ```objc
-- (BOOL)navigationController:(__kindof UINavigationController *)navigationController willPopViewControllerUsingInteractingGesture:(BOOL)interactingGesture {
+- (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController willPopViewController:(__kindof UIViewController *)viewController interactiveType:(NXNavigationInteractiveType)interactiveType {
     // TODO...
     return YES;
 }
@@ -272,26 +272,34 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 - 拦截手势返回事件
 
 ```objc
-- (BOOL)navigationController:(__kindof UINavigationController *)navigationController willPopViewControllerUsingInteractingGesture:(BOOL)interactingGesture {
-    if (self.currentItemType == EventInterceptItemTypeBoth) { // 拦截点击返回按钮事件 & 手势返回事件
-        [self showAlertController];
+- (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController willPopViewController:(__kindof UIViewController *)viewController interactiveType:(NXNavigationInteractiveType)interactiveType {
+    NSLog(@"interactiveType: %zd %@", interactiveType, viewController);
+    
+    if (self.currentItemType == EventInterceptItemTypeBackButtonAction && interactiveType == NXNavigationInteractiveTypeBackButtonAction) {
+        [self showAlertControllerWithViewController:viewController];
         return NO;
     }
-
-    if (self.currentItemType == EventInterceptItemTypeBackButton) { // 拦截点击返回按钮事件
-        if (!interactingGesture) {
-            [self showAlertController];
-            return NO;
-        }
+    
+    if (self.currentItemType == EventInterceptItemTypeBackButtonMenuAction && interactiveType == NXNavigationInteractiveTypeBackButtonMenuAction) {
+        [self showAlertControllerWithViewController:viewController];
+        return NO;
     }
-
-    if (self.currentItemType == EventInterceptItemTypePopGesture) { // 拦截手势返回事件
-        if (interactingGesture) {
-            [self showAlertController];
-            return NO;
-        }
+    
+    if (self.currentItemType == EventInterceptItemTypePopGestureRecognizer && interactiveType == NXNavigationInteractiveTypePopGestureRecognizer) {
+        [self showAlertControllerWithViewController:viewController];
+        return NO;
     }
-
+    
+    if (self.currentItemType == EventInterceptItemTypeCallNXPopMethod && interactiveType == NXNavigationInteractiveTypeCallNXPopMethod) {
+        [self showAlertControllerWithViewController:viewController];
+        return NO;
+    }
+    
+    if (self.currentItemType == EventInterceptItemTypeAll) {
+        [self showAlertControllerWithViewController:viewController];
+        return NO;
+    }
+    
     return YES;
 }
 ```

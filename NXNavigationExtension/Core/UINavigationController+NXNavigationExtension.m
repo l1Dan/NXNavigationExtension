@@ -26,7 +26,6 @@
 
 #import "NXNavigationExtensionPrivate.h"
 #import "NXNavigationExtensionRuntime.h"
-#import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
 
 @implementation UINavigationController (NXNavigationExtension)
@@ -42,8 +41,12 @@
                         if ([bar.delegate isKindOfClass:UINavigationController.class]) {
                             UINavigationController *navigationController = (UINavigationController *)bar.delegate;
                             UIViewController *topViewController = navigationController.topViewController;
-                            if (navigationController.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(navigationController:willPopViewControllerUsingInteractingGesture:)]) {
-                                if (![(id<NXNavigationExtensionInteractable>)topViewController navigationController:navigationController willPopViewControllerUsingInteractingGesture:NO]) {
+                            NSArray<UIViewController *> *viewControllers = navigationController.viewControllers;
+                            UIViewController *destinationViewController = (viewControllers && viewControllers.count >= 2) ? viewControllers[viewControllers.count - 2] : topViewController;
+                            if (navigationController.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
+                                if (![(id<NXNavigationInteractable>)topViewController nx_navigationController:navigationController
+                                                                                        willPopViewController:destinationViewController
+                                                                                              interactiveType:NXNavigationInteractiveTypeBackButtonAction]) {
                                     return;
                                 }
                             }
@@ -58,10 +61,19 @@
             });
             
             NXNavigationExtensionOverrideImplementation([UINavigationController class], NSSelectorFromString(@"_tryRequestPopToItem:"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                return ^BOOL(UINavigationController *selfObject, id firstArgv) {
+                return ^BOOL(UINavigationController *selfObject, UINavigationItem *item) {
                     UIViewController *topViewController = selfObject.topViewController;
-                    if (selfObject.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(navigationController:willPopViewControllerUsingInteractingGesture:)]) {
-                        if (![(id<NXNavigationExtensionInteractable>)topViewController navigationController:selfObject willPopViewControllerUsingInteractingGesture:NO]) {
+                    if (selfObject.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
+                        UIViewController *destinationViewController = topViewController;
+                        for (UIViewController *viewController in selfObject.viewControllers) {
+                            if (viewController.navigationItem == item) {
+                                destinationViewController = viewController;
+                            }
+                        }
+                        
+                        if (![(id<NXNavigationInteractable>)topViewController nx_navigationController:selfObject
+                                                                                willPopViewController:destinationViewController
+                                                                                      interactiveType:NXNavigationInteractiveTypeBackButtonMenuAction]) {
                             return NO;
                         }
                     }
@@ -69,7 +81,7 @@
                     // call super
                     BOOL (*originSelectorIMP)(id, SEL, id);
                     originSelectorIMP = (BOOL (*)(id, SEL, id))originalIMPProvider();
-                    return originSelectorIMP(selfObject, originCMD, firstArgv);
+                    return originSelectorIMP(selfObject, originCMD, item);
                 };
             });
         }
@@ -86,7 +98,7 @@
                     if (selfObject.viewControllers.count > 0) {
                         [viewController nx_configureNavigationBarItemWithBackButtonMenuSupported:backButtonMenuSupported];
                     }
-    
+                    
                     if (viewController.nx_enableFullScreenInteractivePopGesture) {
                         [selfObject nx_configureFullscreenPopGesture];
                     }
@@ -182,20 +194,6 @@
     return viewControllers;
 }
 
-- (id)nx_triggerSystemPopViewControllerWithCompletionHandler:(id (^)(UINavigationController *navigationController))completionHandler {
-    if (self.viewControllers.count <= 1) return nil;
-    
-    UIViewController *topViewController = self.topViewController;
-    if (topViewController && [topViewController respondsToSelector:@selector(navigationController:willPopViewControllerUsingInteractingGesture:)]) {
-        if ([(id<NXNavigationExtensionInteractable>)topViewController navigationController:self willPopViewControllerUsingInteractingGesture:NO]) {
-            return completionHandler(topViewController.navigationController);
-        }
-    } else {
-        return completionHandler(topViewController.navigationController);
-    }
-    return nil;
-}
-
 #pragma mark - Getter & Setter
 
 - (UIPanGestureRecognizer *)nx_fullscreenPopGestureRecognizer {
@@ -228,19 +226,28 @@
 }
 
 - (UIViewController *)nx_popViewControllerAnimated:(BOOL)animated {
-    return [self nx_triggerSystemPopViewControllerWithCompletionHandler:^id(UINavigationController *navigationController) {
+    NSArray<UIViewController *> *viewControllers = self.viewControllers;
+    UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : nil;
+    return [self nx_triggerSystemPopViewController:destinationViewController
+                                   interactiveType:NXNavigationInteractiveTypeCallNXPopMethod
+                                           handler:^id _Nonnull(UINavigationController * _Nonnull navigationController) {
         return [navigationController popViewControllerAnimated:animated];
     }];
 }
 
 - (NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    return [self nx_triggerSystemPopViewControllerWithCompletionHandler:^id(UINavigationController *navigationController) {
+    return [self nx_triggerSystemPopViewController:viewController
+                                   interactiveType:NXNavigationInteractiveTypeCallNXPopMethod
+                                           handler:^id _Nonnull(UINavigationController * _Nonnull navigationController) {
         return [navigationController popToViewController:viewController animated:animated];
     }];
 }
 
 - (NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerAnimated:(BOOL)animated {
-    return [self nx_triggerSystemPopViewControllerWithCompletionHandler:^id(UINavigationController *navigationController) {
+    UIViewController *destinationViewController = self.viewControllers.firstObject;
+    return [self nx_triggerSystemPopViewController:destinationViewController
+                                   interactiveType:NXNavigationInteractiveTypeCallNXPopMethod
+                                           handler:^id _Nonnull(UINavigationController * _Nonnull navigationController) {
         return [navigationController popToRootViewControllerAnimated:animated];
     }];
 }
