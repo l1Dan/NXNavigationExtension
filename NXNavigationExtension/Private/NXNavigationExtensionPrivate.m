@@ -23,8 +23,8 @@
 
 #import "NXNavigationExtensionPrivate.h"
 #import "NXNavigationExtensionRuntime.h"
-//#import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
+
 
 @implementation NXEdgeGestureRecognizerDelegate
 
@@ -113,6 +113,7 @@
 
 @end
 
+
 @implementation UIScrollView (NXNavigationExtensionPrivate)
 
 - (NXNavigationBar *)nx_navigationBar {
@@ -144,6 +145,7 @@
 
 @end
 
+
 @implementation UINavigationBar (NXNavigationExtensionPrivate)
 
 + (void)load {
@@ -157,7 +159,7 @@
         });
         
         NXNavigationExtensionOverrideImplementation([UINavigationBar class], @selector(setUserInteractionEnabled:), ^id _Nonnull(__unsafe_unretained Class  _Nonnull originClass, SEL  _Nonnull originCMD, IMP  _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
-            return ^(UINavigationBar *selfObject, BOOL userInteractionEnabled){
+            return ^(UINavigationBar *selfObject, BOOL userInteractionEnabled) {
                 void (*originSelectorIMP)(id, SEL, BOOL);
                 originSelectorIMP = (void (*)(id, SEL, BOOL))originalIMPProvider();
                 
@@ -196,6 +198,7 @@
 }
 
 @end
+
 
 @implementation UIViewController (NXNavigationExtensionPrivate)
 
@@ -248,6 +251,7 @@
 }
 
 @end
+
 
 @implementation UINavigationController (NXNavigationExtensionPrivate)
 

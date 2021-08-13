@@ -28,6 +28,7 @@
 #import "NXNavigationExtensionRuntime.h"
 #import "UIViewController+NXNavigationExtension.h"
 
+
 @implementation UINavigationController (NXNavigationExtension)
 
 + (void)load {
@@ -146,7 +147,6 @@
 
 - (void)nx_configureFullscreenPopGesture {
     if (![self.interactivePopGestureRecognizer.view.gestureRecognizers containsObject:self.nx_fullscreenPopGestureRecognizer]) {
-        
         // Add our own gesture recognizer to where the onboard screen edge pan gesture recognizer is attached to.
         [self.interactivePopGestureRecognizer.view addGestureRecognizer:self.nx_fullscreenPopGestureRecognizer];
         

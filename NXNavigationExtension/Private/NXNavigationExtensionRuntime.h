@@ -29,11 +29,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 @interface NSString (NXNavigationExtension)
 
 + (NSString *)nx_stringByConcat:(id)firstArgv, ...;
 
 @end
+
 
 @interface NSMethodSignature (NXNavigationExtension)
 
@@ -81,7 +83,7 @@ NXNavigationExtensionOverrideImplementation(Class targetClass, SEL targetSelecto
         // 这只是一个保底，这里要返回一个空 block 保证非 nil，才能避免用小括号语法调用 block 时 crash
         // 空 block 虽然没有参数列表，但在业务那边被转换成 IMP 后就算传多个参数进来也不会 crash
         if (!result) {
-            result = imp_implementationWithBlock(^(id selfObject){
+            result = imp_implementationWithBlock(^(id selfObject) {
                 NSLog(([NSString stringWithFormat:@"%@", targetClass]), @"%@ 没有初始实现，%@\n%@", NSStringFromSelector(targetSelector), selfObject, [NSThread callStackSymbols]);
             });
         }

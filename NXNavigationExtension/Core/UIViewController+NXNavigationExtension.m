@@ -27,12 +27,14 @@
 #import "NXNavigationExtensionRuntime.h"
 #import "UINavigationController+NXNavigationExtension.h"
 
+
 @interface UIViewController (NXNavigationExtension)
 
 @property (nonatomic, assign) BOOL nx_viewWillDisappearFinished;
 @property (nonatomic, assign) BOOL nx_navigationBarDidLoadFinished;
 
 @end
+
 
 @implementation UIViewController (NXNavigationExtension)
 
@@ -259,7 +261,7 @@
     return barTintColor;
 }
 
-- (NSDictionary<NSAttributedStringKey,id> *)nx_titleTextAttributes {
+- (NSDictionary<NSAttributedStringKey, id> *)nx_titleTextAttributes {
     UIColor *color = [UIColor blackColor];
     if (@available(iOS 13.0, *)) {
         color = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
@@ -277,7 +279,7 @@
     return titleTextAttributes;
 }
 
-- (NSDictionary<NSAttributedStringKey,id> *)nx_largeTitleTextAttributes {
+- (NSDictionary<NSAttributedStringKey, id> *)nx_largeTitleTextAttributes {
     UIColor *color = [UIColor blackColor];
     if (@available(iOS 13.0, *)) {
         color = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {

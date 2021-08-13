@@ -23,6 +23,7 @@
 
 #import "NXNavigationExtensionRuntime.h"
 
+
 @implementation NSString (NXNavigationExtension)
 
 + (NSString *)nx_stringByConcat:(id)firstArgv, ... {
@@ -43,6 +44,7 @@
 }
 
 @end
+
 
 @implementation NSMethodSignature (NXNavigationExtension)
 

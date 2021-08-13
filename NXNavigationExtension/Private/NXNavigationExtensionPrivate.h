@@ -22,7 +22,6 @@
 // THE SOFTWARE.
 
 #import "NXNavigationBar.h"
-#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -52,11 +51,13 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 
 @end
 
+
 @interface UIScrollView (NXNavigationExtensionPrivate)
 
 @property (nonatomic, strong, nullable) NXNavigationBar *nx_navigationBar;
 
 @end
+
 
 @interface UINavigationBar (NXNavigationExtensionPrivate)
 
@@ -68,6 +69,7 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 
 @end
 
+
 @interface UIViewController (NXNavigationExtensionPrivate)
 
 /// 设置 UINavigationBarItem
@@ -75,6 +77,7 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 - (void)nx_configureNavigationBarItemWithBackButtonMenuSupported:(BOOL)supported;
 
 @end
+
 
 @interface UINavigationController (NXNavigationExtensionPrivate)
 

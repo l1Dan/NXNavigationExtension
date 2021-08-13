@@ -63,7 +63,7 @@ github "l1Dan/NXNavigationExtension"
 - ✅` 修改导航栏背景颜色`
 - ✅` 修改导航栏背景图片`
 - ✅` 修改导航栏底部线条颜色`
-- ✅` 修改导航栏底部线条颜色图片`
+- ✅` 修改导航栏底部线条图片`
 
 ### 高级功能
 
@@ -78,7 +78,7 @@ github "l1Dan/NXNavigationExtension"
 
 ## 🍽 使用
 
-所有对导航栏外观的修改都是基于视图控制器 `UIViewController` 修改的，而不是基于导航控制器 `UINavigationController` 修改，这种设计逻辑更加符合实际应用场景。也就是自己所在的导航栏的外观自己管理。
+所有对导航栏外观的修改都是基于视图控制器 `UIViewController` 修改的，而不是基于导航控制器 `UINavigationController` 修改，这种设计逻辑更加符合实际应用场景。也就是说视图控制器管理自己的导航栏，而不是使用导航控制器来全局管理。
 
 1. 💉 导入头文件 `#import <NXNavigationExtension/NXNavigationExtension.h>`
 2. 💉 使用之前需要先注册需要修改的导航控制器，以 `FeatureNavigationController` 为例：
@@ -89,7 +89,7 @@ github "l1Dan/NXNavigationExtension"
 
 **注意**：
 
-- 👉 使用之前需要先注册导航控制器，注册之后对导航栏的修改才会生效，也仅限于修改注册的导航控制器所管理的视图控制器，对于子类导航控制器所管理的视图控制器是不会生效的，这样可以有效避免框架污染到其他的导航控制器，保持“谁使用，谁注册”的原则。
+- 👉 使用 `NXNavigationExtension` 之前需要先注册导航控制器，注册之后对导航栏的修改才会生效，也仅限于修改已经注册的导航控制器所管理的视图控制器，对于子类导航控制器所管理的视图控制器是不会生效的，这样可以有效避免框架污染到其他的导航控制器，保持“谁使用，谁注册”的原则。
 - 🚫 不要直接注册 `UINavigationController`，这个影响全局导航栏的外观，建议创建一个 `UINavigationController` 的子类，对这个类进行注册。
 - 🚫 不要使用系统导航栏隐藏、显示方法, `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:`。
 - 🚫 不要使用系统导航栏修改透明度。
@@ -267,9 +267,10 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 }
 ```
 
-- 拦截点击返回按钮事件 & 手势返回事件
-- 拦截点击返回按钮事件
-- 拦截手势返回事件
+1. `NXNavigationInteractiveTypeCallNXPopMethod`: 调用 `nx_pop` 系列方法返回事件拦截。
+2. `NXNavigationInteractiveTypeBackButtonAction`: 点击返回按钮返回事件拦截。
+3. `NXNavigationInteractiveTypeBackButtonMenuAction`: 长按返回按钮选择菜单返回事件拦截。
+4. `NXNavigationInteractiveTypePopGestureRecognizer`: 使用手势交互返回事件拦截。
 
 ```objc
 - (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController willPopViewController:(__kindof UIViewController *)viewController interactiveType:(NXNavigationInteractiveType)interactiveType {
@@ -304,14 +305,14 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 }
 ```
 
-自定义返回按钮事件拦截可以调用方法：`nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:`等方法来触发上面的代理
+自定义返回按钮事件需要拦截可以调用 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 等方法来触发上面的代理回调。
 
 ### 重定向任一控制器跳转
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController04_RedirectViewController.m)
 
 - 以重定向到 `RandomColorViewController` 为例，如果之前有 Push 过 `RandomColorViewController` 的实例，则最后会跳转到实例中，如果没有则会调用 `block`，如果 `block == NULL` 或者 `return nil;` 则重定向跳转不会发生。
-- 执行重定向操作之后，并不会直接跳转到对应的视图控制器，如果需要 `跳转` 操作，可以调用 `popViewControllerAnimated:` 、`使用手势返回`、`点击返回按钮返回`。
+- 执行重定向操作之后，并不会直接跳转到对应的视图控制器，如果需要 `跳转` 操作，可以调用 `popViewControllerAnimated:` 方法返回页面，也可以使用手势滑动返回页面，还可以点击返回按钮返回页面。
 
 ```objc
 [self.navigationController nx_redirectViewControllerClass:[RandomColorViewController class] initializeStandbyViewControllerBlock:^__kindof UIViewController * _Nonnull {

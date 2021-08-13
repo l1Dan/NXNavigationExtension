@@ -25,6 +25,7 @@
 
 static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSUhEUgAAABgAAAAoCAMAAADT08pnAAAAhFBMVEUAAAAAg/8Ae/8AfP8Aev8Aev8Aev8Aev8Aev8Aev8Ae/8Aev8Aev8Ae/8AfP8Ae/8Aff8Afv8Ag/8Ahv8AiP8AjP8Aev8Aev8Ae/8Aev8Aev8Ae/8Ae/8Aff8Ae/8Af/8Afv8Aev8Aev8Ae/8Aev8Ae/8Ae/8Aev8Ae/8AfP8Aff8Aev+lPeVOAAAAK3RSTlMABv1G+fXr4dvW0cvAtTw4JSAWEg4K8u/mxrp1XEExKxuvpKB5b2ljUk1WM3boWAAAAMVJREFUKM9109cWgjAMBuAqigwZboaAIg7s+7+fI+3JaUL+yy8XhQzFMxviypvyq/4m5Z7oX27UD5X+p6e+1hDyyN56Tbw0fnd9Fxt/EI+A50/Xt9bPxMNpvwTgi5frG+sj8RX40nM9l7wAPzaud9ZT4j74KSP9D8H9VrnJjHdKKLRslJF5glXyAh+nv4efKzSkYZUAWyI0fWSVEMchDPCNxkdOlweXRF4reRHF1ZWWfZDOQ3vCQelePDXhOOcpAqYuk0Z9AKe5MI4L1d4yAAAAAElFTkSuQmCC";
 
+
 @implementation NXNavigationBarAppearance
 
 + (NXNavigationBarAppearance *)standardAppearance {
@@ -88,6 +89,7 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 }
 
 @end
+
 
 @implementation NXNavigationBar {
     CGRect _originalNavigationBarFrame;
@@ -199,7 +201,7 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 
 + (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass {
     if (!aClass) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"NavigationClass can‘t be nil" userInfo:nil];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"需要注册的 UINavigationController 或者子类不能为空！" userInfo:nil];
     }
     [NXNavigationBar appearanceInfo][NSStringFromClass(aClass)] = [NXNavigationBarAppearance standardAppearance];
 }

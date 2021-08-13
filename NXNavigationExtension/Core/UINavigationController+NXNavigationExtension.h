@@ -25,6 +25,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 @interface UINavigationController (NXNavigationExtension)
 
 /// 开启全局全屏手势；默认：NO
@@ -55,7 +56,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 内部最终会调用系统方法：`popToRootViewControllerAnimated:`
 /// @param animated 默认 YES
 - (nullable NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerAnimated:(BOOL)animated;
-
 
 /// 重定向视图控制器。可以跳转同一导航控制器下的任一视图控制器
 /// 只会判断视图控制器实例对象的类型（`Class`）是否相同，而非判断视图控制器实例对象（`Instance`）相同

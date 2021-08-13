@@ -29,8 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// `NXNavigationInteractiveTypeCallNXPopMethod` 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 回调方式
 /// `NXNavigationInteractiveTypeBackButtonMenuAction` 需要设置 NXNavigationBarAppearance 属性 `backButtonMenuSupported = YES`
 typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
-    NXNavigationInteractiveTypeCallNXPopMethod, // 调用 `nx_pop` 系列方法返回
-    NXNavigationInteractiveTypeBackButtonAction, // 点击返回按钮返回
+    NXNavigationInteractiveTypeCallNXPopMethod,      // 调用 `nx_pop` 系列方法返回
+    NXNavigationInteractiveTypeBackButtonAction,     // 点击返回按钮返回
     NXNavigationInteractiveTypeBackButtonMenuAction, // 长按返回按钮选择菜单返回
     NXNavigationInteractiveTypePopGestureRecognizer, // 使用手势交互返回
 };
@@ -45,6 +45,10 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
 /// @return `YES` 表示不中断返回操作继续执行；`NO` 表示中断返回操作
 - (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController willPopViewController:(__kindof UIViewController *)viewController interactiveType:(NXNavigationInteractiveType)interactiveType;
 
+@optional
+
+- (BOOL)navigationController:(__kindof UINavigationController *)navigationController willPopViewControllerUsingInteractingGesture:(BOOL)interactingGesture API_DEPRECATED("Use nx_navigationController:willPopViewController:interactiveType: instead.", ios(2.0, 2.0));
+
 @end
 
 API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protocol NXNavigationExtensionInteractable <NSObject>
@@ -54,8 +58,7 @@ API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protoco
 @end
 
 /// 全局外观设置
-NS_SWIFT_NAME(NXNavigationBar.Appearance)
-@interface NXNavigationBarAppearance : NSObject
+NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance : NSObject
 
 /// 全局外观设置
 @property (nonatomic, strong, class, readonly) NXNavigationBarAppearance *standardAppearance;
@@ -93,6 +96,7 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance)
 @property (nonatomic, assign, getter=isBackButtonMenuSupported) BOOL backButtonMenuSupported API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
+
 
 @interface NXNavigationBar : UIView
 

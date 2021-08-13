@@ -1,7 +1,7 @@
 # CHANGELOG.md
 
 ## 3.4.1
-添加返回页面交互方式，之前的 `-navigationController:willPopViewControllerUsingInteractiveGesture:` 方法只能判断使用手势或者不使用手势交互返回页面的交互方式，现在已经支持完整的返回页面交互方式；
+添加返回页面交互方式，之前的 `-navigationController:willPopViewControllerUsingInteractiveGesture:` 方法只能判断使用手势或者不使用手势交互返回页面的方式，现在已经支持完整的返回页面交互方式；
 1. `NXNavigationInteractiveTypeCallNXPopMethod`: 调用 `nx_pop` 系列方法返回。
 2. `NXNavigationInteractiveTypeBackButtonAction`: 点击返回按钮返回。
 3. `NXNavigationInteractiveTypeBackButtonMenuAction`: 长按返回按钮选择菜单返回。
