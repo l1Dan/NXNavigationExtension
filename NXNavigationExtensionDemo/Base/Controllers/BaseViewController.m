@@ -25,6 +25,10 @@
     self.view.backgroundColor = [UIColor customBackgroundColor];
 }
 
+- (void)dealloc {
+    NSLog(@"Dealloced: %@", NSStringFromClass([self class]));
+}
+
 - (NSDictionary<NSAttributedStringKey,id> *)nx_titleTextAttributes {
     return @{NSForegroundColorAttributeName: [self nx_barTintColor]};
 }
@@ -59,10 +63,11 @@
 
 - (UIColor *)randomColor {
     if (!_randomColor) {
+        __weak typeof(self) weakSelf = self;
         _randomColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
-            return self.lightColor;
+            return weakSelf.lightColor;
         } darkModeColor:^UIColor * _Nonnull{
-            return self.darkColor;
+            return weakSelf.darkColor;
         }];
     }
     return _randomColor;

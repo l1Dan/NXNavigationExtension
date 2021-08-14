@@ -5,11 +5,11 @@
 //  Created by Leo Lee on 2020/10/27.
 //
 
-#import "BaseTableViewController.h"
+#import "CustomTableViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ViewController07_ScrollChangeNavigationBar : BaseTableViewController
+@interface ViewController07_ScrollChangeNavigationBar : CustomTableViewController
 
 @end
 

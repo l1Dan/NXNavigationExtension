@@ -28,10 +28,11 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
         _lightRandomColor = [UIColor randomLightColor];
         _darkRandomColor = [UIColor randomDarkColor];
         
+        __weak typeof(self) weakSelf = self;
         _currentRandomColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
-            return self.lightRandomColor;
+            return weakSelf.lightRandomColor;
         } darkModeColor:^UIColor * _Nonnull{
-            return self.darkRandomColor;
+            return weakSelf.darkRandomColor;
         }];
     }
     return self;

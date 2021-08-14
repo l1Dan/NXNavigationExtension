@@ -5,11 +5,11 @@
 //  Created by Leo Lee on 2020/10/25.
 //
 
-#import "BaseTableViewController.h"
+#import "CustomTableViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ViewController02_BackgroundImage : BaseTableViewController
+@interface ViewController02_BackgroundImage : CustomTableViewController
 
 @end
 

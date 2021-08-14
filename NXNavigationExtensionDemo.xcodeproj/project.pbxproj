@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		D615E1A226C40FEA00505C80 /* NXNavigationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6440965265AC67D00BCE890 /* NXNavigationExtension.framework */; };
 		D615E1A326C40FEA00505C80 /* NXNavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6440965265AC67D00BCE890 /* NXNavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D624E9722654F71200CC96E6 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9062654F71100CC96E6 /* BaseTableViewController.m */; };
+		D624E9722654F71200CC96E6 /* CustomTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9062654F71100CC96E6 /* CustomTableViewController.m */; };
 		D624E9732654F71200CC96E6 /* BaseSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9072654F71100CC96E6 /* BaseSplitViewController.m */; };
 		D624E9742654F71200CC96E6 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9082654F71100CC96E6 /* BaseViewController.m */; };
 		D624E9752654F71200CC96E6 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9092654F71100CC96E6 /* BaseNavigationController.m */; };
@@ -56,6 +56,7 @@
 		D624E9A12654F71200CC96E6 /* FakeNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9712654F71200CC96E6 /* FakeNavigationBar.m */; };
 		D6440970265AC73C00BCE890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D644096C265AC73C00BCE890 /* Assets.xcassets */; };
 		D6440971265AC73C00BCE890 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D644096D265AC73C00BCE890 /* LaunchScreen.storyboard */; };
+		D6513E0926C8004C00B593AC /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6513E0826C8004C00B593AC /* BaseTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,12 +75,12 @@
 
 /* Begin PBXFileReference section */
 		D624E8E22654F60500CC96E6 /* NXNavigationExtensionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NXNavigationExtensionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D624E9062654F71100CC96E6 /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
+		D624E9062654F71100CC96E6 /* CustomTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewController.m; sourceTree = "<group>"; };
 		D624E9072654F71100CC96E6 /* BaseSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSplitViewController.m; sourceTree = "<group>"; };
 		D624E9082654F71100CC96E6 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		D624E9092654F71100CC96E6 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		D624E90A2654F71100CC96E6 /* BaseSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSplitViewController.h; sourceTree = "<group>"; };
-		D624E90B2654F71100CC96E6 /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
+		D624E90B2654F71100CC96E6 /* CustomTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewController.h; sourceTree = "<group>"; };
 		D624E90C2654F71100CC96E6 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		D624E90D2654F71100CC96E6 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		D624E9102654F71100CC96E6 /* UITableViewCell+Enabled.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Enabled.h"; sourceTree = "<group>"; };
@@ -167,6 +168,8 @@
 		D644096C265AC73C00BCE890 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D644096E265AC73C00BCE890 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D644096F265AC73C00BCE890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6513E0726C8004C00B593AC /* BaseTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
+		D6513E0826C8004C00B593AC /* BaseTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 		D6771E8826987D6D004A1749 /* NXNavigationExtensionDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NXNavigationExtensionDemo.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -227,10 +230,12 @@
 				D624E9092654F71100CC96E6 /* BaseNavigationController.m */,
 				D624E90A2654F71100CC96E6 /* BaseSplitViewController.h */,
 				D624E9072654F71100CC96E6 /* BaseSplitViewController.m */,
-				D624E90B2654F71100CC96E6 /* BaseTableViewController.h */,
-				D624E9062654F71100CC96E6 /* BaseTableViewController.m */,
+				D6513E0726C8004C00B593AC /* BaseTableViewController.h */,
+				D6513E0826C8004C00B593AC /* BaseTableViewController.m */,
 				D624E90D2654F71100CC96E6 /* BaseViewController.h */,
 				D624E9082654F71100CC96E6 /* BaseViewController.m */,
+				D624E90B2654F71100CC96E6 /* CustomTableViewController.h */,
+				D624E9062654F71100CC96E6 /* CustomTableViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -546,12 +551,13 @@
 				D624E9782654F71200CC96E6 /* UIColor+RandomColor.m in Sources */,
 				D624E9822654F71200CC96E6 /* ViewController05_Custom.m in Sources */,
 				D624E98B2654F71200CC96E6 /* ViewController02_Test.m in Sources */,
-				D624E9722654F71200CC96E6 /* BaseTableViewController.m in Sources */,
+				D624E9722654F71200CC96E6 /* CustomTableViewController.m in Sources */,
 				D624E9872654F71200CC96E6 /* ViewController05_Test.m in Sources */,
 				D624E97C2654F71200CC96E6 /* main.m in Sources */,
 				D624E99C2654F71200CC96E6 /* HierarchyViewController.m in Sources */,
 				D624E9992654F71200CC96E6 /* EventInterceptModel.m in Sources */,
 				D624E99A2654F71200CC96E6 /* RedirectViewControllerModel.m in Sources */,
+				D6513E0926C8004C00B593AC /* BaseTableViewController.m in Sources */,
 				D624E99F2654F71200CC96E6 /* DashboardTabBarController.m in Sources */,
 				D624E9772654F71200CC96E6 /* UITableViewCell+Enabled.m in Sources */,
 				D624E9832654F71200CC96E6 /* ViewController08_WebView.m in Sources */,

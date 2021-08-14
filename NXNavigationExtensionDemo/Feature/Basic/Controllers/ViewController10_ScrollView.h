@@ -5,11 +5,11 @@
 //  Created by Leo Lee on 2020/10/26.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ViewController10_ScrollView : UITableViewController
+@interface ViewController10_ScrollView : BaseTableViewController
 
 @end
 

@@ -5,11 +5,11 @@
 //  Created by Leo Lee on 2020/9/27.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FeatureTableViewController : UITableViewController
+@interface FeatureTableViewController : BaseTableViewController
 
 @end
 

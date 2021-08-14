@@ -5,11 +5,11 @@
 //  Created by Leo Lee on 2021/5/4.
 //
 
-#import "BaseTableViewController.h"
+#import "CustomTableViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ViewController13_Blur : BaseTableViewController
+@interface ViewController13_Blur : CustomTableViewController
 
 @end
 

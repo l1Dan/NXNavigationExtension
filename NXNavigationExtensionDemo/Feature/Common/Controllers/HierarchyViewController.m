@@ -59,10 +59,6 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
     self.heightConstraint.constant = maxHeight;
 }
 
-- (void)dealloc {
-    NSLog(@"%s", __FUNCTION__);
-}
-
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
     

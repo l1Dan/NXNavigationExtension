@@ -2,13 +2,15 @@
 //  BaseTableViewController.h
 //  NXNavigationExtensionDemo
 //
-//  Created by Leo Lee on 2020/9/22.
+//  Created by lidan on 2021/8/14.
 //
 
-#import "BaseViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface BaseTableViewController : BaseViewController <UITableViewDelegate, UITableViewDataSource>
+NS_ASSUME_NONNULL_BEGIN
 
-@property (nonatomic, strong, readonly) UITableView *tableView;
+@interface BaseTableViewController : UITableViewController
 
 @end
+
+NS_ASSUME_NONNULL_END

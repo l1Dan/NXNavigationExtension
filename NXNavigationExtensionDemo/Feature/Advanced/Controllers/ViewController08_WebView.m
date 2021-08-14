@@ -5,6 +5,7 @@
 //  Created by Leo Lee on 2020/10/27.
 //
 
+#import <SafariServices/SafariServices.h>
 #import <WebKit/WebKit.h>
 #import <NXNavigationExtension/NXNavigationExtension.h>
 
@@ -27,7 +28,7 @@
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        _requestURL = [NSURL URLWithString:@"https://l1dan.github.io/"];
+        _requestURL = [NSURL URLWithString:@"https://www.apple.com/"];
     }
     return self;
 }
@@ -35,6 +36,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (@available(iOS 11.0, *)) {
+        self.webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = YES;
+    }
+
+    if (@available(iOS 13.0, *)) {
+        self.webView.scrollView.automaticallyAdjustsScrollIndicatorInsets = YES;
+    }
+
     self.navigationItem.title = @"Loading...";
     
     if (UIDevice.isPhoneDevice) {
@@ -54,12 +65,13 @@
     [self.progressView.heightAnchor constraintEqualToConstant:1.0 / [UIScreen mainScreen].scale].active = YES;
     
     if (@available(iOS 13.0, *)) {
+        __weak typeof(self) weakSelf = self;
         self.webView.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
-            if (self.view.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                self.webView.opaque = NO;
+            if (weakSelf.view.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                weakSelf.webView.opaque = NO;
                 return [UIColor clearColor];
             }
-            self.webView.opaque = YES;
+            weakSelf.webView.opaque = YES;
             return [UIColor whiteColor];
         }];
     } else {
@@ -89,10 +101,6 @@
     return YES;
 }
 
-- (void)dealloc {
-    NSLog(@"%s", __FUNCTION__);
-}
-
 #pragma mark - Observer
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -115,7 +123,7 @@
     }
 }
 
-#pragma mark - Action
+#pragma mark - Private
 
 - (void)clickBackButton:(UIButton *)button {
     if (UIDevice.isPhoneDevice) {
@@ -131,6 +139,22 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)updateLeftButtonItems {
+    if (UIDevice.isPhoneDevice) {
+        if (self.webView.canGoBack) {
+            self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem, self.closeBarButtonItem];
+        } else {
+            self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem];
+        }
+    } else {
+        if (self.webView.canGoBack) {
+            self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem];
+        } else {
+            self.navigationItem.leftBarButtonItems = nil;
+        }
+    }
+}
+
 #pragma mark - Getter
 
 - (UIProgressView *)progressView {
@@ -139,6 +163,7 @@
         _progressView.trackTintColor = [UIColor customLightGrayColor];
         _progressView.progressTintColor = [UIColor customDarkGrayColor];
         _progressView.translatesAutoresizingMaskIntoConstraints = NO;
+        _progressView.alpha = 0.0;
     }
     return _progressView;
 }
@@ -186,20 +211,14 @@
 
 #pragma mark - WKNavigationDelegate
 
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    [self updateLeftButtonItems];
+
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
+
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    if (UIDevice.isPhoneDevice) {
-        if (webView.canGoBack) {
-            self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem, self.closeBarButtonItem];
-        } else {
-            self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem];
-        }
-    } else {
-        if (webView.canGoBack) {
-            self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem];
-        } else {
-            self.navigationItem.leftBarButtonItems = nil;
-        }
-    }
+    [self updateLeftButtonItems];
 }
 
 #pragma mark - NXNavigationInteractable
