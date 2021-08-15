@@ -10,6 +10,7 @@
 #import <NXNavigationExtension/NXNavigationExtension.h>
 
 #import "ViewController08_WebView.h"
+#import "RandomColorViewController.h"
 
 #import "UIColor+RandomColor.h"
 #import "UIDevice+Additions.h"
@@ -29,25 +30,28 @@
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         _requestURL = [NSURL URLWithString:@"https://www.apple.com/"];
+        // Uncomment fot testing dynamic change edgesForExtendedLayout instance.
+//        self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     return self;
+}
+
+// Comment for testing dynamic change edgesForExtendedLayout instance.
+- (UIRectEdge)edgesForExtendedLayout {
+    return UIRectEdgeNone; // Or in NS_DESIGNATED_INITIALIZER method call self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (@available(iOS 11.0, *)) {
-        self.webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
-    } else {
-        self.automaticallyAdjustsScrollViewInsets = YES;
-    }
-
-    if (@available(iOS 13.0, *)) {
-        self.webView.scrollView.automaticallyAdjustsScrollIndicatorInsets = YES;
-    }
-
-    self.navigationItem.title = @"Loading...";
+    // Uncomment fot testing dynamic change edgesForExtendedLayout instance.
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        self.edgesForExtendedLayout = UIRectEdgeAll;
+//        [self nx_setNeedsNavigationBarAppearanceUpdate]; // Update edgesForExtendedLayout instance now.
+//    });
     
+    self.navigationItem.title = @"Loading...";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(clickAddButton:)];
     if (UIDevice.isPhoneDevice) {
         self.navigationItem.leftBarButtonItems = @[self.backBarButtonItem];
     }
@@ -97,8 +101,8 @@
     [self.progressView setHidden:YES];
 }
 
-- (BOOL)nx_useSystemBlurNavigationBar {
-    return YES;
+- (UIColor *)nx_navigationBarBackgroundColor {
+    return [self randomColor];
 }
 
 #pragma mark - Observer
@@ -137,6 +141,10 @@
 
 - (void)clickCloseButton:(UIButton *)button {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)clickAddButton:(UIButton *)button {
+    [self.navigationController pushViewController:[[RandomColorViewController alloc] init] animated:YES];
 }
 
 - (void)updateLeftButtonItems {

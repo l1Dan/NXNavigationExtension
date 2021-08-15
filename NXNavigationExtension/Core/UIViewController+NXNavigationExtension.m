@@ -56,7 +56,24 @@
             [selfObject nx_updateNavigationBarHierarchy];
         });
         
+        NXNavigationExtensionOverrideImplementation([UIViewController class], @selector(extendedLayoutIncludesOpaqueBars), ^id _Nonnull(__unsafe_unretained Class  _Nonnull originClass, SEL  _Nonnull originCMD, IMP  _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
+            return ^BOOL (__unsafe_unretained __kindof UIViewController *selfObject) {
+                BOOL (*originSelectorIMP)(id, SEL);
+                originSelectorIMP = (BOOL (*)(id, SEL))originalIMPProvider();
+                BOOL result = originSelectorIMP(selfObject, originCMD);
+                
+                // FIXED: edgesForExtendedLayoutEnabled instance dynamic changed.
+                if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
+                    selfObject.nx_navigationBar.edgesForExtendedLayoutEnabled = [selfObject nx_edgesForExtendedLayoutEnabled];
+                    selfObject.nx_navigationBar.frame = selfObject.navigationController.navigationBar.frame;
+                }
+                
+                return result;
+            };
+        });
+        
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewWillAppear:), BOOL, ^(__kindof UIViewController * _Nonnull selfObject, BOOL animated) {
+            selfObject.nx_viewWillDisappearFinished = NO;
             if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
                 if (!selfObject.nx_navigationBarDidLoadFinished) {
                     // FIXED: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
@@ -68,7 +85,6 @@
                 [selfObject nx_updateNavigationBarHierarchy];
                 [selfObject nx_updateNavigationBarSubviewState];
             }
-            selfObject.nx_viewWillDisappearFinished = NO;
         });
         
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewDidAppear:), BOOL, ^(__kindof UIViewController * _Nonnull selfObject, BOOL animated) {
@@ -87,14 +103,32 @@
 
 #pragma mark - Private
 
+- (BOOL)nx_edgesForExtendedLayoutEnabled {
+    return self.edgesForExtendedLayout == UIRectEdgeNone;
+}
+
 - (void)nx_setupNavigationBar {
+    if (!self.nx_navigationBar) return;
+    
     self.nx_navigationBar.frame = self.navigationController.navigationBar.frame;
-    if (![self.view isKindOfClass:[UIScrollView class]] && self.nx_navigationBar) {
+    if (![self.view isKindOfClass:[UIScrollView class]]) {
         [self.view addSubview:self.nx_navigationBar];
     }
+    
+    __weak typeof(self) weakSelf = self;
+    self.navigationController.navigationBar.nx_didUpdateFrameHandler = ^(CGRect frame) {
+        if (weakSelf.nx_navigationBar) {
+            weakSelf.nx_navigationBar.edgesForExtendedLayoutEnabled = [weakSelf nx_edgesForExtendedLayoutEnabled];
+        }
+        
+        if (weakSelf.nx_viewWillDisappearFinished) { return; }
+        weakSelf.nx_navigationBar.frame = frame;
+    };
 }
 
 - (void)nx_updateNavigationBarAppearance {
+    if (self.nx_viewWillDisappearFinished) return; // FIXED: delay call nx_updateNavigationBarAppearance method.
+    
     if (self.navigationController && self.navigationController.nx_useNavigationBar) {
         self.navigationController.navigationBar.barTintColor = self.nx_barBarTintColor;
         self.navigationController.navigationBar.tintColor = self.nx_barTintColor;
@@ -117,12 +151,6 @@
         if (self.parentViewController && ![self.parentViewController isKindOfClass:[UINavigationController class]] && self.nx_automaticallyHideNavigationBarInChildViewController) {
             self.nx_navigationBar.hidden = YES;
         }
-        
-        __weak typeof(self) weakSelf = self;
-        self.navigationController.navigationBar.nx_didUpdateFrameHandler = ^(CGRect frame) {
-            if (weakSelf.nx_viewWillDisappearFinished) { return; }
-            weakSelf.nx_navigationBar.frame = frame;
-        };
     }
 }
 
@@ -214,9 +242,12 @@
     
     NXNavigationBar *bar = objc_getAssociatedObject(self, _cmd);
     if (bar && [bar isKindOfClass:[NXNavigationBar class]]) {
+        bar.edgesForExtendedLayoutEnabled = [self nx_edgesForExtendedLayoutEnabled];
         return bar;
     }
+    
     bar = [[NXNavigationBar alloc] initWithFrame:CGRectZero];
+    bar.edgesForExtendedLayoutEnabled = [self nx_edgesForExtendedLayoutEnabled];
     objc_setAssociatedObject(self, _cmd, bar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return bar;
 }

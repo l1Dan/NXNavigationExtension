@@ -52,6 +52,14 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 @end
 
 
+@interface NXNavigationBar ()
+
+/// 设置 UIViewController edgesForExtendedLayout == UIRectEdgeNone
+@property (nonatomic, assign) BOOL edgesForExtendedLayoutEnabled;
+
+@end
+
+
 @interface UIScrollView (NXNavigationExtensionPrivate)
 
 @property (nonatomic, strong, nullable) NXNavigationBar *nx_navigationBar;

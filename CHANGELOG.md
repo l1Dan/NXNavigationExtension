@@ -1,5 +1,12 @@
 # CHANGELOG.md
 
+## 3.4.2
+之前使用 UIViewController 的 `edgesForExtendedLayout` 属性会导致导航栏往下移动，这也就是 `README.md` 文档中提到不要使用 `edgesForExtendedLayout` 属性的原因，现在该问题已经修复。详细信息查看：
+[示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController08_WebView.m)；
+
+- 修改: README.md 文件;
+- 示例代码优化。
+
 ## 3.4.1
 添加返回页面交互方式，之前的 `-navigationController:willPopViewControllerUsingInteractiveGesture:` 方法只能判断使用手势或者不使用手势交互返回页面的方式，现在已经支持完整的返回页面交互方式；
 1. `NXNavigationInteractiveTypeCallNXPopMethod`: 调用 `nx_pop` 系列方法返回。
@@ -20,7 +27,7 @@
 - 新增: `UIViewController+NXNavigationExtension` 属性 `nx_largeTitleTextAttributes`;
 - 移除: `NXNavigationMenuBackControl` 类；
 - 移除: `NXNavigationExtensionMacro` 文件；
-- 优化: 代码格式化、Demo 代码更新。
+- 优化: 代码格式化、示例代码优化。
 
 ## 3.3.1
 - *NXNavigationExtension* 最低支持到 iOS 9.0；
@@ -42,7 +49,7 @@
 - 新增: `nx_globalBackButtonMenuEnabled` 和 `nx_backButtonMenuEnabled` API，为 iOS14 及以上系统提供长按返回按钮显示菜单的功能；
 - 重命名: `addContainerSubview:` 为 `addContainerViewSubview:`
 - 重命名: `standardAppearanceInNavigationControllerClass:` 为 `standardAppearanceForNavigationControllerClass:`
-- 优化: 代码格式化、Demo 代码更新。
+- 优化: 代码格式化、示例代码优化。
 
 ## 3.1.0
 

@@ -90,11 +90,15 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 
 @end
 
+@interface NXNavigationBar ()
 
-@implementation NXNavigationBar {
-    CGRect _originalNavigationBarFrame;
-    UIEdgeInsets _containerViewEdgeInsets;
-}
+@property (nonatomic, assign) CGRect originalNavigationBarFrame;
+@property (nonatomic, assign) UIEdgeInsets containerViewEdgeInsets;
+@property (nonatomic, assign) BOOL edgesForExtendedLayoutEnabled;
+
+@end
+
+@implementation NXNavigationBar
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -109,6 +113,7 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
         
         _containerView = [[UIView alloc] init];
         _containerViewEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 8);
+        _edgesForExtendedLayoutEnabled = NO;
         
         UIBlurEffect *effect;
         if (@available(iOS 13.0, *)) {
@@ -130,20 +135,18 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    [self updateNavigationBarContentFrame];
+    [self updateNavigationBarContentFrameCallSuper:NO];
 }
 
 - (void)setFrame:(CGRect)frame {
     _originalNavigationBarFrame = frame;
     
-    // 重新设置 NavigationBar frame
-    [super setFrame:CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetMaxY(frame))];
-    [self updateNavigationBarContentFrame];
+    [self updateNavigationBarContentFrameCallSuper:YES];
 }
 
 #pragma mark - Private
 
-- (void)updateNavigationBarContentFrame {
+- (void)updateNavigationBarContentFrameCallSuper:(BOOL)callSuper {
     CGRect navigationBarFrame = CGRectMake(0, 0, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame));
     self.visualEffectView.frame = navigationBarFrame;
     self.backgroundImageView.frame = navigationBarFrame;
@@ -159,6 +162,12 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
         [self.superview addSubview:self.containerView];
     }
     [self.superview bringSubviewToFront:self.containerView];
+    
+    // 重新设置 NavigationBar frame
+    if (callSuper) {
+        CGFloat navigationBarY = self.edgesForExtendedLayoutEnabled ? CGRectGetHeight(navigationBarFrame) : 0;
+        [super setFrame:CGRectMake(0, -navigationBarY, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame))];
+    }
 }
 
 + (NSMutableDictionary<NSString *, NXNavigationBarAppearance *> *)appearanceInfo {
@@ -189,7 +198,7 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 
 - (void)setContainerViewEdgeInsets:(UIEdgeInsets)edgeInsets {
     _containerViewEdgeInsets = edgeInsets;
-    [self updateNavigationBarContentFrame];
+    [self updateNavigationBarContentFrameCallSuper:NO];
 }
 
 + (NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass {

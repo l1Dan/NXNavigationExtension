@@ -94,7 +94,7 @@ github "l1Dan/NXNavigationExtension"
 - 🚫 不要使用系统导航栏隐藏、显示方法, `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:`。
 - 🚫 不要使用系统导航栏修改透明度。
 - 🚫 不要使用系统导航栏或导航控制器 `appearance` 相关属性修改。
-- 🚫 不要使用全局 `edgesForExtendedLayout` 修改。
+- 🚫 ~~不要使用全局 `edgesForExtendedLayout` 修改~~。*3.4.2*及以后的版本已经支持。
 - 🚫 不要使用 `<UIGestureRecognizerDelegate>` 相关方法禁用手势返回。
 - 💉 一句话“不要直接操作导航栏或者导航控制器，把这些都交给 `NXNavigationExtension` 处理吧“。
 
