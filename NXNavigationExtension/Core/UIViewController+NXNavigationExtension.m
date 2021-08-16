@@ -27,6 +27,10 @@
 #import "NXNavigationExtensionRuntime.h"
 #import "UINavigationController+NXNavigationExtension.h"
 
+CG_INLINE BOOL
+NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
+    return edge == UIRectEdgeNone;
+}
 
 @interface UIViewController (NXNavigationExtension)
 
@@ -61,13 +65,27 @@
                 BOOL (*originSelectorIMP)(id, SEL);
                 originSelectorIMP = (BOOL (*)(id, SEL))originalIMPProvider();
                 BOOL result = originSelectorIMP(selfObject, originCMD);
-                
+
                 // FIXED: edgesForExtendedLayoutEnabled instance dynamic changed.
                 if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
-                    selfObject.nx_navigationBar.edgesForExtendedLayoutEnabled = [selfObject nx_edgesForExtendedLayoutEnabled];
+                    selfObject.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(selfObject.edgesForExtendedLayout);
                     selfObject.nx_navigationBar.frame = selfObject.navigationController.navigationBar.frame;
                 }
-                
+                return result;
+            };
+        });
+        
+        NXNavigationExtensionOverrideImplementation([UIViewController class], @selector(edgesForExtendedLayout), ^id _Nonnull(__unsafe_unretained Class  _Nonnull originClass, SEL  _Nonnull originCMD, IMP  _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
+            return ^UIRectEdge (__unsafe_unretained __kindof UIViewController *selfObject) {
+                UIRectEdge (*originSelectorIMP)(id, SEL);
+                originSelectorIMP = (UIRectEdge (*)(id, SEL))originalIMPProvider();
+                UIRectEdge result = originSelectorIMP(selfObject, originCMD);
+
+                // FIXED: edgesForExtendedLayoutEnabled instance dynamic changed.
+                if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
+                    selfObject.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(result);
+                    selfObject.nx_navigationBar.frame = selfObject.navigationController.navigationBar.frame;
+                }
                 return result;
             };
         });
@@ -103,10 +121,6 @@
 
 #pragma mark - Private
 
-- (BOOL)nx_edgesForExtendedLayoutEnabled {
-    return self.edgesForExtendedLayout == UIRectEdgeNone;
-}
-
 - (void)nx_setupNavigationBar {
     if (!self.nx_navigationBar) return;
     
@@ -118,7 +132,8 @@
     __weak typeof(self) weakSelf = self;
     self.navigationController.navigationBar.nx_didUpdateFrameHandler = ^(CGRect frame) {
         if (weakSelf.nx_navigationBar) {
-            weakSelf.nx_navigationBar.edgesForExtendedLayoutEnabled = [weakSelf nx_edgesForExtendedLayoutEnabled];
+            // FIXED: 视图控制器同时重写 `extendedLayoutIncludesOpaqueBars` 和 `edgesForExtendedLayout` 属性时需要调用这里来修正导航栏。
+            weakSelf.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(weakSelf.edgesForExtendedLayout);
         }
         
         if (weakSelf.nx_viewWillDisappearFinished) { return; }
@@ -236,18 +251,17 @@
 #pragma mark - Getter & Setter
 
 - (NXNavigationBar *)nx_navigationBar {
-    if (!self.navigationController || ![NXNavigationBar standardAppearanceForNavigationControllerClass:[self.navigationController class]]) {
-        return nil;
-    }
-    
+    // 如果之前已经创建过 NXNavigationBar 实例，则直接返回原来已经创建好的实例对象。
     NXNavigationBar *bar = objc_getAssociatedObject(self, _cmd);
     if (bar && [bar isKindOfClass:[NXNavigationBar class]]) {
-        bar.edgesForExtendedLayoutEnabled = [self nx_edgesForExtendedLayoutEnabled];
+        return bar;
+    }
+    
+    if (!self.navigationController || ![NXNavigationBar standardAppearanceForNavigationControllerClass:[self.navigationController class]]) {
         return bar;
     }
     
     bar = [[NXNavigationBar alloc] initWithFrame:CGRectZero];
-    bar.edgesForExtendedLayoutEnabled = [self nx_edgesForExtendedLayoutEnabled];
     objc_setAssociatedObject(self, _cmd, bar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return bar;
 }

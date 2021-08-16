@@ -30,24 +30,19 @@
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         _requestURL = [NSURL URLWithString:@"https://www.apple.com/"];
-        // Uncomment fot testing dynamic change edgesForExtendedLayout instance.
-//        self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     return self;
 }
 
-// Comment for testing dynamic change edgesForExtendedLayout instance.
-- (UIRectEdge)edgesForExtendedLayout {
-    return UIRectEdgeNone; // Or in NS_DESIGNATED_INITIALIZER method call self.edgesForExtendedLayout = UIRectEdgeNone;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    // comment fot testing dynamic change edgesForExtendedLayout instance.
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
     // Uncomment fot testing dynamic change edgesForExtendedLayout instance.
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        self.edgesForExtendedLayout = UIRectEdgeAll;
-//        [self nx_setNeedsNavigationBarAppearanceUpdate]; // Update edgesForExtendedLayout instance now.
+////        [self nx_setNeedsNavigationBarAppearanceUpdate]; // Update edgesForExtendedLayout instance now.
 //    });
     
     self.navigationItem.title = @"Loading...";

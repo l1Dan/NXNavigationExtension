@@ -1,5 +1,9 @@
 # CHANGELOG.md
 
+## 3.4.3
+- 修复: 获取 `nx_navigationBar` 时的判断逻辑不对问题。修改为：如果之前已经创建过 `nx_navigationBar`，那么之后无论 `self.navigationController` 属性是否为空都会直接返回原来已经创建好的 `nx_navigationBar` 实例。
+- 修复: 视图控制器同时重写 `extendedLayoutIncludesOpaqueBars` 和 `edgesForExtendedLayout` 属性时导航栏位置不对问题。
+
 ## 3.4.2
 之前使用 UIViewController 的 `edgesForExtendedLayout` 属性会导致导航栏往下移动，这也就是 `README.md` 文档中提到不要使用 `edgesForExtendedLayout` 属性的原因，现在该问题已经修复。详细信息查看：
 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController08_WebView.m)；
