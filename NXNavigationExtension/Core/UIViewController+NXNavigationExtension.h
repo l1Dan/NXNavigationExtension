@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置返回按钮图片
 @property (nonatomic, strong, readonly, nullable) UIImage *nx_backImage;
 
-/// 设置横屏时显示的图片
+/// 设置横屏时显示的返回按钮图片
 @property (nonatomic, strong, readonly, nullable) UIImage *nx_landscapeBackImage;
 
 /// 设置 NavigationBar 底部阴影颜色
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置返回按钮图片 `backImage` 的 insets，默认：UIEdgeInsetsZero
 @property (nonatomic, assign, readonly) UIEdgeInsets nx_backImageInsets;
 
-/// 设置横屏时显示的图片 `landscapeBackImage` 的 insets，默认：UIEdgeInsetsZero
+/// 设置横屏时显示返回按钮图片 `landscapeBackImage` 的 insets，默认：UIEdgeInsetsZero
 @property (nonatomic, assign, readonly) UIEdgeInsets nx_landscapeBackImageInsets;
 
 /// 是否使用系统模糊效果；默认 NO
@@ -84,10 +84,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否自动隐藏 NavigationBar；默认 YES
 @property (nonatomic, assign, readonly) BOOL nx_automaticallyHideNavigationBarInChildViewController;
 
-/// 是否隐藏导航栏（UINavigationBar 和 NXNavigationBar 都会隐藏）；默认 NO
-/// 注意⚠️：这里并不是真正的隐藏导航栏，只是将导航栏变成透明，设置返回按钮透明，导航栏的 item(s) 和 title(view) 需要自己控制是否显示。
-/// 这样做的目的是让导航栏下方的视图可以接收事件响应
-@property (nonatomic, assign, readonly) BOOL nx_hidesNavigationBar;
+@property (nonatomic, assign, readonly) BOOL nx_hidesNavigationBar API_DEPRECATED("Use nx_translucentNavigationBar instead.", ios(2.0, 2.0));
+
+/// 设置导航栏是否透明（UINavigationBar 和 NXNavigationBar 都会透明）；默认 NO
+/// 使用 `navigationItem` 设置的导航栏元素需要手动控制是否隐藏。导航栏设置为透明之后，也不会影响方的视图接收事件响应。
+@property (nonatomic, assign, readonly) BOOL nx_translucentNavigationBar;
 
 /// 设置 NXNavigationBar 的 containerView 可以接收事件响应，还可以不跟随导航栏的透明度一起变化；默认 `NO`
 /// 注意⚠️：系统返回按钮点击事件不可用，但系统返回按钮还是显示的，方便在 containerView 自定义返回按钮，

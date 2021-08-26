@@ -274,7 +274,7 @@
 }
 
 - (NXNavigationBarAppearance *)nx_appearance {
-    return [NXNavigationBar standardAppearanceForNavigationControllerClass:[self class]];
+    return [NXNavigationBar appearanceFromRegisterNavigationControllerClass:[self class]];
 }
 
 - (BOOL)nx_useNavigationBar {

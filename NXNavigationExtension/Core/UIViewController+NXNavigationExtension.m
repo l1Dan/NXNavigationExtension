@@ -188,11 +188,11 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (void)nx_updateNavigationBarSubviewState {
     if (self.navigationController && self.navigationController.nx_useNavigationBar) {
-        BOOL hidesNavigationBar = self.nx_hidesNavigationBar;
+        BOOL hidesNavigationBar = self.nx_translucentNavigationBar;
         BOOL containerViewWithoutNavigtionBar = self.nx_containerViewWithoutNavigtionBar;
         if ([self isKindOfClass:[UIPageViewController class]] && !hidesNavigationBar) {
             // FIXED: 处理特殊情况，最后显示的为 UIPageViewController
-            hidesNavigationBar = self.parentViewController.nx_hidesNavigationBar;
+            hidesNavigationBar = self.parentViewController.nx_translucentNavigationBar;
         }
         
         if (hidesNavigationBar) {
@@ -257,7 +257,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         return bar;
     }
     
-    if (!self.navigationController || ![NXNavigationBar standardAppearanceForNavigationControllerClass:[self.navigationController class]]) {
+    if (!self.navigationController || ![NXNavigationBar appearanceFromRegisterNavigationControllerClass:[self.navigationController class]]) {
         return bar;
     }
     
@@ -454,13 +454,17 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 - (BOOL)nx_hidesNavigationBar {
-    NSNumber *hidesNavigationBar = objc_getAssociatedObject(self, _cmd);
-    if (hidesNavigationBar && [hidesNavigationBar isKindOfClass:[NSNumber class]]) {
-        return [hidesNavigationBar boolValue];
+    return [self nx_translucentNavigationBar];
+}
+
+- (BOOL)nx_translucentNavigationBar {
+    NSNumber *translucentNavigationBar = objc_getAssociatedObject(self, _cmd);
+    if (translucentNavigationBar && [translucentNavigationBar isKindOfClass:[NSNumber class]]) {
+        return [translucentNavigationBar boolValue];
     }
-    hidesNavigationBar = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, hidesNavigationBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [hidesNavigationBar boolValue];
+    translucentNavigationBar = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, translucentNavigationBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [translucentNavigationBar boolValue];
 }
 
 - (BOOL)nx_containerViewWithoutNavigtionBar {

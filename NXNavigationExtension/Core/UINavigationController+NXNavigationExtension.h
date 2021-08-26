@@ -34,8 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 全屏手势 UIPanGestureRecognizer
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *nx_fullscreenPopGestureRecognizer;
 
-/// 调用此方法可以触发调用 id<NXNavigationInteractable> 代理方法
-/// 可以统一处理手势滑动返回和自定义返回按钮点击返回的拦截操作
+
 - (void)nx_triggerSystemBackButtonHandler API_DEPRECATED("Use nx_popViewControllerAnimated: instead.", ios(2.0, 2.0));
 
 /// 调用此方法可以触发调用 id<NXNavigationInteractable> 代理方法

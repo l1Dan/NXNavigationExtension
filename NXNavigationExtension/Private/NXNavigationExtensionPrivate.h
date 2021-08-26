@@ -98,7 +98,7 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 /// 全屏收拾代理对象
 @property (nonatomic, strong, readonly) NXFullscreenPopGestureRecognizerDelegate *nx_fullscreenPopGestureDelegate;
 
-/// NXNavigationBar 是否可用；默认 YES；没有注册导航栏时为 NO 时会使用系统导航栏
+/// 是否使用 NXNavigationBar；默认 NO；没有注册导航栏时会使用系统的导航栏
 @property (nonatomic, assign, readonly) BOOL nx_useNavigationBar;
 
 /// 配置 NXNavigationBar

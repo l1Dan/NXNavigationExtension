@@ -81,10 +81,24 @@ github "l1Dan/NXNavigationExtension"
 所有对导航栏外观的修改都是基于视图控制器 `UIViewController` 修改的，而不是基于导航控制器 `UINavigationController` 修改，这种设计逻辑更加符合实际应用场景。也就是说视图控制器管理自己的导航栏，而不是使用导航控制器来全局管理。
 
 1. 💉 导入头文件 `#import <NXNavigationExtension/NXNavigationExtension.h>`
-2. 💉 使用之前需要先注册需要修改的导航控制器，以 `FeatureNavigationController` 为例：
+2. 💉 使用之前需要先注册需要修改的导航控制器，以 `FeatureNavigationController` 和 `OtherNavigationController` 为例：
 
 ```objc
-[NXNavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
+// 1
+NXNavigationBarAppearance *appearance = [NXNavigationBarAppearance standardAppearance];
+appearance.tintColor = [UIColor customTitleColor];
+if (@available(iOS 14.0, *)) {
+    appearance.backButtonMenuSupported = YES;
+}
+[NXNavigationBar registerNavigationControllerClass:[FeatureNavigationController class] forAppearance:appearance];
+```
+或者
+``` objc
+// 2
+NXNavigationBarAppearance *otherAppearance = [[NXNavigationBarAppearance alloc] init];
+otherAppearance.tintColor = [UIColor redColor];
+otherAppearance.backgorundColor = [UIColor greenColor];
+[NXNavigationBar registerNavigationControllerClass:[OtherNavigationController class] forAppearance:otherAppearance];
 ```
 
 **注意**：
@@ -337,7 +351,7 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController06_ClickEventHitToBack.m)
 
 ```objc
-- (BOOL)nx_hidesNavigationBar {
+- (BOOL)nx_translucentNavigationBar {
     return YES;
 }
 ```

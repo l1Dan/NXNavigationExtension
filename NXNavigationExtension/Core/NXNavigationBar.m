@@ -202,17 +202,29 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 }
 
 + (NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass {
+    return [self appearanceFromRegisterNavigationControllerClass:aClass];
+}
+
++ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass {
+    [self registerNavigationControllerClass:aClass forAppearance:[NXNavigationBarAppearance standardAppearance]];
+}
+
++ (NXNavigationBarAppearance *)appearanceFromRegisterNavigationControllerClass:(Class)aClass {
     if (aClass) {
         return [NXNavigationBar appearanceInfo][NSStringFromClass(aClass)];
     }
     return nil;
 }
 
-+ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass {
-    if (!aClass) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"需要注册的 UINavigationController 或者子类不能为空！" userInfo:nil];
++ (void)registerNavigationControllerClass:(Class)aClass forAppearance:(NXNavigationBarAppearance *)appearance {
+    NSAssert(aClass != nil, @"参数不能为空！");
+    
+    if (!aClass) return;
+    if (!appearance) {
+        appearance = [NXNavigationBarAppearance standardAppearance];
     }
-    [NXNavigationBar appearanceInfo][NSStringFromClass(aClass)] = [NXNavigationBarAppearance standardAppearance];
+    
+    [NXNavigationBar appearanceInfo][NSStringFromClass(aClass)] = appearance;
 }
 
 @end

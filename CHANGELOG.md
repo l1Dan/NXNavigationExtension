@@ -1,5 +1,17 @@
 # CHANGELOG.md
 
+## 2.4.4
+因为新特性的添加和功能的不断完善，导致大量 API 重命名，在这里对大家说句抱歉。希望后续的 API 可以稳定下来。
+
+- 新增: `nx_translucentNavigationBar` 属性；
+- 新增: `appearanceFromRegisterNavigationControllerClass:` 方法；
+- 新增: `registerNavigationControllerClass:forAppearance:` 方法；
+- 过期: `nx_hidesNavigationBar` 属性，推荐使用 `nx_translucentNavigationBar` 属性；
+- 过期: `standardAppearanceForNavigationControllerClass:` 方法，推荐使用 `appearanceFromRegisterNavigationControllerClass:` 方法；
+- 过期: `registerStandardAppearanceForNavigationControllerClass:` 方法，推荐使用 `registerNavigationControllerClass:forAppearance` 方法；
+- 修改: README.md 文件;
+- 示例代码优化。
+
 ## 3.4.3
 - 修复: 获取 `nx_navigationBar` 时的判断逻辑不对问题。修改为：如果之前已经创建过 `nx_navigationBar`，那么之后无论 `self.navigationController` 属性是否为空都会直接返回原来已经创建好的 `nx_navigationBar` 实例。
 - 修复: 视图控制器同时重写 `extendedLayoutIncludesOpaqueBars` 和 `edgesForExtendedLayout` 属性时导航栏位置不对问题。

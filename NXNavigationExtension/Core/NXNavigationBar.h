@@ -69,26 +69,26 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 /// 设置返回按钮图片
 @property (nonatomic, strong, nullable) UIImage *backImage;
 
-/// 设置横屏时显示的图片
+/// 设置横屏时显示的返回按钮图片
 @property (nonatomic, strong, nullable) UIImage *landscapeBackImage;
 
-/// 设置 NavigationBar 背景图片
+/// 设置 NXNavigationBar 背景图片
 @property (nonatomic, strong, nullable) UIImage *backgorundImage;
 
-/// 设置 NavigationBar 底部阴影线条图片
+/// 设置 NXNavigationBar 底部阴影线条图片
 @property (nonatomic, strong, nullable) UIImage *shadowImage;
 
-/// 设置 NavigationBar tintColor （返回按钮颜色）
+/// 设置 UINavigationBar tintColor （返回按钮颜色），默认：[UIColor systemBlueColor]
 @property (nonatomic, strong) UIColor *tintColor;
 
-/// 设置 NavigationBar 背景颜色
+/// 设置 NXNavigationBar 背景颜色，默认：iOS13 之前 [UIColor whiteColor]，iOS13及以后 [UIColor systemBackgroundColor]
 @property (nonatomic, strong) UIColor *backgorundColor;
 
 /// 设置返回按钮图片 `backImage` 的 insets，默认：UIEdgeInsetsZero
 /// 当 `backButtonMenuSupported = YES` 时 backImageInsets = {0, -8, 0, 0}
 @property (nonatomic, assign) UIEdgeInsets backImageInsets;
 
-/// 设置横屏时显示的图片 `landscapeBackImage` 的 insets，默认：UIEdgeInsetsZero
+/// 设置横屏时显示返回按钮图片 `landscapeBackImage` 的 insets，默认：UIEdgeInsetsZero
 /// 当 `backButtonMenuSupported = YES` 时 landscapeBackImageInsets = {0, -8, 0, 0}
 @property (nonatomic, assign) UIEdgeInsets landscapeBackImageInsets;
 
@@ -123,13 +123,19 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 /// @param edgeInsets UIEdgeInsets；默认 UIEdgeInsetsMake(0, 8, 0, 8)
 - (void)setContainerViewEdgeInsets:(UIEdgeInsets)edgeInsets;
 
-/// 获取当前设置的皮肤
-/// @param aClass UINavigationController 或子类类对象
-+ (NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass;
++ (nullable NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use appearanceFromRegisterNavigationControllerClass: instead.", ios(2.0, 2.0));
 
-/// 注册默认皮肤
++ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use registerNavigationControllerClass:forAppearance: instead.", ios(2.0, 2.0));
+
+/// 获取已经注册的导航控制器外观设置
 /// @param aClass UINavigationController 或子类类对象
-+ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass;
++ (nullable NXNavigationBarAppearance *)appearanceFromRegisterNavigationControllerClass:(Class)aClass;
+
+/// 设置需要注册的导航控制器，并且设置导航栏的外观，如果 appearance == nil，则设置 appearance 为 [NXNavigationBarAppearance standardAppearance]
+/// @param aClass UINavigationController 或子类类对象
+/// @param appearance NXNavigationBarAppearance 导航栏外观
++ (void)registerNavigationControllerClass:(Class)aClass forAppearance:(nullable NXNavigationBarAppearance *)appearance;
+
 
 @end
 
