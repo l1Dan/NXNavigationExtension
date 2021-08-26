@@ -37,8 +37,6 @@
     self.fakeNavigationBar.title = self.navigationItem.title;
     self.navigationItem.title = nil;
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, 40, 44, 44)];
-    view.backgroundColor = [UIColor redColor];
     self.barStyle = UIStatusBarStyleLightContent;
     
     [self setNeedsStatusBarAppearanceUpdate];

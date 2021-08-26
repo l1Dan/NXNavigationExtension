@@ -123,7 +123,7 @@
     UIColor *changeColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
         return [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]; // ![UIColor blackColor]
     } darkModeColor:^UIColor * _Nonnull{
-        return [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0]; // ![UIColor redColor]
+        return [UIColor colorWithRed:0.0 green:1.0 blue:1.0 alpha:1.0]; // ![UIColor cyanColor]
     }];
     self.backButton.tintColor = [UIColor mixColor1:changeColor color2:whiteColor ratio:alpha];
     self.rightButton.tintColor = [UIColor mixColor1:changeColor color2:whiteColor ratio:alpha];

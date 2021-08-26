@@ -52,9 +52,9 @@
         UIView *contentView = [[UIView alloc] init];
         contentView.translatesAutoresizingMaskIntoConstraints = NO;
         contentView.backgroundColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
-            return [UIColor redColor];
+            return [UIColor purpleColor];
         } darkModeColor:^UIColor * _Nonnull{
-            return [UIColor grayColor];
+            return [UIColor brownColor];
         }];
         [_gaussianBlurView.contentView addSubview:contentView];
         [_gaussianBlurView.contentView setAlpha:0.5];

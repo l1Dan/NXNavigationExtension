@@ -23,12 +23,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NXNavigationBarAppearance.standardAppearance.tintColor = [UIColor customTitleColor];
+    NXNavigationBarAppearance *appearance = [NXNavigationBarAppearance standardAppearance];
+    appearance.tintColor = [UIColor customTitleColor];
     if (@available(iOS 14.0, *)) {
-        NXNavigationBarAppearance.standardAppearance.backButtonMenuSupported = YES;
+        appearance.backButtonMenuSupported = YES;
     }
-    [NXNavigationBar registerStandardAppearanceForNavigationControllerClass:[FeatureNavigationController class]];
     
+    [NXNavigationBar registerNavigationControllerClass:[FeatureNavigationController class] forAppearance:appearance];
+
     FeatureTableViewController *featureTableViewController1 = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     featureTableViewController1.navigationItem.title = @"NXNavigationBar🎉🎉🎉";
 
@@ -68,9 +70,9 @@
     navigationController2.view.layer.borderWidth = 3.0;
     navigationController2.view.layer.cornerRadius = 40;
     navigationController2.view.layer.borderColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
-        return [UIColor redColor];
+        return [UIColor orangeColor];
     } darkModeColor:^UIColor * _Nonnull{
-        return [[UIColor redColor] colorWithAlphaComponent:0.5];
+        return [[UIColor orangeColor] colorWithAlphaComponent:0.5];
     }].CGColor;
 }
 

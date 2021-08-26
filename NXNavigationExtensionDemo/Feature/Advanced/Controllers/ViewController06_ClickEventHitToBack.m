@@ -69,7 +69,7 @@
     self.rightConstraint.constant = -safeAreaInsets.right;
 }
 
-- (BOOL)nx_hidesNavigationBar {
+- (BOOL)nx_translucentNavigationBar {
     return YES;
 }
 
