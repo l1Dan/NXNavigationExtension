@@ -1,7 +1,7 @@
 # CHANGELOG.md
 
-## 2.4.4
-因为新特性的添加和功能的不断完善，导致大量 API 重命名，在这里对大家说句抱歉。希望后续的 API 可以稳定下来。
+## 3.4.4
+因为不断添加新特性和完善功能，导致大量 API 重命名，在这里对大家说声抱歉，后续的 API 尽量少做修改。最后希望大家食用快乐😋。
 
 - 新增: `nx_translucentNavigationBar` 属性；
 - 新增: `appearanceFromRegisterNavigationControllerClass:` 方法；
