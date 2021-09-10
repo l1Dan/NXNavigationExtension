@@ -161,7 +161,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         }
         
         self.nx_navigationBar.backgroundImageView.image = self.nx_navigationBarBackgroundImage;
-        [self.nx_navigationBar enableBlurEffect:self.nx_useSystemBlurNavigationBar];
+        self.nx_navigationBar.blurEffectEnabled = self.nx_useBlurNavigationBar;
         
         if (self.parentViewController && ![self.parentViewController isKindOfClass:[UINavigationController class]] && self.nx_automaticallyHideNavigationBarInChildViewController) {
             self.nx_navigationBar.hidden = YES;
@@ -414,13 +414,17 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 - (BOOL)nx_useSystemBlurNavigationBar {
-    NSNumber *useSystemBlurNavigationBar = objc_getAssociatedObject(self, _cmd);
-    if (useSystemBlurNavigationBar && [useSystemBlurNavigationBar isKindOfClass:[NSNumber class]]) {
-        return [useSystemBlurNavigationBar boolValue];
+    return [self nx_useBlurNavigationBar];
+}
+
+- (BOOL)nx_useBlurNavigationBar {
+    NSNumber *useBlurNavigationBar = objc_getAssociatedObject(self, _cmd);
+    if (useBlurNavigationBar && [useBlurNavigationBar isKindOfClass:[NSNumber class]]) {
+        return [useBlurNavigationBar boolValue];
     }
-    useSystemBlurNavigationBar = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, useSystemBlurNavigationBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [useSystemBlurNavigationBar boolValue];
+    useBlurNavigationBar = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, useBlurNavigationBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [useBlurNavigationBar boolValue];
 }
 
 - (BOOL)nx_disableInteractivePopGesture {

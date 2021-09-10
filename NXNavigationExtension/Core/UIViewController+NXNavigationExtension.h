@@ -72,8 +72,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置横屏时显示返回按钮图片 `landscapeBackImage` 的 insets，默认：UIEdgeInsetsZero
 @property (nonatomic, assign, readonly) UIEdgeInsets nx_landscapeBackImageInsets;
 
-/// 是否使用系统模糊效果；默认 NO
-@property (nonatomic, assign, readonly) BOOL nx_useSystemBlurNavigationBar;
+@property (nonatomic, assign, readonly) BOOL nx_useSystemBlurNavigationBar API_DEPRECATED("Use nx_useBlurNavigationBar & nx_navigationBarBackgroundColor instead.", ios(2.0, 2.0));
+
+/// 是否启用导航栏模糊效果；默认 NO。需要设置 nx_navigationBarBackgroundColor 的 alpha 颜色通道才会有模糊效果
+/// 将 nx_navigationBarBackgroundColor 设置为 [UIColor clearColor]，可以实现类似系统导航栏的模糊效果
+@property (nonatomic, assign, readonly) BOOL nx_useBlurNavigationBar;
 
 /// 是否禁用边缘滑动返回手势；默认 NO
 @property (nonatomic, assign, readonly) BOOL nx_disableInteractivePopGesture;

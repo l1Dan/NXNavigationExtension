@@ -57,6 +57,9 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 /// 设置 UIViewController edgesForExtendedLayout == UIRectEdgeNone
 @property (nonatomic, assign) BOOL edgesForExtendedLayoutEnabled;
 
+/// 设置 NXNavigationBar 模糊背景，背景穿透效果；默认 NO
+@property (nonatomic, assign) BOOL blurEffectEnabled;
+
 @end
 
 

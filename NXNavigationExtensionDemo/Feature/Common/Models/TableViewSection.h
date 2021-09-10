@@ -13,7 +13,7 @@ typedef NS_ENUM(NSUInteger, TableViewSectionItemType) {
     TableViewSectionItemTypeNavigationBarBackgroundColor,          // 修改导航栏背景颜色
     TableViewSectionItemTypeNavigationBarBackgroundImage,          // 修改导航栏背景图片
     TableViewSectionItemTypeNavigationBarTransparent,              // 设置导航栏透明
-    TableViewSectionItemTypeNavigationBarTranslucent,              // 设置导航栏半透明
+    TableViewSectionItemTypeLikeSystemBlurNavigationBar,           // 实现系统导航栏模糊效果
     TableViewSectionItemTypeNavigationBarShadowColor,              // 设置导航栏底部线条颜色
     TableViewSectionItemTypeNavigationBarShadowImage,              // 设置导航栏底部线条图片
     TableViewSectionItemTypeNavigationBarCustomBackButtonImage,    // 自定义返回按钮图片

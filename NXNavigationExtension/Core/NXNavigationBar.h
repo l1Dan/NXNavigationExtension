@@ -111,9 +111,7 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 /// 模糊背景
 @property (nonatomic, strong, readonly) UIVisualEffectView *visualEffectView;
 
-/// 设置 NXNavigationBar 模糊背景，背景穿透效果
-/// @param enabled 是否使用模糊背景；默认 NO
-- (void)enableBlurEffect:(BOOL)enabled;
+- (void)enableBlurEffect:(BOOL)enabled API_DEPRECATED("No longer supported; please adopt UIViewController nx_useBlurNavigationBar instead.", ios(2.0, 2.0));
 
 /// 添加控件到 `containerView`
 /// @param subview 子控件

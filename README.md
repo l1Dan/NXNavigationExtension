@@ -54,7 +54,7 @@ github "l1Dan/NXNavigationExtension"
 ### 基本功能
 
 - ✅` 设置导航栏透明`
-- ✅` 设置导航栏半透明`
+- ✅` 实现系统导航栏模糊效果`
 - ✅` 自定义返回按钮图片`
 - ✅` 自定义返回按钮`
 - ✅` 自定义导航栏模糊背景`
@@ -172,12 +172,16 @@ NXNavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 }
 ```
 
-#### 设置导航栏半透明
+#### 实现系统导航栏模糊效果
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Basic/Controllers/ViewController04_Translucent.m)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Basic/Controllers/ViewController04_LikeSystemBlurNavigationBar.m)
 
 ```objc
-- (BOOL)nx_useSystemBlurNavigationBar {
+- (UIColor *)nx_navigationBarBackgroundColor {
+    return [UIColor clearColor];
+}
+
+- (BOOL)nx_useBlurNavigationBar {
     return YES;
 }
 ```

@@ -1,5 +1,14 @@
 # CHANGELOG.md
 
+## 3.4.5
+使用 `nx_useSystemBlurNavigationBar` 属性局限在于只能实现类似系统导航栏效果，而无法使用自定义颜色作为模糊效果的背景色，现在 `nx_useBlurNavigationBar` 和 `nx_navigationBarBackgroundColor` 属性的配合使用，可以支持自定义颜色作为模糊效果的背景色，加强了导航栏外观定制的能力。
+
+- 新增: `nx_useBlurNavigationBar` 属性；
+- 过期: `nx_useSystemBlurNavigationBar` 属性，推荐使用 `nx_useBlurNavigationBar` 和 `nx_navigationBarBackgroundColor` 属性实现类似系统导航栏效果；
+- 过期: `enableBlurEffect:` 属性，`NXNavigationBar` 不再对外开放此属性;
+- 修改: README.md 文件;
+- 示例代码优化。
+
 ## 3.4.4
 因为不断添加新特性和完善功能，导致大量 API 重命名，在这里对大家说声抱歉，后续的 API 尽量少做修改。最后希望大家食用快乐😋。
 

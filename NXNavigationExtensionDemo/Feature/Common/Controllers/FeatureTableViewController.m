@@ -11,7 +11,7 @@
 #import "ViewController01_BackgroundColor.h"
 #import "ViewController02_BackgroundImage.h"
 #import "ViewController03_Transparent.h"
-#import "ViewController04_Translucent.h"
+#import "ViewController04_LikeSystemBlurNavigationBar.h"
 #import "ViewController05_ShadowColor.h"
 #import "ViewController06_ShadowImage.h"
 #import "ViewController07_CustomBackButtonImage.h"
@@ -63,7 +63,7 @@
     }];
 }
 
-- (BOOL)nx_useSystemBlurNavigationBar {
+- (BOOL)nx_useBlurNavigationBar {
     return YES;
 }
 
@@ -85,8 +85,8 @@
             return [[ViewController02_BackgroundImage alloc] init];
         case TableViewSectionItemTypeNavigationBarTransparent:
             return [[ViewController03_Transparent alloc] init];
-        case TableViewSectionItemTypeNavigationBarTranslucent:
-            return [[ViewController04_Translucent alloc] init];
+        case TableViewSectionItemTypeLikeSystemBlurNavigationBar:
+            return [[ViewController04_LikeSystemBlurNavigationBar alloc] init];
         case TableViewSectionItemTypeNavigationBarShadowColor:
             return [[ViewController05_ShadowColor alloc] init];
         case TableViewSectionItemTypeNavigationBarShadowImage:

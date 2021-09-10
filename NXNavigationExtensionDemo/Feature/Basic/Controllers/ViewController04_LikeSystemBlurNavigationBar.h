@@ -1,5 +1,5 @@
 //
-//  ViewController04_Translucent.h
+//  ViewController04_LikeSystemBlurNavigationBar.h
 //  NXNavigationExtensionDemo
 //
 //  Created by Leo Lee on 2020/10/26.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ViewController04_Translucent : CustomTableViewController
+@interface ViewController04_LikeSystemBlurNavigationBar : CustomTableViewController
 
 @end
 

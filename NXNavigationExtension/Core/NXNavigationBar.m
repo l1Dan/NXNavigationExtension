@@ -92,9 +92,11 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 
 @interface NXNavigationBar ()
 
+@property (nonatomic, strong) UIColor *originalBackgroundColor;
 @property (nonatomic, assign) CGRect originalNavigationBarFrame;
 @property (nonatomic, assign) UIEdgeInsets containerViewEdgeInsets;
 @property (nonatomic, assign) BOOL edgesForExtendedLayoutEnabled;
+@property (nonatomic, assign) BOOL blurEffectEnabled;
 
 @end
 
@@ -102,6 +104,7 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        _originalBackgroundColor = [NXNavigationBarAppearance standardAppearance].backgorundColor;
         _originalNavigationBarFrame = CGRectZero;
         _shadowImageView = [[UIImageView alloc] init];
         _shadowImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -112,6 +115,7 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
         _backgroundImageView.clipsToBounds = YES;
         
         _containerView = [[UIView alloc] init];
+        _containerView.backgroundColor = [UIColor clearColor];
         _containerViewEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 8);
         _edgesForExtendedLayoutEnabled = NO;
         
@@ -124,6 +128,7 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
         
         _visualEffectView = [[UIVisualEffectView alloc] initWithEffect:effect];
         _visualEffectView.hidden = YES;
+        _blurEffectEnabled = NO;
         _backgroundImageView.image = [NXNavigationBarAppearance standardAppearance].backgorundImage;
         
         [self addSubview:self.backgroundImageView];
@@ -145,6 +150,11 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 }
 
 #pragma mark - Private
+
+- (void)setBlurEffectEnabled:(BOOL)blurEffectEnabled {
+    _blurEffectEnabled = blurEffectEnabled;
+    [self setBackgroundColor:self.originalBackgroundColor];
+}
 
 - (void)updateNavigationBarContentFrameCallSuper:(BOOL)callSuper {
     CGRect navigationBarFrame = CGRectMake(0, 0, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame));
@@ -182,11 +192,22 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 #pragma mark - Public
 
 - (void)enableBlurEffect:(BOOL)enabled {
-    if (enabled) {
-        self.backgroundColor = [UIColor clearColor];
-        self.containerView.backgroundColor = [UIColor clearColor];
+    self.blurEffectEnabled = enabled;
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    self.originalBackgroundColor = backgroundColor;
+    if (self.blurEffectEnabled) {
         self.backgroundImageView.hidden = YES;
         self.visualEffectView.hidden = NO;
+        self.visualEffectView.contentView.backgroundColor = backgroundColor;
+        
+        [super setBackgroundColor:[UIColor clearColor]];
+    } else {
+        self.backgroundImageView.hidden = NO;
+        self.visualEffectView.hidden = YES;
+        
+        [super setBackgroundColor:backgroundColor];
     }
 }
 

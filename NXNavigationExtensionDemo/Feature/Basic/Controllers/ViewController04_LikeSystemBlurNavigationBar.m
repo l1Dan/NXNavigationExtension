@@ -1,5 +1,5 @@
 //
-//  ViewController04_Translucent.m
+//  ViewController04_LikeSystemBlurNavigationBar.m
 //  NXNavigationExtensionDemo
 //
 //  Created by Leo Lee on 2020/10/26.
@@ -7,21 +7,26 @@
 
 #import <NXNavigationExtension/NXNavigationExtension.h>
 
-#import "ViewController04_Translucent.h"
+#import "ViewController04_LikeSystemBlurNavigationBar.h"
 #import "UIColor+RandomColor.h"
 
-@interface ViewController04_Translucent ()
+@interface ViewController04_LikeSystemBlurNavigationBar ()
 
 @end
 
-@implementation ViewController04_Translucent
+@implementation ViewController04_LikeSystemBlurNavigationBar
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
 
-- (BOOL)nx_useSystemBlurNavigationBar {
+- (UIColor *)nx_navigationBarBackgroundColor {
+//    return [[UIColor purpleColor] colorWithAlphaComponent:0.5];
+    return [UIColor clearColor];
+}
+
+- (BOOL)nx_useBlurNavigationBar {
     return YES;
 }
 
