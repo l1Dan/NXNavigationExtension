@@ -520,7 +520,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
             backButtonMenuSupported = self.navigationController.nx_appearance.backButtonMenuSupported;
             self.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal;
         }
-        [self nx_configureNavigationBarItemWithBackButtonMenuSupported:backButtonMenuSupported];
+        [self nx_configureNavigationBarWithNavigationController:self.navigationController backButtonMenuSupported:backButtonMenuSupported];
     }
     [self nx_updateNavigationBarAppearance];
     [self nx_updateNavigationBarHierarchy];

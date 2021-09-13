@@ -202,16 +202,14 @@
 
 @implementation UIViewController (NXNavigationExtensionPrivate)
 
-- (void)nx_configureNavigationBarItemWithBackButtonMenuSupported:(BOOL)supported {
+- (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController backButtonMenuSupported:(BOOL)supported {
     if (@available(iOS 14.0, *)) {
         if (self.nx_backButtonMenuEnabled) {
             NSAssert(supported, @"需要设置 NXNavigationBarAppearance backButtonMenuSupported 属性为 YES 才能生效");
-            if (supported) {
-                if (!self.navigationItem.leftItemsSupplementBackButton) {
-                    self.navigationItem.leftBarButtonItem = nil;
-                    self.navigationItem.leftBarButtonItems = nil;
-                    return;
-                }
+            if (supported && !self.navigationItem.leftItemsSupplementBackButton) {
+                self.navigationItem.leftBarButtonItem = nil;
+                self.navigationItem.leftBarButtonItems = nil;
+                return;
             }
         }
     }
@@ -226,8 +224,12 @@
     } else {
         // 如果 leftBarButtonItem(s) 为空则添加 backButtonItem
         if (!backButtonItem) {
-            UIImage *backImage = self.nx_backImage ?: [NXNavigationBarAppearance standardAppearance].backImage;
-            UIImage *landscapeBackImage = self.nx_backImage ?: [NXNavigationBarAppearance standardAppearance].landscapeBackImage;
+            NXNavigationBarAppearance *barAppearance = [NXNavigationBarAppearance standardAppearance];
+            if (navigationController) {
+                barAppearance = [NXNavigationBar appearanceFromRegisterNavigationControllerClass:[navigationController class]];
+            }
+            UIImage *backImage = self.nx_backImage ?: barAppearance.backImage;
+            UIImage *landscapeBackImage = self.nx_backImage ?: barAppearance.landscapeBackImage;
             
             backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage landscapeImagePhone:landscapeBackImage style:UIBarButtonItemStylePlain target:self action:@selector(nx_triggerSystemPopViewController)];
             backButtonItem.imageInsets = self.nx_backImageInsets;

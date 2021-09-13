@@ -97,7 +97,7 @@
                     }
                     
                     if (selfObject.viewControllers.count > 0) {
-                        [viewController nx_configureNavigationBarItemWithBackButtonMenuSupported:backButtonMenuSupported];
+                        [viewController nx_configureNavigationBarWithNavigationController:selfObject backButtonMenuSupported:backButtonMenuSupported];
                     }
                     
                     if (viewController.nx_enableFullScreenInteractivePopGesture) {
@@ -125,7 +125,7 @@
                             }
                             
                             if (index != 0) {
-                                [viewController nx_configureNavigationBarItemWithBackButtonMenuSupported:backButtonMenuSupported];
+                                [viewController nx_configureNavigationBarWithNavigationController:selfObject backButtonMenuSupported:backButtonMenuSupported];
                             }
                             
                             if (viewController.nx_enableFullScreenInteractivePopGesture) {

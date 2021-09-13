@@ -84,8 +84,9 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 @interface UIViewController (NXNavigationExtensionPrivate)
 
 /// 设置 UINavigationBarItem
+/// @param navigationController 包含 UIViewController 的 UINavigationController
 /// @param supported 是否支持使用系统返回菜单按钮
-- (void)nx_configureNavigationBarItemWithBackButtonMenuSupported:(BOOL)supported;
+- (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController backButtonMenuSupported:(BOOL)supported;
 
 @end
 
