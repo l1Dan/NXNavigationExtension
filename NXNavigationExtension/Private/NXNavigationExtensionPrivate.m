@@ -76,7 +76,7 @@
     
     // Ignore when the active view controller doesn't allow interactive pop.
     UIViewController *topViewController = self.navigationController.viewControllers.lastObject;
-    if (!topViewController.nx_enableFullScreenInteractivePopGesture) {
+    if (!topViewController.nx_enableFullscreenInteractivePopGesture) {
         return NO;
     }
     
@@ -163,7 +163,7 @@
                 void (*originSelectorIMP)(id, SEL, BOOL);
                 originSelectorIMP = (void (*)(id, SEL, BOOL))originalIMPProvider();
                 
-                if (selfObject.nx_disableUserInteraction) {
+                if (!selfObject.nx_userInteractionEnabled) {
                     originSelectorIMP(selfObject, originCMD, NO);
                     return;
                 }
@@ -183,18 +183,18 @@
     objc_setAssociatedObject(self, @selector(nx_didUpdateFrameHandler), nx_didUpdateFrameHandler, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-- (BOOL)nx_disableUserInteraction {
-    NSNumber *disableUserInteraction = objc_getAssociatedObject(self, _cmd);
-    if (disableUserInteraction && [disableUserInteraction isKindOfClass:[NSNumber class]]) {
-        return [disableUserInteraction boolValue];
+- (BOOL)nx_userInteractionEnabled {
+    NSNumber *userInteractionEnabled = objc_getAssociatedObject(self, _cmd);
+    if (userInteractionEnabled && [userInteractionEnabled isKindOfClass:[NSNumber class]]) {
+        return [userInteractionEnabled boolValue];
     }
-    disableUserInteraction = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, disableUserInteraction, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [disableUserInteraction boolValue];
+    userInteractionEnabled = [NSNumber numberWithBool:YES];
+    objc_setAssociatedObject(self, _cmd, userInteractionEnabled, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [userInteractionEnabled boolValue];
 }
 
-- (void)setNx_disableUserInteraction:(BOOL)nx_disableUserInteraction {
-    objc_setAssociatedObject(self, @selector(nx_disableUserInteraction), [NSNumber numberWithBool:nx_disableUserInteraction], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setNx_userInteractionEnabled:(BOOL)nx_userInteractionEnabled {
+    objc_setAssociatedObject(self, @selector(nx_userInteractionEnabled), [NSNumber numberWithBool:nx_userInteractionEnabled], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
@@ -224,10 +224,7 @@
     } else {
         // 如果 leftBarButtonItem(s) 为空则添加 backButtonItem
         if (!backButtonItem) {
-            NXNavigationBarAppearance *barAppearance = [NXNavigationBarAppearance standardAppearance];
-            if (navigationController) {
-                barAppearance = [NXNavigationBar appearanceFromRegisterNavigationControllerClass:[navigationController class]];
-            }
+            NXNavigationBarAppearance *barAppearance = navigationController ? navigationController.nx_appearance : [NXNavigationBarAppearance standardAppearance];
             UIImage *backImage = self.nx_backImage ?: barAppearance.backImage;
             UIImage *landscapeBackImage = self.nx_backImage ?: barAppearance.landscapeBackImage;
             

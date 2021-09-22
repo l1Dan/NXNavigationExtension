@@ -188,32 +188,40 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (void)nx_updateNavigationBarSubviewState {
     if (self.navigationController && self.navigationController.nx_useNavigationBar) {
-        BOOL hidesNavigationBar = self.nx_translucentNavigationBar;
+        BOOL translucentNavigationBar = self.nx_translucentNavigationBar;
         BOOL containerViewWithoutNavigtionBar = self.nx_containerViewWithoutNavigtionBar;
-        if ([self isKindOfClass:[UIPageViewController class]] && !hidesNavigationBar) {
+        if ([self isKindOfClass:[UIPageViewController class]] && !translucentNavigationBar) {
             // FIXED: 处理特殊情况，最后显示的为 UIPageViewController
-            hidesNavigationBar = self.parentViewController.nx_translucentNavigationBar;
+            translucentNavigationBar = self.parentViewController.nx_translucentNavigationBar;
         }
         
-        if (hidesNavigationBar) {
+        if (translucentNavigationBar) {
             containerViewWithoutNavigtionBar = NO;
             self.nx_navigationBar.shadowImageView.image = NXNavigationExtensionGetImageFromColor([UIColor clearColor]);
             self.nx_navigationBar.backgroundImageView.image = NXNavigationExtensionGetImageFromColor([UIColor clearColor]);
             self.nx_navigationBar.backgroundColor = [UIColor clearColor];
-            self.navigationController.navigationBar.tintColor = [UIColor clearColor]; // 返回按钮透明
+            self.navigationItem.titleView.hidden = YES;
+            self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
+            self.navigationController.navigationBar.tintColor = [UIColor clearColor];
+            
+            NSDictionary *textAttributes = @{NSForegroundColorAttributeName: [UIColor clearColor]};
+            self.navigationController.navigationBar.titleTextAttributes = textAttributes;
+            if (@available(iOS 11.0, *)) {
+                self.navigationController.navigationBar.largeTitleTextAttributes = textAttributes;
+            }
         }
         
         if (containerViewWithoutNavigtionBar) { // 添加 subView 到 containerView 时可以不随 NavigationBar 的 alpha 变化
-            self.nx_navigationBar.userInteractionEnabled = YES;
             self.nx_navigationBar.containerView.userInteractionEnabled = YES;
-            self.navigationController.navigationBar.nx_disableUserInteraction = YES;
+            self.nx_navigationBar.userInteractionEnabled = YES;
+            self.navigationController.navigationBar.nx_userInteractionEnabled = NO;
             self.navigationController.navigationBar.userInteractionEnabled = NO;
         } else {
-            self.nx_navigationBar.containerView.hidden = hidesNavigationBar;
-            self.nx_navigationBar.userInteractionEnabled = !hidesNavigationBar;
+            self.nx_navigationBar.containerView.hidden = translucentNavigationBar;
             self.nx_navigationBar.containerView.userInteractionEnabled = containerViewWithoutNavigtionBar;
-            self.navigationController.navigationBar.nx_disableUserInteraction = hidesNavigationBar;
-            self.navigationController.navigationBar.userInteractionEnabled = !hidesNavigationBar;
+            self.nx_navigationBar.userInteractionEnabled = !translucentNavigationBar;
+            self.navigationController.navigationBar.nx_userInteractionEnabled = !translucentNavigationBar;
+            self.navigationController.navigationBar.userInteractionEnabled = !translucentNavigationBar;
         }
     }
 }
@@ -257,7 +265,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         return bar;
     }
     
-    if (!self.navigationController || ![NXNavigationBar appearanceFromRegisterNavigationControllerClass:[self.navigationController class]]) {
+    if (!self.navigationController || !self.navigationController.nx_appearance) {
         return bar;
     }
     
@@ -325,21 +333,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 - (NSDictionary<NSAttributedStringKey, id> *)nx_largeTitleTextAttributes {
-    UIColor *color = [UIColor blackColor];
-    if (@available(iOS 13.0, *)) {
-        color = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
-            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                return [UIColor whiteColor];
-            }
-            return [UIColor blackColor];
-        }];
-    }
-    
-    NSDictionary *largeTitleTextAttributes = @{NSForegroundColorAttributeName: color};
-    if (@available(iOS 13.0, *)) {
-        largeTitleTextAttributes = @{NSForegroundColorAttributeName: [color resolvedColorWithTraitCollection:self.view.traitCollection]};
-    }
-    return largeTitleTextAttributes;
+    return [self nx_titleTextAttributes];
 }
 
 - (UIImage *)nx_shadowImage {
@@ -438,13 +432,17 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 - (BOOL)nx_enableFullScreenInteractivePopGesture {
-    NSNumber *enableFullScreenInteractivePopGesture = objc_getAssociatedObject(self, _cmd);
-    if (enableFullScreenInteractivePopGesture && [enableFullScreenInteractivePopGesture isKindOfClass:[NSNumber class]]) {
-        return [enableFullScreenInteractivePopGesture boolValue];
+    return [self nx_enableFullscreenInteractivePopGesture];
+}
+
+- (BOOL)nx_enableFullscreenInteractivePopGesture {
+    NSNumber *enableFullscreenInteractivePopGesture = objc_getAssociatedObject(self, _cmd);
+    if (enableFullscreenInteractivePopGesture && [enableFullscreenInteractivePopGesture isKindOfClass:[NSNumber class]]) {
+        return [enableFullscreenInteractivePopGesture boolValue];
     }
-    enableFullScreenInteractivePopGesture = [NSNumber numberWithBool:UINavigationController.nx_fullscreenPopGestureEnabled];
-    objc_setAssociatedObject(self, _cmd, enableFullScreenInteractivePopGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [enableFullScreenInteractivePopGesture boolValue];
+    enableFullscreenInteractivePopGesture = [NSNumber numberWithBool:UINavigationController.nx_fullscreenPopGestureEnabled];
+    objc_setAssociatedObject(self, _cmd, enableFullscreenInteractivePopGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [enableFullscreenInteractivePopGesture boolValue];
 }
 
 - (BOOL)nx_automaticallyHideNavigationBarInChildViewController {

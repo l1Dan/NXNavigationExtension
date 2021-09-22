@@ -239,13 +239,9 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 
 + (void)registerNavigationControllerClass:(Class)aClass forAppearance:(NXNavigationBarAppearance *)appearance {
     NSAssert(aClass != nil, @"参数不能为空！");
-    
     if (!aClass) return;
-    if (!appearance) {
-        appearance = [NXNavigationBarAppearance standardAppearance];
-    }
     
-    [NXNavigationBar appearanceInfo][NSStringFromClass(aClass)] = appearance;
+    [NXNavigationBar appearanceInfo][NSStringFromClass(aClass)] = appearance ?: [NXNavigationBarAppearance standardAppearance];
 }
 
 @end

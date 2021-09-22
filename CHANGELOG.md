@@ -1,5 +1,12 @@
 # CHANGELOG.md
 
+## 3.4.6
+将视图控制器的属性 `nx_translucentNavigationBar` 的属性设置为 `YES` 时，可以达到隐藏导航栏的目的（只是将导航栏变为透明，并不是真正意义上的隐藏，不推荐直接使用系统导航栏提供的显示或隐藏的方法）。但是这样设置之后会发现 self.navigationItem.title/titleView 还是存在的，这显然是不太符合的导航栏透明或者隐藏的语意。所以为了解决这个问题，现在设置 `nx_translucentNavigationBar` 属性为 `YES` 时，不仅会将导航栏设置为透明的，还会将导航栏上面的所有元素设置为透明或者隐藏的，这样导航栏的外观看起来才更加符合设置 `nx_translucentNavigationBar = YES` 的预期效果。
+
+- NXNavigationExtension 框架代码优化
+- 修改: README.md 文件;
+- 示例代码优化。
+
 ## 3.4.5
 使用 `nx_useSystemBlurNavigationBar` 属性局限在于只能实现类似系统导航栏效果，而无法使用自定义颜色作为模糊效果的背景色，现在 `nx_useBlurNavigationBar` 和 `nx_navigationBarBackgroundColor` 属性的配合使用，可以支持自定义颜色作为模糊效果的背景色，加强了导航栏外观定制的能力。
 

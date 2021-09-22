@@ -29,6 +29,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 将颜色转换成图片
+/// @param color UIColor
+CG_INLINE UIImage *
+NXNavigationExtensionGetImageFromColor(UIColor *color) {
+    CGSize size = CGSizeMake(1.0, 1.0);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    [color setFill];
+    UIRectFill(CGRectMake(0, 0, size.width, size.height));
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 
 @interface NSString (NXNavigationExtension)
 
@@ -139,30 +152,5 @@ NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments(Class targ
         };\
     });
 
-/// 将颜色转换成图片
-/// @param color UIColor
-CG_INLINE UIImage *
-NXNavigationExtensionGetImageFromColor(UIColor *color) {
-    CGSize size = CGSizeMake(1.0, 1.0);
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
-    [color setFill];
-    UIRectFill(CGRectMake(0, 0, size.width, size.height));
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
-
-/// 获取 Key window
-CG_INLINE UIWindow *
-NXNavigationExtensionGetKeyWindow(void) {
-    NSArray<UIWindow *> *windows = UIApplication.sharedApplication.windows;
-    for (UIWindow *window in windows) {
-        if (window.isKeyWindow) {
-            return window;
-        }
-    }
-    return windows.firstObject;
-}
 
 NS_ASSUME_NONNULL_END

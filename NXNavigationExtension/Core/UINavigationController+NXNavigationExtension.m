@@ -100,7 +100,7 @@
                         [viewController nx_configureNavigationBarWithNavigationController:selfObject backButtonMenuSupported:backButtonMenuSupported];
                     }
                     
-                    if (viewController.nx_enableFullScreenInteractivePopGesture) {
+                    if (viewController.nx_enableFullscreenInteractivePopGesture) {
                         [selfObject nx_configureFullscreenPopGesture];
                     }
                 }
@@ -128,7 +128,7 @@
                                 [viewController nx_configureNavigationBarWithNavigationController:selfObject backButtonMenuSupported:backButtonMenuSupported];
                             }
                             
-                            if (viewController.nx_enableFullScreenInteractivePopGesture) {
+                            if (viewController.nx_enableFullscreenInteractivePopGesture) {
                                 [selfObject nx_configureFullscreenPopGesture];
                             }
                         }

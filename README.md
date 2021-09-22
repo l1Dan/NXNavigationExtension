@@ -262,7 +262,7 @@ NXNavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 - 局部有效（在所处页面设置）
 
 ```objc
-- (BOOL)nx_enableFullScreenInteractivePopGesture {
+- (BOOL)nx_enableFullscreenInteractivePopGesture {
     return YES;
 }
 ```

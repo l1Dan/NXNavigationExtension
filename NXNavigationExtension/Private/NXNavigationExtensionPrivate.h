@@ -75,8 +75,8 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 /// UINavigatoinBar layoutSubviews 时调用
 @property (nonatomic, copy, nullable) UINavigationBarDidUpdateFrameHandler nx_didUpdateFrameHandler;
 
-/// 阻止事件被 NavigationBar 接收，需要将事件穿透传递到下层
-@property (nonatomic, assign) BOOL nx_disableUserInteraction;
+/// 允许用户事件被  UINavigationBar 所有控件响应，如果 nx_userInteractionEnabled = NO，那么用户事件会被传递到导航栏的底部视图。
+@property (nonatomic, assign) BOOL nx_userInteractionEnabled;
 
 @end
 

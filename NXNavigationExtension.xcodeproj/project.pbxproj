@@ -15,8 +15,8 @@
 		D624E8D62654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E8CD2654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m */; };
 		D624E8D72654F41400CC96E6 /* UIViewController+NXNavigationExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E8CE2654F41400CC96E6 /* UIViewController+NXNavigationExtension.m */; };
 		D69F2E0F2663505F004A02C8 /* NXNavigationExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = D69F2E0C2663505F004A02C8 /* NXNavigationExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D6C4803726B197B600A66417 /* NXNavigationExtensionPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = D6C4803626B197B600A66417 /* NXNavigationExtensionPrivate.h */; };
-		D6E78B1F26AC57F700DA3512 /* NXNavigationExtensionRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E78B1D26AC57F700DA3512 /* NXNavigationExtensionRuntime.h */; };
+		D6C4803726B197B600A66417 /* NXNavigationExtensionPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = D6C4803626B197B600A66417 /* NXNavigationExtensionPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D6E78B1F26AC57F700DA3512 /* NXNavigationExtensionRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E78B1D26AC57F700DA3512 /* NXNavigationExtensionRuntime.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D6E78B2026AC57F700DA3512 /* NXNavigationExtensionRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E78B1E26AC57F700DA3512 /* NXNavigationExtensionRuntime.m */; };
 /* End PBXBuildFile section */
 
@@ -107,10 +107,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6C4803726B197B600A66417 /* NXNavigationExtensionPrivate.h in Headers */,
-				D6E78B1F26AC57F700DA3512 /* NXNavigationExtensionRuntime.h in Headers */,
 				D624E8D22654F41400CC96E6 /* NXNavigationBar.h in Headers */,
 				D69F2E0F2663505F004A02C8 /* NXNavigationExtension.h in Headers */,
+				D6C4803726B197B600A66417 /* NXNavigationExtensionPrivate.h in Headers */,
+				D6E78B1F26AC57F700DA3512 /* NXNavigationExtensionRuntime.h in Headers */,
 				D624E8D02654F41400CC96E6 /* UINavigationController+NXNavigationExtension.h in Headers */,
 				D624E8D12654F41400CC96E6 /* UIViewController+NXNavigationExtension.h in Headers */,
 			);
@@ -329,7 +329,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.5;
+				MARKETING_VERSION = 3.4.6;
 				MODULEMAP_FILE = "$(SRCROOT)/NXNavigationExtension/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.l1dan.NXNavigationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -363,7 +363,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.5;
+				MARKETING_VERSION = 3.4.6;
 				MODULEMAP_FILE = "$(SRCROOT)/NXNavigationExtension/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.l1dan.NXNavigationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
