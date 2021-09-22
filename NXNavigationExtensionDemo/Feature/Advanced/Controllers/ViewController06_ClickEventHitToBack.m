@@ -73,7 +73,7 @@
     return YES;
 }
 
-- (BOOL)nx_enableFullScreenInteractivePopGesture {
+- (BOOL)nx_enableFullscreenInteractivePopGesture {
     return YES;
 }
 

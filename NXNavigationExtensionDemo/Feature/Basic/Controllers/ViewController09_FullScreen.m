@@ -1,5 +1,5 @@
 //
-//  ViewController10_FullScreen.m
+//  ViewController09_Fullscreen.m
 //  NXNavigationExtensionDemo
 //
 //  Created by Leo Lee on 2020/10/26.
@@ -7,13 +7,13 @@
 
 #import <NXNavigationExtension/NXNavigationExtension.h>
 
-#import "ViewController09_FullScreen.h"
+#import "ViewController09_Fullscreen.h"
 
-@interface ViewController09_FullScreen ()
+@interface ViewController09_Fullscreen ()
 
 @end
 
-@implementation ViewController09_FullScreen
+@implementation ViewController09_Fullscreen
 
 - (void)viewDidLoad {
     [super viewDidLoad];

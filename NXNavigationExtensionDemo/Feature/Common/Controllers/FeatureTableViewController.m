@@ -16,9 +16,9 @@
 #import "ViewController06_ShadowImage.h"
 #import "ViewController07_CustomBackButtonImage.h"
 #import "ViewController08_CustomBackButton.h"
-#import "ViewController09_FullScreen.h"
+#import "ViewController09_Fullscreen.h"
 #import "ViewController10_ScrollView.h"
-#import "ViewController11_ScrollViewWithFullScreen.h"
+#import "ViewController11_ScrollViewWithFullscreen.h"
 #import "ViewController12_Modal.h"
 #import "ViewController13_Blur.h"
 
@@ -95,12 +95,12 @@
             return [[ViewController07_CustomBackButtonImage alloc] init];
         case TableViewSectionItemTypeNavigationBarCustomBackButton:
             return [[ViewController08_CustomBackButton alloc] init];
-        case TableViewSectionItemTypeNavigationBarFullScreen:
-            return [[ViewController09_FullScreen alloc] init];
+        case TableViewSectionItemTypeNavigationBarFullscreen:
+            return [[ViewController09_Fullscreen alloc] init];
         case TableViewSectionItemTypeNavigationBarScrollView:
             return [[ViewController10_ScrollView alloc] init];
-        case TableViewSectionItemTypeNavigationBarScrollViewWithFullScreen:
-            return [[ViewController11_ScrollViewWithFullScreen alloc] init];
+        case TableViewSectionItemTypeNavigationBarScrollViewWithFullscreen:
+            return [[ViewController11_ScrollViewWithFullscreen alloc] init];
         case TableViewSectionItemTypeNavigationBarModal:
             return [[ViewController12_Modal alloc] init];
         case TableViewSectionItemTypeNavigationBarBlur:
@@ -108,7 +108,7 @@
             // Advanced
         case TableViewSectionItemTypeNavigationBarDisablePopGesture:
             return [[ViewController01_DisablePopGesture alloc] init];
-        case TableViewSectionItemTypeNavigationBarFullPopGesture:
+        case TableViewSectionItemTypeNavigationBarFullscreenPopGesture:
             return [[ViewController02_FullPopGesture alloc] init];
         case TableViewSectionItemTypeNavigationBarBackEventIntercept:
             return [[ViewController03_BackEventIntercept alloc] init];

@@ -20,7 +20,7 @@
     // Do any additional setup after loading the view.
 }
 
-- (BOOL)nx_enableFullScreenInteractivePopGesture {
+- (BOOL)nx_enableFullscreenInteractivePopGesture {
     return YES;
 }
 
