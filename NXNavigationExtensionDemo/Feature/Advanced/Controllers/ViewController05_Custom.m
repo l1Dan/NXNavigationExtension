@@ -36,25 +36,26 @@
     if (!self.nx_navigationBar) {
         return;
     }
-    [self.nx_navigationBar addContainerViewSubview:self.searchBar];
-    [self.nx_navigationBar addContainerViewSubview:self.backButton];
-    [self.nx_navigationBar addContainerViewSubview:self.addButton];
     
-    UIView *containerView = self.nx_navigationBar.containerView;
+    [self.nx_navigationBar.contentView addSubview:self.searchBar];
+    [self.nx_navigationBar.contentView addSubview:self.backButton];
+    [self.nx_navigationBar.contentView addSubview:self.addButton];
+    
+    UIView *contentView = self.nx_navigationBar.contentView;
     self.backButton.hidden = !UIDevice.isPhoneDevice;
-    self.leftConstraint = [self.backButton.leftAnchor constraintEqualToAnchor:containerView.leftAnchor];
+    self.leftConstraint = [self.backButton.leftAnchor constraintEqualToAnchor:contentView.leftAnchor];
     self.leftConstraint.active = YES;
     
     [self.backButton.heightAnchor constraintEqualToAnchor:self.searchBar.heightAnchor].active = YES;
     [self.backButton.centerYAnchor constraintEqualToAnchor:self.searchBar.centerYAnchor].active = YES;
     [self.backButton.widthAnchor constraintEqualToConstant:UIDevice.isPhoneDevice ? 44.0 : 0].active = YES;
     
-    [self.searchBar.topAnchor constraintEqualToAnchor:containerView.topAnchor constant:2.0].active = YES;
-    [self.searchBar.bottomAnchor constraintEqualToAnchor:containerView.bottomAnchor constant:-2.0].active = YES;
+    [self.searchBar.topAnchor constraintEqualToAnchor:contentView.topAnchor constant:2.0].active = YES;
+    [self.searchBar.bottomAnchor constraintEqualToAnchor:contentView.bottomAnchor constant:-2.0].active = YES;
     [self.searchBar.leftAnchor constraintEqualToAnchor:self.backButton.rightAnchor constant:8.0].active = YES;
     [self.searchBar.rightAnchor constraintEqualToAnchor:self.addButton.leftAnchor constant:-8.0].active = YES;
     
-    self.rightConstraint = [self.addButton.rightAnchor constraintEqualToAnchor:containerView.rightAnchor];
+    self.rightConstraint = [self.addButton.rightAnchor constraintEqualToAnchor:contentView.rightAnchor];
     self.rightConstraint.active = YES;
     
     [self.addButton.heightAnchor constraintEqualToAnchor:self.searchBar.heightAnchor].active = YES;
@@ -86,8 +87,8 @@
     return UIImage.navigationBarBackgorundImage;
 }
 
-// 点击导航栏控件事件可以由 ContainerView 响应
-- (BOOL)nx_containerViewWithoutNavigtionBar {
+// 点击导航栏控件事件可以由 contentView 响应
+- (BOOL)nx_contentViewWithoutNavigtionBar {
     return YES;
 }
 

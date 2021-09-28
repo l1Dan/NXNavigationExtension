@@ -29,7 +29,12 @@
         appearance.backButtonMenuSupported = YES;
     }
     
-    [NXNavigationBar registerNavigationControllerClass:[FeatureNavigationController class] forAppearance:appearance];
+    [NXNavigationBar setAppearanceForNavigationControllerUsingBlock:^NXNavigationBarAppearance * _Nullable(__kindof UINavigationController * _Nonnull navigationController) {
+        if ([navigationController isKindOfClass:[FeatureNavigationController class]]) {
+            return appearance;
+        }
+        return nil;
+    }];
 
     FeatureTableViewController *featureTableViewController1 = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     featureTableViewController1.navigationItem.title = @"NXNavigationBar🎉🎉🎉";
@@ -49,6 +54,16 @@
     
     self.delegate = self;
     self.viewControllers = @[navigationController1, navigationController2];
+    
+    if (@available(iOS 13.0, *)) {
+        UITabBarAppearance *tabBarAppearance = [[UITabBarAppearance alloc] init];
+        [tabBarAppearance configureWithDefaultBackground];
+        tabBarAppearance.backgroundColor = [UIColor systemBackgroundColor];
+        self.tabBar.standardAppearance = tabBarAppearance;
+        if (@available(iOS 15.0, *)) {
+            self.tabBar.scrollEdgeAppearance = tabBarAppearance;
+        }
+    }
     
     self.tabBar.tintColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
         return [UIColor customDarkGrayColor];

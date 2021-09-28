@@ -45,21 +45,21 @@
         return;
     }
     
-    [self.nx_navigationBar addContainerViewSubview:self.fakeNavigationBar];
+    [self.nx_navigationBar.contentView addSubview:self.fakeNavigationBar];
     self.nx_navigationBar.alpha = 0.0;
     
-    UIView *containerView = self.nx_navigationBar.containerView;
+    UIView *contentView = self.nx_navigationBar.contentView;
 
-    self.topConstraint = [self.fakeNavigationBar.topAnchor constraintEqualToAnchor:containerView.topAnchor];
+    self.topConstraint = [self.fakeNavigationBar.topAnchor constraintEqualToAnchor:contentView.topAnchor];
     self.topConstraint.active = YES;
     
-    self.leftConstraint = [self.fakeNavigationBar.leftAnchor constraintEqualToAnchor:containerView.leftAnchor];
+    self.leftConstraint = [self.fakeNavigationBar.leftAnchor constraintEqualToAnchor:contentView.leftAnchor];
     self.leftConstraint.active = YES;
     
-    self.bottomConstraint = [self.fakeNavigationBar.bottomAnchor constraintEqualToAnchor:containerView.bottomAnchor];
+    self.bottomConstraint = [self.fakeNavigationBar.bottomAnchor constraintEqualToAnchor:contentView.bottomAnchor];
     self.bottomConstraint.active = YES;
     
-    self.rightConstraint = [self.fakeNavigationBar.rightAnchor constraintEqualToAnchor:containerView.rightAnchor];
+    self.rightConstraint = [self.fakeNavigationBar.rightAnchor constraintEqualToAnchor:contentView.rightAnchor];
     self.rightConstraint.active = YES;
 }
 
@@ -83,7 +83,7 @@
     return [UIColor clearColor];
 }
 
-- (BOOL)nx_containerViewWithoutNavigtionBar {
+- (BOOL)nx_contentViewWithoutNavigtionBar {
     return YES;
 }
 
