@@ -7,9 +7,6 @@
 
 #import "BaseNavigationController.h"
 
-@interface BaseNavigationController ()
-
-@end
 
 @implementation BaseNavigationController
 
@@ -22,3 +19,14 @@
 }
 
 @end
+
+
+@implementation FeatureNavigationController
+
+@end
+
+
+@implementation OtherNavigationController
+
+@end
+

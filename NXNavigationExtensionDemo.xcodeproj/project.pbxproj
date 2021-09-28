@@ -49,7 +49,6 @@
 		D624E99A2654F71200CC96E6 /* RedirectViewControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9612654F71200CC96E6 /* RedirectViewControllerModel.m */; };
 		D624E99B2654F71200CC96E6 /* TableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9632654F71200CC96E6 /* TableViewSection.m */; };
 		D624E99C2654F71200CC96E6 /* HierarchyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9652654F71200CC96E6 /* HierarchyViewController.m */; };
-		D624E99D2654F71200CC96E6 /* FeatureNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9662654F71200CC96E6 /* FeatureNavigationController.m */; };
 		D624E99E2654F71200CC96E6 /* RandomColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9692654F71200CC96E6 /* RandomColorViewController.m */; };
 		D624E99F2654F71200CC96E6 /* DashboardTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E96C2654F71200CC96E6 /* DashboardTabBarController.m */; };
 		D624E9A02654F71200CC96E6 /* FeatureTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E96D2654F71200CC96E6 /* FeatureTableViewController.m */; };
@@ -153,12 +152,10 @@
 		D624E9622654F71200CC96E6 /* EventInterceptModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInterceptModel.h; sourceTree = "<group>"; };
 		D624E9632654F71200CC96E6 /* TableViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewSection.m; sourceTree = "<group>"; };
 		D624E9652654F71200CC96E6 /* HierarchyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HierarchyViewController.m; sourceTree = "<group>"; };
-		D624E9662654F71200CC96E6 /* FeatureNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeatureNavigationController.m; sourceTree = "<group>"; };
 		D624E9672654F71200CC96E6 /* FeatureTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeatureTableViewController.h; sourceTree = "<group>"; };
 		D624E9682654F71200CC96E6 /* DashboardTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardTabBarController.h; sourceTree = "<group>"; };
 		D624E9692654F71200CC96E6 /* RandomColorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomColorViewController.m; sourceTree = "<group>"; };
 		D624E96A2654F71200CC96E6 /* HierarchyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HierarchyViewController.h; sourceTree = "<group>"; };
-		D624E96B2654F71200CC96E6 /* FeatureNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeatureNavigationController.h; sourceTree = "<group>"; };
 		D624E96C2654F71200CC96E6 /* DashboardTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardTabBarController.m; sourceTree = "<group>"; };
 		D624E96D2654F71200CC96E6 /* FeatureTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeatureTableViewController.m; sourceTree = "<group>"; };
 		D624E96E2654F71200CC96E6 /* RandomColorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomColorViewController.h; sourceTree = "<group>"; };
@@ -399,8 +396,6 @@
 			children = (
 				D624E9682654F71200CC96E6 /* DashboardTabBarController.h */,
 				D624E96C2654F71200CC96E6 /* DashboardTabBarController.m */,
-				D624E96B2654F71200CC96E6 /* FeatureNavigationController.h */,
-				D624E9662654F71200CC96E6 /* FeatureNavigationController.m */,
 				D624E9672654F71200CC96E6 /* FeatureTableViewController.h */,
 				D624E96D2654F71200CC96E6 /* FeatureTableViewController.m */,
 				D624E96A2654F71200CC96E6 /* HierarchyViewController.h */,
@@ -537,7 +532,6 @@
 				D624E97F2654F71200CC96E6 /* ViewController03_BackEventIntercept.m in Sources */,
 				D624E9952654F71200CC96E6 /* ViewController02_BackgroundImage.m in Sources */,
 				D624E98E2654F71200CC96E6 /* ViewController10_ScrollView.m in Sources */,
-				D624E99D2654F71200CC96E6 /* FeatureNavigationController.m in Sources */,
 				D624E9792654F71200CC96E6 /* UIImage+NavigationBar.m in Sources */,
 				D624E97D2654F71200CC96E6 /* AppDelegate.m in Sources */,
 				D624E9842654F71200CC96E6 /* ViewController04_RedirectViewController.m in Sources */,

@@ -7,8 +7,8 @@
 
 #import <NXNavigationExtension/NXNavigationExtension.h>
 
+#import "BaseNavigationController.h"
 #import "DashboardTabBarController.h"
-#import "FeatureNavigationController.h"
 #import "FeatureTableViewController.h"
 
 #import "UIColor+RandomColor.h"
@@ -29,12 +29,14 @@
         appearance.backButtonMenuSupported = YES;
     }
     
-    [NXNavigationBar setAppearanceForNavigationControllerUsingBlock:^NXNavigationBarAppearance * _Nullable(__kindof UINavigationController * _Nonnull navigationController) {
-        if ([navigationController isKindOfClass:[FeatureNavigationController class]]) {
-            return appearance;
-        }
-        return nil;
-    }];
+    [NXNavigationBar registerNavigationControllerClass:[FeatureNavigationController class] forAppearance:appearance];
+    
+//    NXNavigationBarAppearance *otherAppearance = [[NXNavigationBarAppearance alloc] init];
+//    otherAppearance.backgorundColor = [UIColor redColor];
+//    if (@available(iOS 14.0, *)) {
+//        otherAppearance.backButtonMenuSupported = YES;
+//    }
+//    [NXNavigationBar registerNavigationControllerClass:[OtherNavigationController class] forAppearance:otherAppearance];
 
     FeatureTableViewController *featureTableViewController1 = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     featureTableViewController1.navigationItem.title = @"NXNavigationBar🎉🎉🎉";
@@ -49,7 +51,7 @@
 
     UIImage *systemNormal = [UIImage imageNamed:@"TabBarSystemNormal"];
     UIImage *systemSelected = [UIImage imageNamed:@"TabBarSystemSelected"];
-    BaseNavigationController *navigationController2 = [[BaseNavigationController alloc] initWithRootViewController:featureTableViewController2];
+    OtherNavigationController *navigationController2 = [[OtherNavigationController alloc] initWithRootViewController:featureTableViewController2];
     navigationController2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"System" image:systemNormal selectedImage:systemSelected];
     
     self.delegate = self;
