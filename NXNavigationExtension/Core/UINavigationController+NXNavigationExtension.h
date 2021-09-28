@@ -34,9 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 全屏手势 UIPanGestureRecognizer
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *nx_fullscreenPopGestureRecognizer;
 
-
-- (void)nx_triggerSystemBackButtonHandler API_DEPRECATED("Use nx_popViewControllerAnimated: instead.", ios(2.0, 2.0));
-
 /// 调用此方法可以触发调用 id<NXNavigationInteractable> 代理方法
 /// 可以统一处理手势滑动返回和自定义返回按钮点击返回的拦截操作
 /// 内部最终会调用系统方法：`popViewControllerAnimated:`
@@ -62,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 执行操作之后调用 `popViewControllerAnimated:` 方法，就可以返回到指定视图控制器类型（`Class`）对应的实例中去
 /// @param aClass 指定需要跳转的视图控制器类型
 /// @param block 如果指定的视图控制器类型没有找到，则会使用回调来获取需要创建的视图控制器实例对象
-- (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerBlock:(__kindof UIViewController * (^__nullable)(void))block;
+- (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController * _Nullable(^__nullable)(void))block;
 
 @end
 

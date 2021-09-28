@@ -72,8 +72,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置横屏时显示返回按钮图片 `landscapeBackImage` 的 insets，默认：UIEdgeInsetsZero
 @property (nonatomic, assign, readonly) UIEdgeInsets nx_landscapeBackImageInsets;
 
-@property (nonatomic, assign, readonly) BOOL nx_useSystemBlurNavigationBar API_DEPRECATED("Use nx_useBlurNavigationBar & nx_navigationBarBackgroundColor instead.", ios(2.0, 2.0));
-
 /// 是否启用导航栏模糊效果；默认 NO。需要设置 nx_navigationBarBackgroundColor 的 alpha 颜色通道才会有模糊效果
 /// 将 nx_navigationBarBackgroundColor 设置为 [UIColor clearColor]，可以实现类似系统导航栏的模糊效果
 @property (nonatomic, assign, readonly) BOOL nx_useBlurNavigationBar;
@@ -81,15 +79,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否禁用边缘滑动返回手势；默认 NO
 @property (nonatomic, assign, readonly) BOOL nx_disableInteractivePopGesture;
 
-@property (nonatomic, assign, readonly) BOOL nx_enableFullScreenInteractivePopGesture API_DEPRECATED("Use nx_enableFullscreenInteractivePopGesture instead.", ios(2.0, 2.0));
-
 /// 是否使用全屏返回；默认 NO
 @property (nonatomic, assign, readonly) BOOL nx_enableFullscreenInteractivePopGesture;
 
 /// 是否自动隐藏 NavigationBar；默认 YES
 @property (nonatomic, assign, readonly) BOOL nx_automaticallyHideNavigationBarInChildViewController;
-
-@property (nonatomic, assign, readonly) BOOL nx_hidesNavigationBar API_DEPRECATED("Use nx_translucentNavigationBar instead.", ios(2.0, 2.0));
 
 /// 设置导航栏是否透明（类似导航栏隐藏的效果）。如果需要系统导航栏隐藏可以使用这个属性，不推荐直接设置系统导航栏的显示或隐藏。
 /// 设置导航栏透明会将 self.navigationController.navigationBar.barTintColor/tintColor/titleTextAttributes/largeTitleTextAttributes 的颜色都设置为 [UIColor clearColor]
@@ -98,12 +92,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 将导航栏事件传递到底部视图层也符合导航栏被“隐藏”的行为。
 @property (nonatomic, assign, readonly) BOOL nx_translucentNavigationBar;
 
-/// 使导航栏内部的 `containerView ` 脱离 NXNavigationBar 单独存在。还会将 self.navigationController.navigationBar.userInteractionEnabled 属性设置为 NO。
-/// 这样可以让 containerView 接收到事件响应方便开发者完全自定义导航栏的外观，containerView 的默认外边距为：UIEdgeInsetsMake(0, 8, 0, 8) ，
-/// 可以使用 NXNavigationBar 的  `setContainerViewEdgeInsets:` 方法设置 containerView 的外边距。
+/// 使导航栏内部的 `contentView ` 脱离 NXNavigationBar 单独存在。还会将 self.navigationController.navigationBar.userInteractionEnabled 属性设置为 NO。
+/// 这样可以让 contentView 接收到事件响应方便开发者完全自定义导航栏的外观，contentView 的默认外边距为：UIEdgeInsetsMake(0, 8, 0, 8) ，
+/// 可以使用 NXNavigationBar 的  `contentViewEdgeInsets` 属性设置 contentView 的外边距。
 /// 另外需要注意⚠️的是：导航栏返回按钮虽然无法接收用户的点击事件，但是还会显示在导航栏的上面，这样可以方便开发者在返回按钮底下添加自定义的返回按钮。
 /// 如果你不需要显示这个返回按钮也可以通过 `nx_barTintColor` 属性设置返回按钮颜色为 [UIColor clearColor]
-@property (nonatomic, assign, readonly) BOOL nx_containerViewWithoutNavigtionBar;
+@property (nonatomic, assign, readonly) BOOL nx_contentViewWithoutNavigtionBar;
 
 /// 是否开启返回按钮菜单，默认 `NO`。如果设置为 `YES`需要同时设置 NXNavigationBarAppearance 属性 `backButtonMenuSupported = YES`
 @property (nonatomic, assign, readonly) BOOL nx_backButtonMenuEnabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);

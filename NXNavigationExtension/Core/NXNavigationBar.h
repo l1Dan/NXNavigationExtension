@@ -51,11 +51,6 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
 
 @end
 
-API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protocol NXNavigationExtensionInteractable <NSObject>
-
-- (BOOL)navigationController:(__kindof UINavigationController *)navigationController willPopViewControllerUsingInteractingGesture:(BOOL)interactingGesture API_DEPRECATED("Use nx_navigationController:willPopViewController:interactiveType: instead.", ios(2.0, 2.0));
-
-@end
 
 /// 全局外观设置
 NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance : NSObject
@@ -100,7 +95,11 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 
 @interface NXNavigationBar : UIView
 
-@property (nonatomic, strong, readonly) UIView *containerView;
+/// 设置 `contentView` 的外边距；默认 UIEdgeInsetsMake(0, 8, 0, 8)
+@property (nonatomic, assign) UIEdgeInsets contentViewEdgeInsets;
+
+/// 设置自定义导航栏内容
+@property (nonatomic, strong, readonly) UIView *contentView;
 
 /// NXNavigationBar 底部阴影
 @property (nonatomic, strong, readonly) UIImageView *shadowImageView;
@@ -108,32 +107,16 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 /// NXNavigationBar 背景
 @property (nonatomic, strong, readonly) UIImageView *backgroundImageView;
 
-/// 模糊背景
-@property (nonatomic, strong, readonly) UIVisualEffectView *visualEffectView;
+/// NXNavigationBar 模糊背景
+@property (nonatomic, strong, readonly) UIVisualEffectView *backgroundEffectView;
 
-- (void)enableBlurEffect:(BOOL)enabled API_DEPRECATED("No longer supported; please adopt UIViewController nx_useBlurNavigationBar instead.", ios(2.0, 2.0));
+/// 获取当前导航控制器外观设置
+/// @param navigationController 当前试图控制器的 navigationController
++ (nullable NXNavigationBarAppearance *)appearanceInNavigationController:(__kindof UINavigationController *)navigationController;
 
-/// 添加控件到 `containerView`
-/// @param subview 子控件
-- (void)addContainerViewSubview:(UIView *)subview;
-
-/// 设置 `containerView` UIEdgeInsets
-/// @param edgeInsets UIEdgeInsets；默认 UIEdgeInsetsMake(0, 8, 0, 8)
-- (void)setContainerViewEdgeInsets:(UIEdgeInsets)edgeInsets;
-
-+ (nullable NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use appearanceFromRegisterNavigationControllerClass: instead.", ios(2.0, 2.0));
-
-+ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use registerNavigationControllerClass:forAppearance: instead.", ios(2.0, 2.0));
-
-/// 获取已经注册的导航控制器外观设置
-/// @param aClass UINavigationController 或子类类对象
-+ (nullable NXNavigationBarAppearance *)appearanceFromRegisterNavigationControllerClass:(Class)aClass;
-
-/// 设置需要注册的导航控制器，并且设置导航栏的外观，如果 appearance == nil，则设置 appearance 为 [NXNavigationBarAppearance standardAppearance]
-/// @param aClass UINavigationController 或子类类对象
-/// @param appearance NXNavigationBarAppearance 导航栏外观
-+ (void)registerNavigationControllerClass:(Class)aClass forAppearance:(nullable NXNavigationBarAppearance *)appearance;
-
+/// 通过导航控制器实例选择需要设置的导航栏外观。
+/// @param block 获取导航栏外观设置，如果 NXNavigationBarAppearance == nil，则当前导航控制器的外观设置不生效。
++ (void)setAppearanceForNavigationControllerUsingBlock:(NXNavigationBarAppearance * _Nullable (^)(__kindof UINavigationController *navigationController))block;
 
 @end
 

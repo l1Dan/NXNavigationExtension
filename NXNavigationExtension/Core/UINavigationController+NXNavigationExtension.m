@@ -163,7 +163,7 @@
     }
 }
 
-- (NSArray *)nx_findViewControllerClass:(Class)aClass initializeStandbyViewControllerBlock:(__kindof UIViewController * (^ __nullable)(void))block {
+- (NSArray *)nx_findViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController * (^ __nullable)(void))block {
     NSArray<__kindof UIViewController *> *viewControllers = self.viewControllers;
     if (!aClass || (viewControllers.count <= 1)) return viewControllers;
     
@@ -221,10 +221,6 @@
     objc_setAssociatedObject(self, @selector(nx_fullscreenPopGestureEnabled), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (void)nx_triggerSystemBackButtonHandler {
-    [self nx_popViewControllerAnimated:YES];
-}
-
 - (UIViewController *)nx_popViewControllerAnimated:(BOOL)animated {
     NSArray<UIViewController *> *viewControllers = self.viewControllers;
     UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : nil;
@@ -252,8 +248,8 @@
     }];
 }
 
-- (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerBlock:(__kindof UIViewController * _Nonnull (^)(void))block {
-    NSArray<__kindof UIViewController *> *viewControllers = [self nx_findViewControllerClass:aClass initializeStandbyViewControllerBlock:block];
+- (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController * _Nullable (^)(void))block {
+    NSArray<__kindof UIViewController *> *viewControllers = [self nx_findViewControllerClass:aClass initializeStandbyViewControllerUsingBlock:block];
     [self setViewControllers:viewControllers animated:YES];
 }
 

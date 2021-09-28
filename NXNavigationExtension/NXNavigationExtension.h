@@ -37,12 +37,14 @@ FOUNDATION_EXPORT const unsigned char NXNavigationExtensionVersionString[];
 #import <NXNavigationExtension/NXNavigationBar.h>
 #import <NXNavigationExtension/UINavigationController+NXNavigationExtension.h>
 #import <NXNavigationExtension/UIViewController+NXNavigationExtension.h>
+#import <NXNavigationExtension/NXNavigationExtension+Deprecated.h>
 
 #else
 
 #import "NXNavigationBar.h"
 #import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
+#import "NXNavigationExtension+Deprecated.h"
 
 #endif /* __has_include */
 

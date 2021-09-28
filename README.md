@@ -4,7 +4,7 @@
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/NXNavigationExtension.svg?style=flat)](https://img.shields.io/cocoapods/v/NXNavigationExtension.svg) ![Language](https://img.shields.io/github/languages/top/l1dan/NXNavigationExtension.svg?style=flat) [![MIT Licence](https://img.shields.io/github/license/l1dan/NXNavigationExtension.svg?style=flat)](https://opensource.org/licenses/mit-license.php) [![Platform](https://img.shields.io/cocoapods/p/NXNavigationExtension.svg?style=flat)](https://github.com/l1Dan/NXNavigationExtension/blob/master/README.md) [![GitHub last commit](https://img.shields.io/github/last-commit/l1Dan/NXNavigationExtension.svg?style=flat)](https://img.shields.io/github/last-commit/l1Dan/NXNavigationExtension)
 
-🔥 NXNavigationExtension 是为 iOS 应用设计的一个简单、易用的导航栏处理框架。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。NXNavigationExtension 和 [示例程序代码](https://github.com/l1Dan/NXNavigationExtension/archive/master.zip) 都已经适配暗黑模式（Dark Mode）。
+🔥 NXNavigationExtension 是为 iOS 应用设计的一个轻量级的导航栏处理框架。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。NXNavigationExtension 和 [示例程序代码](https://github.com/l1Dan/NXNavigationExtension/archive/master.zip) 都已经适配暗黑模式（Dark Mode）。
 
 ## 🎉 预览
 
@@ -31,18 +31,19 @@ github "l1Dan/NXNavigationExtension"
 ```
 
 ## 🌈 要求
+
 最新版本最低支持 iOS 9.0
 
 | NXNavigationExtension Version | Minimum iOS Target | Minimum macOS Target | Minimum watchOS Target | Minimum tvOS Target |       Notes        |
 | :---------------------------: | :----------------: | :------------------: | :--------------------: | :-----------------: | :----------------: |
-|              3.x              |       iOS 9.0       |     macOS 10.15      |          n/a           |         n/a         | macOS: macCatalyst |
-|              2.x              |       iOS 11        |     macOS 10.15      |          n/a           |         n/a         | macOS: macCatalyst |
+|              3.x              |      iOS 9.0       |     macOS 10.15      |          n/a           |         n/a         | macOS: macCatalyst |
+|              2.x              |       iOS 11       |     macOS 10.15      |          n/a           |         n/a         | macOS: macCatalyst |
 
 ## 优点
 
 - API 设计通俗易懂，容易上手。
 - 没有继承关系，所有操作基于方法重写，对项目入侵较小。
-- 按需注册需要控制的 `UINavigationController` 子类，不会影响全局外观。
+- 按需设置导航控制器 `UINavigationController` 子类的外观，这样不会影响全局所有导航控制器。
 - 没有对原生导航栏视图层级进行修改，无需担心升级系统兼容性问题。
 - 适配 iOS、iPadOS、macOS，Dark Mode。
 - 支持 CocoaPods、Carthage、Project 方式集成。
@@ -82,7 +83,9 @@ github "l1Dan/NXNavigationExtension"
 所有对导航栏外观的修改都是基于视图控制器 `UIViewController` 修改的，而不是基于导航控制器 `UINavigationController` 修改，这种设计逻辑更加符合实际应用场景。也就是说视图控制器管理自己的导航栏，而不是使用导航控制器来全局管理。
 
 1. 💉 导入头文件 `#import <NXNavigationExtension/NXNavigationExtension.h>`
-2. 💉 使用之前需要先注册需要修改的导航控制器，以 `FeatureNavigationController` 和 `OtherNavigationController` 为例：
+2. 💉 使用之前先设置需要修改的导航控制器，以 `FeatureNavigationController` 和 `OtherNavigationController` 为例：
+
+✅ 推荐设置
 
 ```objc
 // 1
@@ -91,21 +94,44 @@ appearance.tintColor = [UIColor customTitleColor];
 if (@available(iOS 14.0, *)) {
     appearance.backButtonMenuSupported = YES;
 }
-[NXNavigationBar registerNavigationControllerClass:[FeatureNavigationController class] forAppearance:appearance];
-```
-或者
-``` objc
+
 // 2
 NXNavigationBarAppearance *otherAppearance = [[NXNavigationBarAppearance alloc] init];
 otherAppearance.tintColor = [UIColor redColor];
 otherAppearance.backgorundColor = [UIColor greenColor];
 [NXNavigationBar registerNavigationControllerClass:[OtherNavigationController class] forAppearance:otherAppearance];
+
+[NXNavigationBar setAppearanceForNavigationControllerUsingBlock:^NXNavigationBarAppearance * _Nullable(__kindof UINavigationController * _Nonnull navigationController) {
+    if ([navigationController isKindOfClass:[FeatureNavigationController class]]) {
+        return appearance; // 1
+    } else if ([navigationController isKindOfClass:[OtherNavigationController class]]) {
+        return otherAppearance; // 2
+    }
+    return nil;
+}];
+```
+
+❌ 不推荐的设置
+
+```objc
+[NXNavigationBar setAppearanceForNavigationControllerUsingBlock:^NXNavigationBarAppearance * _Nullable(__kindof UINavigationController * _Nonnull navigationController) {
+    return [NXNavigationBarAppearance standardAppearance]; // 会影响所有导航控制器
+}];
+
+// OR
+
+[NXNavigationBar setAppearanceForNavigationControllerUsingBlock:^NXNavigationBarAppearance * _Nullable(__kindof UINavigationController * _Nonnull navigationController) {
+    if ([navigationController isKindOfClass:[UINavigationController class]]) {
+        return [NXNavigationBarAppearance standardAppearance]; // 这样也会影响所有导航控制器
+    }
+    return nil;
+}];
 ```
 
 **注意**：
 
-- 👉 使用 `NXNavigationExtension` 之前需要先注册导航控制器，注册之后对导航栏的修改才会生效，也仅限于修改已经注册的导航控制器所管理的视图控制器，对于子类导航控制器所管理的视图控制器是不会生效的，这样可以有效避免框架污染到其他的导航控制器，保持“谁使用，谁注册”的原则。
-- 🚫 不要直接注册 `UINavigationController`，这个影响全局导航栏的外观，建议创建一个 `UINavigationController` 的子类，对这个类进行注册。
+- 👉 使用 `NXNavigationExtension` 之前需要先设置导航控制器需要使用的外观，设置之后对导航栏的修改才会生效，也仅限于修改已经设置了导航栏外观的导航控制器所管理的视图控制器，对于子类导航控制器所管理的视图控制器是不会生效的，这样可以有效避免框架污染到其他的导航控制器。
+- 🚫 不要直接设置 `UINavigationController` 的外观，会影响全局导航栏的外观，建议创建一个 `UINavigationController` 的子类，对这个子类进行外观的设置。
 - 🚫 不要使用系统导航栏隐藏、显示方法, `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:`。
 - 🚫 不要使用系统导航栏修改透明度。
 - 🚫 不要使用系统导航栏或导航控制器 `appearance` 相关属性修改。
@@ -267,7 +293,7 @@ NXNavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 }
 ```
 
-- 全局有效（在注册导航栏之前设置）
+- 全局有效（在调用`setAppearanceForNavigationControllerUsingBlock:`方法之前设置）
 
 ```objc
 NXNavigationExtensionFullscreenPopGestureEnable = YES;
@@ -294,32 +320,32 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 ```objc
 - (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController willPopViewController:(__kindof UIViewController *)viewController interactiveType:(NXNavigationInteractiveType)interactiveType {
     NSLog(@"interactiveType: %zd %@", interactiveType, viewController);
-    
+
     if (self.currentItemType == EventInterceptItemTypeBackButtonAction && interactiveType == NXNavigationInteractiveTypeBackButtonAction) {
         [self showAlertControllerWithViewController:viewController];
         return NO;
     }
-    
+
     if (self.currentItemType == EventInterceptItemTypeBackButtonMenuAction && interactiveType == NXNavigationInteractiveTypeBackButtonMenuAction) {
         [self showAlertControllerWithViewController:viewController];
         return NO;
     }
-    
+
     if (self.currentItemType == EventInterceptItemTypePopGestureRecognizer && interactiveType == NXNavigationInteractiveTypePopGestureRecognizer) {
         [self showAlertControllerWithViewController:viewController];
         return NO;
     }
-    
+
     if (self.currentItemType == EventInterceptItemTypeCallNXPopMethod && interactiveType == NXNavigationInteractiveTypeCallNXPopMethod) {
         [self showAlertControllerWithViewController:viewController];
         return NO;
     }
-    
+
     if (self.currentItemType == EventInterceptItemTypeAll) {
         [self showAlertControllerWithViewController:viewController];
         return NO;
     }
-    
+
     return YES;
 }
 ```
@@ -334,7 +360,7 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 - 执行重定向操作之后，并不会直接跳转到对应的视图控制器，如果需要 `跳转` 操作，可以调用 `popViewControllerAnimated:` 方法返回页面，也可以使用手势滑动返回页面，还可以点击返回按钮返回页面。
 
 ```objc
-[self.navigationController nx_redirectViewControllerClass:[RandomColorViewController class] initializeStandbyViewControllerBlock:^__kindof UIViewController * _Nonnull {
+[self.navigationController nx_redirectViewControllerClass:[RandomColorViewController class] initializeStandbyViewControllerUsingBlock:^__kindof UIViewController * _Nonnull {
     return [[RandomColorViewController alloc] init];
 }];
 ```
@@ -343,7 +369,7 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 执行上面代码之后并不会立即跳转，下面代码可以实现立即跳转：
 
 ```objc
-[self.navigationController nx_redirectViewControllerClass:[RandomColorViewController class] initializeStandbyViewControllerBlock:^__kindof UIViewController * _Nonnull {
+[self.navigationController nx_redirectViewControllerClass:[RandomColorViewController class] initializeStandbyViewControllerUsingBlock:^__kindof UIViewController * _Nonnull {
     return [[RandomColorViewController alloc] init];
 }];
 [self.navigationController popViewControllerAnimated:YES];
@@ -366,12 +392,12 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
 
 ```objc
-- (BOOL)nx_containerViewWithoutNavigtionBar {
+- (BOOL)nx_contentViewWithoutNavigtionBar {
     return YES;
 }
 ```
 
-可以动态调整 ContainerView 透明度实现：`self.nx_navigationBar.containerView.alpha = value`
+可以动态调整 contentView 透明度实现：`self.nx_navigationBar.contentView.alpha = value`
 
 ### 更新导航栏样式
 
@@ -397,8 +423,8 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController04_RedirectViewController.m)
 
-
 - 设置 backButtonMenuSupported 属性
+
 ```objc
 if (@available(iOS 14.0, *)) {
     NXNavigationBarAppearance.standardAppearance.backButtonMenuSupported = YES;
@@ -406,11 +432,13 @@ if (@available(iOS 14.0, *)) {
 ```
 
 - 页面内控制
+
 ```objc
 - (BOOL)nx_backButtonMenuEnabled {
     return YES;
 }
 ```
+
 ![BackButtonMenu](https://raw.githubusercontent.com/l1Dan/NXNavigationExtension/master/Snapshots/BackButtonMenu.png)
 
 ## 📄 协议

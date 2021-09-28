@@ -137,7 +137,7 @@
             if (selfObject.nx_navigationBar && selfObject.superview != selfObject.nx_navigationBar) {
                 [selfObject.superview addSubview:selfObject.nx_navigationBar];
                 [selfObject.superview bringSubviewToFront:selfObject.nx_navigationBar];
-                [selfObject.superview bringSubviewToFront:selfObject.nx_navigationBar.containerView];
+                [selfObject.superview bringSubviewToFront:selfObject.nx_navigationBar.contentView];
             }
         });
     });
@@ -273,7 +273,7 @@
 }
 
 - (NXNavigationBarAppearance *)nx_appearance {
-    return [NXNavigationBar appearanceFromRegisterNavigationControllerClass:[self class]];
+    return [NXNavigationBar appearanceInNavigationController:self];
 }
 
 - (BOOL)nx_useNavigationBar {

@@ -34,8 +34,8 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 @interface UIViewController (NXNavigationExtension)
 
+@property (nonatomic, assign) BOOL nx_navigationBarInitialize;
 @property (nonatomic, assign) BOOL nx_viewWillDisappearFinished;
-@property (nonatomic, assign) BOOL nx_navigationBarDidLoadFinished;
 
 @end
 
@@ -46,17 +46,11 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIViewController class], @selector(viewDidLoad), ^(__kindof UIViewController * _Nonnull selfObject) {
-            selfObject.nx_navigationBarDidLoadFinished = NO;
-            if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
-                selfObject.nx_navigationBarDidLoadFinished = YES;
-                
-                [selfObject.navigationController nx_configureNavigationBar];
-                [selfObject nx_setupNavigationBar];
-                [selfObject nx_updateNavigationBarAppearance];
-            }
+            [selfObject nx_configureNXNavigationBar];
         });
         
         NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIViewController class], @selector(viewWillLayoutSubviews), ^(__kindof UIViewController * _Nonnull selfObject) {
+            [selfObject nx_configureNXNavigationBar];
             [selfObject nx_updateNavigationBarHierarchy];
         });
         
@@ -93,11 +87,8 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewWillAppear:), BOOL, ^(__kindof UIViewController * _Nonnull selfObject, BOOL animated) {
             selfObject.nx_viewWillDisappearFinished = NO;
             if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
-                if (!selfObject.nx_navigationBarDidLoadFinished) {
-                    // FIXED: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
-                    [selfObject.navigationController nx_configureNavigationBar];
-                    [selfObject nx_setupNavigationBar];
-                }
+                // FIXED: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
+                [selfObject nx_configureNXNavigationBar];
                 // 还原上一个视图控制器对导航栏的修改
                 [selfObject nx_updateNavigationBarAppearance];
                 [selfObject nx_updateNavigationBarHierarchy];
@@ -120,6 +111,16 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 #pragma mark - Private
+
+- (void)nx_configureNXNavigationBar {
+    if (self.navigationController && self.navigationController.nx_useNavigationBar && !self.nx_navigationBarInitialize) {
+        self.nx_navigationBarInitialize = YES;
+        
+        [self.navigationController nx_configureNavigationBar];
+        [self nx_setupNavigationBar];
+        [self nx_updateNavigationBarAppearance];
+    }
+}
 
 - (void)nx_setupNavigationBar {
     if (!self.nx_navigationBar) return;
@@ -171,7 +172,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (void)nx_updateNavigationBarHierarchy {
     if (self.navigationController && self.navigationController.nx_useNavigationBar) {
-        // FIXED: 修复导航栏 containerView 被遮挡问题
+        // FIXED: 修复导航栏 contentView 被遮挡问题
         if ([self.view isKindOfClass:[UIScrollView class]]) {
             UIScrollView *view = (UIScrollView *)self.view;
             [view.nx_navigationBar removeFromSuperview];
@@ -181,7 +182,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
             [self.view.superview addSubview:self.nx_navigationBar];
         } else {
             [self.view bringSubviewToFront:self.nx_navigationBar];
-            [self.view bringSubviewToFront:self.nx_navigationBar.containerView];
+            [self.view bringSubviewToFront:self.nx_navigationBar.contentView];
         }
     }
 }
@@ -189,14 +190,14 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 - (void)nx_updateNavigationBarSubviewState {
     if (self.navigationController && self.navigationController.nx_useNavigationBar) {
         BOOL translucentNavigationBar = self.nx_translucentNavigationBar;
-        BOOL containerViewWithoutNavigtionBar = self.nx_containerViewWithoutNavigtionBar;
+        BOOL contentViewWithoutNavigtionBar = self.nx_contentViewWithoutNavigtionBar;
         if ([self isKindOfClass:[UIPageViewController class]] && !translucentNavigationBar) {
             // FIXED: 处理特殊情况，最后显示的为 UIPageViewController
             translucentNavigationBar = self.parentViewController.nx_translucentNavigationBar;
         }
         
         if (translucentNavigationBar) {
-            containerViewWithoutNavigtionBar = NO;
+            contentViewWithoutNavigtionBar = NO;
             self.nx_navigationBar.shadowImageView.image = NXNavigationExtensionGetImageFromColor([UIColor clearColor]);
             self.nx_navigationBar.backgroundImageView.image = NXNavigationExtensionGetImageFromColor([UIColor clearColor]);
             self.nx_navigationBar.backgroundColor = [UIColor clearColor];
@@ -211,14 +212,14 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
             }
         }
         
-        if (containerViewWithoutNavigtionBar) { // 添加 subView 到 containerView 时可以不随 NavigationBar 的 alpha 变化
-            self.nx_navigationBar.containerView.userInteractionEnabled = YES;
+        if (contentViewWithoutNavigtionBar) { // 添加 subView 到 contentView 时可以不随 NavigationBar 的 alpha 变化
+            self.nx_navigationBar.contentView.userInteractionEnabled = YES;
             self.nx_navigationBar.userInteractionEnabled = YES;
             self.navigationController.navigationBar.nx_userInteractionEnabled = NO;
             self.navigationController.navigationBar.userInteractionEnabled = NO;
         } else {
-            self.nx_navigationBar.containerView.hidden = translucentNavigationBar;
-            self.nx_navigationBar.containerView.userInteractionEnabled = containerViewWithoutNavigtionBar;
+            self.nx_navigationBar.contentView.hidden = translucentNavigationBar;
+            self.nx_navigationBar.contentView.userInteractionEnabled = contentViewWithoutNavigtionBar;
             self.nx_navigationBar.userInteractionEnabled = !translucentNavigationBar;
             self.navigationController.navigationBar.nx_userInteractionEnabled = !translucentNavigationBar;
             self.navigationController.navigationBar.userInteractionEnabled = !translucentNavigationBar;
@@ -227,6 +228,20 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 #pragma mark - Private Getter & Setter
+
+- (BOOL)nx_navigationBarInitialize {
+    NSNumber *navigationBarInitialize = objc_getAssociatedObject(self, _cmd);
+    if (navigationBarInitialize && [navigationBarInitialize isKindOfClass:[NSNumber class]]) {
+        return [navigationBarInitialize boolValue];
+    }
+    navigationBarInitialize = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, navigationBarInitialize, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [navigationBarInitialize boolValue];
+}
+
+- (void)setNx_navigationBarInitialize:(BOOL)nx_navigationBarInitialize {
+    objc_setAssociatedObject(self, @selector(nx_navigationBarInitialize), [NSNumber numberWithBool:nx_navigationBarInitialize], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 
 - (BOOL)nx_viewWillDisappearFinished {
     NSNumber *viewWillDisappearFinished = objc_getAssociatedObject(self, _cmd);
@@ -240,20 +255,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (void)setNx_viewWillDisappearFinished:(BOOL)nx_viewWillDisappearFinished {
     objc_setAssociatedObject(self, @selector(nx_viewWillDisappearFinished), [NSNumber numberWithBool:nx_viewWillDisappearFinished], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (BOOL)nx_navigationBarDidLoadFinished {
-    NSNumber *navigationBarDidLoadFinished = objc_getAssociatedObject(self, _cmd);
-    if (navigationBarDidLoadFinished && [navigationBarDidLoadFinished isKindOfClass:[NSNumber class]]) {
-        return [navigationBarDidLoadFinished boolValue];
-    }
-    navigationBarDidLoadFinished = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, navigationBarDidLoadFinished, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [navigationBarDidLoadFinished boolValue];
-}
-
-- (void)setNx_navigationBarDidLoadFinished:(BOOL)nx_navigationBarDidLoadFinished {
-    objc_setAssociatedObject(self, @selector(nx_navigationBarDidLoadFinished), [NSNumber numberWithBool:nx_navigationBarDidLoadFinished], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark - Getter & Setter
@@ -407,10 +408,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     return insets;
 }
 
-- (BOOL)nx_useSystemBlurNavigationBar {
-    return [self nx_useBlurNavigationBar];
-}
-
 - (BOOL)nx_useBlurNavigationBar {
     NSNumber *useBlurNavigationBar = objc_getAssociatedObject(self, _cmd);
     if (useBlurNavigationBar && [useBlurNavigationBar isKindOfClass:[NSNumber class]]) {
@@ -429,10 +426,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     disableInteractivePopGesture = [NSNumber numberWithBool:NO];
     objc_setAssociatedObject(self, _cmd, disableInteractivePopGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return [disableInteractivePopGesture boolValue];
-}
-
-- (BOOL)nx_enableFullScreenInteractivePopGesture {
-    return [self nx_enableFullscreenInteractivePopGesture];
 }
 
 - (BOOL)nx_enableFullscreenInteractivePopGesture {
@@ -455,10 +448,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     return [automaticallyHideNavigationBarInChildViewController boolValue];
 }
 
-- (BOOL)nx_hidesNavigationBar {
-    return [self nx_translucentNavigationBar];
-}
-
 - (BOOL)nx_translucentNavigationBar {
     NSNumber *translucentNavigationBar = objc_getAssociatedObject(self, _cmd);
     if (translucentNavigationBar && [translucentNavigationBar isKindOfClass:[NSNumber class]]) {
@@ -469,14 +458,14 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     return [translucentNavigationBar boolValue];
 }
 
-- (BOOL)nx_containerViewWithoutNavigtionBar {
-    NSNumber *containerViewWithoutNavigtionBar = objc_getAssociatedObject(self, _cmd);
-    if (containerViewWithoutNavigtionBar && [containerViewWithoutNavigtionBar isKindOfClass:[NSNumber class]]) {
-        return [containerViewWithoutNavigtionBar boolValue];
+- (BOOL)nx_contentViewWithoutNavigtionBar {
+    NSNumber *contentViewWithoutNavigtionBar = objc_getAssociatedObject(self, _cmd);
+    if (contentViewWithoutNavigtionBar && [contentViewWithoutNavigtionBar isKindOfClass:[NSNumber class]]) {
+        return [contentViewWithoutNavigtionBar boolValue];
     }
-    containerViewWithoutNavigtionBar = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, containerViewWithoutNavigtionBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [containerViewWithoutNavigtionBar boolValue];
+    contentViewWithoutNavigtionBar = [NSNumber numberWithBool:NO];
+    objc_setAssociatedObject(self, _cmd, contentViewWithoutNavigtionBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [contentViewWithoutNavigtionBar boolValue];
 }
 
 - (BOOL)nx_backButtonMenuEnabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) {
