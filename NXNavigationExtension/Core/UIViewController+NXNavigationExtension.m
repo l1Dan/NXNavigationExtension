@@ -26,6 +26,7 @@
 #import "NXNavigationExtensionPrivate.h"
 #import "NXNavigationExtensionRuntime.h"
 #import "UINavigationController+NXNavigationExtension.h"
+#import "UIViewController+NXNavigationExtension.h"
 
 CG_INLINE BOOL
 NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
@@ -130,15 +131,28 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         [self.view addSubview:self.nx_navigationBar];
     }
     
-    __weak typeof(self) weakSelf = self;
-    self.navigationController.navigationBar.nx_didUpdateFrameHandler = ^(CGRect frame) {
-        if (weakSelf.nx_navigationBar) {
-            // FIXED: 视图控制器同时重写 `extendedLayoutIncludesOpaqueBars` 和 `edgesForExtendedLayout` 属性时需要调用这里来修正导航栏。
-            weakSelf.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(weakSelf.edgesForExtendedLayout);
+    __weak typeof(self) weakSelf = self; // CurrentViewController handle nx_didUpdatePropertiesHandler callback
+    self.navigationController.navigationBar.nx_didUpdatePropertiesHandler = ^(UINavigationBar * _Nonnull navigationBar) {
+        __kindof UINavigationController *navigationController = (UINavigationController *)navigationBar.delegate;
+        if ([navigationController isKindOfClass:[UINavigationController class]]) {
+            for (__kindof UIViewController *viewController in navigationController.viewControllers) {
+                if (viewController.nx_navigationBar) {
+                    // FIXED: 视图控制器同时重写 `extendedLayoutIncludesOpaqueBars` 和 `edgesForExtendedLayout` 属性时需要调用这里来修正导航栏。
+                    viewController.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(viewController.edgesForExtendedLayout);
+                }
+                // FIXED: delay call nx_updateNavigationBarAppearance method.
+                if (weakSelf == viewController && viewController.nx_viewWillDisappearFinished) {
+                    continue;
+                } else {
+                    viewController.nx_navigationBar.frame = navigationBar.frame;
+                    viewController.nx_navigationBar.hidden = navigationBar.hidden;
+                }
+            }
+        } else {
+            if (weakSelf.nx_viewWillDisappearFinished) { return; }
+            weakSelf.nx_navigationBar.frame = navigationBar.frame;
+            weakSelf.nx_navigationBar.hidden = navigationBar.hidden;
         }
-        
-        if (weakSelf.nx_viewWillDisappearFinished) { return; }
-        weakSelf.nx_navigationBar.frame = frame;
     };
 }
 

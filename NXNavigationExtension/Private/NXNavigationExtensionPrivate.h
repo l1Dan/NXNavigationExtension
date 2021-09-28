@@ -25,7 +25,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
+typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navigationBar);
 
 /// 边缘滑动返回手势代理
 @interface NXEdgeGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
@@ -73,7 +73,7 @@ typedef void (^UINavigationBarDidUpdateFrameHandler)(CGRect frame);
 @interface UINavigationBar (NXNavigationExtensionPrivate)
 
 /// UINavigatoinBar layoutSubviews 时调用
-@property (nonatomic, copy, nullable) UINavigationBarDidUpdateFrameHandler nx_didUpdateFrameHandler;
+@property (nonatomic, copy, nullable) UINavigationBarDidUpdatePropertiesHandler nx_didUpdatePropertiesHandler;
 
 /// 允许用户事件被  UINavigationBar 所有控件响应，如果 nx_userInteractionEnabled = NO，那么用户事件会被传递到导航栏的底部视图。
 @property (nonatomic, assign) BOOL nx_userInteractionEnabled;

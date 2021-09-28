@@ -152,9 +152,9 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UINavigationBar class], @selector(layoutSubviews), ^(__kindof UINavigationBar * _Nonnull selfObject) {
-            UINavigationBarDidUpdateFrameHandler didUpdateFrameHandler = selfObject.nx_didUpdateFrameHandler;
-            if (didUpdateFrameHandler) {
-                didUpdateFrameHandler(selfObject.frame);
+            UINavigationBarDidUpdatePropertiesHandler didUpdatePropertiesHandler = selfObject.nx_didUpdatePropertiesHandler;
+            if (didUpdatePropertiesHandler) {
+                didUpdatePropertiesHandler(selfObject);
             }
         });
         
@@ -170,17 +170,31 @@
                 originSelectorIMP(selfObject, originCMD, userInteractionEnabled);
             };
         });
+        
+        NXNavigationExtensionOverrideImplementation([UINavigationBar class], @selector(setHidden:), ^id _Nonnull(__unsafe_unretained Class  _Nonnull originClass, SEL  _Nonnull originCMD, IMP  _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
+            return ^(UINavigationBar *selfObject, BOOL hidden) {
+                void (*originSelectorIMP)(id, SEL, BOOL);
+                originSelectorIMP = (void (*)(id, SEL, BOOL))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, hidden);
+
+                UINavigationBarDidUpdatePropertiesHandler didUpdatePropertiesHandler = selfObject.nx_didUpdatePropertiesHandler;
+                if (didUpdatePropertiesHandler) {
+                    didUpdatePropertiesHandler(selfObject);
+                }
+            };
+        });
+        
     });
 }
 
 #pragma mark - Getter & Setter
 
-- (UINavigationBarDidUpdateFrameHandler)nx_didUpdateFrameHandler {
+- (UINavigationBarDidUpdatePropertiesHandler)nx_didUpdatePropertiesHandler {
     return objc_getAssociatedObject(self, _cmd);
 }
 
-- (void)setNx_didUpdateFrameHandler:(UINavigationBarDidUpdateFrameHandler)nx_didUpdateFrameHandler {
-    objc_setAssociatedObject(self, @selector(nx_didUpdateFrameHandler), nx_didUpdateFrameHandler, OBJC_ASSOCIATION_COPY_NONATOMIC);
+- (void)setNx_didUpdatePropertiesHandler:(UINavigationBarDidUpdatePropertiesHandler)nx_didUpdatePropertiesHandler {
+    objc_setAssociatedObject(self, @selector(nx_didUpdatePropertiesHandler), nx_didUpdatePropertiesHandler, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 - (BOOL)nx_userInteractionEnabled {

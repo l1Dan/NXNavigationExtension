@@ -132,7 +132,7 @@ otherAppearance.backgorundColor = [UIColor greenColor];
 
 - 👉 使用 `NXNavigationExtension` 之前需要先设置导航控制器需要使用的外观，设置之后对导航栏的修改才会生效，也仅限于修改已经设置了导航栏外观的导航控制器所管理的视图控制器，对于子类导航控制器所管理的视图控制器是不会生效的，这样可以有效避免框架污染到其他的导航控制器。
 - 🚫 不要直接设置 `UINavigationController` 的外观，会影响全局导航栏的外观，建议创建一个 `UINavigationController` 的子类，对这个子类进行外观的设置。
-- 🚫 不要使用系统导航栏隐藏、显示方法, `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:`。
+- 🚫 不要使用 `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:` 等方法显示或隐藏系统导航栏。
 - 🚫 不要使用系统导航栏修改透明度。
 - 🚫 不要使用系统导航栏或导航控制器 `appearance` 相关属性修改。
 - 🚫 ~~不要使用全局 `edgesForExtendedLayout` 修改~~。*3.4.2*及以后的版本已经支持。
