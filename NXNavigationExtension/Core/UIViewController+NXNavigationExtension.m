@@ -136,24 +136,23 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         __kindof UINavigationController *navigationController = (UINavigationController *)navigationBar.delegate;
         if ([navigationController isKindOfClass:[UINavigationController class]]) {
             for (__kindof UIViewController *viewController in navigationController.viewControllers) {
-                if (viewController.nx_navigationBar) {
-                    // FIXED: 视图控制器同时重写 `extendedLayoutIncludesOpaqueBars` 和 `edgesForExtendedLayout` 属性时需要调用这里来修正导航栏。
-                    viewController.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(viewController.edgesForExtendedLayout);
-                }
-                // FIXED: delay call nx_updateNavigationBarAppearance method.
-                if (weakSelf == viewController && viewController.nx_viewWillDisappearFinished) {
-                    continue;
-                } else {
-                    viewController.nx_navigationBar.frame = navigationBar.frame;
-                    viewController.nx_navigationBar.hidden = navigationBar.hidden;
-                }
+                [weakSelf nx_adjustNavigationBarAppearanceForUINavigationBar:navigationBar withViewController:viewController];
             }
         } else {
-            if (weakSelf.nx_viewWillDisappearFinished) { return; }
-            weakSelf.nx_navigationBar.frame = navigationBar.frame;
-            weakSelf.nx_navigationBar.hidden = navigationBar.hidden;
+            [weakSelf nx_adjustNavigationBarAppearanceForUINavigationBar:navigationBar withViewController:weakSelf];
         }
     };
+}
+
+- (void)nx_adjustNavigationBarAppearanceForUINavigationBar:(UINavigationBar *)navigationBar withViewController:(__kindof UIViewController *)viewController {
+    if (viewController.nx_navigationBar) {
+        // FIXED: 视图控制器同时重写 `extendedLayoutIncludesOpaqueBars` 和 `edgesForExtendedLayout` 属性时需要调用这里来修正导航栏。
+        viewController.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(viewController.edgesForExtendedLayout);
+    }
+    // FIXED: delay call nx_updateNavigationBarAppearance method.
+    if (self == viewController && viewController.nx_viewWillDisappearFinished) { return; }
+    viewController.nx_navigationBar.frame = navigationBar.frame;
+    viewController.nx_navigationBar.hidden = navigationBar.hidden;
 }
 
 - (void)nx_updateNavigationBarAppearance {
