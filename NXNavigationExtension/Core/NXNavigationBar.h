@@ -110,13 +110,18 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 /// NXNavigationBar 模糊背景
 @property (nonatomic, strong, readonly) UIVisualEffectView *backgroundEffectView;
 
-/// 获取当前导航控制器外观设置
+/// 获取当前导航控制器注册的外观设置
 /// @param navigationController 当前试图控制器的 navigationController
-+ (nullable NXNavigationBarAppearance *)appearanceInNavigationController:(__kindof UINavigationController *)navigationController;
++ (nullable NXNavigationBarAppearance *)appearanceFromRegisterNavigationController:(__kindof UINavigationController *)navigationController;
 
-/// 通过导航控制器实例选择需要设置的导航栏外观。
-/// @param block 获取导航栏外观设置，如果 NXNavigationBarAppearance == nil，则当前导航控制器的外观设置不生效。
-+ (void)setAppearanceForNavigationControllerUsingBlock:(NXNavigationBarAppearance * _Nullable (^)(__kindof UINavigationController *navigationController))block;
+/// 设置需要注册的导航控制器，默认 appearance 为 [NXNavigationBarAppearance standardAppearance]
+/// @param aClass UINavigationController 或子类类对象
++ (void)registerNavigationControllerClass:(Class)aClass;
+
+/// 设置需要注册的导航控制器，并且设置导航栏的外观，如果 appearance == nil，则设置 appearance 为 [NXNavigationBarAppearance standardAppearance]
+/// @param aClass UINavigationController 或子类类对象
+/// @param appearance NXNavigationBarAppearance 导航栏外观
++ (void)registerNavigationControllerClass:(Class)aClass forAppearance:(nullable NXNavigationBarAppearance *)appearance;
 
 @end
 

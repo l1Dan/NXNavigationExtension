@@ -287,7 +287,7 @@
 }
 
 - (NXNavigationBarAppearance *)nx_appearance {
-    return [NXNavigationBar appearanceInNavigationController:self];
+    return [NXNavigationBar appearanceFromRegisterNavigationController:self];
 }
 
 - (BOOL)nx_useNavigationBar {

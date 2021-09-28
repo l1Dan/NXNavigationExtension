@@ -34,15 +34,6 @@
 
 @implementation NXNavigationBar (NXNavigationExtensionDeprecated)
 
-+ (NSMutableDictionary<NSString *, NXNavigationBarAppearance *> *)appearanceInfo {
-    static NSMutableDictionary<NSString *, NXNavigationBarAppearance *> *appearanceInfo = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        appearanceInfo = [NSMutableDictionary dictionary];
-    });
-    return appearanceInfo;
-}
-
 - (UIView *)containerView {
     return self.contentView;
 }
@@ -75,19 +66,9 @@
 
 + (NXNavigationBarAppearance *)appearanceFromRegisterNavigationControllerClass:(Class)aClass {
     if (aClass) {
-        return [NXNavigationBar appearanceInfo][NSStringFromClass(aClass)];
+        return [self appearanceFromRegisterNavigationController:[[aClass alloc] init]];
     }
     return nil;
-}
-
-+ (void)registerNavigationControllerClass:(Class)aClass forAppearance:(NXNavigationBarAppearance *)appearance {
-    NSAssert(aClass != nil, @"参数不能为空！");
-    if (!aClass) return;
-    
-    [NXNavigationBar appearanceInfo][NSStringFromClass(aClass)] = appearance ?: [NXNavigationBarAppearance standardAppearance];
-    [NXNavigationBar setAppearanceForNavigationControllerUsingBlock:^NXNavigationBarAppearance * _Nullable(__kindof UINavigationController * _Nonnull navigationController) {
-        return [self appearanceFromRegisterNavigationControllerClass:[navigationController class]];
-    }];
 }
 
 - (void)enableBlurEffect:(BOOL)enabled {

@@ -1,5 +1,12 @@
 # CHANGELOG.md
 
+## 3.4.9
+
+允许注册的导航栏控制器的子类使用基类的 `NXNavigationBarAppearance` 设置
+
+- 修改: README.md 文件;
+- 示例代码优化。
+
 ## 3.4.8
 
 代码逻辑优化
@@ -18,8 +25,7 @@ NXNavigationBar 可以跟随系统导航栏的显示隐藏。虽然不推荐使�
 - 新增: `backgroundEffectView` 属性；
 - 新增: `nx_enableFullscreenInteractivePopGesture` 属性；
 - 新增: `nx_contentViewWithoutNavigtionBar` 属性；
-- 新增: `appearanceInNavigationController:` 方法；
-- 新增: `setAppearanceForNavigationControllerUsingBlock:` 方法；
+- 新增: `appearanceFromRegisterNavigationController:` 方法；
 - 新增: `nx_redirectViewControllerClass:initializeStandbyViewControllerUsingBlock:` 方法；
 - 过期: `containerViewEdgeInsets` 属性，推荐使用 `contentViewEdgeInsets` 属性；
 - 过期: `containerView` 属性，推荐使用 `contentView` 属性；
@@ -28,8 +34,7 @@ NXNavigationBar 可以跟随系统导航栏的显示隐藏。虽然不推荐使�
 - 过期: `nx_containerViewWithoutNavigtionBar` 属性，推荐使用 `nx_contentViewWithoutNavigtionBar` 属性；
 - 过期: `addContainerViewSubview:` 方法，推荐使用 `contentView addSubview:` 方法；
 - 过期: `setContainerViewEdgeInsets:` 方法，推荐使用 `contentViewEdgeInsets` 属性；
-- 过期: `appearanceFromRegisterNavigationControllerClass:` 方法，推荐使用 `appearanceInNavigationController:` 方法；
-- 过期: `registerNavigationControllerClass:forAppearance:` 方法，推荐使用 `setAppearanceForNavigationControllerUsingBlock:` 方法；
+- 过期: `appearanceFromRegisterNavigationControllerClass:` 方法，推荐使用 `appearanceFromRegisterNavigationController:` 方法；
 - 过期: `nx_redirectViewControllerClass:initializeStandbyViewControllerBlock:` 方法，推荐使用 `nx_redirectViewControllerClass:initializeStandbyViewControllerUsingBlock:` 方法；
 - 修改: README.md 文件;
 - 示例代码优化。

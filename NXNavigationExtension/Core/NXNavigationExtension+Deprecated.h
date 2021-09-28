@@ -49,13 +49,11 @@ API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protoco
 
 - (void)setContainerViewEdgeInsets:(UIEdgeInsets)edgeInsets API_DEPRECATED("Use contentViewEdgeInsets instead.", ios(2.0, 2.0));
 
-+ (nullable NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use appearanceInNavigationController: instead.", ios(2.0, 2.0));
++ (nullable NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use appearanceFromRegisterNavigationControllerClass: instead.", ios(2.0, 2.0));
 
-+ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use setAppearanceForNavigationControllerUsingBlock: instead.", ios(2.0, 2.0));
++ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use registerNavigationControllerClass:forAppearance: instead.", ios(2.0, 2.0));
 
 + (nullable NXNavigationBarAppearance *)appearanceFromRegisterNavigationControllerClass:(Class)aClass API_DEPRECATED("Use appearanceInNavigationController: instead.", ios(2.0, 2.0));
-
-+ (void)registerNavigationControllerClass:(Class)aClass forAppearance:(nullable NXNavigationBarAppearance *)appearance API_DEPRECATED("Use setAppearanceForNavigationControllerUsingBlock: instead.", ios(2.0, 2.0));
 
 @end
 

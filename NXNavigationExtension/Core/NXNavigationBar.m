@@ -101,14 +101,19 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 @property (nonatomic, assign) BOOL edgesForExtendedLayoutEnabled;
 @property (nonatomic, assign) BOOL blurEffectEnabled;
 
-@property (nonatomic, copy, class) NXNavigationBarAppearance * _Nullable(^navigationControllerAppearanceBlock)(__kindof UINavigationController *);
-
 @end
 
 
 @implementation NXNavigationBar
 
-@dynamic navigationControllerAppearanceBlock;
++ (NSMutableDictionary<NSString *, NXNavigationBarAppearance *> *)registerAppearanceInfo {
+    static NSMutableDictionary<NSString *, NXNavigationBarAppearance *> *registerAppearanceInfo = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        registerAppearanceInfo = [NSMutableDictionary dictionary];
+    });
+    return registerAppearanceInfo;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -158,14 +163,6 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 }
 
 #pragma mark - Private
-
-+ (NXNavigationBarAppearance * _Nullable (^)(__kindof UINavigationController *))navigationControllerAppearanceBlock {
-    return objc_getAssociatedObject(self, _cmd);
-}
-
-+ (void)setNavigationControllerAppearanceBlock:(NXNavigationBarAppearance * _Nullable (^)(__kindof UINavigationController *))navigationControllerAppearanceBlock {
-    objc_setAssociatedObject(self, @selector(navigationControllerAppearanceBlock), navigationControllerAppearanceBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
 
 - (void)setBlurEffectEnabled:(BOOL)blurEffectEnabled {
     _blurEffectEnabled = blurEffectEnabled;
@@ -219,15 +216,24 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
     [self updateNavigationBarContentFrameCallSuper:NO];
 }
 
-+ (NXNavigationBarAppearance *)appearanceInNavigationController:(__kindof UINavigationController *)navigationController {
-    if (self.navigationControllerAppearanceBlock) {
-        return self.navigationControllerAppearanceBlock(navigationController);
++ (NXNavigationBarAppearance *)appearanceFromRegisterNavigationController:(__kindof UINavigationController *)navigationController {
+    for (NSString *className in [NXNavigationBar registerAppearanceInfo]) {
+        if ([navigationController isKindOfClass:NSClassFromString(className)]) {
+            return [NXNavigationBar registerAppearanceInfo][className];
+        }
     }
     return nil;
 }
 
-+ (void)setAppearanceForNavigationControllerUsingBlock:(NXNavigationBarAppearance * _Nullable (^)(__kindof UINavigationController * _Nonnull))block {
-    self.navigationControllerAppearanceBlock = block;
++ (void)registerNavigationControllerClass:(Class)aClass {
+    [self registerNavigationControllerClass:aClass forAppearance:nil];
+}
+
++ (void)registerNavigationControllerClass:(Class)aClass forAppearance:(NXNavigationBarAppearance *)appearance {
+    NSAssert(aClass != nil, @"参数不能为空！");
+    if (!aClass) return;
+    
+    [NXNavigationBar registerAppearanceInfo][NSStringFromClass(aClass)] = appearance ?: [NXNavigationBarAppearance standardAppearance];
 }
 
 @end
