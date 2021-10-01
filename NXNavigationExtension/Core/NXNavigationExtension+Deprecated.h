@@ -24,9 +24,9 @@
 #import <UIKit/UIKit.h>
 
 #import <NXNavigationExtension/NXNavigationBar.h>
+#import <NXNavigationExtension/NXNavigationConfiguration.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
 
 API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protocol NXNavigationExtensionInteractable <NSObject>
 
@@ -34,6 +34,16 @@ API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protoco
 
 @end
 
+
+@interface NXNavigationBarAppearance (NXNavigationExtensionDeprecated)
+
+@property (nonatomic, strong) UIColor *backgorundColor API_DEPRECATED("Use backgroundColor instead.", ios(2.0, 2.0)) API_UNAVAILABLE(watchos, tvos);
+
+@property (nonatomic, strong, nullable) UIImage *backgorundImage API_DEPRECATED("Use backgroundImage instead.", ios(2.0, 2.0)) API_UNAVAILABLE(watchos, tvos);
+
+@property (nonatomic, assign, getter=isBackButtonMenuSupported) BOOL backButtonMenuSupported API_DEPRECATED("Use NXNavigationControllerPreferences menuSupplementBackButton instead.", ios(2.0, 2.0)) API_UNAVAILABLE(watchos, tvos);
+
+@end
 
 @interface NXNavigationBar (NXNavigationExtensionDeprecated)
 
@@ -49,16 +59,22 @@ API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protoco
 
 - (void)setContainerViewEdgeInsets:(UIEdgeInsets)edgeInsets API_DEPRECATED("Use contentViewEdgeInsets instead.", ios(2.0, 2.0));
 
-+ (nullable NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use appearanceFromRegisterNavigationControllerClass: instead.", ios(2.0, 2.0));
++ (nullable NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use configurationFromRegisterNavigationController: instead.", ios(2.0, 2.0));
 
-+ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use registerNavigationControllerClass:forAppearance: instead.", ios(2.0, 2.0));
++ (nullable NXNavigationBarAppearance *)appearanceFromRegisterNavigationControllerClass:(Class)aClass API_DEPRECATED("Use configurationFromRegisterNavigationController: instead.", ios(2.0, 2.0));
 
-+ (nullable NXNavigationBarAppearance *)appearanceFromRegisterNavigationControllerClass:(Class)aClass API_DEPRECATED("Use appearanceInNavigationController: instead.", ios(2.0, 2.0));
++ (nullable NXNavigationBarAppearance *)appearanceFromRegisterNavigationController:(__kindof UINavigationController *)navigationController API_DEPRECATED("Use configurationFromRegisterNavigationController: instead.", ios(2.0, 2.0));
+
++ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use registerNavigationControllerClass:withConfiguration: instead.", ios(2.0, 2.0));
+
++ (void)registerNavigationControllerClass:(Class)aClass forAppearance:(nullable NXNavigationBarAppearance *)appearance API_DEPRECATED("Use registerNavigationControllerClass:withConfiguration: instead.", ios(2.0, 2.0));
 
 @end
 
 
 @interface UINavigationController (NXNavigationExtensionDeprecated)
+
+@property (nonatomic, assign, class) BOOL nx_fullscreenPopGestureEnabled API_DEPRECATED("Use NXNavigationControllerPreferences fullscreenInteractivePopGestureEnabled instead.", ios(2.0, 2.0));
 
 - (void)nx_triggerSystemBackButtonHandler API_DEPRECATED("Use nx_popViewControllerAnimated: instead.", ios(2.0, 2.0));
 

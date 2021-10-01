@@ -24,6 +24,7 @@
 // https://github.com/forkingdog/FDFullscreenPopGesture
 // https://github.com/l1Dan/NSLNavigationSolution
 
+#import "NXNavigationConfiguration.h"
 #import "NXNavigationExtensionPrivate.h"
 #import "NXNavigationExtensionRuntime.h"
 #import "UIViewController+NXNavigationExtension.h"
@@ -67,6 +68,8 @@
                     if (selfObject.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
                         UIViewController *destinationViewController = topViewController;
                         for (UIViewController *viewController in selfObject.viewControllers) {
+                            viewController.nx_configuration = selfObject.nx_configuration; // 先赋值一次
+                            
                             if (viewController.navigationItem == item) {
                                 destinationViewController = viewController;
                             }
@@ -90,14 +93,17 @@
         NXNavigationExtensionOverrideImplementation([UINavigationController class], @selector(pushViewController:animated:), ^id _Nonnull(__unsafe_unretained Class  _Nonnull originClass, SEL  _Nonnull originCMD, IMP  _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
             return ^(UINavigationController *selfObject, UIViewController *viewController, BOOL animated) {
                 if (selfObject.nx_useNavigationBar) {
-                    BOOL backButtonMenuSupported = NO;
+                    viewController.nx_configuration = selfObject.nx_configuration; // 先赋值一次
+                    
+                    BOOL menuSupplementBackButton = NO;
                     if (@available(iOS 14.0, *)) {
-                        backButtonMenuSupported = selfObject.nx_appearance.backButtonMenuSupported;
+                        NXNavigationConfiguration *configuration = selfObject.nx_configuration;
+                        menuSupplementBackButton = configuration.navigationControllerPreferences.menuSupplementBackButton;
                         viewController.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal;
                     }
                     
                     if (selfObject.viewControllers.count > 0) {
-                        [viewController nx_configureNavigationBarWithNavigationController:selfObject backButtonMenuSupported:backButtonMenuSupported];
+                        [viewController nx_configureNavigationBarWithNavigationController:selfObject menuSupplementBackButton:menuSupplementBackButton];
                     }
                     
                     if (viewController.nx_enableFullscreenInteractivePopGesture) {
@@ -118,14 +124,15 @@
                         for (NSUInteger index = 0; index < viewControllers.count; index++) {
                             UIViewController *viewController = viewControllers[index];
                             
-                            BOOL backButtonMenuSupported = NO;
+                            BOOL menuSupplementBackButton = NO;
                             if (@available(iOS 14.0, *)) {
-                                backButtonMenuSupported = selfObject.nx_appearance.backButtonMenuSupported;
+                                NXNavigationConfiguration *configuration = selfObject.nx_configuration;
+                                menuSupplementBackButton = configuration.navigationControllerPreferences.menuSupplementBackButton;
                                 viewController.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal;
                             }
                             
                             if (index != 0) {
-                                [viewController nx_configureNavigationBarWithNavigationController:selfObject backButtonMenuSupported:backButtonMenuSupported];
+                                [viewController nx_configureNavigationBarWithNavigationController:selfObject menuSupplementBackButton:menuSupplementBackButton];
                             }
                             
                             if (viewController.nx_enableFullscreenInteractivePopGesture) {
@@ -207,19 +214,6 @@
 }
 
 #pragma mark - Public
-
-+ (BOOL)nx_fullscreenPopGestureEnabled {
-    NSNumber *number = objc_getAssociatedObject(self, _cmd);
-    if (number && [number isKindOfClass:[NSNumber class]]) {
-        return [number boolValue];
-    }
-    return NO;
-}
-
-+ (void)setNx_fullscreenPopGestureEnabled:(BOOL)nx_fullscreenPopGestureEnabled {
-    NSNumber *number = [NSNumber numberWithBool:nx_fullscreenPopGestureEnabled];
-    objc_setAssociatedObject(self, @selector(nx_fullscreenPopGestureEnabled), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
 
 - (UIViewController *)nx_popViewControllerAnimated:(BOOL)animated {
     NSArray<UIViewController *> *viewControllers = self.viewControllers;

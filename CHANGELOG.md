@@ -1,5 +1,27 @@
 # CHANGELOG.md
 
+## 3.5.0
+
+统一默认偏好设置和外观设置的方式，方面使用。以下三种设置都可以在 `NXNavigationConfiguration` 中使用。
+
+1. `NXNavigationBarAppearance` 默认导航栏外观设置；
+2. `NXNavigationControllerPreferences` 默认导航控制器偏好设置；
+3. `NXViewControllerPreferences` 默认视图控制器偏好设置。
+
+- 新增: `backgroundColor` 属性；
+- 新增: `backgroundImage` 属性；
+- 新增: `NXNavigationControllerPreferences` 类；
+- 新增: `NXViewControllerPreferences` 类；
+- 新增: `NXNavigationConfiguration` 类；
+- 过期: `backgorundColor` 属性（拼写错误），推荐使用 `backgroundColor` 属性；
+- 过期: `backgorundImage` 属性（拼写错误，推荐使用 `backgroundImage` 属性；
+- 过期: `nx_fullscreenPopGestureEnabled` 属性，推荐使用 `NXNavigationControllerPreferences fullscreenInteractivePopGestureEnabled` 属性；
+- 过期: `backButtonMenuSupported` 属性，推荐使用 `NXNavigationControllerPreferences menuSupplementBackButton` 属性；
+- 过期: `appearanceFromRegisterNavigationController:` 方法，推荐使用 `configurationFromRegisterNavigationController:` 方法；
+- 过期: `registerNavigationControllerClass:forAppearance:` 方法，推荐使用 `registerNavigationControllerClass:withConfiguration:` 方法；
+- 修改: README.md 文件;
+- 示例代码优化。
+
 ## 3.4.9
 
 允许注册的导航栏控制器的子类使用基类的 `NXNavigationBarAppearance` 设置

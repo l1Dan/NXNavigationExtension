@@ -83,21 +83,21 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 
 @interface UIViewController (NXNavigationExtensionPrivate)
 
+/// 获取当前导航控制器的配置
+@property (nonatomic, strong, nullable) NXNavigationConfiguration *nx_configuration;
+
 /// 设置 UINavigationBarItem
 /// @param navigationController 包含 UIViewController 的 UINavigationController
 /// @param supported 是否支持使用系统返回菜单按钮
-- (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController backButtonMenuSupported:(BOOL)supported;
+- (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController menuSupplementBackButton:(BOOL)supported;
 
 @end
 
 
 @interface UINavigationController (NXNavigationExtensionPrivate)
 
-/// 获取当前皮肤设置
+/// 手势代理对象
 @property (nonatomic, strong) NXEdgeGestureRecognizerDelegate *nx_gestureDelegate;
-
-/// 获取当前皮肤设置
-@property (nonatomic, strong, readonly, nullable) NXNavigationBarAppearance *nx_appearance;
 
 /// 全屏收拾代理对象
 @property (nonatomic, strong, readonly) NXFullscreenPopGestureRecognizerDelegate *nx_fullscreenPopGestureDelegate;

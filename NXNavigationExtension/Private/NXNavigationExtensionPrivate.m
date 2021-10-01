@@ -21,6 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import "NXNavigationConfiguration.h"
 #import "NXNavigationExtensionPrivate.h"
 #import "NXNavigationExtensionRuntime.h"
 #import "UIViewController+NXNavigationExtension.h"
@@ -216,10 +217,19 @@
 
 @implementation UIViewController (NXNavigationExtensionPrivate)
 
-- (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController backButtonMenuSupported:(BOOL)supported {
+- (NXNavigationConfiguration *)nx_configuration {
+    NXNavigationConfiguration *configuration = objc_getAssociatedObject(self, _cmd);
+    return configuration ?: [NXNavigationConfiguration defaultConfiguration];
+}
+
+- (void)setNx_configuration:(NXNavigationConfiguration *)nx_configuration {
+    objc_setAssociatedObject(self, @selector(nx_configuration), nx_configuration, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController menuSupplementBackButton:(BOOL)supported {
     if (@available(iOS 14.0, *)) {
         if (self.nx_backButtonMenuEnabled) {
-            NSAssert(supported, @"需要设置 NXNavigationBarAppearance backButtonMenuSupported 属性为 YES 才能生效");
+            NSAssert(supported, @"需要设置 NXNavigationControllerPreferences menuSupplementBackButton 属性为 YES 才能生效");
             if (supported && !self.navigationItem.leftItemsSupplementBackButton) {
                 self.navigationItem.leftBarButtonItem = nil;
                 self.navigationItem.leftBarButtonItems = nil;
@@ -238,9 +248,9 @@
     } else {
         // 如果 leftBarButtonItem(s) 为空则添加 backButtonItem
         if (!backButtonItem) {
-            NXNavigationBarAppearance *barAppearance = navigationController ? navigationController.nx_appearance : [NXNavigationBarAppearance standardAppearance];
-            UIImage *backImage = self.nx_backImage ?: barAppearance.backImage;
-            UIImage *landscapeBackImage = self.nx_backImage ?: barAppearance.landscapeBackImage;
+            NXNavigationConfiguration *configuration = navigationController ? navigationController.nx_configuration : [NXNavigationConfiguration defaultConfiguration];
+            UIImage *backImage = self.nx_backImage ?: configuration.navigationBarAppearance.backImage;
+            UIImage *landscapeBackImage = self.nx_backImage ?: configuration.navigationBarAppearance.landscapeBackImage;
             
             backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage landscapeImagePhone:landscapeBackImage style:UIBarButtonItemStylePlain target:self action:@selector(nx_triggerSystemPopViewController)];
             backButtonItem.imageInsets = self.nx_backImageInsets;
@@ -286,12 +296,13 @@
     return delegate;
 }
 
-- (NXNavigationBarAppearance *)nx_appearance {
-    return [NXNavigationBar appearanceFromRegisterNavigationController:self];
+// Overwrite
+- (NXNavigationConfiguration *)nx_configuration {
+    return [NXNavigationBar configurationFromRegisterNavigationController:self];
 }
 
 - (BOOL)nx_useNavigationBar {
-    return self.nx_appearance != nil;
+    return self.nx_configuration != nil;
 }
 
 - (void)nx_configureNavigationBar {

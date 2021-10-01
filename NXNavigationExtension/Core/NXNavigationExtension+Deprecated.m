@@ -21,9 +21,53 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import <objc/runtime.h>
+
 #import "NXNavigationExtension+Deprecated.h"
 #import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
+
+
+@implementation NXNavigationBarAppearance (NXNavigationExtensionDeprecated)
+
+- (UIColor *)backgorundColor {
+    return self.backgroundColor;
+}
+
+- (void)setBackgorundColor:(UIColor *)backgorundColor {
+    self.backgroundColor = backgorundColor;
+}
+
+- (UIImage *)backgorundImage {
+    return self.backgroundImage;
+}
+
+- (void)setBackgorundImage:(UIImage *)backgorundImage {
+    self.backgroundImage = backgorundImage;
+}
+
+- (BOOL)isBackButtonMenuSupported {
+    NSNumber *number = objc_getAssociatedObject(self, _cmd);
+    if (number && [number isKindOfClass:[NSNumber class]]) {
+        return [number boolValue];
+    }
+    return NO;
+}
+
+- (void)setBackButtonMenuSupported:(BOOL)backButtonMenuSupported {
+    NSNumber *number = [NSNumber numberWithBool:backButtonMenuSupported];
+    objc_setAssociatedObject(self, @selector(isBackButtonMenuSupported), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    if (backButtonMenuSupported) {
+        self.backImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+        self.landscapeBackImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+    } else {
+        self.backImageInsets = UIEdgeInsetsZero;
+        self.landscapeBackImageInsets = UIEdgeInsetsZero;
+    }
+}
+
+@end
 
 @interface NXNavigationBar ()
 
@@ -56,12 +100,12 @@
     self.contentViewEdgeInsets = edgeInsets;
 }
 
-+ (NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass {
-    return [self appearanceFromRegisterNavigationControllerClass:aClass];
+- (void)enableBlurEffect:(BOOL)enabled {
+    self.blurEffectEnabled = enabled;
 }
 
-+ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass {
-    [self registerNavigationControllerClass:aClass forAppearance:[NXNavigationBarAppearance standardAppearance]];
++ (NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass {
+    return [self appearanceFromRegisterNavigationControllerClass:aClass];
 }
 
 + (NXNavigationBarAppearance *)appearanceFromRegisterNavigationControllerClass:(Class)aClass {
@@ -71,14 +115,37 @@
     return nil;
 }
 
-- (void)enableBlurEffect:(BOOL)enabled {
-    self.blurEffectEnabled = enabled;
++ (NXNavigationBarAppearance *)appearanceFromRegisterNavigationController:(__kindof UINavigationController *)navigationController {
+    return [self configurationFromRegisterNavigationController:navigationController].navigationBarAppearance;
+}
+
++ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass {
+    [self registerNavigationControllerClass:aClass forAppearance:[NXNavigationBarAppearance standardAppearance]];
+}
+
++ (void)registerNavigationControllerClass:(Class)aClass forAppearance:(NXNavigationBarAppearance *)appearance {
+    NXNavigationConfiguration *configuration = [NXNavigationConfiguration defaultConfiguration];
+    configuration.navigationBarAppearance = appearance ?: [NXNavigationBarAppearance standardAppearance];
+    [self registerNavigationControllerClass:aClass withConfiguration:configuration];
 }
 
 @end
 
 
 @implementation UINavigationController (NXNavigationExtensionDeprecated)
+
++ (BOOL)nx_fullscreenPopGestureEnabled {
+    NSNumber *number = objc_getAssociatedObject(self, _cmd);
+    if (number && [number isKindOfClass:[NSNumber class]]) {
+        return [number boolValue];
+    }
+    return NO;
+}
+
++ (void)setNx_fullscreenPopGestureEnabled:(BOOL)nx_fullscreenPopGestureEnabled {
+    NSNumber *number = [NSNumber numberWithBool:nx_fullscreenPopGestureEnabled];
+    objc_setAssociatedObject(self, @selector(nx_fullscreenPopGestureEnabled), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 
 - (void)nx_triggerSystemBackButtonHandler {
     [self nx_popViewControllerAnimated:YES];

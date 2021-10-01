@@ -21,78 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <objc/runtime.h>
-
 #import "NXNavigationBar.h"
-
-// <@2x.png, 默认颜色：tintColor = [UIColor systemBlueColor]
-static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSUhEUgAAABgAAAAoCAMAAADT08pnAAAAflBMVEUAAAAAkP8Aev8Ae/8Aev8Ae/8AkP8Aev8Aev8Ae/8Ae/8AfP8Afv8Afv8Af/8Aev8Aev8Ae/8Ae/8Ae/8Ae/8Aev8Aev8Ae/8Ae/8Aev8AfP8Afv8Ae/8Ae/8Ae/8Aev8Ae/8Ae/8Aev8Ae/8AfP8Aff8Ae/8AgP8AhP8Aev+USLvdAAAAKXRSTlMAAvT6910F6uFHPDcsIh3x7ubcs62lkItoYU8nzp+alYWAeXRvQDEQDnA4PYMAAAC0SURBVCjPhdNJFoIwEARQjEScEBFRcB5Qyf0vKHZ2Vd3PWv4skvSQKPm0eaLFpyF4xdsw5MTehF8q8k58PEd/Rj+gP8TTGfrd8Ju4e6Hvo9O9O/FiATy6iq/JL9Hf6GfxbIle6z7ZipdH3afkVfRcf/9mRX107JIeDqBEcgU9yjyp4Rv48RI+zqXi4mZQXG6H3UD+TwEtpyH5P1Y8iProUjrzpIE14MWxV43jXVxOTu+HRn8B1TglOoU3GxgAAAAASUVORK5CYII=";
-
-
-@implementation NXNavigationBarAppearance
-
-+ (NXNavigationBarAppearance *)standardAppearance {
-    static NXNavigationBarAppearance *instance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[NXNavigationBarAppearance alloc] init];
-    });
-    return instance;
-}
-
-- (instancetype)init {
-    if (self = [super init]) {
-        _tintColor = [UIColor systemBlueColor];
-        if (@available(iOS 13.0, *)) {
-            _backgorundColor = [UIColor systemBackgroundColor];
-        } else {
-            _backgorundColor = [UIColor whiteColor];
-        }
-        
-        if (@available(iOS 14.0, *)) {
-            self.backButtonMenuSupported = NO;
-        }
-    }
-    return self;
-}
-
-#pragma mark - Getter
-
-- (UIImage *)backImage {
-    if (!_backImage) {
-        NSData *data = [[NSData alloc] initWithBase64EncodedString:NXNavigationBarAppearanceNackImageBase64 options:NSDataBase64DecodingIgnoreUnknownCharacters];
-        if (data) {
-            return [UIImage imageWithData:data scale:2.0];
-        }
-        return nil;
-    }
-    return _backImage;
-}
-
-- (UIImage *)landscapeBackImage {
-    if (!_landscapeBackImage) {
-        NSData *data = [[NSData alloc] initWithBase64EncodedString:NXNavigationBarAppearanceNackImageBase64 options:NSDataBase64DecodingIgnoreUnknownCharacters];
-        if (data) {
-            return [UIImage imageWithData:data scale:3.0];
-        }
-        return nil;
-    }
-    return _landscapeBackImage;
-}
-
-- (void)setBackButtonMenuSupported:(BOOL)backButtonMenuSupported {
-    _backButtonMenuSupported = backButtonMenuSupported;
-    if (backButtonMenuSupported) {
-        _backImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
-        _landscapeBackImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
-    } else {
-        _backImageInsets = UIEdgeInsetsZero;
-        _landscapeBackImageInsets = UIEdgeInsetsZero;
-    }
-}
-
-@end
-
+#import "NXNavigationConfiguration.h"
 
 @interface NXNavigationBar ()
 
@@ -106,18 +36,18 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 
 @implementation NXNavigationBar
 
-+ (NSMutableDictionary<NSString *, NXNavigationBarAppearance *> *)registerAppearanceInfo {
-    static NSMutableDictionary<NSString *, NXNavigationBarAppearance *> *registerAppearanceInfo = nil;
++ (NSMutableDictionary<NSString *, NXNavigationConfiguration *> *)allConfigurations {
+    static NSMutableDictionary<NSString *, NXNavigationConfiguration *> *configurations = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        registerAppearanceInfo = [NSMutableDictionary dictionary];
+        configurations = [NSMutableDictionary dictionary];
     });
-    return registerAppearanceInfo;
+    return configurations;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        _originalBackgroundColor = [NXNavigationBarAppearance standardAppearance].backgorundColor;
+        _originalBackgroundColor = [NXNavigationBarAppearance standardAppearance].backgroundColor;
         _originalNavigationBarFrame = CGRectZero;
         _shadowImageView = [[UIImageView alloc] init];
         _shadowImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -142,7 +72,7 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
         _backgroundEffectView = [[UIVisualEffectView alloc] initWithEffect:effect];
         _backgroundEffectView.hidden = YES;
         _blurEffectEnabled = NO;
-        _backgroundImageView.image = [NXNavigationBarAppearance standardAppearance].backgorundImage;
+        _backgroundImageView.image = [NXNavigationBarAppearance standardAppearance].backgroundImage;
         
         [self addSubview:self.backgroundImageView];
         [self addSubview:self.backgroundEffectView];
@@ -216,24 +146,24 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
     [self updateNavigationBarContentFrameCallSuper:NO];
 }
 
-+ (NXNavigationBarAppearance *)appearanceFromRegisterNavigationController:(__kindof UINavigationController *)navigationController {
-    for (NSString *className in [NXNavigationBar registerAppearanceInfo]) {
++ (NXNavigationConfiguration *)configurationFromRegisterNavigationController:(__kindof UINavigationController *)navigationController {
+    for (NSString *className in [NXNavigationBar allConfigurations]) {
         if ([navigationController isKindOfClass:NSClassFromString(className)]) {
-            return [NXNavigationBar registerAppearanceInfo][className];
+            return [NXNavigationBar allConfigurations][className];
         }
     }
     return nil;
 }
 
 + (void)registerNavigationControllerClass:(Class)aClass {
-    [self registerNavigationControllerClass:aClass forAppearance:nil];
+    [self registerNavigationControllerClass:aClass withConfiguration:nil];
 }
 
-+ (void)registerNavigationControllerClass:(Class)aClass forAppearance:(NXNavigationBarAppearance *)appearance {
-    NSAssert(aClass != nil, @"参数不能为空！");
++ (void)registerNavigationControllerClass:(Class)aClass withConfiguration:(NXNavigationConfiguration *)configuration {
+    NSAssert(aClass != nil, @"参数 aClass 不能为空！");
     if (!aClass) return;
     
-    [NXNavigationBar registerAppearanceInfo][NSStringFromClass(aClass)] = appearance ?: [NXNavigationBarAppearance standardAppearance];
+    [NXNavigationBar allConfigurations][NSStringFromClass(aClass)] = configuration ?: [NXNavigationConfiguration defaultConfiguration];
 }
 
 @end

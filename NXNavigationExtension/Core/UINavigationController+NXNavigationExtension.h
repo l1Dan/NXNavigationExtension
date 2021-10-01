@@ -28,9 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UINavigationController (NXNavigationExtension)
 
-/// 开启全局全屏手势；默认：NO
-@property (nonatomic, assign, class) BOOL nx_fullscreenPopGestureEnabled;
-
 /// 全屏手势 UIPanGestureRecognizer
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *nx_fullscreenPopGestureRecognizer;
 

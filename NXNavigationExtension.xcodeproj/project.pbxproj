@@ -20,6 +20,8 @@
 		D6C4803726B197B600A66417 /* NXNavigationExtensionPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = D6C4803626B197B600A66417 /* NXNavigationExtensionPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D6E78B1F26AC57F700DA3512 /* NXNavigationExtensionRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E78B1D26AC57F700DA3512 /* NXNavigationExtensionRuntime.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D6E78B2026AC57F700DA3512 /* NXNavigationExtensionRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E78B1E26AC57F700DA3512 /* NXNavigationExtensionRuntime.m */; };
+		D6E896002705B2CE0080AD2A /* NXNavigationConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E895FE2705B2CE0080AD2A /* NXNavigationConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6E896012705B2CE0080AD2A /* NXNavigationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E895FF2705B2CE0080AD2A /* NXNavigationConfiguration.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		D6E4024C251FB71C001D7BEE /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6E78B1D26AC57F700DA3512 /* NXNavigationExtensionRuntime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXNavigationExtensionRuntime.h; sourceTree = "<group>"; };
 		D6E78B1E26AC57F700DA3512 /* NXNavigationExtensionRuntime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXNavigationExtensionRuntime.m; sourceTree = "<group>"; };
+		D6E895FE2705B2CE0080AD2A /* NXNavigationConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXNavigationConfiguration.h; sourceTree = "<group>"; };
+		D6E895FF2705B2CE0080AD2A /* NXNavigationConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXNavigationConfiguration.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 			children = (
 				D624E8C92654F41400CC96E6 /* NXNavigationBar.h */,
 				D624E8CC2654F41400CC96E6 /* NXNavigationBar.m */,
+				D6E895FE2705B2CE0080AD2A /* NXNavigationConfiguration.h */,
+				D6E895FF2705B2CE0080AD2A /* NXNavigationConfiguration.m */,
 				D67DE22B2703419200BAED83 /* NXNavigationExtension+Deprecated.h */,
 				D67DE22C2703419200BAED83 /* NXNavigationExtension+Deprecated.m */,
 				D624E8C72654F41300CC96E6 /* UINavigationController+NXNavigationExtension.h */,
@@ -114,6 +120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D624E8D22654F41400CC96E6 /* NXNavigationBar.h in Headers */,
+				D6E896002705B2CE0080AD2A /* NXNavigationConfiguration.h in Headers */,
 				D69F2E0F2663505F004A02C8 /* NXNavigationExtension.h in Headers */,
 				D67DE22D2703419200BAED83 /* NXNavigationExtension+Deprecated.h in Headers */,
 				D6C4803726B197B600A66417 /* NXNavigationExtensionPrivate.h in Headers */,
@@ -155,7 +162,7 @@
 				TargetAttributes = {
 					D6E4024B251FB71C001D7BEE = {
 						CreatedOnToolsVersion = 12.0.1;
-						LastSwiftMigration = 1250;
+						LastSwiftMigration = 1300;
 					};
 				};
 			};
@@ -197,6 +204,7 @@
 				D6E78B2026AC57F700DA3512 /* NXNavigationExtensionRuntime.m in Sources */,
 				D624E8D32654F41400CC96E6 /* NXNavigationExtensionPrivate.m in Sources */,
 				D624E8D62654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m in Sources */,
+				D6E896012705B2CE0080AD2A /* NXNavigationConfiguration.m in Sources */,
 				D624E8D72654F41400CC96E6 /* UIViewController+NXNavigationExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,7 +345,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.9;
+				MARKETING_VERSION = 3.5.0;
 				MODULEMAP_FILE = "$(SRCROOT)/NXNavigationExtension/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.l1dan.NXNavigationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -371,7 +379,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.9;
+				MARKETING_VERSION = 3.5.0;
 				MODULEMAP_FILE = "$(SRCROOT)/NXNavigationExtension/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.l1dan.NXNavigationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";

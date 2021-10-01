@@ -89,33 +89,31 @@ github "l1Dan/NXNavigationExtension"
 
 ```objc
 // 1
-NXNavigationBarAppearance *appearance = [NXNavigationBarAppearance standardAppearance];
-appearance.tintColor = [UIColor customTitleColor];
+NXNavigationConfiguration *configuration = [NXNavigationConfiguration defaultConfiguration];
+configuration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
 if (@available(iOS 14.0, *)) {
-    appearance.backButtonMenuSupported = YES;
+    configuration.navigationControllerPreferences.menuSupplementBackButton = YES;
 }
-
-[NXNavigationBar registerNavigationControllerClass:[FeatureNavigationController class] forAppearance:appearance];
+[NXNavigationBar registerNavigationControllerClass:[FeatureNavigationController class] withConfiguration:configuration];
 
 // 2
-NXNavigationBarAppearance *otherAppearance = [[NXNavigationBarAppearance alloc] init];
-otherAppearance.backgorundColor = [UIColor redColor];
+NXNavigationConfiguration *otherConfiguration = [[NXNavigationConfiguration alloc] init];
+otherConfiguration.navigationBarAppearance.backgroundColor = [UIColor redColor];
 if (@available(iOS 14.0, *)) {
-    otherAppearance.backButtonMenuSupported = YES;
+    otherConfiguration.navigationControllerPreferences.menuSupplementBackButton = YES;
 }
-[NXNavigationBar registerNavigationControllerClass:[OtherNavigationController class] forAppearance:otherAppearance];
+[NXNavigationBar registerNavigationControllerClass:[OtherNavigationController class] withConfiguration:otherConfiguration];
 ```
 
 ❌ 不推荐
 
 ```objc
-NXNavigationBarAppearance *appearance = [NXNavigationBarAppearance standardAppearance];
-appearance.tintColor = [UIColor customTitleColor];
+NXNavigationConfiguration *configuration = [NXNavigationConfiguration defaultConfiguration];
+configuration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
 if (@available(iOS 14.0, *)) {
-    appearance.backButtonMenuSupported = YES;
+    configuration.navigationControllerPreferences.menuSupplementBackButton = YES;
 }
-
-[NXNavigationBar registerNavigationControllerClass:[UINavigationController class] forAppearance:appearance];
+[NXNavigationBar registerNavigationControllerClass:[UINavigationController class] withConfiguration:configuration];
 
 // OR
 
@@ -180,7 +178,7 @@ NXNavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 
 ```objc
 - (UIImage *)nx_navigationBarBackgroundImage {
-    return UIImage.navigationBarBackgorundImage;
+    return UIImage.navigationBarbackgroundImage;
 }
 ```
 
@@ -288,10 +286,16 @@ NXNavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 }
 ```
 
-- 全局有效（在调用`registerNavigationControllerClass:`或`registerNavigationControllerClass:forAppearance:`方法之前设置）
+- 全局有效（在调用`registerNavigationControllerClass:`或`registerNavigationControllerClass:withConfiguration:`方法之前设置）
 
 ```objc
-NXNavigationExtensionFullscreenPopGestureEnable = YES;
+[NXNavigationControllerPreferences standardPreferences].fullscreenInteractivePopGestureEnabled = YES;
+
+// OR
+
+NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
+configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEnabled = YES;
+
 ```
 
 #### 导航栏返回事件拦截
@@ -418,15 +422,23 @@ NXNavigationExtensionFullscreenPopGestureEnable = YES;
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController04_RedirectViewController.m)
 
-- 设置 backButtonMenuSupported 属性
+- 设置 NXNavigationControllerPreferences `menuSupplementBackButton` 属性
 
 ```objc
 if (@available(iOS 14.0, *)) {
-    NXNavigationBarAppearance.standardAppearance.backButtonMenuSupported = YES;
+    [NXNavigationControllerPreferences standardPreferences].menuSupplementBackButton = YES;
 }
+
+// OR
+
+NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
+if (@available(iOS 14.0, *)) {
+    configuration.navigationControllerPreferences.menuSupplementBackButton = YES;
+}
+
 ```
 
-- 页面内控制
+- 还需要在页面内设置
 
 ```objc
 - (BOOL)nx_backButtonMenuEnabled {
