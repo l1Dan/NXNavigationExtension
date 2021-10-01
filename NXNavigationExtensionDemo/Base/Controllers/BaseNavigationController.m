@@ -5,6 +5,8 @@
 //  Created by Leo Lee on 2020/10/29.
 //
 
+#import <NXNavigationExtension/NXNavigationExtension.h>
+
 #import "BaseNavigationController.h"
 
 

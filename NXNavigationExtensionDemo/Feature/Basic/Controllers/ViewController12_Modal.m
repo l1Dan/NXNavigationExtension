@@ -41,4 +41,12 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (UIColor *)nx_navigationBarBackgroundColor {
+    return [UIColor clearColor];
+}
+
+- (BOOL)nx_useBlurNavigationBar {
+    return YES;
+}
+
 @end

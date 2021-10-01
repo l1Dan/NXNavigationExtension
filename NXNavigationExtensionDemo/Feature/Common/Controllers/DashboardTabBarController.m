@@ -22,21 +22,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NXNavigationBarAppearance *appearance = [NXNavigationBarAppearance standardAppearance];
-    appearance.tintColor = [UIColor customTitleColor];
+        
+    [NXNavigationConfiguration defaultConfiguration].navigationControllerPreferences.fullscreenInteractivePopGestureEnabled = YES;
+    NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
+    configuration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
     if (@available(iOS 14.0, *)) {
-        appearance.backButtonMenuSupported = YES;
+        configuration.navigationControllerPreferences.menuSupplementBackButton = YES;
     }
+    [NXNavigationBar registerNavigationControllerClass:[FeatureNavigationController class] withConfiguration:configuration];
     
-    [NXNavigationBar registerNavigationControllerClass:[FeatureNavigationController class] forAppearance:appearance];
-    
-//    NXNavigationBarAppearance *otherAppearance = [[NXNavigationBarAppearance alloc] init];
-//    otherAppearance.backgorundColor = [UIColor redColor];
+//    NXNavigationConfiguration *otherConfiguration = [[NXNavigationConfiguration alloc] init];
+//    otherConfiguration.navigationBarAppearance.backgroundColor = [UIColor redColor];
 //    if (@available(iOS 14.0, *)) {
-//        otherAppearance.backButtonMenuSupported = YES;
+//        otherConfiguration.navigationControllerPreferences.menuSupplementBackButton = YES;
 //    }
-//    [NXNavigationBar registerNavigationControllerClass:[OtherNavigationController class] forAppearance:otherAppearance];
+//    [NXNavigationBar registerNavigationControllerClass:[OtherNavigationController class] withConfiguration:otherConfiguration];
 
     FeatureTableViewController *featureTableViewController1 = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     featureTableViewController1.navigationItem.title = @"NXNavigationBar🎉🎉🎉";
