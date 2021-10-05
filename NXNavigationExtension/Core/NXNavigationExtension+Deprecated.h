@@ -37,11 +37,17 @@ API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protoco
 
 @interface NXNavigationBarAppearance (NXNavigationExtensionDeprecated)
 
+@property (nonatomic, strong, class, readonly) NXNavigationBarAppearance *standardAppearance API_DEPRECATED("Use NXNavigationConfiguration navigationBarAppearance instead.", ios(2.0, 2.0)) API_UNAVAILABLE(watchos, tvos);
+
 @property (nonatomic, strong) UIColor *backgorundColor API_DEPRECATED("Use backgroundColor instead.", ios(2.0, 2.0)) API_UNAVAILABLE(watchos, tvos);
 
 @property (nonatomic, strong, nullable) UIImage *backgorundImage API_DEPRECATED("Use backgroundImage instead.", ios(2.0, 2.0)) API_UNAVAILABLE(watchos, tvos);
 
 @property (nonatomic, assign, getter=isBackButtonMenuSupported) BOOL backButtonMenuSupported API_DEPRECATED("Use NXNavigationControllerPreferences menuSupplementBackButton instead.", ios(2.0, 2.0)) API_UNAVAILABLE(watchos, tvos);
+
+@property (nonatomic, assign) UIEdgeInsets backImageInsets API_DEPRECATED("Use NXNavigationControllerPreferences backImageInsets instead.", ios(2.0, 2.0));
+
+@property (nonatomic, assign) UIEdgeInsets landscapeBackImageInsets API_DEPRECATED("Use NXNavigationControllerPreferences landscapeBackImageInsets instead.", ios(2.0, 2.0));
 
 @end
 
@@ -65,6 +71,8 @@ API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protoco
 
 + (nullable NXNavigationBarAppearance *)appearanceFromRegisterNavigationController:(__kindof UINavigationController *)navigationController API_DEPRECATED("Use configurationFromRegisterNavigationController: instead.", ios(2.0, 2.0));
 
++ (void)registerNavigationControllerClass:(Class)aClass API_DEPRECATED("Use registerNavigationControllerClass:withConfiguration: instead.", ios(2.0, 2.0));
+
 + (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use registerNavigationControllerClass:withConfiguration: instead.", ios(2.0, 2.0));
 
 + (void)registerNavigationControllerClass:(Class)aClass forAppearance:(nullable NXNavigationBarAppearance *)appearance API_DEPRECATED("Use registerNavigationControllerClass:withConfiguration: instead.", ios(2.0, 2.0));
@@ -84,6 +92,10 @@ API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protoco
 
 
 @interface UIViewController (NXNavigationExtensionDeprecated)
+
+@property (nonatomic, assign, readonly) UIEdgeInsets nx_backImageInsets API_DEPRECATED("Use UINavigationController nx_backImageInsets instead.", ios(2.0, 2.0));
+
+@property (nonatomic, assign, readonly) UIEdgeInsets nx_landscapeBackImageInsets API_DEPRECATED("Use UINavigationController nx_landscapeBackImageInsets instead.", ios(2.0, 2.0));
 
 @property (nonatomic, assign, readonly) BOOL nx_useSystemBlurNavigationBar API_DEPRECATED("Use nx_useBlurNavigationBar & nx_navigationBarBackgroundColor instead.", ios(2.0, 2.0));
 

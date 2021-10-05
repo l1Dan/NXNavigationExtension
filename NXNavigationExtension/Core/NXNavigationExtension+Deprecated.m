@@ -30,6 +30,10 @@
 
 @implementation NXNavigationBarAppearance (NXNavigationExtensionDeprecated)
 
++ (NXNavigationBarAppearance *)standardAppearance {
+    return [[NXNavigationConfiguration alloc] init].navigationBarAppearance;
+}
+
 - (UIColor *)backgorundColor {
     return self.backgroundColor;
 }
@@ -65,6 +69,30 @@
         self.backImageInsets = UIEdgeInsetsZero;
         self.landscapeBackImageInsets = UIEdgeInsetsZero;
     }
+}
+
+- (UIEdgeInsets)backImageInsets {
+    NSString *insets = objc_getAssociatedObject(self, _cmd);
+    if (insets && [insets isKindOfClass:[NSString class]]) {
+        return UIEdgeInsetsFromString(insets);
+    }
+    return UIEdgeInsetsZero;
+}
+
+- (void)setBackImageInsets:(UIEdgeInsets)backImageInsets {
+    objc_setAssociatedObject(self, @selector(backImageInsets), NSStringFromUIEdgeInsets(backImageInsets), OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (UIEdgeInsets)landscapeBackImageInsets {
+    NSString *insets = objc_getAssociatedObject(self, _cmd);
+    if (insets && [insets isKindOfClass:[NSString class]]) {
+        return UIEdgeInsetsFromString(insets);
+    }
+    return UIEdgeInsetsZero;
+}
+
+- (void)setLandscapeBackImageInsets:(UIEdgeInsets)landscapeBackImageInsets {
+    objc_setAssociatedObject(self, @selector(landscapeBackImageInsets), NSStringFromUIEdgeInsets(landscapeBackImageInsets), OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 @end
@@ -119,12 +147,16 @@
     return [self configurationFromRegisterNavigationController:navigationController].navigationBarAppearance;
 }
 
++ (void)registerNavigationControllerClass:(Class)aClass {
+    [self registerNavigationControllerClass:aClass withConfiguration:[[NXNavigationConfiguration alloc] init]];
+}
+
 + (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass {
     [self registerNavigationControllerClass:aClass forAppearance:[NXNavigationBarAppearance standardAppearance]];
 }
 
 + (void)registerNavigationControllerClass:(Class)aClass forAppearance:(NXNavigationBarAppearance *)appearance {
-    NXNavigationConfiguration *configuration = [NXNavigationConfiguration defaultConfiguration];
+    NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
     configuration.navigationBarAppearance = appearance ?: [NXNavigationBarAppearance standardAppearance];
     [self registerNavigationControllerClass:aClass withConfiguration:configuration];
 }
@@ -159,6 +191,14 @@
 
 
 @implementation UIViewController (NXNavigationExtensionDeprecated)
+
+- (UIEdgeInsets)nx_backImageInsets {
+    return self.navigationController.nx_backImageInsets;
+}
+
+- (UIEdgeInsets)nx_landscapeBackImageInsets {
+    return self.navigationController.nx_landscapeBackImageInsets;}
+
 
 - (BOOL)nx_useSystemBlurNavigationBar {
     return [self nx_useBlurNavigationBar];

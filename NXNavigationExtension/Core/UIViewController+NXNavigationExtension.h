@@ -26,8 +26,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class NXNavigationBar;
-
-/// 页面配置
 @interface UIViewController (NXNavigationExtension)
 
 /// 获取当前控制器 NXNavigationBar
@@ -66,12 +64,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// The same as NXNavigationBarAppearance `backButtonCustomView` instance.
 @property (nonatomic, strong, readonly, nullable) UIView *nx_backButtonCustomView;
 
-/// The same as NXNavigationBarAppearance `backImageInsets` instance.
-@property (nonatomic, assign, readonly) UIEdgeInsets nx_backImageInsets;
-
-/// The same as NXNavigationBarAppearance `landscapeBackImageInsets` instance.
-@property (nonatomic, assign, readonly) UIEdgeInsets nx_landscapeBackImageInsets;
-
 /// The same as NXViewControllerPreferences `useBlurNavigationBar` instance.
 @property (nonatomic, assign, readonly) BOOL nx_useBlurNavigationBar;
 
@@ -96,10 +88,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// The same as NXViewControllerPreferences `interactivePopMaxAllowedDistanceToLeftEdge` instance.
 @property (nonatomic, assign, readonly) CGFloat nx_interactivePopMaxAllowedDistanceToLeftEdge;
 
-/// 触发导航栏外观更新
+/// 主动触发导航栏外观更新
 - (void)nx_setNeedsNavigationBarAppearanceUpdate;
 
-@property (nonatomic, copy, nullable) NXNavigationConfiguration * (^nx_prepareNavigationConfiguration)(NXNavigationConfiguration *);
+@property (nonatomic, copy, nullable) NXNavigationConfiguration * (^nx_prepareNavigationConfiguration)(NXNavigationConfiguration *configuration);
 
 @end
 

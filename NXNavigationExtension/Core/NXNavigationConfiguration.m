@@ -23,20 +23,11 @@
 
 #import "NXNavigationConfiguration.h"
 
-// <@2x.png, 默认颜色：tintColor = [UIColor systemBlueColor]
-static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSUhEUgAAABgAAAAoCAMAAADT08pnAAAAflBMVEUAAAAAkP8Aev8Ae/8Aev8Ae/8AkP8Aev8Aev8Ae/8Ae/8AfP8Afv8Afv8Af/8Aev8Aev8Ae/8Ae/8Ae/8Ae/8Aev8Aev8Ae/8Ae/8Aev8AfP8Afv8Ae/8Ae/8Ae/8Aev8Ae/8Ae/8Aev8Ae/8AfP8Aff8Ae/8AgP8AhP8Aev+USLvdAAAAKXRSTlMAAvT6910F6uFHPDcsIh3x7ubcs62lkItoYU8nzp+alYWAeXRvQDEQDnA4PYMAAAC0SURBVCjPhdNJFoIwEARQjEScEBFRcB5Qyf0vKHZ2Vd3PWv4skvSQKPm0eaLFpyF4xdsw5MTehF8q8k58PEd/Rj+gP8TTGfrd8Ju4e6Hvo9O9O/FiATy6iq/JL9Hf6GfxbIle6z7ZipdH3afkVfRcf/9mRX107JIeDqBEcgU9yjyp4Rv48RI+zqXi4mZQXG6H3UD+TwEtpyH5P1Y8iProUjrzpIE14MWxV43jXVxOTu+HRn8B1TglOoU3GxgAAAAASUVORK5CYII=";
+// chevron.left@2x.png, SF Pro-Medium, compression, 默认颜色：tintColor = [UIColor whiteColor]
+static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSUhEUgAAABQAAAAjCAMAAACjKNoqAAAAgVBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9d3yJTAAAAK3RSTlMA2QUR1K2xGAzHwaWblI+Ld2hQJ83Mu7e1n5iJfXJsY11IQC0dCINYOSIHKsEspwAAAKhJREFUKM990ckSgjAURNEEJKDMCDIo4Dz9/wcqnU06przLs3ld9YTds6h+bJZSlpaV8ptim+RSTjbCWt+0AtaRHWDKYQHZXVtk2h4Wk+XabgZ5GawnS2GJZ9oAG8gSWGrau4dlMN6SC6rGDcGpBVdnxkvt1AZ6Yt2u/2jlUmnpawN9sF61Hp06s4Y7aOnUydIWOrL6HbSwVNkboAGeL7ho0VTYmjVx+AEgOgfYXg2whAAAAABJRU5ErkJggg==";
 
 
 @implementation NXNavigationBarAppearance
-
-+ (NXNavigationBarAppearance *)standardAppearance {
-    static NXNavigationBarAppearance *instance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[NXNavigationBarAppearance alloc] init];
-    });
-    return instance;
-}
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -68,10 +59,7 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
     
     newAppearance.backButtonCustomView = self.backButtonCustomView;
     newAppearance.backImage = self.backImage;
-    newAppearance.backImageInsets = self.backImageInsets;
-    
     newAppearance.landscapeBackImage = self.landscapeBackImage;
-    newAppearance.landscapeBackImageInsets = self.landscapeBackImageInsets;
 
     return newAppearance;
 }
@@ -112,15 +100,6 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 
 @implementation NXNavigationControllerPreferences
 
-+ (NXNavigationControllerPreferences *)standardPreferences {
-    static NXNavigationControllerPreferences *instance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[NXNavigationControllerPreferences alloc] init];
-    });
-    return instance;
-}
-
 - (instancetype)init {
     if (self = [super init]) {
         _fullscreenInteractivePopGestureEnabled = NO;
@@ -131,6 +110,8 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 
 - (id)copyWithZone:(NSZone *)zone {
     NXNavigationControllerPreferences *newPreferences = [[NXNavigationControllerPreferences alloc] init];
+    newPreferences.backImageInsets = self.backImageInsets;
+    newPreferences.landscapeBackImageInsets = self.landscapeBackImageInsets;
     newPreferences.fullscreenInteractivePopGestureEnabled = self.fullscreenInteractivePopGestureEnabled;
     if (@available(iOS 14.0, *)) {
         newPreferences.menuSupplementBackButton = self.menuSupplementBackButton;
@@ -138,23 +119,21 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
     return newPreferences;
 }
 
-- (void)setFullscreenInteractivePopGestureEnabled:(BOOL)fullscreenInteractivePopGestureEnabled {
-    _fullscreenInteractivePopGestureEnabled = fullscreenInteractivePopGestureEnabled;
+- (void)setMenuSupplementBackButton:(BOOL)menuSupplementBackButton {
+    _menuSupplementBackButton = menuSupplementBackButton;
+    if (menuSupplementBackButton) {
+        _backImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+        _landscapeBackImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+    } else {
+        _backImageInsets = UIEdgeInsetsZero;
+        _landscapeBackImageInsets = UIEdgeInsetsZero;
+    }
 }
 
 @end
 
 
 @implementation NXViewControllerPreferences
-
-+ (NXViewControllerPreferences *)standardPreferences {
-    static NXViewControllerPreferences *instance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[NXViewControllerPreferences alloc] init];
-    });
-    return instance;
-}
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -189,43 +168,24 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 
 
 @implementation NXNavigationConfiguration
-@synthesize navigationControllerPreferences = _navigationControllerPreferences;
-
-+ (NXNavigationConfiguration *)defaultConfiguration {
-    static NXNavigationConfiguration *instance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[NXNavigationConfiguration alloc] init];
-    });
-    return instance;
-}
-
-- (instancetype)init {
-    if (self = [super init]) {
-        if (@available(iOS 14.0, *)) {
-            [self updateNavigationBarAppearanceAllEdgeInsetsWithmenuSupplementBackButton:self.navigationControllerPreferences.menuSupplementBackButton];
-        }
-    }
-    return self;
-}
 
 - (NXNavigationBarAppearance *)navigationBarAppearance {
     if (!_navigationBarAppearance) {
-        _navigationBarAppearance = [[NXNavigationBarAppearance standardAppearance] copy];
+        _navigationBarAppearance = [[NXNavigationBarAppearance alloc] init];
     }
     return _navigationBarAppearance;
 }
 
 - (NXNavigationControllerPreferences *)navigationControllerPreferences {
     if (!_navigationControllerPreferences) {
-        _navigationControllerPreferences = [[NXNavigationControllerPreferences standardPreferences] copy];
+        _navigationControllerPreferences = [[NXNavigationControllerPreferences alloc] init];
     }
     return _navigationControllerPreferences;
 }
 
 - (NXViewControllerPreferences *)viewControllerPreferences {
     if (!_viewControllerPreferences) {
-        _viewControllerPreferences = [[NXViewControllerPreferences standardPreferences] copy];
+        _viewControllerPreferences = [[NXViewControllerPreferences alloc] init];
     }
     return _viewControllerPreferences;
 }
@@ -236,24 +196,6 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
     newConfiguration.navigationControllerPreferences = [self.navigationControllerPreferences copy];
     newConfiguration.viewControllerPreferences = [self.viewControllerPreferences copy];
     return newConfiguration;
-}
-
-- (void)setNavigationControllerPreferences:(NXNavigationControllerPreferences *)navigationControllerPreferences {
-    _navigationControllerPreferences = navigationControllerPreferences;
-
-    if (@available(iOS 14.0, *)) {
-        [self updateNavigationBarAppearanceAllEdgeInsetsWithmenuSupplementBackButton:navigationControllerPreferences.menuSupplementBackButton];
-    }
-}
-
-- (void)updateNavigationBarAppearanceAllEdgeInsetsWithmenuSupplementBackButton:(BOOL)supported {
-    if (supported) {
-        self.navigationBarAppearance.backImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
-        self.navigationBarAppearance.landscapeBackImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
-    } else {
-        self.navigationBarAppearance.backImageInsets = UIEdgeInsetsZero;
-        self.navigationBarAppearance.landscapeBackImageInsets = UIEdgeInsetsZero;
-    }
 }
 
 @end

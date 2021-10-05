@@ -47,7 +47,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        _originalBackgroundColor = [NXNavigationBarAppearance standardAppearance].backgroundColor;
         _originalNavigationBarFrame = CGRectZero;
         _shadowImageView = [[UIImageView alloc] init];
         _shadowImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -72,7 +71,6 @@
         _backgroundEffectView = [[UIVisualEffectView alloc] initWithEffect:effect];
         _backgroundEffectView.hidden = YES;
         _blurEffectEnabled = NO;
-        _backgroundImageView.image = [NXNavigationBarAppearance standardAppearance].backgroundImage;
         
         [self addSubview:self.backgroundImageView];
         [self addSubview:self.backgroundEffectView];
@@ -155,15 +153,14 @@
     return nil;
 }
 
-+ (void)registerNavigationControllerClass:(Class)aClass {
-    [self registerNavigationControllerClass:aClass withConfiguration:nil];
-}
-
 + (void)registerNavigationControllerClass:(Class)aClass withConfiguration:(NXNavigationConfiguration *)configuration {
     NSAssert(aClass != nil, @"参数 aClass 不能为空！");
-    if (!aClass) return;
+    NSAssert(configuration != nil, @"参数 configuration 不能为空！");
     
-    [NXNavigationBar allConfigurations][NSStringFromClass(aClass)] = configuration ?: [NXNavigationConfiguration defaultConfiguration];
+    if (!aClass) return;
+    if (!configuration) return;
+    
+    [NXNavigationBar allConfigurations][NSStringFromClass(aClass)] = configuration;
 }
 
 @end

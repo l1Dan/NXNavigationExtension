@@ -24,6 +24,7 @@
 #import "NXNavigationConfiguration.h"
 #import "NXNavigationExtensionPrivate.h"
 #import "NXNavigationExtensionRuntime.h"
+#import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
 
 
@@ -77,7 +78,7 @@
     
     // Ignore when the active view controller doesn't allow interactive pop.
     UIViewController *topViewController = self.navigationController.viewControllers.lastObject;
-    if (!topViewController.nx_enableFullscreenInteractivePopGesture) {
+    if (![self.navigationController nx_checkFullscreenInteractivePopGestureEnabledWithViewController:topViewController]) {
         return NO;
     }
     
@@ -215,67 +216,6 @@
 @end
 
 
-@implementation UIViewController (NXNavigationExtensionPrivate)
-
-- (NXNavigationConfiguration *)nx_configuration {
-    NXNavigationConfiguration *configuration = objc_getAssociatedObject(self, _cmd);
-    return configuration ?: [NXNavigationConfiguration defaultConfiguration];
-}
-
-- (void)setNx_configuration:(NXNavigationConfiguration *)nx_configuration {
-    objc_setAssociatedObject(self, @selector(nx_configuration), nx_configuration, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController menuSupplementBackButton:(BOOL)supported {
-    if (@available(iOS 14.0, *)) {
-        if (self.nx_backButtonMenuEnabled) {
-            NSAssert(supported, @"需要设置 NXNavigationControllerPreferences menuSupplementBackButton 属性为 YES 才能生效");
-            if (supported && !self.navigationItem.leftItemsSupplementBackButton) {
-                self.navigationItem.leftBarButtonItem = nil;
-                self.navigationItem.leftBarButtonItems = nil;
-                return;
-            }
-        }
-    }
-    
-    UIBarButtonItem *backButtonItem = self.navigationItem.leftBarButtonItem;
-    UIView *customView = self.nx_backButtonCustomView;
-    if (customView) {
-        backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customView];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nx_triggerSystemPopViewController)];
-        customView.userInteractionEnabled = YES;
-        [customView addGestureRecognizer:tap];
-    } else {
-        // 如果 leftBarButtonItem(s) 为空则添加 backButtonItem
-        if (!backButtonItem) {
-            NXNavigationConfiguration *configuration = navigationController ? navigationController.nx_configuration : [NXNavigationConfiguration defaultConfiguration];
-            UIImage *backImage = self.nx_backImage ?: configuration.navigationBarAppearance.backImage;
-            UIImage *landscapeBackImage = self.nx_backImage ?: configuration.navigationBarAppearance.landscapeBackImage;
-            
-            backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage landscapeImagePhone:landscapeBackImage style:UIBarButtonItemStylePlain target:self action:@selector(nx_triggerSystemPopViewController)];
-            backButtonItem.imageInsets = self.nx_backImageInsets;
-            backButtonItem.landscapeImagePhoneInsets = self.nx_landscapeBackImageInsets;
-        }
-    }
-    self.navigationItem.leftBarButtonItem = backButtonItem;
-}
-
-/// 保证 self.navigationController 不为 nil，不要直接调研 navigationController 方法
-- (void)nx_triggerSystemPopViewController {
-    if (self.navigationController) {
-        NSArray<UIViewController *> *viewControllers = self.navigationController.viewControllers;
-        UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : nil;
-        [self.navigationController nx_triggerSystemPopViewController:destinationViewController
-                                                     interactiveType:NXNavigationInteractiveTypeBackButtonAction
-                                                             handler:^id _Nonnull(UINavigationController * _Nonnull navigationController) {
-            return [navigationController popViewControllerAnimated:YES];
-        }];
-    }
-}
-
-@end
-
-
 @implementation UINavigationController (NXNavigationExtensionPrivate)
 
 - (NXEdgeGestureRecognizerDelegate *)nx_gestureDelegate {
@@ -331,6 +271,76 @@
         return handler(topViewController.navigationController);
     }
     return nil;
+}
+
+- (BOOL)nx_checkFullscreenInteractivePopGestureEnabledWithViewController:(__kindof UIViewController *)viewController {
+    if (viewController.nx_enableFullscreenInteractivePopGesture) {
+        return viewController.nx_enableFullscreenInteractivePopGesture;
+    }
+    if (self.nx_fullscreenInteractivePopGestureEnabled) {
+        return self.nx_fullscreenInteractivePopGestureEnabled;
+    }
+    return NO;
+}
+
+@end
+
+
+@implementation UIViewController (NXNavigationExtensionPrivate)
+
+- (NXNavigationConfiguration *)nx_configuration {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setNx_configuration:(NXNavigationConfiguration *)nx_configuration {
+    objc_setAssociatedObject(self, @selector(nx_configuration), nx_configuration, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController menuSupplementBackButton:(BOOL)supported {
+    if (@available(iOS 14.0, *)) {
+        if (self.nx_backButtonMenuEnabled) {
+            NSAssert(supported, @"需要设置 NXNavigationControllerPreferences menuSupplementBackButton 属性为 YES 才能生效");
+            if (supported && !self.navigationItem.leftItemsSupplementBackButton) {
+                self.navigationItem.leftBarButtonItem = nil;
+                self.navigationItem.leftBarButtonItems = nil;
+                return;
+            }
+        }
+    }
+    
+    UIBarButtonItem *backButtonItem = self.navigationItem.leftBarButtonItem;
+    UIView *customView = self.nx_backButtonCustomView;
+    if (customView) {
+        backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customView];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nx_triggerSystemPopViewController)];
+        customView.userInteractionEnabled = YES;
+        [customView addGestureRecognizer:tap];
+    } else {
+        // 如果 leftBarButtonItem(s) 为空则添加 backButtonItem
+        if (!backButtonItem) {
+            NXNavigationConfiguration *configuration = navigationController.nx_configuration;
+            UIImage *backImage = self.nx_backImage ?: configuration.navigationBarAppearance.backImage;
+            UIImage *landscapeBackImage = self.nx_backImage ?: configuration.navigationBarAppearance.landscapeBackImage;
+            
+            backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage landscapeImagePhone:landscapeBackImage style:UIBarButtonItemStylePlain target:self action:@selector(nx_triggerSystemPopViewController)];
+            backButtonItem.imageInsets = navigationController.nx_backImageInsets;
+            backButtonItem.landscapeImagePhoneInsets = navigationController.nx_landscapeBackImageInsets;
+        }
+    }
+    self.navigationItem.leftBarButtonItem = backButtonItem;
+}
+
+/// 保证 self.navigationController 不为 nil，不要直接调研 navigationController 方法
+- (void)nx_triggerSystemPopViewController {
+    if (self.navigationController) {
+        NSArray<UIViewController *> *viewControllers = self.navigationController.viewControllers;
+        UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : nil;
+        [self.navigationController nx_triggerSystemPopViewController:destinationViewController
+                                                     interactiveType:NXNavigationInteractiveTypeBackButtonAction
+                                                             handler:^id _Nonnull(UINavigationController * _Nonnull navigationController) {
+            return [navigationController popViewControllerAnimated:YES];
+        }];
+    }
 }
 
 @end

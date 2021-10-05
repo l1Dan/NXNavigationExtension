@@ -23,7 +23,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
         
-    [NXNavigationConfiguration defaultConfiguration].navigationControllerPreferences.fullscreenInteractivePopGestureEnabled = YES;
     NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
     configuration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
     if (@available(iOS 14.0, *)) {

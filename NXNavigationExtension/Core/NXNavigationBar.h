@@ -43,18 +43,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// NXNavigationBar 模糊背景
 @property (nonatomic, strong, readonly) UIVisualEffectView *backgroundEffectView;
 
-/// 获取当前导航控制器注册的全局配置
+/// 获取当前导航控制器对应的配置信息
 /// @param navigationController 当前视图控制器的 navigationController
 + (nullable NXNavigationConfiguration *)configurationFromRegisterNavigationController:(__kindof UINavigationController *)navigationController;
 
-/// 设置需要注册的导航控制器，默认 configuration 为 [NXNavigationConfiguration defaultConfiguration]
-/// @param aClass UINavigationController 或子类类对象
-+ (void)registerNavigationControllerClass:(Class)aClass;
-
-/// 设置需要注册的导航控制器，并且设置导航栏的外观，默认 configuration 为 [NXNavigationConfiguration defaultConfiguration]
-/// @param aClass UINavigationController 或子类类对象
-/// @param configuration NXNavigationConfiguration 导航栏全局配置
-+ (void)registerNavigationControllerClass:(Class)aClass withConfiguration:(nullable NXNavigationConfiguration *)configuration;
+/// 设置需要注册的导航控制器与配置信息
+/// @param aClass 需要注册的 UINavigationController 或子类泪对象
+/// @param configuration NXNavigationConfiguration 配置信息
++ (void)registerNavigationControllerClass:(Class)aClass withConfiguration:(NXNavigationConfiguration *)configuration;
 
 @end
 

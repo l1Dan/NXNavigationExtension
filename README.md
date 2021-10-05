@@ -89,7 +89,7 @@ github "l1Dan/NXNavigationExtension"
 
 ```objc
 // 1
-NXNavigationConfiguration *configuration = [NXNavigationConfiguration defaultConfiguration];
+NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
 configuration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
 if (@available(iOS 14.0, *)) {
     configuration.navigationControllerPreferences.menuSupplementBackButton = YES;
@@ -108,16 +108,12 @@ if (@available(iOS 14.0, *)) {
 ❌ 不推荐
 
 ```objc
-NXNavigationConfiguration *configuration = [NXNavigationConfiguration defaultConfiguration];
+NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
 configuration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
 if (@available(iOS 14.0, *)) {
     configuration.navigationControllerPreferences.menuSupplementBackButton = YES;
 }
 [NXNavigationBar registerNavigationControllerClass:[UINavigationController class] withConfiguration:configuration];
-
-// OR
-
-[NXNavigationBar registerNavigationControllerClass:[UINavigationController class]];
 ```
 
 **注意**：
@@ -286,16 +282,11 @@ NXNavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
 }
 ```
 
-- 全局有效（在调用`registerNavigationControllerClass:`或`registerNavigationControllerClass:withConfiguration:`方法之前设置）
+- 全局有效（在调用`registerNavigationControllerClass:withConfiguration:`方法之前设置）
 
 ```objc
-[NXNavigationControllerPreferences standardPreferences].fullscreenInteractivePopGestureEnabled = YES;
-
-// OR
-
 NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
 configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEnabled = YES;
-
 ```
 
 #### 导航栏返回事件拦截
@@ -425,17 +416,10 @@ configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEna
 - 设置 NXNavigationControllerPreferences `menuSupplementBackButton` 属性
 
 ```objc
-if (@available(iOS 14.0, *)) {
-    [NXNavigationControllerPreferences standardPreferences].menuSupplementBackButton = YES;
-}
-
-// OR
-
 NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
 if (@available(iOS 14.0, *)) {
     configuration.navigationControllerPreferences.menuSupplementBackButton = YES;
 }
-
 ```
 
 - 还需要在页面内设置

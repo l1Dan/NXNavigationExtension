@@ -81,19 +81,6 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 @end
 
 
-@interface UIViewController (NXNavigationExtensionPrivate)
-
-/// 获取当前导航控制器的配置
-@property (nonatomic, strong, nullable) NXNavigationConfiguration *nx_configuration;
-
-/// 设置 UINavigationBarItem
-/// @param navigationController 包含 UIViewController 的 UINavigationController
-/// @param supported 是否支持使用系统返回菜单按钮
-- (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController menuSupplementBackButton:(BOOL)supported;
-
-@end
-
-
 @interface UINavigationController (NXNavigationExtensionPrivate)
 
 /// 手势代理对象
@@ -115,6 +102,23 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 - (id)nx_triggerSystemPopViewController:(__kindof UIViewController *)viewController
                         interactiveType:(NXNavigationInteractiveType)interactiveType
                                 handler:(id (^)(UINavigationController *navigationController))handler;
+
+/// 检查全屏手势是否可用
+/// @param viewController 当前的视图控制器
+- (BOOL)nx_checkFullscreenInteractivePopGestureEnabledWithViewController:(__kindof UIViewController *)viewController;
+
+@end
+
+
+@interface UIViewController (NXNavigationExtensionPrivate)
+
+/// 获取当前导航控制器的配置
+@property (nonatomic, strong, nullable) NXNavigationConfiguration *nx_configuration;
+
+/// 设置 UINavigationBarItem
+/// @param navigationController 包含 UIViewController 的 UINavigationController
+/// @param supported 是否支持使用系统返回菜单按钮
+- (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController menuSupplementBackButton:(BOOL)supported;
 
 @end
 

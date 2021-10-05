@@ -1,5 +1,12 @@
 # CHANGELOG.md
 
+## 3.5.1
+
+优化 `backImageInsets` 和 `landscapeBackImageInsets` 属性处理方式，移除所有单例的使用。
+
+- 修改: README.md 文件;
+- 示例代码优化。
+
 ## 3.5.0
 
 统一默认偏好设置和外观设置的方式，方面使用。以下三种设置都可以在 `NXNavigationConfiguration` 中使用。

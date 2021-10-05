@@ -477,39 +477,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     return backButtonCustomView;
 }
 
-- (UIEdgeInsets)nx_backImageInsets {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationBarAppearance.backImageInsets;
-    }
-    
-    NSString *insetsValue = objc_getAssociatedObject(self, _cmd);
-    if (insetsValue && [insetsValue isKindOfClass:[NSString class]]) {
-        return UIEdgeInsetsFromString(insetsValue);
-    }
-    UIEdgeInsets insets = configuration.navigationBarAppearance.backImageInsets;
-    
-    objc_setAssociatedObject(self, _cmd, NSStringFromUIEdgeInsets(insets), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return insets;
-}
-
-- (UIEdgeInsets)nx_landscapeBackImageInsets {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationBarAppearance.landscapeBackImageInsets;
-    }
-    
-    NSString *insetsValue = objc_getAssociatedObject(self, _cmd);
-    if (insetsValue && [insetsValue isKindOfClass:[NSString class]]) {
-        return UIEdgeInsetsFromString(insetsValue);
-    }
-    UIEdgeInsets insets = configuration.navigationBarAppearance.landscapeBackImageInsets;
-    objc_setAssociatedObject(self, _cmd, NSStringFromUIEdgeInsets(insets), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return insets;
-}
-
 - (BOOL)nx_useBlurNavigationBar {
     NXNavigationConfiguration *configuration = self.nx_configuration;
     if (self.nx_prepareNavigationConfiguration) {
@@ -553,8 +520,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     if (enableFullscreenInteractivePopGesture && [enableFullscreenInteractivePopGesture isKindOfClass:[NSNumber class]]) {
         return [enableFullscreenInteractivePopGesture boolValue];
     }
-    BOOL fullscreenInteractivePopGestureEnabled = configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEnabled;
-    enableFullscreenInteractivePopGesture = [NSNumber numberWithBool:fullscreenInteractivePopGestureEnabled ?: configuration.viewControllerPreferences.enableFullscreenInteractivePopGesture];
+    enableFullscreenInteractivePopGesture = [NSNumber numberWithBool:configuration.viewControllerPreferences.enableFullscreenInteractivePopGesture];
     objc_setAssociatedObject(self, _cmd, enableFullscreenInteractivePopGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return [enableFullscreenInteractivePopGesture boolValue];
 }
@@ -645,8 +611,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     if (self.navigationController && self.navigationController.nx_useNavigationBar && self.navigationController.viewControllers.count > 1) {
         BOOL menuSupplementBackButton = NO;
         if (@available(iOS 14.0, *)) {
-            NXNavigationConfiguration *configuration = self.nx_configuration;
-            menuSupplementBackButton = configuration.navigationControllerPreferences.menuSupplementBackButton;
+            menuSupplementBackButton = self.navigationController.nx_menuSupplementBackButton;
             self.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal;
         }
         [self nx_configureNavigationBarWithNavigationController:self.navigationController menuSupplementBackButton:menuSupplementBackButton];

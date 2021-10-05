@@ -54,9 +54,6 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
 
 NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance : NSObject <NSCopying>
 
-/// 全局默认外观设置
-@property (nonatomic, strong, class, readonly) NXNavigationBarAppearance *standardAppearance;
-
 /// 设置 UINavigationBar tintColor（返回按钮颜色），默认：[UIColor systemBlueColor]
 @property (nonatomic, strong) UIColor *tintColor;
 
@@ -90,23 +87,20 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 /// 设置横屏时显示的返回按钮图片
 @property (nonatomic, strong, nullable) UIImage *landscapeBackImage;
 
-/// 设置返回按钮图片 `backImage` 的 insets，默认：UIEdgeInsetsZero
-/// 当 NXNavigationControllerPreferences `menuSupplementBackButton = YES` 时 backImageInsets = {0, -8, 0, 0}
-@property (nonatomic, assign) UIEdgeInsets backImageInsets;
-
-/// 设置横屏时显示返回按钮图片 `landscapeBackImage` 的 insets，默认：UIEdgeInsetsZero
-/// 当 NXNavigationControllerPreferences  `menuSupplementBackButton = YES` 时 landscapeBackImageInsets = {0, -8, 0, 0}
-@property (nonatomic, assign) UIEdgeInsets landscapeBackImageInsets;
-
 @end
 
 
 @interface NXNavigationControllerPreferences : NSObject <NSCopying>
 
-/// 全局默认导航控制器偏好设置
-@property (nonatomic, strong, class, readonly) NXNavigationControllerPreferences *standardPreferences;
+/// 设置返回按钮图片 `backImage` 的 insets，默认：UIEdgeInsetsZero
+/// 当 `menuSupplementBackButton = YES` 时 backImageInsets = {0, -8, 0, 0}
+@property (nonatomic, assign) UIEdgeInsets backImageInsets;
 
-/// 开启全屏手势；默认：NO
+/// 设置横屏时显示返回按钮图片 `landscapeBackImage` 的 insets，默认：UIEdgeInsetsZero
+/// 当 `menuSupplementBackButton = YES` 时 landscapeBackImageInsets = {0, -8, 0, 0}
+@property (nonatomic, assign) UIEdgeInsets landscapeBackImageInsets;
+
+/// 是否开启全屏手势；默认：NO
 @property (nonatomic, assign) BOOL fullscreenInteractivePopGestureEnabled;
 
 /// 是否支持返回按钮菜单（iOS14 长按返回按钮会出现返回控制器列表）; 默认：NO
@@ -116,9 +110,6 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 
 
 @interface NXViewControllerPreferences : NSObject <NSCopying>
-
-/// 全局默认视图控制器偏好设置
-@property (nonatomic, strong, class, readonly) NXViewControllerPreferences *standardPreferences;
 
 /// 是否启用导航栏模糊效果；默认 NO。需要设置 nx_navigationBarBackgroundColor 的 alpha 颜色通道才会有模糊效果
 /// 将 nx_navigationBarBackgroundColor 设置为 [UIColor clearColor]，可以实现类似系统导航栏的模糊效果
@@ -150,16 +141,13 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 /// 是否开启返回按钮菜单，默认 `NO`。如果设置为 `YES`需要同时设置 NXNavigationControllerPreferences 属性 `menuSupplementBackButton = YES`
 @property (nonatomic, assign) BOOL backButtonMenuEnabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
-/// 设置触发全屏手势返回，离左边最大滑动距离
+/// 设置全屏手势触发距离
 @property (nonatomic, assign) CGFloat interactivePopMaxAllowedDistanceToLeftEdge;
 
 @end
 
 
 @interface NXNavigationConfiguration : NSObject <NSCopying>
-
-/// 全局默认外观设置
-@property (nonatomic, strong, class, readonly) NXNavigationConfiguration *defaultConfiguration;
 
 /// 默认导航栏外观
 @property (nonatomic, strong) NXNavigationBarAppearance *navigationBarAppearance;

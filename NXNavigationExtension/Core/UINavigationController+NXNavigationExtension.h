@@ -25,8 +25,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
 @interface UINavigationController (NXNavigationExtension)
+
+/// The same as NXNavigationControllerPreferences `backImageInsets` instance.
+@property (nonatomic, assign, readonly) UIEdgeInsets nx_backImageInsets;
+
+/// The same as NXNavigationControllerPreferences `landscapeBackImageInsets` instance.
+@property (nonatomic, assign, readonly) UIEdgeInsets nx_landscapeBackImageInsets;
+
+/// The same as NXNavigationControllerPreferences `fullscreenInteractivePopGestureEnabled` instance.
+@property (nonatomic, assign) BOOL nx_fullscreenInteractivePopGestureEnabled;
+
+/// The same as NXNavigationControllerPreferences `menuSupplementBackButton` instance.
+@property (nonatomic, assign) BOOL nx_menuSupplementBackButton API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 /// 全屏手势 UIPanGestureRecognizer
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *nx_fullscreenPopGestureRecognizer;
