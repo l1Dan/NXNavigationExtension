@@ -1,5 +1,10 @@
 # CHANGELOG.md
 
+## 3.5.2
+
+1. 代码优化
+2. 添加解决滑动返回手势冲突和导航栏渐变的代码示例
+
 ## 3.5.1
 
 优化 `backImageInsets` 和 `landscapeBackImageInsets` 属性处理方式，移除所有单例的使用。
@@ -46,7 +51,7 @@ NXNavigationBar 可以跟随系统导航栏的显示隐藏。虽然不推荐使�
 
 ## 3.4.6
 
-1. 框架代码优化，整理废弃 API，为未来 4.0.0 版本和 SwiftUI 作准备。示例程序代码适配 Xcode13。
+1. 框架代码优化，整理废弃 API，为后续 4.x 版本和 SwiftUI 作准备。示例程序代码适配 Xcode13。
 2. 将视图控制器的属性 `nx_translucentNavigationBar` 的属性设置为 `YES` 时，可以达到隐藏导航栏的目的（只是将导航栏变为透明，并不是真正意义上的隐藏，不推荐直接使用系统导航栏提供的显示或隐藏的方法）。但是这样设置之后会发现 self.navigationItem.title/titleView 还是存在的，这显然是不太符合的导航栏透明或者隐藏的语意。所以为了解决这个问题，现在设置 `nx_translucentNavigationBar` 属性为 `YES` 时，不仅会将导航栏设置为透明的，还会将导航栏上面的所有元素设置为透明或者隐藏的，这样导航栏的外观看起来才更加符合设置 `nx_translucentNavigationBar = YES` 的预期效果。
 
 - 新增: `contentViewEdgeInsets` 属性；

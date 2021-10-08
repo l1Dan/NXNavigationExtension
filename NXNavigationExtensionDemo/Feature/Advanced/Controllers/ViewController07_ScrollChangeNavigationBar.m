@@ -41,9 +41,7 @@
     
     [self setNeedsStatusBarAppearanceUpdate];
     
-    if (!self.nx_navigationBar) {
-        return;
-    }
+    if (!self.nx_navigationBar) return;
     
     [self.nx_navigationBar.contentView addSubview:self.fakeNavigationBar];
     self.nx_navigationBar.alpha = 0.0;

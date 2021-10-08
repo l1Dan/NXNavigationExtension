@@ -9,7 +9,6 @@
 
 #import "ViewController05_Custom.h"
 #import "ViewController12_Modal.h"
-#import "UIImage+NavigationBar.h"
 
 #import "UIColor+RandomColor.h"
 #import "UIDevice+Additions.h"
@@ -33,9 +32,7 @@
     self.navigationItem.title = nil;
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
-    if (!self.nx_navigationBar) {
-        return;
-    }
+    if (!self.nx_navigationBar) return;
     
     [self.nx_navigationBar.contentView addSubview:self.searchBar];
     [self.nx_navigationBar.contentView addSubview:self.backButton];
@@ -61,6 +58,13 @@
     [self.addButton.heightAnchor constraintEqualToAnchor:self.searchBar.heightAnchor].active = YES;
     [self.addButton.centerYAnchor constraintEqualToAnchor:self.searchBar.centerYAnchor].active = YES;
     [self.addButton.widthAnchor constraintEqualToConstant:44].active = YES;
+    
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.colors = @[(__bridge id)[UIColor randomLightColor].CGColor, (__bridge id)[UIColor randomDarkColor].CGColor];
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(1.0, 0);
+    gradientLayer.frame = self.nx_navigationBar.bounds;
+    [self.nx_navigationBar.layer addSublayer:gradientLayer];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -81,10 +85,6 @@
 
 - (UIColor *)nx_barTintColor {
     return [UIColor clearColor];
-}
-
-- (UIImage *)nx_navigationBarBackgroundImage {
-    return UIImage.navigationBarBackgorundImage;
 }
 
 // 点击导航栏控件事件可以由 contentView 响应

@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ViewController02_FullPopGesture : CustomTableViewController
+@interface ViewController02_FullPopGesture : BaseViewController
 
 @end
 

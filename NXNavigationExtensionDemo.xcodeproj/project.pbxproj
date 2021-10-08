@@ -56,6 +56,8 @@
 		D6440970265AC73C00BCE890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D644096C265AC73C00BCE890 /* Assets.xcassets */; };
 		D6440971265AC73C00BCE890 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D644096D265AC73C00BCE890 /* LaunchScreen.storyboard */; };
 		D6513E0926C8004C00B593AC /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6513E0826C8004C00B593AC /* BaseTableViewController.m */; };
+		D65D3B2A271036DB00FCA891 /* ViewController06_ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D65D3B29271036DB00FCA891 /* ViewController06_ScrollView.m */; };
+		D65D3B2D2710372000FCA891 /* ViewController07_PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D65D3B2C2710372000FCA891 /* ViewController07_PageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -167,6 +169,10 @@
 		D644096F265AC73C00BCE890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6513E0726C8004C00B593AC /* BaseTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
 		D6513E0826C8004C00B593AC /* BaseTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
+		D65D3B28271036DB00FCA891 /* ViewController06_ScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController06_ScrollView.h; sourceTree = "<group>"; };
+		D65D3B29271036DB00FCA891 /* ViewController06_ScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController06_ScrollView.m; sourceTree = "<group>"; };
+		D65D3B2B2710372000FCA891 /* ViewController07_PageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController07_PageViewController.h; sourceTree = "<group>"; };
+		D65D3B2C2710372000FCA891 /* ViewController07_PageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController07_PageViewController.m; sourceTree = "<group>"; };
 		D6771E8826987D6D004A1749 /* NXNavigationExtensionDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NXNavigationExtensionDemo.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -323,6 +329,10 @@
 				D624E93B2654F71200CC96E6 /* ViewController04_Test.m */,
 				D624E93C2654F71200CC96E6 /* ViewController05_Test.h */,
 				D624E9362654F71200CC96E6 /* ViewController05_Test.m */,
+				D65D3B28271036DB00FCA891 /* ViewController06_ScrollView.h */,
+				D65D3B29271036DB00FCA891 /* ViewController06_ScrollView.m */,
+				D65D3B2B2710372000FCA891 /* ViewController07_PageViewController.h */,
+				D65D3B2C2710372000FCA891 /* ViewController07_PageViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -512,6 +522,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D65D3B2A271036DB00FCA891 /* ViewController06_ScrollView.m in Sources */,
 				D624E98A2654F71200CC96E6 /* ViewController04_Test.m in Sources */,
 				D624E9982654F71200CC96E6 /* ViewController05_ShadowColor.m in Sources */,
 				D624E9752654F71200CC96E6 /* BaseNavigationController.m in Sources */,
@@ -551,6 +562,7 @@
 				D624E99C2654F71200CC96E6 /* HierarchyViewController.m in Sources */,
 				D624E9992654F71200CC96E6 /* EventInterceptModel.m in Sources */,
 				D624E99A2654F71200CC96E6 /* RedirectViewControllerModel.m in Sources */,
+				D65D3B2D2710372000FCA891 /* ViewController07_PageViewController.m in Sources */,
 				D6513E0926C8004C00B593AC /* BaseTableViewController.m in Sources */,
 				D624E99F2654F71200CC96E6 /* DashboardTabBarController.m in Sources */,
 				D624E9772654F71200CC96E6 /* UITableViewCell+Enabled.m in Sources */,

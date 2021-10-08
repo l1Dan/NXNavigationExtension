@@ -75,6 +75,7 @@ github "l1Dan/NXNavigationExtension"
 - ✅` 导航栏点击事件穿透到底部`
 - ✅` 动态修改导航栏样式`
 - ✅` 更新导航栏样式`
+- ✅` 渐变导航变样式`
 - ✅` 长按返回按钮显示菜单功能`
 - 更多功能请查看示例程序...
 
@@ -83,26 +84,17 @@ github "l1Dan/NXNavigationExtension"
 所有对导航栏外观的修改都是基于视图控制器 `UIViewController` 修改的，而不是基于导航控制器 `UINavigationController` 修改，这种设计逻辑更加符合实际应用场景。也就是说视图控制器管理自己的导航栏，而不是使用导航控制器来全局管理。
 
 1. 💉 导入头文件 `#import <NXNavigationExtension/NXNavigationExtension.h>`
-2. 💉 使用之前需要先注册需要修改的导航控制器，以 `FeatureNavigationController` 和 `OtherNavigationController` 为例：
+2. 💉 使用之前需要先注册需要修改的导航控制器，以 `FeatureNavigationController` 为例：
 
 ✅ 推荐
 
 ```objc
-// 1
 NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
 configuration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
 if (@available(iOS 14.0, *)) {
     configuration.navigationControllerPreferences.menuSupplementBackButton = YES;
 }
 [NXNavigationBar registerNavigationControllerClass:[FeatureNavigationController class] withConfiguration:configuration];
-
-// 2
-NXNavigationConfiguration *otherConfiguration = [[NXNavigationConfiguration alloc] init];
-otherConfiguration.navigationBarAppearance.backgroundColor = [UIColor redColor];
-if (@available(iOS 14.0, *)) {
-    otherConfiguration.navigationControllerPreferences.menuSupplementBackButton = YES;
-}
-[NXNavigationBar registerNavigationControllerClass:[OtherNavigationController class] withConfiguration:otherConfiguration];
 ```
 
 ❌ 不推荐
@@ -113,6 +105,7 @@ configuration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
 if (@available(iOS 14.0, *)) {
     configuration.navigationControllerPreferences.menuSupplementBackButton = YES;
 }
+// UINavigationController 会影响所有的导航控制器，所以不推荐使用这种方式注册
 [NXNavigationBar registerNavigationControllerClass:[UINavigationController class] withConfiguration:configuration];
 ```
 
@@ -126,6 +119,7 @@ if (@available(iOS 14.0, *)) {
 - 🚫 不要使用系统导航栏或导航控制器 `appearance` 相关属性修改。
 - 🚫 ~~不要使用全局 `edgesForExtendedLayout` 修改~~。*3.4.2*及以后的版本已经支持。
 - 🚫 不要使用 `<UIGestureRecognizerDelegate>` 相关方法禁用手势返回。
+- 使用 [UIScrollView](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/Feature/Tests/Controllers/ViewController06_ScrollView.m) 和 [UIPageViewController](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/Feature/Tests/Controllers/ViewController07_PageViewController.m) 手势冲突解决方案
 - 💉 一句话“不要直接操作导航栏或者导航控制器，把这些都交给 `NXNavigationExtension` 处理吧“。
 
 建议：除非你非常明白修改全局性东西的后果，否则不要修改，这么做的原因就是为了减少走一些弯路！
