@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navigationBar);
 
 /// 边缘滑动返回手势代理
-@interface NXEdgeGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
+@interface NXScreenEdgePopGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
 
 /// 获取当前导航控制器
 @property (nonatomic, weak, readonly) UINavigationController *navigationController;
@@ -83,13 +83,13 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 
 @interface UINavigationController (NXNavigationExtensionPrivate)
 
-/// 手势代理对象
-@property (nonatomic, strong) NXEdgeGestureRecognizerDelegate *nx_gestureDelegate;
+/// 侧滑手势代理对象
+@property (nonatomic, strong, readonly) NXScreenEdgePopGestureRecognizerDelegate *nx_screenEdgePopGestureDelegate;
 
-/// 全屏收拾代理对象
+/// 全屏手势代理对象
 @property (nonatomic, strong, readonly) NXFullscreenPopGestureRecognizerDelegate *nx_fullscreenPopGestureDelegate;
 
-/// 是否使用 NXNavigationBar；默认 NO；没有注册导航栏时会使用系统的导航栏
+/// 是否使用 NXNavigationBar；默认 NO；如果为 NO 则使用系统导航栏
 @property (nonatomic, assign, readonly) BOOL nx_useNavigationBar;
 
 /// 配置 NXNavigationBar

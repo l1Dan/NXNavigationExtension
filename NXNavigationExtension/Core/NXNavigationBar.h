@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置 `contentView` 的外边距；默认 UIEdgeInsetsMake(0, 8, 0, 8)
 @property (nonatomic, assign) UIEdgeInsets contentViewEdgeInsets;
 
-/// 设置自定义导航栏内容
+/// 添加自定义导航栏内容
 @property (nonatomic, strong, readonly) UIView *contentView;
 
 /// NXNavigationBar 底部阴影

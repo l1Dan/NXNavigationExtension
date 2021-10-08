@@ -28,7 +28,7 @@
 #import "UIViewController+NXNavigationExtension.h"
 
 
-@implementation NXEdgeGestureRecognizerDelegate
+@implementation NXScreenEdgePopGestureRecognizerDelegate
 
 - (instancetype)initWithNavigationController:(UINavigationController *)navigationController {
     if (self = [super init]) {
@@ -218,12 +218,12 @@
 
 @implementation UINavigationController (NXNavigationExtensionPrivate)
 
-- (NXEdgeGestureRecognizerDelegate *)nx_gestureDelegate {
+- (NXScreenEdgePopGestureRecognizerDelegate *)nx_screenEdgePopGestureDelegate {
     return objc_getAssociatedObject(self, _cmd);
 }
 
-- (void)setNx_gestureDelegate:(NXEdgeGestureRecognizerDelegate *)nx_gestureDelegate {
-    objc_setAssociatedObject(self, @selector(nx_gestureDelegate), nx_gestureDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setNx_screenEdgePopGestureDelegate:(NXScreenEdgePopGestureRecognizerDelegate * _Nonnull)nx_screenEdgePopGestureDelegate {
+    objc_setAssociatedObject(self, @selector(nx_screenEdgePopGestureDelegate), nx_screenEdgePopGestureDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NXFullscreenPopGestureRecognizerDelegate *)nx_fullscreenPopGestureDelegate {
@@ -250,8 +250,8 @@
     [self.navigationBar setShadowImage:[[UIImage alloc] init]];
     [self.navigationBar setTranslucent:YES];
     
-    self.nx_gestureDelegate = [[NXEdgeGestureRecognizerDelegate alloc] initWithNavigationController:self];
-    self.interactivePopGestureRecognizer.delegate = self.nx_gestureDelegate;
+    self.nx_screenEdgePopGestureDelegate = [[NXScreenEdgePopGestureRecognizerDelegate alloc] initWithNavigationController:self];
+    self.interactivePopGestureRecognizer.delegate = self.nx_screenEdgePopGestureDelegate;
 }
 
 - (id)nx_triggerSystemPopViewController:(__kindof UIViewController *)viewController
