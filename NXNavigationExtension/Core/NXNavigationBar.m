@@ -144,7 +144,9 @@
     [self updateNavigationBarContentFrameCallSuper:NO];
 }
 
-+ (NXNavigationConfiguration *)configurationFromRegisterNavigationController:(__kindof UINavigationController *)navigationController {
++ (NXNavigationConfiguration *)configurationFromNavigationController:(__kindof UINavigationController *)navigationController {
+    if (!navigationController) return nil;
+    
     for (NSString *className in [NXNavigationBar allConfigurations]) {
         if ([navigationController isKindOfClass:NSClassFromString(className)]) {
             return [NXNavigationBar allConfigurations][className];
@@ -153,14 +155,14 @@
     return nil;
 }
 
-+ (void)registerNavigationControllerClass:(Class)aClass withConfiguration:(NXNavigationConfiguration *)configuration {
-    NSAssert(aClass != nil, @"参数 aClass 不能为空！");
++ (void)registerNavigationControllerClass:(Class)navigationControllerClass withConfiguration:(NXNavigationConfiguration *)configuration {
+    NSAssert(navigationControllerClass != nil, @"参数 navigationControllerClass 不能为空！");
     NSAssert(configuration != nil, @"参数 configuration 不能为空！");
     
-    if (!aClass) return;
+    if (!navigationControllerClass) return;
     if (!configuration) return;
     
-    [NXNavigationBar allConfigurations][NSStringFromClass(aClass)] = configuration;
+    [NXNavigationBar allConfigurations][NSStringFromClass(navigationControllerClass)] = configuration;
 }
 
 @end

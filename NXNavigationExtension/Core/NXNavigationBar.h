@@ -45,12 +45,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 获取当前导航控制器对应的配置信息
 /// @param navigationController 当前视图控制器的 navigationController
-+ (nullable NXNavigationConfiguration *)configurationFromRegisterNavigationController:(__kindof UINavigationController *)navigationController;
++ (nullable NXNavigationConfiguration *)configurationFromNavigationController:(nullable __kindof UINavigationController *)navigationController;
 
 /// 设置需要注册的导航控制器与配置信息
-/// @param aClass 需要注册的 UINavigationController 或子类泪对象
+/// @param navigationControllerClass 需要注册的 UINavigationController 或子类泪对象
 /// @param configuration NXNavigationConfiguration 配置信息
-+ (void)registerNavigationControllerClass:(Class)aClass withConfiguration:(NXNavigationConfiguration *)configuration;
++ (void)registerNavigationControllerClass:(Class)navigationControllerClass withConfiguration:(NXNavigationConfiguration *)configuration NS_SWIFT_NAME(register(_:with:));
 
 @end
 

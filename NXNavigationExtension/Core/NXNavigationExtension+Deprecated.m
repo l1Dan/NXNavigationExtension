@@ -144,7 +144,11 @@
 }
 
 + (NXNavigationBarAppearance *)appearanceFromRegisterNavigationController:(__kindof UINavigationController *)navigationController {
-    return [self configurationFromRegisterNavigationController:navigationController].navigationBarAppearance;
+    return [self configurationFromNavigationController:navigationController].navigationBarAppearance;
+}
+
++ (NXNavigationConfiguration *)configurationRegisterFromNavigationController:(__kindof UINavigationController *)navigationController {
+    return [self configurationFromNavigationController:navigationController];
 }
 
 + (void)registerNavigationControllerClass:(Class)aClass {

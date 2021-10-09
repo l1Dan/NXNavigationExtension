@@ -238,7 +238,7 @@
 
 // Overwrite
 - (NXNavigationConfiguration *)nx_configuration {
-    return [NXNavigationBar configurationFromRegisterNavigationController:self];
+    return [NXNavigationBar configurationFromNavigationController:self];
 }
 
 - (BOOL)nx_useNavigationBar {
@@ -289,6 +289,9 @@
 @implementation UIViewController (NXNavigationExtensionPrivate)
 
 - (NXNavigationConfiguration *)nx_configuration {
+    if (self.navigationController && self.navigationController.nx_configuration) {
+        [self setNx_configuration:self.navigationController.nx_configuration];
+    }
     return objc_getAssociatedObject(self, _cmd);
 }
 
