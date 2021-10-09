@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *addButton;
+@property (nonatomic, strong) CAGradientLayer *gradientLayer;
 
 @property (nonatomic, strong) NSLayoutConstraint *leftConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *rightConstraint;
@@ -37,6 +38,7 @@
     [self.nx_navigationBar.contentView addSubview:self.searchBar];
     [self.nx_navigationBar.contentView addSubview:self.backButton];
     [self.nx_navigationBar.contentView addSubview:self.addButton];
+    [self.nx_navigationBar.layer addSublayer:self.gradientLayer];
     
     UIView *contentView = self.nx_navigationBar.contentView;
     self.backButton.hidden = !UIDevice.isPhoneDevice;
@@ -58,13 +60,6 @@
     [self.addButton.heightAnchor constraintEqualToAnchor:self.searchBar.heightAnchor].active = YES;
     [self.addButton.centerYAnchor constraintEqualToAnchor:self.searchBar.centerYAnchor].active = YES;
     [self.addButton.widthAnchor constraintEqualToConstant:44].active = YES;
-    
-    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.colors = @[(__bridge id)[UIColor randomLightColor].CGColor, (__bridge id)[UIColor randomDarkColor].CGColor];
-    gradientLayer.startPoint = CGPointMake(0, 0);
-    gradientLayer.endPoint = CGPointMake(1.0, 0);
-    gradientLayer.frame = self.nx_navigationBar.bounds;
-    [self.nx_navigationBar.layer addSublayer:gradientLayer];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -77,6 +72,7 @@
 
     self.leftConstraint.constant = safeAreaInsets.left;
     self.rightConstraint.constant = -safeAreaInsets.right;
+    self.gradientLayer.frame = self.nx_navigationBar.bounds;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -136,6 +132,16 @@
         [_addButton addTarget:self action:@selector(clickAddButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _addButton;
+}
+
+- (CAGradientLayer *)gradientLayer {
+    if (!_gradientLayer) {
+        _gradientLayer = [CAGradientLayer layer];
+        _gradientLayer.colors = @[(__bridge id)[UIColor randomLightColor].CGColor, (__bridge id)[UIColor randomDarkColor].CGColor];
+        _gradientLayer.startPoint = CGPointMake(0, 0);
+        _gradientLayer.endPoint = CGPointMake(1.0, 0);
+    }
+    return _gradientLayer;
 }
 
 #pragma mark - Action

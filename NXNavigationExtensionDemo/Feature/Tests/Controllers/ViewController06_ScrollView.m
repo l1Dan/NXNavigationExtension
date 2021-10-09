@@ -40,8 +40,24 @@
 
     [self addViewContent];
     [self addViewConstraints];
-    [self setupContent];
+    [self setupContentWithSize:[UIScreen mainScreen].bounds.size];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.navigationController) {
+        // Step2: if use screen edge pop gesture
+//        [self.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
+        [self.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.nx_fullscreenPopGestureRecognizer];
+    }
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [self setupContentWithSize:size];
+}
+
+#pragma mark - Private
 
 - (void)addViewContent {
     [self.view addSubview:self.scrollView];
@@ -54,21 +70,20 @@
     [self.scrollView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
 }
 
-- (void)setupContent {
+- (void)setupContentWithSize:(CGSize)size {
     if (!self.imageNames || !self.imageNames.count) return;
-    
-    CGRect bounds = [UIScreen mainScreen].bounds;
-    for (NSUInteger index = 0; index < self.imageNames.count; index++) {
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:self.imageNames[index]]];
-        imageView.frame = CGRectMake(bounds.size.width * index, 0, bounds.size.width, bounds.size.height);
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [self.scrollView addSubview:imageView];
-        [self.scrollView setContentSize:CGSizeMake(bounds.size.width + bounds.size.width * index, bounds.size.height)];
+    for (UIView *subview in [self.scrollView subviews]) {
+        [subview removeFromSuperview];
     }
     
-    // Step2: if use screen edge pop gesture
-//    [self.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
-    [self.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.nx_fullscreenPopGestureRecognizer];
+    for (NSUInteger index = 0; index < self.imageNames.count; index++) {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:self.imageNames[index]]];
+        imageView.frame = CGRectMake(size.width * index, 0, size.width, size.height);
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.scrollView addSubview:imageView];
+        [self.scrollView setContentSize:CGSizeMake(size.width + size.width * index, size.height)];
+    }
+    [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 #pragma mark -

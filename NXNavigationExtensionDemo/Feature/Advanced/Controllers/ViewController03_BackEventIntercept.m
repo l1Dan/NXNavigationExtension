@@ -68,20 +68,24 @@ static CGFloat HeightForFooterInSection = 60.0;
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
         _footerView.backgroundColor = [UIColor clearColor];
         
-        CGFloat buttonHeight = height * 0.8;
-        CGFloat buttonWidth = width * 0.8;
-        
-        CGFloat buttonY = (height - buttonHeight) * 0.5;
-        CGFloat buttonX = (width - buttonWidth) * 0.5;
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(buttonX, buttonY, buttonWidth, buttonHeight)];
+        UIButton *button = [[UIButton alloc] init];
         button.layer.borderColor = [UIColor purpleColor].CGColor;
         button.layer.borderWidth = 2.0;
-        button.layer.cornerRadius = buttonHeight * 0.5;
+        button.layer.cornerRadius = 10;
         button.titleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
+        button.translatesAutoresizingMaskIntoConstraints = NO;
         [button setTitle:@"调用 “nx_pop” 方法返回" forState:UIControlStateNormal];
         [button setTitleColor:[UIColor randomLightColor] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(clickPopViewControllerButton:) forControlEvents:UIControlEventTouchUpInside];
         [_footerView addSubview:button];
+        
+        [NSLayoutConstraint activateConstraints:@[
+            [button.centerXAnchor constraintEqualToAnchor:_footerView.centerXAnchor],
+            [button.centerYAnchor constraintEqualToAnchor:_footerView.centerYAnchor],
+            [button.widthAnchor constraintEqualToAnchor:_footerView.widthAnchor multiplier:0.8],
+            [button.heightAnchor constraintEqualToAnchor:_footerView.heightAnchor multiplier:0.8],
+        ]];
+        
     }
     return _footerView;
 }

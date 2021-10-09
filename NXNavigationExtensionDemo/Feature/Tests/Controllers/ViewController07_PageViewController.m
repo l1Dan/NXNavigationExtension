@@ -51,6 +51,12 @@
     [self setupContent];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    for (ViewController06_ScrollView *vc in self.pageViewControllers) {
+        [vc viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    }
+}
+
 - (void)setupContent {
     if (!self.imageNames || !self.imageNames.count) return;
     

@@ -39,7 +39,7 @@
 - (void)addViewConstraints {
     [NSLayoutConstraint activateConstraints:@[
         [self.contentView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
-        [self.contentView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:200],
+        [self.contentView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:100],
     ]];
 }
 
