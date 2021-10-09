@@ -68,8 +68,6 @@
                     if (selfObject.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
                         UIViewController *destinationViewController = topViewController;
                         for (UIViewController *viewController in selfObject.viewControllers) {
-                            viewController.nx_configuration = selfObject.nx_configuration; // 先赋值一次
-                            
                             if (viewController.navigationItem == item) {
                                 destinationViewController = viewController;
                             }
@@ -119,6 +117,10 @@
         NXNavigationExtensionOverrideImplementation([UINavigationController class], @selector(setViewControllers:animated:), ^id _Nonnull(__unsafe_unretained Class  _Nonnull originClass, SEL  _Nonnull originCMD, IMP  _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
             return ^(UINavigationController *selfObject, NSArray<UIViewController *> *viewControllers, BOOL animated) {
                 if (selfObject.nx_useNavigationBar) {
+                    for (UIViewController *viewController in viewControllers) {
+                        viewController.nx_configuration = selfObject.nx_configuration; // 先赋值一次                        
+                    }
+                    
                     if (viewControllers.count > 1) {
                         for (NSUInteger index = 0; index < viewControllers.count; index++) {
                             UIViewController *viewController = viewControllers[index];

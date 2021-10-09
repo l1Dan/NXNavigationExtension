@@ -42,10 +42,10 @@ github "l1Dan/NXNavigationExtension"
 ## 优点
 
 - API 设计通俗易懂，容易上手。
-- 没有继承关系，所有操作基于方法重写，对项目入侵较小。
-- 按需注册导航控制器 `UINavigationController` 的外观，这样才不会影响所有的导航控制器。
-- 没有对原生导航栏视图层级进行修改，无需担心升级系统兼容性问题。
-- 适配 iOS、iPadOS、macOS，Dark Mode。
+- 没有继承关系，所有操作基于分类实现，对项目入侵较小。
+- 按需注册所使用的导航控制器，这样才不会影响所有的导航控制器外观。
+- 没有对原生导航栏视图层级进行修改，无需担心系统升级的兼容性问题。
+- 适配 iOS、iPadOS、macOS、横竖屏切换、暗黑模式。
 - 支持 CocoaPods、Carthage、Project 方式集成。
 
 ## 👏 功能
@@ -113,13 +113,13 @@ if (@available(iOS 14.0, *)) {
 
 - 👉 使用 `NXNavigationExtension` 之前需要先注册导航控制器，注册之后对导航栏的修改才会生效，也仅限于修改已经注册的导航控制器以及子类所管理的视图控制器，~~对于子类导航控制器所管理的视图控制器是不会生效的~~。*3.4.9*及以后的版本已经可以。
 - 👉 为了有效避免框架污染到其他的导航控制器，请保持“谁使用，谁注册”的原则。
+- 👉 使用 [UIScrollView](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/Feature/Tests/Controllers/ViewController06_ScrollView.m) 和 [UIPageViewController](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/Feature/Tests/Controllers/ViewController07_PageViewController.m) 手势冲突解决方案
 - 🚫 不要直接注册 `UINavigationController`，会影响全局导航栏的外观，建议创建一个 `UINavigationController` 的子类，对这个子类进行外观的设置。
 - 🚫 不要使用 `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:` 等方法显示或隐藏系统导航栏。
 - 🚫 不要使用系统导航栏修改透明度。
 - 🚫 不要使用系统导航栏或导航控制器 `appearance` 相关属性修改。
 - 🚫 ~~不要使用全局 `edgesForExtendedLayout` 修改~~。*3.4.2*及以后的版本已经支持。
 - 🚫 不要使用 `<UIGestureRecognizerDelegate>` 相关方法禁用手势返回。
-- 使用 [UIScrollView](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/Feature/Tests/Controllers/ViewController06_ScrollView.m) 和 [UIPageViewController](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/Feature/Tests/Controllers/ViewController07_PageViewController.m) 手势冲突解决方案
 - 💉 一句话“不要直接操作导航栏或者导航控制器，把这些都交给 `NXNavigationExtension` 处理吧“。
 
 建议：除非你非常明白修改全局性东西的后果，否则不要修改，这么做的原因就是为了减少走一些弯路！
@@ -134,7 +134,8 @@ if (@available(iOS 14.0, *)) {
 
 ```objc
 // 全局统一修改，不会覆盖基于视图控制器修改
-NXNavigationBarAppearance.standardAppearance.tintColor = [UIColor redColor];
+NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
+configuration.navigationBarAppearance.tintColor = [UIColor redColor];
 
 // 基于视图控制器修改
 - (UIColor *)nx_barTintColor {
