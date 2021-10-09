@@ -16,6 +16,9 @@
 
 @interface DashboardTabBarController () <UITabBarControllerDelegate>
 
+@property (nonatomic, strong) FeatureNavigationController *featureNavigationController;
+@property (nonatomic, strong) OtherNavigationController *otherNavigationController;
+
 @end
 
 @implementation DashboardTabBarController
@@ -36,25 +39,11 @@
 //        otherConfiguration.navigationControllerPreferences.menuSupplementBackButton = YES;
 //    }
 //    [NXNavigationBar registerNavigationControllerClass:[OtherNavigationController class] withConfiguration:otherConfiguration];
-
-    FeatureTableViewController *featureTableViewController1 = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    featureTableViewController1.navigationItem.title = @"NXNavigationBar🎉🎉🎉";
-
-    UIImage *customNormal = [UIImage imageNamed:@"TabBarCustomNormal"];
-    UIImage *customSelected = [UIImage imageNamed:@"TabBarCustomSelected"];
-    FeatureNavigationController *navigationController1 = [[FeatureNavigationController alloc] initWithRootViewController:featureTableViewController1];
-    navigationController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Custom" image:customNormal selectedImage:customSelected];
     
-    FeatureTableViewController *featureTableViewController2 = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    featureTableViewController2.navigationItem.title = @"UINavigationBar⚠️⚠️⚠️";
-
-    UIImage *systemNormal = [UIImage imageNamed:@"TabBarSystemNormal"];
-    UIImage *systemSelected = [UIImage imageNamed:@"TabBarSystemSelected"];
-    OtherNavigationController *navigationController2 = [[OtherNavigationController alloc] initWithRootViewController:featureTableViewController2];
-    navigationController2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"System" image:systemNormal selectedImage:systemSelected];
+    [self updateOtherNavigationControllerBorderStyle];
     
     self.delegate = self;
-    self.viewControllers = @[navigationController1, navigationController2];
+    self.viewControllers = @[self.featureNavigationController, self.otherNavigationController];
     
     if (@available(iOS 13.0, *)) {
         UITabBarAppearance *tabBarAppearance = [[UITabBarAppearance alloc] init];
@@ -81,16 +70,24 @@
     }
     
     self.tabBar.translucent = NO; // FIXED: iOS Modal -> Dismiss -> Push, TabBar BUG
-    
-    // ⚠️Warning!!!
-    navigationController2.view.layer.borderWidth = 3.0;
-    navigationController2.view.layer.cornerRadius = 40;
-    navigationController2.view.layer.borderColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
-        return [UIColor orangeColor];
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    [self updateOtherNavigationControllerBorderStyle];
+}
+
+#pragma mark - Private
+
+- (void)updateOtherNavigationControllerBorderStyle {
+    self.otherNavigationController.view.layer.borderColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor redColor];
     } darkModeColor:^UIColor * _Nonnull{
-        return [[UIColor orangeColor] colorWithAlphaComponent:0.5];
+        return [UIColor orangeColor];
     }].CGColor;
 }
+
+#pragma mark - UITabBarControllerDelegate
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     if (UIDevice.isPhoneDevice) return;
@@ -111,6 +108,36 @@
     [viewControllers addObject:detailNavigationController];
     
     [self.splitViewController setViewControllers:viewControllers];
+}
+
+#pragma mark - Getter
+
+- (FeatureNavigationController *)featureNavigationController {
+    if (!_featureNavigationController) {
+        FeatureTableViewController *featureTableViewController = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        featureTableViewController.navigationItem.title = @"NXNavigationBar🎉🎉🎉";
+
+        UIImage *customNormal = [UIImage imageNamed:@"TabBarCustomNormal"];
+        UIImage *customSelected = [UIImage imageNamed:@"TabBarCustomSelected"];
+        _featureNavigationController = [[FeatureNavigationController alloc] initWithRootViewController:featureTableViewController];
+        _featureNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Custom" image:customNormal selectedImage:customSelected];
+    }
+    return _featureNavigationController;
+}
+
+- (OtherNavigationController *)otherNavigationController {
+    if (!_otherNavigationController) {
+        FeatureTableViewController *featureTableViewController = [[FeatureTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        featureTableViewController.navigationItem.title = @"UINavigationBar❌❌❌";
+
+        UIImage *systemNormal = [UIImage imageNamed:@"TabBarSystemNormal"];
+        UIImage *systemSelected = [UIImage imageNamed:@"TabBarSystemSelected"];
+        _otherNavigationController = [[OtherNavigationController alloc] initWithRootViewController:featureTableViewController];
+        _otherNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"System" image:systemNormal selectedImage:systemSelected];
+        _otherNavigationController.view.layer.borderWidth = 3.0;
+        _otherNavigationController.view.layer.cornerRadius = 40;
+    }
+    return _otherNavigationController;
 }
 
 @end

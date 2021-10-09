@@ -42,10 +42,10 @@ github "l1Dan/NXNavigationExtension"
 ## 优点
 
 - API 设计通俗易懂，容易上手。
-- 没有继承关系，所有操作基于分类实现，对项目入侵较小。
-- 按需注册所使用的导航控制器，这样才不会影响所有的导航控制器外观。
+- 没有继承关系，所有操作基于分类实现，低耦合。
+- 白名单模式，按需注册所使用的导航控制器，这样才不会影响所有的导航控制器外观。
 - 没有对原生导航栏视图层级进行修改，无需担心系统升级的兼容性问题。
-- 适配 iOS、iPadOS、macOS、横竖屏切换、暗黑模式。
+- 适配 iOS、iPadOS、macOS、Swift、横竖屏切换、暗黑模式。
 - 支持 CocoaPods、Carthage、Project 方式集成。
 
 ## 👏 功能
@@ -113,7 +113,6 @@ if (@available(iOS 14.0, *)) {
 
 - 👉 使用 `NXNavigationExtension` 之前需要先注册导航控制器，注册之后对导航栏的修改才会生效，也仅限于修改已经注册的导航控制器以及子类所管理的视图控制器，~~对于子类导航控制器所管理的视图控制器是不会生效的~~。*3.4.9*及以后的版本已经可以。
 - 👉 为了有效避免框架污染到其他的导航控制器，请保持“谁使用，谁注册”的原则。
-- 👉 使用 [UIScrollView](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/Feature/Tests/Controllers/ViewController06_ScrollView.m) 和 [UIPageViewController](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/Feature/Tests/Controllers/ViewController07_PageViewController.m) 手势冲突解决方案
 - 🚫 不要直接注册 `UINavigationController`，会影响全局导航栏的外观，建议创建一个 `UINavigationController` 的子类，对这个子类进行外观的设置。
 - 🚫 不要使用 `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:` 等方法显示或隐藏系统导航栏。
 - 🚫 不要使用系统导航栏修改透明度。
@@ -426,6 +425,32 @@ if (@available(iOS 14.0, *)) {
 ```
 
 ![BackButtonMenu](https://raw.githubusercontent.com/l1Dan/NXNavigationExtension/master/Snapshots/BackButtonMenu.png)
+
+## FAQ 常见问题
+
+> Q: iOS14 及之后的版本为什么注册了 `UIImagePickerController`、`PHPickerViewController` 类之后还是无法修改？（**iOS14 之前系统的 `UIImagePickerController` 是可以修改的**）
+
+> A: 因为 `UIImagePickerController` 和 `PHPickerViewController` 里面的 UINavigationBar 是隐藏的，NXNavigationBar 会跟随系统 UINavigationBar 隐藏与显示，所以无法修改。另外 PHPickerViewController 其实是一个 UIViewController 的子类，你既可以用 `push` 的方式显示控制器也可以用 `present` 的方式显示控制器，他们有个共同特点：使用的都是一个 “假” 的导航栏。
+
+---
+
+> Q: 为什么 iOS13 之前使用 `self.navigationItem.searchController` 设置的 `UISearchBar` 无法跟随导航栏的变化而变化，iOS13 之后的却可以呢？
+
+> A: 因为在 iOS13 之前导航栏中不包含 `UISearchBar`，iOS13 之后导航栏才包含 `UISearchBar` 的。具体使用请参考[示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/Feature/Common/Controllers/FeatureTableViewController.m)。
+
+---
+
+> Q: 如何解决 `UIScrollView` 和 `UIPageViewController` 手势冲突?
+
+> A: 使用 [UIScrollView](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/Feature/Tests/Controllers/ViewController06_ScrollView.m) 和 [UIPageViewController](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/Feature/Tests/Controllers/ViewController07_PageViewController.m) 手势冲突解决方案。
+
+---
+
+> Q: 为什么 `NXNavigationExtension` 框架不包含控制器的转场动画功能？
+
+> A: 原则就是尽可能的保持框架的简单轻量，将更多的精力花在框架本身的稳定性上，尽可能地使用系统原有功能。另外转场动画功能并不适用于所有场景，处理不好还会导致导航栏错位、页面错误的问题，这无疑会提升框架的复杂度并且降低框架的稳定性，所以这部分功能需要开发者自己实现。
+
+---
 
 ## 📄 协议
 

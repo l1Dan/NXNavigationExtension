@@ -38,6 +38,7 @@
 
 @interface FeatureTableViewController ()
 
+@property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) NSArray<NSDictionary<NSString *, id> *> *allViewControllers;
 @property (nonatomic, strong) NSArray<TableViewSection *> *sections;
 
@@ -48,26 +49,49 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.definesPresentationContext = YES;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"FeatureTableViewCellIdentifer"];
+    
+    if (@available(iOS 11.0, *)) {
+        self.navigationItem.searchController = self.searchController;
+        self.navigationItem.hidesSearchBarWhenScrolling = NO;
+    } else {
+        self.tableView.tableHeaderView = self.searchController.searchBar;
+    }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 - (NSDictionary<NSAttributedStringKey,id> *)nx_titleTextAttributes {
-    return @{NSForegroundColorAttributeName: [UIColor customTitleColor]};
+    return @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+}
+
+- (UIColor *)nx_navigationBarBackgroundColor {
+    return [UIColor customDarkGrayColor];
 }
 
 - (UIColor *)nx_shadowImageTintColor {
-    return [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
-        return [UIColor lightGrayColor];
-    } darkModeColor:^UIColor * _Nonnull{
-        return [[UIColor lightGrayColor] colorWithAlphaComponent:0.65];
-    }];
-}
-
-- (BOOL)nx_useBlurNavigationBar {
-    return YES;
+    return [UIColor clearColor];
 }
 
 #pragma mark - Getter
+
+- (UISearchController *)searchController {
+    if (!_searchController) {
+        _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+        _searchController.searchBar.backgroundImage = [[UIImage alloc] init]; // Remove shadow
+        
+        if (@available(iOS 13.0, *)) {
+            // Nothing...
+        } else {
+            _searchController.searchBar.backgroundColor = [UIColor customDarkGrayColor];
+            _searchController.view.backgroundColor = [UIColor customDarkGrayColor];
+        }
+    }
+    return _searchController;
+}
 
 - (NSArray<TableViewSection *> *)sections {
     if (!_sections) {
@@ -177,6 +201,12 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return self.sections[section].title;
+}
+
+#pragma mark - UISearchResultsUpdating
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    
 }
 
 @end
