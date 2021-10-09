@@ -37,10 +37,17 @@
 }
 
 - (void)addViewConstraints {
-    [NSLayoutConstraint activateConstraints:@[
-        [self.contentView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
-        [self.contentView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:100],
-    ]];
+    if (@available(iOS 11.0, *)) {
+        [NSLayoutConstraint activateConstraints:@[
+            [self.contentView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+            [self.contentView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:50],
+        ]];
+    } else {
+        [NSLayoutConstraint activateConstraints:@[
+            [self.contentView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+            [self.contentView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:100],
+        ]];
+    }
 }
 
 - (BOOL)nx_enableFullscreenInteractivePopGesture {
