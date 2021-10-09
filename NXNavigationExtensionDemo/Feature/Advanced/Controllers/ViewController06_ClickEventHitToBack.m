@@ -89,7 +89,7 @@
 
 - (UISegmentedControl *)segmentedControl {
     if (!_segmentedControl) {
-        _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"First", @"Second"]];
+        _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Tap1", @"Tap2"]];
         _segmentedControl.selectedSegmentIndex = 0;
         _segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
         _segmentedControl.backgroundColor = [UIColor customLightGrayColor];

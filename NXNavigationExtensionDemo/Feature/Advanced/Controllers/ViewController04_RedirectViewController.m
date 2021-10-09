@@ -86,7 +86,7 @@
             [RedirectViewControllerModel modelWithTitle:NSStringFromClass([ViewController03_Test class]) type:RedirectViewControllerTypeTest3],
             [RedirectViewControllerModel modelWithTitle:NSStringFromClass([ViewController04_Test class]) type:RedirectViewControllerTypeTest4],
             [RedirectViewControllerModel modelWithTitle:NSStringFromClass([ViewController05_Test class]) type:RedirectViewControllerTypeTest5],
-            [RedirectViewControllerModel modelWithTitle:@"选择需要跳转的控制器类型" type:RedirectViewControllerTypeChoose],
+            [RedirectViewControllerModel modelWithTitle:@"🚀选择需要跳转的控制器类型" type:RedirectViewControllerTypeChoose],
             [RedirectViewControllerModel modelWithTitle:@"⭐️重定向到：" type:RedirectViewControllerTypeJump],
         ];
     }

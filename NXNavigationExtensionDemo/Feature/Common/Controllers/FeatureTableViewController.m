@@ -76,53 +76,53 @@
     return _sections;
 }
 
-- (__kindof UIViewController *)viewControllerForItemType:(TableViewSectionItemType)itemType {
+- (__kindof UIViewController *)viewControllerForItemType:(TableViewItemType)itemType {
     switch (itemType) {
             // Basic
-        case TableViewSectionItemTypeNavigationBarBackgroundColor:
+        case TableViewItemTypeNavigationBarBackgroundColor:
             return [[ViewController01_BackgroundColor alloc] init];
-        case TableViewSectionItemTypeNavigationBarBackgroundImage:
+        case TableViewItemTypeNavigationBarBackgroundImage:
             return [[ViewController02_BackgroundImage alloc] init];
-        case TableViewSectionItemTypeNavigationBarTransparent:
+        case TableViewItemTypeNavigationBarTransparent:
             return [[ViewController03_Transparent alloc] init];
-        case TableViewSectionItemTypeLikeSystemBlurNavigationBar:
+        case TableViewItemTypeLikeSystemBlurNavigationBar:
             return [[ViewController04_LikeSystemBlurNavigationBar alloc] init];
-        case TableViewSectionItemTypeNavigationBarShadowColor:
+        case TableViewItemTypeNavigationBarShadowColor:
             return [[ViewController05_ShadowColor alloc] init];
-        case TableViewSectionItemTypeNavigationBarShadowImage:
+        case TableViewItemTypeNavigationBarShadowImage:
             return [[ViewController06_ShadowImage alloc] init];
-        case TableViewSectionItemTypeNavigationBarCustomBackButtonImage:
+        case TableViewItemTypeNavigationBarCustomBackButtonImage:
             return [[ViewController07_CustomBackButtonImage alloc] init];
-        case TableViewSectionItemTypeNavigationBarCustomBackButton:
+        case TableViewItemTypeNavigationBarCustomBackButton:
             return [[ViewController08_CustomBackButton alloc] init];
-        case TableViewSectionItemTypeNavigationBarFullscreen:
+        case TableViewItemTypeNavigationBarFullscreen:
             return [[ViewController09_Fullscreen alloc] init];
-        case TableViewSectionItemTypeNavigationBarScrollView:
+        case TableViewItemTypeNavigationBarTabViewController:
             return [[ViewController10_ScrollView alloc] init];
-        case TableViewSectionItemTypeNavigationBarScrollViewWithFullscreen:
+        case TableViewItemTypeNavigationBarTabViewControllerWithFullscreen:
             return [[ViewController11_ScrollViewWithFullscreen alloc] init];
-        case TableViewSectionItemTypeNavigationBarModal:
+        case TableViewItemTypeNavigationBarModal:
             return [[ViewController12_Modal alloc] init];
-        case TableViewSectionItemTypeNavigationBarBlur:
+        case TableViewItemTypeNavigationBarBlur:
             return [[ViewController13_Blur alloc] init];
             // Advanced
-        case TableViewSectionItemTypeNavigationBarDisablePopGesture:
+        case TableViewItemTypeNavigationBarDisablePopGesture:
             return [[ViewController01_DisablePopGesture alloc] init];
-        case TableViewSectionItemTypeNavigationBarFullscreenPopGesture:
+        case TableViewItemTypeNavigationBarFullscreenPopGesture:
             return [[ViewController02_FullPopGesture alloc] init];
-        case TableViewSectionItemTypeNavigationBarBackEventIntercept:
+        case TableViewItemTypeNavigationBarBackEventIntercept:
             return [[ViewController03_BackEventIntercept alloc] init];
-        case TableViewSectionItemTypeNavigationBarRedirectViewController:
+        case TableViewItemTypeNavigationBarRedirectViewController:
             return [[ViewController04_RedirectViewController alloc] init];
-        case TableViewSectionItemTypeNavigationBarCustom:
+        case TableViewItemTypeNavigationBarCustom:
             return [[ViewController05_Custom alloc] init];
-        case TableViewSectionItemTypeNavigationBarClickEventHitToBack:
+        case TableViewItemTypeNavigationBarClickEventHitToBack:
             return [[ViewController06_ClickEventHitToBack alloc] init];
-        case TableViewSectionItemTypeNavigationBarScrollChangeNavigationBar:
+        case TableViewItemTypeNavigationBarScrollChangeNavigationBar:
             return [[ViewController07_ScrollChangeNavigationBar alloc] init];
-        case TableViewSectionItemTypeNavigationBarWebView:
+        case TableViewItemTypeNavigationBarWebView:
             return [[ViewController08_WebView alloc] init];
-        case TableViewSectionItemTypeNavigationBarUpdateNavigationBar:
+        case TableViewItemTypeNavigationBarUpdateNavigationBar:
             return [[RandomColorViewController alloc] init];
         default:
             break;
@@ -143,7 +143,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FeatureTableViewCellIdentifer"];
     cell.textLabel.textColor = [UIColor customTextColor];
-    TableViewSectionItem *item = self.sections[indexPath.section].items[indexPath.row];
+    TableViewItem *item = self.sections[indexPath.section].items[indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%02zd: %@", indexPath.row + 1, item.title];
     cell.accessoryType = item.showDisclosureIndicator ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     
@@ -153,8 +153,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    TableViewSectionItem *item = self.sections[indexPath.section].items[indexPath.row];
-    TableViewSectionItemType itemType = item.itemType;
+    TableViewItem *item = self.sections[indexPath.section].items[indexPath.row];
+    TableViewItemType itemType = item.itemType;
     __kindof UIViewController *viewController = [self viewControllerForItemType:itemType];
     if (!viewController) return;
     

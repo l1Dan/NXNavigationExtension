@@ -44,7 +44,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"Row: %02zd with UIScrollView", indexPath.row + 1];
+    cell.textLabel.text = [NSString stringWithFormat:@"Row: %02zd", indexPath.row + 1];
     cell.textLabel.textColor = [UIColor customTextColor];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.backgroundColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{

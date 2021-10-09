@@ -109,7 +109,7 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
             cell.backgroundColor = [(BaseViewController *)viewController randomColor];
         }
     } else {
-        cell.textLabel.text = @"(#)Insert ViewController to back";
+        cell.textLabel.text = @"(*)New a ViewController in stack";
         cell.textLabel.textColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
             return  [UIColor blueColor];
         } darkModeColor:^UIColor * _Nonnull{
