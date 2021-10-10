@@ -62,7 +62,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
                 originSelectorIMP = (BOOL (*)(id, SEL))originalIMPProvider();
                 BOOL result = originSelectorIMP(selfObject, originCMD);
 
-                // FIXED: edgesForExtendedLayoutEnabled instance dynamic changed.
+                // fix: edgesForExtendedLayoutEnabled instance dynamic changed.
                 if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
                     selfObject.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(selfObject.edgesForExtendedLayout);
                     selfObject.nx_navigationBar.frame = selfObject.navigationController.navigationBar.frame;
@@ -77,7 +77,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
                 originSelectorIMP = (UIRectEdge (*)(id, SEL))originalIMPProvider();
                 UIRectEdge result = originSelectorIMP(selfObject, originCMD);
 
-                // FIXED: edgesForExtendedLayoutEnabled instance dynamic changed.
+                // fix: edgesForExtendedLayoutEnabled instance dynamic changed.
                 if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
                     selfObject.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(result);
                     selfObject.nx_navigationBar.frame = selfObject.navigationController.navigationBar.frame;
@@ -89,7 +89,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewWillAppear:), BOOL, ^(__kindof UIViewController * _Nonnull selfObject, BOOL animated) {
             selfObject.nx_viewWillDisappearFinished = NO;
             if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
-                // FIXED: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
+                // fix: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
                 [selfObject nx_configureNXNavigationBar];
                 // 还原上一个视图控制器对导航栏的修改
                 [selfObject nx_updateNavigationBarAppearance];
@@ -147,17 +147,17 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (void)nx_adjustNavigationBarAppearanceForUINavigationBar:(UINavigationBar *)navigationBar withViewController:(__kindof UIViewController *)viewController {
     if (viewController.nx_navigationBar) {
-        // FIXED: 视图控制器同时重写 `extendedLayoutIncludesOpaqueBars` 和 `edgesForExtendedLayout` 属性时需要调用这里来修正导航栏。
+        // fix: 视图控制器同时重写 `extendedLayoutIncludesOpaqueBars` 和 `edgesForExtendedLayout` 属性时需要调用这里来修正导航栏。
         viewController.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(viewController.edgesForExtendedLayout);
     }
-    // FIXED: delay call nx_updateNavigationBarAppearance method.
+    // fix: delay call nx_updateNavigationBarAppearance method.
     if (self == viewController && viewController.nx_viewWillDisappearFinished) { return; }
     viewController.nx_navigationBar.frame = navigationBar.frame;
     viewController.nx_navigationBar.hidden = navigationBar.hidden;
 }
 
 - (void)nx_updateNavigationBarAppearance {
-    if (self.nx_viewWillDisappearFinished) return; // FIXED: delay call nx_updateNavigationBarAppearance method.
+    if (self.nx_viewWillDisappearFinished) return; // fix: delay call nx_updateNavigationBarAppearance method.
     
     if (self.navigationController && self.navigationController.nx_useNavigationBar) {
         self.navigationController.navigationBar.barTintColor = self.nx_barBarTintColor;
@@ -186,7 +186,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (void)nx_updateNavigationBarHierarchy {
     if (self.navigationController && self.navigationController.nx_useNavigationBar) {
-        // FIXED: 修复导航栏 contentView 被遮挡问题
+        // fix: 修复导航栏 contentView 被遮挡问题
         if ([self.view isKindOfClass:[UIScrollView class]]) {
             UIScrollView *view = (UIScrollView *)self.view;
             [view.nx_navigationBar removeFromSuperview];
@@ -206,7 +206,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         BOOL translucentNavigationBar = self.nx_translucentNavigationBar;
         BOOL contentViewWithoutNavigtionBar = self.nx_contentViewWithoutNavigtionBar;
         if ([self isKindOfClass:[UIPageViewController class]] && !translucentNavigationBar) {
-            // FIXED: 处理特殊情况，最后显示的为 UIPageViewController
+            // fix: 处理特殊情况，最后显示的为 UIPageViewController
             translucentNavigationBar = self.parentViewController.nx_translucentNavigationBar;
         }
         
