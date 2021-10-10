@@ -4,7 +4,7 @@
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/NXNavigationExtension.svg?style=flat)](https://img.shields.io/cocoapods/v/NXNavigationExtension.svg) ![Language](https://img.shields.io/github/languages/top/l1dan/NXNavigationExtension.svg?style=flat) [![MIT Licence](https://img.shields.io/github/license/l1dan/NXNavigationExtension.svg?style=flat)](https://opensource.org/licenses/mit-license.php) [![Platform](https://img.shields.io/cocoapods/p/NXNavigationExtension.svg?style=flat)](https://github.com/l1Dan/NXNavigationExtension/blob/master/README.md) [![GitHub last commit](https://img.shields.io/github/last-commit/l1Dan/NXNavigationExtension.svg?style=flat)](https://img.shields.io/github/last-commit/l1Dan/NXNavigationExtension)
 
-🔥 NXNavigationExtension 是为 iOS 应用设计的一个轻量级的导航栏处理框架。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。NXNavigationExtension 和 [示例程序代码](https://github.com/l1Dan/NXNavigationExtension/archive/master.zip) 都已经适配暗黑模式（Dark Mode）。
+🔥 NXNavigationExtension 是为 iOS 应用设计的一个轻量级的导航栏处理框架。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。NXNavigationExtension 和 [示例代码](https://github.com/l1Dan/NXNavigationExtension/archive/master.zip) 都已经适配暗黑模式（Dark Mode）。
 
 ## 🎉 预览
 
@@ -12,7 +12,7 @@
 
 ## 🌟 开始使用
 
-下载 [NXNavigationExtension](https://github.com/l1Dan/NXNavigationExtension/archive/master.zip) 示例程序代码。
+下载 [NXNavigationExtension](https://github.com/l1Dan/NXNavigationExtension/archive/master.zip) 示例代码。
 
 ## 使用 CocoaPods 安装
 
@@ -77,7 +77,7 @@ github "l1Dan/NXNavigationExtension"
 - ✅` 更新导航栏样式`
 - ✅` 渐变导航变样式`
 - ✅` 长按返回按钮显示菜单功能`
-- 更多功能请查看示例程序...
+- 更多功能请查看示例代码...
 
 ## 🍽 使用
 
@@ -448,7 +448,7 @@ A: 使用 [UIScrollView](https://github.com/l1Dan/NXNavigationExtension/blob/mai
 
 Q: 为什么 `NXNavigationExtension` 框架不包含控制器的转场动画功能？
 
-A: 原则就是尽可能的保持框架的简单轻量，将更多的精力花在框架本身的稳定性上，尽可能地使用系统原有功能。另外转场动画功能并不适用于所有业务场景也不属于这个框架的一部分功能，如果有转场动画的需求可以试下这个[VCTransitionsLibrary](https://github.com/ColinEberhardt/VCTransitionsLibrary)。也可以参考[示例程序](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/Feature/Drawer/DrawerAnimationController.m)。
+A: 原则就是尽可能的保持框架的简单轻量，将更多的精力花在框架本身的稳定性上，尽可能地使用系统原有功能。转场动画功能并不适用于所有业务场景，另外也不属于这个框架的功能。如果有转场动画的需求需要开发者自己实现，也可以参考[VCTransitionsLibrary](https://github.com/ColinEberhardt/VCTransitionsLibrary)，或者参考[示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/Feature/Drawer/DrawerAnimationController.m)。
 
 ---
 
