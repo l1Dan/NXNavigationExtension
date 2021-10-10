@@ -20,6 +20,10 @@
     return self.topViewController;
 }
 
+- (void)dealloc {
+    NSLog(@"Dealloced: %@", NSStringFromClass([self class]));
+}
+
 @end
 
 

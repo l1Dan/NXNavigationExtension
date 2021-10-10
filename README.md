@@ -428,9 +428,9 @@ if (@available(iOS 14.0, *)) {
 
 ## FAQ 常见问题
 
-Q: iOS14 及之后的版本为什么注册了 `UIImagePickerController`、`PHPickerViewController` 类之后还是无法修改？（**iOS14 之前系统的 `UIImagePickerController` 是可以修改的**）
+Q: iOS14 及之后的版本为什么注册了 `UIImagePickerController`、`PHPickerViewController` 类之后还是无法修改导航栏的外观？
 
-A: 因为 `UIImagePickerController` 和 `PHPickerViewController` 里面的 UINavigationBar 是隐藏的，NXNavigationBar 会跟随系统 UINavigationBar 隐藏与显示，所以无法修改。另外 PHPickerViewController 其实是一个 UIViewController 的子类，你既可以用 `push` 的方式显示控制器也可以用 `present` 的方式显示控制器，他们有个共同特点：使用的都是一个 “假” 的导航栏。
+A: 因为 `UIImagePickerController` 和 `PHPickerViewController` 里面的 UINavigationBar 是隐藏的，NXNavigationBar 会跟随系统导航栏隐藏与显示，所以无法修改（**iOS14 之前系统的 `UIImagePickerController` 是可以修改的**）。另外 PHPickerViewController 其实是一个 UIViewController 的子类，你既可以用 `push` 的方式显示控制器也可以用 `present` 的方式显示控制器，他们有个共同特点：使用的都是一个 “假” 的导航栏。
 
 ---
 
@@ -448,7 +448,7 @@ A: 使用 [UIScrollView](https://github.com/l1Dan/NXNavigationExtension/blob/mai
 
 Q: 为什么 `NXNavigationExtension` 框架不包含控制器的转场动画功能？
 
-A: 原则就是尽可能的保持框架的简单轻量，将更多的精力花在框架本身的稳定性上，尽可能地使用系统原有功能。另外转场动画功能并不适用于所有场景，处理不好还会导致导航栏错位、页面错误的问题，这无疑会提升框架的复杂度并且降低框架的稳定性，所以这部分功能需要开发者自己实现。
+A: 原则就是尽可能的保持框架的简单轻量，将更多的精力花在框架本身的稳定性上，尽可能地使用系统原有功能。另外转场动画功能并不适用于所有业务场景也不属于这个框架的一部分功能，如果有转场动画的需求可以试下这个[VCTransitionsLibrary](https://github.com/ColinEberhardt/VCTransitionsLibrary)。也可以参考[示例程序](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/Feature/Drawer/DrawerAnimationController.m)。
 
 ---
 

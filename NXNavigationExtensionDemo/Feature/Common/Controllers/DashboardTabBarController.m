@@ -69,7 +69,7 @@
         }];
     }
     
-    self.tabBar.translucent = NO; // FIXED: iOS Modal -> Dismiss -> Push, TabBar BUG
+    self.tabBar.translucent = NO; // fix: iOS Modal -> Dismiss -> Push, TabBar BUG
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {

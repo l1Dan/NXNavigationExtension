@@ -36,11 +36,17 @@
 #import "UIColor+RandomColor.h"
 #import "UIDevice+Additions.h"
 
-@interface FeatureTableViewController ()
+#import "DrawAnimationTransitionDelegate.h"
+
+
+@interface FeatureTableViewController () 
 
 @property (nonatomic, strong) UISearchController *searchController;
+@property (nonatomic, strong) UIBarButtonItem *presentDrawerButtonItem;
+
 @property (nonatomic, strong) NSArray<NSDictionary<NSString *, id> *> *allViewControllers;
 @property (nonatomic, strong) NSArray<TableViewSection *> *sections;
+@property (nonatomic, strong) DrawAnimationTransitionDelegate *animationTransitionDelegate;
 
 @end
 
@@ -49,8 +55,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.leftBarButtonItem = self.presentDrawerButtonItem;
     self.definesPresentationContext = YES;
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"FeatureTableViewCellIdentifer"];
     
     if (@available(iOS 11.0, *)) {
         self.navigationItem.searchController = self.searchController;
@@ -58,6 +64,8 @@
     } else {
         self.tableView.tableHeaderView = self.searchController.searchBar;
     }
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"FeatureTableViewCellIdentifer"];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -76,6 +84,12 @@
     return [UIColor clearColor];
 }
 
+#pragma mark - Private
+
+- (void)clickOpenDraweButtonItem:(UIBarButtonItem *)item {
+    [self.animationTransitionDelegate openDrawer];
+}
+
 #pragma mark - Getter
 
 - (UISearchController *)searchController {
@@ -91,6 +105,14 @@
         }
     }
     return _searchController;
+}
+
+- (UIBarButtonItem *)presentDrawerButtonItem {
+    if (!_presentDrawerButtonItem) {
+        _presentDrawerButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavigationBarMore"] style:UIBarButtonItemStylePlain target:self action:@selector(clickOpenDraweButtonItem:)];
+        _presentDrawerButtonItem.tintColor = [UIColor whiteColor];
+    }
+    return _presentDrawerButtonItem;
 }
 
 - (NSArray<TableViewSection *> *)sections {
@@ -121,9 +143,9 @@
             return [[ViewController08_CustomBackButton alloc] init];
         case TableViewItemTypeNavigationBarFullscreen:
             return [[ViewController09_Fullscreen alloc] init];
-        case TableViewItemTypeNavigationBarTabViewController:
+        case TableViewItemTypeNavigationBarTableViewController:
             return [[ViewController10_ScrollView alloc] init];
-        case TableViewItemTypeNavigationBarTabViewControllerWithFullscreen:
+        case TableViewItemTypeNavigationBarTableViewControllerWithFullscreen:
             return [[ViewController11_ScrollViewWithFullscreen alloc] init];
         case TableViewItemTypeNavigationBarModal:
             return [[ViewController12_Modal alloc] init];
@@ -152,6 +174,14 @@
             break;
     }
     return nil;
+}
+
+- (DrawAnimationTransitionDelegate *)animationTransitionDelegate {
+    if (!_animationTransitionDelegate) {
+        _animationTransitionDelegate = [[DrawAnimationTransitionDelegate alloc] init];
+        [_animationTransitionDelegate setupDrawerWithViewController:self inView:self.view];
+    }
+    return _animationTransitionDelegate;
 }
 
 #pragma mark - Table view data source
@@ -201,12 +231,6 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return self.sections[section].title;
-}
-
-#pragma mark - UISearchResultsUpdating
-
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    
 }
 
 @end

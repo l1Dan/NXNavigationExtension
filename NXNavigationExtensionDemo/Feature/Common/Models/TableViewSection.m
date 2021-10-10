@@ -48,8 +48,8 @@
         [TableViewItem itemWithTitle:@"自定义返回按钮图片" itemType:TableViewItemTypeNavigationBarCustomBackButtonImage],
         [TableViewItem itemWithTitle:@"自定义返回按钮" itemType:TableViewItemTypeNavigationBarCustomBackButton],
         [TableViewItem itemWithTitle:@"全屏背景色" itemType:TableViewItemTypeNavigationBarFullscreen],
-        [TableViewItem itemWithTitle:@"UITabViewController" itemType:TableViewItemTypeNavigationBarTabViewController],
-        [TableViewItem itemWithTitle:@"UITabViewController 全屏背景色" itemType:TableViewItemTypeNavigationBarTabViewControllerWithFullscreen],
+        [TableViewItem itemWithTitle:@"UITableViewController" itemType:TableViewItemTypeNavigationBarTableViewController],
+        [TableViewItem itemWithTitle:@"UITableViewController 全屏背景色" itemType:TableViewItemTypeNavigationBarTableViewControllerWithFullscreen],
         [TableViewItem itemWithTitle:@"模态窗口" itemType:TableViewItemTypeNavigationBarModal],
         [TableViewItem itemWithTitle:@"自定义导航栏模糊背景" itemType:TableViewItemTypeNavigationBarBlur],
     ];

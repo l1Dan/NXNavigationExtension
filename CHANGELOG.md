@@ -1,5 +1,7 @@
 # CHANGELOG.md
 
+- 添加转场动画示例代码。
+
 ## 3.5.3
 
 - 修复一处 nx_configuration 赋值逻辑错误问题；

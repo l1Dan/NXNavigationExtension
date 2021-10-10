@@ -53,6 +53,9 @@
 		D624E99F2654F71200CC96E6 /* DashboardTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E96C2654F71200CC96E6 /* DashboardTabBarController.m */; };
 		D624E9A02654F71200CC96E6 /* FeatureTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E96D2654F71200CC96E6 /* FeatureTableViewController.m */; };
 		D624E9A12654F71200CC96E6 /* FakeNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9712654F71200CC96E6 /* FakeNavigationBar.m */; };
+		D6304B532712C4190016696B /* DrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6304B522712C4190016696B /* DrawerViewController.m */; };
+		D6304B562712C4370016696B /* DrawerAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6304B552712C4370016696B /* DrawerAnimationController.m */; };
+		D6304B65271347B60016696B /* DrawAnimationTransitionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6304B64271347B60016696B /* DrawAnimationTransitionDelegate.m */; };
 		D6440970265AC73C00BCE890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D644096C265AC73C00BCE890 /* Assets.xcassets */; };
 		D6440971265AC73C00BCE890 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D644096D265AC73C00BCE890 /* LaunchScreen.storyboard */; };
 		D6513E0926C8004C00B593AC /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6513E0826C8004C00B593AC /* BaseTableViewController.m */; };
@@ -163,6 +166,12 @@
 		D624E96E2654F71200CC96E6 /* RandomColorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomColorViewController.h; sourceTree = "<group>"; };
 		D624E9702654F71200CC96E6 /* FakeNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeNavigationBar.h; sourceTree = "<group>"; };
 		D624E9712654F71200CC96E6 /* FakeNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeNavigationBar.m; sourceTree = "<group>"; };
+		D6304B512712C4190016696B /* DrawerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawerViewController.h; sourceTree = "<group>"; };
+		D6304B522712C4190016696B /* DrawerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawerViewController.m; sourceTree = "<group>"; };
+		D6304B542712C4370016696B /* DrawerAnimationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawerAnimationController.h; sourceTree = "<group>"; };
+		D6304B552712C4370016696B /* DrawerAnimationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawerAnimationController.m; sourceTree = "<group>"; };
+		D6304B63271347B60016696B /* DrawAnimationTransitionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawAnimationTransitionDelegate.h; sourceTree = "<group>"; };
+		D6304B64271347B60016696B /* DrawAnimationTransitionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawAnimationTransitionDelegate.m; sourceTree = "<group>"; };
 		D6440965265AC67D00BCE890 /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D644096C265AC73C00BCE890 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D644096E265AC73C00BCE890 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -272,6 +281,7 @@
 				D624E9222654F71200CC96E6 /* Advanced */,
 				D624E9402654F71200CC96E6 /* Basic */,
 				D624E95C2654F71200CC96E6 /* Common */,
+				D6304B502712C3E60016696B /* Drawer */,
 				D624E9342654F71200CC96E6 /* Tests */,
 			);
 			path = Feature;
@@ -433,6 +443,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D6304B502712C3E60016696B /* Drawer */ = {
+			isa = PBXGroup;
+			children = (
+				D6304B63271347B60016696B /* DrawAnimationTransitionDelegate.h */,
+				D6304B64271347B60016696B /* DrawAnimationTransitionDelegate.m */,
+				D6304B512712C4190016696B /* DrawerViewController.h */,
+				D6304B522712C4190016696B /* DrawerViewController.m */,
+				D6304B542712C4370016696B /* DrawerAnimationController.h */,
+				D6304B552712C4370016696B /* DrawerAnimationController.m */,
+			);
+			path = Drawer;
+			sourceTree = "<group>";
+		};
 		D644096B265AC73C00BCE890 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,6 +554,7 @@
 				D624E9732654F71200CC96E6 /* BaseSplitViewController.m in Sources */,
 				D624E9932654F71200CC96E6 /* ViewController11_ScrollViewWithFullscreen.m in Sources */,
 				D624E9862654F71200CC96E6 /* ViewController07_ScrollChangeNavigationBar.m in Sources */,
+				D6304B562712C4370016696B /* DrawerAnimationController.m in Sources */,
 				D624E9742654F71200CC96E6 /* BaseViewController.m in Sources */,
 				D624E9922654F71200CC96E6 /* ViewController07_CustomBackButtonImage.m in Sources */,
 				D624E9A02654F71200CC96E6 /* FeatureTableViewController.m in Sources */,
@@ -543,6 +567,7 @@
 				D624E97F2654F71200CC96E6 /* ViewController03_BackEventIntercept.m in Sources */,
 				D624E9952654F71200CC96E6 /* ViewController02_BackgroundImage.m in Sources */,
 				D624E98E2654F71200CC96E6 /* ViewController10_ScrollView.m in Sources */,
+				D6304B532712C4190016696B /* DrawerViewController.m in Sources */,
 				D624E9792654F71200CC96E6 /* UIImage+NavigationBar.m in Sources */,
 				D624E97D2654F71200CC96E6 /* AppDelegate.m in Sources */,
 				D624E9842654F71200CC96E6 /* ViewController04_RedirectViewController.m in Sources */,
@@ -559,6 +584,7 @@
 				D624E9722654F71200CC96E6 /* CustomTableViewController.m in Sources */,
 				D624E9872654F71200CC96E6 /* ViewController05_Test.m in Sources */,
 				D624E97C2654F71200CC96E6 /* main.m in Sources */,
+				D6304B65271347B60016696B /* DrawAnimationTransitionDelegate.m in Sources */,
 				D624E99C2654F71200CC96E6 /* HierarchyViewController.m in Sources */,
 				D624E9992654F71200CC96E6 /* EventInterceptModel.m in Sources */,
 				D624E99A2654F71200CC96E6 /* RedirectViewControllerModel.m in Sources */,
