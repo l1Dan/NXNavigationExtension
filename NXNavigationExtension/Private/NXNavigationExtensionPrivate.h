@@ -65,6 +65,7 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 
 @interface UIScrollView (NXNavigationExtensionPrivate)
 
+/// UIViewController 中 scrollView 所引用的 NXNavigationBar
 @property (nonatomic, strong, nullable) NXNavigationBar *nx_navigationBar;
 
 @end
@@ -107,6 +108,11 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 /// @param viewController 当前的视图控制器
 - (BOOL)nx_checkFullscreenInteractivePopGestureEnabledWithViewController:(__kindof UIViewController *)viewController;
 
+/// 设置导航栏的系统返回按钮
+/// @param viewControllers 不包含当前控制器的其他所有控制器集合
+/// @param currentViewController 当前控制器
+- (void)nx_configureNavigationBackItemWithViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers currentViewController:(__kindof UIViewController *)currentViewController;
+
 @end
 
 
@@ -119,8 +125,7 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 
 /// 设置 UINavigationBarItem
 /// @param navigationController 包含 UIViewController 的 UINavigationController
-/// @param supported 是否支持使用系统返回菜单按钮
-- (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController menuSupplementBackButton:(BOOL)supported;
+- (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController;
 
 @end
 

@@ -64,6 +64,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// The same as NXNavigationBarAppearance `backButtonCustomView` instance.
 @property (nonatomic, strong, readonly, nullable) UIView *nx_backButtonCustomView;
 
+/// The same as NXNavigationBarAppearance `systemBackButtonTitle` instance.
+@property (nonatomic, copy, readonly, nullable) NSString* nx_systemBackButtonTitle;
+
+/// The same as NXNavigationBarAppearance `backImageInsets` instance.
+@property (nonatomic, assign, readonly) UIEdgeInsets nx_backImageInsets;
+
+/// The same as NXNavigationBarAppearance `nlandscapeBackImageInsets` instance.
+@property (nonatomic, assign, readonly) UIEdgeInsets nx_landscapeBackImageInsets;
+
+/// The same as NXNavigationBarAppearance `useSystemBackButton` instance.
+@property (nonatomic, assign, readonly) BOOL nx_useSystemBackButton;
+
 /// The same as NXViewControllerPreferences `useBlurNavigationBar` instance.
 @property (nonatomic, assign, readonly) BOOL nx_useBlurNavigationBar;
 
@@ -82,13 +94,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// The same as NXViewControllerPreferences `contentViewWithoutNavigtionBar` instance.
 @property (nonatomic, assign, readonly) BOOL nx_contentViewWithoutNavigtionBar;
 
-/// The same as NXViewControllerPreferences `backButtonMenuEnabled` instance.
-@property (nonatomic, assign, readonly) BOOL nx_backButtonMenuEnabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
-
 /// The same as NXViewControllerPreferences `interactivePopMaxAllowedDistanceToLeftEdge` instance.
 @property (nonatomic, assign, readonly) CGFloat nx_interactivePopMaxAllowedDistanceToLeftEdge;
 
-/// 主动触发导航栏外观更新
+/// 手动触发导航栏外观更新
 - (void)nx_setNeedsNavigationBarAppearanceUpdate;
 
 @end

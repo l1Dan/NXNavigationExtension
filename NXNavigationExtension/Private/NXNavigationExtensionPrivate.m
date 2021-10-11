@@ -298,6 +298,28 @@
     return NO;
 }
 
+- (void)nx_configureNavigationBackItemWithViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers currentViewController:(__kindof UIViewController *)currentViewController {
+    __kindof UIViewController *lastViewController = viewControllers.lastObject;
+    if (lastViewController && lastViewController != currentViewController) {
+        if (currentViewController.nx_systemBackButtonTitle) {
+            NSString *title = [currentViewController.nx_systemBackButtonTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:nil action:nil];
+            if ([title isEqualToString:@""]) { // 没有标题
+                if (@available(iOS 14.0, *)) {
+                    lastViewController.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal;
+                } else {
+                    lastViewController.navigationItem.backBarButtonItem =backItem;
+                }
+            } else { // 自定义标题
+                lastViewController.navigationItem.backBarButtonItem = backItem;
+            }
+        } else {
+            // 恢复系统返回按钮样式
+            lastViewController.navigationItem.backBarButtonItem = nil;
+        }
+    }
+}
+
 @end
 
 
@@ -329,16 +351,13 @@
     objc_setAssociatedObject(self, @selector(nx_prepareConfigureViewControllerCallback), nx_prepareConfigureViewControllerCallback, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController menuSupplementBackButton:(BOOL)supported {
-    if (@available(iOS 14.0, *)) {
-        if (self.nx_backButtonMenuEnabled) {
-            NSAssert(supported, @"需要设置 NXNavigationControllerPreferences menuSupplementBackButton 属性为 YES 才能生效");
-            if (supported && !self.navigationItem.leftItemsSupplementBackButton) {
-                self.navigationItem.leftBarButtonItem = nil;
-                self.navigationItem.leftBarButtonItems = nil;
-                return;
-            }
+- (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController {
+    if (self.nx_useSystemBackButton) {
+        if (!self.navigationItem.leftItemsSupplementBackButton) {
+            self.navigationItem.leftBarButtonItem = nil;
+            self.navigationItem.leftBarButtonItems = nil;
         }
+        return;
     }
     
     UIBarButtonItem *backButtonItem = self.navigationItem.leftBarButtonItem;

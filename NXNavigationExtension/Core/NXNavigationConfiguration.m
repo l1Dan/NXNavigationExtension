@@ -32,6 +32,8 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 - (instancetype)init {
     if (self = [super init]) {
         _tintColor = [UIColor systemBlueColor];
+        _useSystemBackButton = NO;
+        _systemBackButtonTitle = @"";
         if (@available(iOS 13.0, *)) {
             _backgroundColor = [UIColor systemBackgroundColor];
         } else {
@@ -60,6 +62,12 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
     newAppearance.backButtonCustomView = self.backButtonCustomView;
     newAppearance.backImage = self.backImage;
     newAppearance.landscapeBackImage = self.landscapeBackImage;
+    
+    newAppearance.backImageInsets = self.backImageInsets;
+    newAppearance.landscapeBackImageInsets = self.landscapeBackImageInsets;
+    
+    newAppearance.useSystemBackButton = self.useSystemBackButton;
+    newAppearance.systemBackButtonTitle = self.systemBackButtonTitle;
 
     return newAppearance;
 }
@@ -95,6 +103,17 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
     return _largeTitleTextAttributes;
 }
 
+- (void)setUseSystemBackButton:(BOOL)useSystemBackButton {
+    _useSystemBackButton = useSystemBackButton;
+    if (useSystemBackButton) {
+        _backImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+        _landscapeBackImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+    } else {
+        _backImageInsets = UIEdgeInsetsZero;
+        _landscapeBackImageInsets = UIEdgeInsetsZero;
+    }
+}
+
 @end
 
 
@@ -103,31 +122,14 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 - (instancetype)init {
     if (self = [super init]) {
         _fullscreenInteractivePopGestureEnabled = NO;
-        _menuSupplementBackButton = NO;
     }
     return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone {
     NXNavigationControllerPreferences *newPreferences = [[NXNavigationControllerPreferences alloc] init];
-    newPreferences.backImageInsets = self.backImageInsets;
-    newPreferences.landscapeBackImageInsets = self.landscapeBackImageInsets;
     newPreferences.fullscreenInteractivePopGestureEnabled = self.fullscreenInteractivePopGestureEnabled;
-    if (@available(iOS 14.0, *)) {
-        newPreferences.menuSupplementBackButton = self.menuSupplementBackButton;
-    }
     return newPreferences;
-}
-
-- (void)setMenuSupplementBackButton:(BOOL)menuSupplementBackButton {
-    _menuSupplementBackButton = menuSupplementBackButton;
-    if (menuSupplementBackButton) {
-        _backImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
-        _landscapeBackImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
-    } else {
-        _backImageInsets = UIEdgeInsetsZero;
-        _landscapeBackImageInsets = UIEdgeInsetsZero;
-    }
 }
 
 @end
@@ -143,7 +145,6 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
         _automaticallyHideNavigationBarInChildViewController = YES;
         _translucentNavigationBar = NO;
         _contentViewWithoutNavigtionBar = NO;
-        _backButtonMenuEnabled = NO;
         _interactivePopMaxAllowedDistanceToLeftEdge = 0.0;
     }
     return self;
@@ -158,9 +159,6 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
     newPreferences.translucentNavigationBar = self.translucentNavigationBar;
     newPreferences.contentViewWithoutNavigtionBar = self.contentViewWithoutNavigtionBar;
     newPreferences.interactivePopMaxAllowedDistanceToLeftEdge = self.interactivePopMaxAllowedDistanceToLeftEdge;
-    if (@available(iOS 14.0, *)) {
-        newPreferences.backButtonMenuEnabled = self.backButtonMenuEnabled;
-    }
     return newPreferences;
 }
 

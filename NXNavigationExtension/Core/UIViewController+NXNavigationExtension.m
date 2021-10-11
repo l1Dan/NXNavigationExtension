@@ -427,6 +427,51 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     return backButtonCustomView;
 }
 
+- (NSString *)nx_systemBackButtonTitle {
+    NXNavigationConfiguration *configuration = self.nx_configuration;
+    NSString *systemBackButtonTitle = objc_getAssociatedObject(self, _cmd);
+    if (systemBackButtonTitle && [systemBackButtonTitle isKindOfClass:[NSString class]]) {
+        return systemBackButtonTitle;
+    }
+    systemBackButtonTitle = configuration.navigationBarAppearance.systemBackButtonTitle;
+    objc_setAssociatedObject(self, _cmd, systemBackButtonTitle, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    return systemBackButtonTitle;
+}
+
+- (UIEdgeInsets)nx_backImageInsets {
+    NXNavigationConfiguration *configuration = self.nx_configuration;
+    NSString *insetsValue = objc_getAssociatedObject(self, _cmd);
+    if (insetsValue && [insetsValue isKindOfClass:[NSString class]]) {
+        return UIEdgeInsetsFromString(insetsValue);
+    }
+    UIEdgeInsets insets = configuration.navigationBarAppearance.backImageInsets;
+    
+    objc_setAssociatedObject(self, _cmd, NSStringFromUIEdgeInsets(insets), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return insets;
+}
+
+- (UIEdgeInsets)nx_landscapeBackImageInsets {
+    NXNavigationConfiguration *configuration = self.nx_configuration;
+    NSString *insetsValue = objc_getAssociatedObject(self, _cmd);
+    if (insetsValue && [insetsValue isKindOfClass:[NSString class]]) {
+        return UIEdgeInsetsFromString(insetsValue);
+    }
+    UIEdgeInsets insets = configuration.navigationBarAppearance.landscapeBackImageInsets;
+    objc_setAssociatedObject(self, _cmd, NSStringFromUIEdgeInsets(insets), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return insets;
+}
+
+- (BOOL)nx_useSystemBackButton {
+    NXNavigationConfiguration *configuration = self.nx_configuration;
+    NSNumber *useSystemBackButton = objc_getAssociatedObject(self, _cmd);
+    if (useSystemBackButton && [useSystemBackButton isKindOfClass:[NSNumber class]]) {
+        return [useSystemBackButton boolValue];
+    }
+    useSystemBackButton = [NSNumber numberWithBool:configuration.navigationBarAppearance.useSystemBackButton];
+    objc_setAssociatedObject(self, _cmd, useSystemBackButton, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return [useSystemBackButton boolValue];
+}
+
 - (BOOL)nx_useBlurNavigationBar {
     NXNavigationConfiguration *configuration = self.nx_configuration;
     NSNumber *useBlurNavigationBar = objc_getAssociatedObject(self, _cmd);
@@ -493,17 +538,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     return [contentViewWithoutNavigtionBar boolValue];
 }
 
-- (BOOL)nx_backButtonMenuEnabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSNumber *backButtonMenuEnabled = objc_getAssociatedObject(self, _cmd);
-    if (backButtonMenuEnabled && [backButtonMenuEnabled isKindOfClass:[NSNumber class]]) {
-        return [backButtonMenuEnabled boolValue];
-    }
-    backButtonMenuEnabled = [NSNumber numberWithBool:configuration.viewControllerPreferences.backButtonMenuEnabled];
-    objc_setAssociatedObject(self, _cmd, backButtonMenuEnabled, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [backButtonMenuEnabled boolValue];
-}
-
 - (CGFloat)nx_interactivePopMaxAllowedDistanceToLeftEdge {
     NXNavigationConfiguration *configuration = self.nx_configuration;
     NSNumber *interactivePopMaxAllowedDistanceToLeftEdge = objc_getAssociatedObject(self, _cmd);
@@ -519,18 +553,20 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (void)nx_setNeedsNavigationBarAppearanceUpdate {
     if (self.navigationController && self.navigationController.nx_useNavigationBar && self.navigationController.viewControllers.count > 1) {
-        // 手动刷新时调用一次外部修改
+        // 手动刷新时调用一次外部修改的配置
         NXNavigationPrepareConfigurationCallback callback = self.nx_prepareConfigureViewControllerCallback;
         if (callback) {
             self.nx_configuration = callback(self, [self.nx_configuration copy]);
         }
         
-        BOOL menuSupplementBackButton = NO;
-        if (@available(iOS 14.0, *)) {
-            menuSupplementBackButton = self.navigationController.nx_menuSupplementBackButton;
-            self.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal;
+        NSUInteger length = [self.navigationController.viewControllers indexOfObject:self];
+        if (length > 0) {
+            // 不包含当前控制器的其他所有控制器
+            NSArray<__kindof UIViewController *> *viewControllers = [self.navigationController.viewControllers subarrayWithRange:NSMakeRange(0, length)];
+            [self.navigationController nx_configureNavigationBackItemWithViewControllers:viewControllers currentViewController:self];
         }
-        [self nx_configureNavigationBarWithNavigationController:self.navigationController menuSupplementBackButton:menuSupplementBackButton];
+        
+        [self nx_configureNavigationBarWithNavigationController:self.navigationController];
     }
     [self nx_updateNavigationBarAppearance];
     [self nx_updateNavigationBarHierarchy];

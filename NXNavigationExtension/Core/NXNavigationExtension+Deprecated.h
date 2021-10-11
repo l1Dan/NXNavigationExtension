@@ -43,7 +43,7 @@ API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protoco
 
 @property (nonatomic, strong, nullable) UIImage *backgorundImage API_DEPRECATED("Use backgroundImage instead.", ios(2.0, 2.0)) API_UNAVAILABLE(watchos, tvos);
 
-@property (nonatomic, assign, getter=isBackButtonMenuSupported) BOOL backButtonMenuSupported API_DEPRECATED("Use NXNavigationControllerPreferences menuSupplementBackButton instead.", ios(2.0, 2.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, assign, getter=isBackButtonMenuSupported) BOOL backButtonMenuSupported API_DEPRECATED("Use NXNavigationBarAppearance useSystemBackButton instead.", ios(2.0, 2.0)) API_UNAVAILABLE(watchos, tvos);
 
 @property (nonatomic, assign) UIEdgeInsets backImageInsets API_DEPRECATED("Use NXNavigationControllerPreferences backImageInsets instead.", ios(2.0, 2.0));
 
@@ -90,14 +90,14 @@ API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protoco
 
 - (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerBlock:(__kindof UIViewController * _Nullable(^__nullable)(void))block API_DEPRECATED("Use nx_redirectViewControllerClass:initializeStandbyViewControllerUsingBlock: instead.", ios(2.0, 2.0));
 
+@property (nonatomic, assign, readonly) BOOL nx_menuSupplementBackButton API_DEPRECATED("Use NXNavigationBarAppearance useSystemBackButton instead.", ios(2.0, 2.0));
+
 @end
 
 
 @interface UIViewController (NXNavigationExtensionDeprecated)
 
-@property (nonatomic, assign, readonly) UIEdgeInsets nx_backImageInsets API_DEPRECATED("Use UINavigationController nx_backImageInsets instead.", ios(2.0, 2.0));
-
-@property (nonatomic, assign, readonly) UIEdgeInsets nx_landscapeBackImageInsets API_DEPRECATED("Use UINavigationController nx_landscapeBackImageInsets instead.", ios(2.0, 2.0));
+@property (nonatomic, assign, readonly) BOOL nx_backButtonMenuEnabled API_DEPRECATED("Use nx_useSystemBackButton instead.", ios(2.0, 2.0));
 
 @property (nonatomic, assign, readonly) BOOL nx_useSystemBlurNavigationBar API_DEPRECATED("Use nx_useBlurNavigationBar & nx_navigationBarBackgroundColor instead.", ios(2.0, 2.0));
 

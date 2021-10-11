@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 返回页面使用的交互方式
 /// `NXNavigationInteractiveTypeCallNXPopMethod` 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 回调方式
-/// `NXNavigationInteractiveTypeBackButtonMenuAction` 需要设置 NXNavigationControllerPreferences 属性 `menuSupplementBackButton = YES`
+/// `NXNavigationInteractiveTypeBackButtonMenuAction` 需要设置  `useSystemBackButton = YES` 或者 `nx_useSystemBackButton = YES`
 typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
     NXNavigationInteractiveTypeCallNXPopMethod,      // 调用 `nx_pop` 系列方法返回
     NXNavigationInteractiveTypeBackButtonAction,     // 点击返回按钮返回
@@ -54,6 +54,9 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
 
 NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance : NSObject <NSCopying>
 
+/// 设置 NXNavigationBar 背景颜色，默认：iOS13 之前 [UIColor whiteColor]，iOS13及以后 [UIColor systemBackgroundColor]
+@property (nonatomic, strong) UIColor *backgroundColor;
+
 /// 设置 UINavigationBar tintColor（返回按钮颜色），默认：[UIColor systemBlueColor]
 @property (nonatomic, strong) UIColor *tintColor;
 
@@ -72,9 +75,6 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 /// 设置 UINavigationBar largeTitleTextAttributes
 @property (nonatomic, strong, nullable) NSDictionary<NSAttributedStringKey, id> *largeTitleTextAttributes API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
 
-/// 设置 NXNavigationBar 背景颜色，默认：iOS13 之前 [UIColor whiteColor]，iOS13及以后 [UIColor systemBackgroundColor]
-@property (nonatomic, strong) UIColor *backgroundColor;
-
 /// 设置 NXNavigationBar 背景图片
 @property (nonatomic, strong, nullable) UIImage *backgroundImage;
 
@@ -87,24 +87,28 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 /// 设置横屏时显示的返回按钮图片
 @property (nonatomic, strong, nullable) UIImage *landscapeBackImage;
 
+/// 系统返回按钮的 2 种标题: 1. 使用系统默认标题，2.自定义标题(或者标题为空)；
+/// 默认：空字符串（不显示标题）。如果返回 nil，则使用系统返回按钮自带的标题
+@property (nonatomic, copy, nullable) NSString *systemBackButtonTitle;
+
+/// 设置返回按钮图片 `backImage` 的 insets，默认：UIEdgeInsetsZero
+/// 当 `useSystemBackButton = YES` 时 backImageInsets = {0, -8, 0, 0}
+@property (nonatomic, assign) UIEdgeInsets backImageInsets;
+
+/// 设置横屏时显示返回按钮图片 `landscapeBackImage` 的 insets，默认：UIEdgeInsetsZero
+/// 当 `useSystemBackButton = YES` 时 landscapeBackImageInsets = {0, -8, 0, 0}
+@property (nonatomic, assign) UIEdgeInsets landscapeBackImageInsets;
+
+/// 是否使用系统返回按钮；默认 NO
+@property (nonatomic, assign) BOOL useSystemBackButton;
+
 @end
 
 
 @interface NXNavigationControllerPreferences : NSObject <NSCopying>
 
-/// 设置返回按钮图片 `backImage` 的 insets，默认：UIEdgeInsetsZero
-/// 当 `menuSupplementBackButton = YES` 时 backImageInsets = {0, -8, 0, 0}
-@property (nonatomic, assign) UIEdgeInsets backImageInsets;
-
-/// 设置横屏时显示返回按钮图片 `landscapeBackImage` 的 insets，默认：UIEdgeInsetsZero
-/// 当 `menuSupplementBackButton = YES` 时 landscapeBackImageInsets = {0, -8, 0, 0}
-@property (nonatomic, assign) UIEdgeInsets landscapeBackImageInsets;
-
 /// 是否开启全屏手势；默认：NO
 @property (nonatomic, assign) BOOL fullscreenInteractivePopGestureEnabled;
-
-/// 是否支持返回按钮菜单（iOS14 长按返回按钮会出现返回控制器列表）; 默认：NO
-@property (nonatomic, assign) BOOL menuSupplementBackButton API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 
@@ -137,9 +141,6 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 /// 另外需要注意⚠️的是：导航栏返回按钮虽然无法接收用户的点击事件，但是还会显示在导航栏的上面，这样可以方便开发者在返回按钮底下添加自定义的返回按钮。
 /// 如果你不需要显示这个返回按钮也可以通过 `nx_barTintColor` 属性设置返回按钮颜色为 [UIColor clearColor]
 @property (nonatomic, assign) BOOL contentViewWithoutNavigtionBar;
-
-/// 是否开启返回按钮菜单，默认 `NO`。如果设置为 `YES`需要同时设置 NXNavigationControllerPreferences 属性 `menuSupplementBackButton = YES`
-@property (nonatomic, assign) BOOL backButtonMenuEnabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 /// 设置全屏手势触发距离
 @property (nonatomic, assign) CGFloat interactivePopMaxAllowedDistanceToLeftEdge;

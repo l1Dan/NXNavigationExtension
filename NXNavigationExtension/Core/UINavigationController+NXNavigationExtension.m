@@ -94,15 +94,11 @@
                     // 先赋值一次
                     viewController.nx_configuration = selfObject.nx_configuration;
                     viewController.nx_prepareConfigureViewControllerCallback = selfObject.nx_prepareConfigureViewControllerCallback;
-                    
-                    BOOL menuSupplementBackButton = NO;
-                    if (@available(iOS 14.0, *)) {
-                        menuSupplementBackButton = selfObject.nx_menuSupplementBackButton;
-                        viewController.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal;
-                    }
+                    // 设置返回按钮
+                    [selfObject nx_configureNavigationBackItemWithViewControllers:selfObject.viewControllers currentViewController:viewController];
                     
                     if (selfObject.viewControllers.count > 0) {
-                        [viewController nx_configureNavigationBarWithNavigationController:selfObject menuSupplementBackButton:menuSupplementBackButton];
+                        [viewController nx_configureNavigationBarWithNavigationController:selfObject];
                     }
                     
                     if ([selfObject nx_checkFullscreenInteractivePopGestureEnabledWithViewController:viewController]) {
@@ -128,15 +124,11 @@
                     if (viewControllers.count > 1) {
                         for (NSUInteger index = 0; index < viewControllers.count; index++) {
                             UIViewController *viewController = viewControllers[index];
-                            
-                            BOOL menuSupplementBackButton = NO;
-                            if (@available(iOS 14.0, *)) {
-                                menuSupplementBackButton = selfObject.nx_menuSupplementBackButton;
-                                viewController.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal;
-                            }
+                            // 设置返回按钮
+                            [selfObject nx_configureNavigationBackItemWithViewControllers:viewControllers currentViewController:viewController];
                             
                             if (index != 0) {
-                                [viewController nx_configureNavigationBarWithNavigationController:selfObject menuSupplementBackButton:menuSupplementBackButton];
+                                [viewController nx_configureNavigationBarWithNavigationController:selfObject];
                             }
                             
                             if ([selfObject nx_checkFullscreenInteractivePopGestureEnabledWithViewController:viewController]) {
@@ -207,29 +199,6 @@
 
 #pragma mark - Getter & Setter
 
-- (UIEdgeInsets)nx_backImageInsets {
-    NXNavigationConfiguration *configuration = self.nx_configuration;    
-    NSString *insetsValue = objc_getAssociatedObject(self, _cmd);
-    if (insetsValue && [insetsValue isKindOfClass:[NSString class]]) {
-        return UIEdgeInsetsFromString(insetsValue);
-    }
-    UIEdgeInsets insets = configuration.navigationControllerPreferences.backImageInsets;
-    
-    objc_setAssociatedObject(self, _cmd, NSStringFromUIEdgeInsets(insets), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return insets;
-}
-
-- (UIEdgeInsets)nx_landscapeBackImageInsets {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSString *insetsValue = objc_getAssociatedObject(self, _cmd);
-    if (insetsValue && [insetsValue isKindOfClass:[NSString class]]) {
-        return UIEdgeInsetsFromString(insetsValue);
-    }
-    UIEdgeInsets insets = configuration.navigationControllerPreferences.landscapeBackImageInsets;
-    objc_setAssociatedObject(self, _cmd, NSStringFromUIEdgeInsets(insets), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return insets;
-}
-
 - (BOOL)nx_fullscreenInteractivePopGestureEnabled {
     NXNavigationConfiguration *configuration = self.nx_configuration;
     NSNumber *fullscreenInteractivePopGestureEnabled = objc_getAssociatedObject(self, _cmd);
@@ -239,17 +208,6 @@
     fullscreenInteractivePopGestureEnabled = [NSNumber numberWithBool:configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEnabled];
     objc_setAssociatedObject(self, _cmd, fullscreenInteractivePopGestureEnabled, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return [fullscreenInteractivePopGestureEnabled boolValue];
-}
-
-- (BOOL)nx_menuSupplementBackButton API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSNumber *menuSupplementBackButton = objc_getAssociatedObject(self, _cmd);
-    if (menuSupplementBackButton && [menuSupplementBackButton isKindOfClass:[NSNumber class]]) {
-        return [menuSupplementBackButton boolValue];
-    }
-    menuSupplementBackButton = [NSNumber numberWithBool:configuration.navigationControllerPreferences.menuSupplementBackButton];
-    objc_setAssociatedObject(self, _cmd, menuSupplementBackButton, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [menuSupplementBackButton boolValue];
 }
 
 - (UIPanGestureRecognizer *)nx_fullscreenPopGestureRecognizer {

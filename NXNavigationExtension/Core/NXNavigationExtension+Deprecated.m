@@ -71,30 +71,6 @@
     }
 }
 
-- (UIEdgeInsets)backImageInsets {
-    NSString *insets = objc_getAssociatedObject(self, _cmd);
-    if (insets && [insets isKindOfClass:[NSString class]]) {
-        return UIEdgeInsetsFromString(insets);
-    }
-    return UIEdgeInsetsZero;
-}
-
-- (void)setBackImageInsets:(UIEdgeInsets)backImageInsets {
-    objc_setAssociatedObject(self, @selector(backImageInsets), NSStringFromUIEdgeInsets(backImageInsets), OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
-
-- (UIEdgeInsets)landscapeBackImageInsets {
-    NSString *insets = objc_getAssociatedObject(self, _cmd);
-    if (insets && [insets isKindOfClass:[NSString class]]) {
-        return UIEdgeInsetsFromString(insets);
-    }
-    return UIEdgeInsetsZero;
-}
-
-- (void)setLandscapeBackImageInsets:(UIEdgeInsets)landscapeBackImageInsets {
-    objc_setAssociatedObject(self, @selector(landscapeBackImageInsets), NSStringFromUIEdgeInsets(landscapeBackImageInsets), OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
-
 @end
 
 @interface NXNavigationBar ()
@@ -191,6 +167,10 @@
     [self nx_redirectViewControllerClass:aClass initializeStandbyViewControllerUsingBlock:block];
 }
 
+- (BOOL)nx_menuSupplementBackButton {
+    return NO;
+}
+
 @end
 
 
@@ -218,6 +198,10 @@
 
 - (BOOL)nx_containerViewWithoutNavigtionBar {
     return [self nx_contentViewWithoutNavigtionBar];
+}
+
+- (BOOL)nx_backButtonMenuEnabled {
+    return [self nx_useSystemBackButton];
 }
 
 @end
