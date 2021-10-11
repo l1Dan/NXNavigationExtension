@@ -115,6 +115,8 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 /// 获取当前导航控制器的配置
 @property (nonatomic, strong, nullable) NXNavigationConfiguration *nx_configuration;
 
+@property (nonatomic, strong, nullable) NXNavigationPrepareConfigurationCallback nx_prepareConfigureViewControllerCallback;
+
 /// 设置 UINavigationBarItem
 /// @param navigationController 包含 UIViewController 的 UINavigationController
 /// @param supported 是否支持使用系统返回菜单按钮

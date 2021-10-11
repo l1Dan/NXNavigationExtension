@@ -23,6 +23,10 @@
 
 #import "NXNavigationBar.h"
 #import "NXNavigationConfiguration.h"
+#import "NXNavigationExtensionRuntime.h"
+
+static NSString *NXNavigationConfigurationKey = @"NXNavigationConfigurationKey";
+static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurationCallbackKey";
 
 @interface NXNavigationBar ()
 
@@ -36,8 +40,8 @@
 
 @implementation NXNavigationBar
 
-+ (NSMutableDictionary<NSString *, NXNavigationConfiguration *> *)allConfigurations {
-    static NSMutableDictionary<NSString *, NXNavigationConfiguration *> *configurations = nil;
++ (NSMutableDictionary<NSString *, NSDictionary<NSString *, id> *> *)allConfigurations {
+    static NSMutableDictionary<NSString *, NSDictionary<NSString *, id> *> *configurations = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         configurations = [NSMutableDictionary dictionary];
@@ -97,6 +101,8 @@
     [self setBackgroundColor:self.originalBackgroundColor];
 }
 
+/// 更新导航栏 frame
+/// @param callSuper 是否需要调用 super setFrame: 方法
 - (void)updateNavigationBarContentFrameCallSuper:(BOOL)callSuper {
     CGRect navigationBarFrame = CGRectMake(0, 0, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame));
     self.backgroundEffectView.frame = navigationBarFrame;
@@ -119,6 +125,23 @@
         CGFloat navigationBarY = self.edgesForExtendedLayoutEnabled ? CGRectGetHeight(navigationBarFrame) : 0;
         [super setFrame:CGRectMake(0, -navigationBarY, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame))];
     }
+}
+
++ (NSDictionary<NSString *, id> *)lookupConfigurationInfoWithNavigationControllerClass:(__kindof Class)navigationControllerClass {
+    if (!navigationControllerClass) return nil;
+    // 收集所有的类
+    NSMutableArray<Class> *classes = [NSMutableArray array];
+    for (NSString *className in [NXNavigationBar allConfigurations].allKeys) {
+        if (NSClassFromString(className)) {
+            [classes addObject:NSClassFromString(className)];
+        }
+    }
+    // 查找所有注册的类中最适合一个
+    Class aClass = NXNavigationExtensionLookupClass(navigationControllerClass, classes);
+    if (aClass) {
+        return [NXNavigationBar allConfigurations][NSStringFromClass(aClass)];
+    }
+    return nil;
 }
 
 #pragma mark - Public
@@ -146,23 +169,44 @@
 
 + (NXNavigationConfiguration *)configurationFromNavigationController:(__kindof UINavigationController *)navigationController {
     if (!navigationController) return nil;
-    
-    for (NSString *className in [NXNavigationBar allConfigurations]) {
-        if ([navigationController isKindOfClass:NSClassFromString(className)]) {
-            return [NXNavigationBar allConfigurations][className];
-        }
-    }
-    return nil;
+    return [self configurationFromNavigationControllerClass:[navigationController class]];
 }
 
 + (void)registerNavigationControllerClass:(Class)navigationControllerClass withConfiguration:(NXNavigationConfiguration *)configuration {
-    NSAssert(navigationControllerClass != nil, @"参数 navigationControllerClass 不能为空！");
+    if (navigationControllerClass && configuration) {
+        [self registerNavigationControllerClasses:@[navigationControllerClass] forConfiguration:configuration];
+    }
+}
+
++ (NXNavigationConfiguration *)configurationFromNavigationControllerClass:(Class)navigationControllerClass {
+    NSDictionary<NSString *, id> *info = [self lookupConfigurationInfoWithNavigationControllerClass:navigationControllerClass];
+    return info ? info[NXNavigationConfigurationKey] : info;
+}
+
++ (nullable NXNavigationPrepareConfigurationCallback)prepareConfigureViewControllerCallbackFromNavigationControllerClass:(Class)navigationControllerClass {
+    NSDictionary<NSString *, id> *info = [self lookupConfigurationInfoWithNavigationControllerClass:navigationControllerClass];
+    return info ? info[NXNavigationConfigurationCallbackKey] : info;
+}
+
++ (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses
+                           forConfiguration:(NXNavigationConfiguration *)configuration {
+    [self registerNavigationControllerClasses:navigationControllerClasses
+                             forConfiguration:configuration
+       prepareConfigureViewControllerCallback:NULL];
+}
+
++ (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses
+                           forConfiguration:(NXNavigationConfiguration *)configuration
+     prepareConfigureViewControllerCallback:(NXNavigationPrepareConfigurationCallback)callback {
+    NSAssert(navigationControllerClasses != nil, @"参数 navigationControllerClasses 不能为空！");
     NSAssert(configuration != nil, @"参数 configuration 不能为空！");
     
-    if (!navigationControllerClass) return;
-    if (!configuration) return;
-    
-    [NXNavigationBar allConfigurations][NSStringFromClass(navigationControllerClass)] = configuration;
+    for (Class navigationControllerClass in navigationControllerClasses) {
+        NSMutableDictionary<NSString *, id> *info = [NSMutableDictionary dictionary];
+        [info setValue:configuration forKey:NXNavigationConfigurationKey];
+        [info setValue:callback forKey:NXNavigationConfigurationCallbackKey];
+        [NXNavigationBar allConfigurations][NSStringFromClass(navigationControllerClass)] = info;
+    }
 }
 
 @end

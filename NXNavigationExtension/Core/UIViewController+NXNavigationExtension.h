@@ -91,8 +91,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 主动触发导航栏外观更新
 - (void)nx_setNeedsNavigationBarAppearanceUpdate;
 
-@property (nonatomic, copy, nullable) NXNavigationConfiguration * (^nx_prepareNavigationConfiguration)(NXNavigationConfiguration *configuration);
-
 @end
 
 NS_ASSUME_NONNULL_END

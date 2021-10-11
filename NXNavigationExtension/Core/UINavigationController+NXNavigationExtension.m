@@ -91,7 +91,9 @@
         NXNavigationExtensionOverrideImplementation([UINavigationController class], @selector(pushViewController:animated:), ^id _Nonnull(__unsafe_unretained Class  _Nonnull originClass, SEL  _Nonnull originCMD, IMP  _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
             return ^(UINavigationController *selfObject, UIViewController *viewController, BOOL animated) {
                 if (selfObject.nx_useNavigationBar) {
-                    viewController.nx_configuration = selfObject.nx_configuration; // 先赋值一次
+                    // 先赋值一次
+                    viewController.nx_configuration = selfObject.nx_configuration;
+                    viewController.nx_prepareConfigureViewControllerCallback = selfObject.nx_prepareConfigureViewControllerCallback;
                     
                     BOOL menuSupplementBackButton = NO;
                     if (@available(iOS 14.0, *)) {
@@ -118,7 +120,9 @@
             return ^(UINavigationController *selfObject, NSArray<UIViewController *> *viewControllers, BOOL animated) {
                 if (selfObject.nx_useNavigationBar) {
                     for (UIViewController *viewController in viewControllers) {
-                        viewController.nx_configuration = selfObject.nx_configuration; // 先赋值一次                        
+                        // 先赋值一次
+                        viewController.nx_configuration = selfObject.nx_configuration;
+                        viewController.nx_prepareConfigureViewControllerCallback = selfObject.nx_prepareConfigureViewControllerCallback;
                     }
                     
                     if (viewControllers.count > 1) {
@@ -204,12 +208,7 @@
 #pragma mark - Getter & Setter
 
 - (UIEdgeInsets)nx_backImageInsets {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationControllerPreferences.backImageInsets;
-    }
-    
+    NXNavigationConfiguration *configuration = self.nx_configuration;    
     NSString *insetsValue = objc_getAssociatedObject(self, _cmd);
     if (insetsValue && [insetsValue isKindOfClass:[NSString class]]) {
         return UIEdgeInsetsFromString(insetsValue);
@@ -222,11 +221,6 @@
 
 - (UIEdgeInsets)nx_landscapeBackImageInsets {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationControllerPreferences.landscapeBackImageInsets;
-    }
-    
     NSString *insetsValue = objc_getAssociatedObject(self, _cmd);
     if (insetsValue && [insetsValue isKindOfClass:[NSString class]]) {
         return UIEdgeInsetsFromString(insetsValue);
@@ -238,11 +232,6 @@
 
 - (BOOL)nx_fullscreenInteractivePopGestureEnabled {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationControllerPreferences.fullscreenInteractivePopGestureEnabled;
-    }
-    
     NSNumber *fullscreenInteractivePopGestureEnabled = objc_getAssociatedObject(self, _cmd);
     if (fullscreenInteractivePopGestureEnabled && [fullscreenInteractivePopGestureEnabled isKindOfClass:[NSNumber class]]) {
         return [fullscreenInteractivePopGestureEnabled boolValue];
@@ -254,11 +243,6 @@
 
 - (BOOL)nx_menuSupplementBackButton API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationControllerPreferences.menuSupplementBackButton;
-    }
-    
     NSNumber *menuSupplementBackButton = objc_getAssociatedObject(self, _cmd);
     if (menuSupplementBackButton && [menuSupplementBackButton isKindOfClass:[NSNumber class]]) {
         return [menuSupplementBackButton boolValue];

@@ -238,7 +238,22 @@
 
 // Overwrite
 - (NXNavigationConfiguration *)nx_configuration {
-    return [NXNavigationBar configurationFromNavigationController:self];
+    NXNavigationConfiguration *configuration = objc_getAssociatedObject(self, _cmd);
+    if (!configuration) {
+        configuration = [NXNavigationBar configurationFromNavigationControllerClass:[self class]];
+        [self setNx_configuration:configuration];
+    }
+    return configuration;
+}
+
+// Overwrite
+- (NXNavigationPrepareConfigurationCallback)nx_prepareConfigureViewControllerCallback {
+    NXNavigationPrepareConfigurationCallback callback = objc_getAssociatedObject(self, _cmd);
+    if (!callback) {
+        callback = [NXNavigationBar prepareConfigureViewControllerCallbackFromNavigationControllerClass:[self class]];
+        [self setNx_prepareConfigureViewControllerCallback:callback];
+    }
+    return callback;
 }
 
 - (BOOL)nx_useNavigationBar {
@@ -289,14 +304,29 @@
 @implementation UIViewController (NXNavigationExtensionPrivate)
 
 - (NXNavigationConfiguration *)nx_configuration {
-    if (self.navigationController && self.navigationController.nx_configuration) {
-        [self setNx_configuration:self.navigationController.nx_configuration];
+    NXNavigationConfiguration *configuration = objc_getAssociatedObject(self, _cmd);
+    if (!configuration && self.navigationController) {
+        configuration = self.navigationController.nx_configuration;
+        [self setNx_configuration:configuration];
     }
-    return objc_getAssociatedObject(self, _cmd);
+    return configuration;
 }
 
 - (void)setNx_configuration:(NXNavigationConfiguration *)nx_configuration {
     objc_setAssociatedObject(self, @selector(nx_configuration), nx_configuration, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NXNavigationPrepareConfigurationCallback)nx_prepareConfigureViewControllerCallback {
+    NXNavigationPrepareConfigurationCallback callback = objc_getAssociatedObject(self, _cmd);
+    if (!callback && self.navigationController) {
+        callback = self.navigationController.nx_prepareConfigureViewControllerCallback;
+        [self setNx_prepareConfigureViewControllerCallback:callback];
+    }
+    return callback;
+}
+
+- (void)setNx_prepareConfigureViewControllerCallback:(NXNavigationPrepareConfigurationCallback)nx_prepareConfigureViewControllerCallback {
+    objc_setAssociatedObject(self, @selector(nx_prepareConfigureViewControllerCallback), nx_prepareConfigureViewControllerCallback, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController menuSupplementBackButton:(BOOL)supported {

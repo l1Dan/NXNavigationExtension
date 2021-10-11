@@ -26,6 +26,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class NXNavigationConfiguration;
+
+typedef NXNavigationConfiguration *_Nullable(^_Nullable NXNavigationPrepareConfigurationCallback)(__kindof UIViewController *viewController, NXNavigationConfiguration *configuration);
+
 @interface NXNavigationBar : UIView
 
 /// 设置 `contentView` 的外边距；默认 UIEdgeInsetsMake(0, 8, 0, 8)
@@ -51,6 +54,19 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param navigationControllerClass 需要注册的 UINavigationController 或子类泪对象
 /// @param configuration NXNavigationConfiguration 配置信息
 + (void)registerNavigationControllerClass:(Class)navigationControllerClass withConfiguration:(NXNavigationConfiguration *)configuration NS_SWIFT_NAME(register(_:with:));
+
+// For beta
++ (nullable NXNavigationConfiguration *)configurationFromNavigationControllerClass:(nullable Class)navigationControllerClass;
+
++ (nullable NXNavigationPrepareConfigurationCallback)prepareConfigureViewControllerCallbackFromNavigationControllerClass:(nullable Class)navigationControllerClass;
+
+// For beta
++ (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses
+                           forConfiguration:(NXNavigationConfiguration *)configuration;
+// For beta
++ (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses
+                           forConfiguration:(NXNavigationConfiguration *)configuration
+     prepareConfigureViewControllerCallback:(NXNavigationPrepareConfigurationCallback)callback;
 
 @end
 

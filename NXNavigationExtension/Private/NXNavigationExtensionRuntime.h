@@ -43,6 +43,27 @@ NXNavigationExtensionGetImageFromColor(UIColor *color) {
     return image;
 }
 
+/// 根据使用的类查找到最适合的类或者基类，不同于 `isKindOfClass:`
+/// @param aClass 需要查找的类
+/// @param classes 包含所有待查找的类
+CG_INLINE __nullable Class
+NXNavigationExtensionLookupClass(__nullable Class aClass, NSArray<Class> *classes) {
+    if (!aClass) return nil;
+    
+    NSString *className = NSStringFromClass(aClass);
+    if ([className isEqualToString:NSStringFromClass([UIResponder class])] || [className isEqualToString:NSStringFromClass([NSObject class])]) {
+        return nil;
+    }
+    
+    for (Class cls in classes) {
+        if ([className isEqualToString:NSStringFromClass(cls)]) {
+            return cls;
+        }
+    }
+    
+    return NXNavigationExtensionLookupClass([aClass superclass], classes);
+}
+
 @interface NSString (NXNavigationExtension)
 
 + (NSString *)nx_stringByConcat:(id)firstArgv, ...;

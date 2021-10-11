@@ -117,6 +117,11 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 - (void)nx_configureNXNavigationBar {
     if (self.navigationController && self.navigationController.nx_useNavigationBar && !self.nx_navigationBarInitialize) {
         self.nx_navigationBarInitialize = YES;
+        // 首次加载时调用一次外部修改
+        NXNavigationPrepareConfigurationCallback callback = self.nx_prepareConfigureViewControllerCallback;
+        if (callback) {
+            self.nx_configuration = callback(self, [self.nx_configuration copy]);
+        }
         
         [self.navigationController nx_configureNavigationBar];
         [self nx_setupNavigationBar];
@@ -291,11 +296,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (UIColor *)nx_navigationBarBackgroundColor {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationBarAppearance.backgroundColor;
-    }
-    
     UIColor *color = objc_getAssociatedObject(self, _cmd);
     if (color && [color isKindOfClass:[UIColor class]]) {
         return color;
@@ -307,11 +307,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (UIImage *)nx_navigationBarBackgroundImage {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationBarAppearance.backgroundImage;
-    }
-    
     UIImage *image = objc_getAssociatedObject(self, _cmd);
     if (image && [image isKindOfClass:[UIImage class]]) {
         return image;
@@ -323,11 +318,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (UIColor *)nx_barBarTintColor {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationBarAppearance.barTintColor;
-    }
-    
     UIColor *barBarTintColor = objc_getAssociatedObject(self, _cmd);
     if (barBarTintColor && [barBarTintColor isKindOfClass:[UIColor class]]) {
         return barBarTintColor;
@@ -339,11 +329,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (UIColor *)nx_barTintColor {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationBarAppearance.tintColor;
-    }
-    
     UIColor *barTintColor = objc_getAssociatedObject(self, _cmd);
     if (barTintColor && [barTintColor isKindOfClass:[UIColor class]]) {
         return barTintColor;
@@ -355,11 +340,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (NSDictionary<NSAttributedStringKey, id> *)nx_titleTextAttributes {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationBarAppearance.titleTextAttributes;
-    }
-    
     NSDictionary<NSAttributedStringKey, id> *titleTextAttributes = configuration.navigationBarAppearance.titleTextAttributes;
     if (titleTextAttributes) {
         return titleTextAttributes;
@@ -384,11 +364,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (NSDictionary<NSAttributedStringKey, id> *)nx_largeTitleTextAttributes {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationBarAppearance.titleTextAttributes;
-    }
-    
     NSDictionary<NSAttributedStringKey, id> *largeTitleTextAttributes = configuration.navigationBarAppearance.largeTitleTextAttributes;
     if (largeTitleTextAttributes) {
         return largeTitleTextAttributes;
@@ -399,11 +374,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (UIImage *)nx_shadowImage {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationBarAppearance.shadowImage;
-    }
-    
     UIImage *shadowImage = objc_getAssociatedObject(self, _cmd);
     if (shadowImage && [shadowImage isKindOfClass:[UIImage class]]) {
         return shadowImage;
@@ -415,11 +385,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (UIColor *)nx_shadowImageTintColor {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationBarAppearance.shadowColor;
-    }
-    
     UIColor *shadowImageTintColor = objc_getAssociatedObject(self, _cmd);
     if (shadowImageTintColor && [shadowImageTintColor isKindOfClass:[UIColor class]]) {
         return shadowImageTintColor;
@@ -431,11 +396,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (UIImage *)nx_backImage {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationBarAppearance.backImage;
-    }
-    
     UIImage *backImage = objc_getAssociatedObject(self, _cmd);
     if (backImage && [backImage isKindOfClass:[UIImage class]]) {
         return backImage;
@@ -447,11 +407,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (UIImage *)nx_landscapeBackImage {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationBarAppearance.landscapeBackImage;
-    }
-    
     UIImage *landscapeBackImage = objc_getAssociatedObject(self, _cmd);
     if (landscapeBackImage && [landscapeBackImage isKindOfClass:[UIImage class]]) {
         return landscapeBackImage;
@@ -463,11 +418,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (UIView *)nx_backButtonCustomView {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.navigationBarAppearance.backButtonCustomView;
-    }
-    
     UIView *backButtonCustomView = objc_getAssociatedObject(self, _cmd);
     if (backButtonCustomView && [backButtonCustomView isKindOfClass:[UIView class]]) {
         return backButtonCustomView;
@@ -479,11 +429,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (BOOL)nx_useBlurNavigationBar {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.viewControllerPreferences.useBlurNavigationBar;
-    }
-    
     NSNumber *useBlurNavigationBar = objc_getAssociatedObject(self, _cmd);
     if (useBlurNavigationBar && [useBlurNavigationBar isKindOfClass:[NSNumber class]]) {
         return [useBlurNavigationBar boolValue];
@@ -495,11 +440,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (BOOL)nx_disableInteractivePopGesture {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.viewControllerPreferences.disableInteractivePopGesture;
-    }
-    
     NSNumber *disableInteractivePopGesture = objc_getAssociatedObject(self, _cmd);
     if (disableInteractivePopGesture && [disableInteractivePopGesture isKindOfClass:[NSNumber class]]) {
         return [disableInteractivePopGesture boolValue];
@@ -511,11 +451,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (BOOL)nx_enableFullscreenInteractivePopGesture {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.viewControllerPreferences.enableFullscreenInteractivePopGesture;
-    }
-    
     NSNumber *enableFullscreenInteractivePopGesture = objc_getAssociatedObject(self, _cmd);
     if (enableFullscreenInteractivePopGesture && [enableFullscreenInteractivePopGesture isKindOfClass:[NSNumber class]]) {
         return [enableFullscreenInteractivePopGesture boolValue];
@@ -527,11 +462,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (BOOL)nx_automaticallyHideNavigationBarInChildViewController {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.viewControllerPreferences.automaticallyHideNavigationBarInChildViewController;
-    }
-    
     NSNumber *automaticallyHideNavigationBarInChildViewController = objc_getAssociatedObject(self, _cmd);
     if (automaticallyHideNavigationBarInChildViewController && [automaticallyHideNavigationBarInChildViewController isKindOfClass:[NSNumber class]]) {
         return [automaticallyHideNavigationBarInChildViewController boolValue];
@@ -543,11 +473,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (BOOL)nx_translucentNavigationBar {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.viewControllerPreferences.translucentNavigationBar;
-    }
-    
     NSNumber *translucentNavigationBar = objc_getAssociatedObject(self, _cmd);
     if (translucentNavigationBar && [translucentNavigationBar isKindOfClass:[NSNumber class]]) {
         return [translucentNavigationBar boolValue];
@@ -559,11 +484,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (BOOL)nx_contentViewWithoutNavigtionBar {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.viewControllerPreferences.contentViewWithoutNavigtionBar;
-    }
-    
     NSNumber *contentViewWithoutNavigtionBar = objc_getAssociatedObject(self, _cmd);
     if (contentViewWithoutNavigtionBar && [contentViewWithoutNavigtionBar isKindOfClass:[NSNumber class]]) {
         return [contentViewWithoutNavigtionBar boolValue];
@@ -575,11 +495,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (BOOL)nx_backButtonMenuEnabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.viewControllerPreferences.backButtonMenuEnabled;
-    }
-    
     NSNumber *backButtonMenuEnabled = objc_getAssociatedObject(self, _cmd);
     if (backButtonMenuEnabled && [backButtonMenuEnabled isKindOfClass:[NSNumber class]]) {
         return [backButtonMenuEnabled boolValue];
@@ -591,11 +506,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (CGFloat)nx_interactivePopMaxAllowedDistanceToLeftEdge {
     NXNavigationConfiguration *configuration = self.nx_configuration;
-    if (self.nx_prepareNavigationConfiguration) {
-        NXNavigationConfiguration *temporary = self.nx_prepareNavigationConfiguration([configuration copy]);
-        return temporary.viewControllerPreferences.interactivePopMaxAllowedDistanceToLeftEdge;
-    }
-    
     NSNumber *interactivePopMaxAllowedDistanceToLeftEdge = objc_getAssociatedObject(self, _cmd);
     if (interactivePopMaxAllowedDistanceToLeftEdge && [interactivePopMaxAllowedDistanceToLeftEdge isKindOfClass:[NSNumber class]]) {
 #if CGFLOAT_IS_DOUBLE
@@ -609,6 +519,12 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 - (void)nx_setNeedsNavigationBarAppearanceUpdate {
     if (self.navigationController && self.navigationController.nx_useNavigationBar && self.navigationController.viewControllers.count > 1) {
+        // 手动刷新时调用一次外部修改
+        NXNavigationPrepareConfigurationCallback callback = self.nx_prepareConfigureViewControllerCallback;
+        if (callback) {
+            self.nx_configuration = callback(self, [self.nx_configuration copy]);
+        }
+        
         BOOL menuSupplementBackButton = NO;
         if (@available(iOS 14.0, *)) {
             menuSupplementBackButton = self.navigationController.nx_menuSupplementBackButton;
@@ -619,15 +535,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     [self nx_updateNavigationBarAppearance];
     [self nx_updateNavigationBarHierarchy];
     [self nx_updateNavigationBarSubviewState];
-}
-
-- (NXNavigationConfiguration * _Nonnull (^)(NXNavigationConfiguration * _Nonnull))nx_prepareNavigationConfiguration {
-    return objc_getAssociatedObject(self, _cmd);
-}
-
-- (void)setNx_prepareNavigationConfiguration:(NXNavigationConfiguration * _Nonnull (^)(NXNavigationConfiguration * _Nonnull))nx_prepareNavigationConfiguration {
-    objc_setAssociatedObject(self, @selector(nx_prepareNavigationConfiguration), nx_prepareNavigationConfiguration, OBJC_ASSOCIATION_COPY_NONATOMIC);
-    [self nx_updateNavigationBarAppearance];
 }
 
 @end
