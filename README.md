@@ -60,6 +60,7 @@ github "l1Dan/NXNavigationExtension"
 - ✅` 自定义返回按钮`
 - ✅` 自定义导航栏模糊背景`
 - ✅` 修改返回按钮箭头颜色`
+- ✅` 修改系统返回按钮文字`
 - ✅` 修改导航栏标题颜色`
 - ✅` 修改导航栏背景颜色`
 - ✅` 修改导航栏背景图片`
@@ -83,18 +84,23 @@ github "l1Dan/NXNavigationExtension"
 
 所有对导航栏外观的修改都是基于视图控制器 `UIViewController` 修改的，而不是基于导航控制器 `UINavigationController` 修改，这种设计逻辑更加符合实际应用场景。也就是说视图控制器管理自己的导航栏，而不是使用导航控制器来全局管理。
 
-1. 💉 导入头文件 `#import <NXNavigationExtension/NXNavigationExtension.h>`
-2. 💉 使用之前需要先注册需要修改的导航控制器，以 `FeatureNavigationController` 为例：
+1. 💉 导入头文件 `#import <NXNavigationExtension/NXNavigationExtension.h>`。
+2. 💉 使用之前需要先注册需要修改的导航控制器。
 
 ✅ 推荐
 
 ```objc
-NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
+NXNavigationConfiguration *configuration = [NXNavigationConfiguration defaultConfiguration];
 configuration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
-if (@available(iOS 14.0, *)) {
-    configuration.navigationControllerPreferences.menuSupplementBackButton = YES;
-}
-[NXNavigationBar registerNavigationControllerClass:[FeatureNavigationController class] withConfiguration:configuration];
+[configuration registerNavigationControllerClasses:@[[FeatureNavigationController class]] prepareConfigureViewControllerCallback:^NXNavigationConfiguration * _Nullable(__kindof UIViewController * _Nonnull viewController, NXNavigationConfiguration * _Nonnull configuration) {
+    configuration.navigationBarAppearance.backgroundColor = [UIColor brownColor];
+    return configuration;
+}];
+
+// OR
+NXNavigationConfiguration *otherConfiguration = [[NXNavigationConfiguration alloc] init];
+otherConfiguration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
+[otherConfiguration registerNavigationControllerClasses:@[[OtherNavigationController class]]];
 ```
 
 ❌ 不推荐
@@ -102,11 +108,8 @@ if (@available(iOS 14.0, *)) {
 ```objc
 NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
 configuration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
-if (@available(iOS 14.0, *)) {
-    configuration.navigationControllerPreferences.menuSupplementBackButton = YES;
-}
 // UINavigationController 会影响所有的导航控制器，所以不推荐使用这种方式注册
-[NXNavigationBar registerNavigationControllerClass:[UINavigationController class] withConfiguration:configuration];
+[configuration registerNavigationControllerClasses:@[[UINavigationController class]]];
 ```
 
 **注意**：
@@ -139,6 +142,21 @@ configuration.navigationBarAppearance.tintColor = [UIColor redColor];
 // 基于视图控制器修改
 - (UIColor *)nx_barTintColor {
     return self.isDarkMode ? [UIColor whiteColor] : [UIColor blackColor];
+}
+```
+
+## 修改系统返回按钮文字
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Common/Controllers/RandomColorViewController.m)
+
+```objc
+// 需要设置使用系统返回按钮，这样才会有效果
+- (BOOL)nx_useSystemBackButton {
+    return YES;
+}
+
+- (NSString *)nx_systemBackButtonTitle {
+    return self.backButtonTitle;
 }
 ```
 
@@ -359,7 +377,7 @@ configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEna
 [self.navigationController popViewControllerAnimated:YES];
 ```
 
-上面代码大意为：首先查找 `self.navigationController.ViewConrollers` 是否存在一个类型为 `[RandomColorViewController class]` 的实例对象，如果存在则重定向到此视图控制器，没有则使用 `[[RandomColorViewController alloc] init]` 来创建一个新的 `[RandomColorViewController class]` 的实例对象。
+意思是：首先查找 `self.navigationController.ViewConrollers` 是否存在一个类型为 `[RandomColorViewController class]` 的实例对象，如果存在则重定向到此视图控制器，没有则使用 `[[RandomColorViewController alloc] init]` 来创建一个新的 `[RandomColorViewController class]` 的实例对象。
 
 ### 导航栏点击事件穿透到底部
 
@@ -407,19 +425,8 @@ configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEna
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController04_RedirectViewController.m)
 
-- 设置 NXNavigationControllerPreferences `menuSupplementBackButton` 属性
-
 ```objc
-NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
-if (@available(iOS 14.0, *)) {
-    configuration.navigationControllerPreferences.menuSupplementBackButton = YES;
-}
-```
-
-- 还需要在页面内设置
-
-```objc
-- (BOOL)nx_backButtonMenuEnabled {
+- (BOOL)nx_useSystemBackButton {
     return YES;
 }
 ```

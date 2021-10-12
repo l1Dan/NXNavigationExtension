@@ -1,6 +1,19 @@
 # CHANGELOG.md
 
-- 添加转场动画示例代码。
+## 3.6.0
+
+优化准备配置信息开始生效前期的调用逻辑、大幅减少重复调用次数，此功能可以针对修改一些第三方库内部以及 SwiftUI 内部使用的导航栏。优化同时注册多个有继承关系导航控制器的配置信息查找逻辑。将 `NXNavigationBar` 类中注册导航控制器的逻辑移动到 `NXNavigationConfiguration` 类中。
+
+1. 添加系统导航栏返回按钮标题的自定义逻辑
+2. 添加转场动画示例代码。
+
+- 新增: `registerNavigationControllerClasses:` 方法；
+- 新增: `registerNavigationControllerClasses:prepareConfigureViewControllerCallback:` 方法；
+- 新增: `configurationFromNavigationControllerClass:` 方法；
+- 新增: `prepareConfigureViewControllerCallbackFromNavigationControllerClass:` 方法；
+- 过期: `registerNavigationControllerClass:withConfiguration:` 方法，推荐使用 `NXNavigationConfiguration registerNavigationControllerClasses:` 方法;
+- 修改: README.md 文件;
+- 示例代码优化。
 
 ## 3.5.3
 
