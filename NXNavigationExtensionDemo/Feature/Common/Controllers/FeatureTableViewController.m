@@ -170,6 +170,9 @@
             return [[ViewController08_WebView alloc] init];
         case TableViewItemTypeNavigationBarUpdateNavigationBar:
             return [[RandomColorViewController alloc] init];
+        case TableViewItemTypeNavigationBarTransitionAnimation: {
+            [self.animationTransitionDelegate openDrawer];
+        } break;
         default:
             break;
     }
@@ -199,22 +202,24 @@
     cell.textLabel.textColor = [UIColor customTextColor];
     TableViewItem *item = self.sections[indexPath.section].items[indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%02zd: %@", indexPath.row + 1, item.title];
-    cell.accessoryType = item.showDisclosureIndicator ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+    cell.accessoryType = item.showsDisclosureIndicator ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {    
     TableViewItem *item = self.sections[indexPath.section].items[indexPath.row];
     TableViewItemType itemType = item.itemType;
     __kindof UIViewController *viewController = [self viewControllerForItemType:itemType];
-    if (!viewController) return;
+    if (!viewController) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
+    }
     
     viewController.title = item.title;
     UINavigationController *controller = [[[self.navigationController class] alloc] initWithRootViewController:viewController];
     if ([viewController isKindOfClass:[ViewController12_Modal class]]) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
         [self presentViewController:controller animated:YES completion:NULL];
     } else {
         if (UIDevice.isPhoneDevice) {

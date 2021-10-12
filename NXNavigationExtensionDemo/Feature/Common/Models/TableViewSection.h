@@ -33,13 +33,14 @@ typedef NS_ENUM(NSUInteger, TableViewItemType) {
     TableViewItemTypeNavigationBarScrollChangeNavigationBar,            // 滑动改变导航栏样式
     TableViewItemTypeNavigationBarWebView,                              // WKWebView
     TableViewItemTypeNavigationBarUpdateNavigationBar,                  // 更新导航栏样式
+    TableViewItemTypeNavigationBarTransitionAnimation,                  // 自定义转场动画
 };
 
 @interface TableViewItem : NSObject
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, assign) TableViewItemType itemType;
-@property (nonatomic, assign, getter=showDisclosureIndicator) BOOL disclosureIndicator; // Default: YES
+@property (nonatomic, assign, getter=showsDisclosureIndicator) BOOL disclosureIndicator;
 
 - (instancetype)initWithTitle:(NSString *)title itemType:(TableViewItemType)itemType;
 

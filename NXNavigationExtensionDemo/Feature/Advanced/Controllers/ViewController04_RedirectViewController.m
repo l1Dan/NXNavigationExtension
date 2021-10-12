@@ -59,7 +59,7 @@
     return @{NSForegroundColorAttributeName: [self nx_barTintColor]};
 }
 
-- (BOOL)nx_backButtonMenuEnabled {
+- (BOOL)nx_useSystemBackButton {
     return YES;
 }
 

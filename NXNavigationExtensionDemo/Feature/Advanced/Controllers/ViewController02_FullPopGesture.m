@@ -99,12 +99,6 @@
 }
 
 - (NSArray<NSString *> *)imageNames {
-    /**
-     * Image Links
-     * https://images.unsplash.com/photo-1633620210623-edf036a3621e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=nicolas-arnold-YgjkyR3eU-w-unsplash.jpg
-     * https://images.unsplash.com/photo-1633673489026-62f02b97c1fe?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=heye-jensen-aZBzt_oMX7Y-unsplash.jpg
-     * https://images.unsplash.com/photo-1633630167673-8650317b1c9d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=jusfilm-nRxaFz7pXUc-unsplash.jpg
-     */
     if (!_imageNames) {
         NSMutableArray<NSString *> *imageNames = [NSMutableArray array];
         for (NSUInteger index = 0; index < 3; index++) {

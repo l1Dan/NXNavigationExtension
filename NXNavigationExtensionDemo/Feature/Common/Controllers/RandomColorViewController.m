@@ -14,6 +14,7 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
 
 @interface RandomColorViewController ()
 
+@property (nonatomic, copy) NSString *backButtonTitle;
 @property (nonatomic, strong) UIColor *currentRandomColor;
 @property (nonatomic, strong) UIColor *lightRandomColor;
 @property (nonatomic, strong) UIColor *darkRandomColor;
@@ -25,6 +26,7 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        _backButtonTitle = @"Custom";
         _lightRandomColor = [UIColor randomLightColor];
         _darkRandomColor = [UIColor randomDarkColor];
         
@@ -80,8 +82,12 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
     return @{NSForegroundColorAttributeName: [self nx_barTintColor]};
 }
 
-- (BOOL)nx_backButtonMenuEnabled {
+- (BOOL)nx_useSystemBackButton {
     return YES;
+}
+
+- (NSString *)nx_systemBackButtonTitle {
+    return self.backButtonTitle;
 }
 
 #pragma mark - Private
@@ -99,8 +105,10 @@ static CGFloat RandomColorButtonWidthAndHeight = 160.0;
 - (void)clickRandomColorButton:(UIButton *)button {
     button.tag += 1;
     
+    self.backButtonTitle = [NSString stringWithFormat:@"😜(%zd)", button.tag];
     self.lightRandomColor = [UIColor randomLightColor];
     self.darkRandomColor = [UIColor randomDarkColor];
+    
     [self updateRandomColorButtonState];
     [self nx_setNeedsNavigationBarAppearanceUpdate];
     [self setNeedsStatusBarAppearanceUpdate];

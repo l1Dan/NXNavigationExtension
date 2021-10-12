@@ -39,7 +39,7 @@ static CGFloat HeightForFooterInSection = 60.0;
     }];
 }
 
-- (BOOL)nx_backButtonMenuEnabled {
+- (BOOL)nx_useSystemBackButton {
     return YES;
 }
 

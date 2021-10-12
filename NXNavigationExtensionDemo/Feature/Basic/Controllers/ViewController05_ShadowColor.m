@@ -24,4 +24,8 @@
     return [UIColor redColor];
 }
 
+- (UIColor *)nx_navigationBarBackgroundColor {
+    return self.view.backgroundColor;
+}
+
 @end

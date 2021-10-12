@@ -13,9 +13,16 @@
     if (self = [super init]) {
         _title = title;
         _itemType = itemType;
-        _disclosureIndicator = itemType == TableViewItemTypeNavigationBarModal ? NO : YES;
     }
     return self;
+}
+
+- (BOOL)showsDisclosureIndicator {
+    if (self.itemType == TableViewItemTypeNavigationBarModal ||
+        self.itemType == TableViewItemTypeNavigationBarTransitionAnimation) {
+        return NO;
+    }
+    return YES;
 }
 
 + (instancetype)itemWithTitle:(NSString *)title itemType:(TableViewItemType)itemType {
@@ -66,6 +73,7 @@
         [TableViewItem itemWithTitle:@"滑动改变导航栏样式" itemType:TableViewItemTypeNavigationBarScrollChangeNavigationBar],
         [TableViewItem itemWithTitle:@"WKWebView" itemType:TableViewItemTypeNavigationBarWebView],
         [TableViewItem itemWithTitle:@"更新导航栏样式" itemType:TableViewItemTypeNavigationBarUpdateNavigationBar],
+        [TableViewItem itemWithTitle:@"自定义转场动画" itemType:TableViewItemTypeNavigationBarTransitionAnimation],
     ];
     TableViewSection *section2 = [TableViewSection sectionWithItems:items2];
     section2.title = @"高级功能";

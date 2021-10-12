@@ -24,4 +24,8 @@
     return [UIImage imageNamed:@"NavigationBarShadowImage"];
 }
 
+- (UIColor *)nx_navigationBarBackgroundColor {
+    return self.view.backgroundColor;
+}
+
 @end

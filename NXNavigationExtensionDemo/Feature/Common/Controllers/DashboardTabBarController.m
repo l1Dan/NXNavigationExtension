@@ -25,20 +25,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
-    NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
+    // 用初始化的方式设置默认 configuration
+    NXNavigationConfiguration *configuration = [NXNavigationConfiguration defaultConfiguration];
     configuration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
-    if (@available(iOS 14.0, *)) {
-        configuration.navigationControllerPreferences.menuSupplementBackButton = YES;
-    }
-    [NXNavigationBar registerNavigationControllerClass:[FeatureNavigationController class] withConfiguration:configuration];
+    [configuration registerNavigationControllerClasses:@[[FeatureNavigationController class]] prepareConfigureViewControllerCallback:^NXNavigationConfiguration * _Nullable(__kindof UIViewController * _Nonnull viewController, NXNavigationConfiguration * _Nonnull configuration) {
+        configuration.navigationBarAppearance.backgroundColor = [UIColor brownColor];
+        return configuration;
+    }];
     
 //    NXNavigationConfiguration *otherConfiguration = [[NXNavigationConfiguration alloc] init];
-//    otherConfiguration.navigationBarAppearance.backgroundColor = [UIColor redColor];
-//    if (@available(iOS 14.0, *)) {
-//        otherConfiguration.navigationControllerPreferences.menuSupplementBackButton = YES;
-//    }
-//    [NXNavigationBar registerNavigationControllerClass:[OtherNavigationController class] withConfiguration:otherConfiguration];
+//    otherConfiguration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
+//    [otherConfiguration registerNavigationControllerClasses:@[[OtherNavigationController class]]];
     
     [self updateOtherNavigationControllerBorderStyle];
     
@@ -68,8 +65,8 @@
             return [UIColor customDarkGrayColor];
         }];
     }
-    
-    self.tabBar.translucent = NO; // fix: iOS Modal -> Dismiss -> Push, TabBar BUG
+    // fix: iOS Modal -> Dismiss -> Push, TabBar BUG
+    self.tabBar.translucent = NO;
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
