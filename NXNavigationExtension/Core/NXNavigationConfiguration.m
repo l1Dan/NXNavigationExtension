@@ -38,6 +38,9 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
         _tintColor = [UIColor systemBlueColor];
         _useSystemBackButton = NO;
         _systemBackButtonTitle = @"";
+        _backImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+        _landscapeBackImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+        
         if (@available(iOS 13.0, *)) {
             _backgroundColor = [UIColor systemBackgroundColor];
         } else {
@@ -105,17 +108,6 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
         _largeTitleTextAttributes = self.titleTextAttributes;
     }
     return _largeTitleTextAttributes;
-}
-
-- (void)setUseSystemBackButton:(BOOL)useSystemBackButton {
-    _useSystemBackButton = useSystemBackButton;
-    if (useSystemBackButton) {
-        _backImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
-        _landscapeBackImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
-    } else {
-        _backImageInsets = UIEdgeInsetsZero;
-        _landscapeBackImageInsets = UIEdgeInsetsZero;
-    }
 }
 
 @end

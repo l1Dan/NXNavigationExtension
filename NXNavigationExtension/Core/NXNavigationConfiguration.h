@@ -95,12 +95,10 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 /// 默认：空字符串（不显示标题）。如果返回 nil，则使用系统返回按钮自带的标题
 @property (nonatomic, copy, nullable) NSString *systemBackButtonTitle;
 
-/// 设置返回按钮图片 `backImage` 的 insets，默认：UIEdgeInsetsZero
-/// 当 `useSystemBackButton = YES` 时 backImageInsets = {0, -8, 0, 0}
+/// 设置返回按钮图片 `backImage` 的 insets，默认：backImageInsets = {0, -8, 0, 0}
 @property (nonatomic, assign) UIEdgeInsets backImageInsets;
 
-/// 设置横屏时显示返回按钮图片 `landscapeBackImage` 的 insets，默认：UIEdgeInsetsZero
-/// 当 `useSystemBackButton = YES` 时 landscapeBackImageInsets = {0, -8, 0, 0}
+/// 设置横屏时显示返回按钮图片 `landscapeBackImage` 的 insets，默认：landscapeBackImageInsets = {0, -8, 0, 0}
 @property (nonatomic, assign) UIEdgeInsets landscapeBackImageInsets;
 
 /// 是否使用系统返回按钮；默认 NO

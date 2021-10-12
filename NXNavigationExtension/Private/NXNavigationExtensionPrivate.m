@@ -298,23 +298,37 @@
     return NO;
 }
 
+/// 调整系统返回按钮设置
+/// @param viewControllers 在 currentViewController 之前的所有视图控制器
+/// @param currentViewController 当前需要调整系统返回按钮设置的视图控制器
 - (void)nx_configureNavigationBackItemWithViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers currentViewController:(__kindof UIViewController *)currentViewController {
     __kindof UIViewController *lastViewController = viewControllers.lastObject;
     if (lastViewController && lastViewController != currentViewController) {
         if (currentViewController.nx_systemBackButtonTitle) {
+            // 去掉前后空格
             NSString *title = [currentViewController.nx_systemBackButtonTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:nil action:nil];
-            if ([title isEqualToString:@""]) { // 没有标题
+            if ([title isEqualToString:@""]) {
                 if (@available(iOS 14.0, *)) {
+                    /**
+                     * #1
+                     * lastViewController.navigationItem.backBarButtonItem = nil; 恢复系统返回按钮默认样式。长按返回按钮还会出现上一级导航栏的标题
+                     * lastViewController.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal; 隐藏返回按钮标题
+                     * #2
+                     * UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil]; // 隐藏返回按钮标题
+                     * lastViewController.navigationItem.backBarButtonItem = backItem; 长按返回按钮将无法出现上一级导航栏的标题
+                     */
+                    lastViewController.navigationItem.backBarButtonItem = nil;
                     lastViewController.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal;
                 } else {
-                    lastViewController.navigationItem.backBarButtonItem =backItem;
+                    lastViewController.navigationItem.backBarButtonItem = backItem;
                 }
-            } else { // 自定义标题
+            } else {
+                // 自定义返回按钮标题
                 lastViewController.navigationItem.backBarButtonItem = backItem;
             }
         } else {
-            // 恢复系统返回按钮样式
+            // 恢复系统返回按钮默认样式
             lastViewController.navigationItem.backBarButtonItem = nil;
         }
     }

@@ -126,14 +126,16 @@
                     }
                     
                     if (viewControllers.count > 1) {
+                        NSMutableArray<__kindof UIViewController *> *previousViewControllers = [NSMutableArray array];
                         for (NSUInteger index = 0; index < viewControllers.count; index++) {
                             UIViewController *viewController = viewControllers[index];
-                            // 设置返回按钮
-                            [selfObject nx_configureNavigationBackItemWithViewControllers:viewControllers currentViewController:viewController];
                             
                             if (index != 0) {
+                                // 设置返回按钮
+                                [selfObject nx_configureNavigationBackItemWithViewControllers:previousViewControllers currentViewController:viewController];
                                 [viewController nx_configureNavigationBarWithNavigationController:selfObject];
                             }
+                            [previousViewControllers addObject:viewController];
                             
                             if ([selfObject nx_checkFullscreenInteractivePopGestureEnabledWithViewController:viewController]) {
                                 [selfObject nx_configureFullscreenPopGesture];
