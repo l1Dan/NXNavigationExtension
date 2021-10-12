@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navigationBar);
 
-/// 边缘滑动返回手势代理
+/// 边缘返回手势代理对象
 @interface NXScreenEdgePopGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
 
 /// 获取当前导航控制器
@@ -54,10 +54,10 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 
 @interface NXNavigationBar ()
 
-/// 设置 UIViewController edgesForExtendedLayout == UIRectEdgeNone
+/// UIViewController 的 edgesForExtendedLayout 属性是否为 UIRectEdgeNone
 @property (nonatomic, assign) BOOL edgesForExtendedLayoutEnabled;
 
-/// 设置 NXNavigationBar 模糊背景，背景穿透效果；默认 NO
+/// 是否使用 NXNavigationBar 背景模糊效果；默认 NO
 @property (nonatomic, assign) BOOL blurEffectEnabled;
 
 @end
@@ -76,7 +76,7 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 /// UINavigatoinBar layoutSubviews 时调用
 @property (nonatomic, copy, nullable) UINavigationBarDidUpdatePropertiesHandler nx_didUpdatePropertiesHandler;
 
-/// 允许用户事件被  UINavigationBar 所有控件响应，如果 nx_userInteractionEnabled = NO，那么用户事件会被传递到导航栏的底部视图。
+/// 是否允许 UINavigationBar 接收到事件响应，如果 nx_userInteractionEnabled = NO，那么用户事件会被传递到导航栏的底部视图。
 @property (nonatomic, assign) BOOL nx_userInteractionEnabled;
 
 @end
@@ -84,34 +84,34 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 
 @interface UINavigationController (NXNavigationExtensionPrivate)
 
-/// 侧滑手势代理对象
+/// 边缘返回手势代理对象
 @property (nonatomic, strong, readonly) NXScreenEdgePopGestureRecognizerDelegate *nx_screenEdgePopGestureDelegate;
 
-/// 全屏手势代理对象
+/// 全屏返回手势代理对象
 @property (nonatomic, strong, readonly) NXFullscreenPopGestureRecognizerDelegate *nx_fullscreenPopGestureDelegate;
 
-/// 是否使用 NXNavigationBar；默认 NO；如果为 NO 则使用系统导航栏
+/// 是否使用 NXNavigationBar，默认 NO；如果导航控制器没有注册则使用系统导航栏
 @property (nonatomic, assign, readonly) BOOL nx_useNavigationBar;
 
 /// 配置 NXNavigationBar
 - (void)nx_configureNavigationBar;
 
-/// 控制器返回页面统一逻辑跳转逻辑
-/// @param viewController 跳转到的目的地视图控制器
+/// 控制器返回页面统一跳转逻辑
+/// @param destinationViewController 目标视图控制器
 /// @param interactiveType 当前返回执行的交互方式
 /// @param handler 处理跳转的回调
-- (id)nx_triggerSystemPopViewController:(__kindof UIViewController *)viewController
+- (id)nx_triggerSystemPopViewController:(__kindof UIViewController *)destinationViewController
                         interactiveType:(NXNavigationInteractiveType)interactiveType
                                 handler:(id (^)(UINavigationController *navigationController))handler;
 
-/// 检查全屏手势是否可用
+/// 检查全屏返回手势是否可用
 /// @param viewController 当前的视图控制器
 - (BOOL)nx_checkFullscreenInteractivePopGestureEnabledWithViewController:(__kindof UIViewController *)viewController;
 
-/// 设置导航栏的系统返回按钮
-/// @param viewControllers 不包含当前控制器的其他所有控制器集合
-/// @param currentViewController 当前控制器
-- (void)nx_configureNavigationBackItemWithViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers currentViewController:(__kindof UIViewController *)currentViewController;
+/// 调整系统返回按钮设置
+/// @param currentViewController 当前需要调整系统返回按钮设置的视图控制器
+/// @param previousViewControllers 不包括 `currentViewController` 前面的所有视图控制器
+- (void)nx_adjustmentSystemBackButtonForViewController:(__kindof UIViewController *)currentViewController inViewControllers:(NSArray<__kindof UIViewController *> *)previousViewControllers;
 
 @end
 
@@ -119,7 +119,7 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 @interface UIViewController (NXNavigationExtensionPrivate)
 
 /// 标记 viewController 是否存在于 self.navigationController.viewControllers 中
-/// 可以有效地减少 viewController 内部逻辑的无效调用
+/// 可以有效地减少 viewController 内部逻辑无效的方法调用
 @property (nonatomic, assign) BOOL nx_navigationStackContained;
 
 /// 获取当前导航控制器的配置
@@ -129,7 +129,7 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 @property (nonatomic, strong, nullable) NXNavigationPrepareConfigurationCallback nx_prepareConfigureViewControllerCallback;
 
 /// 设置 UINavigationBarItem
-/// @param navigationController 包含 UIViewController 的 UINavigationController
+/// @param navigationController 包含当前视图控制器的导航控制器
 - (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController;
 
 @end

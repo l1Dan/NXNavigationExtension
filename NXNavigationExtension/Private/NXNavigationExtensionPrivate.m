@@ -269,16 +269,16 @@
     self.interactivePopGestureRecognizer.delegate = self.nx_screenEdgePopGestureDelegate;
 }
 
-- (id)nx_triggerSystemPopViewController:(__kindof UIViewController *)viewController
+- (id)nx_triggerSystemPopViewController:(__kindof UIViewController *)destinationViewController
                         interactiveType:(NXNavigationInteractiveType)interactiveType
                                 handler:(id (^)(UINavigationController *navigationController))handler {
     if (self.viewControllers.count <= 1) return nil;
     
     UIViewController *topViewController = self.topViewController;
     if (self.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
-        UIViewController *destinationViewController = viewController ?: topViewController;
+        UIViewController *viewController = destinationViewController ?: topViewController;
         if ([(id<NXNavigationInteractable>)topViewController nx_navigationController:self
-                                                               willPopViewController:destinationViewController
+                                                               willPopViewController:viewController
                                                                      interactiveType:interactiveType]) {
             return handler(topViewController.navigationController);
         }
@@ -298,11 +298,8 @@
     return NO;
 }
 
-/// 调整系统返回按钮设置
-/// @param viewControllers 在 currentViewController 之前的所有视图控制器
-/// @param currentViewController 当前需要调整系统返回按钮设置的视图控制器
-- (void)nx_configureNavigationBackItemWithViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers currentViewController:(__kindof UIViewController *)currentViewController {
-    __kindof UIViewController *lastViewController = viewControllers.lastObject;
+- (void)nx_adjustmentSystemBackButtonForViewController:(__kindof UIViewController *)currentViewController inViewControllers:(NSArray<__kindof UIViewController *> *)previousViewControllers {
+    __kindof UIViewController *lastViewController = previousViewControllers.lastObject;
     if (lastViewController && lastViewController != currentViewController) {
         if (currentViewController.nx_systemBackButtonTitle) {
             // 去掉前后空格

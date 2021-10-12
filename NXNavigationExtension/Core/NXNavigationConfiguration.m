@@ -189,7 +189,7 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
             [classes addObject:NSClassFromString(className)];
         }
     }
-    // 查找所有注册的类中最适合一个
+    // 查找到最适合那个类对象
     Class aClass = NXNavigationExtensionLookupClass(navigationControllerClass, classes);
     if (aClass) {
         return [NXNavigationConfiguration defaultConfiguration].registerClassesInfo[NSStringFromClass(aClass)];

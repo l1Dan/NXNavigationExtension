@@ -97,7 +97,7 @@
                     viewController.nx_configuration = selfObject.nx_configuration;
                     viewController.nx_prepareConfigureViewControllerCallback = selfObject.nx_prepareConfigureViewControllerCallback;
                     // 设置返回按钮
-                    [selfObject nx_configureNavigationBackItemWithViewControllers:selfObject.viewControllers currentViewController:viewController];
+                    [selfObject nx_adjustmentSystemBackButtonForViewController:viewController inViewControllers:selfObject.viewControllers];
                     
                     if (selfObject.viewControllers.count > 0) {
                         [viewController nx_configureNavigationBarWithNavigationController:selfObject];
@@ -132,7 +132,7 @@
                             
                             if (index != 0) {
                                 // 设置返回按钮
-                                [selfObject nx_configureNavigationBackItemWithViewControllers:previousViewControllers currentViewController:viewController];
+                                [selfObject nx_adjustmentSystemBackButtonForViewController:viewController inViewControllers:previousViewControllers];
                                 [viewController nx_configureNavigationBarWithNavigationController:selfObject];
                             }
                             [previousViewControllers addObject:viewController];

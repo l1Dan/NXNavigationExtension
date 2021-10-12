@@ -148,15 +148,15 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         __kindof UINavigationController *navigationController = (UINavigationController *)navigationBar.delegate;
         if ([navigationController isKindOfClass:[UINavigationController class]]) {
             for (__kindof UIViewController *viewController in navigationController.viewControllers) {
-                [weakSelf nx_adjustNavigationBarAppearanceForUINavigationBar:navigationBar withViewController:viewController];
+                [weakSelf nx_adjustmentNavigationBarAppearanceForUINavigationBar:navigationBar withViewController:viewController];
             }
         } else {
-            [weakSelf nx_adjustNavigationBarAppearanceForUINavigationBar:navigationBar withViewController:weakSelf];
+            [weakSelf nx_adjustmentNavigationBarAppearanceForUINavigationBar:navigationBar withViewController:weakSelf];
         }
     };
 }
 
-- (void)nx_adjustNavigationBarAppearanceForUINavigationBar:(UINavigationBar *)navigationBar withViewController:(__kindof UIViewController *)viewController {
+- (void)nx_adjustmentNavigationBarAppearanceForUINavigationBar:(UINavigationBar *)navigationBar withViewController:(__kindof UIViewController *)viewController {
     if (viewController.nx_navigationBar) {
         // fix: 视图控制器同时重写 `extendedLayoutIncludesOpaqueBars` 和 `edgesForExtendedLayout` 属性时需要调用这里来修正导航栏。
         viewController.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(viewController.edgesForExtendedLayout);
@@ -569,8 +569,8 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         NSUInteger length = [self.navigationController.viewControllers indexOfObject:self];
         if (length > 0) {
             // 不包含当前控制器的其他所有控制器
-            NSArray<__kindof UIViewController *> *viewControllers = [self.navigationController.viewControllers subarrayWithRange:NSMakeRange(0, length)];
-            [self.navigationController nx_configureNavigationBackItemWithViewControllers:viewControllers currentViewController:self];
+            NSArray<__kindof UIViewController *> *previousViewControllers = [self.navigationController.viewControllers subarrayWithRange:NSMakeRange(0, length)];
+            [self.navigationController nx_adjustmentSystemBackButtonForViewController:self inViewControllers:previousViewControllers];
         }
         
         [self nx_configureNavigationBarWithNavigationController:self.navigationController];

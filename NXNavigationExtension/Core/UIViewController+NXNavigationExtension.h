@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NXNavigationBar;
 @interface UIViewController (NXNavigationExtension)
 
-/// 获取当前控制器 NXNavigationBar
+/// 获取当前控制器的 NXNavigationBar
 @property (nonatomic, strong, readonly, nullable) NXNavigationBar *nx_navigationBar;
 
 /// The same as NXNavigationBarAppearance `backgroundColor` instance.
