@@ -240,7 +240,7 @@
 - (NXNavigationConfiguration *)nx_configuration {
     NXNavigationConfiguration *configuration = objc_getAssociatedObject(self, _cmd);
     if (!configuration) {
-        configuration = [NXNavigationBar configurationFromNavigationControllerClass:[self class]];
+        configuration = [NXNavigationConfiguration configurationFromNavigationControllerClass:[self class]];
         [self setNx_configuration:configuration];
     }
     return configuration;
@@ -250,7 +250,7 @@
 - (NXNavigationPrepareConfigurationCallback)nx_prepareConfigureViewControllerCallback {
     NXNavigationPrepareConfigurationCallback callback = objc_getAssociatedObject(self, _cmd);
     if (!callback) {
-        callback = [NXNavigationBar prepareConfigureViewControllerCallbackFromNavigationControllerClass:[self class]];
+        callback = [NXNavigationConfiguration prepareConfigureViewControllerCallbackFromNavigationControllerClass:[self class]];
         [self setNx_prepareConfigureViewControllerCallback:callback];
     }
     return callback;
@@ -324,6 +324,18 @@
 
 
 @implementation UIViewController (NXNavigationExtensionPrivate)
+
+- (BOOL)nx_navigationStackContained {
+    NSNumber *number = objc_getAssociatedObject(self, _cmd);
+    if (number && [number isKindOfClass:[NSNumber class]]) {
+        return [number boolValue];
+    }
+    return NO;
+}
+
+- (void)setNx_navigationStackContained:(BOOL)nx_navigationStackContained {
+    objc_setAssociatedObject(self, @selector(nx_navigationStackContained), @(nx_navigationStackContained), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 
 - (NXNavigationConfiguration *)nx_configuration {
     NXNavigationConfiguration *configuration = objc_getAssociatedObject(self, _cmd);

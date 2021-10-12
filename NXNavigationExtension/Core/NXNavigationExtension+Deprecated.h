@@ -65,19 +65,19 @@ API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protoco
 
 - (void)setContainerViewEdgeInsets:(UIEdgeInsets)edgeInsets API_DEPRECATED("Use contentViewEdgeInsets instead.", ios(2.0, 2.0));
 
-+ (nullable NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use configurationFromRegisterNavigationController: instead.", ios(2.0, 2.0));
++ (nullable NXNavigationBarAppearance *)standardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use NXNavigationConfiguration configurationFromNavigationControllerClass: instead.", ios(2.0, 2.0));
 
-+ (nullable NXNavigationBarAppearance *)appearanceFromRegisterNavigationControllerClass:(Class)aClass API_DEPRECATED("Use configurationFromRegisterNavigationController: instead.", ios(2.0, 2.0));
++ (nullable NXNavigationBarAppearance *)appearanceFromRegisterNavigationControllerClass:(Class)aClass API_DEPRECATED("Use NXNavigationConfiguration configurationFromNavigationControllerClass: instead.", ios(2.0, 2.0));
 
-+ (nullable NXNavigationBarAppearance *)appearanceFromRegisterNavigationController:(__kindof UINavigationController *)navigationController API_DEPRECATED("Use configurationFromRegisterNavigationController: instead.", ios(2.0, 2.0));
++ (nullable NXNavigationBarAppearance *)appearanceFromRegisterNavigationController:(__kindof UINavigationController *)navigationController API_DEPRECATED("Use NXNavigationConfiguration configurationFromNavigationControllerClass: instead.", ios(2.0, 2.0));
 
-+ (nullable NXNavigationConfiguration *)configurationRegisterFromNavigationController:(__kindof UINavigationController *)navigationController API_DEPRECATED("Use configurationFromNavigationController: instead.", ios(2.0, 2.0));
++ (void)registerNavigationControllerClass:(Class)aClass API_DEPRECATED("Use NXNavigationConfiguration registerNavigationControllerClasses: instead.", ios(2.0, 2.0));
 
-+ (void)registerNavigationControllerClass:(Class)aClass API_DEPRECATED("Use registerNavigationControllerClass:withConfiguration: instead.", ios(2.0, 2.0));
++ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use NXNavigationConfiguration registerNavigationControllerClasses: instead.", ios(2.0, 2.0));
 
-+ (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass API_DEPRECATED("Use registerNavigationControllerClass:withConfiguration: instead.", ios(2.0, 2.0));
++ (void)registerNavigationControllerClass:(Class)aClass forAppearance:(nullable NXNavigationBarAppearance *)appearance API_DEPRECATED("Use NXNavigationConfiguration registerNavigationControllerClasses: instead.", ios(2.0, 2.0));
 
-+ (void)registerNavigationControllerClass:(Class)aClass forAppearance:(nullable NXNavigationBarAppearance *)appearance API_DEPRECATED("Use registerNavigationControllerClass:withConfiguration: instead.", ios(2.0, 2.0));
++ (void)registerNavigationControllerClass:(Class)navigationControllerClass withConfiguration:(NXNavigationConfiguration *)configuration API_DEPRECATED("Use NXNavigationConfiguration registerNavigationControllerClasses: instead.", ios(2.0, 2.0));
 
 @end
 

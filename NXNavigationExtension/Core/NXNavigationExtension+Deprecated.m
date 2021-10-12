@@ -31,7 +31,7 @@
 @implementation NXNavigationBarAppearance (NXNavigationExtensionDeprecated)
 
 + (NXNavigationBarAppearance *)standardAppearance {
-    return [[NXNavigationConfiguration alloc] init].navigationBarAppearance;
+    return [NXNavigationConfiguration defaultConfiguration].navigationBarAppearance;
 }
 
 - (UIColor *)backgorundColor {
@@ -120,25 +120,34 @@
 }
 
 + (NXNavigationBarAppearance *)appearanceFromRegisterNavigationController:(__kindof UINavigationController *)navigationController {
-    return [self configurationFromNavigationController:navigationController].navigationBarAppearance;
+    return [self configurationRegisterFromNavigationController:navigationController].navigationBarAppearance;
 }
 
 + (NXNavigationConfiguration *)configurationRegisterFromNavigationController:(__kindof UINavigationController *)navigationController {
-    return [self configurationFromNavigationController:navigationController];
+    return [NXNavigationConfiguration configurationFromNavigationControllerClass:[navigationController class]];
+}
+
++ (NXNavigationConfiguration *)configurationFromNavigationController:(__kindof UINavigationController *)navigationController {
+    return [NXNavigationConfiguration configurationFromNavigationControllerClass:[navigationController class]];
 }
 
 + (void)registerNavigationControllerClass:(Class)aClass {
-    [self registerNavigationControllerClass:aClass withConfiguration:[[NXNavigationConfiguration alloc] init]];
+    [self registerNavigationControllerClass:aClass forAppearance:nil];
 }
 
 + (void)registerStandardAppearanceForNavigationControllerClass:(Class)aClass {
-    [self registerNavigationControllerClass:aClass forAppearance:[NXNavigationBarAppearance standardAppearance]];
+    [self registerNavigationControllerClass:aClass forAppearance:nil];
 }
 
 + (void)registerNavigationControllerClass:(Class)aClass forAppearance:(NXNavigationBarAppearance *)appearance {
-    NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
-    configuration.navigationBarAppearance = appearance ?: [NXNavigationBarAppearance standardAppearance];
-    [self registerNavigationControllerClass:aClass withConfiguration:configuration];
+    if (appearance) {
+        NXNavigationConfiguration.defaultConfiguration.navigationBarAppearance = appearance;
+    }
+    [[NXNavigationConfiguration defaultConfiguration] registerNavigationControllerClasses:@[aClass]];
+}
+
++ (void)registerNavigationControllerClass:(Class)navigationControllerClass withConfiguration:(NXNavigationConfiguration *)configuration {
+    [configuration registerNavigationControllerClasses:@[navigationControllerClass]];
 }
 
 @end

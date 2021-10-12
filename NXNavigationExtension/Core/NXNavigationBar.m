@@ -22,11 +22,6 @@
 // THE SOFTWARE.
 
 #import "NXNavigationBar.h"
-#import "NXNavigationConfiguration.h"
-#import "NXNavigationExtensionRuntime.h"
-
-static NSString *NXNavigationConfigurationKey = @"NXNavigationConfigurationKey";
-static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurationCallbackKey";
 
 @interface NXNavigationBar ()
 
@@ -39,15 +34,6 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 
 
 @implementation NXNavigationBar
-
-+ (NSMutableDictionary<NSString *, NSDictionary<NSString *, id> *> *)allConfigurations {
-    static NSMutableDictionary<NSString *, NSDictionary<NSString *, id> *> *configurations = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        configurations = [NSMutableDictionary dictionary];
-    });
-    return configurations;
-}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -127,23 +113,6 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
     }
 }
 
-+ (NSDictionary<NSString *, id> *)lookupConfigurationInfoWithNavigationControllerClass:(__kindof Class)navigationControllerClass {
-    if (!navigationControllerClass) return nil;
-    // 收集所有的类
-    NSMutableArray<Class> *classes = [NSMutableArray array];
-    for (NSString *className in [NXNavigationBar allConfigurations].allKeys) {
-        if (NSClassFromString(className)) {
-            [classes addObject:NSClassFromString(className)];
-        }
-    }
-    // 查找所有注册的类中最适合一个
-    Class aClass = NXNavigationExtensionLookupClass(navigationControllerClass, classes);
-    if (aClass) {
-        return [NXNavigationBar allConfigurations][NSStringFromClass(aClass)];
-    }
-    return nil;
-}
-
 #pragma mark - Public
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
@@ -165,48 +134,6 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 - (void)setContentViewEdgeInsets:(UIEdgeInsets)contentViewEdgeInsets {
     _contentViewEdgeInsets = contentViewEdgeInsets;
     [self updateNavigationBarContentFrameCallSuper:NO];
-}
-
-+ (NXNavigationConfiguration *)configurationFromNavigationController:(__kindof UINavigationController *)navigationController {
-    if (!navigationController) return nil;
-    return [self configurationFromNavigationControllerClass:[navigationController class]];
-}
-
-+ (void)registerNavigationControllerClass:(Class)navigationControllerClass withConfiguration:(NXNavigationConfiguration *)configuration {
-    if (navigationControllerClass && configuration) {
-        [self registerNavigationControllerClasses:@[navigationControllerClass] forConfiguration:configuration];
-    }
-}
-
-+ (NXNavigationConfiguration *)configurationFromNavigationControllerClass:(Class)navigationControllerClass {
-    NSDictionary<NSString *, id> *info = [self lookupConfigurationInfoWithNavigationControllerClass:navigationControllerClass];
-    return info ? info[NXNavigationConfigurationKey] : info;
-}
-
-+ (nullable NXNavigationPrepareConfigurationCallback)prepareConfigureViewControllerCallbackFromNavigationControllerClass:(Class)navigationControllerClass {
-    NSDictionary<NSString *, id> *info = [self lookupConfigurationInfoWithNavigationControllerClass:navigationControllerClass];
-    return info ? info[NXNavigationConfigurationCallbackKey] : info;
-}
-
-+ (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses
-                           forConfiguration:(NXNavigationConfiguration *)configuration {
-    [self registerNavigationControllerClasses:navigationControllerClasses
-                             forConfiguration:configuration
-       prepareConfigureViewControllerCallback:NULL];
-}
-
-+ (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses
-                           forConfiguration:(NXNavigationConfiguration *)configuration
-     prepareConfigureViewControllerCallback:(NXNavigationPrepareConfigurationCallback)callback {
-    NSAssert(navigationControllerClasses != nil, @"参数 navigationControllerClasses 不能为空！");
-    NSAssert(configuration != nil, @"参数 configuration 不能为空！");
-    
-    for (Class navigationControllerClass in navigationControllerClasses) {
-        NSMutableDictionary<NSString *, id> *info = [NSMutableDictionary dictionary];
-        [info setValue:configuration forKey:NXNavigationConfigurationKey];
-        [info setValue:callback forKey:NXNavigationConfigurationCallbackKey];
-        [NXNavigationBar allConfigurations][NSStringFromClass(navigationControllerClass)] = info;
-    }
 }
 
 @end

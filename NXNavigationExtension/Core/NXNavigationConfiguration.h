@@ -25,6 +25,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class NXNavigationConfiguration;
+
+typedef NXNavigationConfiguration *_Nullable(^_Nullable NXNavigationPrepareConfigurationCallback)(__kindof UIViewController *viewController, NXNavigationConfiguration *configuration);
+
 /// 返回页面使用的交互方式
 /// `NXNavigationInteractiveTypeCallNXPopMethod` 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 回调方式
 /// `NXNavigationInteractiveTypeBackButtonMenuAction` 需要设置  `useSystemBackButton = YES` 或者 `nx_useSystemBackButton = YES`
@@ -150,6 +154,9 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 
 @interface NXNavigationConfiguration : NSObject <NSCopying>
 
+/// 全局默认配置
+@property (nonatomic, strong, readonly, class) NXNavigationConfiguration *defaultConfiguration;
+
 /// 默认导航栏外观
 @property (nonatomic, strong) NXNavigationBarAppearance *navigationBarAppearance;
 
@@ -158,6 +165,23 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 
 /// 默认视图控制器偏好设置
 @property (nonatomic, strong) NXViewControllerPreferences *viewControllerPreferences;
+
+/// 使用当前配置注册需要设置的导航控制器
+/// @param navigationControllerClasses 需要注册的 UINavigationController 或子类泪对象
+- (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses;
+
+/// 使用当前配置注册需要设置的导航控制器
+/// @param navigationControllerClasses 需要注册的 UINavigationController 或子类泪对象
+/// @param callback 即将应用配置到当前视图控制器的回调
+- (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses prepareConfigureViewControllerCallback:(NXNavigationPrepareConfigurationCallback)callback;
+
+/// 通过导航控制器获取对应的配置信息
+/// @param navigationControllerClass 需要注册的 UINavigationController 或子类泪对象
++ (nullable NXNavigationConfiguration *)configurationFromNavigationControllerClass:(nullable Class)navigationControllerClass;
+
+/// 通过导航控制器获取对应的配置信息回调
+/// @param navigationControllerClass 需要注册的 UINavigationController 或子类泪对象
++ (nullable NXNavigationPrepareConfigurationCallback)prepareConfigureViewControllerCallbackFromNavigationControllerClass:(nullable Class)navigationControllerClass;
 
 @end
 

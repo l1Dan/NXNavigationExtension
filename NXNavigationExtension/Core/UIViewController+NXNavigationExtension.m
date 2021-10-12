@@ -38,6 +38,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 @property (nonatomic, assign) BOOL nx_navigationBarInitialize;
 @property (nonatomic, assign) BOOL nx_viewWillDisappearFinished;
+@property (nonatomic, assign, readonly) BOOL nx_canSetupNavigationBar;
 
 @end
 
@@ -63,7 +64,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
                 BOOL result = originSelectorIMP(selfObject, originCMD);
 
                 // fix: edgesForExtendedLayoutEnabled instance dynamic changed.
-                if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
+                if (selfObject.nx_canSetupNavigationBar) {
                     selfObject.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(selfObject.edgesForExtendedLayout);
                     selfObject.nx_navigationBar.frame = selfObject.navigationController.navigationBar.frame;
                 }
@@ -78,7 +79,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
                 UIRectEdge result = originSelectorIMP(selfObject, originCMD);
 
                 // fix: edgesForExtendedLayoutEnabled instance dynamic changed.
-                if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
+                if (selfObject.nx_canSetupNavigationBar) {
                     selfObject.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(result);
                     selfObject.nx_navigationBar.frame = selfObject.navigationController.navigationBar.frame;
                 }
@@ -88,7 +89,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewWillAppear:), BOOL, ^(__kindof UIViewController * _Nonnull selfObject, BOOL animated) {
             selfObject.nx_viewWillDisappearFinished = NO;
-            if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
+            if (selfObject.nx_canSetupNavigationBar) {
                 // fix: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
                 [selfObject nx_configureNXNavigationBar];
                 // 还原上一个视图控制器对导航栏的修改
@@ -99,7 +100,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         });
         
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewDidAppear:), BOOL, ^(__kindof UIViewController * _Nonnull selfObject, BOOL animated) {
-            if (selfObject.navigationController && selfObject.navigationController.nx_useNavigationBar) {
+            if (selfObject.nx_canSetupNavigationBar) {
                 BOOL interactivePopGestureRecognizerEnabled = selfObject.navigationController.viewControllers.count > 1;
                 selfObject.navigationController.interactivePopGestureRecognizer.enabled = interactivePopGestureRecognizerEnabled;
                 [selfObject nx_updateNavigationBarSubviewState];
@@ -114,8 +115,13 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 #pragma mark - Private
 
+/// 检查是否符合导航栏设置的条件
+- (BOOL)nx_canSetupNavigationBar {
+    return self.navigationController && self.navigationController.nx_useNavigationBar && self.nx_navigationStackContained;
+}
+
 - (void)nx_configureNXNavigationBar {
-    if (self.navigationController && self.navigationController.nx_useNavigationBar && !self.nx_navigationBarInitialize) {
+    if (self.nx_canSetupNavigationBar && !self.nx_navigationBarInitialize) {
         self.nx_navigationBarInitialize = YES;
         // 首次加载时调用一次外部修改
         NXNavigationPrepareConfigurationCallback callback = self.nx_prepareConfigureViewControllerCallback;
@@ -162,9 +168,10 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 - (void)nx_updateNavigationBarAppearance {
-    if (self.nx_viewWillDisappearFinished) return; // fix: delay call nx_updateNavigationBarAppearance method.
+    // fix: delay call nx_updateNavigationBarAppearance method.
+    if (self.nx_viewWillDisappearFinished) return;
     
-    if (self.navigationController && self.navigationController.nx_useNavigationBar) {
+    if (self.nx_canSetupNavigationBar) {
         self.navigationController.navigationBar.barTintColor = self.nx_barBarTintColor;
         self.navigationController.navigationBar.tintColor = self.nx_barTintColor;
         self.navigationController.navigationBar.titleTextAttributes = self.nx_titleTextAttributes;
@@ -190,7 +197,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 - (void)nx_updateNavigationBarHierarchy {
-    if (self.navigationController && self.navigationController.nx_useNavigationBar) {
+    if (self.nx_canSetupNavigationBar) {
         // fix: 修复导航栏 contentView 被遮挡问题
         if ([self.view isKindOfClass:[UIScrollView class]]) {
             UIScrollView *view = (UIScrollView *)self.view;
@@ -207,7 +214,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 - (void)nx_updateNavigationBarSubviewState {
-    if (self.navigationController && self.navigationController.nx_useNavigationBar) {
+    if (self.nx_canSetupNavigationBar) {
         BOOL translucentNavigationBar = self.nx_translucentNavigationBar;
         BOOL contentViewWithoutNavigtionBar = self.nx_contentViewWithoutNavigtionBar;
         if ([self isKindOfClass:[UIPageViewController class]] && !translucentNavigationBar) {
@@ -552,7 +559,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 - (void)nx_setNeedsNavigationBarAppearanceUpdate {
-    if (self.navigationController && self.navigationController.nx_useNavigationBar && self.navigationController.viewControllers.count > 1) {
+    if (self.nx_canSetupNavigationBar && self.navigationController.viewControllers.count > 1) {
         // 手动刷新时调用一次外部修改的配置
         NXNavigationPrepareConfigurationCallback callback = self.nx_prepareConfigureViewControllerCallback;
         if (callback) {

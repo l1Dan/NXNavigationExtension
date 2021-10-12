@@ -118,9 +118,14 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 
 @interface UIViewController (NXNavigationExtensionPrivate)
 
+/// 标记 viewController 是否存在于 self.navigationController.viewControllers 中
+/// 可以有效地减少 viewController 内部逻辑的无效调用
+@property (nonatomic, assign) BOOL nx_navigationStackContained;
+
 /// 获取当前导航控制器的配置
 @property (nonatomic, strong, nullable) NXNavigationConfiguration *nx_configuration;
 
+/// 即将应用配置到当前视图控制器的回调
 @property (nonatomic, strong, nullable) NXNavigationPrepareConfigurationCallback nx_prepareConfigureViewControllerCallback;
 
 /// 设置 UINavigationBarItem
