@@ -165,20 +165,20 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 @property (nonatomic, strong) NXViewControllerPreferences *viewControllerPreferences;
 
 /// 使用当前配置注册需要设置的导航控制器
-/// @param navigationControllerClasses 需要注册的 UINavigationController 或子类泪对象
+/// @param navigationControllerClasses 需要注册的 UINavigationController 或子类
 - (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses;
 
 /// 使用当前配置注册需要设置的导航控制器
-/// @param navigationControllerClasses 需要注册的 UINavigationController 或子类泪对象
+/// @param navigationControllerClasses 需要注册的 UINavigationController 或子类
 /// @param callback 即将应用配置到当前视图控制器的回调
 - (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses prepareConfigureViewControllerCallback:(NXNavigationPrepareConfigurationCallback)callback;
 
 /// 通过导航控制器获取对应的配置信息
-/// @param navigationControllerClass 需要注册的 UINavigationController 或子类泪对象
+/// @param navigationControllerClass 需要注册的 UINavigationController 或子类
 + (nullable NXNavigationConfiguration *)configurationFromNavigationControllerClass:(nullable Class)navigationControllerClass;
 
 /// 通过导航控制器获取对应的配置信息回调
-/// @param navigationControllerClass 需要注册的 UINavigationController 或子类泪对象
+/// @param navigationControllerClass 需要注册的 UINavigationController 或子类
 + (nullable NXNavigationPrepareConfigurationCallback)prepareConfigureViewControllerCallbackFromNavigationControllerClass:(nullable Class)navigationControllerClass;
 
 @end
