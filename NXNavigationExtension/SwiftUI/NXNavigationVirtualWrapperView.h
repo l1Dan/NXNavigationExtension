@@ -1,5 +1,5 @@
 //
-// NXNavigationExtension.h
+// NXNavigationVirtualWrapperView.h
 //
 // Copyright (c) 2020 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
 //
@@ -21,35 +21,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
-
-#ifndef NXNavigationExtension_h
-#define NXNavigationExtension_h
+#import <UIKit/UIKit.h>
 
 #if __has_include(<NXNavigationExtension/NXNavigationExtension.h>)
 
-//! Project version number for NXNavigationExtension.
-FOUNDATION_EXPORT double NXNavigationExtensionVersionNumber;
-
-//! Project version string for NXNavigationExtension.
-FOUNDATION_EXPORT const unsigned char NXNavigationExtensionVersionString[];
-
-#import <NXNavigationExtension/NXNavigationBar.h>
 #import <NXNavigationExtension/NXNavigationConfiguration.h>
-#import <NXNavigationExtension/NXNavigationVirtualWrapperView.h>
-#import <NXNavigationExtension/UINavigationController+NXNavigationExtension.h>
-#import <NXNavigationExtension/UIViewController+NXNavigationExtension.h>
-#import <NXNavigationExtension/NXNavigationExtension+Deprecated.h>
 
 #else
 
-#import "NXNavigationBar.h"
 #import "NXNavigationConfiguration.h"
-#import "NXNavigationVirtualWrapperView.h"
-#import "UINavigationController+NXNavigationExtension.h"
-#import "UIViewController+NXNavigationExtension.h"
-#import "NXNavigationExtension+Deprecated.h"
 
 #endif /* __has_include */
 
-#endif /* NXNavigationExtension_h */
+NS_ASSUME_NONNULL_BEGIN
+
+@class NXNavigationConfiguration;
+
+API_AVAILABLE(ios(13.0), tvos(13.0))
+@interface NXNavigationVirtualWrapperView : UIView
+
+/// 执行 UIViewController 生命周期时系统自动调用，每个 UIViewController 实例会调用多次。即将应用配置到当前视图控制器的回调
+@property (nonatomic, copy, nullable) NXNavigationPrepareConfigurationCallback prepareConfigurationCallback;
+
+/// 筛选当前 UIHostingController 使用的 NXNavigationVirtualWrapperView 实例对象，开发者可以自定义查找规则（如果内部查找规则无效的情况下）。
+/// @param hostingController SwiftUI 中实际使用的视图控制器
++ (nullable NXNavigationVirtualWrapperView *)filterNavigationVirtualWrapperViewWithViewController:(__kindof UIViewController *)hostingController;
+
+@end
+
+NS_ASSUME_NONNULL_END

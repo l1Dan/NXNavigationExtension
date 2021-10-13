@@ -206,14 +206,7 @@
 #pragma mark - Getter & Setter
 
 - (BOOL)nx_fullscreenInteractivePopGestureEnabled {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSNumber *fullscreenInteractivePopGestureEnabled = objc_getAssociatedObject(self, _cmd);
-    if (fullscreenInteractivePopGestureEnabled && [fullscreenInteractivePopGestureEnabled isKindOfClass:[NSNumber class]]) {
-        return [fullscreenInteractivePopGestureEnabled boolValue];
-    }
-    fullscreenInteractivePopGestureEnabled = [NSNumber numberWithBool:configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEnabled];
-    objc_setAssociatedObject(self, _cmd, fullscreenInteractivePopGestureEnabled, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [fullscreenInteractivePopGestureEnabled boolValue];
+    return self.nx_configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEnabled;
 }
 
 - (UIPanGestureRecognizer *)nx_fullscreenPopGestureRecognizer {

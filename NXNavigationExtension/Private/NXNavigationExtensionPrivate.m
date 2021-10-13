@@ -204,13 +204,11 @@
     if (userInteractionEnabled && [userInteractionEnabled isKindOfClass:[NSNumber class]]) {
         return [userInteractionEnabled boolValue];
     }
-    userInteractionEnabled = [NSNumber numberWithBool:YES];
-    objc_setAssociatedObject(self, _cmd, userInteractionEnabled, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [userInteractionEnabled boolValue];
+    return YES;
 }
 
 - (void)setNx_userInteractionEnabled:(BOOL)nx_userInteractionEnabled {
-    objc_setAssociatedObject(self, @selector(nx_userInteractionEnabled), [NSNumber numberWithBool:nx_userInteractionEnabled], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(nx_userInteractionEnabled), @(nx_userInteractionEnabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
@@ -236,7 +234,7 @@
     return delegate;
 }
 
-// Overwrite
+// Override
 - (NXNavigationConfiguration *)nx_configuration {
     NXNavigationConfiguration *configuration = objc_getAssociatedObject(self, _cmd);
     if (!configuration) {
@@ -246,7 +244,7 @@
     return configuration;
 }
 
-// Overwrite
+// Override
 - (NXNavigationPrepareConfigurationCallback)nx_prepareConfigureViewControllerCallback {
     NXNavigationPrepareConfigurationCallback callback = objc_getAssociatedObject(self, _cmd);
     if (!callback) {
@@ -335,6 +333,14 @@
 
 
 @implementation UIViewController (NXNavigationExtensionPrivate)
+
+- (NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setNx_navigationVirtualWrapperView:(NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
+    objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperView), nx_navigationVirtualWrapperView, OBJC_ASSOCIATION_ASSIGN);
+}
 
 - (BOOL)nx_navigationStackContained {
     NSNumber *number = objc_getAssociatedObject(self, _cmd);

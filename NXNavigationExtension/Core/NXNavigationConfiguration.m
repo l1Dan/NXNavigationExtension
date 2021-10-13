@@ -65,7 +65,6 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
     
     newAppearance.backgroundColor = self.backgroundColor;
     newAppearance.backgroundImage = self.backgroundImage;
-    
     newAppearance.backButtonCustomView = self.backButtonCustomView;
     newAppearance.backImage = self.backImage;
     newAppearance.landscapeBackImage = self.landscapeBackImage;
@@ -245,6 +244,10 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
     NSAssert(navigationControllerClasses != nil, @"参数 navigationControllerClasses 不能为空！");
     
     NXNavigationConfiguration *configuration = self;
+    if (configuration == [NXNavigationConfiguration defaultConfiguration]) {
+        configuration = [configuration copy];
+    }
+    
     for (Class navigationControllerClass in navigationControllerClasses) {
         NSMutableDictionary<NSString *, id> *info = [NSMutableDictionary dictionary];
         [info setValue:configuration forKey:NXNavigationConfigurationKey];

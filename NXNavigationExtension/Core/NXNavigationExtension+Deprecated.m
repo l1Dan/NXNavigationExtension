@@ -59,9 +59,7 @@
 }
 
 - (void)setBackButtonMenuSupported:(BOOL)backButtonMenuSupported {
-    NSNumber *number = [NSNumber numberWithBool:backButtonMenuSupported];
-    objc_setAssociatedObject(self, @selector(isBackButtonMenuSupported), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    
+    objc_setAssociatedObject(self, @selector(isBackButtonMenuSupported), @(backButtonMenuSupported), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     if (backButtonMenuSupported) {
         self.backImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
         self.landscapeBackImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
@@ -164,8 +162,7 @@
 }
 
 + (void)setNx_fullscreenPopGestureEnabled:(BOOL)nx_fullscreenPopGestureEnabled {
-    NSNumber *number = [NSNumber numberWithBool:nx_fullscreenPopGestureEnabled];
-    objc_setAssociatedObject(self, @selector(nx_fullscreenPopGestureEnabled), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(nx_fullscreenPopGestureEnabled), @(nx_fullscreenPopGestureEnabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)nx_triggerSystemBackButtonHandler {

@@ -23,8 +23,17 @@
 
 #import <UIKit/UIKit.h>
 
+#if __has_include(<NXNavigationExtension/NXNavigationExtension.h>)
+
 #import <NXNavigationExtension/NXNavigationBar.h>
 #import <NXNavigationExtension/NXNavigationConfiguration.h>
+
+#else
+
+#import "NXNavigationBar.h"
+#import "NXNavigationConfiguration.h"
+
+#endif /* __has_include */
 
 NS_ASSUME_NONNULL_BEGIN
 

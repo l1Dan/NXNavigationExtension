@@ -24,6 +24,7 @@
 #import <objc/runtime.h>
 
 #import "NXNavigationConfiguration.h"
+#import "NXNavigationVirtualWrapperView.h"
 #import "NXNavigationExtensionPrivate.h"
 #import "NXNavigationExtensionRuntime.h"
 #import "UINavigationController+NXNavigationExtension.h"
@@ -37,6 +38,8 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 @interface UIViewController (NXNavigationExtension)
 
 @property (nonatomic, assign) BOOL nx_navigationBarInitialize;
+@property (nonatomic, assign) BOOL nx_navigationVirtualWrapperViewInitialize;
+@property (nonatomic, assign) BOOL nx_navigationVirtualWrapperNotFound;
 @property (nonatomic, assign) BOOL nx_viewWillDisappearFinished;
 @property (nonatomic, assign, readonly) BOOL nx_canSetupNavigationBar;
 
@@ -50,10 +53,12 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     dispatch_once(&onceToken, ^{
         NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIViewController class], @selector(viewDidLoad), ^(__kindof UIViewController * _Nonnull selfObject) {
             [selfObject nx_configureNXNavigationBar];
+            [selfObject nx_executePrepareConfigurationCallback];
         });
         
         NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIViewController class], @selector(viewWillLayoutSubviews), ^(__kindof UIViewController * _Nonnull selfObject) {
             [selfObject nx_configureNXNavigationBar];
+            [selfObject nx_executePrepareConfigurationCallback];
             [selfObject nx_updateNavigationBarHierarchy];
         });
         
@@ -92,6 +97,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
             if (selfObject.nx_canSetupNavigationBar) {
                 // fix: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
                 [selfObject nx_configureNXNavigationBar];
+                [selfObject nx_executePrepareConfigurationCallback];
                 // 还原上一个视图控制器对导航栏的修改
                 [selfObject nx_updateNavigationBarAppearance];
                 [selfObject nx_updateNavigationBarHierarchy];
@@ -104,6 +110,8 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
                 BOOL interactivePopGestureRecognizerEnabled = selfObject.navigationController.viewControllers.count > 1;
                 selfObject.navigationController.interactivePopGestureRecognizer.enabled = interactivePopGestureRecognizerEnabled;
                 [selfObject nx_updateNavigationBarSubviewState];
+                // perf: 当前 ViewController 以及展示完成，可以检查 NXNavigationVirtualWrapperView 是否存在
+                [selfObject nx_checkNavigationVirtualWrapperViewState];
             }
         });
         
@@ -123,15 +131,14 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 - (void)nx_configureNXNavigationBar {
     if (self.nx_canSetupNavigationBar && !self.nx_navigationBarInitialize) {
         self.nx_navigationBarInitialize = YES;
-        // 首次加载时调用一次外部修改
+        [self.navigationController nx_configureNavigationBar];
+        [self nx_setupNavigationBar];
+        [self nx_updateNavigationBarAppearance];
+        // 只会调用一次
         NXNavigationPrepareConfigurationCallback callback = self.nx_prepareConfigureViewControllerCallback;
         if (callback) {
             self.nx_configuration = callback(self, [self.nx_configuration copy]);
         }
-        
-        [self.navigationController nx_configureNavigationBar];
-        [self nx_setupNavigationBar];
-        [self nx_updateNavigationBarAppearance];
     }
 }
 
@@ -253,6 +260,36 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     }
 }
 
+- (void)nx_executePrepareConfigurationCallback {
+    if (self.nx_navigationVirtualWrapperNotFound) return;
+    
+    if (@available(iOS 13.0, *)) {
+        if (self.nx_canSetupNavigationBar && !self.nx_navigationVirtualWrapperViewInitialize) {
+            self.nx_navigationVirtualWrapperView = [NXNavigationVirtualWrapperView filterNavigationVirtualWrapperViewWithViewController:self];
+            if (self.nx_navigationVirtualWrapperView) {
+                self.nx_navigationVirtualWrapperViewInitialize = YES;
+                // perf: 先复制保存一份，避免修改全局配置信息
+                self.nx_configuration = [self.nx_configuration copy];
+            }
+        }
+        // 会重复调用多次
+        if (self.nx_navigationVirtualWrapperViewInitialize) {
+            NXNavigationPrepareConfigurationCallback callback = self.nx_navigationVirtualWrapperView.prepareConfigurationCallback;
+            if (callback) {
+                self.nx_configuration = callback(self, self.nx_configuration);
+            }
+        }
+    }
+}
+
+- (void)nx_checkNavigationVirtualWrapperViewState {
+    if (@available(iOS 13.0, *)) {
+        self.nx_navigationVirtualWrapperNotFound = self.nx_navigationVirtualWrapperView ? NO : YES;
+    } else {
+        self.nx_navigationVirtualWrapperNotFound = YES;
+    }
+}
+
 #pragma mark - Private Getter & Setter
 
 - (BOOL)nx_navigationBarInitialize {
@@ -260,13 +297,35 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     if (navigationBarInitialize && [navigationBarInitialize isKindOfClass:[NSNumber class]]) {
         return [navigationBarInitialize boolValue];
     }
-    navigationBarInitialize = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, navigationBarInitialize, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [navigationBarInitialize boolValue];
+    return NO;
 }
 
 - (void)setNx_navigationBarInitialize:(BOOL)nx_navigationBarInitialize {
-    objc_setAssociatedObject(self, @selector(nx_navigationBarInitialize), [NSNumber numberWithBool:nx_navigationBarInitialize], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(nx_navigationBarInitialize), @(nx_navigationBarInitialize), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)nx_navigationVirtualWrapperViewInitialize {
+    NSNumber *navigationVirtualWrapperViewInitialize = objc_getAssociatedObject(self, _cmd);
+    if (navigationVirtualWrapperViewInitialize && [navigationVirtualWrapperViewInitialize isKindOfClass:[NSNumber class]]) {
+        return [navigationVirtualWrapperViewInitialize boolValue];
+    }
+    return NO;
+}
+
+- (void)setNx_navigationVirtualWrapperViewInitialize:(BOOL)nx_navigationVirtualWrapperViewInitialize {
+    objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperViewInitialize), @(nx_navigationVirtualWrapperViewInitialize), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)nx_navigationVirtualWrapperNotFound {
+    NSNumber *navigationVirtualWrapperNotFound = objc_getAssociatedObject(self, _cmd);
+    if (navigationVirtualWrapperNotFound && [navigationVirtualWrapperNotFound isKindOfClass:[NSNumber class]]) {
+        return [navigationVirtualWrapperNotFound boolValue];
+    }
+    return NO;
+}
+
+- (void)setNx_navigationVirtualWrapperNotFound:(BOOL)nx_navigationVirtualWrapperNotFound {
+    objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperNotFound), @(nx_navigationVirtualWrapperNotFound), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)nx_viewWillDisappearFinished {
@@ -274,13 +333,11 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     if (viewWillDisappearFinished && [viewWillDisappearFinished isKindOfClass:[NSNumber class]]) {
         return [viewWillDisappearFinished boolValue];
     }
-    viewWillDisappearFinished = [NSNumber numberWithBool:NO];
-    objc_setAssociatedObject(self, _cmd, viewWillDisappearFinished, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [viewWillDisappearFinished boolValue];
+    return NO;
 }
 
 - (void)setNx_viewWillDisappearFinished:(BOOL)nx_viewWillDisappearFinished {
-    objc_setAssociatedObject(self, @selector(nx_viewWillDisappearFinished), [NSNumber numberWithBool:nx_viewWillDisappearFinished], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(nx_viewWillDisappearFinished), @(nx_viewWillDisappearFinished), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark - Getter & Setter
@@ -302,52 +359,23 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 - (UIColor *)nx_navigationBarBackgroundColor {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    UIColor *color = objc_getAssociatedObject(self, _cmd);
-    if (color && [color isKindOfClass:[UIColor class]]) {
-        return color;
-    }
-    color = configuration.navigationBarAppearance.backgroundColor;
-    objc_setAssociatedObject(self, _cmd, color, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return color;
+    return self.nx_configuration.navigationBarAppearance.backgroundColor;
 }
 
 - (UIImage *)nx_navigationBarBackgroundImage {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    UIImage *image = objc_getAssociatedObject(self, _cmd);
-    if (image && [image isKindOfClass:[UIImage class]]) {
-        return image;
-    }
-    image = configuration.navigationBarAppearance.backgroundImage;
-    objc_setAssociatedObject(self, _cmd, image, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return image;
+    return self.nx_configuration.navigationBarAppearance.backgroundImage;
 }
 
 - (UIColor *)nx_barBarTintColor {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    UIColor *barBarTintColor = objc_getAssociatedObject(self, _cmd);
-    if (barBarTintColor && [barBarTintColor isKindOfClass:[UIColor class]]) {
-        return barBarTintColor;
-    }
-    barBarTintColor = configuration.navigationBarAppearance.barTintColor;
-    objc_setAssociatedObject(self, _cmd, barBarTintColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return barBarTintColor;
+    return self.nx_configuration.navigationBarAppearance.barTintColor;
 }
 
 - (UIColor *)nx_barTintColor {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    UIColor *barTintColor = objc_getAssociatedObject(self, _cmd);
-    if (barTintColor && [barTintColor isKindOfClass:[UIColor class]]) {
-        return barTintColor;
-    }
-    barTintColor = configuration.navigationBarAppearance.tintColor;
-    objc_setAssociatedObject(self, _cmd, barTintColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return barTintColor;
+    return self.nx_configuration.navigationBarAppearance.tintColor;
 }
 
 - (NSDictionary<NSAttributedStringKey, id> *)nx_titleTextAttributes {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSDictionary<NSAttributedStringKey, id> *titleTextAttributes = configuration.navigationBarAppearance.titleTextAttributes;
+    NSDictionary<NSAttributedStringKey, id> *titleTextAttributes = self.nx_configuration.navigationBarAppearance.titleTextAttributes;
     if (titleTextAttributes) {
         return titleTextAttributes;
     }
@@ -370,8 +398,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 - (NSDictionary<NSAttributedStringKey, id> *)nx_largeTitleTextAttributes {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSDictionary<NSAttributedStringKey, id> *largeTitleTextAttributes = configuration.navigationBarAppearance.largeTitleTextAttributes;
+    NSDictionary<NSAttributedStringKey, id> *largeTitleTextAttributes = self.nx_configuration.navigationBarAppearance.largeTitleTextAttributes;
     if (largeTitleTextAttributes) {
         return largeTitleTextAttributes;
     }
@@ -380,192 +407,71 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 - (UIImage *)nx_shadowImage {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    UIImage *shadowImage = objc_getAssociatedObject(self, _cmd);
-    if (shadowImage && [shadowImage isKindOfClass:[UIImage class]]) {
-        return shadowImage;
-    }
-    shadowImage = configuration.navigationBarAppearance.shadowImage;
-    objc_setAssociatedObject(self, _cmd, shadowImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return shadowImage;
+    return self.nx_configuration.navigationBarAppearance.shadowImage;
 }
 
 - (UIColor *)nx_shadowImageTintColor {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    UIColor *shadowImageTintColor = objc_getAssociatedObject(self, _cmd);
-    if (shadowImageTintColor && [shadowImageTintColor isKindOfClass:[UIColor class]]) {
-        return shadowImageTintColor;
-    }
-    shadowImageTintColor = configuration.navigationBarAppearance.shadowColor;
-    objc_setAssociatedObject(self, _cmd, shadowImageTintColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return shadowImageTintColor;
+    return self.nx_configuration.navigationBarAppearance.shadowColor;
 }
 
 - (UIImage *)nx_backImage {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    UIImage *backImage = objc_getAssociatedObject(self, _cmd);
-    if (backImage && [backImage isKindOfClass:[UIImage class]]) {
-        return backImage;
-    }
-    backImage = configuration.navigationBarAppearance.backImage;
-    objc_setAssociatedObject(self, _cmd, backImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return backImage;
+    return self.nx_configuration.navigationBarAppearance.backImage;
 }
 
 - (UIImage *)nx_landscapeBackImage {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    UIImage *landscapeBackImage = objc_getAssociatedObject(self, _cmd);
-    if (landscapeBackImage && [landscapeBackImage isKindOfClass:[UIImage class]]) {
-        return landscapeBackImage;
-    }
-    landscapeBackImage = configuration.navigationBarAppearance.landscapeBackImage;
-    objc_setAssociatedObject(self, _cmd, landscapeBackImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return landscapeBackImage;
+    return self.nx_configuration.navigationBarAppearance.landscapeBackImage;
 }
 
 - (UIView *)nx_backButtonCustomView {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    UIView *backButtonCustomView = objc_getAssociatedObject(self, _cmd);
-    if (backButtonCustomView && [backButtonCustomView isKindOfClass:[UIView class]]) {
-        return backButtonCustomView;
-    }
-    backButtonCustomView = configuration.navigationBarAppearance.backButtonCustomView;
-    objc_setAssociatedObject(self, _cmd, backButtonCustomView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return backButtonCustomView;
+    return self.nx_configuration.navigationBarAppearance.backButtonCustomView;
 }
 
 - (NSString *)nx_systemBackButtonTitle {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSString *systemBackButtonTitle = objc_getAssociatedObject(self, _cmd);
-    if (systemBackButtonTitle && [systemBackButtonTitle isKindOfClass:[NSString class]]) {
-        return systemBackButtonTitle;
-    }
-    systemBackButtonTitle = configuration.navigationBarAppearance.systemBackButtonTitle;
-    objc_setAssociatedObject(self, _cmd, systemBackButtonTitle, OBJC_ASSOCIATION_COPY_NONATOMIC);
-    return systemBackButtonTitle;
+    return self.nx_configuration.navigationBarAppearance.systemBackButtonTitle;
 }
 
 - (UIEdgeInsets)nx_backImageInsets {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSString *insetsValue = objc_getAssociatedObject(self, _cmd);
-    if (insetsValue && [insetsValue isKindOfClass:[NSString class]]) {
-        return UIEdgeInsetsFromString(insetsValue);
-    }
-    UIEdgeInsets insets = configuration.navigationBarAppearance.backImageInsets;
-    
-    objc_setAssociatedObject(self, _cmd, NSStringFromUIEdgeInsets(insets), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return insets;
+    return self.nx_configuration.navigationBarAppearance.backImageInsets;
 }
 
 - (UIEdgeInsets)nx_landscapeBackImageInsets {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSString *insetsValue = objc_getAssociatedObject(self, _cmd);
-    if (insetsValue && [insetsValue isKindOfClass:[NSString class]]) {
-        return UIEdgeInsetsFromString(insetsValue);
-    }
-    UIEdgeInsets insets = configuration.navigationBarAppearance.landscapeBackImageInsets;
-    objc_setAssociatedObject(self, _cmd, NSStringFromUIEdgeInsets(insets), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return insets;
+    return self.nx_configuration.navigationBarAppearance.landscapeBackImageInsets;
 }
 
 - (BOOL)nx_useSystemBackButton {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSNumber *useSystemBackButton = objc_getAssociatedObject(self, _cmd);
-    if (useSystemBackButton && [useSystemBackButton isKindOfClass:[NSNumber class]]) {
-        return [useSystemBackButton boolValue];
-    }
-    useSystemBackButton = [NSNumber numberWithBool:configuration.navigationBarAppearance.useSystemBackButton];
-    objc_setAssociatedObject(self, _cmd, useSystemBackButton, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [useSystemBackButton boolValue];
+    return self.nx_configuration.navigationBarAppearance.useSystemBackButton;
 }
 
 - (BOOL)nx_useBlurNavigationBar {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSNumber *useBlurNavigationBar = objc_getAssociatedObject(self, _cmd);
-    if (useBlurNavigationBar && [useBlurNavigationBar isKindOfClass:[NSNumber class]]) {
-        return [useBlurNavigationBar boolValue];
-    }
-    useBlurNavigationBar = [NSNumber numberWithBool:configuration.viewControllerPreferences.useBlurNavigationBar];
-    objc_setAssociatedObject(self, _cmd, useBlurNavigationBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [useBlurNavigationBar boolValue];
+    return self.nx_configuration.viewControllerPreferences.useBlurNavigationBar;
 }
 
 - (BOOL)nx_disableInteractivePopGesture {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSNumber *disableInteractivePopGesture = objc_getAssociatedObject(self, _cmd);
-    if (disableInteractivePopGesture && [disableInteractivePopGesture isKindOfClass:[NSNumber class]]) {
-        return [disableInteractivePopGesture boolValue];
-    }
-    disableInteractivePopGesture = [NSNumber numberWithBool:configuration.viewControllerPreferences.disableInteractivePopGesture];
-    objc_setAssociatedObject(self, _cmd, disableInteractivePopGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [disableInteractivePopGesture boolValue];
+    return self.nx_configuration.viewControllerPreferences.disableInteractivePopGesture;
 }
 
 - (BOOL)nx_enableFullscreenInteractivePopGesture {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSNumber *enableFullscreenInteractivePopGesture = objc_getAssociatedObject(self, _cmd);
-    if (enableFullscreenInteractivePopGesture && [enableFullscreenInteractivePopGesture isKindOfClass:[NSNumber class]]) {
-        return [enableFullscreenInteractivePopGesture boolValue];
-    }
-    enableFullscreenInteractivePopGesture = [NSNumber numberWithBool:configuration.viewControllerPreferences.enableFullscreenInteractivePopGesture];
-    objc_setAssociatedObject(self, _cmd, enableFullscreenInteractivePopGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [enableFullscreenInteractivePopGesture boolValue];
+    return self.nx_configuration.viewControllerPreferences.enableFullscreenInteractivePopGesture;
 }
 
 - (BOOL)nx_automaticallyHideNavigationBarInChildViewController {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSNumber *automaticallyHideNavigationBarInChildViewController = objc_getAssociatedObject(self, _cmd);
-    if (automaticallyHideNavigationBarInChildViewController && [automaticallyHideNavigationBarInChildViewController isKindOfClass:[NSNumber class]]) {
-        return [automaticallyHideNavigationBarInChildViewController boolValue];
-    }
-    automaticallyHideNavigationBarInChildViewController = [NSNumber numberWithBool:configuration.viewControllerPreferences.automaticallyHideNavigationBarInChildViewController];
-    objc_setAssociatedObject(self, _cmd, automaticallyHideNavigationBarInChildViewController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [automaticallyHideNavigationBarInChildViewController boolValue];
+    return self.nx_configuration.viewControllerPreferences.automaticallyHideNavigationBarInChildViewController;
 }
 
 - (BOOL)nx_translucentNavigationBar {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSNumber *translucentNavigationBar = objc_getAssociatedObject(self, _cmd);
-    if (translucentNavigationBar && [translucentNavigationBar isKindOfClass:[NSNumber class]]) {
-        return [translucentNavigationBar boolValue];
-    }
-    translucentNavigationBar = [NSNumber numberWithBool:configuration.viewControllerPreferences.translucentNavigationBar];
-    objc_setAssociatedObject(self, _cmd, translucentNavigationBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [translucentNavigationBar boolValue];
+    return self.nx_configuration.viewControllerPreferences.translucentNavigationBar;
 }
 
 - (BOOL)nx_contentViewWithoutNavigtionBar {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSNumber *contentViewWithoutNavigtionBar = objc_getAssociatedObject(self, _cmd);
-    if (contentViewWithoutNavigtionBar && [contentViewWithoutNavigtionBar isKindOfClass:[NSNumber class]]) {
-        return [contentViewWithoutNavigtionBar boolValue];
-    }
-    contentViewWithoutNavigtionBar = [NSNumber numberWithBool:configuration.viewControllerPreferences.contentViewWithoutNavigtionBar];
-    objc_setAssociatedObject(self, _cmd, contentViewWithoutNavigtionBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return [contentViewWithoutNavigtionBar boolValue];
+    return self.nx_configuration.viewControllerPreferences.contentViewWithoutNavigtionBar;
 }
 
 - (CGFloat)nx_interactivePopMaxAllowedDistanceToLeftEdge {
-    NXNavigationConfiguration *configuration = self.nx_configuration;
-    NSNumber *interactivePopMaxAllowedDistanceToLeftEdge = objc_getAssociatedObject(self, _cmd);
-    if (interactivePopMaxAllowedDistanceToLeftEdge && [interactivePopMaxAllowedDistanceToLeftEdge isKindOfClass:[NSNumber class]]) {
-#if CGFLOAT_IS_DOUBLE
-        return [interactivePopMaxAllowedDistanceToLeftEdge doubleValue];
-#else
-        return [interactivePopMaxAllowedDistanceToLeftEdge floatValue];
-#endif
-    }
-    return configuration.viewControllerPreferences.interactivePopMaxAllowedDistanceToLeftEdge;
+    return self.nx_configuration.viewControllerPreferences.interactivePopMaxAllowedDistanceToLeftEdge;
 }
 
 - (void)nx_setNeedsNavigationBarAppearanceUpdate {
     if (self.nx_canSetupNavigationBar && self.navigationController.viewControllers.count > 1) {
-        // 手动刷新时调用一次外部修改的配置
-        NXNavigationPrepareConfigurationCallback callback = self.nx_prepareConfigureViewControllerCallback;
-        if (callback) {
-            self.nx_configuration = callback(self, [self.nx_configuration copy]);
-        }
-        
         NSUInteger length = [self.navigationController.viewControllers indexOfObject:self];
         if (length > 0) {
             // 不包含当前控制器的其他所有控制器

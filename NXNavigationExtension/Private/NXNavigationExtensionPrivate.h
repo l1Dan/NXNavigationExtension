@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navigationBar);
 
+@class NXNavigationVirtualWrapperView;
+
 /// 边缘返回手势代理对象
 @interface NXScreenEdgePopGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
 
@@ -117,6 +119,9 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 
 
 @interface UIViewController (NXNavigationExtensionPrivate)
+
+// For SwiftUI，拿到当前的 NXNavigationVirtualWrapperView。
+@property (nonatomic, weak, nullable) NXNavigationVirtualWrapperView *nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0));
 
 /// 标记 viewController 是否存在于 self.navigationController.viewControllers 中
 /// 可以有效地减少 viewController 内部逻辑无效的方法调用
