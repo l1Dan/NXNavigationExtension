@@ -28,11 +28,10 @@
     // 用初始化的方式设置默认 configuration
     NXNavigationConfiguration *configuration = [NXNavigationConfiguration defaultConfiguration];
     configuration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
-    [configuration registerNavigationControllerClasses:@[[FeatureNavigationController class]] prepareConfigureViewControllerCallback:^NXNavigationConfiguration * _Nullable(__kindof UIViewController * _Nonnull viewController, NXNavigationConfiguration * _Nonnull configuration) {
+    [configuration registerNavigationControllerClasses:@[[FeatureNavigationController class]] prepareConfigureViewControllerCallback:^(__kindof UIViewController * _Nonnull viewController, NXNavigationConfiguration * _Nonnull configuration) {
         configuration.navigationBarAppearance.backgroundColor = [UIColor brownColor];
         return configuration;
-    }];
-    
+    }];    
 //    NXNavigationConfiguration *otherConfiguration = [[NXNavigationConfiguration alloc] init];
 //    otherConfiguration.navigationBarAppearance.tintColor = [UIColor customTitleColor];
 //    [otherConfiguration registerNavigationControllerClasses:@[[OtherNavigationController class]]];
