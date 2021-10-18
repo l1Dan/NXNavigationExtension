@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NXNavigationConfiguration;
 
-typedef NXNavigationConfiguration *_Nullable(^_Nullable NXNavigationPrepareConfigurationCallback)(__kindof UIViewController *viewController, NXNavigationConfiguration *configuration);
+typedef void (^_Nullable NXNavigationPrepareConfigurationCallback)(__kindof UIViewController *viewController, NXNavigationConfiguration *configuration);
 
 /// 返回页面使用的交互方式
 /// `NXNavigationInteractiveTypeCallNXPopMethod` 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 回调方式
@@ -48,10 +48,6 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
 /// @param interactiveType 返回页面使用的交互方式
 /// @return `YES` 表示不中断返回操作继续执行；`NO` 表示中断返回操作
 - (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController willPopViewController:(__kindof UIViewController *)viewController interactiveType:(NXNavigationInteractiveType)interactiveType;
-
-@optional
-
-- (BOOL)navigationController:(__kindof UINavigationController *)navigationController willPopViewControllerUsingInteractingGesture:(BOOL)interactingGesture API_DEPRECATED("Use nx_navigationController:willPopViewController:interactiveType: instead.", ios(2.0, 2.0));
 
 @end
 
