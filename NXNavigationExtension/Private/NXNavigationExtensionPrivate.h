@@ -65,6 +65,14 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 @end
 
 
+@interface NXViewControllerPreferences ()
+
+/// 当前视图控制器的 traitCollection 对象
+@property (nonatomic, strong) UITraitCollection *traitCollection;
+
+@end
+
+
 @interface UIScrollView (NXNavigationExtensionPrivate)
 
 /// UIViewController 中 scrollView 所引用的 NXNavigationBar
@@ -115,12 +123,21 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 /// @param previousViewControllers 不包括 `currentViewController` 前面的所有视图控制器
 - (void)nx_adjustmentSystemBackButtonForViewController:(__kindof UIViewController *)currentViewController inViewControllers:(NSArray<__kindof UIViewController *> *)previousViewControllers;
 
+/// 准备 Pop 视图控制器的最后检查。主要检查代理 `nx_navigationInteractDelegate` 和视图控制器是否有实现 `id<NXNavigationInteractable>` 代理逻辑。
+/// @param currentViewController 当前所处的视图控制器
+/// @param destinationViewController 需要 Pop 到的目标视图控制器
+/// @param interactiveType 当前 Pop 视图控制器的的交互类型
+- (BOOL)nx_viewController:(__kindof UIViewController *)currentViewController preparePopViewController:(__kindof UIViewController *)destinationViewController interactiveType:(NXNavigationInteractiveType)interactiveType;
+
 @end
 
 
 @interface UIViewController (NXNavigationExtensionPrivate)
 
-// For SwiftUI，拿到当前的 NXNavigationVirtualWrapperView。
+/// For SwiftUI，返回页面时交互事件代理
+@property (nonatomic, weak, nullable) id<NXNavigationInteractable> nx_navigationInteractDelegate;
+
+/// For SwiftUI，拿到当前的 NXNavigationVirtualWrapperView。
 @property (nonatomic, weak, nullable) NXNavigationVirtualWrapperView *nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0));
 
 /// 标记 viewController 是否存在于 self.navigationController.viewControllers 中

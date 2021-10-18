@@ -117,6 +117,9 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 
 @interface NXViewControllerPreferences : NSObject <NSCopying>
 
+/// 当前视图控制器的 traitCollection 对象
+@property (nonatomic, strong, nullable, readonly) UITraitCollection *traitCollection;
+
 /// 是否使用模糊导航栏模糊；默认 NO。需要设置 nx_navigationBarBackgroundColor 的 alpha 颜色通道才会有效果
 /// 将 nx_navigationBarBackgroundColor 设置为 [UIColor clearColor]，可以实现类似系统导航栏的模糊效果
 @property (nonatomic, assign) BOOL useBlurNavigationBar;

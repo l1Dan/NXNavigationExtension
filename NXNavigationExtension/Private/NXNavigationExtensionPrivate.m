@@ -24,8 +24,16 @@
 #import "NXNavigationConfiguration.h"
 #import "NXNavigationExtensionPrivate.h"
 #import "NXNavigationExtensionRuntime.h"
+#import "NXNavigationVirtualWrapperView.h"
 #import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
+
+
+@interface NXNavigationVirtualWrapperView ()
+
+@property (nonatomic, weak) __kindof UIViewController *hostingController;
+
+@end
 
 
 @implementation NXScreenEdgePopGestureRecognizerDelegate
@@ -49,10 +57,10 @@
     
     NSArray<UIViewController *> *viewControllers = self.navigationController.viewControllers;
     UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : topViewController;
-    if (self.navigationController.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
-        return [(id<NXNavigationInteractable>)topViewController nx_navigationController:self.navigationController
-                                                                  willPopViewController:destinationViewController
-                                                                        interactiveType:NXNavigationInteractiveTypePopGestureRecognizer];
+    if (self.navigationController.nx_useNavigationBar && topViewController) {
+        return [self.navigationController nx_viewController:topViewController
+                                   preparePopViewController:destinationViewController
+                                            interactiveType:NXNavigationInteractiveTypePopGestureRecognizer];
     }
     
     return YES;
@@ -104,10 +112,10 @@
     
     NSArray<UIViewController *> *viewControllers = self.navigationController.viewControllers;
     UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : topViewController;
-    if (self.navigationController.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
-        return [(id<NXNavigationInteractable>)topViewController nx_navigationController:self.navigationController
-                                                                  willPopViewController:destinationViewController
-                                                                        interactiveType:NXNavigationInteractiveTypePopGestureRecognizer];
+    if (self.navigationController.nx_useNavigationBar && topViewController) {
+        return [self.navigationController nx_viewController:topViewController
+                                   preparePopViewController:destinationViewController
+                                            interactiveType:NXNavigationInteractiveTypePopGestureRecognizer];
     }
     
     return YES;
@@ -273,11 +281,9 @@
     if (self.viewControllers.count <= 1) return nil;
     
     UIViewController *topViewController = self.topViewController;
-    if (self.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
+    if (self.nx_useNavigationBar && topViewController) {
         UIViewController *viewController = destinationViewController ?: topViewController;
-        if ([(id<NXNavigationInteractable>)topViewController nx_navigationController:self
-                                                               willPopViewController:viewController
-                                                                     interactiveType:interactiveType]) {
+        if ([self nx_viewController:topViewController preparePopViewController:viewController interactiveType:interactiveType]) {
             return handler(topViewController.navigationController);
         }
     } else {
@@ -329,16 +335,49 @@
     }
 }
 
+- (BOOL)nx_viewController:(__kindof UIViewController *)currentViewController preparePopViewController:(__kindof UIViewController *)destinationViewController interactiveType:(NXNavigationInteractiveType)interactiveType {
+    if ([currentViewController.nx_navigationInteractDelegate respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
+        return [currentViewController.nx_navigationInteractDelegate nx_navigationController:self willPopViewController:destinationViewController interactiveType:interactiveType];
+    } else if ([currentViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
+        return [currentViewController nx_navigationController:self willPopViewController:destinationViewController interactiveType:interactiveType];
+    }
+    return YES;
+}
+
+
 @end
 
 
 @implementation UIViewController (NXNavigationExtensionPrivate)
+
+/// 保证 self.navigationController 不为 nil，不要直接调研 navigationController 方法
+- (void)nx_triggerSystemPopViewController {
+    if (self.navigationController) {
+        NSArray<UIViewController *> *viewControllers = self.navigationController.viewControllers;
+        UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : nil;
+        [self.navigationController nx_triggerSystemPopViewController:destinationViewController
+                                                     interactiveType:NXNavigationInteractiveTypeBackButtonAction
+                                                             handler:^id _Nonnull(UINavigationController * _Nonnull navigationController) {
+            return [navigationController popViewControllerAnimated:YES];
+        }];
+    }
+}
+
+- (id<NXNavigationInteractable>)nx_navigationInteractDelegate {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setNx_navigationInteractDelegate:(id<NXNavigationInteractable>)nx_navigationInteractDelegate {
+    objc_setAssociatedObject(self, @selector(nx_navigationInteractDelegate), nx_navigationInteractDelegate, OBJC_ASSOCIATION_ASSIGN);
+}
 
 - (NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
     return objc_getAssociatedObject(self, _cmd);
 }
 
 - (void)setNx_navigationVirtualWrapperView:(NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
+    nx_navigationVirtualWrapperView.hostingController = self;
+    self.nx_navigationInteractDelegate = (id<NXNavigationInteractable>)nx_navigationVirtualWrapperView;
     objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperView), nx_navigationVirtualWrapperView, OBJC_ASSOCIATION_ASSIGN);
 }
 
@@ -364,7 +403,8 @@
 }
 
 - (void)setNx_configuration:(NXNavigationConfiguration *)nx_configuration {
-    objc_setAssociatedObject(self, @selector(nx_configuration), nx_configuration, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    // copy 一次，保证每个页面之间的配置互不影响
+    objc_setAssociatedObject(self, @selector(nx_configuration), [nx_configuration copy], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NXNavigationPrepareConfigurationCallback)nx_prepareConfigureViewControllerCallback {
@@ -411,17 +451,5 @@
     self.navigationItem.leftBarButtonItem = backButtonItem;
 }
 
-/// 保证 self.navigationController 不为 nil，不要直接调研 navigationController 方法
-- (void)nx_triggerSystemPopViewController {
-    if (self.navigationController) {
-        NSArray<UIViewController *> *viewControllers = self.navigationController.viewControllers;
-        UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : nil;
-        [self.navigationController nx_triggerSystemPopViewController:destinationViewController
-                                                     interactiveType:NXNavigationInteractiveTypeBackButtonAction
-                                                             handler:^id _Nonnull(UINavigationController * _Nonnull navigationController) {
-            return [navigationController popViewControllerAnimated:YES];
-        }];
-    }
-}
 
 @end

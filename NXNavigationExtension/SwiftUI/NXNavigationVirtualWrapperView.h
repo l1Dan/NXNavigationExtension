@@ -38,7 +38,10 @@ NS_ASSUME_NONNULL_BEGIN
 @class NXNavigationConfiguration;
 
 API_AVAILABLE(ios(13.0), tvos(13.0))
-@interface NXNavigationVirtualWrapperView : UIView
+@interface NXNavigationVirtualWrapperView : UIView <NXNavigationInteractable>
+
+/// NXNavigationVirtualWrapperView 实际所在的视图控制器
+@property (nonatomic, weak, nullable, readonly) __kindof UIViewController *hostingController;
 
 /// 执行 UIViewController 生命周期时系统自动调用，每个 UIViewController 实例会调用多次。即将应用配置到当前视图控制器的回调
 @property (nonatomic, copy, nullable) NXNavigationPrepareConfigurationCallback prepareConfigurationCallback;

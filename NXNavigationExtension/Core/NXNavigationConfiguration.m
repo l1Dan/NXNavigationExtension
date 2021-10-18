@@ -129,6 +129,11 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 
 @end
 
+@interface NXViewControllerPreferences ()
+
+@property (nonatomic, strong) UITraitCollection *traitCollection;
+
+@end
 
 @implementation NXViewControllerPreferences
 

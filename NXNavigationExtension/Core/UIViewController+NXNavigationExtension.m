@@ -118,6 +118,14 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewWillDisappear:), BOOL, ^(__kindof UIViewController * _Nonnull selfObject, BOOL animated) {
             selfObject.nx_viewWillDisappearFinished = YES;
         });
+        
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(traitCollectionDidChange:), BOOL, ^(__kindof UIViewController * _Nonnull selfObject, BOOL animated) {
+            if (selfObject.nx_canSetupNavigationBar) {
+                selfObject.nx_configuration.viewControllerPreferences.traitCollection = selfObject.view.traitCollection;
+                [selfObject nx_executePrepareConfigurationCallback];
+            }
+        });
+        
     });
 }
 
@@ -137,7 +145,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         // 只会调用一次
         NXNavigationPrepareConfigurationCallback callback = self.nx_prepareConfigureViewControllerCallback;
         if (callback) {
-            self.nx_configuration = callback(self, [self.nx_configuration copy]);
+            callback(self, self.nx_configuration);
         }
     }
 }
@@ -268,15 +276,13 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
             self.nx_navigationVirtualWrapperView = [NXNavigationVirtualWrapperView filterNavigationVirtualWrapperViewWithViewController:self];
             if (self.nx_navigationVirtualWrapperView) {
                 self.nx_navigationVirtualWrapperViewInitialize = YES;
-                // perf: 先复制保存一份，避免修改全局配置信息
-                self.nx_configuration = [self.nx_configuration copy];
             }
         }
         // 会重复调用多次
         if (self.nx_navigationVirtualWrapperViewInitialize) {
             NXNavigationPrepareConfigurationCallback callback = self.nx_navigationVirtualWrapperView.prepareConfigurationCallback;
             if (callback) {
-                self.nx_configuration = callback(self, self.nx_configuration);
+                callback(self, self.nx_configuration);
             }
         }
     }

@@ -45,10 +45,8 @@
                             UIViewController *topViewController = navigationController.topViewController;
                             NSArray<UIViewController *> *viewControllers = navigationController.viewControllers;
                             UIViewController *destinationViewController = (viewControllers && viewControllers.count >= 2) ? viewControllers[viewControllers.count - 2] : topViewController;
-                            if (navigationController.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
-                                if (![(id<NXNavigationInteractable>)topViewController nx_navigationController:navigationController
-                                                                                        willPopViewController:destinationViewController
-                                                                                              interactiveType:NXNavigationInteractiveTypeBackButtonAction]) {
+                            if (navigationController.nx_useNavigationBar && topViewController) {
+                                if (![navigationController nx_viewController:topViewController preparePopViewController:destinationViewController interactiveType:NXNavigationInteractiveTypeBackButtonAction]) {
                                     return;
                                 }
                             }
@@ -65,7 +63,7 @@
             NXNavigationExtensionOverrideImplementation([UINavigationController class], NSSelectorFromString(@"_tryRequestPopToItem:"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
                 return ^BOOL(UINavigationController *selfObject, UINavigationItem *item) {
                     UIViewController *topViewController = selfObject.topViewController;
-                    if (selfObject.nx_useNavigationBar && topViewController && [topViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
+                    if (selfObject.nx_useNavigationBar && topViewController) {
                         UIViewController *destinationViewController = topViewController;
                         for (UIViewController *viewController in selfObject.viewControllers) {
                             if (viewController.navigationItem == item) {
@@ -73,9 +71,7 @@
                             }
                         }
                         
-                        if (![(id<NXNavigationInteractable>)topViewController nx_navigationController:selfObject
-                                                                                willPopViewController:destinationViewController
-                                                                                      interactiveType:NXNavigationInteractiveTypeBackButtonMenuAction]) {
+                        if (![selfObject nx_viewController:topViewController preparePopViewController:destinationViewController interactiveType:NXNavigationInteractiveTypeBackButtonMenuAction]) {
                             return NO;
                         }
                     }

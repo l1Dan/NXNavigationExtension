@@ -25,7 +25,19 @@
 #import "NXNavigationExtensionPrivate.h"
 #import "UIViewController+NXNavigationExtension.h"
 
+@interface NXNavigationVirtualWrapperView ()
+
+@property (nonatomic, weak) __kindof UIViewController *hostingController;
+
+@end
+
 @implementation NXNavigationVirtualWrapperView
+
+- (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController
+          willPopViewController:(__kindof UIViewController *)viewController
+                interactiveType:(NXNavigationInteractiveType)interactiveType {
+    return YES;
+}
 
 + (NXNavigationVirtualWrapperView *)filterNavigationVirtualWrapperViewWithViewController:(__kindof UIViewController *)hostingController {
     if (!hostingController || !hostingController.view) return nil;
