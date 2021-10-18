@@ -83,6 +83,8 @@
 		D6D2D8BC27197A6B00ABBE59 /* EdgePopGestureDisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D8BB27197A6B00ABBE59 /* EdgePopGestureDisable.swift */; };
 		D6D2D8BE27197CC100ABBE59 /* FullscreenPopGestureEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D8BD27197CC100ABBE59 /* FullscreenPopGestureEnable.swift */; };
 		D6F61A26271D180C00733382 /* ColorScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F61A25271D180C00733382 /* ColorScrollView.swift */; };
+		D6F61A2B271D5F9000733382 /* UpdateNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F61A2A271D5F9000733382 /* UpdateNavigationBar.swift */; };
+		D6F61A2D271D5FCC00733382 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F61A2C271D5FCC00733382 /* CustomNavigationBar.swift */; };
 		D6F7D952271BBAEB0015400D /* Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F7D951271BBAEB0015400D /* Present.swift */; };
 /* End PBXBuildFile section */
 
@@ -226,6 +228,8 @@
 		D6D2D8BB27197A6B00ABBE59 /* EdgePopGestureDisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgePopGestureDisable.swift; sourceTree = "<group>"; };
 		D6D2D8BD27197CC100ABBE59 /* FullscreenPopGestureEnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenPopGestureEnable.swift; sourceTree = "<group>"; };
 		D6F61A25271D180C00733382 /* ColorScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScrollView.swift; sourceTree = "<group>"; };
+		D6F61A2A271D5F9000733382 /* UpdateNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNavigationBar.swift; sourceTree = "<group>"; };
+		D6F61A2C271D5FCC00733382 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		D6F7D951271BBAEB0015400D /* Present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Present.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -600,7 +604,9 @@
 				D6D2D8BD27197CC100ABBE59 /* FullscreenPopGestureEnable.swift */,
 				D6786C482719D83B008CA715 /* NavigatioinBarUserInteractionDisable.swift */,
 				D63D17E5271BC7EA00CD8061 /* BackButtonEventIntercept.swift */,
+				D6F61A2C271D5FCC00733382 /* CustomNavigationBar.swift */,
 				D6786C462719CACB008CA715 /* WebView.swift */,
+				D6F61A2A271D5F9000733382 /* UpdateNavigationBar.swift */,
 			);
 			path = Advanced;
 			sourceTree = "<group>";
@@ -714,6 +720,7 @@
 				D6304B532712C4190016696B /* DrawerViewController.m in Sources */,
 				D624E9792654F71200CC96E6 /* UIImage+NavigationBar.m in Sources */,
 				D624E9842654F71200CC96E6 /* ViewController04_RedirectViewController.m in Sources */,
+				D6F61A2D271D5FCC00733382 /* CustomNavigationBar.swift in Sources */,
 				D624E9A12654F71200CC96E6 /* FakeNavigationBar.m in Sources */,
 				D6D2D8B72719763E00ABBE59 /* ListView.swift in Sources */,
 				D62710E227187911006D49CE /* NXNavigationWrapperView.swift in Sources */,
@@ -735,6 +742,7 @@
 				D6304B65271347B60016696B /* DrawAnimationTransitionDelegate.m in Sources */,
 				D624E99C2654F71200CC96E6 /* HierarchyViewController.m in Sources */,
 				D624E9992654F71200CC96E6 /* EventInterceptModel.m in Sources */,
+				D6F61A2B271D5F9000733382 /* UpdateNavigationBar.swift in Sources */,
 				D63D17E6271BC7EA00CD8061 /* BackButtonEventIntercept.swift in Sources */,
 				D624E99A2654F71200CC96E6 /* RedirectViewControllerModel.m in Sources */,
 				D65D3B2D2710372000FCA891 /* ViewController07_PageViewController.m in Sources */,
