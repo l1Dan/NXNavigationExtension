@@ -39,12 +39,12 @@ struct NXNavigationWrapperView: UIViewRepresentable {
     typealias UIViewType = NXNavigationVirtualView
     
     private let virtualView = NXNavigationVirtualView()
-    private let configurationCallback: (NXNavigationConfiguration) -> Void
+    private let prepareConfigurationCallback: (NXNavigationConfiguration) -> Void
     private var willPopViewController: ((NXNavigationInteractiveType) -> Bool)?
 
-    init(configurationCallback: @escaping (NXNavigationConfiguration) -> Void,
+    init(prepareConfigurationCallback: @escaping (NXNavigationConfiguration) -> Void,
          willPopViewController:  ((NXNavigationInteractiveType) -> Bool)? = nil) {
-        self.configurationCallback = configurationCallback
+        self.prepareConfigurationCallback = prepareConfigurationCallback
         self.willPopViewController = willPopViewController
     }
     
@@ -55,7 +55,7 @@ struct NXNavigationWrapperView: UIViewRepresentable {
     }
     
     func prepareConfigurationCallback(viewController: UIViewController, configuration: NXNavigationConfiguration) {
-        configurationCallback(configuration)
+        prepareConfigurationCallback(configuration)
         viewController.nx_setNeedsNavigationBarAppearanceUpdate()
     }
     
@@ -68,21 +68,21 @@ struct NXNavigationWrapperView: UIViewRepresentable {
 @available(iOS 13.0, *)
 extension View {
     
-    func useNXNavigationView(configurationCallback: @escaping (NXNavigationConfiguration) -> Void) -> some View {
-        useNXNavigationView(configurationCallback: configurationCallback) { _ in return true }
+    func useNXNavigationView(prepareConfigurationCallback: @escaping (NXNavigationConfiguration) -> Void) -> some View {
+        useNXNavigationView(prepareConfigurationCallback: prepareConfigurationCallback) { _ in return true }
     }
     
-    func useNXNavigationView(configurationCallback: @escaping (NXNavigationConfiguration) -> Void,
+    func useNXNavigationView(prepareConfigurationCallback: @escaping (NXNavigationConfiguration) -> Void,
                              willPopViewController: @escaping ((NXNavigationInteractiveType) -> Bool)) -> some View {
         ZStack {
             if #available(iOS 15.0, *) {
                 overlay {
-                    NXNavigationWrapperView(configurationCallback: configurationCallback, willPopViewController: willPopViewController)
+                    NXNavigationWrapperView(prepareConfigurationCallback: prepareConfigurationCallback, willPopViewController: willPopViewController)
                         .frame(width: 0, height: 0)
                 }
             } else {
                 overlay(
-                    NXNavigationWrapperView(configurationCallback: configurationCallback, willPopViewController: willPopViewController)
+                    NXNavigationWrapperView(prepareConfigurationCallback: prepareConfigurationCallback, willPopViewController: willPopViewController)
                         .frame(width: 0, height: 0)
                 )
             }

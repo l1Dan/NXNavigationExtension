@@ -17,7 +17,7 @@ struct BackButtonEventIntercept: View {
     @State private var interactiveType = NavigationEventItemType.all
     @State private var isPresented: Bool = false
     
-    private let items = NavigationEventItem.items
+    private let events = NavigationEventItem.items
     private let item: NavigationFeatureItem
     
     init(_ item: NavigationFeatureItem) {
@@ -25,7 +25,7 @@ struct BackButtonEventIntercept: View {
     }
     
     var body: some View {
-        List(items, id:\.self.title) { item in
+        List(events, id:\.self.title) { item in
             Button {
                 interactiveType = item.type
             } label: {

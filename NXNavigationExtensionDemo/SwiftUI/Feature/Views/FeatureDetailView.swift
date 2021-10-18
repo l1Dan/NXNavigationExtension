@@ -48,6 +48,8 @@ struct FeatureDetailView: View {
             return AnyView(NavigatioinBarUserInteractionDisable(item))
         case .backButtonEventIntercept:
             return AnyView(BackButtonEventIntercept(item))
+        case .customNavigationBar:
+            return AnyView(CustomNavigationBar(item))
         case .webView:
             return AnyView(WebView(item))
             
