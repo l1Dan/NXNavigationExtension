@@ -47,12 +47,11 @@ struct BackButtonEventIntercept: View {
             }
             return Alert(title:Text("提示"), message: Text("是否继续返回？"), primaryButton: destructive, secondaryButton: cancel)
         })
-        .useNXNavigationView(configuration: { configuration in
+        .useNXNavigationView { configuration in
             configuration.navigationBarAppearance.backgroundImage = UIImage(named: "NavigationBarBackgound88")
             configuration.navigationBarAppearance.tintColor = .white
             configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-            return configuration
-        }, willPopViewController: { interactiveType in
+        } willPopViewController: { interactiveType in
             if self.interactiveType == .all {
                 isPresented = true
                 return false
@@ -70,7 +69,7 @@ struct BackButtonEventIntercept: View {
                 return false
             }
             return true
-        })
+        }
     }
 }
 

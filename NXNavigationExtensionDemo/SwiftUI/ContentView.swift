@@ -20,7 +20,6 @@ struct ContentView: View {
                 .useNXNavigationView { configuration in
                     configuration.navigationBarAppearance.backgroundColor = .customDarkGray
                     configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-                    return configuration
                 }
         }
         .navigationViewStyle(.stack)

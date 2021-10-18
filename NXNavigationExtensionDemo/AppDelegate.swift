@@ -34,7 +34,6 @@ extension AppDelegate {
         featureConfiguration.navigationBarAppearance.tintColor = .customTitle
         featureConfiguration.registerNavigationControllerClasses([FeatureNavigationController.self]) { viewController, configuration in
             configuration.navigationBarAppearance.backgroundColor = .brown
-            return configuration
         }
         
         // For SwiftUI

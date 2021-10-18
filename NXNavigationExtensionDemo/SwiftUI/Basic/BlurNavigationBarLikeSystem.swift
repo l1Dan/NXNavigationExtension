@@ -35,7 +35,6 @@ struct BlurNavigationBarLikeSystem: View {
                 }
                 
                 configuration.viewControllerPreferences.useBlurNavigationBar = true // ✅
-                return configuration
             }
     }
 }

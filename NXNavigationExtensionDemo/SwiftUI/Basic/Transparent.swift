@@ -33,8 +33,6 @@ struct Transparent: View {
                 } else {
                     configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: color]
                 }
-                
-                return configuration
             }
     }
 }

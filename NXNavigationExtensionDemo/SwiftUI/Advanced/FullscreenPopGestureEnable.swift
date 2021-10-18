@@ -26,7 +26,6 @@ struct FullscreenPopGestureEnable: View {
                 configuration.navigationBarAppearance.tintColor = .black
                 configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
                 configuration.viewControllerPreferences.enableFullscreenInteractivePopGesture = true // ✅
-                return configuration
             }
     }
 }

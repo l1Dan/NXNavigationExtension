@@ -21,27 +21,11 @@ struct BackgorundImage: View {
     var body: some View {
         ColorListView()
             .navigationBarTitle(item.title)
-            .useNXNavigationView(configuration: { configuration in
+            .useNXNavigationView { configuration in
                 configuration.navigationBarAppearance.backgroundImage = UIImage(named: "NavigationBarBackgound88")
                 configuration.navigationBarAppearance.tintColor = .white
                 configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-                return configuration
-            }, willPopViewController: { interactiveType in
-                switch interactiveType {
-                case .backButtonAction:
-                    print("backButtonAction")
-                case .backButtonMenuAction:
-                    print("backButtonMenuAction")
-                case .popGestureRecognizer:
-                    print("popGestureRecognizer")
-                case .callNXPopMethod:
-                    print("callNXPopMethod")
-                @unknown default:
-                    return true
-                }
-                
-                return true
-            })
+            }
     }
 }
 

@@ -21,7 +21,6 @@ struct NavigatioinBarUserInteractionDisable: View {
         ColorScrollView(true)
             .useNXNavigationView { configuration in
                 configuration.viewControllerPreferences.translucentNavigationBar = true
-                return configuration
             }
     }
 }

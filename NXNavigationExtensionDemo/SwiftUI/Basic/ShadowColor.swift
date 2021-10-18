@@ -25,7 +25,6 @@ struct ShadowColor: View {
                 configuration.navigationBarAppearance.tintColor = .black
                 configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
                 configuration.navigationBarAppearance.shadowColor = .systemRed
-                return configuration
             }
     }
 }
