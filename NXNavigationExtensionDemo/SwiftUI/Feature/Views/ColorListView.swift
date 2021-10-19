@@ -15,8 +15,13 @@ struct ColorListView: View {
     
     var body: some View {
         List(0 ..< 30) { index in
-            Text(String(format: "Row: %02zd", index + 1))
-                .listRowBackground(Color( colorScheme == .dark ? UIColor.randomDark : UIColor.randomLight))
+            NavigationLink {
+                UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBarForManually))
+            } label: {
+                Text(String(format: "Row: %02zd", index + 1))
+            }
+            .listRowBackground(Color( colorScheme == .dark ? UIColor.randomDark : UIColor.randomLight))
+
         }.listStyle(.plain)
     }
 

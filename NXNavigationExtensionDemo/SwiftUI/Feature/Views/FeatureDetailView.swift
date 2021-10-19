@@ -52,6 +52,8 @@ struct FeatureDetailView: View {
             return AnyView(CustomNavigationBar(item))
         case .webView:
             return AnyView(WebView(item))
+        case .updateNavigationBarForManually:
+            return AnyView(UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBarForManually)))
             
         default:
             return AnyView(Text("No implementation").navigationBarTitle(item.title))

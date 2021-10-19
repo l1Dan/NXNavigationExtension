@@ -77,12 +77,14 @@ extension View {
         ZStack {
             if #available(iOS 15.0, *) {
                 overlay {
-                    NXNavigationWrapperView(prepareConfigurationCallback: prepareConfigurationCallback, willPopViewController: willPopViewController)
+                    NXNavigationWrapperView(prepareConfigurationCallback: prepareConfigurationCallback,
+                                            willPopViewController: willPopViewController)
                         .frame(width: 0, height: 0)
                 }
             } else {
                 overlay(
-                    NXNavigationWrapperView(prepareConfigurationCallback: prepareConfigurationCallback, willPopViewController: willPopViewController)
+                    NXNavigationWrapperView(prepareConfigurationCallback: prepareConfigurationCallback,
+                                            willPopViewController: willPopViewController)
                         .frame(width: 0, height: 0)
                 )
             }

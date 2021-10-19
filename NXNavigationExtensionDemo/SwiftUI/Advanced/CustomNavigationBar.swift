@@ -53,7 +53,7 @@ struct FakeNavigationBar<Content>: View where Content : View {
                         Spacer()
                         
                         NavigationLink(isActive: $isActive) {
-                            UpdateNavigationBar()
+                            UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBarForManually))
                         } label: {
                             Button {
                                 isActive = true

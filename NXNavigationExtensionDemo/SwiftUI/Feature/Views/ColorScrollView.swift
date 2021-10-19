@@ -23,16 +23,25 @@ struct ColorScrollView: View {
     
     var body: some View {
         contentView(hasHeader: hasHeader)
-//            .edgesIgnoringSafeArea(.top)
     }
     
     private func contentView(hasHeader: Bool) -> some View {
         let list = ForEach(0..<30) { index in
             VStack(alignment: .leading) {
-                Text("Row: \(index + 1)")
-                    .padding(EdgeInsets(top: 10, leading: 8.0, bottom: 10.0, trailing: 8.0))
-                Color(UIColor.separator).frame(height: 0.3)
+                NavigationLink {
+                    UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBarForManually))
+                } label: {
+                    VStack {
+                        HStack {
+                            Text("Row: \(index + 1)")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                        }.padding()
+                        Color(UIColor.separator).frame(height: 0.3)
+                    }
+                }
             }
+            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
             .background(Color( colorScheme == .dark ? UIColor.randomDark : UIColor.randomLight))
         }
         
@@ -55,6 +64,8 @@ struct ColorScrollView: View {
 @available(iOS 13.0.0, *)
 struct ColorScrollView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorScrollView()
+        NavigationView {
+            ColorScrollView()
+        }
     }
 }

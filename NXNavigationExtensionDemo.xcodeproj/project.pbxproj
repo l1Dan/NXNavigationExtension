@@ -265,6 +265,7 @@
 		D624E8E42654F60500CC96E6 /* NXNavigationExtensionDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D6372C1A271F07CF00FFA3F2 /* NX */,
 				D6C15D1227186C8700C35990 /* Common */,
 				D6C15D0D27186B4100C35990 /* SwiftUI */,
 				D62710E027187884006D49CE /* UIKit */,
@@ -519,6 +520,14 @@
 			path = Drawer;
 			sourceTree = "<group>";
 		};
+		D6372C1A271F07CF00FFA3F2 /* NX */ = {
+			isa = PBXGroup;
+			children = (
+				D62710E127187911006D49CE /* NXNavigationWrapperView.swift */,
+			);
+			path = NX;
+			sourceTree = "<group>";
+		};
 		D644096B265AC73C00BCE890 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -536,8 +545,6 @@
 				D6D2D8A227193C9D00ABBE59 /* Basic */,
 				D628FCAA271C7D9800ADA48B /* Extensions */,
 				D6D2D899271924FD00ABBE59 /* Feature */,
-				D6C15D0E27186B6E00C35990 /* ContentView.swift */,
-				D62710E127187911006D49CE /* NXNavigationWrapperView.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -545,8 +552,7 @@
 		D6C15D1227186C8700C35990 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				D6D2D8AA27195F3200ABBE59 /* ColorListView.swift */,
-				D6F61A25271D180C00733382 /* ColorScrollView.swift */,
+				D6C15D0E27186B6E00C35990 /* ContentView.swift */,
 				D6C15D1527186E6C00C35990 /* MainTabBarController.swift */,
 				D6C15D1327186CCA00C35990 /* SplitAdaptorViewController.swift */,
 			);
@@ -574,6 +580,8 @@
 		D6D2D89A2719251E00ABBE59 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D6D2D8AA27195F3200ABBE59 /* ColorListView.swift */,
+				D6F61A25271D180C00733382 /* ColorScrollView.swift */,
 				D6D2D89B2719253000ABBE59 /* FeatureListView.swift */,
 				D6D2D89D271928AC00ABBE59 /* FeatureDetailView.swift */,
 			);
