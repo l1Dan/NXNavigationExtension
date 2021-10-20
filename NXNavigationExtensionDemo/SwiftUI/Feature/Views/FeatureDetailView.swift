@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct FeatureDetailView: View {
     private let item: NavigationFeatureItem
     
@@ -61,7 +61,7 @@ struct FeatureDetailView: View {
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct FeatureDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

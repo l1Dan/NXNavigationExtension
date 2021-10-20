@@ -11,7 +11,7 @@ import WebKit
 import SwiftUI
 #endif
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct WebViewWrapperView: UIViewRepresentable {
     typealias UIViewType = WKWebView
     
@@ -26,7 +26,7 @@ struct WebViewWrapperView: UIViewRepresentable {
     
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct WebView: View {
     
     private let item: NavigationFeatureItem
@@ -44,7 +44,7 @@ struct WebView: View {
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct WebView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

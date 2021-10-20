@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct NavigatioinBarUserInteractionDisable: View {
     private let item: NavigationFeatureItem
     
@@ -20,12 +20,13 @@ struct NavigatioinBarUserInteractionDisable: View {
     var body: some View {
         ColorScrollView(true)
             .useNXNavigationView { configuration in
+                configuration.viewControllerPreferences.enableFullscreenInteractivePopGesture = true
                 configuration.viewControllerPreferences.translucentNavigationBar = true
             }
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct NavigatioinBarUserInteractionDisable_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

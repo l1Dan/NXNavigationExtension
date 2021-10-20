@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct BackButtonEventIntercept: View {
     @Environment(\.presentationMode) private var presentationMode;
     
@@ -73,7 +73,7 @@ struct BackButtonEventIntercept: View {
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct BackButtonEventIntercept_Previews: PreviewProvider {
     static var previews: some View {
         BackButtonEventIntercept(NavigationFeatureItem(style: .backButtonEventIntercept))

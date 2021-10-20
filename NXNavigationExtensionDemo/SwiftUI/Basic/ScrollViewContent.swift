@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct ScrollViewContent: View {
     private let item: NavigationFeatureItem
     
@@ -35,7 +35,7 @@ struct ScrollViewContent: View {
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct ScrollViewContent_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{

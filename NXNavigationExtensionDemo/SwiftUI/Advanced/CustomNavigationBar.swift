@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct FakeNavigationBar<Content>: View where Content : View {
     @Environment(\.presentationMode) private var presentationMode;
     @Environment(\.colorScheme) private var colorScheme;
@@ -72,7 +72,7 @@ struct FakeNavigationBar<Content>: View where Content : View {
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct CustomNavigationBar: View {
     private let item: NavigationFeatureItem
     
@@ -91,7 +91,7 @@ struct CustomNavigationBar: View {
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct CustomNavigationBar_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

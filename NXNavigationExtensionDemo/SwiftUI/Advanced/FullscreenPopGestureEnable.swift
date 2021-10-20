@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct FullscreenPopGestureEnable: View {
     private let item: NavigationFeatureItem
     let randomColor = UIColor.randomLight
@@ -19,18 +19,27 @@ struct FullscreenPopGestureEnable: View {
     }
 
     var body: some View {
-        Text(item.title)
-            .navigationBarTitle(item.title)
-            .useNXNavigationView { configuration in
-                configuration.navigationBarAppearance.backgroundColor = randomColor
-                configuration.navigationBarAppearance.tintColor = .black
-                configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-                configuration.viewControllerPreferences.enableFullscreenInteractivePopGesture = true
+        GeometryReader { geometry in
+            ScrollView(.horizontal) {
+                HStack {
+                    Rectangle().fill(Color.red).frame(width: geometry.size.width, height: geometry.size.height + geometry.safeAreaInsets.top)
+                    Rectangle().fill(Color.blue).frame(width: geometry.size.width, height: geometry.size.height + geometry.safeAreaInsets.top)
+                    Rectangle().fill(Color.red).frame(width: geometry.size.width, height: geometry.size.height + geometry.safeAreaInsets.top)
+                    Rectangle().fill(Color.yellow).frame(width: geometry.size.width, height: geometry.size.height + geometry.safeAreaInsets.top)
+                    Rectangle().fill(Color.red).frame(width: geometry.size.width, height: geometry.size.height + geometry.safeAreaInsets.top)
+                }
             }
+            .edgesIgnoringSafeArea(.top)
+        }
+        .navigationBarTitle(item.title)
+        .useNXNavigationView { configuration in
+            configuration.navigationBarAppearance.backgroundColor = .clear
+            configuration.viewControllerPreferences.enableFullscreenInteractivePopGesture = true
+        }
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct FullscreenPopGestureEnable_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

@@ -8,8 +8,9 @@
 
 import SwiftUI
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct FeatureListView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @State private var presentingModal = false
     private let sections:[NavigationFeatureSection]
     
@@ -35,6 +36,7 @@ struct FeatureListView: View {
                                 presentingModal = true
                             }, label: {
                                 Text(String(format: "%02zd: %@", index + 1, section.items[index].title))
+                                    .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                             }).sheet(isPresented: $presentingModal) {
                                 NavigationView {
                                     Present(section.items[index], presentedAsModal: $presentingModal)
@@ -56,7 +58,7 @@ struct FeatureListView: View {
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct FeatureListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

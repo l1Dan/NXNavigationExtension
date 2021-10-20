@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct Transparent: View {
     private let item: NavigationFeatureItem
     
@@ -26,7 +26,7 @@ struct Transparent: View {
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct Transparent_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

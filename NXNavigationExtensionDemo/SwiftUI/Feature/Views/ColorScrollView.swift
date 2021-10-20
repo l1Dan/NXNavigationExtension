@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct ColorScrollView: View {
     @Environment(\.colorScheme) private var colorScheme;
     @State private var selection = 0
@@ -61,7 +61,7 @@ struct ColorScrollView: View {
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct ColorScrollView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct ColorListView: View {
     @Environment(\.colorScheme) private var colorScheme;
     
@@ -27,7 +27,7 @@ struct ColorListView: View {
 
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct ColorListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

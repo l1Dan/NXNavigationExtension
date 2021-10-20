@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct EdgePopGestureDisable: View {
     private let item: NavigationFeatureItem
     let randomColor = UIColor.randomLight
@@ -23,14 +23,12 @@ struct EdgePopGestureDisable: View {
             .navigationBarTitle(item.title)
             .useNXNavigationView { configuration in
                 configuration.navigationBarAppearance.backgroundColor = randomColor
-                configuration.navigationBarAppearance.tintColor = .black
-                configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
                 configuration.viewControllerPreferences.disableInteractivePopGesture = true
             }
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct EdgePopGestureDisable_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

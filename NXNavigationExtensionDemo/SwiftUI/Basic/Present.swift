@@ -9,9 +9,10 @@
 import SwiftUI
 #endif
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct Present: View {
-    @Binding var presentedAsModal: Bool
+    @Environment(\.colorScheme) private var colorScheme
+    @Binding private var presentedAsModal: Bool
     
     private let item: NavigationFeatureItem
     
@@ -23,11 +24,11 @@ struct Present: View {
     var body: some View {
         ColorListView()
             .navigationBarTitle(item.title)
-            .navigationBarItems(leading: Button (action: {
+            .navigationBarItems(leading:Button (action: {
                 self.presentedAsModal = false
             }, label: {
                 Image(systemName: "xmark")
-            }))
+            }).foregroundColor(colorScheme == .dark ? Color.white : Color.black))
             .useNXNavigationView { configuration in
                 configuration.navigationBarAppearance.backgroundColor = .clear
                 configuration.viewControllerPreferences.useBlurNavigationBar = true
@@ -35,7 +36,7 @@ struct Present: View {
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct Present_Previews: PreviewProvider {
     @State static var presentedAsModal = false
     static var previews: some View {

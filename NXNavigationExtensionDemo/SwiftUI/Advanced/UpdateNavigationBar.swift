@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct UpdateNavigationBar: View {
     private static let buttonWidthAndHeight = 160.0
     
@@ -44,7 +44,7 @@ struct UpdateNavigationBar: View {
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct UpdateNavigationBar_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

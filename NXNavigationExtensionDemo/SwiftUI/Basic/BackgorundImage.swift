@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct BackgorundImage: View {
     @State private var isPresented = false
     private let item: NavigationFeatureItem
@@ -29,7 +29,7 @@ struct BackgorundImage: View {
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13, *)
 struct BackgorundImage_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

@@ -86,7 +86,7 @@ class MainTabBarController: UITabBarController {
     }()
     
     // iOS13 or Later
-    @available(iOS 13.0.0, *)
+    @available(iOS 13, *)
     private lazy var hostingController: UIHostingController<ContentView> = {
         let hostingController = UIHostingController(rootView: ContentView())
         let systemNormal = UIImage(named: "TabBarSystemNormal")
