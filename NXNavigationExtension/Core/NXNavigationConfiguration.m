@@ -31,6 +31,12 @@ static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSU
 static NSString *NXNavigationConfigurationKey = @"NXNavigationConfigurationKey";
 static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurationCallbackKey";
 
+@interface NXNavigationBarAppearance ()
+
+@property (nonatomic, strong) NSData *imageData;
+
+@end
+
 @implementation NXNavigationBarAppearance
 
 - (instancetype)init {
@@ -40,6 +46,7 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
         _systemBackButtonTitle = @"";
         _backImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
         _landscapeBackImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+        _imageData = [[NSData alloc] initWithBase64EncodedString:NXNavigationBarAppearanceNackImageBase64 options:NSDataBase64DecodingIgnoreUnknownCharacters];
         
         if (@available(iOS 13.0, *)) {
             _backgroundColor = [UIColor systemBackgroundColor];
@@ -82,22 +89,18 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 
 - (UIImage *)backImage {
     if (!_backImage) {
-        NSData *data = [[NSData alloc] initWithBase64EncodedString:NXNavigationBarAppearanceNackImageBase64 options:NSDataBase64DecodingIgnoreUnknownCharacters];
-        if (data) {
-            return [UIImage imageWithData:data scale:2.0];
+        if (self.imageData) {
+            _backImage = [UIImage imageWithData:self.imageData scale:2.0];
         }
-        return nil;
     }
     return _backImage;
 }
 
 - (UIImage *)landscapeBackImage {
     if (!_landscapeBackImage) {
-        NSData *data = [[NSData alloc] initWithBase64EncodedString:NXNavigationBarAppearanceNackImageBase64 options:NSDataBase64DecodingIgnoreUnknownCharacters];
-        if (data) {
-            return [UIImage imageWithData:data scale:3.0];
+        if (self.imageData) {
+            _landscapeBackImage = [UIImage imageWithData:self.imageData scale:3.0];
         }
-        return nil;
     }
     return _landscapeBackImage;
 }

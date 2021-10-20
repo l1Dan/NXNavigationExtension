@@ -362,7 +362,6 @@
     return YES;
 }
 
-
 @end
 
 
@@ -439,6 +438,7 @@
 }
 
 - (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController {
+    self.navigationItem.hidesBackButton = !self.nx_useSystemBackButton;
     if (self.nx_useSystemBackButton) {
         if (!self.navigationItem.leftItemsSupplementBackButton) {
             self.navigationItem.leftBarButtonItem = nil;
@@ -455,19 +455,13 @@
         customView.userInteractionEnabled = YES;
         [customView addGestureRecognizer:tap];
     } else {
-        // 如果 leftBarButtonItem(s) 为空则添加 backButtonItem
-        if (!backButtonItem) {
-            NXNavigationConfiguration *configuration = navigationController.nx_configuration;
-            UIImage *backImage = self.nx_backImage ?: configuration.navigationBarAppearance.backImage;
-            UIImage *landscapeBackImage = self.nx_backImage ?: configuration.navigationBarAppearance.landscapeBackImage;
-            
-            backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage landscapeImagePhone:landscapeBackImage style:UIBarButtonItemStylePlain target:self action:@selector(nx_triggerSystemPopViewController)];
-            backButtonItem.imageInsets = navigationController.nx_backImageInsets;
-            backButtonItem.landscapeImagePhoneInsets = navigationController.nx_landscapeBackImageInsets;
-        }
+        UIImage *backImage = self.nx_backImage;
+        UIImage *landscapeBackImage = self.nx_backImage;
+        backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage landscapeImagePhone:landscapeBackImage style:UIBarButtonItemStylePlain target:self action:@selector(nx_triggerSystemPopViewController)];
+        backButtonItem.imageInsets = navigationController.nx_backImageInsets;
+        backButtonItem.landscapeImagePhoneInsets = navigationController.nx_landscapeBackImageInsets;
     }
     self.navigationItem.leftBarButtonItem = backButtonItem;
 }
-
 
 @end
