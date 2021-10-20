@@ -25,7 +25,7 @@ struct EdgePopGestureDisable: View {
                 configuration.navigationBarAppearance.backgroundColor = randomColor
                 configuration.navigationBarAppearance.tintColor = .black
                 configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-                configuration.viewControllerPreferences.disableInteractivePopGesture = true // ✅
+                configuration.viewControllerPreferences.disableInteractivePopGesture = true
             }
     }
 }

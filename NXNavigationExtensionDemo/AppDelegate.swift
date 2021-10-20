@@ -39,8 +39,6 @@ extension AppDelegate {
         // For SwiftUI
         if #available(iOS 13.0, *) {
             let defaultConfiguration = NXNavigationConfiguration()
-            defaultConfiguration.navigationBarAppearance.tintColor = .black
-            defaultConfiguration.navigationBarAppearance.backgroundColor = .white
             defaultConfiguration.navigationBarAppearance.useSystemBackButton = true // Requirements for SwiftUI
             
             var classes: [AnyClass] = []
@@ -56,7 +54,17 @@ extension AppDelegate {
                 ].compactMap { $0 }
             }
             
-            defaultConfiguration.registerNavigationControllerClasses(classes)
+            defaultConfiguration.registerNavigationControllerClasses(classes) { viewController, configuration in
+                // Default dynamic colors
+                let color = UIColor.customColor { return .black } darkModeColor: { return .white }
+                if let traitCollection = configuration.viewControllerPreferences.traitCollection {
+                    configuration.navigationBarAppearance.tintColor = color.resolvedColor(with: traitCollection)
+                    configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: color.resolvedColor(with: traitCollection)]
+                } else {
+                    configuration.navigationBarAppearance.tintColor = color
+                    configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: color]
+                }
+            }
         }
     }
 }

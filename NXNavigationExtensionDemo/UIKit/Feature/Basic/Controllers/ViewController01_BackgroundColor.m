@@ -29,7 +29,7 @@
 }
 
 - (UIColor *)nx_navigationBarBackgroundColor {
-    return [UIColor customDarkGrayColor];
+    return self.randomColor;
 }
 
 @end

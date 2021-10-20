@@ -21,18 +21,7 @@ struct Transparent: View {
         ColorListView()
             .navigationBarTitle(item.title)
             .useNXNavigationView { configuration in
-                let userInterfaceStyle = configuration.viewControllerPreferences.traitCollection?.userInterfaceStyle ?? .light
-                let tintColor = userInterfaceStyle == .dark ? UIColor.white : UIColor.black
-                configuration.navigationBarAppearance.tintColor = tintColor
                 configuration.navigationBarAppearance.backgroundColor = .clear
-                
-                // Dynamic color
-                let color = UIColor.customColor { return .black } darkModeColor: { return .white }
-                if let traitCollection = configuration.viewControllerPreferences.traitCollection {
-                    configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: color.resolvedColor(with: traitCollection)]
-                } else {
-                    configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: color]
-                }
             }
     }
 }

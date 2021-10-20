@@ -10,7 +10,9 @@ import SwiftUI
 #endif
 
 @available(iOS 13.0.0, *)
-struct BackgorundColor: View {
+struct BackgorundColor: View {    
+    private let randomDark = UIColor.randomDark
+    private let randomLight = UIColor.randomLight
     private let item: NavigationFeatureItem
     
     init(_ item: NavigationFeatureItem) {
@@ -22,17 +24,7 @@ struct BackgorundColor: View {
             .navigationBarTitle(item.title)
             .useNXNavigationView { configuration in
                 let userInterfaceStyle = configuration.viewControllerPreferences.traitCollection?.userInterfaceStyle ?? .light
-                let tintColor = userInterfaceStyle == .dark ? UIColor.white : UIColor.black
-                configuration.navigationBarAppearance.tintColor = tintColor
-                configuration.navigationBarAppearance.backgroundColor = userInterfaceStyle == .dark ? .systemBlue : .systemRed
-
-                // Dynamic color
-                let color = UIColor.customColor { return .black } darkModeColor: { return .white }
-                if let traitCollection = configuration.viewControllerPreferences.traitCollection {
-                    configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: color.resolvedColor(with: traitCollection)]
-                } else {
-                    configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: color]
-                }
+                configuration.navigationBarAppearance.backgroundColor = userInterfaceStyle == .dark ? randomDark : randomLight
             }
     }
 }

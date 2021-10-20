@@ -22,8 +22,6 @@ struct ShadowImage: View {
             .navigationBarTitle(item.title)
             .useNXNavigationView { configuration in
                 configuration.navigationBarAppearance.backgroundColor = .systemBackground
-                configuration.navigationBarAppearance.tintColor = .black
-                configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
                 configuration.navigationBarAppearance.shadowImage = UIImage(named: "NavigationBarShadowImage")
             }
     }
