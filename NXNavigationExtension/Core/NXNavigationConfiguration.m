@@ -102,13 +102,6 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
     return _landscapeBackImage;
 }
 
-- (NSDictionary<NSAttributedStringKey,id> *)largeTitleTextAttributes {
-    if (!_largeTitleTextAttributes) {
-        _largeTitleTextAttributes = self.titleTextAttributes;
-    }
-    return _largeTitleTextAttributes;
-}
-
 @end
 
 
@@ -129,11 +122,13 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 
 @end
 
+
 @interface NXViewControllerPreferences ()
 
 @property (nonatomic, strong) UITraitCollection *traitCollection;
 
 @end
+
 
 @implementation NXViewControllerPreferences
 
@@ -170,6 +165,7 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSDictionary<NSString *, id> *> *registerClassesInfo;
 
 @end
+
 
 @implementation NXNavigationConfiguration
 
