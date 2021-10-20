@@ -275,6 +275,24 @@
     self.interactivePopGestureRecognizer.delegate = self.nx_screenEdgePopGestureDelegate;
 }
 
+- (void)nx_configureFullscreenPopGesture {
+    if (![self.interactivePopGestureRecognizer.view.gestureRecognizers containsObject:self.nx_fullscreenPopGestureRecognizer]) {
+        // Add our own gesture recognizer to where the onboard screen edge pan gesture recognizer is attached to.
+        [self.interactivePopGestureRecognizer.view addGestureRecognizer:self.nx_fullscreenPopGestureRecognizer];
+        
+        // Forward the gesture events to the private handler of the onboard gesture recognizer.
+        NSArray *internalTargets = [self.interactivePopGestureRecognizer valueForKey:@"targets"];
+        id internalTarget = [internalTargets.firstObject valueForKey:@"target"];
+        SEL internalAction = NSSelectorFromString(@"handleNavigationTransition:");
+        self.nx_fullscreenPopGestureRecognizer.delegate = self.nx_fullscreenPopGestureDelegate;
+        [self.nx_fullscreenPopGestureRecognizer addTarget:internalTarget action:internalAction];
+        
+        // Disable the onboard gesture recognizer.
+        self.interactivePopGestureRecognizer.enabled = NO;
+        [self.interactivePopGestureRecognizer.view addGestureRecognizer:self.nx_fullscreenPopGestureRecognizer];
+    }
+}
+
 - (id)nx_triggerSystemPopViewController:(__kindof UIViewController *)destinationViewController
                         interactiveType:(NXNavigationInteractiveType)interactiveType
                                 handler:(id (^)(UINavigationController *navigationController))handler {

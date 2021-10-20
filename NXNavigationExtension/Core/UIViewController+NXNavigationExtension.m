@@ -294,8 +294,14 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 - (void)nx_executePrepareConfigurationCallback {
-    [self nx_executePrepareConfigurationViewControllerCallback];
-    [self nx_executePrepareConfigurationNavigationVirtualWrapperViewCallback];
+    if ([self nx_canSetupNavigationBar]) {
+        [self nx_executePrepareConfigurationViewControllerCallback];
+        [self nx_executePrepareConfigurationNavigationVirtualWrapperViewCallback];
+        // 重新检查全屏返回手势是否动态修改
+        if ([self.navigationController nx_checkFullscreenInteractivePopGestureEnabledWithViewController:self]) {
+            [self.navigationController nx_configureFullscreenPopGesture];
+        }
+    }
 }
 
 - (void)nx_executePrepareConfigurationViewControllerCallback {

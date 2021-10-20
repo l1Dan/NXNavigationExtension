@@ -106,6 +106,9 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 /// 配置 NXNavigationBar
 - (void)nx_configureNavigationBar;
 
+/// 配置全屏返回手势
+- (void)nx_configureFullscreenPopGesture;
+
 /// 控制器返回页面统一跳转逻辑
 /// @param destinationViewController 目标视图控制器
 /// @param interactiveType 当前返回执行的交互方式
