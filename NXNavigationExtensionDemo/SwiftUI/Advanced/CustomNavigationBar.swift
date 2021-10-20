@@ -82,9 +82,7 @@ struct CustomNavigationBar: View {
     
     var body: some View {
         FakeNavigationBar(content: {
-            List(0..<30) { index in
-                Text("Content: \(index)")
-            }
+            ColorListView()
         }, title: Text(item.title)).useNXNavigationView { configuration in
             configuration.viewControllerPreferences.translucentNavigationBar = true
         }

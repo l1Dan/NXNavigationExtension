@@ -32,6 +32,10 @@ struct FeatureDetailView: View {
             return AnyView(ShadowColor(item))
         case .shadowImage:
             return AnyView(ShadowImage(item))
+        case .customBackImage:
+            return AnyView(CustomBackImage(item))
+        case .customBackView:
+            return AnyView(CustomBackView(item))
         case .fullscreenColor:
             return AnyView(FullscreenColor(item))
         case .listView:

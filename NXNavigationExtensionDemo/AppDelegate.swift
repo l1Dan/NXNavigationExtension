@@ -38,9 +38,6 @@ extension AppDelegate {
         
         // For SwiftUI
         if #available(iOS 13.0, *) {
-            let defaultConfiguration = NXNavigationConfiguration()
-            defaultConfiguration.navigationBarAppearance.useSystemBackButton = true // Requirements for SwiftUI
-            
             var classes: [AnyClass] = []
             if #available(iOS 15.0, *) {
                 classes = [
@@ -54,7 +51,7 @@ extension AppDelegate {
                 ].compactMap { $0 }
             }
             
-            defaultConfiguration.registerNavigationControllerClasses(classes) { viewController, configuration in
+            NXNavigationConfiguration().registerNavigationControllerClasses(classes) { viewController, configuration in
                 // Default dynamic colors
                 let color = UIColor.customColor { return .black } darkModeColor: { return .white }
                 if let traitCollection = configuration.viewControllerPreferences.traitCollection {

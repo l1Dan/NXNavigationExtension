@@ -15,18 +15,18 @@ class NavigationFeatureItem {
         case blurNavigationBarCustom = "自定义导航栏模糊背景" // Not working
         case shadowColor = "设置导航栏底部线条颜色"
         case shadowImage = "设置导航栏底部线条图片"
-        case customBackImage = "自定义返回按钮图片" // Not working
-        case customBackView = "自定义返回按钮" // Not working
+        case customBackImage = "自定义返回按钮图片"
+        case customBackView = "自定义返回按钮"
         case fullscreenColor = "全屏背景色"
-        case listView = "List"
+        case listView = "List" // Not working
         case scrollViewContent = "ScrollView"
         case present = "Present ViewController"
         
         case edgePopGestureDisable = "禁用边缘手势滑动返回"
-        case fullscreenPopGestureEnable = "启用全屏手势滑动返回" // Not working
-        case backButtonEventIntercept = "导航栏返回事件拦截" // Not working
+        case fullscreenPopGestureEnable = "启用全屏手势滑动返回"
+        case backButtonEventIntercept = "导航栏返回事件拦截"
         case redirectViewController = "重定向任一视图控制器跳转" // Not working
-        case customNavigationBar = "完全自定义导航栏" // Not working
+        case customNavigationBar = "完全自定义导航栏"
         case navigatioinBarUserInteractionDisable = "导航栏点击事件穿透到底部视图"
         case dynamicChangeNavigationBarStyle = "滑动改变导航栏样式" // Not working
         case webView = "WKWebView"
@@ -78,8 +78,8 @@ class NavigationFeatureSection {
 //            NavigationFeatureItem(style: .blurNavigationBarCustom),
             NavigationFeatureItem(style: .shadowColor),
             NavigationFeatureItem(style: .shadowImage),
-//            NavigationFeatureItem(style: .customBackImage),
-//            NavigationFeatureItem(style: .customBackView),
+            NavigationFeatureItem(style: .customBackImage),
+            NavigationFeatureItem(style: .customBackView),
             NavigationFeatureItem(style: .fullscreenColor),
 //            NavigationFeatureItem(style: .listView),
             NavigationFeatureItem(style: .scrollViewContent),

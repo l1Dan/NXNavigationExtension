@@ -57,6 +57,8 @@
 		D63D17E8271BC8AC00CD8061 /* NavigationEventItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63D17E7271BC8AC00CD8061 /* NavigationEventItem.swift */; };
 		D6440970265AC73C00BCE890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D644096C265AC73C00BCE890 /* Assets.xcassets */; };
 		D6440971265AC73C00BCE890 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D644096D265AC73C00BCE890 /* LaunchScreen.storyboard */; };
+		D6447FCF27205EE200CB64F5 /* CustomBackImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6447FCE27205EE200CB64F5 /* CustomBackImage.swift */; };
+		D6447FD127205EF100CB64F5 /* CustomBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6447FD027205EF100CB64F5 /* CustomBackView.swift */; };
 		D6513E0926C8004C00B593AC /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6513E0826C8004C00B593AC /* BaseTableViewController.m */; };
 		D65D3B2A271036DB00FCA891 /* ViewController06_ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D65D3B29271036DB00FCA891 /* ViewController06_ScrollView.m */; };
 		D65D3B2D2710372000FCA891 /* ViewController07_PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D65D3B2C2710372000FCA891 /* ViewController07_PageViewController.m */; };
@@ -197,6 +199,8 @@
 		D644096C265AC73C00BCE890 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D644096E265AC73C00BCE890 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D644096F265AC73C00BCE890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6447FCE27205EE200CB64F5 /* CustomBackImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackImage.swift; sourceTree = "<group>"; };
+		D6447FD027205EF100CB64F5 /* CustomBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackView.swift; sourceTree = "<group>"; };
 		D6513E0726C8004C00B593AC /* BaseTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
 		D6513E0826C8004C00B593AC /* BaseTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 		D65D3B28271036DB00FCA891 /* ViewController06_ScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController06_ScrollView.h; sourceTree = "<group>"; };
@@ -597,6 +601,8 @@
 				D6D2D8AE27196EBE00ABBE59 /* BlurNavigationBarLikeSystem.swift */,
 				D6D2D8B0271970BC00ABBE59 /* ShadowColor.swift */,
 				D6D2D8B2271971D300ABBE59 /* ShadowImage.swift */,
+				D6447FCE27205EE200CB64F5 /* CustomBackImage.swift */,
+				D6447FD027205EF100CB64F5 /* CustomBackView.swift */,
 				D6D2D8B42719745900ABBE59 /* FullscreenColor.swift */,
 				D6D2D8B62719763E00ABBE59 /* ListView.swift */,
 				D6D2D8B82719775200ABBE59 /* ScrollViewContent.swift */,
@@ -705,6 +711,7 @@
 				D6304B562712C4370016696B /* DrawerAnimationController.m in Sources */,
 				D6F61A26271D180C00733382 /* ColorScrollView.swift in Sources */,
 				D6D2D8BC27197A6B00ABBE59 /* EdgePopGestureDisable.swift in Sources */,
+				D6447FD127205EF100CB64F5 /* CustomBackView.swift in Sources */,
 				D6D2D8A72719553000ABBE59 /* UIColor+Extensions.swift in Sources */,
 				D6C15D0F27186B6E00C35990 /* ContentView.swift in Sources */,
 				D6786C492719D83B008CA715 /* NavigatioinBarUserInteractionDisable.swift in Sources */,
@@ -720,6 +727,7 @@
 				D624E98F2654F71200CC96E6 /* ViewController01_BackgroundColor.m in Sources */,
 				D624E99B2654F71200CC96E6 /* TableViewSection.m in Sources */,
 				D624E9942654F71200CC96E6 /* ViewController08_CustomBackButton.m in Sources */,
+				D6447FCF27205EE200CB64F5 /* CustomBackImage.swift in Sources */,
 				D624E9882654F71200CC96E6 /* ViewController01_Test.m in Sources */,
 				D624E97F2654F71200CC96E6 /* ViewController03_BackEventIntercept.m in Sources */,
 				D6D2D8A927195B5000ABBE59 /* BackgorundImage.swift in Sources */,

@@ -22,11 +22,9 @@
 }
 
 - (UIView *)nx_backButtonCustomView {
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [backButton setTitle:@"😋" forState:UIControlStateNormal];
     [backButton setImage:[[UIImage imageNamed:@"NavigationBarBack"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [backButton setTitleColor:UIColor.customDarkGrayColor forState:UIControlStateNormal];
-    [backButton setTintColor:UIColor.customTitleColor];
     return backButton;
 }
 

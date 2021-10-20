@@ -11,29 +11,20 @@ import SwiftUI
 
 @available(iOS 13, *)
 struct FullscreenPopGestureEnable: View {
+    private let randomDark = UIColor.randomDark
+    private let randomLight = UIColor.randomLight
     private let item: NavigationFeatureItem
-    let randomColor = UIColor.randomLight
     
     init(_ item: NavigationFeatureItem) {
         self.item = item
     }
 
     var body: some View {
-        GeometryReader { geometry in
-            ScrollView(.horizontal) {
-                HStack {
-                    Rectangle().fill(Color.red).frame(width: geometry.size.width, height: geometry.size.height + geometry.safeAreaInsets.top)
-                    Rectangle().fill(Color.blue).frame(width: geometry.size.width, height: geometry.size.height + geometry.safeAreaInsets.top)
-                    Rectangle().fill(Color.red).frame(width: geometry.size.width, height: geometry.size.height + geometry.safeAreaInsets.top)
-                    Rectangle().fill(Color.yellow).frame(width: geometry.size.width, height: geometry.size.height + geometry.safeAreaInsets.top)
-                    Rectangle().fill(Color.red).frame(width: geometry.size.width, height: geometry.size.height + geometry.safeAreaInsets.top)
-                }
-            }
-            .edgesIgnoringSafeArea(.top)
-        }
+        ColorListView()
         .navigationBarTitle(item.title)
         .useNXNavigationView { configuration in
-            configuration.navigationBarAppearance.backgroundColor = .clear
+            let userInterfaceStyle = configuration.viewControllerPreferences.traitCollection?.userInterfaceStyle ?? .light
+            configuration.navigationBarAppearance.backgroundColor = userInterfaceStyle == .dark ? randomDark : randomLight
             configuration.viewControllerPreferences.enableFullscreenInteractivePopGesture = true
         }
     }

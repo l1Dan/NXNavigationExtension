@@ -10,7 +10,7 @@ import SwiftUI
 #endif
 
 @available(iOS 13, *)
-struct BackgorundColor: View {    
+struct BackgorundColor: View {
     private let randomDark = UIColor.randomDark
     private let randomLight = UIColor.randomLight
     private let item: NavigationFeatureItem

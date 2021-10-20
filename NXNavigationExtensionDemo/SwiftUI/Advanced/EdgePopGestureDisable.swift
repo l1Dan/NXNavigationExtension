@@ -11,18 +11,20 @@ import SwiftUI
 
 @available(iOS 13, *)
 struct EdgePopGestureDisable: View {
+    private let randomDark = UIColor.randomDark
+    private let randomLight = UIColor.randomLight
     private let item: NavigationFeatureItem
-    let randomColor = UIColor.randomLight
-    
+
     init(_ item: NavigationFeatureItem) {
         self.item = item
     }
 
     var body: some View {
-        Text(item.title)
+        ColorListView()
             .navigationBarTitle(item.title)
             .useNXNavigationView { configuration in
-                configuration.navigationBarAppearance.backgroundColor = randomColor
+                let userInterfaceStyle = configuration.viewControllerPreferences.traitCollection?.userInterfaceStyle ?? .light
+                configuration.navigationBarAppearance.backgroundColor = userInterfaceStyle == .dark ? randomDark : randomLight
                 configuration.viewControllerPreferences.disableInteractivePopGesture = true
             }
     }

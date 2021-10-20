@@ -34,13 +34,13 @@ struct UpdateNavigationBar: View {
             Text("Update")
         }
         .frame(width: UpdateNavigationBar.buttonWidthAndHeight, height: UpdateNavigationBar.buttonWidthAndHeight)
-        .overlay(
-            RoundedRectangle(cornerRadius: UpdateNavigationBar.buttonWidthAndHeight * 0.5, style: .circular).strokeBorder(Color.blue, lineWidth: 5))
-            .navigationBarTitle(item.title)
-            .useNXNavigationView { configuration in
-                let userInterfaceStyle = configuration.viewControllerPreferences.traitCollection?.userInterfaceStyle ?? .light
-                configuration.navigationBarAppearance.backgroundColor = userInterfaceStyle == .dark ? .systemBlue : .systemRed
-            }.preferredColorScheme(colorScheme)
+        .overlay(RoundedRectangle(cornerRadius: UpdateNavigationBar.buttonWidthAndHeight * 0.5, style: .circular).strokeBorder(Color.blue, lineWidth: 5))
+        .navigationBarTitle(item.title)
+        .preferredColorScheme(colorScheme)
+        .useNXNavigationView { configuration in
+            let userInterfaceStyle = configuration.viewControllerPreferences.traitCollection?.userInterfaceStyle ?? .light
+            configuration.navigationBarAppearance.backgroundColor = userInterfaceStyle == .dark ? .systemBlue : .systemRed
+        }
     }
 }
 

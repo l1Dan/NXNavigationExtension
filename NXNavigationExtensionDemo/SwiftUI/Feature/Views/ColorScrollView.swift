@@ -52,7 +52,8 @@ struct ColorScrollView: View {
                         ForEach(0..<taps.count) { index in
                             Text(self.taps[index]).tag(index)
                         }
-                    }.pickerStyle(.segmented)
+                    }
+                    .pickerStyle(.segmented)
                     Text("Value: \(taps[selection])")
                 }
                 list
