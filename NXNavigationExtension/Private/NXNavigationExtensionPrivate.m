@@ -124,6 +124,19 @@
 @end
 
 
+@implementation UINavigationItem (NXNavigationExtensionPrivate)
+
+- (UIViewController *)nx_viewController {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setNx_viewController:(UIViewController *)nx_viewController {
+    objc_setAssociatedObject(self, @selector(nx_viewController), nx_viewController, OBJC_ASSOCIATION_ASSIGN);
+}
+
+@end
+
+
 @implementation UIScrollView (NXNavigationExtensionPrivate)
 
 - (NXNavigationBar *)nx_navigationBar {
@@ -161,6 +174,15 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        NXNavigationExtensionOverrideImplementation([UINavigationItem class], @selector(setHidesBackButton:animated:), ^id _Nonnull(__unsafe_unretained Class  _Nonnull originClass, SEL  _Nonnull originCMD, IMP  _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
+            return ^void (__unsafe_unretained __kindof UINavigationItem *selfObject, BOOL hidden, BOOL animated){
+                BOOL hidesBackButton = !selfObject.nx_viewController.nx_useSystemBackButton;
+                void (*originSelectorIMP)(UINavigationItem *, SEL, BOOL, BOOL);
+                originSelectorIMP = (void (*)(UINavigationItem *, SEL, BOOL, BOOL))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, hidesBackButton, animated);
+            };
+        });
+        
         NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UINavigationBar class], @selector(layoutSubviews), ^(__kindof UINavigationBar * _Nonnull selfObject) {
             UINavigationBarDidUpdatePropertiesHandler didUpdatePropertiesHandler = selfObject.nx_didUpdatePropertiesHandler;
             if (didUpdatePropertiesHandler) {
@@ -322,7 +344,7 @@
 
 - (void)nx_adjustmentSystemBackButtonForViewController:(__kindof UIViewController *)currentViewController inViewControllers:(NSArray<__kindof UIViewController *> *)previousViewControllers {
     __kindof UIViewController *lastViewController = previousViewControllers.lastObject;
-    if (lastViewController && lastViewController != currentViewController) {
+    if (lastViewController && lastViewController != currentViewController && currentViewController.nx_useSystemBackButton) {
         if (currentViewController.nx_systemBackButtonTitle) {
             // 去掉前后空格
             NSString *title = [currentViewController.nx_systemBackButtonTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -365,6 +387,13 @@
 @end
 
 
+@interface UIViewController (NXNavigationExtensionPrivate)
+
+/// 记录自定义返回按钮对象，用于后续对比是否为同一个对象
+@property (nonatomic, strong) UIBarButtonItem *nx_customBackButtonItem;
+
+@end
+
 @implementation UIViewController (NXNavigationExtensionPrivate)
 
 /// 保证 self.navigationController 不为 nil，不要直接调研 navigationController 方法
@@ -378,6 +407,14 @@
             return [navigationController popViewControllerAnimated:YES];
         }];
     }
+}
+
+- (UIBarButtonItem *)nx_customBackButtonItem {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setNx_customBackButtonItem:(UIBarButtonItem *)nx_customBackButtonItem {
+    objc_setAssociatedObject(self, @selector(nx_customBackButtonItem), nx_customBackButtonItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (id<NXNavigationInteractable>)nx_navigationInteractDelegate {
@@ -438,9 +475,13 @@
 }
 
 - (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController {
-    self.navigationItem.hidesBackButton = !self.nx_useSystemBackButton;
+    [self.navigationItem setHidesBackButton:!self.nx_useSystemBackButton animated:NO];
     if (self.nx_useSystemBackButton) {
-        if (!self.navigationItem.leftItemsSupplementBackButton) {
+        UIBarButtonItem *customBackButtonItem = self.nx_customBackButtonItem;
+        UIBarButtonItem *leftBarButtonItem = self.navigationItem.leftBarButtonItem;
+        // 如果导航栏不同时支持返回按钮和 leftItems 则清空 left 区域，或者 left 为自定义返回按钮也要清空。
+        if (!self.navigationItem.leftItemsSupplementBackButton ||
+            (customBackButtonItem && leftBarButtonItem && customBackButtonItem == leftBarButtonItem)) {
             self.navigationItem.leftBarButtonItem = nil;
             self.navigationItem.leftBarButtonItems = nil;
         }
@@ -454,12 +495,14 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nx_triggerSystemPopViewController)];
         customView.userInteractionEnabled = YES;
         [customView addGestureRecognizer:tap];
+        self.nx_customBackButtonItem = backButtonItem;
     } else {
         UIImage *backImage = self.nx_backImage;
         UIImage *landscapeBackImage = self.nx_backImage;
         backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage landscapeImagePhone:landscapeBackImage style:UIBarButtonItemStylePlain target:self action:@selector(nx_triggerSystemPopViewController)];
         backButtonItem.imageInsets = navigationController.nx_backImageInsets;
         backButtonItem.landscapeImagePhoneInsets = navigationController.nx_landscapeBackImageInsets;
+        self.nx_customBackButtonItem = backButtonItem;
     }
     self.navigationItem.leftBarButtonItem = backButtonItem;
 }

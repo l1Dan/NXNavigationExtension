@@ -73,6 +73,14 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 @end
 
 
+@interface UINavigationItem (NXNavigationExtensionPrivate)
+
+/// 关联 navigationItem 所使用的 viewController，用于监听中途返回按钮被修改的情况
+@property (nonatomic, weak, nullable) UIViewController *nx_viewController;
+
+@end
+
+
 @interface UIScrollView (NXNavigationExtensionPrivate)
 
 /// UIViewController 中 scrollView 所引用的 NXNavigationBar

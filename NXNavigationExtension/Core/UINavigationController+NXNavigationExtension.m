@@ -87,6 +87,7 @@
         NXNavigationExtensionOverrideImplementation([UINavigationController class], @selector(pushViewController:animated:), ^id _Nonnull(__unsafe_unretained Class  _Nonnull originClass, SEL  _Nonnull originCMD, IMP  _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
             return ^(UINavigationController *selfObject, UIViewController *viewController, BOOL animated) {
                 if (selfObject.nx_useNavigationBar) {
+                    viewController.navigationItem.nx_viewController = viewController;
                     // 标记 viewController 是否存在于 self.navigationController.viewControllers 中
                     viewController.nx_navigationStackContained = YES;
                     // 先赋值一次
@@ -114,6 +115,7 @@
             return ^(UINavigationController *selfObject, NSArray<UIViewController *> *viewControllers, BOOL animated) {
                 if (selfObject.nx_useNavigationBar) {
                     for (UIViewController *viewController in viewControllers) {
+                        viewController.navigationItem.nx_viewController = viewController;
                         // 标记 viewController 是否存在于 self.navigationController.viewControllers 中
                         viewController.nx_navigationStackContained = YES;
                         // 先赋值一次
