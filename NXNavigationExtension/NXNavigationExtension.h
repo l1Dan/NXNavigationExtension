@@ -36,6 +36,7 @@ FOUNDATION_EXPORT const unsigned char NXNavigationExtensionVersionString[];
 
 #import <NXNavigationExtension/NXNavigationBar.h>
 #import <NXNavigationExtension/NXNavigationConfiguration.h>
+#import <NXNavigationExtension/NXNavigationRouter.h>
 #import <NXNavigationExtension/NXNavigationVirtualWrapperView.h>
 #import <NXNavigationExtension/UINavigationController+NXNavigationExtension.h>
 #import <NXNavigationExtension/UIViewController+NXNavigationExtension.h>
@@ -45,6 +46,7 @@ FOUNDATION_EXPORT const unsigned char NXNavigationExtensionVersionString[];
 
 #import "NXNavigationBar.h"
 #import "NXNavigationConfiguration.h"
+#import "NXNavigationRouter.h"
 #import "NXNavigationVirtualWrapperView.h"
 #import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"

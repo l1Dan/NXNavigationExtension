@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navigationBar);
 
-@class NXNavigationVirtualWrapperView;
+@class NXNavigationVirtualWrapperView, NXNavigationRouter;
 
 /// 边缘返回手势代理对象
 @interface NXScreenEdgePopGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
@@ -107,6 +107,8 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 
 /// 全屏返回手势代理对象
 @property (nonatomic, strong, readonly) NXFullscreenPopGestureRecognizerDelegate *nx_fullscreenPopGestureDelegate;
+
+@property (nonatomic, strong, readonly) NXNavigationRouter *nx_navigationRouter API_AVAILABLE(ios(13.0));
 
 /// 是否使用 NXNavigationBar，默认 NO；如果导航控制器没有注册则使用系统导航栏
 @property (nonatomic, assign, readonly) BOOL nx_useNavigationBar;

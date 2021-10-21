@@ -24,6 +24,7 @@
 #import "NXNavigationConfiguration.h"
 #import "NXNavigationExtensionPrivate.h"
 #import "NXNavigationExtensionRuntime.h"
+#import "NXNavigationRouter.h"
 #import "NXNavigationVirtualWrapperView.h"
 #import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
@@ -262,6 +263,15 @@
     delegate = [[NXFullscreenPopGestureRecognizerDelegate alloc] initWithNavigationController:self];
     objc_setAssociatedObject(self, _cmd, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return delegate;
+}
+
+- (NXNavigationRouter *)nx_navigationRouter API_AVAILABLE(ios(13.0)) {
+    NXNavigationRouter *navigationRouter = objc_getAssociatedObject(self, _cmd);
+    if (!navigationRouter) {
+        navigationRouter = [[NXNavigationRouter alloc] init];
+        objc_setAssociatedObject(self, _cmd, navigationRouter, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return navigationRouter;
 }
 
 // Override

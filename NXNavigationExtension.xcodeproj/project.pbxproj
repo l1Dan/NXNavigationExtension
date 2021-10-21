@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D60F1A7D2716CC580033C84E /* NXNavigationVirtualWrapperView.h in Headers */ = {isa = PBXBuildFile; fileRef = D60F1A7B2716CC580033C84E /* NXNavigationVirtualWrapperView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D60F1A7E2716CC580033C84E /* NXNavigationVirtualWrapperView.m in Sources */ = {isa = PBXBuildFile; fileRef = D60F1A7C2716CC580033C84E /* NXNavigationVirtualWrapperView.m */; };
+		D61F68182721601F007A525D /* NXNavigationRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = D61F68162721601F007A525D /* NXNavigationRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D61F68192721601F007A525D /* NXNavigationRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = D61F68172721601F007A525D /* NXNavigationRouter.m */; };
 		D624E8D02654F41400CC96E6 /* UINavigationController+NXNavigationExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = D624E8C72654F41300CC96E6 /* UINavigationController+NXNavigationExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D624E8D12654F41400CC96E6 /* UIViewController+NXNavigationExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = D624E8C82654F41400CC96E6 /* UIViewController+NXNavigationExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D624E8D22654F41400CC96E6 /* NXNavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = D624E8C92654F41400CC96E6 /* NXNavigationBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -29,6 +31,8 @@
 /* Begin PBXFileReference section */
 		D60F1A7B2716CC580033C84E /* NXNavigationVirtualWrapperView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXNavigationVirtualWrapperView.h; sourceTree = "<group>"; };
 		D60F1A7C2716CC580033C84E /* NXNavigationVirtualWrapperView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXNavigationVirtualWrapperView.m; sourceTree = "<group>"; };
+		D61F68162721601F007A525D /* NXNavigationRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXNavigationRouter.h; sourceTree = "<group>"; };
+		D61F68172721601F007A525D /* NXNavigationRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXNavigationRouter.m; sourceTree = "<group>"; };
 		D624E8C72654F41300CC96E6 /* UINavigationController+NXNavigationExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+NXNavigationExtension.h"; sourceTree = "<group>"; };
 		D624E8C82654F41400CC96E6 /* UIViewController+NXNavigationExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NXNavigationExtension.h"; sourceTree = "<group>"; };
 		D624E8C92654F41400CC96E6 /* NXNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXNavigationBar.h; sourceTree = "<group>"; };
@@ -91,6 +95,8 @@
 		D60F1A7A2716CBF30033C84E /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				D61F68162721601F007A525D /* NXNavigationRouter.h */,
+				D61F68172721601F007A525D /* NXNavigationRouter.m */,
 				D60F1A7B2716CC580033C84E /* NXNavigationVirtualWrapperView.h */,
 				D60F1A7C2716CC580033C84E /* NXNavigationVirtualWrapperView.m */,
 			);
@@ -135,9 +141,10 @@
 			files = (
 				D624E8D22654F41400CC96E6 /* NXNavigationBar.h in Headers */,
 				D6E896002705B2CE0080AD2A /* NXNavigationConfiguration.h in Headers */,
-				D60F1A7D2716CC580033C84E /* NXNavigationVirtualWrapperView.h in Headers */,
 				D69F2E0F2663505F004A02C8 /* NXNavigationExtension.h in Headers */,
 				D67DE22D2703419200BAED83 /* NXNavigationExtension+Deprecated.h in Headers */,
+				D61F68182721601F007A525D /* NXNavigationRouter.h in Headers */,
+				D60F1A7D2716CC580033C84E /* NXNavigationVirtualWrapperView.h in Headers */,
 				D6C4803726B197B600A66417 /* NXNavigationExtensionPrivate.h in Headers */,
 				D6E78B1F26AC57F700DA3512 /* NXNavigationExtensionRuntime.h in Headers */,
 				D624E8D02654F41400CC96E6 /* UINavigationController+NXNavigationExtension.h in Headers */,
@@ -222,6 +229,7 @@
 				D624E8D62654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m in Sources */,
 				D6E896012705B2CE0080AD2A /* NXNavigationConfiguration.m in Sources */,
 				D624E8D72654F41400CC96E6 /* UIViewController+NXNavigationExtension.m in Sources */,
+				D61F68192721601F007A525D /* NXNavigationRouter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
