@@ -142,7 +142,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 /// 检查是否符合导航栏设置的条件
 - (BOOL)nx_canSetupNavigationBar {
-    return self.navigationController && self.navigationController.nx_useNavigationBar && self.nx_navigationStackContained;
+    return self.navigationController && self.navigationController.nx_useNavigationBar;
 }
 
 - (void)nx_checkNavigationVirtualWrapperViewState {

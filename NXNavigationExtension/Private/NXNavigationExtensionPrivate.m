@@ -445,18 +445,6 @@
     objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperView), nx_navigationVirtualWrapperView, OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (BOOL)nx_navigationStackContained {
-    NSNumber *number = objc_getAssociatedObject(self, _cmd);
-    if (number && [number isKindOfClass:[NSNumber class]]) {
-        return [number boolValue];
-    }
-    return NO;
-}
-
-- (void)setNx_navigationStackContained:(BOOL)nx_navigationStackContained {
-    objc_setAssociatedObject(self, @selector(nx_navigationStackContained), @(nx_navigationStackContained), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 - (NXNavigationConfiguration *)nx_configuration {
     NXNavigationConfiguration *configuration = objc_getAssociatedObject(self, _cmd);
     if (!configuration && self.navigationController) {
