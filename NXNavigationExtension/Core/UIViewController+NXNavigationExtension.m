@@ -30,10 +30,6 @@
 #import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
 
-CG_INLINE BOOL
-NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
-    return edge == UIRectEdgeNone;
-}
 
 @interface UIViewController (NXNavigationExtension)
 
@@ -42,6 +38,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 @property (nonatomic, assign) BOOL nx_navigationVirtualWrapperNotFound;
 @property (nonatomic, assign) BOOL nx_viewWillDisappearFinished;
 @property (nonatomic, assign, readonly) BOOL nx_canSetupNavigationBar;
+@property (nonatomic, strong, readonly) NXNavigationObservationDelegate *nx_navigationObservationDelegate;
 
 @end
 
@@ -70,8 +67,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
                 // fix: edgesForExtendedLayoutEnabled instance dynamic changed.
                 if (selfObject.nx_canSetupNavigationBar) {
-                    selfObject.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(selfObject.edgesForExtendedLayout);
-                    selfObject.nx_navigationBar.frame = selfObject.navigationController.navigationBar.frame;
+                    [selfObject nx_updateNavigationBarFrame];
                 }
                 return result;
             };
@@ -85,8 +81,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
                 // fix: edgesForExtendedLayoutEnabled instance dynamic changed.
                 if (selfObject.nx_canSetupNavigationBar) {
-                    selfObject.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(result);
-                    selfObject.nx_navigationBar.frame = selfObject.navigationController.navigationBar.frame;
+                    [selfObject nx_updateNavigationBarFrame];
                 }
                 return result;
             };
@@ -125,7 +120,7 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 
 /// 检查是否符合导航栏设置的条件
 - (BOOL)nx_canSetupNavigationBar {
-    return self.navigationController && self.navigationController.nx_useNavigationBar && self.nx_navigationStackContained;
+    return self.navigationController && self.navigationController.nx_useNavigationBar;
 }
 
 - (void)nx_configureNXNavigationBar {
@@ -134,6 +129,10 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         [self.navigationController nx_configureNavigationBar];
         [self nx_setupNavigationBar];
         [self nx_updateNavigationBarAppearance];
+        // UIViewController self.view.frame 发生改变的情况
+        self.nx_navigationObservationDelegate.viewControllerDidUpdateFrameHandler = ^(UIViewController *viewController) {
+            [viewController nx_updateNavigationBarFrame];
+        };
         // 只会调用一次
         NXNavigationPrepareConfigurationCallback callback = self.nx_prepareConfigureViewControllerCallback;
         if (callback) {
@@ -164,10 +163,6 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
 }
 
 - (void)nx_adjustmentNavigationBarAppearanceForUINavigationBar:(UINavigationBar *)navigationBar withViewController:(__kindof UIViewController *)viewController {
-    if (viewController.nx_navigationBar) {
-        // fix: 视图控制器同时重写 `extendedLayoutIncludesOpaqueBars` 和 `edgesForExtendedLayout` 属性时需要调用这里来修正导航栏。
-        viewController.nx_navigationBar.edgesForExtendedLayoutEnabled = NXNavigationExtensionEdgesForExtendedLayoutEnabled(viewController.edgesForExtendedLayout);
-    }
     // fix: delay call nx_updateNavigationBarAppearance method.
     if (self == viewController && viewController.nx_viewWillDisappearFinished) { return; }
     viewController.nx_navigationBar.frame = navigationBar.frame;
@@ -200,6 +195,15 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
         if (self.parentViewController && ![self.parentViewController isKindOfClass:[UINavigationController class]] && self.nx_automaticallyHideNavigationBarInChildViewController) {
             self.nx_navigationBar.hidden = YES;
         }
+    }
+}
+
+- (void)nx_updateNavigationBarFrame {
+    if (self.nx_canSetupNavigationBar && !self.nx_viewWillDisappearFinished) {
+        self.nx_navigationBar.originalNavigationBarFrame = self.navigationController.navigationBar.frame;
+        UIView *view = [self.view isKindOfClass:[UIScrollView class]] ? self.view.superview : self.view;
+        UINavigationBar *navigationBar = self.navigationController.navigationBar;
+        self.nx_navigationBar.frame = [navigationBar.superview convertRect:navigationBar.frame toView:view];
     }
 }
 
@@ -288,6 +292,15 @@ NXNavigationExtensionEdgesForExtendedLayoutEnabled(UIRectEdge edge) {
     } else {
         self.nx_navigationVirtualWrapperNotFound = YES;
     }
+}
+
+- (NXNavigationObservationDelegate *)nx_navigationObservationDelegate {
+    NXNavigationObservationDelegate *delegate = objc_getAssociatedObject(self, _cmd);
+    if (!delegate) {
+        delegate = [[NXNavigationObservationDelegate alloc] initWithObserve:self];
+        objc_setAssociatedObject(self, _cmd, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return delegate;
 }
 
 #pragma mark - Private Getter & Setter

@@ -116,6 +116,39 @@
 @end
 
 
+@interface NXNavigationObservationDelegate ()
+
+@property (nonatomic, weak) __kindof UIViewController *observe;
+
+@end
+
+@implementation NXNavigationObservationDelegate
+
+- (instancetype)initWithObserve:(UIViewController *)observe {
+    if (self = [super init]) {
+        _observe = observe;
+        [observe.view addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:NULL];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [self.observe removeObserver:self forKeyPath:@"frame" context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"frame"] && [object isKindOfClass:[UIView class]]) {
+        if (self.viewControllerDidUpdateFrameHandler) {
+            self.viewControllerDidUpdateFrameHandler(self.observe);
+        }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+@end
+
+
 @implementation UIScrollView (NXNavigationExtensionPrivate)
 
 - (NXNavigationBar *)nx_navigationBar {
@@ -340,18 +373,6 @@
 
 - (void)setNx_navigationVirtualWrapperView:(NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
     objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperView), nx_navigationVirtualWrapperView, OBJC_ASSOCIATION_ASSIGN);
-}
-
-- (BOOL)nx_navigationStackContained {
-    NSNumber *number = objc_getAssociatedObject(self, _cmd);
-    if (number && [number isKindOfClass:[NSNumber class]]) {
-        return [number boolValue];
-    }
-    return NO;
-}
-
-- (void)setNx_navigationStackContained:(BOOL)nx_navigationStackContained {
-    objc_setAssociatedObject(self, @selector(nx_navigationStackContained), @(nx_navigationStackContained), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NXNavigationConfiguration *)nx_configuration {
