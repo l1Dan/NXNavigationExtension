@@ -1,5 +1,14 @@
 # CHANGELOG.md
 
+## 3.6.3
+
+- 修复 UIViewController view frame 改变时 NXNavigationBar frame 不更新的问题
+- 移除 nx_navigationStackContained 变量，代码精简
+
+## 3.6.2
+
+- 完善 SwiftUI 基础支持；
+
 ## 3.6.1
 
 - 添加 SwiftUI 基础支持；
