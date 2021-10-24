@@ -125,6 +125,39 @@
 @end
 
 
+@interface NXNavigationObservationDelegate ()
+
+@property (nonatomic, weak) __kindof UIViewController *observe;
+
+@end
+
+@implementation NXNavigationObservationDelegate
+
+- (instancetype)initWithObserve:(UIViewController *)observe {
+    if (self = [super init]) {
+        _observe = observe;
+        [observe.view addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:NULL];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [self.observe removeObserver:self forKeyPath:@"frame" context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"frame"] && [object isKindOfClass:[UIView class]]) {
+        if (self.viewControllerDidUpdateFrameHandler) {
+            self.viewControllerDidUpdateFrameHandler(self.observe);
+        }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+@end
+
+
 @implementation UINavigationItem (NXNavigationExtensionPrivate)
 
 - (UIViewController *)nx_viewController {

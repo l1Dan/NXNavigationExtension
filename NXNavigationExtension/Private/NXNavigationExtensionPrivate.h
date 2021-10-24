@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navigationBar);
 
+typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewController);
+
 @class NXNavigationVirtualWrapperView, NXNavigationRouter;
 
 /// 边缘返回手势代理对象
@@ -54,10 +56,22 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 @end
 
 
-@interface NXNavigationBar ()
+@interface NXNavigationObservationDelegate : NSObject
 
-/// UIViewController 的 edgesForExtendedLayout 属性是否为 UIRectEdgeNone
-@property (nonatomic, assign) BOOL edgesForExtendedLayoutEnabled;
+/// UIViewController view frame 改变时的回调
+@property (nonatomic, copy) UIViewControllerDidUpdateFrameHandler viewControllerDidUpdateFrameHandler;
+
+/// 当前 viewController
+@property (nonatomic, weak, nullable, readonly) __kindof UIViewController *observe;
+
+/// 便利构造函数
+/// @param observe 当前 viewController
+- (instancetype)initWithObserve:(UIViewController *)observe;
+
+@end
+
+
+@interface NXNavigationBar ()
 
 /// 是否使用 NXNavigationBar 背景模糊效果；默认 NO
 @property (nonatomic, assign) BOOL blurEffectEnabled;

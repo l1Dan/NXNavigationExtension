@@ -26,8 +26,6 @@
 @interface NXNavigationBar ()
 
 @property (nonatomic, strong) UIColor *originalBackgroundColor;
-@property (nonatomic, assign) CGRect originalNavigationBarFrame;
-@property (nonatomic, assign) BOOL edgesForExtendedLayoutEnabled;
 @property (nonatomic, assign) BOOL blurEffectEnabled;
 
 @end
@@ -49,7 +47,6 @@
         _contentView = [[UIView alloc] init];
         _contentView.backgroundColor = [UIColor clearColor];
         _contentViewEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 8);
-        _edgesForExtendedLayoutEnabled = NO;
         
         UIBlurEffect *effect;
         if (@available(iOS 13.0, *)) {
@@ -71,13 +68,11 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    [self updateNavigationBarContentFrameCallSuper:NO];
+    [self updateNavigationBarFrame:self.frame callSuper:NO];
 }
 
 - (void)setFrame:(CGRect)frame {
-    _originalNavigationBarFrame = frame;
-    
-    [self updateNavigationBarContentFrameCallSuper:YES];
+    [self updateNavigationBarFrame:frame callSuper:YES];
 }
 
 #pragma mark - Private
@@ -89,7 +84,7 @@
 
 /// 更新导航栏 frame
 /// @param callSuper 是否需要调用 super setFrame: 方法
-- (void)updateNavigationBarContentFrameCallSuper:(BOOL)callSuper {
+- (void)updateNavigationBarFrame:(CGRect)frame callSuper:(BOOL)callSuper {
     CGRect navigationBarFrame = CGRectMake(0, 0, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame));
     self.backgroundEffectView.frame = navigationBarFrame;
     self.backgroundImageView.frame = navigationBarFrame;
@@ -108,8 +103,8 @@
     
     // 重新设置 NavigationBar frame
     if (callSuper) {
-        CGFloat navigationBarY = self.edgesForExtendedLayoutEnabled ? CGRectGetHeight(navigationBarFrame) : 0;
-        [super setFrame:CGRectMake(0, -navigationBarY, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame))];
+        CGFloat navigationBarY = CGRectGetMinY(frame) - CGRectGetMinY(_originalNavigationBarFrame);
+        [super setFrame:CGRectMake(0, navigationBarY, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame))];
     }
 }
 
@@ -133,7 +128,7 @@
 
 - (void)setContentViewEdgeInsets:(UIEdgeInsets)contentViewEdgeInsets {
     _contentViewEdgeInsets = contentViewEdgeInsets;
-    [self updateNavigationBarContentFrameCallSuper:NO];
+    [self updateNavigationBarFrame:self.frame callSuper:NO];
 }
 
 @end
