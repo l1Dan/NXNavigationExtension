@@ -13,9 +13,10 @@ Pod::Spec.new do |spec|
   spec.author   = { 'Leo Lee' => 'l1dan@hotmail.com' }
   spec.source   = { :git => 'https://github.com/l1Dan/NXNavigationExtension.git', :tag => "#{spec.version}" }
 
+  spec.swift_version = '5.0'
   spec.ios.deployment_target  = '9.0'
   spec.frameworks   = 'UIKit'
-  spec.source_files = 'NXNavigationExtension/**/*.{h,m}'
+  spec.source_files = 'NXNavigationExtension/**/*.{h,m,swift}'
   spec.module_map   = 'NXNavigationExtension/module.modulemap'
   spec.public_header_files  = 'NXNavigationExtension/Core/*.h', 'NXNavigationExtension/SwiftUI/*.h', 'NXNavigationExtension/NXNavigationExtension.h'
 

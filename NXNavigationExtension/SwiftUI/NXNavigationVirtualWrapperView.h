@@ -26,10 +26,12 @@
 #if __has_include(<NXNavigationExtension/NXNavigationExtension.h>)
 
 #import <NXNavigationExtension/NXNavigationConfiguration.h>
+#import <NXNavigationExtension/NXNavigationRouter.h>
 
 #else
 
 #import "NXNavigationConfiguration.h"
+#import "NXNavigationRouter.h"
 
 #endif /* __has_include */
 
@@ -38,7 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class NXNavigationConfiguration;
 
 API_AVAILABLE(ios(13.0), tvos(13.0))
-@interface NXNavigationVirtualWrapperView : UIView <NXNavigationInteractable>
+@interface NXNavigationVirtualWrapperView : UIView <NXNavigationInteractable, NXNavigationContext>
+
+@property (nonatomic, copy, nullable) NSString *routeName;
 
 /// NXNavigationVirtualWrapperView 实际所在的视图控制器
 @property (nonatomic, weak, nullable, readonly) __kindof UIViewController *hostingController;

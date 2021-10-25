@@ -22,6 +22,8 @@
 		D67DE22E2703419200BAED83 /* NXNavigationExtension+Deprecated.m in Sources */ = {isa = PBXBuildFile; fileRef = D67DE22C2703419200BAED83 /* NXNavigationExtension+Deprecated.m */; };
 		D69F2E0F2663505F004A02C8 /* NXNavigationExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = D69F2E0C2663505F004A02C8 /* NXNavigationExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D6C4803726B197B600A66417 /* NXNavigationExtensionPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = D6C4803626B197B600A66417 /* NXNavigationExtensionPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D6C8A50B2726C3F500DB82CC /* NXNavigationExtension+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C8A50A2726C3F500DB82CC /* NXNavigationExtension+SwiftUI.swift */; };
+		D6C8A50F2726C47400DB82CC /* NXNavigationWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C8A50E2726C47400DB82CC /* NXNavigationWrapperView.swift */; };
 		D6E78B1F26AC57F700DA3512 /* NXNavigationExtensionRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E78B1D26AC57F700DA3512 /* NXNavigationExtensionRuntime.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D6E78B2026AC57F700DA3512 /* NXNavigationExtensionRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E78B1E26AC57F700DA3512 /* NXNavigationExtensionRuntime.m */; };
 		D6E896002705B2CE0080AD2A /* NXNavigationConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E895FE2705B2CE0080AD2A /* NXNavigationConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -46,6 +48,8 @@
 		D69F2E0C2663505F004A02C8 /* NXNavigationExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXNavigationExtension.h; sourceTree = "<group>"; };
 		D69F2E0D2663505F004A02C8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6C4803626B197B600A66417 /* NXNavigationExtensionPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXNavigationExtensionPrivate.h; sourceTree = "<group>"; };
+		D6C8A50A2726C3F500DB82CC /* NXNavigationExtension+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NXNavigationExtension+SwiftUI.swift"; sourceTree = "<group>"; };
+		D6C8A50E2726C47400DB82CC /* NXNavigationWrapperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXNavigationWrapperView.swift; sourceTree = "<group>"; };
 		D6E4024C251FB71C001D7BEE /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6E78B1D26AC57F700DA3512 /* NXNavigationExtensionRuntime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXNavigationExtensionRuntime.h; sourceTree = "<group>"; };
 		D6E78B1E26AC57F700DA3512 /* NXNavigationExtensionRuntime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXNavigationExtensionRuntime.m; sourceTree = "<group>"; };
@@ -95,10 +99,12 @@
 		D60F1A7A2716CBF30033C84E /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				D6C8A50A2726C3F500DB82CC /* NXNavigationExtension+SwiftUI.swift */,
 				D61F68162721601F007A525D /* NXNavigationRouter.h */,
 				D61F68172721601F007A525D /* NXNavigationRouter.m */,
 				D60F1A7B2716CC580033C84E /* NXNavigationVirtualWrapperView.h */,
 				D60F1A7C2716CC580033C84E /* NXNavigationVirtualWrapperView.m */,
+				D6C8A50E2726C47400DB82CC /* NXNavigationWrapperView.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -222,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D60F1A7E2716CC580033C84E /* NXNavigationVirtualWrapperView.m in Sources */,
+				D6C8A50B2726C3F500DB82CC /* NXNavigationExtension+SwiftUI.swift in Sources */,
 				D67DE22E2703419200BAED83 /* NXNavigationExtension+Deprecated.m in Sources */,
 				D624E8D52654F41400CC96E6 /* NXNavigationBar.m in Sources */,
 				D6E78B2026AC57F700DA3512 /* NXNavigationExtensionRuntime.m in Sources */,
@@ -229,6 +236,7 @@
 				D624E8D62654F41400CC96E6 /* UINavigationController+NXNavigationExtension.m in Sources */,
 				D6E896012705B2CE0080AD2A /* NXNavigationConfiguration.m in Sources */,
 				D624E8D72654F41400CC96E6 /* UIViewController+NXNavigationExtension.m in Sources */,
+				D6C8A50F2726C47400DB82CC /* NXNavigationWrapperView.swift in Sources */,
 				D61F68192721601F007A525D /* NXNavigationRouter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
