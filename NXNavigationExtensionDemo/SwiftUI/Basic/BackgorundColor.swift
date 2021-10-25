@@ -22,10 +22,10 @@ struct BackgorundColor: View {
     var body: some View {
         ColorListView()
             .navigationBarTitle(item.title)
-            .useNXNavigationView { configuration in
+            .useNXNavigationView(onPrepareConfiguration: { configuration in
                 let userInterfaceStyle = configuration.viewControllerPreferences.traitCollection?.userInterfaceStyle ?? .light
                 configuration.navigationBarAppearance.backgroundColor = userInterfaceStyle == .dark ? randomDark : randomLight
-            }
+            })
     }
 }
 

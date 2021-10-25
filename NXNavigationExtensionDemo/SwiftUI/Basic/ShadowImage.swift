@@ -20,10 +20,10 @@ struct ShadowImage: View {
     var body: some View {
         Text(item.title)
             .navigationBarTitle(item.title)
-            .useNXNavigationView { configuration in
+            .useNXNavigationView(onPrepareConfiguration: { configuration in
                 configuration.navigationBarAppearance.backgroundColor = .systemBackground
                 configuration.navigationBarAppearance.shadowImage = UIImage(named: "NavigationBarShadowImage")
-            }
+            })
     }
 }
 

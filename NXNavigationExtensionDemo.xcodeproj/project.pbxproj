@@ -49,7 +49,6 @@
 		D624E99E2654F71200CC96E6 /* RandomColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9692654F71200CC96E6 /* RandomColorViewController.m */; };
 		D624E9A02654F71200CC96E6 /* FeatureTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E96D2654F71200CC96E6 /* FeatureTableViewController.m */; };
 		D624E9A12654F71200CC96E6 /* FakeNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9712654F71200CC96E6 /* FakeNavigationBar.m */; };
-		D62710E227187911006D49CE /* NXNavigationWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62710E127187911006D49CE /* NXNavigationWrapperView.swift */; };
 		D6304B532712C4190016696B /* DrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6304B522712C4190016696B /* DrawerViewController.m */; };
 		D6304B562712C4370016696B /* DrawerAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6304B552712C4370016696B /* DrawerAnimationController.m */; };
 		D6304B65271347B60016696B /* DrawAnimationTransitionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6304B64271347B60016696B /* DrawAnimationTransitionDelegate.m */; };
@@ -68,6 +67,7 @@
 		D6C15D1127186B7500C35990 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C15D1027186B7500C35990 /* AppDelegate.swift */; };
 		D6C15D1427186CCA00C35990 /* SplitAdaptorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C15D1327186CCA00C35990 /* SplitAdaptorViewController.swift */; };
 		D6C15D1627186E6C00C35990 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C15D1527186E6C00C35990 /* MainTabBarController.swift */; };
+		D6C8A5142726CF0B00DB82CC /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C8A5132726CF0B00DB82CC /* NavigationRouter.swift */; };
 		D6D2D898271918B400ABBE59 /* NavigationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D897271918B400ABBE59 /* NavigationFeature.swift */; };
 		D6D2D89C2719253000ABBE59 /* FeatureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D89B2719253000ABBE59 /* FeatureListView.swift */; };
 		D6D2D89E271928AC00ABBE59 /* FeatureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D89D271928AC00ABBE59 /* FeatureDetailView.swift */; };
@@ -186,7 +186,6 @@
 		D624E96E2654F71200CC96E6 /* RandomColorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomColorViewController.h; sourceTree = "<group>"; };
 		D624E9702654F71200CC96E6 /* FakeNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeNavigationBar.h; sourceTree = "<group>"; };
 		D624E9712654F71200CC96E6 /* FakeNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeNavigationBar.m; sourceTree = "<group>"; };
-		D62710E127187911006D49CE /* NXNavigationWrapperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXNavigationWrapperView.swift; sourceTree = "<group>"; };
 		D6304B512712C4190016696B /* DrawerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawerViewController.h; sourceTree = "<group>"; };
 		D6304B522712C4190016696B /* DrawerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawerViewController.m; sourceTree = "<group>"; };
 		D6304B542712C4370016696B /* DrawerAnimationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawerAnimationController.h; sourceTree = "<group>"; };
@@ -215,6 +214,7 @@
 		D6C15D1027186B7500C35990 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6C15D1327186CCA00C35990 /* SplitAdaptorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitAdaptorViewController.swift; sourceTree = "<group>"; };
 		D6C15D1527186E6C00C35990 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		D6C8A5132726CF0B00DB82CC /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		D6D2D897271918B400ABBE59 /* NavigationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFeature.swift; sourceTree = "<group>"; };
 		D6D2D89B2719253000ABBE59 /* FeatureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureListView.swift; sourceTree = "<group>"; };
 		D6D2D89D271928AC00ABBE59 /* FeatureDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureDetailView.swift; sourceTree = "<group>"; };
@@ -269,14 +269,13 @@
 		D624E8E42654F60500CC96E6 /* NXNavigationExtensionDemo */ = {
 			isa = PBXGroup;
 			children = (
-				D6372C1A271F07CF00FFA3F2 /* NX */,
 				D6C15D1227186C8700C35990 /* Common */,
 				D6C15D0D27186B4100C35990 /* SwiftUI */,
 				D62710E027187884006D49CE /* UIKit */,
 				D644096B265AC73C00BCE890 /* Supporting Files */,
 				D6C15D1027186B7500C35990 /* AppDelegate.swift */,
-				D6771E8826987D6D004A1749 /* NXNavigationExtensionDemo.entitlements */,
 				D6C15D0A27186B1A00C35990 /* NXNavigationExtensionDemo-Bridging-Header.h */,
+				D6771E8826987D6D004A1749 /* NXNavigationExtensionDemo.entitlements */,
 			);
 			path = NXNavigationExtensionDemo;
 			sourceTree = "<group>";
@@ -516,20 +515,12 @@
 			children = (
 				D6304B63271347B60016696B /* DrawAnimationTransitionDelegate.h */,
 				D6304B64271347B60016696B /* DrawAnimationTransitionDelegate.m */,
-				D6304B512712C4190016696B /* DrawerViewController.h */,
-				D6304B522712C4190016696B /* DrawerViewController.m */,
 				D6304B542712C4370016696B /* DrawerAnimationController.h */,
 				D6304B552712C4370016696B /* DrawerAnimationController.m */,
+				D6304B512712C4190016696B /* DrawerViewController.h */,
+				D6304B522712C4190016696B /* DrawerViewController.m */,
 			);
 			path = Drawer;
-			sourceTree = "<group>";
-		};
-		D6372C1A271F07CF00FFA3F2 /* NX */ = {
-			isa = PBXGroup;
-			children = (
-				D62710E127187911006D49CE /* NXNavigationWrapperView.swift */,
-			);
-			path = NX;
 			sourceTree = "<group>";
 		};
 		D644096B265AC73C00BCE890 /* Supporting Files */ = {
@@ -566,8 +557,8 @@
 		D6D2D8962719187A00ABBE59 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D6D2D897271918B400ABBE59 /* NavigationFeature.swift */,
 				D63D17E7271BC8AC00CD8061 /* NavigationEventItem.swift */,
+				D6D2D897271918B400ABBE59 /* NavigationFeature.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -586,8 +577,8 @@
 			children = (
 				D6D2D8AA27195F3200ABBE59 /* ColorListView.swift */,
 				D6F61A25271D180C00733382 /* ColorScrollView.swift */,
-				D6D2D89B2719253000ABBE59 /* FeatureListView.swift */,
 				D6D2D89D271928AC00ABBE59 /* FeatureDetailView.swift */,
+				D6D2D89B2719253000ABBE59 /* FeatureListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -597,16 +588,16 @@
 			children = (
 				D6D2D8A327193CDD00ABBE59 /* BackgorundColor.swift */,
 				D6D2D8A827195B5000ABBE59 /* BackgorundImage.swift */,
-				D6D2D8AC2719652600ABBE59 /* Transparent.swift */,
 				D6D2D8AE27196EBE00ABBE59 /* BlurNavigationBarLikeSystem.swift */,
-				D6D2D8B0271970BC00ABBE59 /* ShadowColor.swift */,
-				D6D2D8B2271971D300ABBE59 /* ShadowImage.swift */,
 				D6447FCE27205EE200CB64F5 /* CustomBackImage.swift */,
 				D6447FD027205EF100CB64F5 /* CustomBackView.swift */,
 				D6D2D8B42719745900ABBE59 /* FullscreenColor.swift */,
 				D6D2D8B62719763E00ABBE59 /* ListView.swift */,
-				D6D2D8B82719775200ABBE59 /* ScrollViewContent.swift */,
 				D6F7D951271BBAEB0015400D /* Present.swift */,
+				D6D2D8B82719775200ABBE59 /* ScrollViewContent.swift */,
+				D6D2D8B0271970BC00ABBE59 /* ShadowColor.swift */,
+				D6D2D8B2271971D300ABBE59 /* ShadowImage.swift */,
+				D6D2D8AC2719652600ABBE59 /* Transparent.swift */,
 			);
 			path = Basic;
 			sourceTree = "<group>";
@@ -614,13 +605,14 @@
 		D6D2D8BA27197A4800ABBE59 /* Advanced */ = {
 			isa = PBXGroup;
 			children = (
+				D63D17E5271BC7EA00CD8061 /* BackButtonEventIntercept.swift */,
+				D6F61A2C271D5FCC00733382 /* CustomNavigationBar.swift */,
+				D6C8A5132726CF0B00DB82CC /* NavigationRouter.swift */,
 				D6D2D8BB27197A6B00ABBE59 /* EdgePopGestureDisable.swift */,
 				D6D2D8BD27197CC100ABBE59 /* FullscreenPopGestureEnable.swift */,
 				D6786C482719D83B008CA715 /* NavigatioinBarUserInteractionDisable.swift */,
-				D63D17E5271BC7EA00CD8061 /* BackButtonEventIntercept.swift */,
-				D6F61A2C271D5FCC00733382 /* CustomNavigationBar.swift */,
-				D6786C462719CACB008CA715 /* WebView.swift */,
 				D6F61A2A271D5F9000733382 /* UpdateNavigationBar.swift */,
+				D6786C462719CACB008CA715 /* WebView.swift */,
 			);
 			path = Advanced;
 			sourceTree = "<group>";
@@ -739,7 +731,6 @@
 				D6F61A2D271D5FCC00733382 /* CustomNavigationBar.swift in Sources */,
 				D624E9A12654F71200CC96E6 /* FakeNavigationBar.m in Sources */,
 				D6D2D8B72719763E00ABBE59 /* ListView.swift in Sources */,
-				D62710E227187911006D49CE /* NXNavigationWrapperView.swift in Sources */,
 				D624E9802654F71200CC96E6 /* ViewController06_ClickEventHitToBack.m in Sources */,
 				D624E9852654F71200CC96E6 /* ViewController01_DisablePopGesture.m in Sources */,
 				D624E98D2654F71200CC96E6 /* ViewController13_Blur.m in Sources */,
@@ -767,6 +758,7 @@
 				D6C15D1627186E6C00C35990 /* MainTabBarController.swift in Sources */,
 				D6D2D8B92719775200ABBE59 /* ScrollViewContent.swift in Sources */,
 				D6D2D8A427193CDD00ABBE59 /* BackgorundColor.swift in Sources */,
+				D6C8A5142726CF0B00DB82CC /* NavigationRouter.swift in Sources */,
 				D624E9772654F71200CC96E6 /* UITableViewCell+Enabled.m in Sources */,
 				D624E9832654F71200CC96E6 /* ViewController08_WebView.m in Sources */,
 				D624E9962654F71200CC96E6 /* ViewController12_Modal.m in Sources */,

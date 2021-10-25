@@ -21,11 +21,11 @@ struct BackgorundImage: View {
     var body: some View {
         ColorListView()
             .navigationBarTitle(item.title)
-            .useNXNavigationView { configuration in
+            .useNXNavigationView(onPrepareConfiguration: { configuration in
                 configuration.navigationBarAppearance.backgroundImage = UIImage(named: "NavigationBarBackgound88")
                 configuration.navigationBarAppearance.tintColor = .white
                 configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-            }
+            })
     }
 }
 

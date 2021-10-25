@@ -20,10 +20,10 @@ struct BlurNavigationBarLikeSystem: View {
     var body: some View {
         ColorListView()
             .navigationBarTitle(item.title)
-            .useNXNavigationView { configuration in
-                configuration.navigationBarAppearance.backgroundColor = .clear                
+            .useNXNavigationView(onPrepareConfiguration:  { configuration in
+                configuration.navigationBarAppearance.backgroundColor = .clear
                 configuration.viewControllerPreferences.useBlurNavigationBar = true
-            }
+            })
     }
 }
 

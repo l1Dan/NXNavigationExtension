@@ -5,17 +5,21 @@
 //  Created by lidan on 2021/10/17.
 //
 
+import NXNavigationExtension
+
 #if canImport(SwiftUI)
 import SwiftUI
 #endif
 
 @available(iOS 13, *)
 struct BackButtonEventIntercept: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.presentationMode) private var presentationMode;
     
     @State private var navigationPopToViewController = false
     @State private var interactiveType = NavigationEventItemType.all
     @State private var isPresented: Bool = false
+    @State private var context: NXNavigationContext?
     
     private let events = NavigationEventItem.items
     private let item: NavigationFeatureItem
@@ -25,20 +29,37 @@ struct BackButtonEventIntercept: View {
     }
     
     var body: some View {
-        List(events, id:\.self.title) { item in
-            Button {
-                interactiveType = item.type
-            } label: {
-                HStack {
-                    Text("\(item.title)")
-                    if interactiveType == item.type {
-                        Spacer()
-                        Image(systemName: "checkmark")
+        List {
+            Section {
+                ForEach(events, id:\.self.title) { item in
+                    Button {
+                        interactiveType = item.type
+                    } label: {
+                        HStack {
+                            Text("\(item.title)").foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                            if interactiveType == item.type {
+                                Spacer()
+                                Image(systemName: "checkmark")
+                            }
+                        }
                     }
+                }
+            } footer: {
+                GeometryReader { geometry in
+                    Button {
+                        guard let context = context else { return }
+                        NXNavigationRouter.of(context).nx.pop()
+                    } label: {
+                        Text("调用 “nx_pop” 方法返回")
+                            .font(.system(size: 18))
+                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                    }
+                    .frame(width: geometry.size.width, height: 60, alignment: .center)
+                    .overlay(RoundedRectangle(cornerRadius: 10, style: .circular).strokeBorder(Color.blue, lineWidth: 2.0))
                 }
             }
         }
-        .listStyle(.plain)
+        .listStyle(.grouped)
         .navigationBarTitle(item.title)
         .alert(isPresented: $isPresented, content: {
             let cancel = Alert.Button.cancel(Text("取消"))
@@ -51,7 +72,9 @@ struct BackButtonEventIntercept: View {
             configuration.navigationBarAppearance.backgroundImage = UIImage(named: "NavigationBarBackgound88")
             configuration.navigationBarAppearance.tintColor = .white
             configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        } willPopViewController: { interactiveType in
+        } onContextChanged: { context in
+            self.context = context
+        } onWillPopViewController: { interactiveType in
             if self.interactiveType == .all {
                 isPresented = true
                 return false

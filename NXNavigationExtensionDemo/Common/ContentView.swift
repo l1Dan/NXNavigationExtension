@@ -17,10 +17,10 @@ struct ContentView: View {
         NavigationView {
             FeatureListView(sections)
                 .navigationBarTitle("SwiftUI🎉🎉🎉")
-                .useNXNavigationView { configuration in
+                .useNXNavigationView(onPrepareConfiguration: { configuration in
                     configuration.navigationBarAppearance.backgroundColor = .customDarkGray
                     configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-                }
+                })
         }
         .navigationViewStyle(.stack)
     }

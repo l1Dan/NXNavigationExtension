@@ -37,10 +37,10 @@ struct UpdateNavigationBar: View {
         .overlay(RoundedRectangle(cornerRadius: UpdateNavigationBar.buttonWidthAndHeight * 0.5, style: .circular).strokeBorder(Color.blue, lineWidth: 5))
         .navigationBarTitle(item.title)
         .preferredColorScheme(colorScheme)
-        .useNXNavigationView { configuration in
+        .useNXNavigationView(onPrepareConfiguration: { configuration in
             let userInterfaceStyle = configuration.viewControllerPreferences.traitCollection?.userInterfaceStyle ?? .light
             configuration.navigationBarAppearance.backgroundColor = userInterfaceStyle == .dark ? .systemBlue : .systemRed
-        }
+        })
     }
 }
 

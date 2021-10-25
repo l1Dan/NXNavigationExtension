@@ -29,10 +29,10 @@ struct Present: View {
             }, label: {
                 Image(systemName: "xmark")
             }).foregroundColor(colorScheme == .dark ? Color.white : Color.black))
-            .useNXNavigationView { configuration in
+            .useNXNavigationView(onPrepareConfiguration: { configuration in
                 configuration.navigationBarAppearance.backgroundColor = .clear
                 configuration.viewControllerPreferences.useBlurNavigationBar = true
-            }
+            })
     }
 }
 

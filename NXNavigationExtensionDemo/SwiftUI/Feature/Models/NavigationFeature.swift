@@ -25,7 +25,7 @@ class NavigationFeatureItem {
         case edgePopGestureDisable = "禁用边缘手势滑动返回"
         case fullscreenPopGestureEnable = "启用全屏手势滑动返回"
         case backButtonEventIntercept = "导航栏返回事件拦截"
-        case redirectViewController = "重定向任一视图控制器跳转" // Not working
+        case navigationRouter = "SwiftUI 路由管理"
         case customNavigationBar = "完全自定义导航栏"
         case navigatioinBarUserInteractionDisable = "导航栏点击事件穿透到底部视图"
         case dynamicChangeNavigationBarStyle = "滑动改变导航栏样式" // Not working
@@ -92,7 +92,7 @@ class NavigationFeatureSection {
             NavigationFeatureItem(style: .edgePopGestureDisable),
             NavigationFeatureItem(style: .fullscreenPopGestureEnable),
             NavigationFeatureItem(style: .backButtonEventIntercept),
-            NavigationFeatureItem(style: .redirectViewController),
+            NavigationFeatureItem(style: .navigationRouter),
             NavigationFeatureItem(style: .customNavigationBar),
             NavigationFeatureItem(style: .navigatioinBarUserInteractionDisable),
             NavigationFeatureItem(style: .dynamicChangeNavigationBarStyle),
