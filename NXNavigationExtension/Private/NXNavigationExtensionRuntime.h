@@ -64,6 +64,7 @@ NXNavigationExtensionLookupClass(__nullable Class aClass, NSArray<Class> *classe
     return NXNavigationExtensionLookupClass([aClass superclass], classes);
 }
 
+
 @interface NSString (NXNavigationExtension)
 
 + (NSString *)nx_stringByConcat:(id)firstArgv, ...;

@@ -21,15 +21,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NXNavigationExtensionInternal.h"
 #import "NXNavigationVirtualWrapperView.h"
+
+#import "NXNavigationExtensionInternal.h"
+
 #import "UIViewController+NXNavigationExtension.h"
+
 
 @interface NXNavigationVirtualWrapperView ()
 
 @property (nonatomic, weak) __kindof UIViewController *hostingController;
 
 @end
+
 
 @implementation NXNavigationVirtualWrapperView
 

@@ -26,6 +26,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class NXNavigationBar;
+
+
 @interface UIViewController (NXNavigationExtension)
 
 /// 获取当前控制器的 NXNavigationBar
@@ -65,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly, nullable) UIView *nx_backButtonCustomView;
 
 /// The same as NXNavigationBarAppearance `systemBackButtonTitle` instance.
-@property (nonatomic, copy, readonly, nullable) NSString* nx_systemBackButtonTitle;
+@property (nonatomic, copy, readonly, nullable) NSString *nx_systemBackButtonTitle;
 
 /// The same as NXNavigationBarAppearance `backImageInsets` instance.
 @property (nonatomic, assign, readonly) UIEdgeInsets nx_backImageInsets;

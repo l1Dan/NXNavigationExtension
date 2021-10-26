@@ -21,12 +21,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NXNavigationRouter.h"
-#import "NXNavigationExtensionInternal.h"
 #import "NXNavigationVirtualWrapperView.h"
+
+#import "NXNavigationExtensionInternal.h"
+#import "NXNavigationRouter.h"
 
 #import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
+
 
 @interface NXNavigationRouter ()
 
@@ -36,11 +38,12 @@
 
 @end
 
+
 @implementation NXNavigationRouter
 
 #pragma mark - Getter
 
-- (NSMutableDictionary<NSString *,id<NXNavigationContext>> *)contextInfo {
+- (NSMutableDictionary<NSString *, id<NXNavigationContext>> *)contextInfo {
     if (!_contextInfo) {
         _contextInfo = [NSMutableDictionary dictionary];
     }

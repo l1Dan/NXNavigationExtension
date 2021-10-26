@@ -25,6 +25,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 @interface UINavigationController (NXNavigationExtension)
 
 /// The same as NXNavigationControllerPreferences `fullscreenInteractivePopGestureEnabled` instance.
@@ -58,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 执行操作之后调用 `popViewControllerAnimated:` 方法，就可以返回到指定视图控制器类型（`Class`）对应的实例中去
 /// @param aClass 指定需要跳转的视图控制器类型
 /// @param block 如果指定的视图控制器类型没有找到，则会使用回调来获取需要创建的视图控制器实例对象
-- (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController * _Nullable(^__nullable)(void))block;
+- (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController *_Nullable (^__nullable)(void))block;
 
 @end
 

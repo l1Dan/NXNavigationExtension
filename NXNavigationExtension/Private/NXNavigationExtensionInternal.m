@@ -21,11 +21,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import "NXNavigationVirtualWrapperView.h"
+
 #import "NXNavigationExtensionHeaders.h"
 #import "NXNavigationExtensionInternal.h"
 #import "NXNavigationExtensionRuntime.h"
 #import "NXNavigationRouter.h"
-#import "NXNavigationVirtualWrapperView.h"
+
 #import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
 
@@ -131,6 +133,7 @@
 
 @end
 
+
 @implementation NXNavigationObservationDelegate
 
 - (instancetype)initWithObserve:(UIViewController *)observe {
@@ -145,7 +148,7 @@
     [self.observe removeObserver:self forKeyPath:@"frame" context:NULL];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey, id> *)change context:(void *)context {
     if ([keyPath isEqualToString:@"frame"] && [object isKindOfClass:[UIView class]]) {
         if (self.viewControllerDidUpdateFrameHandler) {
             self.viewControllerDidUpdateFrameHandler(self.observe);
@@ -184,13 +187,13 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIScrollView class], @selector(removeFromSuperview), ^(__kindof UIScrollView * _Nonnull selfObject) {
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIScrollView class], @selector(removeFromSuperview), ^(__kindof UIScrollView *_Nonnull selfObject) {
             if (selfObject.nx_navigationBar) {
                 [selfObject.nx_navigationBar removeFromSuperview];
             }
         });
         
-        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIScrollView class], @selector(didMoveToSuperview), ^(__kindof UIScrollView * _Nonnull selfObject) {
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIScrollView class], @selector(didMoveToSuperview), ^(__kindof UIScrollView *_Nonnull selfObject) {
             if (selfObject.nx_navigationBar && selfObject.superview != selfObject.nx_navigationBar) {
                 [selfObject.superview addSubview:selfObject.nx_navigationBar];
                 [selfObject.superview bringSubviewToFront:selfObject.nx_navigationBar];
@@ -208,8 +211,8 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NXNavigationExtensionOverrideImplementation([UINavigationItem class], @selector(setHidesBackButton:animated:), ^id _Nonnull(__unsafe_unretained Class  _Nonnull originClass, SEL  _Nonnull originCMD, IMP  _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
-            return ^void (__unsafe_unretained __kindof UINavigationItem *selfObject, BOOL hidden, BOOL animated){
+        NXNavigationExtensionOverrideImplementation([UINavigationItem class], @selector(setHidesBackButton:animated:), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
+            return ^void(__unsafe_unretained __kindof UINavigationItem *selfObject, BOOL hidden, BOOL animated) {
                 BOOL hidesBackButton = !selfObject.nx_viewController.nx_useSystemBackButton;
                 void (*originSelectorIMP)(UINavigationItem *, SEL, BOOL, BOOL);
                 originSelectorIMP = (void (*)(UINavigationItem *, SEL, BOOL, BOOL))originalIMPProvider();
@@ -217,14 +220,14 @@
             };
         });
         
-        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UINavigationBar class], @selector(layoutSubviews), ^(__kindof UINavigationBar * _Nonnull selfObject) {
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UINavigationBar class], @selector(layoutSubviews), ^(__kindof UINavigationBar *_Nonnull selfObject) {
             UINavigationBarDidUpdatePropertiesHandler didUpdatePropertiesHandler = selfObject.nx_didUpdatePropertiesHandler;
             if (didUpdatePropertiesHandler) {
                 didUpdatePropertiesHandler(selfObject);
             }
         });
         
-        NXNavigationExtensionOverrideImplementation([UINavigationBar class], @selector(setUserInteractionEnabled:), ^id _Nonnull(__unsafe_unretained Class  _Nonnull originClass, SEL  _Nonnull originCMD, IMP  _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
+        NXNavigationExtensionOverrideImplementation([UINavigationBar class], @selector(setUserInteractionEnabled:), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
             return ^(UINavigationBar *selfObject, BOOL userInteractionEnabled) {
                 void (*originSelectorIMP)(id, SEL, BOOL);
                 originSelectorIMP = (void (*)(id, SEL, BOOL))originalIMPProvider();
@@ -237,19 +240,18 @@
             };
         });
         
-        NXNavigationExtensionOverrideImplementation([UINavigationBar class], @selector(setHidden:), ^id _Nonnull(__unsafe_unretained Class  _Nonnull originClass, SEL  _Nonnull originCMD, IMP  _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
+        NXNavigationExtensionOverrideImplementation([UINavigationBar class], @selector(setHidden:), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
             return ^(UINavigationBar *selfObject, BOOL hidden) {
                 void (*originSelectorIMP)(id, SEL, BOOL);
                 originSelectorIMP = (void (*)(id, SEL, BOOL))originalIMPProvider();
                 originSelectorIMP(selfObject, originCMD, hidden);
-
+                
                 UINavigationBarDidUpdatePropertiesHandler didUpdatePropertiesHandler = selfObject.nx_didUpdatePropertiesHandler;
                 if (didUpdatePropertiesHandler) {
                     didUpdatePropertiesHandler(selfObject);
                 }
             };
         });
-        
     });
 }
 
@@ -284,7 +286,7 @@
     return objc_getAssociatedObject(self, _cmd);
 }
 
-- (void)setNx_screenEdgePopGestureDelegate:(NXScreenEdgePopGestureRecognizerDelegate * _Nonnull)nx_screenEdgePopGestureDelegate {
+- (void)setNx_screenEdgePopGestureDelegate:(NXScreenEdgePopGestureRecognizerDelegate *_Nonnull)nx_screenEdgePopGestureDelegate {
     objc_setAssociatedObject(self, @selector(nx_screenEdgePopGestureDelegate), nx_screenEdgePopGestureDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -437,6 +439,7 @@
 
 @end
 
+
 @implementation UIViewController (NXNavigationExtensionInternal)
 
 /// 保证 self.navigationController 不为 nil，不要直接调研 navigationController 方法
@@ -446,7 +449,7 @@
         UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : nil;
         [self.navigationController nx_triggerSystemPopViewController:destinationViewController
                                                      interactiveType:NXNavigationInteractiveTypeBackButtonAction
-                                                             handler:^id _Nonnull(UINavigationController * _Nonnull navigationController) {
+                                                             handler:^id _Nonnull(UINavigationController *_Nonnull navigationController) {
             return [navigationController popViewControllerAnimated:YES];
         }];
     }

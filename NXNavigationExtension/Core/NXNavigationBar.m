@@ -23,6 +23,7 @@
 
 #import "NXNavigationBar.h"
 
+
 @interface NXNavigationBar ()
 
 @property (nonatomic, strong) UIColor *originalBackgroundColor;

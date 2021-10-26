@@ -27,6 +27,7 @@
 #import "NXNavigationConfiguration.h"
 #import "NXNavigationExtensionInternal.h"
 #import "NXNavigationExtensionRuntime.h"
+
 #import "UIViewController+NXNavigationExtension.h"
 
 
@@ -78,13 +79,13 @@
                     
                     // call super
                     BOOL (*originSelectorIMP)(id, SEL, id);
-                    originSelectorIMP = (BOOL (*)(id, SEL, id))originalIMPProvider();
+                    originSelectorIMP = (BOOL(*)(id, SEL, id))originalIMPProvider();
                     return originSelectorIMP(selfObject, originCMD, item);
                 };
             });
         }
         
-        NXNavigationExtensionOverrideImplementation([UINavigationController class], @selector(pushViewController:animated:), ^id _Nonnull(__unsafe_unretained Class  _Nonnull originClass, SEL  _Nonnull originCMD, IMP  _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
+        NXNavigationExtensionOverrideImplementation([UINavigationController class], @selector(pushViewController:animated:), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
             return ^(UINavigationController *selfObject, UIViewController *viewController, BOOL animated) {
                 if (selfObject.nx_useNavigationBar) {
                     viewController.navigationItem.nx_viewController = viewController;
@@ -109,7 +110,7 @@
             };
         });
         
-        NXNavigationExtensionOverrideImplementation([UINavigationController class], @selector(setViewControllers:animated:), ^id _Nonnull(__unsafe_unretained Class  _Nonnull originClass, SEL  _Nonnull originCMD, IMP  _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
+        NXNavigationExtensionOverrideImplementation([UINavigationController class], @selector(setViewControllers:animated:), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
             return ^(UINavigationController *selfObject, NSArray<UIViewController *> *viewControllers, BOOL animated) {
                 if (selfObject.nx_useNavigationBar) {
                     for (UIViewController *viewController in viewControllers) {

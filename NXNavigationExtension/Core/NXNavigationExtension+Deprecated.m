@@ -22,4 +22,3 @@
 // THE SOFTWARE.
 
 #import "NXNavigationExtension+Deprecated.h"
-
