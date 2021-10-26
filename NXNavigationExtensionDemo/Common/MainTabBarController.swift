@@ -25,7 +25,7 @@ class MainTabBarController: UITabBarController {
             if #available(iOS 15.0, *) {
                 tabBar.scrollEdgeAppearance = tabBarAppearance
             }
-            viewControllers = [featureNavigationController, hostingController]
+            viewControllers = [hostingController, featureNavigationController]
         } else {
             // fix: iOS Modal -> Dismiss -> Push, TabBar BUG
             tabBar.isTranslucent = false

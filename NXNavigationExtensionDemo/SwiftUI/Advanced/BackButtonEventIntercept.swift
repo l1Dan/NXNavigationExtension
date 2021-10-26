@@ -45,18 +45,16 @@ struct BackButtonEventIntercept: View {
                     }
                 }
             } footer: {
-                GeometryReader { geometry in
-                    Button {
-                        guard let context = context else { return }
-                        NXNavigationRouter.of(context).nx.pop()
-                    } label: {
-                        Text("调用 “nx_pop” 方法返回")
-                            .font(.system(size: 18))
-                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
-                    }
-                    .frame(width: geometry.size.width, height: 60, alignment: .center)
-                    .overlay(RoundedRectangle(cornerRadius: 10, style: .circular).strokeBorder(Color.blue, lineWidth: 2.0))
+                Button {
+                    guard let context = context else { return }
+                    NXNavigationRouter.of(context).nx.pop()
+                } label: {
+                    Text("调用 “nx_pop” 方法返回")
+                        .font(.system(size: 18))
+                        .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                        .frame(minWidth: 100, maxWidth: .infinity, minHeight: 60)
                 }
+                .overlay(RoundedRectangle(cornerRadius: 10, style: .circular).strokeBorder(Color.blue, lineWidth: 2.0))
             }
         }
         .listStyle(.grouped)

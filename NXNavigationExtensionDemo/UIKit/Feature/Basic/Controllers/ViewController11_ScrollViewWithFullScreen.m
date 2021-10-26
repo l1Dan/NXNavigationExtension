@@ -7,7 +7,7 @@
 
 #import <NXNavigationExtension/NXNavigationExtension.h>
 
-#import "ViewController11_ScrollViewWithFullScreen.h"
+#import "ViewController11_ScrollViewWithFullscreen.h"
 
 @interface ViewController11_ScrollViewWithFullscreen ()
 
