@@ -81,7 +81,7 @@
     return [UIColor clearColor];
 }
 
-- (BOOL)nx_contentViewWithoutNavigtionBar {
+- (BOOL)nx_contentViewWithoutNavigationBar {
     return YES;
 }
 

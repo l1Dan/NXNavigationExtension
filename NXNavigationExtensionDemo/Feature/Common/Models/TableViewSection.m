@@ -54,9 +54,9 @@
         [TableViewItem itemWithTitle:@"设置导航栏底部线条图片" itemType:TableViewItemTypeNavigationBarShadowImage],
         [TableViewItem itemWithTitle:@"自定义返回按钮图片" itemType:TableViewItemTypeNavigationBarCustomBackButtonImage],
         [TableViewItem itemWithTitle:@"自定义返回按钮" itemType:TableViewItemTypeNavigationBarCustomBackButton],
-        [TableViewItem itemWithTitle:@"全屏背景色" itemType:TableViewItemTypeNavigationBarFullscreen],
+        [TableViewItem itemWithTitle:@"全屏背景色" itemType:TableViewItemTypeNavigationBarFullScreen],
         [TableViewItem itemWithTitle:@"UITableViewController" itemType:TableViewItemTypeNavigationBarTableViewController],
-        [TableViewItem itemWithTitle:@"UITableViewController 全屏背景色" itemType:TableViewItemTypeNavigationBarTableViewControllerWithFullscreen],
+        [TableViewItem itemWithTitle:@"UITableViewController 全屏背景色" itemType:TableViewItemTypeNavigationBarTableViewControllerWithFullScreen],
         [TableViewItem itemWithTitle:@"模态窗口" itemType:TableViewItemTypeNavigationBarModal],
         [TableViewItem itemWithTitle:@"自定义导航栏模糊背景" itemType:TableViewItemTypeNavigationBarBlur],
     ];
@@ -65,7 +65,7 @@
     
     NSArray *items2 = @[
         [TableViewItem itemWithTitle:@"禁用边缘手势滑动返回" itemType:TableViewItemTypeNavigationBarDisablePopGesture],
-        [TableViewItem itemWithTitle:@"启用全屏手势滑动返回" itemType:TableViewItemTypeNavigationBarFullscreenPopGesture],
+        [TableViewItem itemWithTitle:@"启用全屏手势滑动返回" itemType:TableViewItemTypeNavigationBarFullScreenPopGesture],
         [TableViewItem itemWithTitle:@"导航栏返回事件拦截" itemType:TableViewItemTypeNavigationBarBackEventIntercept],
         [TableViewItem itemWithTitle:@"重定向任一视图控制器跳转" itemType:TableViewItemTypeNavigationBarRedirectViewController],
         [TableViewItem itemWithTitle:@"完全自定义导航栏" itemType:TableViewItemTypeNavigationBarCustom],

@@ -17,7 +17,7 @@
 
 @property (nonatomic, strong) ViewController06_ScrollView *currentViewController;
 @property (nonatomic, assign) BOOL disableInteractivePopGesture;
-@property (nonatomic, assign) BOOL enableFullscreenInteractivePopGesture;
+@property (nonatomic, assign) BOOL enableFullScreenInteractivePopGesture;
 
 
 @end
@@ -38,13 +38,13 @@
     
     // Step1: if use screen edge pop gesture
 //    self.disableInteractivePopGesture = NO;
-    self.enableFullscreenInteractivePopGesture = YES;
+    self.enableFullScreenInteractivePopGesture = YES;
     
     for (UIScrollView *subview in self.pageViewController.view.subviews) {
         if ([subview isKindOfClass:[UIScrollView class]]) {
             // Step2: if use screen edge pop gesture
 //            [subview.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
-            [subview.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.nx_fullscreenPopGestureRecognizer];
+            [subview.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.nx_fullScreenPopGestureRecognizer];
         }
     }
     
@@ -93,8 +93,8 @@
 //    return self.disableInteractivePopGesture;
 //}
 
-- (BOOL)nx_enableFullscreenInteractivePopGesture {
-    return self.enableFullscreenInteractivePopGesture;
+- (BOOL)nx_enableFullScreenInteractivePopGesture {
+    return self.enableFullScreenInteractivePopGesture;
 }
 
 #pragma mark - Getter & Setter
@@ -153,7 +153,7 @@
     
     // Step4: if use screen edge pop gesture
 //    self.disableInteractivePopGesture = !(pageViewController.viewControllers.firstObject == self.pageViewControllers.firstObject);
-    self.enableFullscreenInteractivePopGesture = (pageViewController.viewControllers.firstObject == self.pageViewControllers.firstObject);
+    self.enableFullScreenInteractivePopGesture = (pageViewController.viewControllers.firstObject == self.pageViewControllers.firstObject);
 }
 
 @end

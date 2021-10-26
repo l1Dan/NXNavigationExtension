@@ -1,5 +1,5 @@
 //
-//  ViewController11_ScrollViewWithFullscreen.m
+//  ViewController11_ScrollViewWithFullScreen.m
 //  NXNavigationExtensionDemo
 //
 //  Created by Leo Lee on 2020/10/26.
@@ -9,11 +9,11 @@
 
 #import "ViewController11_ScrollViewWithFullScreen.h"
 
-@interface ViewController11_ScrollViewWithFullscreen ()
+@interface ViewController11_ScrollViewWithFullScreen ()
 
 @end
 
-@implementation ViewController11_ScrollViewWithFullscreen
+@implementation ViewController11_ScrollViewWithFullScreen
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -39,11 +39,10 @@
 		D624E9902654F71200CC96E6 /* ViewController06_ShadowImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E94B2654F71200CC96E6 /* ViewController06_ShadowImage.m */; };
 		D624E9912654F71200CC96E6 /* ViewController03_Transparent.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E94E2654F71200CC96E6 /* ViewController03_Transparent.m */; };
 		D624E9922654F71200CC96E6 /* ViewController07_CustomBackButtonImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9502654F71200CC96E6 /* ViewController07_CustomBackButtonImage.m */; };
-		D624E9932654F71200CC96E6 /* ViewController11_ScrollViewWithFullscreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9512654F71200CC96E6 /* ViewController11_ScrollViewWithFullscreen.m */; };
+		D624E9932654F71200CC96E6 /* ViewController11_ScrollViewWithFullScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9512654F71200CC96E6 /* ViewController11_ScrollViewWithFullScreen.m */; };
 		D624E9942654F71200CC96E6 /* ViewController08_CustomBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9522654F71200CC96E6 /* ViewController08_CustomBackButton.m */; };
 		D624E9952654F71200CC96E6 /* ViewController02_BackgroundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9552654F71200CC96E6 /* ViewController02_BackgroundImage.m */; };
 		D624E9962654F71200CC96E6 /* ViewController12_Modal.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9562654F71200CC96E6 /* ViewController12_Modal.m */; };
-		D624E9972654F71200CC96E6 /* ViewController09_Fullscreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E95A2654F71200CC96E6 /* ViewController09_Fullscreen.m */; };
 		D624E9982654F71200CC96E6 /* ViewController05_ShadowColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E95B2654F71200CC96E6 /* ViewController05_ShadowColor.m */; };
 		D624E9992654F71200CC96E6 /* EventInterceptModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E95E2654F71200CC96E6 /* EventInterceptModel.m */; };
 		D624E99A2654F71200CC96E6 /* RedirectViewControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D624E9612654F71200CC96E6 /* RedirectViewControllerModel.m */; };
@@ -61,6 +60,7 @@
 		D6513E0926C8004C00B593AC /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6513E0826C8004C00B593AC /* BaseTableViewController.m */; };
 		D65D3B2A271036DB00FCA891 /* ViewController06_ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D65D3B29271036DB00FCA891 /* ViewController06_ScrollView.m */; };
 		D65D3B2D2710372000FCA891 /* ViewController07_PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D65D3B2C2710372000FCA891 /* ViewController07_PageViewController.m */; };
+		D69813F027281A7A00EE01F8 /* ViewController09_FullScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D69813EF27281A7A00EE01F8 /* ViewController09_FullScreen.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -125,7 +125,7 @@
 		D624E93E2654F71200CC96E6 /* ViewController02_Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController02_Test.m; sourceTree = "<group>"; };
 		D624E93F2654F71200CC96E6 /* ViewController03_Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController03_Test.h; sourceTree = "<group>"; };
 		D624E9422654F71200CC96E6 /* ViewController08_CustomBackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController08_CustomBackButton.h; sourceTree = "<group>"; };
-		D624E9432654F71200CC96E6 /* ViewController11_ScrollViewWithFullscreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController11_ScrollViewWithFullscreen.h; sourceTree = "<group>"; };
+		D624E9432654F71200CC96E6 /* ViewController11_ScrollViewWithFullScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController11_ScrollViewWithFullScreen.h; sourceTree = "<group>"; };
 		D624E9442654F71200CC96E6 /* ViewController07_CustomBackButtonImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController07_CustomBackButtonImage.h; sourceTree = "<group>"; };
 		D624E9452654F71200CC96E6 /* ViewController04_LikeSystemBlurNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController04_LikeSystemBlurNavigationBar.m; sourceTree = "<group>"; };
 		D624E9462654F71200CC96E6 /* ViewController12_Modal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController12_Modal.h; sourceTree = "<group>"; };
@@ -135,11 +135,10 @@
 		D624E94A2654F71200CC96E6 /* ViewController01_BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController01_BackgroundColor.m; sourceTree = "<group>"; };
 		D624E94B2654F71200CC96E6 /* ViewController06_ShadowImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController06_ShadowImage.m; sourceTree = "<group>"; };
 		D624E94C2654F71200CC96E6 /* ViewController05_ShadowColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController05_ShadowColor.h; sourceTree = "<group>"; };
-		D624E94D2654F71200CC96E6 /* ViewController09_Fullscreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController09_Fullscreen.h; sourceTree = "<group>"; };
 		D624E94E2654F71200CC96E6 /* ViewController03_Transparent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController03_Transparent.m; sourceTree = "<group>"; };
 		D624E94F2654F71200CC96E6 /* ViewController04_LikeSystemBlurNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController04_LikeSystemBlurNavigationBar.h; sourceTree = "<group>"; };
 		D624E9502654F71200CC96E6 /* ViewController07_CustomBackButtonImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController07_CustomBackButtonImage.m; sourceTree = "<group>"; };
-		D624E9512654F71200CC96E6 /* ViewController11_ScrollViewWithFullscreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController11_ScrollViewWithFullscreen.m; sourceTree = "<group>"; };
+		D624E9512654F71200CC96E6 /* ViewController11_ScrollViewWithFullScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController11_ScrollViewWithFullScreen.m; sourceTree = "<group>"; };
 		D624E9522654F71200CC96E6 /* ViewController08_CustomBackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController08_CustomBackButton.m; sourceTree = "<group>"; };
 		D624E9532654F71200CC96E6 /* ViewController10_ScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController10_ScrollView.h; sourceTree = "<group>"; };
 		D624E9542654F71200CC96E6 /* ViewController13_Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController13_Blur.h; sourceTree = "<group>"; };
@@ -148,7 +147,6 @@
 		D624E9572654F71200CC96E6 /* ViewController06_ShadowImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController06_ShadowImage.h; sourceTree = "<group>"; };
 		D624E9582654F71200CC96E6 /* ViewController01_BackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController01_BackgroundColor.h; sourceTree = "<group>"; };
 		D624E9592654F71200CC96E6 /* ViewController03_Transparent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController03_Transparent.h; sourceTree = "<group>"; };
-		D624E95A2654F71200CC96E6 /* ViewController09_Fullscreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController09_Fullscreen.m; sourceTree = "<group>"; };
 		D624E95B2654F71200CC96E6 /* ViewController05_ShadowColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController05_ShadowColor.m; sourceTree = "<group>"; };
 		D624E95E2654F71200CC96E6 /* EventInterceptModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInterceptModel.m; sourceTree = "<group>"; };
 		D624E95F2654F71200CC96E6 /* RedirectViewControllerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedirectViewControllerModel.h; sourceTree = "<group>"; };
@@ -183,6 +181,8 @@
 		D65D3B2B2710372000FCA891 /* ViewController07_PageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController07_PageViewController.h; sourceTree = "<group>"; };
 		D65D3B2C2710372000FCA891 /* ViewController07_PageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController07_PageViewController.m; sourceTree = "<group>"; };
 		D6771E8826987D6D004A1749 /* NXNavigationExtensionDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NXNavigationExtensionDemo.entitlements; sourceTree = "<group>"; };
+		D69813EE27281A7A00EE01F8 /* ViewController09_FullScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController09_FullScreen.h; sourceTree = "<group>"; };
+		D69813EF27281A7A00EE01F8 /* ViewController09_FullScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController09_FullScreen.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -374,12 +374,12 @@
 				D624E9502654F71200CC96E6 /* ViewController07_CustomBackButtonImage.m */,
 				D624E9422654F71200CC96E6 /* ViewController08_CustomBackButton.h */,
 				D624E9522654F71200CC96E6 /* ViewController08_CustomBackButton.m */,
-				D624E94D2654F71200CC96E6 /* ViewController09_Fullscreen.h */,
-				D624E95A2654F71200CC96E6 /* ViewController09_Fullscreen.m */,
+				D69813EE27281A7A00EE01F8 /* ViewController09_FullScreen.h */,
+				D69813EF27281A7A00EE01F8 /* ViewController09_FullScreen.m */,
 				D624E9532654F71200CC96E6 /* ViewController10_ScrollView.h */,
 				D624E9492654F71200CC96E6 /* ViewController10_ScrollView.m */,
-				D624E9432654F71200CC96E6 /* ViewController11_ScrollViewWithFullscreen.h */,
-				D624E9512654F71200CC96E6 /* ViewController11_ScrollViewWithFullscreen.m */,
+				D624E9432654F71200CC96E6 /* ViewController11_ScrollViewWithFullScreen.h */,
+				D624E9512654F71200CC96E6 /* ViewController11_ScrollViewWithFullScreen.m */,
 				D624E9462654F71200CC96E6 /* ViewController12_Modal.h */,
 				D624E9562654F71200CC96E6 /* ViewController12_Modal.m */,
 				D624E9542654F71200CC96E6 /* ViewController13_Blur.h */,
@@ -552,7 +552,7 @@
 				D624E9902654F71200CC96E6 /* ViewController06_ShadowImage.m in Sources */,
 				D624E9912654F71200CC96E6 /* ViewController03_Transparent.m in Sources */,
 				D624E9732654F71200CC96E6 /* BaseSplitViewController.m in Sources */,
-				D624E9932654F71200CC96E6 /* ViewController11_ScrollViewWithFullscreen.m in Sources */,
+				D624E9932654F71200CC96E6 /* ViewController11_ScrollViewWithFullScreen.m in Sources */,
 				D624E9862654F71200CC96E6 /* ViewController07_ScrollChangeNavigationBar.m in Sources */,
 				D6304B562712C4370016696B /* DrawerAnimationController.m in Sources */,
 				D624E9742654F71200CC96E6 /* BaseViewController.m in Sources */,
@@ -575,7 +575,6 @@
 				D624E9802654F71200CC96E6 /* ViewController06_ClickEventHitToBack.m in Sources */,
 				D624E9852654F71200CC96E6 /* ViewController01_DisablePopGesture.m in Sources */,
 				D624E98D2654F71200CC96E6 /* ViewController13_Blur.m in Sources */,
-				D624E9972654F71200CC96E6 /* ViewController09_Fullscreen.m in Sources */,
 				D624E98C2654F71200CC96E6 /* ViewController04_LikeSystemBlurNavigationBar.m in Sources */,
 				D624E9762654F71200CC96E6 /* UIDevice+Additions.m in Sources */,
 				D624E9782654F71200CC96E6 /* UIColor+RandomColor.m in Sources */,
@@ -584,6 +583,7 @@
 				D624E9722654F71200CC96E6 /* CustomTableViewController.m in Sources */,
 				D624E9872654F71200CC96E6 /* ViewController05_Test.m in Sources */,
 				D624E97C2654F71200CC96E6 /* main.m in Sources */,
+				D69813F027281A7A00EE01F8 /* ViewController09_FullScreen.m in Sources */,
 				D6304B65271347B60016696B /* DrawAnimationTransitionDelegate.m in Sources */,
 				D624E99C2654F71200CC96E6 /* HierarchyViewController.m in Sources */,
 				D624E9992654F71200CC96E6 /* EventInterceptModel.m in Sources */,
