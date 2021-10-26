@@ -534,7 +534,9 @@
             [self.navigationController nx_adjustmentSystemBackButtonForViewController:self inViewControllers:previousViewControllers];
         }
         
-        [self nx_configureNavigationBarWithNavigationController:self.navigationController];
+        if (self.navigationController.viewControllers.firstObject != self) {
+            [self nx_configureNavigationBarWithNavigationController:self.navigationController];            
+        }
         // 重新检查全屏返回手势是否动态修改
         if ([self.navigationController nx_checkFullscreenInteractivePopGestureEnabledWithViewController:self]) {
             [self.navigationController nx_configureFullscreenPopGesture];
