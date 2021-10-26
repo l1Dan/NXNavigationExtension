@@ -1,5 +1,10 @@
 # CHANGELOG.md
 
+## 3.6.4
+
+- 单词拼写错误修正：fullscreen -> fullScreen, Fullscreen -> FullScreen, contentViewWithoutNavigtionBar -> contentViewWithoutNavigationBar
+- 修复调用 nx_setNeedsNavigationBarAppearanceUpdate 更新导航栏时会修改 rootViewController leftItem 的问题
+
 ## 3.6.3
 
 - 修复 UIViewController view frame 改变时 NXNavigationBar frame 不更新的问题
@@ -99,7 +104,7 @@ NXNavigationBar 可以跟随系统导航栏的显示隐藏。虽然不推荐使�
 - 过期: `containerViewEdgeInsets` 属性，推荐使用 `contentViewEdgeInsets` 属性；
 - 过期: `containerView` 属性，推荐使用 `contentView` 属性；
 - 过期: `visualEffectView` 属性，推荐使用 `backgroundEffectView` 属性；
-- 过期: `nx_containerViewWithoutNavigationBar` 属性，推荐使用 `nx_contentViewWithoutNavigationBar` 属性；
+- 过期: `nx_containerViewWithoutNavigtionBar` 属性，推荐使用 `nx_contentViewWithoutNavigationBar` 属性；
 - 过期: `addContainerViewSubview:` 方法，推荐使用 `contentView addSubview:` 方法；
 - 过期: `setContainerViewEdgeInsets:` 方法，推荐使用 `contentViewEdgeInsets` 属性；
 - 过期: `appearanceFromRegisterNavigationControllerClass:` 方法，推荐使用 `appearanceFromRegisterNavigationController:` 方法；
