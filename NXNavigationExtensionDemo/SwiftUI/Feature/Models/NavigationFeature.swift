@@ -17,13 +17,13 @@ class NavigationFeatureItem {
         case shadowImage = "设置导航栏底部线条图片"
         case customBackImage = "自定义返回按钮图片"
         case customBackView = "自定义返回按钮"
-        case fullscreenColor = "全屏背景色"
+        case fullScreenColor = "全屏背景色"
         case listView = "List" // Not working
         case scrollViewContent = "ScrollView"
         case present = "Present ViewController"
         
         case edgePopGestureDisable = "禁用边缘手势滑动返回"
-        case fullscreenPopGestureEnable = "启用全屏手势滑动返回"
+        case fullScreenPopGestureEnable = "启用全屏手势滑动返回"
         case backButtonEventIntercept = "导航栏返回事件拦截"
         case navigationRouter = "SwiftUI 路由管理"
         case customNavigationBar = "完全自定义导航栏"
@@ -80,7 +80,7 @@ class NavigationFeatureSection {
             NavigationFeatureItem(style: .shadowImage),
             NavigationFeatureItem(style: .customBackImage),
             NavigationFeatureItem(style: .customBackView),
-            NavigationFeatureItem(style: .fullscreenColor),
+            NavigationFeatureItem(style: .fullScreenColor),
 //            NavigationFeatureItem(style: .listView),
             NavigationFeatureItem(style: .scrollViewContent),
             NavigationFeatureItem(style: .present),
@@ -90,7 +90,7 @@ class NavigationFeatureSection {
         
         let advancedItems = [
             NavigationFeatureItem(style: .edgePopGestureDisable),
-            NavigationFeatureItem(style: .fullscreenPopGestureEnable),
+            NavigationFeatureItem(style: .fullScreenPopGestureEnable),
             NavigationFeatureItem(style: .backButtonEventIntercept),
             NavigationFeatureItem(style: .navigationRouter),
             NavigationFeatureItem(style: .customNavigationBar),

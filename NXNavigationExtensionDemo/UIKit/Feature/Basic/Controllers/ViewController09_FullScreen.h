@@ -1,5 +1,5 @@
 //
-//  ViewController09_Fullscreen.h
+//  ViewController09_FullScreen.h
 //  NXNavigationExtensionDemo
 //
 //  Created by Leo Lee on 2020/10/26.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ViewController09_Fullscreen : BaseViewController
+@interface ViewController09_FullScreen : BaseViewController
 
 @end
 

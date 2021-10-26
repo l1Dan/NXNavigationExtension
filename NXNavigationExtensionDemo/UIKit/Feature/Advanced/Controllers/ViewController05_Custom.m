@@ -84,7 +84,7 @@
 }
 
 // 点击导航栏控件事件可以由 contentView 响应
-- (BOOL)nx_contentViewWithoutNavigtionBar {
+- (BOOL)nx_contentViewWithoutNavigationBar {
     return YES;
 }
 

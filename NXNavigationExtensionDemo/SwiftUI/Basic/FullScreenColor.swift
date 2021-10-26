@@ -1,5 +1,5 @@
 //
-//  FullscreenColor.swift
+//  FullScreenColor.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/15.
@@ -10,7 +10,7 @@ import SwiftUI
 #endif
 
 @available(iOS 13, *)
-struct FullscreenColor: View {
+struct FullScreenColor: View {
     private let item: NavigationFeatureItem
     
     init(_ item: NavigationFeatureItem) {
@@ -35,10 +35,10 @@ struct FullscreenColor: View {
 }
 
 @available(iOS 13, *)
-struct FullscreenColor_Previews: PreviewProvider {
+struct FullScreenColor_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FullscreenColor(NavigationFeatureItem(style: .fullscreenColor))
+            FullScreenColor(NavigationFeatureItem(style: .fullScreenColor))
         }
     }
 }

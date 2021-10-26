@@ -20,7 +20,7 @@ struct NavigatioinBarUserInteractionDisable: View {
     var body: some View {
         ColorScrollView(true)
             .useNXNavigationView(onPrepareConfiguration: { configuration in
-                configuration.viewControllerPreferences.enableFullscreenInteractivePopGesture = true
+                configuration.viewControllerPreferences.enableFullScreenInteractivePopGesture = true
                 configuration.viewControllerPreferences.translucentNavigationBar = true
             })
     }

@@ -36,8 +36,8 @@ struct FeatureDetailView: View {
             return AnyView(CustomBackImage(item))
         case .customBackView:
             return AnyView(CustomBackView(item))
-        case .fullscreenColor:
-            return AnyView(FullscreenColor(item))
+        case .fullScreenColor:
+            return AnyView(FullScreenColor(item))
         case .listView:
             return AnyView(ListView(item))
         case .scrollViewContent:
@@ -46,8 +46,8 @@ struct FeatureDetailView: View {
             // Advanced
         case .edgePopGestureDisable:
             return AnyView(EdgePopGestureDisable(item))
-        case .fullscreenPopGestureEnable:
-            return AnyView(FullscreenPopGestureEnable(item))
+        case .fullScreenPopGestureEnable:
+            return AnyView(FullScreenPopGestureEnable(item))
         case .navigatioinBarUserInteractionDisable:
             return AnyView(NavigatioinBarUserInteractionDisable(item))
         case .backButtonEventIntercept:

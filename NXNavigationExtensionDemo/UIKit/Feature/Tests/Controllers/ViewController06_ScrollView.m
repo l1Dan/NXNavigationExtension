@@ -16,7 +16,7 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 
 @property (nonatomic, assign) BOOL disableInteractivePopGesture;
-@property (nonatomic, assign) BOOL enableFullscreenInteractivePopGesture;
+@property (nonatomic, assign) BOOL enableFullScreenInteractivePopGesture;
 
 @end
 
@@ -36,7 +36,7 @@
     
     // Step1: if use screen edge pop gesture
 //    self.disableInteractivePopGesture = NO;
-    self.enableFullscreenInteractivePopGesture = YES;
+    self.enableFullScreenInteractivePopGesture = YES;
 
     [self addViewContent];
     [self addViewConstraints];
@@ -49,7 +49,7 @@
     if (self.navigationController) {
         // Step2: if use screen edge pop gesture
 //        [self.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
-        [self.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.nx_fullscreenPopGestureRecognizer];
+        [self.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.nx_fullScreenPopGestureRecognizer];
     }
 }
 
@@ -101,8 +101,8 @@
 //    return self.disableInteractivePopGesture;
 //}
 
-- (BOOL)nx_enableFullscreenInteractivePopGesture {
-    return self.enableFullscreenInteractivePopGesture;
+- (BOOL)nx_enableFullScreenInteractivePopGesture {
+    return self.enableFullScreenInteractivePopGesture;
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -111,11 +111,11 @@
     if (scrollView.contentOffset.x <= 0) {
         // Step4: if use screen edge pop gesture
 //        self.disableInteractivePopGesture = NO;
-        self.enableFullscreenInteractivePopGesture = YES;
+        self.enableFullScreenInteractivePopGesture = YES;
     } else {
         // Step5: if use screen edge pop gesture
 //        self.disableInteractivePopGesture = YES;
-        self.enableFullscreenInteractivePopGesture = NO;
+        self.enableFullScreenInteractivePopGesture = NO;
     }
 }
 
