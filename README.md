@@ -289,7 +289,7 @@ configuration.navigationBarAppearance.tintColor = [UIColor redColor];
 - 局部有效（在所处页面设置）
 
 ```objc
-- (BOOL)nx_enableFullscreenInteractivePopGesture {
+- (BOOL)nx_enableFullScreenInteractivePopGesture {
     return YES;
 }
 ```
@@ -298,7 +298,7 @@ configuration.navigationBarAppearance.tintColor = [UIColor redColor];
 
 ```objc
 NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
-configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEnabled = YES;
+configuration.navigationControllerPreferences.fullScreenInteractivePopGestureEnabled = YES;
 ```
 
 #### 导航栏返回事件拦截
@@ -394,7 +394,7 @@ configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEna
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
 
 ```objc
-- (BOOL)nx_contentViewWithoutNavigtionBar {
+- (BOOL)nx_contentViewWithoutNavigationBar {
     return YES;
 }
 ```
