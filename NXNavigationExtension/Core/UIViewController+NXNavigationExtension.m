@@ -491,8 +491,9 @@
             NSArray<__kindof UIViewController *> *previousViewControllers = [self.navigationController.viewControllers subarrayWithRange:NSMakeRange(0, length)];
             [self.navigationController nx_adjustmentSystemBackButtonForViewController:self inViewControllers:previousViewControllers];
         }
-        
-        [self nx_configureNavigationBarWithNavigationController:self.navigationController];
+        if (self.navigationController.viewControllers.firstObject != self) {
+            [self nx_configureNavigationBarWithNavigationController:self.navigationController];
+        }
     }
     [self nx_updateNavigationBarAppearance];
     [self nx_updateNavigationBarHierarchy];
