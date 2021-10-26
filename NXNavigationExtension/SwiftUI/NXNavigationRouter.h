@@ -46,6 +46,8 @@ API_AVAILABLE(ios(13.0), tvos(13.0))
 
 - (void)removeContext:(id<NXNavigationContext>)context;
 
+- (void)setNeedsNavigationBarAppearanceUpdate;
+
 - (BOOL)popWithRouteName:(nullable NSString *)routeName animated:(BOOL)animated NS_REFINED_FOR_SWIFT;
 
 @end

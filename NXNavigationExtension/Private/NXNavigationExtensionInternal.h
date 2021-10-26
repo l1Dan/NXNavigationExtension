@@ -1,5 +1,5 @@
 //
-// NXNavigationExtensionPrivate.h
+// NXNavigationExtensionInternal.h
 //
 // Copyright (c) 2020 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
 //
@@ -71,7 +71,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 @end
 
 
-@interface UINavigationItem (NXNavigationExtensionPrivate)
+@interface UINavigationItem (NXNavigationExtensionInternal)
 
 /// 关联 navigationItem 所使用的 viewController，用于监听中途返回按钮被修改的情况
 @property (nonatomic, weak, nullable) UIViewController *nx_viewController;
@@ -79,7 +79,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 @end
 
 
-@interface UIScrollView (NXNavigationExtensionPrivate)
+@interface UIScrollView (NXNavigationExtensionInternal)
 
 /// UIViewController 中 scrollView 所引用的 NXNavigationBar
 @property (nonatomic, strong, nullable) NXNavigationBar *nx_navigationBar;
@@ -87,7 +87,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 @end
 
 
-@interface UINavigationBar (NXNavigationExtensionPrivate)
+@interface UINavigationBar (NXNavigationExtensionInternal)
 
 /// UINavigatoinBar layoutSubviews 时调用
 @property (nonatomic, copy, nullable) UINavigationBarDidUpdatePropertiesHandler nx_didUpdatePropertiesHandler;
@@ -98,7 +98,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 @end
 
 
-@interface UINavigationController (NXNavigationExtensionPrivate)
+@interface UINavigationController (NXNavigationExtensionInternal)
 
 /// 边缘返回手势代理对象
 @property (nonatomic, strong, readonly) NXScreenEdgePopGestureRecognizerDelegate *nx_screenEdgePopGestureDelegate;
@@ -143,7 +143,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 @end
 
 
-@interface UIViewController (NXNavigationExtensionPrivate)
+@interface UIViewController (NXNavigationExtensionInternal)
 
 /// For SwiftUI，返回页面时交互事件代理
 @property (nonatomic, weak, nullable) id<NXNavigationInteractable> nx_navigationInteractDelegate;

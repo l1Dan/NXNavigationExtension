@@ -1,5 +1,5 @@
 //
-// NXNavigationExtensionPrivate.m
+// NXNavigationExtensionInternal.m
 //
 // Copyright (c) 2020 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
 //
@@ -22,7 +22,7 @@
 // THE SOFTWARE.
 
 #import "NXNavigationExtensionHeaders.h"
-#import "NXNavigationExtensionPrivate.h"
+#import "NXNavigationExtensionInternal.h"
 #import "NXNavigationExtensionRuntime.h"
 #import "NXNavigationRouter.h"
 #import "NXNavigationVirtualWrapperView.h"
@@ -158,7 +158,7 @@
 @end
 
 
-@implementation UINavigationItem (NXNavigationExtensionPrivate)
+@implementation UINavigationItem (NXNavigationExtensionInternal)
 
 - (UIViewController *)nx_viewController {
     return objc_getAssociatedObject(self, _cmd);
@@ -171,7 +171,7 @@
 @end
 
 
-@implementation UIScrollView (NXNavigationExtensionPrivate)
+@implementation UIScrollView (NXNavigationExtensionInternal)
 
 - (NXNavigationBar *)nx_navigationBar {
     return objc_getAssociatedObject(self, _cmd);
@@ -203,7 +203,7 @@
 @end
 
 
-@implementation UINavigationBar (NXNavigationExtensionPrivate)
+@implementation UINavigationBar (NXNavigationExtensionInternal)
 
 + (void)load {
     static dispatch_once_t onceToken;
@@ -278,7 +278,7 @@
 @end
 
 
-@implementation UINavigationController (NXNavigationExtensionPrivate)
+@implementation UINavigationController (NXNavigationExtensionInternal)
 
 - (NXScreenEdgePopGestureRecognizerDelegate *)nx_screenEdgePopGestureDelegate {
     return objc_getAssociatedObject(self, _cmd);
@@ -430,14 +430,14 @@
 @end
 
 
-@interface UIViewController (NXNavigationExtensionPrivate)
+@interface UIViewController (NXNavigationExtensionInternal)
 
 /// 记录自定义返回按钮对象，用于后续对比是否为同一个对象
 @property (nonatomic, strong) UIBarButtonItem *nx_customBackButtonItem;
 
 @end
 
-@implementation UIViewController (NXNavigationExtensionPrivate)
+@implementation UIViewController (NXNavigationExtensionInternal)
 
 /// 保证 self.navigationController 不为 nil，不要直接调研 navigationController 方法
 - (void)nx_triggerSystemPopViewController {

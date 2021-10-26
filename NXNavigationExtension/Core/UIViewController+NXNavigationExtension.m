@@ -23,9 +23,9 @@
 
 #import <objc/runtime.h>
 
-#import "NXNavigationConfiguration.h"
+#import "NXNavigationExtensionHeaders.h"
 #import "NXNavigationVirtualWrapperView.h"
-#import "NXNavigationExtensionPrivate.h"
+#import "NXNavigationExtensionInternal.h"
 #import "NXNavigationExtensionRuntime.h"
 #import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"

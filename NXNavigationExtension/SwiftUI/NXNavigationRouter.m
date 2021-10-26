@@ -22,20 +22,16 @@
 // THE SOFTWARE.
 
 #import "NXNavigationRouter.h"
+#import "NXNavigationExtensionInternal.h"
+#import "NXNavigationVirtualWrapperView.h"
+
 #import "UINavigationController+NXNavigationExtension.h"
-
-@interface UINavigationController (NXNavigationExtensionPrivate)
-
-@property (nonatomic, strong, readonly) NXNavigationRouter *nx_navigationRouter API_AVAILABLE(ios(13.0));
-
-@end
-
+#import "UIViewController+NXNavigationExtension.h"
 
 @interface NXNavigationRouter ()
 
 @property (nonatomic, strong) NSMutableDictionary<NSString *, id<NXNavigationContext>> *contextInfo;
-@property (nonatomic, weak) id<NXNavigationContext> currentContext;
-@property (nonatomic, weak) UINavigationController *navigationController;
+@property (nonatomic, weak) id<NXNavigationContext> context;
 @property (nonatomic, assign) BOOL callNXPopMethod;
 
 @end
@@ -92,11 +88,16 @@
 }
 
 - (BOOL)popWithAnimated:(BOOL)animated {
+    UINavigationController *navigationController = self.context.hostingController.navigationController;
+    if (!navigationController) {
+        return NO;
+    }
+    
     if (self.callNXPopMethod) {
         self.callNXPopMethod = NO;
-        return [self.navigationController nx_popViewControllerAnimated:animated] ? YES : NO;
+        return [navigationController nx_popViewControllerAnimated:animated] ? YES : NO;
     } else {
-        return [self.navigationController popViewControllerAnimated:animated] ? YES : NO;
+        return [navigationController popViewControllerAnimated:animated] ? YES : NO;
     }
     return NO;
 }
@@ -105,16 +106,26 @@
 
 + (instancetype)of:(id<NXNavigationContext>)context {
     NXNavigationRouter *navigationRouter = context.hostingController.navigationController.nx_navigationRouter;
-    navigationRouter.currentContext = context;
-    navigationRouter.navigationController = context.hostingController.navigationController;
+    navigationRouter.context = context;
     return navigationRouter;
 }
 
+- (void)setNeedsNavigationBarAppearanceUpdate {
+    __kindof UIViewController *hostingController = self.context.hostingController;
+    if (!hostingController) return;
+    
+    NXNavigationVirtualWrapperView *view = hostingController.nx_navigationVirtualWrapperView;
+    if (view && view.prepareConfigurationCallback && hostingController.nx_configuration) {
+        view.prepareConfigurationCallback(hostingController, hostingController.nx_configuration);
+        [hostingController nx_setNeedsNavigationBarAppearanceUpdate];
+    }
+}
+
 - (BOOL)popWithRouteName:(NSString *)routeName animated:(BOOL)animated {
-    if (self.currentContext &&
-        self.currentContext.routeName &&
-        self.currentContext.routeName.length &&
-        [self.currentContext.routeName isEqualToString:routeName]) {
+    if (self.context &&
+        self.context.routeName &&
+        self.context.routeName.length &&
+        [self.context.routeName isEqualToString:routeName]) {
         return NO;
     }
     
@@ -123,12 +134,17 @@
         return [self popWithAnimated:animated];
     }
     
+    UINavigationController *navigationController = self.context.hostingController.navigationController;
+    if (!navigationController) {
+        return NO;
+    }
+    
     if ([routeName isEqualToString:@"/"]) {
         if (self.callNXPopMethod) {
             self.callNXPopMethod = NO;
-            return [self.navigationController nx_popToRootViewControllerAnimated:animated] ? YES : NO;
+            return [navigationController nx_popToRootViewControllerAnimated:animated] ? YES : NO;
         } else {
-            return [self.navigationController popToRootViewControllerAnimated:animated] ? YES : NO;
+            return [navigationController popToRootViewControllerAnimated:animated] ? YES : NO;
         }
     }
     
@@ -136,9 +152,9 @@
     if (context && context.hostingController) {
         if (self.callNXPopMethod) {
             self.callNXPopMethod = NO;
-            return [self.navigationController nx_popToViewController:context.hostingController animated:animated] ? YES : NO;
+            return [navigationController nx_popToViewController:context.hostingController animated:animated] ? YES : NO;
         } else {
-            return [self.navigationController popToViewController:context.hostingController animated:animated] ? YES : NO;
+            return [navigationController popToViewController:context.hostingController animated:animated] ? YES : NO;
         }
     }
     return NO;

@@ -38,16 +38,14 @@ public class NXNavigationVirtualView: NXNavigationVirtualWrapperView {
         isUserInteractionEnabled = false
     }
     
-    @available(iOS, unavailable)
-    @available(macOS, unavailable)
-    @available(watchOS, unavailable)
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     public override func nx_navigationController(_ navigationController: UINavigationController,
-                                          willPop viewController: UIViewController,
-                                          interactiveType: NXNavigationInteractiveType) -> Bool {
+                                                 willPop viewController: UIViewController,
+                                                 interactiveType: NXNavigationInteractiveType) -> Bool {
         return self.onWillPopViewController?(interactiveType) ?? true
     }
 }

@@ -21,8 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import "NXNavigationExtensionInternal.h"
 #import "NXNavigationVirtualWrapperView.h"
-#import "NXNavigationExtensionPrivate.h"
 #import "UIViewController+NXNavigationExtension.h"
 
 @interface NXNavigationVirtualWrapperView ()

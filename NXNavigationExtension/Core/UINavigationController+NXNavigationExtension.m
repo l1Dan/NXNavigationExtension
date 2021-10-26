@@ -25,7 +25,7 @@
 // https://github.com/l1Dan/NSLNavigationSolution
 
 #import "NXNavigationConfiguration.h"
-#import "NXNavigationExtensionPrivate.h"
+#import "NXNavigationExtensionInternal.h"
 #import "NXNavigationExtensionRuntime.h"
 #import "UIViewController+NXNavigationExtension.h"
 
