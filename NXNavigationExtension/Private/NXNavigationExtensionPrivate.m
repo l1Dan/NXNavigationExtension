@@ -61,7 +61,7 @@
 @end
 
 
-@implementation NXFullscreenPopGestureRecognizerDelegate
+@implementation NXFullScreenPopGestureRecognizerDelegate
 
 - (instancetype)initWithNavigationController:(UINavigationController *)navigationController {
     if (self = [super init]) {
@@ -78,7 +78,7 @@
     
     // Ignore when the active view controller doesn't allow interactive pop.
     UIViewController *topViewController = self.navigationController.viewControllers.lastObject;
-    if (![self.navigationController nx_checkFullscreenInteractivePopGestureEnabledWithViewController:topViewController]) {
+    if (![self.navigationController nx_checkFullScreenInteractivePopGestureEnabledWithViewController:topViewController]) {
         return NO;
     }
     
@@ -257,12 +257,12 @@
     objc_setAssociatedObject(self, @selector(nx_screenEdgePopGestureDelegate), nx_screenEdgePopGestureDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NXFullscreenPopGestureRecognizerDelegate *)nx_fullscreenPopGestureDelegate {
-    NXFullscreenPopGestureRecognizerDelegate *delegate = objc_getAssociatedObject(self, _cmd);
-    if (delegate && [delegate isKindOfClass:[NXFullscreenPopGestureRecognizerDelegate class]]) {
+- (NXFullScreenPopGestureRecognizerDelegate *)nx_fullScreenPopGestureDelegate {
+    NXFullScreenPopGestureRecognizerDelegate *delegate = objc_getAssociatedObject(self, _cmd);
+    if (delegate && [delegate isKindOfClass:[NXFullScreenPopGestureRecognizerDelegate class]]) {
         return delegate;
     }
-    delegate = [[NXFullscreenPopGestureRecognizerDelegate alloc] initWithNavigationController:self];
+    delegate = [[NXFullScreenPopGestureRecognizerDelegate alloc] initWithNavigationController:self];
     objc_setAssociatedObject(self, _cmd, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return delegate;
 }
@@ -319,12 +319,12 @@
     return nil;
 }
 
-- (BOOL)nx_checkFullscreenInteractivePopGestureEnabledWithViewController:(__kindof UIViewController *)viewController {
-    if (viewController.nx_enableFullscreenInteractivePopGesture) {
-        return viewController.nx_enableFullscreenInteractivePopGesture;
+- (BOOL)nx_checkFullScreenInteractivePopGestureEnabledWithViewController:(__kindof UIViewController *)viewController {
+    if (viewController.nx_enableFullScreenInteractivePopGesture) {
+        return viewController.nx_enableFullScreenInteractivePopGesture;
     }
-    if (self.nx_fullscreenInteractivePopGestureEnabled) {
-        return self.nx_fullscreenInteractivePopGestureEnabled;
+    if (self.nx_fullScreenInteractivePopGestureEnabled) {
+        return self.nx_fullScreenInteractivePopGestureEnabled;
     }
     return NO;
 }

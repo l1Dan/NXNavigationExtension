@@ -71,6 +71,41 @@
 
 @end
 
+
+@implementation NXNavigationControllerPreferences (NXNavigationExtensionDeprecated)
+
+- (BOOL)fullscreenInteractivePopGestureEnabled {
+    return self.fullScreenInteractivePopGestureEnabled;
+}
+
+- (void)setFullscreenInteractivePopGestureEnabled:(BOOL)fullscreenInteractivePopGestureEnabled {
+    self.fullScreenInteractivePopGestureEnabled = fullscreenInteractivePopGestureEnabled;
+}
+
+@end
+
+
+@implementation NXViewControllerPreferences (NXNavigationExtensionDeprecated)
+
+- (BOOL)enableFullscreenInteractivePopGesture {
+    return self.enableFullScreenInteractivePopGesture;
+}
+
+- (void)setEnableFullscreenInteractivePopGesture:(BOOL)enableFullscreenInteractivePopGesture {
+    self.enableFullScreenInteractivePopGesture = enableFullscreenInteractivePopGesture;
+}
+
+- (BOOL)contentViewWithoutNavigtionBar {
+    return self.contentViewWithoutNavigationBar;
+}
+
+- (void)setContentViewWithoutNavigtionBar:(BOOL)contentViewWithoutNavigtionBar {
+    self.contentViewWithoutNavigtionBar = contentViewWithoutNavigtionBar;
+}
+
+@end
+
+
 @interface NXNavigationBar ()
 
 @property (nonatomic, assign) BOOL blurEffectEnabled;
@@ -153,7 +188,15 @@
 
 @implementation UINavigationController (NXNavigationExtensionDeprecated)
 
-+ (BOOL)nx_fullscreenPopGestureEnabled {
+- (BOOL)nx_fullscreenInteractivePopGestureEnabled {
+    return self.nx_fullScreenInteractivePopGestureEnabled;
+}
+
+- (UIPanGestureRecognizer *)nx_fullscreenPopGestureRecognizer {
+    return self.nx_fullScreenPopGestureRecognizer;
+}
+
++ (BOOL)nx_fullScreenPopGestureEnabled {
     NSNumber *number = objc_getAssociatedObject(self, _cmd);
     if (number && [number isKindOfClass:[NSNumber class]]) {
         return [number boolValue];
@@ -161,8 +204,8 @@
     return NO;
 }
 
-+ (void)setNx_fullscreenPopGestureEnabled:(BOOL)nx_fullscreenPopGestureEnabled {
-    objc_setAssociatedObject(self, @selector(nx_fullscreenPopGestureEnabled), @(nx_fullscreenPopGestureEnabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
++ (void)setNx_fullScreenPopGestureEnabled:(BOOL)nx_fullScreenPopGestureEnabled {
+    objc_setAssociatedObject(self, @selector(nx_fullScreenPopGestureEnabled), @(nx_fullScreenPopGestureEnabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)nx_triggerSystemBackButtonHandler {
@@ -194,20 +237,24 @@
     return [self nx_useBlurNavigationBar];
 }
 
-- (BOOL)nx_enableFullScreenInteractivePopGesture {
-    return [self nx_enableFullscreenInteractivePopGesture];
-}
-
 - (BOOL)nx_hidesNavigationBar {
     return [self nx_translucentNavigationBar];
 }
 
 - (BOOL)nx_containerViewWithoutNavigtionBar {
-    return [self nx_contentViewWithoutNavigtionBar];
+    return [self nx_contentViewWithoutNavigationBar];
 }
 
 - (BOOL)nx_backButtonMenuEnabled {
     return [self nx_useSystemBackButton];
+}
+
+- (BOOL)nx_enableFullscreenInteractivePopGesture {
+    return self.nx_enableFullScreenInteractivePopGesture;
+}
+
+- (BOOL)nx_contentViewWithoutNavigtionBar {
+    return self.nx_contentViewWithoutNavigationBar;
 }
 
 @end

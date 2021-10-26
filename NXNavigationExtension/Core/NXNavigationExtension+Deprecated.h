@@ -60,6 +60,22 @@ API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protoco
 
 @end
 
+@interface NXNavigationControllerPreferences (NXNavigationExtensionDeprecated)
+
+@property (nonatomic, assign) BOOL fullscreenInteractivePopGestureEnabled API_DEPRECATED("Use fullScreenInteractivePopGestureEnabled instead.", ios(2.0, 2.0));
+
+@end
+
+
+@interface NXViewControllerPreferences (NXNavigationExtensionDeprecated)
+
+@property (nonatomic, assign) BOOL enableFullscreenInteractivePopGesture API_DEPRECATED("Use enableFullScreenInteractivePopGesture instead.", ios(2.0, 2.0));
+
+@property (nonatomic, assign) BOOL contentViewWithoutNavigtionBar API_DEPRECATED("Use contentViewWithoutNavigationBar instead.", ios(2.0, 2.0));
+
+@end
+
+
 @interface NXNavigationBar (NXNavigationExtensionDeprecated)
 
 @property (nonatomic, assign) UIEdgeInsets containerViewEdgeInsets API_DEPRECATED("Use contentViewEdgeInsets instead.", ios(2.0, 2.0));
@@ -93,7 +109,11 @@ API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protoco
 
 @interface UINavigationController (NXNavigationExtensionDeprecated)
 
-@property (nonatomic, assign, class) BOOL nx_fullscreenPopGestureEnabled API_DEPRECATED("Use NXNavigationControllerPreferences fullscreenInteractivePopGestureEnabled instead.", ios(2.0, 2.0));
+@property (nonatomic, assign, readonly) BOOL nx_fullscreenInteractivePopGestureEnabled API_DEPRECATED("Use nx_fullScreenInteractivePopGestureEnabled instead.", ios(2.0, 2.0));
+
+@property (nonatomic, strong, readonly) UIPanGestureRecognizer *nx_fullscreenPopGestureRecognizer API_DEPRECATED("Use nx_fullScreenPopGestureRecognizer instead.", ios(2.0, 2.0));
+
+@property (nonatomic, assign, class) BOOL nx_fullScreenPopGestureEnabled API_DEPRECATED("Use NXNavigationControllerPreferences fullScreenInteractivePopGestureEnabled instead.", ios(2.0, 2.0));
 
 - (void)nx_triggerSystemBackButtonHandler API_DEPRECATED("Use nx_popViewControllerAnimated: instead.", ios(2.0, 2.0));
 
@@ -110,11 +130,14 @@ API_DEPRECATED("Use NXNavigationInteractable protocol.", ios(2.0, 2.0)) @protoco
 
 @property (nonatomic, assign, readonly) BOOL nx_useSystemBlurNavigationBar API_DEPRECATED("Use nx_useBlurNavigationBar & nx_navigationBarBackgroundColor instead.", ios(2.0, 2.0));
 
-@property (nonatomic, assign, readonly) BOOL nx_enableFullScreenInteractivePopGesture API_DEPRECATED("Use nx_enableFullscreenInteractivePopGesture instead.", ios(2.0, 2.0));
 
 @property (nonatomic, assign, readonly) BOOL nx_hidesNavigationBar API_DEPRECATED("Use nx_translucentNavigationBar instead.", ios(2.0, 2.0));
 
-@property (nonatomic, assign, readonly) BOOL nx_containerViewWithoutNavigtionBar API_DEPRECATED("Use nx_contentViewWithoutNavigtionBar instead.", ios(2.0, 2.0));
+@property (nonatomic, assign, readonly) BOOL nx_containerViewWithoutNavigtionBar API_DEPRECATED("Use nx_contentViewWithoutNavigationBar instead.", ios(2.0, 2.0));
+
+@property (nonatomic, assign, readonly) BOOL nx_enableFullscreenInteractivePopGesture API_DEPRECATED("Use nx_enableFullScreenInteractivePopGesture instead.", ios(2.0, 2.0));
+
+@property (nonatomic, assign, readonly) BOOL nx_contentViewWithoutNavigtionBar API_DEPRECATED("Use nx_contentViewWithoutNavigationBar instead.", ios(2.0, 2.0));
 
 @end
 

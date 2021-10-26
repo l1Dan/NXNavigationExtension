@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly, nullable) UIView *nx_backButtonCustomView;
 
 /// The same as NXNavigationBarAppearance `systemBackButtonTitle` instance.
-@property (nonatomic, copy, readonly, nullable) NSString* nx_systemBackButtonTitle;
+@property (nonatomic, copy, readonly, nullable) NSString *nx_systemBackButtonTitle;
 
 /// The same as NXNavigationBarAppearance `backImageInsets` instance.
 @property (nonatomic, assign, readonly) UIEdgeInsets nx_backImageInsets;
@@ -82,8 +82,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// The same as NXViewControllerPreferences `disableInteractivePopGesture` instance.
 @property (nonatomic, assign, readonly) BOOL nx_disableInteractivePopGesture;
 
-/// The same as NXViewControllerPreferences `enableFullscreenInteractivePopGesture` instance.
-@property (nonatomic, assign, readonly) BOOL nx_enableFullscreenInteractivePopGesture;
+/// The same as NXViewControllerPreferences `enableFullScreenInteractivePopGesture` instance.
+@property (nonatomic, assign, readonly) BOOL nx_enableFullScreenInteractivePopGesture;
 
 /// The same as NXViewControllerPreferences `automaticallyHideNavigationBarInChildViewController` instance.
 @property (nonatomic, assign, readonly) BOOL nx_automaticallyHideNavigationBarInChildViewController;
@@ -91,8 +91,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// The same as NXViewControllerPreferences `translucentNavigationBar` instance.
 @property (nonatomic, assign, readonly) BOOL nx_translucentNavigationBar;
 
-/// The same as NXViewControllerPreferences `contentViewWithoutNavigtionBar` instance.
-@property (nonatomic, assign, readonly) BOOL nx_contentViewWithoutNavigtionBar;
+/// The same as NXViewControllerPreferences `contentViewWithoutNavigationBar` instance.
+@property (nonatomic, assign, readonly) BOOL nx_contentViewWithoutNavigationBar;
 
 /// The same as NXViewControllerPreferences `interactivePopMaxAllowedDistanceToLeftEdge` instance.
 @property (nonatomic, assign, readonly) CGFloat nx_interactivePopMaxAllowedDistanceToLeftEdge;

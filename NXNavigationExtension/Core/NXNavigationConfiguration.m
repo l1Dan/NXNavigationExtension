@@ -25,7 +25,7 @@
 #import "NXNavigationExtensionRuntime.h"
 
 // chevron.left@2x.png, SF Pro-Medium, compression, 默认颜色：tintColor = [UIColor whiteColor]
-static NSString *NXNavigationBarAppearanceNackImageBase64 = @"iVBORw0KGgoAAAANSUhEUgAAABQAAAAjCAMAAACjKNoqAAAAgVBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9d3yJTAAAAK3RSTlMA2QUR1K2xGAzHwaWblI+Ld2hQJ83Mu7e1n5iJfXJsY11IQC0dCINYOSIHKsEspwAAAKhJREFUKM990ckSgjAURNEEJKDMCDIo4Dz9/wcqnU06przLs3ld9YTds6h+bJZSlpaV8ptim+RSTjbCWt+0AtaRHWDKYQHZXVtk2h4Wk+XabgZ5GawnS2GJZ9oAG8gSWGrau4dlMN6SC6rGDcGpBVdnxkvt1AZ6Yt2u/2jlUmnpawN9sF61Hp06s4Y7aOnUydIWOrL6HbSwVNkboAGeL7ho0VTYmjVx+AEgOgfYXg2whAAAAABJRU5ErkJggg==";
+static NSString *NXNavigationBarBackImageBase64Data = @"iVBORw0KGgoAAAANSUhEUgAAABQAAAAjCAMAAACjKNoqAAAAgVBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9d3yJTAAAAK3RSTlMA2QUR1K2xGAzHwaWblI+Ld2hQJ83Mu7e1n5iJfXJsY11IQC0dCINYOSIHKsEspwAAAKhJREFUKM990ckSgjAURNEEJKDMCDIo4Dz9/wcqnU06przLs3ld9YTds6h+bJZSlpaV8ptim+RSTjbCWt+0AtaRHWDKYQHZXVtk2h4Wk+XabgZ5GawnS2GJZ9oAG8gSWGrau4dlMN6SC6rGDcGpBVdnxkvt1AZ6Yt2u/2jlUmnpawN9sF61Hp06s4Y7aOnUydIWOrL6HbSwVNkboAGeL7ho0VTYmjVx+AEgOgfYXg2whAAAAABJRU5ErkJggg==";
 
 
 static NSString *NXNavigationConfigurationKey = @"NXNavigationConfigurationKey";
@@ -82,7 +82,7 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 
 - (UIImage *)backImage {
     if (!_backImage) {
-        NSData *data = [[NSData alloc] initWithBase64EncodedString:NXNavigationBarAppearanceNackImageBase64 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        NSData *data = [[NSData alloc] initWithBase64EncodedString:NXNavigationBarBackImageBase64Data options:NSDataBase64DecodingIgnoreUnknownCharacters];
         if (data) {
             return [UIImage imageWithData:data scale:2.0];
         }
@@ -93,7 +93,7 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 
 - (UIImage *)landscapeBackImage {
     if (!_landscapeBackImage) {
-        NSData *data = [[NSData alloc] initWithBase64EncodedString:NXNavigationBarAppearanceNackImageBase64 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        NSData *data = [[NSData alloc] initWithBase64EncodedString:NXNavigationBarBackImageBase64Data options:NSDataBase64DecodingIgnoreUnknownCharacters];
         if (data) {
             return [UIImage imageWithData:data scale:3.0];
         }
@@ -116,14 +116,14 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 
 - (instancetype)init {
     if (self = [super init]) {
-        _fullscreenInteractivePopGestureEnabled = NO;
+        _fullScreenInteractivePopGestureEnabled = NO;
     }
     return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone {
     NXNavigationControllerPreferences *newPreferences = [[NXNavigationControllerPreferences alloc] init];
-    newPreferences.fullscreenInteractivePopGestureEnabled = self.fullscreenInteractivePopGestureEnabled;
+    newPreferences.fullScreenInteractivePopGestureEnabled = self.fullScreenInteractivePopGestureEnabled;
     return newPreferences;
 }
 
@@ -136,10 +136,10 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
     if (self = [super init]) {
         _useBlurNavigationBar = NO;
         _disableInteractivePopGesture = NO;
-        _enableFullscreenInteractivePopGesture = NO;
+        _enableFullScreenInteractivePopGesture = NO;
         _automaticallyHideNavigationBarInChildViewController = YES;
         _translucentNavigationBar = NO;
-        _contentViewWithoutNavigtionBar = NO;
+        _contentViewWithoutNavigationBar = NO;
         _interactivePopMaxAllowedDistanceToLeftEdge = 0.0;
     }
     return self;
@@ -149,10 +149,10 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
     NXViewControllerPreferences *newPreferences = [[NXViewControllerPreferences alloc] init];
     newPreferences.useBlurNavigationBar = self.useBlurNavigationBar;
     newPreferences.disableInteractivePopGesture = self.disableInteractivePopGesture;
-    newPreferences.enableFullscreenInteractivePopGesture = self.enableFullscreenInteractivePopGesture;
+    newPreferences.enableFullScreenInteractivePopGesture = self.enableFullScreenInteractivePopGesture;
     newPreferences.automaticallyHideNavigationBarInChildViewController = self.automaticallyHideNavigationBarInChildViewController;
     newPreferences.translucentNavigationBar = self.translucentNavigationBar;
-    newPreferences.contentViewWithoutNavigtionBar = self.contentViewWithoutNavigtionBar;
+    newPreferences.contentViewWithoutNavigationBar = self.contentViewWithoutNavigationBar;
     newPreferences.interactivePopMaxAllowedDistanceToLeftEdge = self.interactivePopMaxAllowedDistanceToLeftEdge;
     return newPreferences;
 }

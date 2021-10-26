@@ -44,7 +44,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 @end
 
 /// 全屏滑动返回手势代理
-@interface NXFullscreenPopGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
+@interface NXFullScreenPopGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
 
 /// 获取当前导航控制器
 @property (nonatomic, weak, readonly) UINavigationController *navigationController;
@@ -103,7 +103,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 @property (nonatomic, strong, readonly) NXScreenEdgePopGestureRecognizerDelegate *nx_screenEdgePopGestureDelegate;
 
 /// 全屏返回手势代理对象
-@property (nonatomic, strong, readonly) NXFullscreenPopGestureRecognizerDelegate *nx_fullscreenPopGestureDelegate;
+@property (nonatomic, strong, readonly) NXFullScreenPopGestureRecognizerDelegate *nx_fullScreenPopGestureDelegate;
 
 /// 是否使用 NXNavigationBar，默认 NO；如果导航控制器没有注册则使用系统导航栏
 @property (nonatomic, assign, readonly) BOOL nx_useNavigationBar;
@@ -121,7 +121,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 
 /// 检查全屏返回手势是否可用
 /// @param viewController 当前的视图控制器
-- (BOOL)nx_checkFullscreenInteractivePopGestureEnabledWithViewController:(__kindof UIViewController *)viewController;
+- (BOOL)nx_checkFullScreenInteractivePopGestureEnabledWithViewController:(__kindof UIViewController *)viewController;
 
 /// 调整系统返回按钮设置
 /// @param currentViewController 当前需要调整系统返回按钮设置的视图控制器

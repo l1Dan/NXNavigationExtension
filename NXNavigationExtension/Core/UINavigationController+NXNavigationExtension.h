@@ -27,11 +27,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UINavigationController (NXNavigationExtension)
 
-/// The same as NXNavigationControllerPreferences `fullscreenInteractivePopGestureEnabled` instance.
-@property (nonatomic, assign, readonly) BOOL nx_fullscreenInteractivePopGestureEnabled;
+/// The same as NXNavigationControllerPreferences `fullScreenInteractivePopGestureEnabled` instance.
+@property (nonatomic, assign, readonly) BOOL nx_fullScreenInteractivePopGestureEnabled;
 
 /// 全屏手势识别器
-@property (nonatomic, strong, readonly) UIPanGestureRecognizer *nx_fullscreenPopGestureRecognizer;
+@property (nonatomic, strong, readonly) UIPanGestureRecognizer *nx_fullScreenPopGestureRecognizer;
 
 /// 调用此方法可以触发调用 id<NXNavigationInteractable> 代理方法
 /// 可以统一处理手势滑动返回和自定义返回按钮点击返回的拦截操作
