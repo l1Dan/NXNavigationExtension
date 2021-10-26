@@ -21,7 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NXNavigationBar.h"
+#import "NXNavigationConfiguration.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,7 +29,7 @@ typedef void (^UINavigationBarDidUpdatePropertiesHandler)(UINavigationBar *navig
 
 typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewController);
 
-@class NXNavigationVirtualWrapperView, NXNavigationRouter;
+@class NXNavigationBar, NXNavigationVirtualWrapperView, NXNavigationRouter;
 
 /// 边缘返回手势代理对象
 @interface NXScreenEdgePopGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
@@ -67,22 +67,6 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 /// 便利构造函数
 /// @param observe 当前 viewController
 - (instancetype)initWithObserve:(UIViewController *)observe;
-
-@end
-
-
-@interface NXNavigationBar ()
-
-/// 是否使用 NXNavigationBar 背景模糊效果；默认 NO
-@property (nonatomic, assign) BOOL blurEffectEnabled;
-
-@end
-
-
-@interface NXViewControllerPreferences ()
-
-/// 当前视图控制器的 traitCollection 对象
-@property (nonatomic, strong) UITraitCollection *traitCollection;
 
 @end
 
