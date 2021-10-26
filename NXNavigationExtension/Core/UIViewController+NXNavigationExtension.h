@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// The same as NXNavigationBarAppearance `backImageInsets` instance.
 @property (nonatomic, assign, readonly) UIEdgeInsets nx_backImageInsets;
 
-/// The same as NXNavigationBarAppearance `nlandscapeBackImageInsets` instance.
+/// The same as NXNavigationBarAppearance `landscapeBackImageInsets` instance.
 @property (nonatomic, assign, readonly) UIEdgeInsets nx_landscapeBackImageInsets;
 
 /// The same as NXNavigationBarAppearance `useSystemBackButton` instance.
