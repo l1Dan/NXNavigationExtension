@@ -260,14 +260,14 @@
 - (void)nx_updateNavigationBarSubviewState {
     if (self.nx_canSetupNavigationBar) {
         BOOL translucentNavigationBar = self.nx_translucentNavigationBar;
-        BOOL contentViewWithoutNavigtionBar = self.nx_contentViewWithoutNavigtionBar;
+        BOOL contentViewWithoutNavigationBar = self.nx_contentViewWithoutNavigationBar;
         if ([self isKindOfClass:[UIPageViewController class]] && !translucentNavigationBar) {
             // fix: 处理特殊情况，最后显示的为 UIPageViewController
             translucentNavigationBar = self.parentViewController.nx_translucentNavigationBar;
         }
         
         if (translucentNavigationBar) {
-            contentViewWithoutNavigtionBar = NO;
+            contentViewWithoutNavigationBar = NO;
             self.nx_navigationBar.shadowImageView.image = NXNavigationExtensionGetImageFromColor([UIColor clearColor]);
             self.nx_navigationBar.backgroundImageView.image = NXNavigationExtensionGetImageFromColor([UIColor clearColor]);
             self.nx_navigationBar.backgroundColor = [UIColor clearColor];
@@ -282,14 +282,14 @@
             }
         }
         
-        if (contentViewWithoutNavigtionBar) { // 添加 subView 到 contentView 时可以不随 NavigationBar 的 alpha 变化
+        if (contentViewWithoutNavigationBar) { // 添加 subView 到 contentView 时可以不随 NavigationBar 的 alpha 变化
             self.nx_navigationBar.contentView.userInteractionEnabled = YES;
             self.nx_navigationBar.userInteractionEnabled = YES;
             self.navigationController.navigationBar.nx_userInteractionEnabled = NO;
             self.navigationController.navigationBar.userInteractionEnabled = NO;
         } else {
             self.nx_navigationBar.contentView.hidden = translucentNavigationBar;
-            self.nx_navigationBar.contentView.userInteractionEnabled = contentViewWithoutNavigtionBar;
+            self.nx_navigationBar.contentView.userInteractionEnabled = contentViewWithoutNavigationBar;
             self.nx_navigationBar.userInteractionEnabled = !translucentNavigationBar;
             self.navigationController.navigationBar.nx_userInteractionEnabled = !translucentNavigationBar;
             self.navigationController.navigationBar.userInteractionEnabled = !translucentNavigationBar;
@@ -505,8 +505,8 @@
     return self.nx_configuration.viewControllerPreferences.disableInteractivePopGesture;
 }
 
-- (BOOL)nx_enableFullscreenInteractivePopGesture {
-    return self.nx_configuration.viewControllerPreferences.enableFullscreenInteractivePopGesture;
+- (BOOL)nx_enableFullScreenInteractivePopGesture {
+    return self.nx_configuration.viewControllerPreferences.enableFullScreenInteractivePopGesture;
 }
 
 - (BOOL)nx_automaticallyHideNavigationBarInChildViewController {
@@ -517,8 +517,8 @@
     return self.nx_configuration.viewControllerPreferences.translucentNavigationBar;
 }
 
-- (BOOL)nx_contentViewWithoutNavigtionBar {
-    return self.nx_configuration.viewControllerPreferences.contentViewWithoutNavigtionBar;
+- (BOOL)nx_contentViewWithoutNavigationBar {
+    return self.nx_configuration.viewControllerPreferences.contentViewWithoutNavigationBar;
 }
 
 - (CGFloat)nx_interactivePopMaxAllowedDistanceToLeftEdge {
@@ -538,8 +538,8 @@
             [self nx_configureNavigationBarWithNavigationController:self.navigationController];            
         }
         // 重新检查全屏返回手势是否动态修改
-        if ([self.navigationController nx_checkFullscreenInteractivePopGestureEnabledWithViewController:self]) {
-            [self.navigationController nx_configureFullscreenPopGesture];
+        if ([self.navigationController nx_checkFullScreenInteractivePopGestureEnabledWithViewController:self]) {
+            [self.navigationController nx_configureFullScreenPopGesture];
         }
     }
     [self nx_updateNavigationBarAppearance];

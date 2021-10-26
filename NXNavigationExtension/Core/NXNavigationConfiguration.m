@@ -114,14 +114,14 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 
 - (instancetype)init {
     if (self = [super init]) {
-        _fullscreenInteractivePopGestureEnabled = NO;
+        _fullScreenInteractivePopGestureEnabled = NO;
     }
     return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone {
     NXNavigationControllerPreferences *newPreferences = [[NXNavigationControllerPreferences alloc] init];
-    newPreferences.fullscreenInteractivePopGestureEnabled = self.fullscreenInteractivePopGestureEnabled;
+    newPreferences.fullScreenInteractivePopGestureEnabled = self.fullScreenInteractivePopGestureEnabled;
     return newPreferences;
 }
 
@@ -141,10 +141,10 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
     if (self = [super init]) {
         _useBlurNavigationBar = NO;
         _disableInteractivePopGesture = NO;
-        _enableFullscreenInteractivePopGesture = NO;
+        _enableFullScreenInteractivePopGesture = NO;
         _automaticallyHideNavigationBarInChildViewController = YES;
         _translucentNavigationBar = NO;
-        _contentViewWithoutNavigtionBar = NO;
+        _contentViewWithoutNavigationBar = NO;
         _interactivePopMaxAllowedDistanceToLeftEdge = 0.0;
     }
     return self;
@@ -154,10 +154,10 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
     NXViewControllerPreferences *newPreferences = [[NXViewControllerPreferences alloc] init];
     newPreferences.useBlurNavigationBar = self.useBlurNavigationBar;
     newPreferences.disableInteractivePopGesture = self.disableInteractivePopGesture;
-    newPreferences.enableFullscreenInteractivePopGesture = self.enableFullscreenInteractivePopGesture;
+    newPreferences.enableFullScreenInteractivePopGesture = self.enableFullScreenInteractivePopGesture;
     newPreferences.automaticallyHideNavigationBarInChildViewController = self.automaticallyHideNavigationBarInChildViewController;
     newPreferences.translucentNavigationBar = self.translucentNavigationBar;
-    newPreferences.contentViewWithoutNavigtionBar = self.contentViewWithoutNavigtionBar;
+    newPreferences.contentViewWithoutNavigationBar = self.contentViewWithoutNavigationBar;
     newPreferences.interactivePopMaxAllowedDistanceToLeftEdge = self.interactivePopMaxAllowedDistanceToLeftEdge;
     return newPreferences;
 }

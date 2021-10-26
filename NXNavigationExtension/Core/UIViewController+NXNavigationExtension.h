@@ -84,8 +84,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// The same as NXViewControllerPreferences `disableInteractivePopGesture` instance.
 @property (nonatomic, assign, readonly) BOOL nx_disableInteractivePopGesture;
 
-/// The same as NXViewControllerPreferences `enableFullscreenInteractivePopGesture` instance.
-@property (nonatomic, assign, readonly) BOOL nx_enableFullscreenInteractivePopGesture;
+/// The same as NXViewControllerPreferences `enableFullScreenInteractivePopGesture` instance.
+@property (nonatomic, assign, readonly) BOOL nx_enableFullScreenInteractivePopGesture;
 
 /// The same as NXViewControllerPreferences `automaticallyHideNavigationBarInChildViewController` instance.
 @property (nonatomic, assign, readonly) BOOL nx_automaticallyHideNavigationBarInChildViewController;
@@ -93,8 +93,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// The same as NXViewControllerPreferences `translucentNavigationBar` instance.
 @property (nonatomic, assign, readonly) BOOL nx_translucentNavigationBar;
 
-/// The same as NXViewControllerPreferences `contentViewWithoutNavigtionBar` instance.
-@property (nonatomic, assign, readonly) BOOL nx_contentViewWithoutNavigtionBar;
+/// The same as NXViewControllerPreferences `contentViewWithoutNavigationBar` instance.
+@property (nonatomic, assign, readonly) BOOL nx_contentViewWithoutNavigationBar;
 
 /// The same as NXViewControllerPreferences `interactivePopMaxAllowedDistanceToLeftEdge` instance.
 @property (nonatomic, assign, readonly) CGFloat nx_interactivePopMaxAllowedDistanceToLeftEdge;

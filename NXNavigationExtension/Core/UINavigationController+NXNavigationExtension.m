@@ -99,8 +99,8 @@
                         [viewController nx_configureNavigationBarWithNavigationController:selfObject];
                     }
                     
-                    if ([selfObject nx_checkFullscreenInteractivePopGestureEnabledWithViewController:viewController]) {
-                        [selfObject nx_configureFullscreenPopGesture];
+                    if ([selfObject nx_checkFullScreenInteractivePopGestureEnabledWithViewController:viewController]) {
+                        [selfObject nx_configureFullScreenPopGesture];
                     }
                 }
                 
@@ -132,8 +132,8 @@
                             }
                             [previousViewControllers addObject:viewController];
                             
-                            if ([selfObject nx_checkFullscreenInteractivePopGestureEnabledWithViewController:viewController]) {
-                                [selfObject nx_configureFullscreenPopGesture];
+                            if ([selfObject nx_checkFullScreenInteractivePopGestureEnabledWithViewController:viewController]) {
+                                [selfObject nx_configureFullScreenPopGesture];
                             }
                         }
                     }
@@ -180,11 +180,11 @@
 
 #pragma mark - Getter & Setter
 
-- (BOOL)nx_fullscreenInteractivePopGestureEnabled {
-    return self.nx_configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEnabled;
+- (BOOL)nx_fullScreenInteractivePopGestureEnabled {
+    return self.nx_configuration.navigationControllerPreferences.fullScreenInteractivePopGestureEnabled;
 }
 
-- (UIPanGestureRecognizer *)nx_fullscreenPopGestureRecognizer {
+- (UIPanGestureRecognizer *)nx_fullScreenPopGestureRecognizer {
     UIPanGestureRecognizer *panGestureRecognizer = objc_getAssociatedObject(self, _cmd);
     if (panGestureRecognizer && [panGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
         return panGestureRecognizer;

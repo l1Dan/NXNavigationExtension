@@ -25,6 +25,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 @class NXNavigationConfiguration;
 
 typedef void (^_Nullable NXNavigationPrepareConfigurationCallback)(__kindof UIViewController *viewController, NXNavigationConfiguration *configuration);
@@ -106,7 +107,7 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 @interface NXNavigationControllerPreferences : NSObject <NSCopying>
 
 /// 是否开启全屏手势；默认：NO
-@property (nonatomic, assign) BOOL fullscreenInteractivePopGestureEnabled;
+@property (nonatomic, assign) BOOL fullScreenInteractivePopGestureEnabled;
 
 @end
 
@@ -124,7 +125,7 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 @property (nonatomic, assign) BOOL disableInteractivePopGesture;
 
 /// 是否启用全屏返回；默认 NO
-@property (nonatomic, assign) BOOL enableFullscreenInteractivePopGesture;
+@property (nonatomic, assign) BOOL enableFullScreenInteractivePopGesture;
 
 /// 是否自动隐藏 NavigationBar；默认 YES
 @property (nonatomic, assign) BOOL automaticallyHideNavigationBarInChildViewController;
@@ -137,12 +138,12 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 @property (nonatomic, assign) BOOL translucentNavigationBar;
 
 /// 可以让导航栏内部的 `contentView ` 脱离 NXNavigationBar 单独存在。还会将 self.navigationController.navigationBar.userInteractionEnabled 属性设置为 NO。
-/// 与 `translucentNavigationBar` 属性的性质不同的是：`translucentNavigationBar` 是整个导航栏“区域”无法接收事件响应，而 `contentViewWithoutNavigtionBar`
+/// 与 `translucentNavigationBar` 属性的性质不同的是：`translucentNavigationBar` 是整个导航栏“区域”无法接收事件响应，而 `contentViewWithoutNavigationBar`
 /// 属性只会让系统的导航栏（UINavigationBar）无法接收事件响应，导航栏底下的 `NXNavigationBar` 还是能够接收事件响应的。方便开发者完全自定义导航栏的外观，
 /// `contentView` 的默认外边距为：UIEdgeInsetsMake(0, 8, 0, 8) ，可以使用 NXNavigationBar 的  `contentViewEdgeInsets` 属性设置 `contentView` 的外边距。
 /// 另外需要注意⚠️的是：导航栏返回按钮虽然无法接收用户的点击事件，但是还会显示在导航栏的上面，这样可以方便开发者在返回按钮底下添加自定义的返回按钮。
 /// 如果你不需要显示这个返回按钮也可以通过 `nx_barTintColor` 属性设置返回按钮颜色为 [UIColor clearColor]
-@property (nonatomic, assign) BOOL contentViewWithoutNavigtionBar;
+@property (nonatomic, assign) BOOL contentViewWithoutNavigationBar;
 
 /// 设置全屏手势触发距离
 @property (nonatomic, assign) CGFloat interactivePopMaxAllowedDistanceToLeftEdge;
