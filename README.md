@@ -186,7 +186,7 @@ configuration.navigationBarAppearance.tintColor = [UIColor redColor];
 
 ```objc
 - (UIImage *)nx_navigationBarBackgroundImage {
-    return UIImage.navigationBarbackgroundImage;
+    return UIImage.navigationBarBackgroundImage;
 }
 ```
 
@@ -289,7 +289,7 @@ configuration.navigationBarAppearance.tintColor = [UIColor redColor];
 - 局部有效（在所处页面设置）
 
 ```objc
-- (BOOL)nx_enableFullscreenInteractivePopGesture {
+- (BOOL)nx_enableFullScreenInteractivePopGesture {
     return YES;
 }
 ```
@@ -298,7 +298,7 @@ configuration.navigationBarAppearance.tintColor = [UIColor redColor];
 
 ```objc
 NXNavigationConfiguration *configuration = [[NXNavigationConfiguration alloc] init];
-configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEnabled = YES;
+configuration.navigationControllerPreferences.fullScreenInteractivePopGestureEnabled = YES;
 ```
 
 #### 导航栏返回事件拦截
@@ -377,7 +377,7 @@ configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEna
 [self.navigationController popViewControllerAnimated:YES];
 ```
 
-意思是：首先查找 `self.navigationController.ViewConrollers` 是否存在一个类型为 `[RandomColorViewController class]` 的实例对象，如果存在则重定向到此视图控制器，没有则使用 `[[RandomColorViewController alloc] init]` 来创建一个新的 `[RandomColorViewController class]` 的实例对象。
+意思是：首先查找 `self.navigationController.viewControllers` 是否存在一个类型为 `[RandomColorViewController class]` 的实例对象，如果存在则重定向到此视图控制器，没有则使用 `[[RandomColorViewController alloc] init]` 来创建一个新的 `[RandomColorViewController class]` 的实例对象。
 
 ### 导航栏点击事件穿透到底部
 
@@ -394,7 +394,7 @@ configuration.navigationControllerPreferences.fullscreenInteractivePopGestureEna
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController07_ScrollChangeNavigationBar.m)
 
 ```objc
-- (BOOL)nx_contentViewWithoutNavigtionBar {
+- (BOOL)nx_contentViewWithoutNavigationBar {
     return YES;
 }
 ```

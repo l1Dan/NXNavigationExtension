@@ -63,7 +63,7 @@
 - 新增: `NXNavigationConfiguration` 类；
 - 过期: `backgorundColor` 属性（拼写错误），推荐使用 `backgroundColor` 属性；
 - 过期: `backgorundImage` 属性（拼写错误，推荐使用 `backgroundImage` 属性；
-- 过期: `nx_fullscreenPopGestureEnabled` 属性，推荐使用 `NXNavigationControllerPreferences fullscreenInteractivePopGestureEnabled` 属性；
+- 过期: `nx_fullscreenPopGestureEnabled` 属性，推荐使用 `NXNavigationControllerPreferences fullScreenInteractivePopGestureEnabled` 属性；
 - 过期: `backButtonMenuSupported` 属性，推荐使用 `NXNavigationControllerPreferences menuSupplementBackButton` 属性；
 - 过期: `appearanceFromRegisterNavigationController:` 方法，推荐使用 `configurationFromRegisterNavigationController:` 方法；
 - 过期: `registerNavigationControllerClass:forAppearance:` 方法，推荐使用 `registerNavigationControllerClass:withConfiguration:` 方法；
@@ -93,15 +93,15 @@ NXNavigationBar 可以跟随系统导航栏的显示隐藏。虽然不推荐使�
 - 新增: `contentViewEdgeInsets` 属性；
 - 新增: `contentView` 属性；
 - 新增: `backgroundEffectView` 属性；
-- 新增: `nx_enableFullscreenInteractivePopGesture` 属性；
-- 新增: `nx_contentViewWithoutNavigtionBar` 属性；
+- 新增: `nx_enableFullScreenInteractivePopGesture` 属性；
+- 新增: `nx_contentViewWithoutNavigationBar` 属性；
 - 新增: `appearanceFromRegisterNavigationController:` 方法；
 - 新增: `nx_redirectViewControllerClass:initializeStandbyViewControllerUsingBlock:` 方法；
 - 过期: `containerViewEdgeInsets` 属性，推荐使用 `contentViewEdgeInsets` 属性；
 - 过期: `containerView` 属性，推荐使用 `contentView` 属性；
 - 过期: `visualEffectView` 属性，推荐使用 `backgroundEffectView` 属性；
-- 过期: `nx_enableFullScreenInteractivePopGesture` 属性，推荐使用 `nx_enableFullscreenInteractivePopGesture` 属性；
-- 过期: `nx_containerViewWithoutNavigtionBar` 属性，推荐使用 `nx_contentViewWithoutNavigtionBar` 属性；
+- 过期: `nx_enableFullScreenInteractivePopGesture` 属性，推荐使用 `nx_enableFullScreenInteractivePopGesture` 属性；
+- 过期: `nx_containerViewWithoutNavigationBar` 属性，推荐使用 `nx_contentViewWithoutNavigationBar` 属性；
 - 过期: `addContainerViewSubview:` 方法，推荐使用 `contentView addSubview:` 方法；
 - 过期: `setContainerViewEdgeInsets:` 方法，推荐使用 `contentViewEdgeInsets` 属性；
 - 过期: `appearanceFromRegisterNavigationControllerClass:` 方法，推荐使用 `appearanceFromRegisterNavigationController:` 方法；
@@ -211,7 +211,7 @@ NXNavigationBar 可以跟随系统导航栏的显示隐藏。虽然不推荐使�
 - 重命名: `UINavigationExtensionMacro` 为 `NXNavigationExtensionMacro`；
 - 重命名: `UINavigationExtensionPrivate` 为 `NXNavigationExtensionPrivate`；
 - 重命名: `UEEdgeGestureRecognizerDelegate` 为 `NXEdgeGestureRecognizerDelegate`；
-- 重命名: `UEFullscreenPopGestureRecognizerDelegate` 为 `NXFullscreenPopGestureRecognizerDelegate`；
+- 重命名: `UEFullScreenPopGestureRecognizerDelegate` 为 `NXFullScreenPopGestureRecognizerDelegate`；
 - 移除: `UINavigationController+NXNavigationExtension.m` 的方法，以避免其他分类重写这些方法时造成不可预期的行为。
   > 1. `-childViewControllerForStatusBarStyle`
   > 2. `-childViewControllerForStatusBarHidden`
