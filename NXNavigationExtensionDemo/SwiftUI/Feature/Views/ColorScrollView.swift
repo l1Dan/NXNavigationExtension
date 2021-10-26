@@ -27,20 +27,22 @@ struct ColorScrollView: View {
     
     private func contentView(hasHeader: Bool) -> some View {
         let list = ForEach(0..<30) { index in
-            VStack(alignment: .leading) {
-                NavigationLink {
-                    UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBarForManually))
-                } label: {
+            NavigationLink {
+                UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBarForManually))
+            } label: {
+                ZStack {
+                    HStack {
+                        Text("Row: \(index + 1)").padding(.leading)
+                        Spacer()
+                        Image(systemName: "chevron.right").padding(.trailing)
+                    }
                     VStack {
-                        HStack {
-                            Text("Row: \(index + 1)")
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                        }.padding()
-                        Color(UIColor.separator).frame(height: 0.3)
+                        Spacer()
+                        Color(UIColor.separator).frame(height: 1.0 / UIScreen.main.scale)
                     }
                 }
             }
+            .frame(height: 40)
             .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
             .background(Color( colorScheme == .dark ? UIColor.randomDark : UIColor.randomLight))
         }

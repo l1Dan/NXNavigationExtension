@@ -13,14 +13,26 @@ import SwiftUI
 
 @available(iOS 13, *)
 struct UpdateNavigationBar: View {
-    private static let buttonWidthAndHeight = 160.0
+    @Environment(\.colorScheme) private var colorScheme
     
     @State private var context: NXNavigationContext?
-    @State private var colorScheme = ColorScheme.dark
     @State private var title = "Custom"
     @State private var count = 0
+
+    @State private var darkColor = UIColor.randomDark
+    @State private var lightColor = UIColor.randomLight
+    @State private var isLightTheme = true
+
+    private static let buttonWidthAndHeight = 160.0
     
     private let item: NavigationFeatureItem
+    
+    private var randomColor: UIColor {
+        switch colorScheme {
+        case .dark: return darkColor
+        default: return lightColor
+        }
+    }
     
     init(_ item: NavigationFeatureItem) {
         self.item = item
@@ -30,35 +42,34 @@ struct UpdateNavigationBar: View {
         Button {
             count += 1
             title = "😜(\(count))"
+            isLightTheme.toggle()
+            
+            switch colorScheme {
+            case .dark: darkColor = UIColor.randomDark
+            default: lightColor = UIColor.randomLight
+            }
             
             if let context = context {
                 NXNavigationRouter.of(context).setNeedsNavigationBarAppearanceUpdate()
             }
-            
-            switch colorScheme {
-            case .dark:
-                colorScheme = .light
-            case .light:
-                colorScheme = .dark
-            @unknown default:
-                colorScheme = .light
-            }
         } label: {
             Text("Update")
+                .foregroundColor(Color(randomColor))
                 .frame(width: UpdateNavigationBar.buttonWidthAndHeight, height: UpdateNavigationBar.buttonWidthAndHeight)
         }
-        .overlay(RoundedRectangle(cornerRadius: UpdateNavigationBar.buttonWidthAndHeight * 0.5, style: .circular).strokeBorder(Color.blue, lineWidth: 5))
+        .overlay(RoundedRectangle(cornerRadius: UpdateNavigationBar.buttonWidthAndHeight * 0.5, style: .circular).strokeBorder(Color(randomColor), lineWidth: 5))
         .navigationBarTitle(item.title)
-        .preferredColorScheme(colorScheme)
         .useNXNavigationView(onPrepareConfiguration: { configuration in
-            let userInterfaceStyle = configuration.viewControllerPreferences.traitCollection?.userInterfaceStyle ?? .light
-            configuration.navigationBarAppearance.backgroundColor = userInterfaceStyle == .dark ? .systemBlue : .systemRed
             configuration.navigationBarAppearance.useSystemBackButton = true
+            configuration.navigationBarAppearance.tintColor = isLightTheme ? .black : .white
+            configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: isLightTheme ? UIColor.black : UIColor.white]
             configuration.navigationBarAppearance.systemBackButtonTitle = title
+            configuration.navigationBarAppearance.backgroundColor = randomColor
         }, onContextChanged: { context in
             self.context = context
         })
     }
+    
 }
 
 @available(iOS 13, *)
