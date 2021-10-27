@@ -13,61 +13,67 @@ import SwiftUI
 struct FakeNavigationBar<Content>: View where Content : View {
     @Environment(\.presentationMode) private var presentationMode;
     @Environment(\.colorScheme) private var colorScheme;
+    
+    @State private var statusBarHeight = 0.0
     @State private var isActive = false
     
     private let content : () -> Content
     private let title: Text
     private var action: (() -> Void)?
     
-    init(@ViewBuilder content: @escaping () -> Content, title: Text) {
-        self.content = content
+    init(title: Text, @ViewBuilder content: @escaping () -> Content) {
         self.title = title
+        self.content = content
+        self.statusBarHeight = UIApplication.shared.statusBarHeight
     }
     
     var body: some View {
-        ZStack {
-            content()
-            GeometryReader { geometry in
-                ZStack {
-                    Rectangle()
-                        .fill(Color.blue)
+        GeometryReader { geometry in
+            ZStack {
+                content()
+                VStack(spacing: 0.0) {
+                    Color.red
+                        .frame(width: geometry.size.width, height: UIApplication.shared.statusBarHeight)
                         .opacity(0.9)
-                        .blur(radius: 1.0)
-                        .frame(height: geometry.safeAreaInsets.bottom + 44.0)
-                }
-                VStack(alignment: .center) {
-                    Rectangle()
-                        .fill(Color.clear)
-                        .frame(height: geometry.safeAreaInsets.bottom)
-                    Spacer()
-                    HStack {
-                        Button {
-                            presentationMode.wrappedValue.dismiss()
-                        } label: {
-                            Image(systemName: "arrow.left")
-                                .padding(EdgeInsets(top: 0, leading: 8.0, bottom: 0, trailing: 8.0))
-                        }.accentColor(colorScheme == .dark ? Color.white : Color.black)
-
-                        Spacer()
-                        title.accentColor(colorScheme == .dark ? Color.white : Color.black)
-                        Spacer()
-                        
-                        NavigationLink(isActive: $isActive) {
-                            UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBarForManually))
-                        } label: {
+                    ZStack {
+                        Color.blue.opacity(0.9)
+                        HStack {
                             Button {
-                                isActive = true
+                                presentationMode.wrappedValue.dismiss()
                             } label: {
-                                Image(systemName: "plus")
-                                    .padding(EdgeInsets(top: 0, leading: 8.0, bottom: 0, trailing: 8.0))
+                                Image(systemName: "arrow.left")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 24, height: 24)
+                                    .padding(.leading, 8.0)
                             }.accentColor(colorScheme == .dark ? Color.white : Color.black)
+                            
+                            Spacer()
+                            title.accentColor(colorScheme == .dark ? Color.white : Color.black)
+                            Spacer()
+                            
+                            NavigationLink(isActive: $isActive) {
+                                UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBarForManually))
+                            } label: {
+                                Button {
+                                    isActive = true
+                                } label: {
+                                    Image(systemName: "plus")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 22, height: 22)
+                                        .padding(.trailing, 8.0)
+                                }.accentColor(colorScheme == .dark ? Color.white : Color.black)
+                            }
                         }
+                        .padding([.leading, .trailing], 8.0)
                     }
+                    .frame(width: geometry.size.width, height: 44.0)
                     Spacer()
                 }
-                .frame(height: geometry.safeAreaInsets.bottom + 44.0)
             }
         }
+        .navigationBarTitle(Text(""), displayMode: .inline)
         .edgesIgnoringSafeArea(.top)
     }
 }
@@ -81,9 +87,10 @@ struct CustomNavigationBar: View {
     }
     
     var body: some View {
-        FakeNavigationBar(content: {
+        FakeNavigationBar(title: Text(item.title)) {
             ColorListView()
-        }, title: Text(item.title)).useNXNavigationView { configuration in
+        }
+        .useNXNavigationView { configuration in
             configuration.viewControllerPreferences.translucentNavigationBar = true
         }
     }

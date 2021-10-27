@@ -138,7 +138,13 @@
     [cell setCellClickEnabled:model.clickEnabled];
     
     cell.backgroundColor = nil;
-    cell.textLabel.textColor = [UIColor customTextColor];
+    
+    cell.textLabel.textColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor blackColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        return [UIColor whiteColor];
+    }];
+    
     if (model.type == RedirectViewControllerTypeChoose) {
         cell.textLabel.text = model.title;
         cell.accessoryType = UITableViewCellAccessoryNone;

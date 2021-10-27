@@ -13,8 +13,6 @@ import SwiftUI
 
 @available(iOS 13, *)
 struct UpdateNavigationBar: View {
-    @Environment(\.colorScheme) private var colorScheme
-    
     @State private var context: NXNavigationContext?
     @State private var title = "Custom"
     @State private var count = 0
@@ -28,9 +26,10 @@ struct UpdateNavigationBar: View {
     private let item: NavigationFeatureItem
     
     private var randomColor: UIColor {
-        switch colorScheme {
-        case .dark: return darkColor
-        default: return lightColor
+        if isLightTheme {
+            return lightColor
+        } else {
+            return darkColor
         }
     }
     
@@ -44,9 +43,10 @@ struct UpdateNavigationBar: View {
             title = "😜(\(count))"
             isLightTheme.toggle()
             
-            switch colorScheme {
-            case .dark: darkColor = UIColor.randomDark
-            default: lightColor = UIColor.randomLight
+            if isLightTheme {
+                lightColor = UIColor.randomLight
+            } else {
+                darkColor = UIColor.randomDark
             }
             
             if let context = context {

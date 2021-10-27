@@ -104,14 +104,20 @@ static CGFloat const ChooseJumpTableViewHeight = 44.0;
         NSUInteger index = (self.chooseViewControllers.count - 1) - indexPath.row;
         __kindof UIViewController *viewController = self.chooseViewControllers[index];
         cell.textLabel.text = [NSString stringWithFormat:@"(%zd)%@", index, viewController.navigationItem.title];
-        cell.textLabel.textColor = [UIColor customTextColor];
+        
+        cell.textLabel.textColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+            return [UIColor blackColor];
+        } darkModeColor:^UIColor * _Nonnull{
+            return [UIColor whiteColor];
+        }];
+        
         if ([viewController isKindOfClass:[BaseViewController class]]) {
             cell.backgroundColor = [(BaseViewController *)viewController randomColor];
         }
     } else {
         cell.textLabel.text = @"(*)New a ViewController in stack";
         cell.textLabel.textColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
-            return  [UIColor blueColor];
+            return [UIColor blueColor];
         } darkModeColor:^UIColor * _Nonnull{
             return [[UIColor blueColor] colorWithAlphaComponent:0.5];
         }];

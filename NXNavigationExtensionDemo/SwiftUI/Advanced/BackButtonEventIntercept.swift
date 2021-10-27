@@ -70,6 +70,7 @@ struct BackButtonEventIntercept: View {
             configuration.navigationBarAppearance.backgroundImage = UIImage(named: "NavigationBarBackgound88")
             configuration.navigationBarAppearance.tintColor = .white
             configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            configuration.navigationBarAppearance.useSystemBackButton = true
         } onContextChanged: { context in
             self.context = context
         } onWillPopViewController: { interactiveType in

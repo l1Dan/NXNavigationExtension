@@ -52,12 +52,14 @@ struct FeatureDetailView: View {
             return AnyView(NavigatioinBarUserInteractionDisable(item))
         case .backButtonEventIntercept:
             return AnyView(BackButtonEventIntercept(item))
+        case .navigationRouter:
+            return AnyView(NavigationRouter(item))
         case .customNavigationBar:
             return AnyView(CustomNavigationBar(item))
         case .webView:
             return AnyView(WebView(item))
         case .updateNavigationBarForManually:
-            return AnyView(UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBarForManually)))
+            return AnyView(UpdateNavigationBar(item))
             
         default:
             return AnyView(Text("No implementation").navigationBarTitle(item.title))

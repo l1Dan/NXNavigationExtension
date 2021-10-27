@@ -18,7 +18,7 @@ class NavigationFeatureItem {
         case customBackImage = "自定义返回按钮图片"
         case customBackView = "自定义返回按钮"
         case fullScreenColor = "全屏背景色"
-        case listView = "List" // Not working
+        case listView = "List"
         case scrollViewContent = "ScrollView"
         case present = "Present ViewController"
         
@@ -30,7 +30,7 @@ class NavigationFeatureItem {
         case navigatioinBarUserInteractionDisable = "导航栏点击事件穿透到底部视图"
         case dynamicChangeNavigationBarStyle = "滑动改变导航栏样式" // Not working
         case webView = "WKWebView"
-        case updateNavigationBarForManually = "更新导航栏样式" // Not working
+        case updateNavigationBarForManually = "更新导航栏样式"
         case customViewControllerTransitionAnimation = "自定义转场动画" // Not working
     }
     
@@ -81,7 +81,7 @@ class NavigationFeatureSection {
             NavigationFeatureItem(style: .customBackImage),
             NavigationFeatureItem(style: .customBackView),
             NavigationFeatureItem(style: .fullScreenColor),
-//            NavigationFeatureItem(style: .listView),
+            NavigationFeatureItem(style: .listView),
             NavigationFeatureItem(style: .scrollViewContent),
             NavigationFeatureItem(style: .present),
             
@@ -95,7 +95,7 @@ class NavigationFeatureSection {
             NavigationFeatureItem(style: .navigationRouter),
             NavigationFeatureItem(style: .customNavigationBar),
             NavigationFeatureItem(style: .navigatioinBarUserInteractionDisable),
-            NavigationFeatureItem(style: .dynamicChangeNavigationBarStyle),
+//            NavigationFeatureItem(style: .dynamicChangeNavigationBarStyle),
             NavigationFeatureItem(style: .webView),
             NavigationFeatureItem(style: .updateNavigationBarForManually),
 //            NavigationFeatureItem(style: .customViewControllerTransitionAnimation),

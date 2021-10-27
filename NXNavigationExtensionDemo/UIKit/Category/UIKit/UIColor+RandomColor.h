@@ -17,8 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIColor *)customTitleColor;
 
-+ (UIColor *)customTextColor;
-
 + (UIColor *)customLightGrayColor;
 
 + (UIColor *)customDarkGrayColor;

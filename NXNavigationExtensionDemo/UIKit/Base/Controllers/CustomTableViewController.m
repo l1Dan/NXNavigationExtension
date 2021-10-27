@@ -57,8 +57,14 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"Row: %02zd", indexPath.row + 1];
-    cell.textLabel.textColor = [UIColor customTextColor];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    cell.textLabel.textColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor blackColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        return [UIColor whiteColor];
+    }];
+    
     cell.backgroundColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
         return [UIColor randomLightColor];
     } darkModeColor:^UIColor * _Nonnull{

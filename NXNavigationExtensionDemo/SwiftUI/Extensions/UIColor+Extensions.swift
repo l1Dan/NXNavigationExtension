@@ -8,19 +8,48 @@
 import UIKit
 
 extension UIColor {
+    
+    private static var randomColor: UIColor {
+        let red = CGFloat.random(in: 10...350) / 360.0
+        let green = CGFloat.random(in: 10...350) / 360.0
+        let blue = CGFloat.random(in: 10...350) / 360.0
+        return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+    }
 
     static var randomLight: UIColor {
-        let hue = CGFloat.random(in: 0...255.0) / 256.0;
-        let saturation = CGFloat.random(in: 0...128.0) / 256.0 + 0.5;
-        let brightness = CGFloat.random(in: 0...128.0) / 256.0 + 0.5;
-        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
+        var hue = CGFloat(0.0)
+        var saturation = CGFloat(0.0)
+        var brightness = CGFloat(0.0)
+        var alpha = CGFloat(0.0)
+        randomColor.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        
+        if saturation > 0.5 {
+            saturation -= CGFloat.random(in: 0.0..<0.5)
+        }
+        
+        if brightness < 0.5 {
+            brightness += CGFloat.random(in: 0.0..<0.5)
+        }
+        
+        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
     }
     
     static var randomDark: UIColor {
-        let hue = CGFloat.random(in: 0...255.0) / 256.0;
-        let saturation = CGFloat.random(in: 0...128.0) / 256.0 + 0.5;
-        let brightness = CGFloat.random(in: 0...128.0) / 256.0;
-        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
+        var hue = CGFloat(0.0)
+        var saturation = CGFloat(0.0)
+        var brightness = CGFloat(0.0)
+        var alpha = CGFloat(0.0)
+        randomColor.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        
+        if saturation < 0.5 {
+            saturation += CGFloat.random(in: 0.0..<0.5)
+        }
+        
+        if brightness > 0.5 {
+            brightness -= CGFloat.random(in: 0.0..<0.5)
+        }
+        
+        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
     }
     
     static var customTitle: UIColor {
@@ -28,14 +57,6 @@ extension UIColor {
             return UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0) // .black
         } darkModeColor: {
             return UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0) // .white
-        }
-    }
-    
-    static var customText: UIColor {
-        return UIColor.customColor {
-            return .customDarkGray
-        } darkModeColor: {
-            return .customLightGray
         }
     }
     

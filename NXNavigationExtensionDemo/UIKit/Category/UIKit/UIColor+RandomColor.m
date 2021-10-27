@@ -9,18 +9,48 @@
 
 @implementation UIColor (RandomColor)
 
++ (UIColor *)randomColor {
+    CGFloat red = ((arc4random() % 340) + 10) / 360.0;
+    CGFloat green = ((arc4random() % 340) + 10) / 360.0;
+    CGFloat blue = ((arc4random() % 340) + 10) / 360.0;
+    return [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
+}
+
 + (UIColor *)randomLightColor {
-    CGFloat hue = arc4random() % 256 / 256.0;
-    CGFloat saturation = arc4random() % 128 / 256.0 + 0.5;
-    CGFloat brightness = arc4random() % 128 / 256.0 + 0.5;
-    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1.0];
+    CGFloat hue = 0.0;
+    CGFloat saturation = 0.0;
+    CGFloat brightness = 0.0;
+    CGFloat alpha = 0.0;
+
+    [[self randomColor] getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
+    
+    if (saturation > 0.5) {
+        saturation -= arc4random() % 50 / 100.0;
+    }
+    
+    if (brightness < 0.5) {
+        brightness += arc4random() % 50 / 100.0;
+    }
+    
+    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha];
 }
 
 + (UIColor *)randomDarkColor {
-    CGFloat hue = arc4random() % 256 / 256.0;
-    CGFloat saturation = arc4random() % 128 / 256.0 + 0.5;
-    CGFloat brightness = arc4random() % 128 / 256.0;
-    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1.0];
+    CGFloat hue = 0.0;
+    CGFloat saturation = 0.0;
+    CGFloat brightness = 0.0;
+    CGFloat alpha = 0.0;
+
+    [[self randomColor] getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
+    if (saturation < 0.5) {
+        saturation += arc4random() % 50 / 100.0;
+    }
+
+    if (brightness > 0.5) {
+        brightness -= arc4random() % 50 / 100.0;
+    }
+    
+    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha];
 }
 
 + (UIColor *)customTitleColor {
@@ -28,14 +58,6 @@
         return [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]; // ![UIColor blackColor]
     } darkModeColor:^UIColor * _Nonnull{
         return [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]; // ![UIColor whiteColor]
-    }];
-}
-
-+ (UIColor *)customTextColor {
-    return [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
-        return [UIColor customDarkGrayColor];
-    } darkModeColor:^UIColor * _Nonnull{
-        return [UIColor customLightGrayColor];
     }];
 }
 

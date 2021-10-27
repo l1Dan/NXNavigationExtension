@@ -19,7 +19,7 @@ struct ShadowColor: View {
 
     var body: some View {
         Text(item.title)
-            .navigationBarTitle(item.title)
+            .navigationBarTitle(Text(item.title), displayMode: .inline)
             .useNXNavigationView(onPrepareConfiguration: { configuration in
                 configuration.navigationBarAppearance.backgroundColor = .systemBackground
                 configuration.navigationBarAppearance.shadowColor = .systemRed

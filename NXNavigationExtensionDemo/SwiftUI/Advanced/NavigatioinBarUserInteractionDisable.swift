@@ -18,11 +18,22 @@ struct NavigatioinBarUserInteractionDisable: View {
     }
     
     var body: some View {
-        ColorScrollView(true)
-            .useNXNavigationView(onPrepareConfiguration: { configuration in
-                configuration.viewControllerPreferences.enableFullScreenInteractivePopGesture = true
-                configuration.viewControllerPreferences.translucentNavigationBar = true
-            })
+        GeometryReader { geometry in
+            VStack {
+                ColorScrollView(true)
+                    .useNXNavigationView(onPrepareConfiguration: { configuration in
+                        configuration.viewControllerPreferences.enableFullScreenInteractivePopGesture = true
+                        configuration.viewControllerPreferences.translucentNavigationBar = true
+                    })
+                    .padding(.top, UIApplication.shared.statusBarHeight)
+            }
+            ZStack {
+                Color.red
+                    .opacity(0.9)
+                    .frame(width: geometry.size.width, height: UIApplication.shared.statusBarHeight)
+            }
+        }
+        .edgesIgnoringSafeArea(.top)
     }
 }
 

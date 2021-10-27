@@ -51,6 +51,7 @@
 		D6304B532712C4190016696B /* DrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6304B522712C4190016696B /* DrawerViewController.m */; };
 		D6304B562712C4370016696B /* DrawerAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6304B552712C4370016696B /* DrawerAnimationController.m */; };
 		D6304B65271347B60016696B /* DrawAnimationTransitionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6304B64271347B60016696B /* DrawAnimationTransitionDelegate.m */; };
+		D63B35A127292D9800F07D17 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B35A027292D9800F07D17 /* UIApplication+Extensions.swift */; };
 		D63D17E6271BC7EA00CD8061 /* BackButtonEventIntercept.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63D17E5271BC7EA00CD8061 /* BackButtonEventIntercept.swift */; };
 		D63D17E8271BC8AC00CD8061 /* NavigationEventItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63D17E7271BC8AC00CD8061 /* NavigationEventItem.swift */; };
 		D6440970265AC73C00BCE890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D644096C265AC73C00BCE890 /* Assets.xcassets */; };
@@ -190,6 +191,7 @@
 		D6304B552712C4370016696B /* DrawerAnimationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawerAnimationController.m; sourceTree = "<group>"; };
 		D6304B63271347B60016696B /* DrawAnimationTransitionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawAnimationTransitionDelegate.h; sourceTree = "<group>"; };
 		D6304B64271347B60016696B /* DrawAnimationTransitionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawAnimationTransitionDelegate.m; sourceTree = "<group>"; };
+		D63B35A027292D9800F07D17 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		D63D17E5271BC7EA00CD8061 /* BackButtonEventIntercept.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonEventIntercept.swift; sourceTree = "<group>"; };
 		D63D17E7271BC8AC00CD8061 /* NavigationEventItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationEventItem.swift; sourceTree = "<group>"; };
 		D6440965265AC67D00BCE890 /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -506,6 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				D6D2D8A62719553000ABBE59 /* UIColor+Extensions.swift */,
+				D63B35A027292D9800F07D17 /* UIApplication+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -588,6 +591,8 @@
 			children = (
 				D6D2D8A327193CDD00ABBE59 /* BackgorundColor.swift */,
 				D6D2D8A827195B5000ABBE59 /* BackgorundImage.swift */,
+				D6D2D8B0271970BC00ABBE59 /* ShadowColor.swift */,
+				D6D2D8B2271971D300ABBE59 /* ShadowImage.swift */,
 				D6D2D8AE27196EBE00ABBE59 /* BlurNavigationBarLikeSystem.swift */,
 				D6447FCE27205EE200CB64F5 /* CustomBackImage.swift */,
 				D6447FD027205EF100CB64F5 /* CustomBackView.swift */,
@@ -595,8 +600,6 @@
 				D6D2D8B62719763E00ABBE59 /* ListView.swift */,
 				D6F7D951271BBAEB0015400D /* Present.swift */,
 				D6D2D8B82719775200ABBE59 /* ScrollViewContent.swift */,
-				D6D2D8B0271970BC00ABBE59 /* ShadowColor.swift */,
-				D6D2D8B2271971D300ABBE59 /* ShadowImage.swift */,
 				D6D2D8AC2719652600ABBE59 /* Transparent.swift */,
 			);
 			path = Basic;
@@ -743,6 +746,7 @@
 				D624E98B2654F71200CC96E6 /* ViewController02_Test.m in Sources */,
 				D6D2D8B3271971D300ABBE59 /* ShadowImage.swift in Sources */,
 				D6D2D8AB27195F3300ABBE59 /* ColorListView.swift in Sources */,
+				D63B35A127292D9800F07D17 /* UIApplication+Extensions.swift in Sources */,
 				D624E9722654F71200CC96E6 /* CustomTableViewController.m in Sources */,
 				D624E9872654F71200CC96E6 /* ViewController05_Test.m in Sources */,
 				D6304B65271347B60016696B /* DrawAnimationTransitionDelegate.m in Sources */,
