@@ -13,7 +13,7 @@ import SwiftUI
 
 @available(iOS 13, *)
 struct UpdateNavigationBar: View {
-    @State private var context: NXNavigationContext?
+    @State private var context: NXNavigationRouter.Context
     @State private var title = "Custom"
     @State private var count = 0
 
@@ -35,6 +35,7 @@ struct UpdateNavigationBar: View {
     
     init(_ item: NavigationFeatureItem) {
         self.item = item
+        self.context = NXNavigationRouter.Context(routeName: "/UpdateNavigationBar")
     }
     
     var body: some View {
@@ -49,9 +50,7 @@ struct UpdateNavigationBar: View {
                 darkColor = UIColor.randomDark
             }
             
-            if let context = context {
-                NXNavigationRouter.of(context).setNeedsNavigationBarAppearanceUpdate()
-            }
+            NXNavigationRouter.of(context).setNeedsNavigationBarAppearanceUpdate()
         } label: {
             Text("Update")
                 .foregroundColor(Color(randomColor))
@@ -59,14 +58,12 @@ struct UpdateNavigationBar: View {
         }
         .overlay(RoundedRectangle(cornerRadius: UpdateNavigationBar.buttonWidthAndHeight * 0.5, style: .circular).strokeBorder(Color(randomColor), lineWidth: 5))
         .navigationBarTitle(item.title)
-        .useNXNavigationView(onPrepareConfiguration: { configuration in
+        .useNXNavigationView(context: $context, onPrepareConfiguration: { configuration in
             configuration.navigationBarAppearance.useSystemBackButton = true
             configuration.navigationBarAppearance.tintColor = isLightTheme ? .black : .white
             configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: isLightTheme ? UIColor.black : UIColor.white]
             configuration.navigationBarAppearance.systemBackButtonTitle = title
             configuration.navigationBarAppearance.backgroundColor = randomColor
-        }, onContextChanged: { context in
-            self.context = context
         })
     }
     

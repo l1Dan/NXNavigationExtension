@@ -16,10 +16,10 @@ struct BackButtonEventIntercept: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.presentationMode) private var presentationMode;
     
+    @State private var context: NXNavigationRouter.Context = .init(routeName: "")
     @State private var navigationPopToViewController = false
     @State private var interactiveType = NavigationEventItemType.all
     @State private var isPresented: Bool = false
-    @State private var context: NXNavigationContext?
     
     private let events = NavigationEventItem.items
     private let item: NavigationFeatureItem
@@ -46,7 +46,6 @@ struct BackButtonEventIntercept: View {
                 }
             } footer: {
                 Button {
-                    guard let context = context else { return }
                     NXNavigationRouter.of(context).nx.pop()
                 } label: {
                     Text("调用 “nx_pop” 方法返回")
@@ -66,14 +65,12 @@ struct BackButtonEventIntercept: View {
             }
             return Alert(title:Text("提示"), message: Text("是否继续返回？"), primaryButton: destructive, secondaryButton: cancel)
         })
-        .useNXNavigationView { configuration in
+        .useNXNavigationView(context: $context, onPrepareConfiguration: { configuration in
             configuration.navigationBarAppearance.backgroundImage = UIImage(named: "NavigationBarBackgound88")
             configuration.navigationBarAppearance.tintColor = .white
             configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             configuration.navigationBarAppearance.useSystemBackButton = true
-        } onContextChanged: { context in
-            self.context = context
-        } onWillPopViewController: { interactiveType in
+        }, onWillPopViewController: { interactiveType in
             if self.interactiveType == .all {
                 isPresented = true
                 return false
@@ -91,7 +88,7 @@ struct BackButtonEventIntercept: View {
                 return false
             }
             return true
-        }
+        })
     }
 }
 

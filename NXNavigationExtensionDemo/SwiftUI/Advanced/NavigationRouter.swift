@@ -13,10 +13,9 @@ import SwiftUI
 
 private enum PopType: String {
     case pop = "Pop"
-    case popTo = "PopTo"
-    case popFirst = "PopFirst"
-    case popLast = "PopLast"
-    case popIndex = "PopIndex"
+    case popUntil = "PopUntil"
+    case popToFirstUntil = "PopToFirstUntil"
+    case popToLastUntil = "PopToLastUntil"
 }
 
 @available(iOS 13, *)
@@ -27,12 +26,18 @@ private struct NavigationShowPopTypeView: View {
     @Binding private var popType: PopType
     
     private let names: [String]
+    private let context: NXNavigationRouter.Context
     private let onDismissed: (String) -> Void
     
-    init(names: [String], popType: Binding<PopType>, isPresented: Binding<Bool>, onDismissed: @escaping (String) -> Void) {
+    init(names: [String],
+         context: NXNavigationRouter.Context,
+         popType: Binding<PopType>,
+         isPresented: Binding<Bool>,
+         onDismissed: @escaping (String) -> Void) {
         var routeNames = names
         routeNames.insert("/", at: 0)
         self.names = routeNames
+        self.context = context
         self._popType = popType
         self._isPresented = isPresented
         self.onDismissed = onDismissed
@@ -51,7 +56,7 @@ private struct NavigationShowPopTypeView: View {
                         } label: {
                             Text(name).frame(width: width, height: 44)
                         }
-                        .disabled((name == names[0]) && (popType != .popTo))
+                        .disabled(buttonDisabled(routeName: name, popType: popType))
                         Color(UIColor.separator).frame(height: 1.0 / UIScreen.main.scale)
                     }
                 }
@@ -64,6 +69,18 @@ private struct NavigationShowPopTypeView: View {
         }
     }
     
+    private func canPop(_ routeName: String) -> Bool {
+        if routeName == names[0] { return true }
+        return NXNavigationRouter.of(context).filterViewControllers(withRouteName: routeName).count > 0
+    }
+    
+    private func buttonDisabled(routeName: String, popType: PopType) -> Bool {
+        if routeName == names[0] && popType != .popUntil {
+            return true
+        }
+        return !canPop(routeName)
+    }
+    
 }
 
 
@@ -71,17 +88,24 @@ private struct NavigationShowPopTypeView: View {
 private struct NavigationDestinationRouteView: View {
     @State private var isPresented = false
     @State private var popType: PopType = .pop
-    @State private var context: NXNavigationContext?
+    @State private var context: NXNavigationRouter.Context
 
     private let names = ["/index1", "/index2", "index3", "/custom", "custom2"]
-    private let popTypes: [PopType] = [.pop, .popTo, .popFirst, .popLast, .popIndex]
+    private let popTypes: [PopType] = [.pop, .popUntil, .popToFirstUntil, .popToLastUntil]
     private var randomDark = UIColor.randomDark
     private var randomLight = UIColor.randomLight
+    
+    private var popRouteNames: [String] {
+        var names = self.names
+        names.insert(NavigationFeatureItem.Style.navigationRouter.rawValue, at: 0)
+        return names
+    }
     
     private let title: String
     
     init(title: String) {
         self.title = title
+        self.context = NXNavigationRouter.Context(routeName: title)
     }
     
     var body: some View {
@@ -99,11 +123,9 @@ private struct NavigationDestinationRouteView: View {
                 
                 ForEach(popTypes, id: \.self.rawValue) { type in
                     Button {
-                        guard let context = context else { return }
-                        
                         switch type {
                         case .pop: NXNavigationRouter.of(context).pop()
-                        case .popTo, .popFirst, .popLast, .popIndex:
+                        default:
                             popType = type
                             isPresented = true
                         }
@@ -121,20 +143,27 @@ private struct NavigationDestinationRouteView: View {
             }.listStyle(.grouped)
             
             if isPresented {
-                NavigationShowPopTypeView(names: names, popType: $popType, isPresented: $isPresented) { name in
-                    guard let context = context else { return }
-                    NXNavigationRouter.of(context).pop(name)
-                    print(name)
+                NavigationShowPopTypeView(names: popRouteNames, context: context, popType: $popType, isPresented: $isPresented) { routeName in
+                    switch popType {
+                    case .popUntil:
+                        NXNavigationRouter.of(context).popUntil(routeName)
+                    case .popToFirstUntil:
+                        NXNavigationRouter.of(context).popToFirstUntil(routeName)
+                    case .popToLastUntil:
+                        NXNavigationRouter.of(context).popToLastUntil(routeName)
+                    default:
+                        NXNavigationRouter.of(context).popToRoot()
+                    }
+                    print(routeName)
                 }
             }
         }
         .navigationBarTitle(title)
-        .useNXNavigationView(routeName: title, onPrepareConfiguration: { configuration in
+        .useNXNavigationView(context: $context,
+                             onPrepareConfiguration: { configuration in
             let userInterfaceStyle = configuration.viewControllerPreferences.traitCollection?.userInterfaceStyle ?? .light
             configuration.navigationBarAppearance.backgroundColor = userInterfaceStyle == .dark ? randomDark : randomLight
             configuration.navigationBarAppearance.useSystemBackButton = true
-        }, onContextChanged: { context in
-            self.context = context
         })
     }
     
