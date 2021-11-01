@@ -442,6 +442,18 @@
 
 @implementation UIViewController (NXNavigationExtensionInternal)
 
+- (BOOL)nx_isRootViewController {
+    NSNumber *number = objc_getAssociatedObject(self, _cmd);
+    if (number && [number isKindOfClass:[NSNumber class]]) {
+        return [number boolValue];
+    }
+    return NO;
+}
+
+- (void)setNx_isRootViewController:(BOOL)nx_isRootViewController {
+    objc_setAssociatedObject(self, @selector(nx_isRootViewController), @(nx_isRootViewController), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 /// 保证 self.navigationController 不为 nil，不要直接调研 navigationController 方法
 - (void)nx_triggerSystemPopViewController {
     if (self.navigationController) {

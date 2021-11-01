@@ -146,6 +146,9 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 
 @interface UIViewController (NXNavigationExtensionInternal)
 
+/// 记录当前视图控制器是否为导航控制器的 rootViewController
+@property (nonatomic, assign) BOOL nx_isRootViewController;
+
 /// For SwiftUI，返回页面时交互事件代理
 @property (nonatomic, weak, nullable) id<NXNavigationInteractable> nx_navigationInteractDelegate;
 
