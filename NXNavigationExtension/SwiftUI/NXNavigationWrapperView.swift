@@ -27,9 +27,10 @@ import UIKit
 import SwiftUI
 #endif
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public class NXNavigationVirtualView: NXNavigationVirtualWrapperView {
     
+    /// 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
     var onWillPopViewController: ((NXNavigationInteractiveType) -> Bool)?
     
     override init(frame: CGRect) {
@@ -43,6 +44,7 @@ public class NXNavigationVirtualView: NXNavigationVirtualWrapperView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// 重写基类的代理方法。
     public override func nx_navigationController(_ navigationController: UINavigationController,
                                                  willPop viewController: UIViewController,
                                                  interactiveType: NXNavigationInteractiveType) -> Bool {
@@ -50,22 +52,29 @@ public class NXNavigationVirtualView: NXNavigationVirtualWrapperView {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct NXNavigationWrapperView: UIViewRepresentable {
     public typealias UIViewType = NXNavigationVirtualView
     
+    /// NXNavigationVirtualView 实例对象
     private let virtualView = NXNavigationVirtualView()
+    
+    /// 即将应用配置到当前视图控制器的回调
     private var onPrepareConfiguration: ((NXNavigationConfiguration) -> Void)?
-    private var onContextChanged: ((NXNavigationContext) -> Void)? = nil
+    
+    /// 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
     private var onWillPopViewController: ((NXNavigationInteractiveType) -> Bool)?
     
-    init(routeName: String = "",
+    /// 初始化方法
+    /// - Parameters:
+    ///   - context: 当前对象的 NXNavigationRouter.Context 实例对象
+    ///   - onPrepareConfiguration: 即将应用配置到当前视图控制器的回调
+    ///   - onWillPopViewController: 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
+    init(context: Binding<NXNavigationRouter.Context>,
          onPrepareConfiguration: ((NXNavigationConfiguration) -> Void)? = nil,
-         onContextChanged: ((NXNavigationContext) -> Void)? = nil,
          onWillPopViewController: ((NXNavigationInteractiveType) -> Bool)? = nil) {
-        self.virtualView.routeName = routeName
+        self.virtualView.context = context.wrappedValue
         self.onPrepareConfiguration = onPrepareConfiguration
-        self.onContextChanged = onContextChanged
         self.onWillPopViewController = onWillPopViewController
     }
     
@@ -79,9 +88,12 @@ public struct NXNavigationWrapperView: UIViewRepresentable {
         // Nothing...
     }
     
+    /// 即将应用配置到当前视图控制器的回调
+    /// - Parameters:
+    ///   - viewController: 当前的 UIHostingController
+    ///   - configuration: 设置当前视图控制器的配置信息
     private func onPrepareConfiguration(viewController: UIViewController, configuration: NXNavigationConfiguration) {
         onPrepareConfiguration?(configuration)
-        onContextChanged?(virtualView)
         viewController.nx_setNeedsNavigationBarAppearanceUpdate()
     }
     

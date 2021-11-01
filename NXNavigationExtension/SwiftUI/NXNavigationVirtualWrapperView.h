@@ -26,26 +26,22 @@
 #if __has_include(<NXNavigationExtension/NXNavigationExtension.h>)
 
 #import <NXNavigationExtension/NXNavigationConfiguration.h>
-#import <NXNavigationExtension/NXNavigationRouter.h>
 
 #else
 
 #import "NXNavigationConfiguration.h"
-#import "NXNavigationRouter.h"
 
 #endif /* __has_include */
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NXNavigationConfiguration;
+@class NXNavigationConfiguration, NXNavigationRouterContext;
 
-API_AVAILABLE(ios(13.0), tvos(13.0))
-@interface NXNavigationVirtualWrapperView : UIView <NXNavigationInteractable, NXNavigationContext>
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+@interface NXNavigationVirtualWrapperView : UIView <NXNavigationInteractable>
 
-@property (nonatomic, copy, nullable) NSString *routeName;
-
-/// NXNavigationVirtualWrapperView 实际所在的视图控制器
-@property (nonatomic, weak, nullable, readonly) __kindof UIViewController *hostingController;
+/// 当前 UIHostingController ContentView 的 NXNavigationRouterContext 对象
+@property (nonatomic, strong, nullable) NXNavigationRouterContext *context;
 
 /// 执行 UIViewController 生命周期时系统自动调用，每个 UIViewController 实例会调用多次。即将应用配置到当前视图控制器的回调
 @property (nonatomic, copy, nullable) NXNavigationPrepareConfigurationCallback prepareConfigurationCallback;

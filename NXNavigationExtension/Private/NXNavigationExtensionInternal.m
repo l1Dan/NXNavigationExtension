@@ -32,13 +32,6 @@
 #import "UIViewController+NXNavigationExtension.h"
 
 
-@interface NXNavigationVirtualWrapperView ()
-
-@property (nonatomic, weak) __kindof UIViewController *hostingController;
-
-@end
-
-
 @implementation NXScreenEdgePopGestureRecognizerDelegate
 
 - (instancetype)initWithNavigationController:(UINavigationController *)navigationController {
@@ -488,7 +481,7 @@
 }
 
 - (void)setNx_navigationVirtualWrapperView:(NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
-    nx_navigationVirtualWrapperView.hostingController = self;
+    nx_navigationVirtualWrapperView.context.hostingController = self;
     self.nx_navigationInteractDelegate = (id<NXNavigationInteractable>)nx_navigationVirtualWrapperView;
     objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperView), nx_navigationVirtualWrapperView, OBJC_ASSOCIATION_ASSIGN);
 }

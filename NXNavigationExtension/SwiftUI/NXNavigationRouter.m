@@ -30,10 +30,25 @@
 #import "UIViewController+NXNavigationExtension.h"
 
 
+@implementation NXNavigationRouterContext
+
+- (instancetype)initWithRouteName:(NSString *)routeName {
+    if (self = [super init]) {
+        _routeName = routeName ?: @"";
+    }
+    return self;
+}
+
++ (instancetype)navigationRouterContextWithRouteName:(NSString *)routeName {
+    return [[[self class] alloc] initWithRouteName:routeName];
+}
+
+@end
+
+
 @interface NXNavigationRouter ()
 
-@property (nonatomic, strong) NSMutableDictionary<NSString *, id<NXNavigationContext>> *contextInfo;
-@property (nonatomic, weak) id<NXNavigationContext> context;
+@property (nonatomic, weak) NXNavigationRouterContext *context;
 @property (nonatomic, assign) BOOL callNXPopMethod;
 
 @end
@@ -42,14 +57,6 @@
 @implementation NXNavigationRouter
 
 #pragma mark - Getter
-
-- (NSMutableDictionary<NSString *, id<NXNavigationContext>> *)contextInfo {
-    if (!_contextInfo) {
-        _contextInfo = [NSMutableDictionary dictionary];
-    }
-    
-    return _contextInfo;
-}
 
 - (NXNavigationRouter *)nx {
     self.callNXPopMethod = YES;
@@ -65,29 +72,6 @@
     if (routeName.length == 0) return nil;
     
     return routeName;
-}
-
-- (void)addContext:(id<NXNavigationContext>)context {
-    NSString *routeName = [self checkRouteName:context.routeName];
-    if (!routeName) {
-        NSLog(@"路由名字不规范");
-        return;
-    }
-    
-    UINavigationController *navigationController = context.hostingController.navigationController;
-    if ([routeName isEqualToString:@"/"] && navigationController.viewControllers.firstObject != context.hostingController) {
-        NSLog(@"路由名称 '%@' 为 rootViewController 所有，请使用其他路由名称", routeName);
-        return;
-    }
-    
-    self.contextInfo[routeName] = context;
-}
-
-- (void)removeContext:(id<NXNavigationContext>)context {
-    NSString *routeName = [self checkRouteName:context.routeName];
-    if (!routeName) return;
-    
-    [self.contextInfo removeObjectForKey:routeName];
 }
 
 - (BOOL)popWithAnimated:(BOOL)animated {
@@ -107,10 +91,34 @@
 
 #pragma mark - Public
 
-+ (instancetype)of:(id<NXNavigationContext>)context {
++ (instancetype)of:(NXNavigationRouterContext *)context {
     NXNavigationRouter *navigationRouter = context.hostingController.navigationController.nx_navigationRouter;
     navigationRouter.context = context;
     return navigationRouter;
+}
+
+- (NSArray<__kindof UIViewController *> *)filterViewControllersWithRouteName:(NSString *)routeName {
+    if (!routeName ||
+        !self.context ||
+        !self.context.hostingController ||
+        !self.context.hostingController.navigationController ||
+        !self.context.hostingController.navigationController.viewControllers) {
+        return @[];
+    }
+    
+    NSArray<__kindof UIViewController *> *viewControllers = self.context.hostingController.navigationController.viewControllers;
+    NSMutableArray<__kindof UIViewController *> *filterViewControllers = [NSMutableArray array];
+    for (__kindof UIViewController *viewController in viewControllers) {
+        if (viewController.nx_navigationVirtualWrapperView &&
+            viewController.nx_navigationVirtualWrapperView.context &&
+            viewController.nx_navigationVirtualWrapperView.context.routeName &&
+            [viewController.nx_navigationVirtualWrapperView.context.routeName isEqualToString:routeName]) {
+            if (self.context.hostingController != viewController) {
+                [filterViewControllers addObject:viewController];
+            }
+        }
+    }
+    return filterViewControllers;
 }
 
 - (void)setNeedsNavigationBarAppearanceUpdate {
@@ -124,11 +132,10 @@
     }
 }
 
-- (BOOL)popWithRouteName:(NSString *)routeName animated:(BOOL)animated {
-    if (self.context &&
-        self.context.routeName &&
-        self.context.routeName.length &&
-        [self.context.routeName isEqualToString:routeName]) {
+- (BOOL)popToFirst:(BOOL)first routeName:(NSString *)routeName animated:(BOOL)animated {
+    if (!self.context ||
+        !self.context.routeName ||
+        !self.context.routeName.length) {
         return NO;
     }
     
@@ -151,15 +158,17 @@
         }
     }
     
-    id<NXNavigationContext> context = self.contextInfo[routeName];
-    if (context && context.hostingController) {
+    NSArray<__kindof UIViewController *> *viewControllers = [self filterViewControllersWithRouteName:routeName];
+    if (viewControllers && viewControllers.count) {
+        __kindof UIViewController *viewController = first ? viewControllers.firstObject : viewControllers.lastObject;
         if (self.callNXPopMethod) {
             self.callNXPopMethod = NO;
-            return [navigationController nx_popToViewController:context.hostingController animated:animated] ? YES : NO;
+            return [navigationController nx_popToViewController:viewController animated:animated] ? YES : NO;
         } else {
-            return [navigationController popToViewController:context.hostingController animated:animated] ? YES : NO;
+            return [navigationController popToViewController:viewController animated:animated] ? YES : NO;
         }
     }
+    
     return NO;
 }
 

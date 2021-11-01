@@ -28,13 +28,6 @@
 #import "UIViewController+NXNavigationExtension.h"
 
 
-@interface NXNavigationVirtualWrapperView ()
-
-@property (nonatomic, weak) __kindof UIViewController *hostingController;
-
-@end
-
-
 @implementation NXNavigationVirtualWrapperView
 
 - (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController

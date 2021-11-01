@@ -107,6 +107,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 /// 全屏返回手势代理对象
 @property (nonatomic, strong, readonly) NXFullScreenPopGestureRecognizerDelegate *nx_fullScreenPopGestureDelegate;
 
+/// For SwiftUI，保存 NXNavigationRouter 的示例话对象。可以保持 UINavigationController 实例和 NXNavigationRouter 实例的对应关系
 @property (nonatomic, strong, readonly) NXNavigationRouter *nx_navigationRouter API_AVAILABLE(ios(13.0));
 
 /// 是否使用 NXNavigationBar，默认 NO；如果导航控制器没有注册则使用系统导航栏
@@ -152,7 +153,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 /// For SwiftUI，返回页面时交互事件代理
 @property (nonatomic, weak, nullable) id<NXNavigationInteractable> nx_navigationInteractDelegate;
 
-/// For SwiftUI，拿到当前的 NXNavigationVirtualWrapperView。
+/// For SwiftUI，拿到当前的 NXNavigationVirtualWrapperView
 @property (nonatomic, weak, nullable) NXNavigationVirtualWrapperView *nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0));
 
 /// 获取当前导航控制器的配置

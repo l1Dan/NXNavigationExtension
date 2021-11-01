@@ -25,30 +25,48 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(13.0), tvos(13.0))
-@protocol NXNavigationContext <NSObject>
 
-@property (nonatomic, copy, nullable) NSString *routeName;
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+NS_SWIFT_NAME(NXNavigationRouter.Context) @interface NXNavigationRouterContext : NSObject
 
-@property (nonatomic, weak, nullable, readonly) __kindof UIViewController *hostingController;
+/// 路由名称
+@property (nonatomic, copy, readonly) NSString *routeName;
+
+/// SwiftUI ContentView 所在的 UIHostingController
+@property (nonatomic, weak, nullable) __kindof UIViewController *hostingController;
+
+/// 初始化 NXNavigationRouterContext 对象
+/// @param routeName 路由名称
+- (instancetype)initWithRouteName:(nullable NSString *)routeName;
+
+/// 便利构造函数
+/// @param routeName 路由名称
++ (instancetype)navigationRouterContextWithRouteName:(nullable NSString *)routeName;
 
 @end
 
-
-API_AVAILABLE(ios(13.0), tvos(13.0))
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 @interface NXNavigationRouter : NSObject
 
+/// 调用 `nx_` 开头的方法；比如：NXNavigationRouter.of(context).nx./pop()/popUntil("routeName")...
 @property (nonatomic, strong, readonly) NXNavigationRouter *nx;
 
-+ (instancetype)of:(id<NXNavigationContext>)context;
+/// 获取 NXNavigationRouter 对象
+/// @param context 当前使用的 NXNavigationRouterContext 对象
++ (instancetype)of:(NXNavigationRouterContext *)context;
 
-- (void)addContext:(id<NXNavigationContext>)context;
+/// 通过理由名称筛选可以被路由器所使用的所有视图控制器对象
+/// @param routeName 路由名称
+- (NSArray<__kindof UIViewController *> *)filterViewControllersWithRouteName:(NSString *)routeName;
 
-- (void)removeContext:(id<NXNavigationContext>)context;
-
+/// The same as UIViewController `nx_setNeedsNavigationBarAppearanceUpdate` instance.
 - (void)setNeedsNavigationBarAppearanceUpdate;
 
-- (BOOL)popWithRouteName:(nullable NSString *)routeName animated:(BOOL)animated NS_REFINED_FOR_SWIFT;
+/// 适配调用系统 `pop` 系列或者 `nx_pop` 系列方法
+/// @param first 如果 routeName 相同，是否 pop 到第一个视图控制器对象
+/// @param routeName 路由名称
+/// @param animated 是否使用转场动画
+- (BOOL)popToFirst:(BOOL)first routeName:(NSString *)routeName animated:(BOOL)animated NS_REFINED_FOR_SWIFT;
 
 @end
 
