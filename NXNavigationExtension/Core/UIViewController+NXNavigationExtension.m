@@ -126,6 +126,8 @@
 - (void)nx_configureNXNavigationBar {
     if (self.nx_canSetupNavigationBar && !self.nx_navigationBarInitialize) {
         self.nx_navigationBarInitialize = YES;
+        // fix: 修复 popToRootViewController 时调用 nx_setNeedsNavigationBarAppearanceUpdate 方法会设置 leftBarButtonItem 的问题
+        [self.navigationController viewControllers].firstObject.nx_isRootViewController = YES;
         [self.navigationController nx_configureNavigationBar];
         [self nx_setupNavigationBar];
         [self nx_updateNavigationBarAppearance];
@@ -491,7 +493,8 @@
             NSArray<__kindof UIViewController *> *previousViewControllers = [self.navigationController.viewControllers subarrayWithRange:NSMakeRange(0, length)];
             [self.navigationController nx_adjustmentSystemBackButtonForViewController:self inViewControllers:previousViewControllers];
         }
-        if (self.navigationController.viewControllers.firstObject != self) {
+        
+        if (!self.nx_isRootViewController) {
             [self nx_configureNavigationBarWithNavigationController:self.navigationController];
         }
     }

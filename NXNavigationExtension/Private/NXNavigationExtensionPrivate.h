@@ -133,6 +133,9 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 
 @interface UIViewController (NXNavigationExtensionPrivate)
 
+/// 记录当前视图控制器是否为导航控制器的 rootViewController
+@property (nonatomic, assign) BOOL nx_isRootViewController;
+
 // For SwiftUI，拿到当前的 NXNavigationVirtualWrapperView。
 @property (nonatomic, weak, nullable) NXNavigationVirtualWrapperView *nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0));
 

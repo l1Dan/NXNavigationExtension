@@ -367,6 +367,18 @@
 
 @implementation UIViewController (NXNavigationExtensionPrivate)
 
+- (BOOL)nx_isRootViewController {
+    NSNumber *number = objc_getAssociatedObject(self, _cmd);
+    if (number && [number isKindOfClass:[NSNumber class]]) {
+        return [number boolValue];
+    }
+    return NO;
+}
+
+- (void)setNx_isRootViewController:(BOOL)nx_isRootViewController {
+    objc_setAssociatedObject(self, @selector(nx_isRootViewController), @(nx_isRootViewController), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 - (NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
     return objc_getAssociatedObject(self, _cmd);
 }
