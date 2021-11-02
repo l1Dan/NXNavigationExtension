@@ -97,30 +97,6 @@
     return navigationRouter;
 }
 
-- (NSArray<__kindof UIViewController *> *)filterViewControllersWithRouteName:(NSString *)routeName {
-    if (!routeName ||
-        !self.context ||
-        !self.context.hostingController ||
-        !self.context.hostingController.navigationController ||
-        !self.context.hostingController.navigationController.viewControllers) {
-        return @[];
-    }
-    
-    NSArray<__kindof UIViewController *> *viewControllers = self.context.hostingController.navigationController.viewControllers;
-    NSMutableArray<__kindof UIViewController *> *filterViewControllers = [NSMutableArray array];
-    for (__kindof UIViewController *viewController in viewControllers) {
-        if (viewController.nx_navigationVirtualWrapperView &&
-            viewController.nx_navigationVirtualWrapperView.context &&
-            viewController.nx_navigationVirtualWrapperView.context.routeName &&
-            [viewController.nx_navigationVirtualWrapperView.context.routeName isEqualToString:routeName]) {
-            if (self.context.hostingController != viewController) {
-                [filterViewControllers addObject:viewController];
-            }
-        }
-    }
-    return filterViewControllers;
-}
-
 - (void)setNeedsNavigationBarAppearanceUpdate {
     __kindof UIViewController *hostingController = self.context.hostingController;
     if (!hostingController) return;
@@ -132,7 +108,37 @@
     }
 }
 
-- (BOOL)popToFirst:(BOOL)first routeName:(NSString *)routeName animated:(BOOL)animated {
+- (__kindof UIViewController *)destinationViewControllerWithRouteName:(NSString *)routeName isReverse:(BOOL)isReverse {
+    if (!routeName ||
+        !self.context ||
+        !self.context.hostingController ||
+        !self.context.hostingController.navigationController ||
+        !self.context.hostingController.navigationController.viewControllers) {
+        return nil;
+    }
+    
+    NSArray<__kindof UIViewController *> *viewControllers = self.context.hostingController.navigationController.viewControllers;
+    if (viewControllers && viewControllers.lastObject == self.context.hostingController) {
+        // 将自己移除
+        NSMutableArray<__kindof UIViewController *> *vcs = [NSMutableArray arrayWithArray:viewControllers];
+        [vcs removeLastObject];
+        viewControllers = vcs;
+    }
+    viewControllers = isReverse ? viewControllers.reverseObjectEnumerator.allObjects : viewControllers;
+    
+    for (__kindof UIViewController *viewController in viewControllers) {
+        if (viewController.nx_navigationVirtualWrapperView &&
+            viewController.nx_navigationVirtualWrapperView.context &&
+            viewController.nx_navigationVirtualWrapperView.context.routeName &&
+            [viewController.nx_navigationVirtualWrapperView.context.routeName isEqualToString:routeName]) {
+            return viewController;
+        }
+    }
+    
+    return nil;
+}
+
+- (BOOL)popWithRouteName:(NSString *)routeName animated:(BOOL)animated isReverse:(BOOL)isReverse {
     if (!self.context ||
         !self.context.routeName ||
         !self.context.routeName.length) {
@@ -158,9 +164,8 @@
         }
     }
     
-    NSArray<__kindof UIViewController *> *viewControllers = [self filterViewControllersWithRouteName:routeName];
-    if (viewControllers && viewControllers.count) {
-        __kindof UIViewController *viewController = first ? viewControllers.firstObject : viewControllers.lastObject;
+    __kindof UIViewController *viewController = [self destinationViewControllerWithRouteName:routeName isReverse:isReverse];
+    if (viewController) {
         if (self.callNXPopMethod) {
             self.callNXPopMethod = NO;
             return [navigationController nx_popToViewController:viewController animated:animated] ? YES : NO;

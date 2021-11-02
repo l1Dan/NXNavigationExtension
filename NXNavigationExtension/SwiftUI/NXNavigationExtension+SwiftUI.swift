@@ -67,7 +67,7 @@ public extension NXNavigationRouter {
     ///   - animated: 是否使用转场动画
     /// - Returns: 本次操作是否成功
     func popToFirstUntil(_ routeName: String, _ animated: Bool = true) -> Bool {
-        return __pop(toFirst: true, routeName: routeName, animated: animated)
+        return __pop(withRouteName: routeName, animated: animated, isReverse: false)
     }
     
     @discardableResult
@@ -78,7 +78,7 @@ public extension NXNavigationRouter {
     ///   - animated: 是否使用转场动画
     /// - Returns: 本次操作是否成功
     func popToLastUntil(_ routeName: String, _ animated: Bool = true) -> Bool {
-        return __pop(toFirst: false, routeName: routeName, animated: animated)
+        return __pop(withRouteName: routeName, animated: animated, isReverse: true)
     }
     
 }
@@ -122,7 +122,7 @@ public extension View {
     }
     
     /// 通过 View 添加 `NXNavigationBar` 的包装对象，提供当前导航栏的外观的便利。
-    /// - Parameter onPrepareConfiguration: 执行 UIViewController 生命周期时系统自动调用，每个 UIViewController 实例会调用多次。即将应用配置到当前视图控制器的回调
+    /// - Parameter onPrepareConfiguration: 即将应用配置到当前视图控制器的回调，执行 UIViewController 生命周期时系统自动调用，每个 UIViewController 实例会调用多次。
     /// - Returns: 返回高度为 0，宽度为 0，并且是隐藏的 View
     ///
     /// import SwiftUI
@@ -186,7 +186,7 @@ public extension View {
     /// 通过 View 添加 `NXNavigationBar` 的包装对象，提供当前导航栏的外观的便利。
     /// - Parameters:
     ///   - context: 当前对象的 NXNavigationRouter.Context 实例对象
-    ///   - onPrepareConfiguration: 执行 UIViewController 生命周期时系统自动调用，每个 UIViewController 实例会调用多次。即将应用配置到当前视图控制器的回调
+    ///   - onPrepareConfiguration: 即将应用配置到当前视图控制器的回调，执行 UIViewController 生命周期时系统自动调用，每个 UIViewController 实例会调用多次。
     ///   - onWillPopViewController: 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
     ///   执行 `NXNavigationRouter.of(context).nx.\pop()\popToRoot()\popUntil("routeName")\popToFirstUntil("routeName")\popToLastUntil("routeName")` 等方法后也会触发这个代理回调
     /// - Returns: 返回高度为 0，宽度为 0，并且是隐藏的 View

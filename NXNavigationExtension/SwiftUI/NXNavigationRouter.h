@@ -55,18 +55,19 @@ API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 /// @param context 当前使用的 NXNavigationRouterContext 对象
 + (instancetype)of:(NXNavigationRouterContext *)context;
 
-/// 通过理由名称筛选可以被路由器所使用的所有视图控制器对象
-/// @param routeName 路由名称
-- (NSArray<__kindof UIViewController *> *)filterViewControllersWithRouteName:(NSString *)routeName;
-
 /// The same as UIViewController `nx_setNeedsNavigationBarAppearanceUpdate` instance.
 - (void)setNeedsNavigationBarAppearanceUpdate;
 
-/// 适配调用系统 `pop` 系列或者 `nx_pop` 系列方法
-/// @param first 如果 routeName 相同，是否 pop 到第一个视图控制器对象
+/// 通过路由名称得到可以弹出的目标视图控制器
+/// @param routeName 路由名称
+/// @param isReverse 遇到相同的路由名称时，是从栈头还是栈尾弹出视图控制器。
+- (nullable __kindof UIViewController *)destinationViewControllerWithRouteName:(NSString *)routeName isReverse:(BOOL)isReverse;
+
+/// 用于适配调用系统 `pop` 系列或者 `nx_pop` 系列方法
 /// @param routeName 路由名称
 /// @param animated 是否使用转场动画
-- (BOOL)popToFirst:(BOOL)first routeName:(NSString *)routeName animated:(BOOL)animated NS_REFINED_FOR_SWIFT;
+/// @param isReverse 遇到相同的路由名称时，是从栈头还是栈尾弹出视图控制器。
+- (BOOL)popWithRouteName:(NSString *)routeName animated:(BOOL)animated isReverse:(BOOL)isReverse NS_REFINED_FOR_SWIFT;
 
 @end
 

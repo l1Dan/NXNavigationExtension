@@ -171,7 +171,7 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 
 /// 使用当前配置注册需要设置的导航控制器
 /// @param navigationControllerClasses 需要注册的 UINavigationController 或子类类对象集合
-/// @param callback 执行 UIViewController 生命周期时系统自动调用，每个 UIViewController 实例只会调用一次。即将应用配置到当前视图控制器的回调
+/// @param callback 即将应用配置到当前视图控制器的回调，执行 UIViewController 生命周期时系统自动调用，每个 UIViewController 实例会调用多次。
 - (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses prepareConfigureViewControllerCallback:(NXNavigationPrepareConfigurationCallback)callback;
 
 /// 通过导航控制器获取对应的配置信息
