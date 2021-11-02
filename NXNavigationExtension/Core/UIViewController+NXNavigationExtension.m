@@ -528,16 +528,17 @@
 }
 
 - (void)nx_setNeedsNavigationBarAppearanceUpdate {
-    if (self.nx_canSetupNavigationBar && self.navigationController.viewControllers.count > 1) {
-        NSUInteger length = [self.navigationController.viewControllers indexOfObject:self];
-        if (length > 0) {
+    NSArray<__kindof UIViewController *> *viewControllers = self.navigationController.viewControllers;
+    if (self.nx_canSetupNavigationBar && viewControllers.count > 1) {
+        NSUInteger length = [viewControllers indexOfObject:self];
+        if (length > 0 && length <= viewControllers.count) {
             // 不包含当前控制器的其他所有控制器
-            NSArray<__kindof UIViewController *> *previousViewControllers = [self.navigationController.viewControllers subarrayWithRange:NSMakeRange(0, length)];
+            NSArray<__kindof UIViewController *> *previousViewControllers = [viewControllers subarrayWithRange:NSMakeRange(0, length)];
             [self.navigationController nx_adjustmentSystemBackButtonForViewController:self inViewControllers:previousViewControllers];
         }
         
         if (!self.nx_isRootViewController) {
-            [self nx_configureNavigationBarWithNavigationController:self.navigationController];            
+            [self nx_configureNavigationBarWithNavigationController:self.navigationController];
         }
         // 重新检查全屏返回手势是否动态修改
         if ([self.navigationController nx_checkFullScreenInteractivePopGestureEnabledWithViewController:self]) {
