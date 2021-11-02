@@ -71,7 +71,7 @@ private struct NavigationShowPopTypeView: View {
     
     private func canPop(_ routeName: String) -> Bool {
         if routeName == names[0] { return true }
-        return NXNavigationRouter.of(context).filterViewControllers(withRouteName: routeName).count > 0
+        return NXNavigationRouter.of(context).destinationViewController(withRouteName: routeName, isReverse: true) != nil
     }
     
     private func buttonDisabled(routeName: String, popType: PopType) -> Bool {
