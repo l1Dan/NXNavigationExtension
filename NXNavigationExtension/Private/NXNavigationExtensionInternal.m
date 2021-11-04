@@ -206,10 +206,15 @@
     dispatch_once(&onceToken, ^{
         NXNavigationExtensionOverrideImplementation([UINavigationItem class], @selector(setHidesBackButton:animated:), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
             return ^void(__unsafe_unretained __kindof UINavigationItem *selfObject, BOOL hidden, BOOL animated) {
-                BOOL hidesBackButton = !selfObject.nx_viewController.nx_useSystemBackButton;
                 void (*originSelectorIMP)(UINavigationItem *, SEL, BOOL, BOOL);
                 originSelectorIMP = (void (*)(UINavigationItem *, SEL, BOOL, BOOL))originalIMPProvider();
-                originSelectorIMP(selfObject, originCMD, hidesBackButton, animated);
+                
+                if (selfObject.nx_viewController.navigationController.nx_useNavigationBar) {
+                    BOOL hidesBackButton = !selfObject.nx_viewController.nx_useSystemBackButton;
+                    originSelectorIMP(selfObject, originCMD, hidesBackButton, animated);
+                } else {
+                    originSelectorIMP(selfObject, originCMD, hidden, animated);
+                }
             };
         });
         
