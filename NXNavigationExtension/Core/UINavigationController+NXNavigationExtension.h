@@ -23,6 +23,16 @@
 
 #import <UIKit/UIKit.h>
 
+#if __has_include(<NXNavigationExtension/NXNavigationExtension.h>)
+
+#import <NXNavigationExtension/NXNavigationConfiguration.h>
+
+#else
+
+#import "NXNavigationConfiguration.h"
+
+#endif /* __has_include */
+
 NS_ASSUME_NONNULL_BEGIN
 
 
@@ -52,6 +62,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 内部最终会调用系统方法：`popToRootViewControllerAnimated:`
 /// @param animated 默认 YES
 - (nullable NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerAnimated:(BOOL)animated;
+
+/// 即将应用配置到已经注册的导航控制器所管理的视图控制器的回调，每个视图控制器控实例对象只会调用一次。
+/// @param callback 设置将要配置的信息
+- (void)nx_prepareConfigureViewControllersCallback:(NXViewControllerPrepareConfigurationCallback)callback;
 
 /// 重定向视图控制器。可以跳转同一导航控制器下的任一视图控制器
 /// 只会判断视图控制器实例对象的类型（`Class`）是否相同，而非判断视图控制器实例对象（`Instance`）相同

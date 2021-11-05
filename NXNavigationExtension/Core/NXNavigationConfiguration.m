@@ -243,17 +243,13 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 #pragma mark - Public
 
 - (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses {
-    [self registerNavigationControllerClasses:navigationControllerClasses prepareConfigureViewControllerCallback:NULL];
+    [self registerNavigationControllerClasses:navigationControllerClasses prepareConfigureNavigationControllerCallback:NULL];
 }
 
-- (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses prepareConfigureViewControllerCallback:(NXNavigationPrepareConfigurationCallback)callback {
+- (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses prepareConfigureNavigationControllerCallback:(NXNavigationControllerPrepareConfigurationCallback)callback {
     NSAssert(navigationControllerClasses != nil, @"参数 navigationControllerClasses 不能为空！");
     
     NXNavigationConfiguration *configuration = self;
-    if (configuration == [NXNavigationConfiguration defaultConfiguration]) {
-        configuration = [configuration copy];
-    }
-    
     for (Class navigationControllerClass in navigationControllerClasses) {
         NSMutableDictionary<NSString *, id> *info = [NSMutableDictionary dictionary];
         [info setValue:configuration forKey:NXNavigationConfigurationKey];
@@ -267,7 +263,7 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
     return info ? info[NXNavigationConfigurationKey] : info;
 }
 
-+ (nullable NXNavigationPrepareConfigurationCallback)prepareConfigureViewControllerCallbackFromNavigationControllerClass:(Class)navigationControllerClass {
++ (nullable NXNavigationControllerPrepareConfigurationCallback)prepareConfigurationCallbackFromNavigationControllerClass:(Class)navigationControllerClass {
     NSDictionary<NSString *, id> *info = [NXNavigationConfiguration lookupConfigurationInfoWithNavigationControllerClass:navigationControllerClass];
     return info ? info[NXNavigationConfigurationCallbackKey] : info;
 }

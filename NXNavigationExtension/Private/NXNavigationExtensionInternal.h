@@ -107,7 +107,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 /// 全屏返回手势代理对象
 @property (nonatomic, strong, readonly) NXFullScreenPopGestureRecognizerDelegate *nx_fullScreenPopGestureDelegate;
 
-/// For SwiftUI，保存 NXNavigationRouter 的示例话对象。可以保持 UINavigationController 实例和 NXNavigationRouter 实例的对应关系
+/// For SwiftUI，保存 NXNavigationRouter 的实例对象。可以保持 UINavigationController 实例和 NXNavigationRouter 实例的对应关系
 @property (nonatomic, strong, readonly) NXNavigationRouter *nx_navigationRouter API_AVAILABLE(ios(13.0));
 
 /// 是否使用 NXNavigationBar，默认 NO；如果导航控制器没有注册则使用系统导航栏
@@ -159,8 +159,8 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 /// 获取当前导航控制器的配置
 @property (nonatomic, strong, nullable) NXNavigationConfiguration *nx_configuration;
 
-/// 即将应用配置到当前视图控制器的回调
-@property (nonatomic, strong, nullable) NXNavigationPrepareConfigurationCallback nx_prepareConfigureViewControllerCallback;
+/// 即将应用配置到当前视图控制器的回调，每个视图控制器控实例对象只会调用一次。
+@property (nonatomic, strong, nullable) NXViewControllerPrepareConfigurationCallback nx_prepareConfigureViewControllerCallback;
 
 /// 设置 UINavigationBarItem
 /// @param navigationController 包含当前视图控制器的导航控制器

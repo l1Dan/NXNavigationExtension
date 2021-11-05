@@ -25,8 +25,6 @@
 
 #import "NXNavigationExtensionInternal.h"
 
-#import "UIViewController+NXNavigationExtension.h"
-
 
 @implementation NXNavigationVirtualWrapperView
 

@@ -43,8 +43,8 @@ API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 /// 当前 UIHostingController ContentView 的 NXNavigationRouterContext 对象
 @property (nonatomic, strong, nullable) NXNavigationRouterContext *context;
 
-/// 即将应用配置到当前视图控制器的回调，执行 UIViewController 生命周期时系统自动调用，每个 UIViewController 实例会调用多次。
-@property (nonatomic, copy, nullable) NXNavigationPrepareConfigurationCallback prepareConfigurationCallback;
+/// 即将应用配置到当前视图控制器的回调，执行 `setNeedsNavigationBarAppearanceUpdate` 方法时也会触发此回调。
+@property (nonatomic, copy, nullable) NXViewControllerPrepareConfigurationCallback prepareConfigurationCallback;
 
 /// 筛选当前 UIHostingController 使用的 NXNavigationVirtualWrapperView 实例对象，开发者可以自定义查找规则（如果内部查找规则无效的情况下）。
 /// @param hostingController SwiftUI 中实际使用的视图控制器

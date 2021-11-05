@@ -59,7 +59,7 @@ public struct NXNavigationWrapperView: UIViewRepresentable {
     /// NXNavigationVirtualView 实例对象
     private let virtualView = NXNavigationVirtualView()
     
-    /// 即将应用配置到当前视图控制器的回调
+    /// 即将应用配置到当前视图控制器的回调，执行 `setNeedsNavigationBarAppearanceUpdate` 方法时也会触发此回调。
     private var onPrepareConfiguration: ((NXNavigationConfiguration) -> Void)?
     
     /// 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
@@ -68,7 +68,7 @@ public struct NXNavigationWrapperView: UIViewRepresentable {
     /// 初始化方法
     /// - Parameters:
     ///   - context: 当前对象的 NXNavigationRouter.Context 实例对象
-    ///   - onPrepareConfiguration: 即将应用配置到当前视图控制器的回调
+    ///   - onPrepareConfiguration: 即将应用配置到当前视图控制器的回调，执行 `setNeedsNavigationBarAppearanceUpdate` 方法时也会触发此回调。
     ///   - onWillPopViewController: 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
     init(context: Binding<NXNavigationRouter.Context>,
          onPrepareConfiguration: ((NXNavigationConfiguration) -> Void)? = nil,
@@ -88,13 +88,12 @@ public struct NXNavigationWrapperView: UIViewRepresentable {
         // Nothing...
     }
     
-    /// 即将应用配置到当前视图控制器的回调
+    /// 即将应用配置到当前视图控制器的回调，执行 `setNeedsNavigationBarAppearanceUpdate` 方法时也会触发此回调。
     /// - Parameters:
     ///   - viewController: 当前的 UIHostingController
     ///   - configuration: 设置当前视图控制器的配置信息
     private func onPrepareConfiguration(viewController: UIViewController, configuration: NXNavigationConfiguration) {
         onPrepareConfiguration?(configuration)
-        viewController.nx_setNeedsNavigationBarAppearanceUpdate()
     }
     
 }

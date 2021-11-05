@@ -29,7 +29,6 @@
 #import "NXNavigationExtensionInternal.h"
 #import "NXNavigationExtensionRuntime.h"
 
-#import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
 
 
@@ -38,7 +37,6 @@
 @property (nonatomic, assign) BOOL nx_navigationBarInitialize;
 @property (nonatomic, assign) BOOL nx_navigationVirtualWrapperViewInitialize;
 @property (nonatomic, assign) BOOL nx_navigationVirtualWrapperViewNotFound;
-@property (nonatomic, assign) BOOL nx_viewDidInitialize;
 @property (nonatomic, assign) BOOL nx_viewWillDisappearFinished;
 @property (nonatomic, assign, readonly) BOOL nx_canSetupNavigationBar;
 @property (nonatomic, strong, readonly) NXNavigationObservationDelegate *nx_navigationObservationDelegate;
@@ -52,19 +50,13 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIViewController class], @selector(viewDidLoad), ^(__kindof UIViewController *_Nonnull selfObject) {
-            selfObject.nx_viewDidInitialize = NO;
             [selfObject nx_configureNXNavigationBar];
             [selfObject nx_configureNavigationVirtualWrapperView];
-            [selfObject nx_executePrepareConfigurationCallback];
         });
         
         NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIViewController class], @selector(viewWillLayoutSubviews), ^(__kindof UIViewController *_Nonnull selfObject) {
             [selfObject nx_configureNXNavigationBar];
             [selfObject nx_configureNavigationVirtualWrapperView];
-            // perf: 当前页面加载完成之后就无需重复调用了，后续的导航栏修改调用 `nx_setNeedsNavigationBarAppearanceUpdate` 方法即可。
-            if (!selfObject.nx_viewDidInitialize) {
-                [selfObject nx_executePrepareConfigurationCallback];
-            }
             [selfObject nx_updateNavigationBarHierarchy];
         });
         
@@ -100,7 +92,6 @@
                 // fix: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
                 [selfObject nx_configureNXNavigationBar];
                 [selfObject nx_configureNavigationVirtualWrapperView];
-                [selfObject nx_executePrepareConfigurationCallback];
                 // 还原上一个视图控制器对导航栏的修改
                 [selfObject nx_updateNavigationBarAppearance];
                 [selfObject nx_updateNavigationBarHierarchy];
@@ -109,7 +100,6 @@
         });
 
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewDidAppear:), BOOL, ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
-            selfObject.nx_viewDidInitialize = YES;
             if (selfObject.nx_canSetupNavigationBar) {
                 BOOL interactivePopGestureRecognizerEnabled = selfObject.navigationController.viewControllers.count > 1;
                 selfObject.navigationController.interactivePopGestureRecognizer.enabled = interactivePopGestureRecognizerEnabled;
@@ -126,7 +116,6 @@
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(traitCollectionDidChange:), BOOL, ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
             if (selfObject.nx_canSetupNavigationBar) {
                 selfObject.nx_configuration.viewControllerPreferences.traitCollection = selfObject.view.traitCollection;
-                [selfObject nx_executePrepareConfigurationCallback];
             }
         });
     });
@@ -150,6 +139,8 @@
 - (void)nx_configureNXNavigationBar {
     if (self.nx_canSetupNavigationBar && !self.nx_navigationBarInitialize) {
         self.nx_navigationBarInitialize = YES;
+        // 调用外部配置信息
+        [self nx_executePrepareConfigurationViewControllerCallback];
         // fix: 修复 popToRootViewController 时调用 nx_setNeedsNavigationBarAppearanceUpdate 方法会设置 leftBarButtonItem 的问题
         [self.navigationController viewControllers].firstObject.nx_isRootViewController = YES;
         [self.navigationController nx_configureNavigationBar];
@@ -170,6 +161,9 @@
             self.nx_navigationVirtualWrapperView = [NXNavigationVirtualWrapperView filterNavigationVirtualWrapperViewWithViewController:self];
             if (self.nx_navigationVirtualWrapperView) {
                 self.nx_navigationVirtualWrapperViewInitialize = YES;
+                // 调用外部配置信息
+                [self nx_executePrepareConfigurationNavigationVirtualWrapperViewCallback];
+                [self nx_setNeedsNavigationBarAppearanceUpdate];
             }
         }
     }
@@ -299,16 +293,9 @@
     }
 }
 
-- (void)nx_executePrepareConfigurationCallback {
-    if ([self nx_canSetupNavigationBar]) {
-        [self nx_executePrepareConfigurationViewControllerCallback];
-        [self nx_executePrepareConfigurationNavigationVirtualWrapperViewCallback];
-    }
-}
-
 - (void)nx_executePrepareConfigurationViewControllerCallback {
     if ([self nx_canSetupNavigationBar]) {
-        NXNavigationPrepareConfigurationCallback callback = self.nx_prepareConfigureViewControllerCallback;
+        NXViewControllerPrepareConfigurationCallback callback = self.nx_prepareConfigureViewControllerCallback;
         if (callback) {
             callback(self, self.nx_configuration);
         }
@@ -318,7 +305,7 @@
 - (void)nx_executePrepareConfigurationNavigationVirtualWrapperViewCallback {
     if (@available(iOS 13.0, *)) {
         if ([self nx_canSetupNavigationBar] && self.nx_navigationVirtualWrapperViewInitialize) {
-            NXNavigationPrepareConfigurationCallback callback = self.nx_navigationVirtualWrapperView.prepareConfigurationCallback;
+            NXViewControllerPrepareConfigurationCallback callback = self.nx_navigationVirtualWrapperView.prepareConfigurationCallback;
             if (callback) {
                 callback(self, self.nx_configuration);
             }
@@ -362,18 +349,6 @@
 
 - (void)setNx_navigationVirtualWrapperViewNotFound:(BOOL)nx_navigationVirtualWrapperViewNotFound {
     objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperViewNotFound), @(nx_navigationVirtualWrapperViewNotFound), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (BOOL)nx_viewDidInitialize {
-    NSNumber *viewDidInitialize = objc_getAssociatedObject(self, _cmd);
-    if (viewDidInitialize && [viewDidInitialize isKindOfClass:[NSNumber class]]) {
-        return [viewDidInitialize boolValue];
-    }
-    return NO;
-}
-
-- (void)setNx_viewDidInitialize:(BOOL)nx_viewDidInitialize {
-    objc_setAssociatedObject(self, @selector(nx_viewDidInitialize), @(nx_viewDidInitialize), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)nx_viewWillDisappearFinished {

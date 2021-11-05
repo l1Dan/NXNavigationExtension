@@ -28,7 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NXNavigationConfiguration;
 
-typedef void (^_Nullable NXNavigationPrepareConfigurationCallback)(__kindof UIViewController *viewController, NXNavigationConfiguration *configuration);
+typedef NXNavigationConfiguration *_Nullable(^_Nullable NXNavigationControllerPrepareConfigurationCallback)(__kindof UINavigationController *navigationController, NXNavigationConfiguration *configuration);
+
+typedef void (^_Nullable NXViewControllerPrepareConfigurationCallback)(__kindof UIViewController *viewController, NXNavigationConfiguration *configuration);
 
 /// 返回页面使用的交互方式
 /// `NXNavigationInteractiveTypeCallNXPopMethod` 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 回调方式
@@ -169,10 +171,10 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 /// @param navigationControllerClasses 需要注册的 UINavigationController 或子类类对象集合
 - (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses;
 
-/// 使用当前配置注册需要设置的导航控制器
+/// 使用当前配置注册需要设置的导航控制器。如果 callback 中 NXNavigationConfiguration 返回为 nil，则此导航控制器及导航控制器管理的所有视图控制器的配置都将不会生效（相当于没有注册） 。
 /// @param navigationControllerClasses 需要注册的 UINavigationController 或子类类对象集合
-/// @param callback 即将应用配置到当前视图控制器的回调，执行 UIViewController 生命周期时系统自动调用，每个 UIViewController 实例会调用多次。
-- (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses prepareConfigureViewControllerCallback:(NXNavigationPrepareConfigurationCallback)callback;
+/// @param callback 即将应用配置到当前视图控制器的回调，每个导航控制器实例对象只会调用一次。
+- (void)registerNavigationControllerClasses:(NSArray<Class> *)navigationControllerClasses prepareConfigureNavigationControllerCallback:(NXNavigationControllerPrepareConfigurationCallback)callback;
 
 /// 通过导航控制器获取对应的配置信息
 /// @param navigationControllerClass 需要注册的 UINavigationController 或子类类对象
@@ -180,7 +182,7 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 
 /// 通过导航控制器获取对应的配置信息回调
 /// @param navigationControllerClass 需要注册的 UINavigationController 或子类类对象
-+ (nullable NXNavigationPrepareConfigurationCallback)prepareConfigureViewControllerCallbackFromNavigationControllerClass:(nullable Class)navigationControllerClass;
++ (nullable NXNavigationControllerPrepareConfigurationCallback)prepareConfigurationCallbackFromNavigationControllerClass:(nullable Class)navigationControllerClass;
 
 @end
 

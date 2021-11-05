@@ -277,8 +277,29 @@
 
 @end
 
+@interface UINavigationController (NXNavigationExtensionInternal)
+
+@property (nonatomic, assign) BOOL nx_prepareConfigurationCompleted;
+
+@end
 
 @implementation UINavigationController (NXNavigationExtensionInternal)
+
+#pragma mark - Private
+
+- (BOOL)nx_prepareConfigurationCompleted {
+    NSNumber *number = objc_getAssociatedObject(self, _cmd);
+    if (number && [number isKindOfClass:[NSNumber class]]) {
+        return [number boolValue];
+    }
+    return NO;
+}
+
+- (void)setNx_prepareConfigurationCompleted:(BOOL)nx_prepareConfigurationCompleted {
+    objc_setAssociatedObject(self, @selector(nx_prepareConfigurationCompleted), @(nx_prepareConfigurationCompleted), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+#pragma mark - Public
 
 - (NXScreenEdgePopGestureRecognizerDelegate *)nx_screenEdgePopGestureDelegate {
     return objc_getAssociatedObject(self, _cmd);
@@ -310,21 +331,16 @@
 // Override
 - (NXNavigationConfiguration *)nx_configuration {
     NXNavigationConfiguration *configuration = objc_getAssociatedObject(self, _cmd);
-    if (!configuration) {
+    if (!configuration && !self.nx_prepareConfigurationCompleted) {
+        self.nx_prepareConfigurationCompleted = YES;
         configuration = [NXNavigationConfiguration configurationFromNavigationControllerClass:[self class]];
+        NXNavigationControllerPrepareConfigurationCallback callback = [NXNavigationConfiguration prepareConfigurationCallbackFromNavigationControllerClass:[self class]];
+        if (callback) {
+            configuration = callback(self, [configuration copy]);
+        }
         [self setNx_configuration:configuration];
     }
     return configuration;
-}
-
-// Override
-- (NXNavigationPrepareConfigurationCallback)nx_prepareConfigureViewControllerCallback {
-    NXNavigationPrepareConfigurationCallback callback = objc_getAssociatedObject(self, _cmd);
-    if (!callback) {
-        callback = [NXNavigationConfiguration prepareConfigureViewControllerCallbackFromNavigationControllerClass:[self class]];
-        [self setNx_prepareConfigureViewControllerCallback:callback];
-    }
-    return callback;
 }
 
 - (BOOL)nx_useNavigationBar {
@@ -505,16 +521,16 @@
     objc_setAssociatedObject(self, @selector(nx_configuration), [nx_configuration copy], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NXNavigationPrepareConfigurationCallback)nx_prepareConfigureViewControllerCallback {
-    NXNavigationPrepareConfigurationCallback callback = objc_getAssociatedObject(self, _cmd);
-    if (!callback && self.navigationController) {
+- (NXViewControllerPrepareConfigurationCallback)nx_prepareConfigureViewControllerCallback {
+    NXViewControllerPrepareConfigurationCallback callback = objc_getAssociatedObject(self, _cmd);
+    if (!callback && self.navigationController && self.navigationController.nx_useNavigationBar) {
         callback = self.navigationController.nx_prepareConfigureViewControllerCallback;
         [self setNx_prepareConfigureViewControllerCallback:callback];
     }
     return callback;
 }
 
-- (void)setNx_prepareConfigureViewControllerCallback:(NXNavigationPrepareConfigurationCallback)nx_prepareConfigureViewControllerCallback {
+- (void)setNx_prepareConfigureViewControllerCallback:(NXViewControllerPrepareConfigurationCallback)nx_prepareConfigureViewControllerCallback {
     objc_setAssociatedObject(self, @selector(nx_prepareConfigureViewControllerCallback), nx_prepareConfigureViewControllerCallback, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 

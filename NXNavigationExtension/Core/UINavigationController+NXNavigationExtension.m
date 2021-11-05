@@ -24,11 +24,10 @@
 // https://github.com/forkingdog/FDFullscreenPopGesture
 // https://github.com/l1Dan/NSLNavigationSolution
 
-#import "NXNavigationConfiguration.h"
 #import "NXNavigationExtensionInternal.h"
 #import "NXNavigationExtensionRuntime.h"
 
-#import "UIViewController+NXNavigationExtension.h"
+#import "UINavigationController+NXNavigationExtension.h"
 
 
 @implementation UINavigationController (NXNavigationExtension)
@@ -221,6 +220,10 @@
                                            handler:^id _Nonnull(UINavigationController * _Nonnull navigationController) {
         return [navigationController popToRootViewControllerAnimated:animated];
     }];
+}
+
+- (void)nx_prepareConfigureViewControllersCallback:(NXViewControllerPrepareConfigurationCallback)callback {
+    self.nx_prepareConfigureViewControllerCallback = callback;
 }
 
 - (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController * _Nullable (^)(void))block {
