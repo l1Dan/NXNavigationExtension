@@ -56,7 +56,7 @@ public extension NXNavigationRouter {
     ///   - animated: 是否使用转场动画
     /// - Returns: 本次操作是否成功
     func popUntil(_ routeName: String, _ animated: Bool = true) -> Bool {
-        return popToLastUntil(routeName)
+        return popToLastUntil(routeName, animated)
     }
     
     @discardableResult

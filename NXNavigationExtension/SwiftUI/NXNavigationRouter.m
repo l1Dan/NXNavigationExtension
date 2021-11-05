@@ -65,15 +65,6 @@
 
 #pragma mark - Private
 
-- (NSString *)checkRouteName:(NSString *)routeName {
-    if (!routeName) return nil;
-    
-    routeName = [routeName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    if (routeName.length == 0) return nil;
-    
-    return routeName;
-}
-
 - (BOOL)popWithAnimated:(BOOL)animated {
     UINavigationController *navigationController = self.context.hostingController.navigationController;
     if (!navigationController) {
@@ -139,13 +130,11 @@
 }
 
 - (BOOL)popWithRouteName:(NSString *)routeName animated:(BOOL)animated isReverse:(BOOL)isReverse {
-    if (!self.context ||
-        !self.context.routeName ||
-        !self.context.routeName.length) {
+    if (!self.context || !self.context.routeName) {
         return NO;
     }
     
-    routeName = [self checkRouteName:routeName];
+    routeName = [routeName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (!routeName || [routeName isEqualToString:@""]) {
         return [self popWithAnimated:animated];
     }
