@@ -21,10 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIColor *)customDarkGrayColor;
 
-+ (UIColor *)customBlueColor;
-
-+ (UIColor *)customBackgroundColor;
-
 + (UIColor *)customGroupedBackgroundColor;
 
 + (UIColor *)mixColor1:(UIColor *)color1 color2:(UIColor *)color2 ratio:(CGFloat)ratio;

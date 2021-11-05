@@ -1,5 +1,5 @@
 //
-//  BackgorundColor.swift
+//  BackgroundColor.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/15.
@@ -10,7 +10,7 @@ import SwiftUI
 #endif
 
 @available(iOS 13, *)
-struct BackgorundColor: View {
+struct BackgroundColor: View {
     private let randomDark = UIColor.randomDark
     private let randomLight = UIColor.randomLight
     private let item: NavigationFeatureItem
@@ -30,10 +30,10 @@ struct BackgorundColor: View {
 }
 
 @available(iOS 13, *)
-struct BackgorundColor_Previews: PreviewProvider {
+struct BackgroundColor_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            BackgorundColor(NavigationFeatureItem(style: .backgorundColor))
+            BackgroundColor(NavigationFeatureItem(style: .backgroundColor))
         }
     }
 }

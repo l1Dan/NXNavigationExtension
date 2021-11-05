@@ -22,7 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor customBackgroundColor];
+    self.view.backgroundColor = [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
+        return [UIColor whiteColor];
+    } darkModeColor:^UIColor * _Nonnull{
+        return [UIColor blackColor];
+    }];
 }
 
 - (void)dealloc {

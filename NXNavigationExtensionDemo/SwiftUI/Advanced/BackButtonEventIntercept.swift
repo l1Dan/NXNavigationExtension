@@ -66,7 +66,7 @@ struct BackButtonEventIntercept: View {
             return Alert(title:Text("提示"), message: Text("是否继续返回？"), primaryButton: destructive, secondaryButton: cancel)
         })
         .useNXNavigationView(context: $context, onPrepareConfiguration: { configuration in
-            configuration.navigationBarAppearance.backgroundImage = UIImage(named: "NavigationBarBackgound88")
+            configuration.navigationBarAppearance.backgroundImage = UIImage(named: "NavigationBarBackground88")
             configuration.navigationBarAppearance.tintColor = .white
             configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             configuration.navigationBarAppearance.useSystemBackButton = true

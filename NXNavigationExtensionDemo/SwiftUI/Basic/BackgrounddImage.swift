@@ -1,5 +1,5 @@
 //
-//  BackgorundImage.swift
+//  BackgrounddImage.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/15.
@@ -10,7 +10,7 @@ import SwiftUI
 #endif
 
 @available(iOS 13, *)
-struct BackgorundImage: View {
+struct BackgrounddImage: View {
     @State private var isPresented = false
     private let item: NavigationFeatureItem
     
@@ -22,7 +22,7 @@ struct BackgorundImage: View {
         ColorListView()
             .navigationBarTitle(item.title)
             .useNXNavigationView(onPrepareConfiguration: { configuration in
-                configuration.navigationBarAppearance.backgroundImage = UIImage(named: "NavigationBarBackgound88")
+                configuration.navigationBarAppearance.backgroundImage = UIImage(named: "NavigationBarBackground88")
                 configuration.navigationBarAppearance.tintColor = .white
                 configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             })
@@ -30,10 +30,10 @@ struct BackgorundImage: View {
 }
 
 @available(iOS 13, *)
-struct BackgorundImage_Previews: PreviewProvider {
+struct BackgrounddImage_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            BackgorundImage(NavigationFeatureItem(style: .backgorundImage))
+            BackgrounddImage(NavigationFeatureItem(style: .backgroundImage))
         }
     }
 }

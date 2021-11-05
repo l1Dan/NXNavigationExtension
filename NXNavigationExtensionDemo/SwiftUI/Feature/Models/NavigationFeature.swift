@@ -8,8 +8,8 @@
 class NavigationFeatureItem {
     
     enum Style: String {
-        case backgorundColor = "修改导航栏背景颜色"
-        case backgorundImage = "修改导航栏背景图片"
+        case backgroundColor = "修改导航栏背景颜色"
+        case backgroundImage = "修改导航栏背景图片"
         case transparent = "设置导航栏透明"
         case blurNavigationBarLikeSystem = "实现系统导航栏模糊效果"
         case blurNavigationBarCustom = "自定义导航栏模糊背景" // Not working
@@ -27,7 +27,7 @@ class NavigationFeatureItem {
         case backButtonEventIntercept = "导航栏返回事件拦截"
         case navigationRouter = "SwiftUI 路由管理"
         case customNavigationBar = "完全自定义导航栏"
-        case navigatioinBarUserInteractionDisable = "导航栏点击事件穿透到底部视图"
+        case navigationBarUserInteractionDisable = "导航栏点击事件穿透到底部视图"
         case dynamicChangeNavigationBarStyle = "滑动改变导航栏样式" // Not working
         case webView = "WKWebView"
         case updateNavigationBarForManually = "更新导航栏样式"
@@ -71,8 +71,8 @@ class NavigationFeatureSection {
     
     static var sections: [NavigationFeatureSection] {
         let basicItems = [
-            NavigationFeatureItem(style: .backgorundColor),
-            NavigationFeatureItem(style: .backgorundImage),
+            NavigationFeatureItem(style: .backgroundColor),
+            NavigationFeatureItem(style: .backgroundImage),
             NavigationFeatureItem(style: .transparent),
             NavigationFeatureItem(style: .blurNavigationBarLikeSystem),
 //            NavigationFeatureItem(style: .blurNavigationBarCustom),
@@ -94,7 +94,7 @@ class NavigationFeatureSection {
             NavigationFeatureItem(style: .backButtonEventIntercept),
             NavigationFeatureItem(style: .navigationRouter),
             NavigationFeatureItem(style: .customNavigationBar),
-            NavigationFeatureItem(style: .navigatioinBarUserInteractionDisable),
+            NavigationFeatureItem(style: .navigationBarUserInteractionDisable),
 //            NavigationFeatureItem(style: .dynamicChangeNavigationBarStyle),
             NavigationFeatureItem(style: .webView),
             NavigationFeatureItem(style: .updateNavigationBarForManually),

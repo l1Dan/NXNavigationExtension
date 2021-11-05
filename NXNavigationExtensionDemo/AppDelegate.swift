@@ -32,8 +32,15 @@ extension AppDelegate {
         // For FeatureNavigationController
         let featureConfiguration = NXNavigationConfiguration.default
         featureConfiguration.navigationBarAppearance.tintColor = .customTitle
-        featureConfiguration.registerNavigationControllerClasses([FeatureNavigationController.self]) { viewController, configuration in
+        featureConfiguration.registerNavigationControllerClasses([FeatureNavigationController.self]) { navigationController, configuration in
             configuration.navigationBarAppearance.backgroundColor = .brown
+            
+            print("UIKit(navigationController):", navigationController, configuration)
+            navigationController.nx_prepareConfigureViewControllersCallback { viewController, configuration in
+                print("UIKit(viewController):", viewController, configuration)
+            }
+            
+            return configuration
         }
         
         // For SwiftUI
@@ -51,7 +58,7 @@ extension AppDelegate {
                 ].compactMap { $0 }
             }
             
-            NXNavigationConfiguration().registerNavigationControllerClasses(classes) { viewController, configuration in
+            NXNavigationConfiguration().registerNavigationControllerClasses(classes) { navigationController, configuration in
                 // Default dynamic colors
                 let color = UIColor.customColor { return .black } darkModeColor: { return .white }
                 if let traitCollection = configuration.viewControllerPreferences.traitCollection {
@@ -61,6 +68,13 @@ extension AppDelegate {
                     configuration.navigationBarAppearance.tintColor = color
                     configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: color]
                 }
+                
+                print("SwiftUI(navigationController):", navigationController, configuration)
+                navigationController.nx_prepareConfigureViewControllersCallback { viewController, configuration in
+                    print("SwiftUI(viewController):", viewController, configuration)
+                }
+                
+                return configuration
             }
         }
     }

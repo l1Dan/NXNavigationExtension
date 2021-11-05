@@ -20,10 +20,10 @@ struct FeatureDetailView: View {
     var body: some View {
         switch item.style {
             // Basic
-        case .backgorundColor:
-            return AnyView(BackgorundColor(item))
-        case .backgorundImage:
-            return AnyView(BackgorundImage(item))
+        case .backgroundColor:
+            return AnyView(BackgroundColor(item))
+        case .backgroundImage:
+            return AnyView(BackgrounddImage(item))
         case .transparent:
             return AnyView(Transparent(item))
         case .blurNavigationBarLikeSystem:
@@ -48,8 +48,8 @@ struct FeatureDetailView: View {
             return AnyView(EdgePopGestureDisable(item))
         case .fullScreenPopGestureEnable:
             return AnyView(FullScreenPopGestureEnable(item))
-        case .navigatioinBarUserInteractionDisable:
-            return AnyView(NavigatioinBarUserInteractionDisable(item))
+        case .navigationBarUserInteractionDisable:
+            return AnyView(NavigationBarUserInteractionDisable(item))
         case .backButtonEventIntercept:
             return AnyView(BackButtonEventIntercept(item))
         case .navigationRouter:

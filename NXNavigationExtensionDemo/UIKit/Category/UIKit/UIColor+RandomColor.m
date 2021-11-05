@@ -69,22 +69,6 @@
     return [UIColor colorWithRed:167 / 255.0 green:167 / 255.0 blue:167 / 255.0 alpha:1.0];
 }
 
-+ (UIColor *)customBlueColor {
-    return [UIColor colorWithRed:0.0 green:122 / 255.0 blue:1.0 alpha:1.0]; // [UIColor systemBlueColor]
-}
-
-+ (UIColor *)customBackgroundColor {
-    return [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
-        return [UIColor whiteColor];
-    } darkModeColor:^UIColor * _Nonnull{
-        if (@available(iOS 13.0, *)) {
-            return [UIColor systemGray6Color];
-        } else {
-            return [UIColor whiteColor];
-        }
-    }];
-}
-
 + (UIColor *)customGroupedBackgroundColor {
     return [UIColor customColorWithLightModeColor:^UIColor * _Nonnull{
         return [UIColor colorWithRed:239 / 255.0 green:239 / 255.0 blue:244 / 255.0 alpha:1.0]; // [UIColor groupTableViewBackgroundColor];

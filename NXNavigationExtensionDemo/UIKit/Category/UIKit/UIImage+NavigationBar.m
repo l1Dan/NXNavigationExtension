@@ -9,7 +9,7 @@
 
 @implementation UIImage (NavigationBar)
 
-+ (UIImage *)navigationBarBackgorundImage {
++ (UIImage *)navigationBarBackgroundImage {
     CGFloat statusBarHeight = 20.0;
     
     __kindof UIWindow *keyWindow = UIApplication.sharedApplication.windows.firstObject;
@@ -28,7 +28,7 @@
         statusBarHeight = CGRectGetHeight(UIApplication.sharedApplication.statusBarFrame);
     }
 #endif
-    return statusBarHeight <= 20.0 ? [UIImage imageNamed:@"NavigationBarBackgound64"] : [UIImage imageNamed:@"NavigationBarBackgound88"];
+    return statusBarHeight <= 20.0 ? [UIImage imageNamed:@"NavigationBarBackground64"] : [UIImage imageNamed:@"NavigationBarBackground88"];
 }
 
 @end

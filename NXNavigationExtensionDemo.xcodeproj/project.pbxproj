@@ -62,7 +62,7 @@
 		D65D3B2A271036DB00FCA891 /* ViewController06_ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D65D3B29271036DB00FCA891 /* ViewController06_ScrollView.m */; };
 		D65D3B2D2710372000FCA891 /* ViewController07_PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D65D3B2C2710372000FCA891 /* ViewController07_PageViewController.m */; };
 		D6786C472719CACB008CA715 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6786C462719CACB008CA715 /* WebView.swift */; };
-		D6786C492719D83B008CA715 /* NavigatioinBarUserInteractionDisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6786C482719D83B008CA715 /* NavigatioinBarUserInteractionDisable.swift */; };
+		D6786C492719D83B008CA715 /* NavigationBarUserInteractionDisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6786C482719D83B008CA715 /* NavigationBarUserInteractionDisable.swift */; };
 		D6C15D0F27186B6E00C35990 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C15D0E27186B6E00C35990 /* ContentView.swift */; };
 		D6C15D1127186B7500C35990 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C15D1027186B7500C35990 /* AppDelegate.swift */; };
 		D6C15D1427186CCA00C35990 /* SplitAdaptorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C15D1327186CCA00C35990 /* SplitAdaptorViewController.swift */; };
@@ -72,9 +72,9 @@
 		D6D2D898271918B400ABBE59 /* NavigationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D897271918B400ABBE59 /* NavigationFeature.swift */; };
 		D6D2D89C2719253000ABBE59 /* FeatureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D89B2719253000ABBE59 /* FeatureListView.swift */; };
 		D6D2D89E271928AC00ABBE59 /* FeatureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D89D271928AC00ABBE59 /* FeatureDetailView.swift */; };
-		D6D2D8A427193CDD00ABBE59 /* BackgorundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D8A327193CDD00ABBE59 /* BackgorundColor.swift */; };
+		D6D2D8A427193CDD00ABBE59 /* BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D8A327193CDD00ABBE59 /* BackgroundColor.swift */; };
 		D6D2D8A72719553000ABBE59 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D8A62719553000ABBE59 /* UIColor+Extensions.swift */; };
-		D6D2D8A927195B5000ABBE59 /* BackgorundImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D8A827195B5000ABBE59 /* BackgorundImage.swift */; };
+		D6D2D8A927195B5000ABBE59 /* BackgrounddImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D8A827195B5000ABBE59 /* BackgrounddImage.swift */; };
 		D6D2D8AB27195F3300ABBE59 /* ColorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D8AA27195F3200ABBE59 /* ColorListView.swift */; };
 		D6D2D8AD2719652600ABBE59 /* Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D8AC2719652600ABBE59 /* Transparent.swift */; };
 		D6D2D8AF27196EBE00ABBE59 /* BlurNavigationBarLikeSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2D8AE27196EBE00ABBE59 /* BlurNavigationBarLikeSystem.swift */; };
@@ -208,7 +208,7 @@
 		D65D3B2C2710372000FCA891 /* ViewController07_PageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController07_PageViewController.m; sourceTree = "<group>"; };
 		D6771E8826987D6D004A1749 /* NXNavigationExtensionDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NXNavigationExtensionDemo.entitlements; sourceTree = "<group>"; };
 		D6786C462719CACB008CA715 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		D6786C482719D83B008CA715 /* NavigatioinBarUserInteractionDisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatioinBarUserInteractionDisable.swift; sourceTree = "<group>"; };
+		D6786C482719D83B008CA715 /* NavigationBarUserInteractionDisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarUserInteractionDisable.swift; sourceTree = "<group>"; };
 		D6C15D0A27186B1A00C35990 /* NXNavigationExtensionDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NXNavigationExtensionDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		D6C15D0E27186B6E00C35990 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D6C15D1027186B7500C35990 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -220,9 +220,9 @@
 		D6D2D897271918B400ABBE59 /* NavigationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFeature.swift; sourceTree = "<group>"; };
 		D6D2D89B2719253000ABBE59 /* FeatureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureListView.swift; sourceTree = "<group>"; };
 		D6D2D89D271928AC00ABBE59 /* FeatureDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureDetailView.swift; sourceTree = "<group>"; };
-		D6D2D8A327193CDD00ABBE59 /* BackgorundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgorundColor.swift; sourceTree = "<group>"; };
+		D6D2D8A327193CDD00ABBE59 /* BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColor.swift; sourceTree = "<group>"; };
 		D6D2D8A62719553000ABBE59 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
-		D6D2D8A827195B5000ABBE59 /* BackgorundImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgorundImage.swift; sourceTree = "<group>"; };
+		D6D2D8A827195B5000ABBE59 /* BackgrounddImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgrounddImage.swift; sourceTree = "<group>"; };
 		D6D2D8AA27195F3200ABBE59 /* ColorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorListView.swift; sourceTree = "<group>"; };
 		D6D2D8AC2719652600ABBE59 /* Transparent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transparent.swift; sourceTree = "<group>"; };
 		D6D2D8AE27196EBE00ABBE59 /* BlurNavigationBarLikeSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurNavigationBarLikeSystem.swift; sourceTree = "<group>"; };
@@ -589,8 +589,8 @@
 		D6D2D8A227193C9D00ABBE59 /* Basic */ = {
 			isa = PBXGroup;
 			children = (
-				D6D2D8A327193CDD00ABBE59 /* BackgorundColor.swift */,
-				D6D2D8A827195B5000ABBE59 /* BackgorundImage.swift */,
+				D6D2D8A327193CDD00ABBE59 /* BackgroundColor.swift */,
+				D6D2D8A827195B5000ABBE59 /* BackgrounddImage.swift */,
 				D6D2D8B0271970BC00ABBE59 /* ShadowColor.swift */,
 				D6D2D8B2271971D300ABBE59 /* ShadowImage.swift */,
 				D6D2D8AE27196EBE00ABBE59 /* BlurNavigationBarLikeSystem.swift */,
@@ -613,7 +613,7 @@
 				D6C8A5132726CF0B00DB82CC /* NavigationRouter.swift */,
 				D6D2D8BB27197A6B00ABBE59 /* EdgePopGestureDisable.swift */,
 				D6D2D8BD27197CC100ABBE59 /* FullScreenPopGestureEnable.swift */,
-				D6786C482719D83B008CA715 /* NavigatioinBarUserInteractionDisable.swift */,
+				D6786C482719D83B008CA715 /* NavigationBarUserInteractionDisable.swift */,
 				D6F61A2A271D5F9000733382 /* UpdateNavigationBar.swift */,
 				D6786C462719CACB008CA715 /* WebView.swift */,
 			);
@@ -708,7 +708,7 @@
 				D6447FD127205EF100CB64F5 /* CustomBackView.swift in Sources */,
 				D6D2D8A72719553000ABBE59 /* UIColor+Extensions.swift in Sources */,
 				D6C15D0F27186B6E00C35990 /* ContentView.swift in Sources */,
-				D6786C492719D83B008CA715 /* NavigatioinBarUserInteractionDisable.swift in Sources */,
+				D6786C492719D83B008CA715 /* NavigationBarUserInteractionDisable.swift in Sources */,
 				D624E9742654F71200CC96E6 /* BaseViewController.m in Sources */,
 				D624E9922654F71200CC96E6 /* ViewController07_CustomBackButtonImage.m in Sources */,
 				D624E9A02654F71200CC96E6 /* FeatureTableViewController.m in Sources */,
@@ -724,7 +724,7 @@
 				D6447FCF27205EE200CB64F5 /* CustomBackImage.swift in Sources */,
 				D624E9882654F71200CC96E6 /* ViewController01_Test.m in Sources */,
 				D624E97F2654F71200CC96E6 /* ViewController03_BackEventIntercept.m in Sources */,
-				D6D2D8A927195B5000ABBE59 /* BackgorundImage.swift in Sources */,
+				D6D2D8A927195B5000ABBE59 /* BackgrounddImage.swift in Sources */,
 				D624E9952654F71200CC96E6 /* ViewController02_BackgroundImage.m in Sources */,
 				D624E98E2654F71200CC96E6 /* ViewController10_ScrollView.m in Sources */,
 				D6304B532712C4190016696B /* DrawerViewController.m in Sources */,
@@ -761,7 +761,7 @@
 				D6C15D1627186E6C00C35990 /* MainTabBarController.swift in Sources */,
 				D6C406C62727F4B20074C058 /* ViewController11_ScrollViewWithFullScreen.m in Sources */,
 				D6D2D8B92719775200ABBE59 /* ScrollViewContent.swift in Sources */,
-				D6D2D8A427193CDD00ABBE59 /* BackgorundColor.swift in Sources */,
+				D6D2D8A427193CDD00ABBE59 /* BackgroundColor.swift in Sources */,
 				D6C8A5142726CF0B00DB82CC /* NavigationRouter.swift in Sources */,
 				D624E9772654F71200CC96E6 /* UITableViewCell+Enabled.m in Sources */,
 				D624E9832654F71200CC96E6 /* ViewController08_WebView.m in Sources */,

@@ -34,7 +34,7 @@
 }
 
 - (UIImage *)nx_navigationBarBackgroundImage {
-    return UIImage.navigationBarBackgorundImage;
+    return UIImage.navigationBarBackgroundImage;
 }
 
 @end
