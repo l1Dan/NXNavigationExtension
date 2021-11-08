@@ -11,17 +11,17 @@ import NXNavigationExtension
 import SwiftUI
 #endif
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct BackButtonEventIntercept: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.presentationMode) private var presentationMode;
     
     @State private var context: NXNavigationRouter.Context = .init(routeName: "")
     @State private var navigationPopToViewController = false
-    @State private var interactiveType = NavigationEventItemType.all
+    @State private var selectedItemType = NavigationBackEvent.State.all
     @State private var isPresented: Bool = false
     
-    private let events = NavigationEventItem.items
+    private let events = NavigationBackEvent.items
     private let item: NavigationFeatureItem
     
     init(_ item: NavigationFeatureItem) {
@@ -33,11 +33,11 @@ struct BackButtonEventIntercept: View {
             Section {
                 ForEach(events, id:\.self.title) { item in
                     Button {
-                        interactiveType = item.type
+                        selectedItemType = item.state
                     } label: {
                         HStack {
                             Text("\(item.title)").foregroundColor(colorScheme == .dark ? Color.white : Color.black)
-                            if interactiveType == item.type {
+                            if selectedItemType == item.state {
                                 Spacer()
                                 Image(systemName: "checkmark")
                             }
@@ -71,19 +71,11 @@ struct BackButtonEventIntercept: View {
             configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             configuration.navigationBarAppearance.useSystemBackButton = true
         }, onWillPopViewController: { interactiveType in
-            if self.interactiveType == .all {
-                isPresented = true
-                return false
-            } else if self.interactiveType == .backButtonAction && interactiveType == .backButtonAction {
-                isPresented = true
-                return false
-            } else if self.interactiveType == .backButtonMenuAction && interactiveType == .backButtonMenuAction {
-                isPresented = true
-                return false
-            } else if self.interactiveType == .popGestureRecognizer && interactiveType == .popGestureRecognizer {
-                isPresented = true
-                return false
-            } else if self.interactiveType == .callNXPopMethod && interactiveType == .callNXPopMethod {
+            if selectedItemType == .backButtonAction && interactiveType == .backButtonAction ||
+                selectedItemType == .backButtonMenuAction && interactiveType == .backButtonMenuAction ||
+                selectedItemType == .popGestureRecognizer && interactiveType == .popGestureRecognizer ||
+                selectedItemType == .callNXPopMethod && interactiveType == .callNXPopMethod ||
+                selectedItemType == .all {
                 isPresented = true
                 return false
             }
@@ -92,7 +84,7 @@ struct BackButtonEventIntercept: View {
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct BackButtonEventIntercept_Previews: PreviewProvider {
     static var previews: some View {
         BackButtonEventIntercept(NavigationFeatureItem(style: .backButtonEventIntercept))

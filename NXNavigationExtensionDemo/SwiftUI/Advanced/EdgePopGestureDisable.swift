@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct EdgePopGestureDisable: View {
     private let randomDark = UIColor.randomDark
     private let randomLight = UIColor.randomLight
@@ -30,7 +30,7 @@ struct EdgePopGestureDisable: View {
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct EdgePopGestureDisable_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

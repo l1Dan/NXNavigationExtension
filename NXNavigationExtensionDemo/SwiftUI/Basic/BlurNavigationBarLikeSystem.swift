@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct BlurNavigationBarLikeSystem: View {
     private let item: NavigationFeatureItem
     
@@ -27,11 +27,11 @@ struct BlurNavigationBarLikeSystem: View {
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct BlurNavigationBarLikeSystem_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            BlurNavigationBarLikeSystem(NavigationFeatureItem(style: .blurNavigationBarLikeSystem))
+            BlurNavigationBarLikeSystem(NavigationFeatureItem(style: .likeSystemNavigationBar))
         }
     }
 }

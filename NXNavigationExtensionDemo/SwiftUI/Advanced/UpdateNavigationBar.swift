@@ -11,7 +11,7 @@ import NXNavigationExtension
 import SwiftUI
 #endif
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct UpdateNavigationBar: View {
     @State private var context: NXNavigationRouter.Context
     @State private var title = "Custom"
@@ -69,11 +69,11 @@ struct UpdateNavigationBar: View {
     
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct UpdateNavigationBar_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBarForManually))
+            UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBar))
         }
     }
 }

@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct Present: View {
     @Environment(\.colorScheme) private var colorScheme
     @Binding private var presentedAsModal: Bool
@@ -36,7 +36,7 @@ struct Present: View {
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct Present_Previews: PreviewProvider {
     @State static var presentedAsModal = false
     static var previews: some View {

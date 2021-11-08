@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct CustomBackView: View {
     private let item: NavigationFeatureItem
     
@@ -33,7 +33,7 @@ struct CustomBackView: View {
     }()
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct CustomBackView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

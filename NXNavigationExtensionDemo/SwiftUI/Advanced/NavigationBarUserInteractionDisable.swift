@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct NavigationBarUserInteractionDisable: View {
     private let item: NavigationFeatureItem
     
@@ -37,11 +37,11 @@ struct NavigationBarUserInteractionDisable: View {
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct NavigationBarUserInteractionDisable_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            NavigationBarUserInteractionDisable(NavigationFeatureItem(style: .navigationBarUserInteractionDisable))
+            NavigationBarUserInteractionDisable(NavigationFeatureItem(style: .navigationBarDisable))
         }
     }
 }

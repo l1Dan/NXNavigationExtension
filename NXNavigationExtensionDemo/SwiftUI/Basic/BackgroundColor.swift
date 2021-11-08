@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct BackgroundColor: View {
     private let randomDark = UIColor.randomDark
     private let randomLight = UIColor.randomLight
@@ -29,7 +29,7 @@ struct BackgroundColor: View {
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct BackgroundColor_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

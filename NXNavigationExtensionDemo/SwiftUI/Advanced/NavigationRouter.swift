@@ -18,7 +18,7 @@ private enum PopType: String {
     case popToLastUntil = "PopToLastUntil"
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 private struct NavigationShowPopTypeView: View {
     @Environment(\.colorScheme) private var colorScheme
 
@@ -84,7 +84,7 @@ private struct NavigationShowPopTypeView: View {
 }
 
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 private struct NavigationDestinationRouteView: View {
     @State private var isPresented = false
     @State private var popType: PopType = .pop
@@ -169,7 +169,7 @@ private struct NavigationDestinationRouteView: View {
     
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct NavigationRouter: View {
     private var randomDark = UIColor.randomDark
     private var randomLight = UIColor.randomLight
@@ -185,7 +185,7 @@ struct NavigationRouter: View {
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct NavigationRouter_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

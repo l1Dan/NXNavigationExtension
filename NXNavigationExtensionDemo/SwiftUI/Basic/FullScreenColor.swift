@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct FullScreenColor: View {
     private let item: NavigationFeatureItem
     
@@ -34,7 +34,7 @@ struct FullScreenColor: View {
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct FullScreenColor_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

@@ -9,8 +9,8 @@
 import SwiftUI
 #endif
 
-@available(iOS 13, *)
-struct FakeNavigationBar<Content>: View where Content : View {
+@available(iOS 13.0, *)
+struct FakeNavigationView<Content>: View where Content : View {
     @Environment(\.presentationMode) private var presentationMode;
     @Environment(\.colorScheme) private var colorScheme;
     
@@ -53,7 +53,7 @@ struct FakeNavigationBar<Content>: View where Content : View {
                             Spacer()
                             
                             NavigationLink(isActive: $isActive) {
-                                UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBarForManually))
+                                UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBar))
                             } label: {
                                 Button {
                                     isActive = true
@@ -78,7 +78,7 @@ struct FakeNavigationBar<Content>: View where Content : View {
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct CustomNavigationBar: View {
     private let item: NavigationFeatureItem
     
@@ -87,7 +87,7 @@ struct CustomNavigationBar: View {
     }
     
     var body: some View {
-        FakeNavigationBar(title: Text(item.title)) {
+        FakeNavigationView(title: Text(item.title)) {
             ColorListView()
         }
         .useNXNavigationView { configuration in
@@ -96,7 +96,7 @@ struct CustomNavigationBar: View {
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct CustomNavigationBar_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

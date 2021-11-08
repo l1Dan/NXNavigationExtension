@@ -9,7 +9,7 @@
 import SwiftUI
 #endif
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct ShadowImage: View {
     private let item: NavigationFeatureItem
     
@@ -27,7 +27,7 @@ struct ShadowImage: View {
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13.0, *)
 struct ShadowImage_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
