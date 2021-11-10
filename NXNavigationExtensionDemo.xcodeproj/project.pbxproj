@@ -503,7 +503,7 @@
 		D624E8DA2654F60500CC96E6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					D624E8E12654F60500CC96E6 = {
 						CreatedOnToolsVersion = 12.5;

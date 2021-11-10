@@ -172,7 +172,7 @@
 		D61CCBF3251A13F100A91580 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1310;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					D6E4024B251FB71C001D7BEE = {
