@@ -88,7 +88,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 
 @interface UINavigationBar (NXNavigationExtensionPrivate)
 
-/// UINavigatoinBar layoutSubviews 时调用
+/// UINavigation layoutSubviews 时调用
 @property (nonatomic, copy, nullable) UINavigationBarDidUpdatePropertiesHandler nx_didUpdatePropertiesHandler;
 
 /// 是否允许 UINavigationBar 接收到事件响应，如果 nx_userInteractionEnabled = NO，那么用户事件会被传递到导航栏的底部视图。

@@ -10,7 +10,7 @@
 
 @interface DrawerAnimationController ()
 
-@property (nonatomic, strong) UIVisualEffectView *backgorundColorView;
+@property (nonatomic, strong) UIVisualEffectView *backgroundColorView;
 
 @end
 
@@ -35,9 +35,9 @@
     UIView *containerView = [transitionContext containerView];
     [containerView insertSubview:toVC.view aboveSubview:fromVC.view];
     
-    self.backgorundColorView.frame = containerView.bounds;
-    self.backgorundColorView.alpha = 0.0;
-    [containerView insertSubview:self.backgorundColorView belowSubview:toVC.view];
+    self.backgroundColorView.frame = containerView.bounds;
+    self.backgroundColorView.alpha = 0.0;
+    [containerView insertSubview:self.backgroundColorView belowSubview:toVC.view];
     
     CGRect toViewFinalFrame =  [transitionContext finalFrameForViewController:toVC];
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
@@ -56,7 +56,7 @@
         fromVC.view.layer.cornerRadius = 10;
         fromVC.view.clipsToBounds = YES;
         
-        self.backgorundColorView.alpha = 1.0;
+        self.backgroundColorView.alpha = 1.0;
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];
@@ -82,7 +82,7 @@
         
         fromVC.view.frame = CGRectOffset(fromViewFinalFrame, -fromViewFinalFrame.size.width, 0);
         
-        self.backgorundColorView.alpha = 0.0;
+        self.backgroundColorView.alpha = 0.0;
     } completion:^(BOOL finished) {
         self.reverse = NO;
         if ([transitionContext transitionWasCancelled]) {
@@ -90,9 +90,9 @@
             toVC.view.clipsToBounds = NO;
             toVC.view.transform = CGAffineTransformIdentity;
             
-            self.backgorundColorView.alpha = 1.0;
+            self.backgroundColorView.alpha = 1.0;
         } else {
-            [self.backgorundColorView removeFromSuperview];
+            [self.backgroundColorView removeFromSuperview];
         }
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];
@@ -100,8 +100,8 @@
 
 #pragma mark - Getter
 
-- (UIVisualEffectView *)backgorundColorView {
-    if (!_backgorundColorView) {
+- (UIVisualEffectView *)backgroundColorView {
+    if (!_backgroundColorView) {
         UIBlurEffect *effect;
         if (@available(iOS 13.0, *)) {
             effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemChromeMaterial];
@@ -109,10 +109,10 @@
             effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
         }
         
-        _backgorundColorView = [[UIVisualEffectView alloc] initWithEffect:effect];
-        _backgorundColorView.alpha = 0.0;
+        _backgroundColorView = [[UIVisualEffectView alloc] initWithEffect:effect];
+        _backgroundColorView.alpha = 0.0;
     }
-    return _backgorundColorView;
+    return _backgroundColorView;
 }
 
 @end

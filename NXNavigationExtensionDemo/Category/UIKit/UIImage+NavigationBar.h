@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIImage (NavigationBar)
 
-+ (UIImage *)navigationBarBackgorundImage;
++ (UIImage *)navigationBarBackgroundImage;
 
 @end
 

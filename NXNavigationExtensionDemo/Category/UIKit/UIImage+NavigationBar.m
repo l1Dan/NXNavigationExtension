@@ -9,7 +9,7 @@
 
 @implementation UIImage (NavigationBar)
 
-+ (UIImage *)navigationBarBackgorundImage {
++ (UIImage *)navigationBarBackgroundImage {
     CGFloat statusBarHeight = 20.0;
     
     __kindof UIWindow *keyWindow = UIApplication.sharedApplication.windows.firstObject;
