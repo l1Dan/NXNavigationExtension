@@ -4,6 +4,9 @@
 
 - 单词拼写错误修正：fullscreen -> fullScreen, Fullscreen -> FullScreen, contentViewWithoutNavigtionBar -> contentViewWithoutNavigationBar
 - 修复调用 nx_setNeedsNavigationBarAppearanceUpdate 更新导航栏时会修改 rootViewController leftItem 的问题
+- 使 nx_popToViewController:animated: 函数更加符合 Swift 的命名规范
+- 修复 index 索引获取错误的问题
+- 1.示例代码优化 2.修改错别字
 
 ## 3.6.3
 
