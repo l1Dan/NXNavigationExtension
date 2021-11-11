@@ -59,10 +59,10 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
 
 NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance : NSObject <NSCopying>
 
-/// 设置 NXNavigationBar 背景颜色，默认：iOS13 之前 [UIColor whiteColor]，iOS13及以后 [UIColor systemBackgroundColor]
+/// 设置 NXNavigationBar 背景颜色，默认：[UIColor systemBlueColor]，这样处理能够快速辨别框架是否生效
 @property (nonatomic, strong) UIColor *backgroundColor;
 
-/// 设置 UINavigationBar tintColor（返回按钮颜色），默认：[UIColor systemBlueColor]
+/// 设置 UINavigationBar tintColor（返回按钮颜色），默认：iOS13 之前 [UIColor whiteColor]，iOS13及以后 [UIColor systemBackgroundColor]
 @property (nonatomic, strong) UIColor *tintColor;
 
 /// 设置 UINavigationBar barTintColor

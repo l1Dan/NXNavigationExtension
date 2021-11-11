@@ -43,7 +43,7 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 
 - (instancetype)init {
     if (self = [super init]) {
-        _tintColor = [UIColor systemBlueColor];
+        _backgroundColor = [UIColor systemBlueColor];
         _useSystemBackButton = NO;
         _systemBackButtonTitle = @"";
         _backImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
@@ -51,9 +51,9 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
         _imageData = [[NSData alloc] initWithBase64EncodedString:NXNavigationBarBackImageBase64Data options:NSDataBase64DecodingIgnoreUnknownCharacters];
         
         if (@available(iOS 13.0, *)) {
-            _backgroundColor = [UIColor systemBackgroundColor];
+            _tintColor = [UIColor systemBackgroundColor];
         } else {
-            _backgroundColor = [UIColor whiteColor];
+            _tintColor = [UIColor whiteColor];
         }
     }
     return self;
