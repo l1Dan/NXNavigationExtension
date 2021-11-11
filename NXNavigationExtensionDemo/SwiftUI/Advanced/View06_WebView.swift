@@ -1,5 +1,5 @@
 //
-//  WebView.swift
+//  View06_WebView.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/15.
@@ -27,7 +27,7 @@ struct WebViewWrapperView: UIViewRepresentable {
 }
 
 @available(iOS 13.0, *)
-struct WebView: View {
+struct View06_WebView: View {
     
     private let item: NavigationFeatureItem
     private let randomColor = UIColor.randomLight
@@ -45,10 +45,10 @@ struct WebView: View {
 }
 
 @available(iOS 13.0, *)
-struct WebView_Previews: PreviewProvider {
+struct View06_WebView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            WebView(NavigationFeatureItem(style: .webView))
+            View06_WebView(NavigationFeatureItem(style: .webView))
         }
     }
 }

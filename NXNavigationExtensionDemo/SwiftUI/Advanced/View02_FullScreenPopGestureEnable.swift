@@ -1,5 +1,5 @@
 //
-//  FullScreenPopGestureEnable.swift
+//  View02_FullScreenPopGestureEnable.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/15.
@@ -10,7 +10,7 @@ import SwiftUI
 #endif
 
 @available(iOS 13.0, *)
-struct FullScreenPopGestureEnable: View {
+struct View02_FullScreenPopGestureEnable: View {
     private let randomDark = UIColor.randomDark
     private let randomLight = UIColor.randomLight
     private let item: NavigationFeatureItem
@@ -31,10 +31,10 @@ struct FullScreenPopGestureEnable: View {
 }
 
 @available(iOS 13.0, *)
-struct FullScreenPopGestureEnable_Previews: PreviewProvider {
+struct View02_FullScreenPopGestureEnable_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FullScreenPopGestureEnable(NavigationFeatureItem(style: .fullScreenPopGestureEnable))            
+            View02_FullScreenPopGestureEnable(NavigationFeatureItem(style: .fullScreenPopGestureEnable))            
         }
     }
 }

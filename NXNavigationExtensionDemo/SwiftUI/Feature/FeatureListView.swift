@@ -39,7 +39,7 @@ struct FeatureListView: View {
                                     .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                             }).sheet(isPresented: $presentingModal) {
                                 NavigationView {
-                                    Present(section.items[index], presentedAsModal: $presentingModal)
+                                    View10_Present(section.items[index], presentedAsModal: $presentingModal)
                                 }
                             }
                         } else {

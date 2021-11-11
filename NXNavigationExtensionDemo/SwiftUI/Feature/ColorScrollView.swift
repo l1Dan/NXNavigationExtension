@@ -28,7 +28,7 @@ struct ColorScrollView: View {
     private func contentView(hasHeader: Bool) -> some View {
         let list = ForEach(0..<30) { index in
             NavigationLink {
-                UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBar))
+                View07_UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBar))
             } label: {
                 ZStack {
                     HStack {

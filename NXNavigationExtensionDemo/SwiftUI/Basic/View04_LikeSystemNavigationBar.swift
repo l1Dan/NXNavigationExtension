@@ -1,5 +1,5 @@
 //
-//  Transparent.swift
+//  View04_LikeSystemNavigationBar.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/15.
@@ -10,7 +10,7 @@ import SwiftUI
 #endif
 
 @available(iOS 13.0, *)
-struct Transparent: View {
+struct View04_LikeSystemNavigationBar: View {
     private let item: NavigationFeatureItem
     
     init(_ item: NavigationFeatureItem) {
@@ -20,17 +20,18 @@ struct Transparent: View {
     var body: some View {
         ColorListView()
             .navigationBarTitle(item.title)
-            .useNXNavigationView { configuration in
+            .useNXNavigationView(onPrepareConfiguration:  { configuration in
                 configuration.navigationBarAppearance.backgroundColor = .clear
-            }
+                configuration.viewControllerPreferences.useBlurNavigationBar = true
+            })
     }
 }
 
 @available(iOS 13.0, *)
-struct Transparent_Previews: PreviewProvider {
+struct View04_LikeSystemNavigationBar_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            Transparent(NavigationFeatureItem(style: .transparent))
+            View04_LikeSystemNavigationBar(NavigationFeatureItem(style: .likeSystemNavigationBar))
         }
     }
 }

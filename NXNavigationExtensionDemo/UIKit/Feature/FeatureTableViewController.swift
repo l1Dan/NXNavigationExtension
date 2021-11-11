@@ -125,18 +125,18 @@ class FeatureTableViewController: BaseTableViewController {
         }
         
         viewController.title = item.title
-        let masterNavigationController = type(of: navigationController).init(rootViewController: viewController)
+        let primaryNavigationController = type(of: navigationController).init(rootViewController: viewController)
         if viewController is ViewController10_Present {
             tableView.deselectRow(at: indexPath, animated: true)
-            present(masterNavigationController, animated: true, completion: nil)
+            present(primaryNavigationController, animated: true, completion: nil)
         } else {
             if UIDevice.isPhoneDevice {
                 viewController.hidesBottomBarWhenPushed = true
                 navigationController.pushViewController(viewController, animated: true)
             } else {
-                if let detailNavigationController = self.splitViewController?.viewControllers.last as? UINavigationController{
-                    if !(detailNavigationController.viewControllers.last?.isKind(of: type(of: viewController)) ?? false) {
-                        showDetailViewController(masterNavigationController, sender: nil)
+                if let secondaryNavigationController = self.splitViewController?.viewControllers.last as? UINavigationController{
+                    if !(secondaryNavigationController.viewControllers.last?.isKind(of: type(of: viewController)) ?? false) {
+                        showDetailViewController(primaryNavigationController, sender: nil)
                     }
                 }
             }

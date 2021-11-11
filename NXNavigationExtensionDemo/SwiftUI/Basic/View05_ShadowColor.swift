@@ -1,5 +1,5 @@
 //
-//  ShadowImage.swift
+//  View05_ShadowColor.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/15.
@@ -10,7 +10,7 @@ import SwiftUI
 #endif
 
 @available(iOS 13.0, *)
-struct ShadowImage: View {
+struct View05_ShadowColor: View {
     private let item: NavigationFeatureItem
     
     init(_ item: NavigationFeatureItem) {
@@ -22,16 +22,16 @@ struct ShadowImage: View {
             .navigationBarTitle(Text(item.title), displayMode: .inline)
             .useNXNavigationView(onPrepareConfiguration: { configuration in
                 configuration.navigationBarAppearance.backgroundColor = .systemBackground
-                configuration.navigationBarAppearance.shadowImage = UIImage(named: "NavigationBarShadowImage")
+                configuration.navigationBarAppearance.shadowColor = .systemRed
             })
     }
 }
 
 @available(iOS 13.0, *)
-struct ShadowImage_Previews: PreviewProvider {
+struct View05_ShadowColor_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ShadowImage(NavigationFeatureItem(style: .shadowImage))
+            View05_ShadowColor(NavigationFeatureItem(style: .shadowColor))
         }
     }
 }

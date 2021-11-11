@@ -1,5 +1,5 @@
 //
-//  CustomBackView.swift
+//  View08_CustomBackView.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/20.
@@ -10,7 +10,7 @@ import SwiftUI
 #endif
 
 @available(iOS 13.0, *)
-struct CustomBackView: View {
+struct View08_CustomBackView: View {
     private let item: NavigationFeatureItem
     
     init(_ item: NavigationFeatureItem) {
@@ -21,7 +21,7 @@ struct CustomBackView: View {
         ColorListView()
             .navigationBarTitle(item.title)
             .useNXNavigationView { configuration in
-                configuration.navigationBarAppearance.backButtonCustomView = CustomBackView.backButton
+                configuration.navigationBarAppearance.backButtonCustomView = View08_CustomBackView.backButton
             }
     }
     
@@ -34,10 +34,10 @@ struct CustomBackView: View {
 }
 
 @available(iOS 13.0, *)
-struct CustomBackView_Previews: PreviewProvider {
+struct View08_CustomBackView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CustomBackView(NavigationFeatureItem(style: .customBackView))
+            View08_CustomBackView(NavigationFeatureItem(style: .customBackView))
         }
     }
 }

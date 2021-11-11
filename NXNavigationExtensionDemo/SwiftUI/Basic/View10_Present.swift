@@ -1,5 +1,5 @@
 //
-//  Present.swift
+//  View10_Present.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/17.
@@ -10,7 +10,7 @@ import SwiftUI
 #endif
 
 @available(iOS 13.0, *)
-struct Present: View {
+struct View10_Present: View {
     @Environment(\.colorScheme) private var colorScheme
     @Binding private var presentedAsModal: Bool
     
@@ -37,11 +37,11 @@ struct Present: View {
 }
 
 @available(iOS 13.0, *)
-struct Present_Previews: PreviewProvider {
+struct View10_Present_Previews: PreviewProvider {
     @State static var presentedAsModal = false
     static var previews: some View {
         NavigationView {
-            Present(NavigationFeatureItem(style: .present), presentedAsModal: $presentedAsModal)
+            View10_Present(NavigationFeatureItem(style: .present), presentedAsModal: $presentedAsModal)
         }
     }
 }

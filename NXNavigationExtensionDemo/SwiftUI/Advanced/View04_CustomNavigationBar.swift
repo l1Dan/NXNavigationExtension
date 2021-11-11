@@ -1,5 +1,5 @@
 //
-//  CustomNavigationBar.swift
+//  View04_CustomNavigationBar.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/18.
@@ -53,7 +53,7 @@ struct FakeNavigationView<Content>: View where Content : View {
                             Spacer()
                             
                             NavigationLink(isActive: $isActive) {
-                                UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBar))
+                                View07_UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBar))
                             } label: {
                                 Button {
                                     isActive = true
@@ -79,7 +79,7 @@ struct FakeNavigationView<Content>: View where Content : View {
 }
 
 @available(iOS 13.0, *)
-struct CustomNavigationBar: View {
+struct View04_CustomNavigationBar: View {
     private let item: NavigationFeatureItem
     
     init(_ item: NavigationFeatureItem) {
@@ -97,10 +97,10 @@ struct CustomNavigationBar: View {
 }
 
 @available(iOS 13.0, *)
-struct CustomNavigationBar_Previews: PreviewProvider {
+struct View04_CustomNavigationBar_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CustomNavigationBar(NavigationFeatureItem(style: .customNavigationBar))
+            View04_CustomNavigationBar(NavigationFeatureItem(style: .customNavigationBar))
         }
     }
 }

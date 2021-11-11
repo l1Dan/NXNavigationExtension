@@ -1,5 +1,5 @@
 //
-//  BackgrounddImage.swift
+//  View02_BackgrounddImage.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/15.
@@ -10,7 +10,7 @@ import SwiftUI
 #endif
 
 @available(iOS 13.0, *)
-struct BackgrounddImage: View {
+struct View02_BackgrounddImage: View {
     @State private var isPresented = false
     private let item: NavigationFeatureItem
     
@@ -30,10 +30,10 @@ struct BackgrounddImage: View {
 }
 
 @available(iOS 13.0, *)
-struct BackgrounddImage_Previews: PreviewProvider {
+struct View02_BackgrounddImage_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            BackgrounddImage(NavigationFeatureItem(style: .backgroundImage))
+            View02_BackgrounddImage(NavigationFeatureItem(style: .backgroundImage))
         }
     }
 }

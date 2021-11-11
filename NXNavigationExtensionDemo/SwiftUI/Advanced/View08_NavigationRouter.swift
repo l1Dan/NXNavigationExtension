@@ -1,5 +1,5 @@
 //
-//  NavigationRouter.swift
+//  View08_NavigationRouter.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/25.
@@ -170,7 +170,7 @@ private struct NavigationDestinationRouteView: View {
 }
 
 @available(iOS 13.0, *)
-struct NavigationRouter: View {
+struct View08_NavigationRouter: View {
     private var randomDark = UIColor.randomDark
     private var randomLight = UIColor.randomLight
     
@@ -186,10 +186,10 @@ struct NavigationRouter: View {
 }
 
 @available(iOS 13.0, *)
-struct NavigationRouter_Previews: PreviewProvider {
+struct View08_NavigationRouter_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            NavigationRouter(NavigationFeatureItem(style: .navigationRouter))
+            View08_NavigationRouter(NavigationFeatureItem(style: .navigationRouter))
         }
     }
 }

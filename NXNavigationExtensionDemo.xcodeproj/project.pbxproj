@@ -7,29 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D64039D3273CB1AB0047F25E /* NXNavigationExtensionSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D64039D2273CB1AB0047F25E /* NXNavigationExtensionSwiftUI.framework */; };
+		D64039D4273CB1AB0047F25E /* NXNavigationExtensionSwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D64039D2273CB1AB0047F25E /* NXNavigationExtensionSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6B022B8273AB780008003F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022B7273AB780008003F6 /* AppDelegate.swift */; };
 		D6B022C1273AB781008003F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6B022C0273AB781008003F6 /* Assets.xcassets */; };
 		D6B022C4273AB781008003F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6B022C2273AB781008003F6 /* LaunchScreen.storyboard */; };
-		D6B02325273AB8E3008003F6 /* BackButtonEventIntercept.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022D5273AB8E3008003F6 /* BackButtonEventIntercept.swift */; };
-		D6B02326273AB8E3008003F6 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022D6273AB8E3008003F6 /* NavigationRouter.swift */; };
-		D6B02327273AB8E3008003F6 /* FullScreenPopGestureEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022D7273AB8E3008003F6 /* FullScreenPopGestureEnable.swift */; };
-		D6B02328273AB8E3008003F6 /* NavigationBarUserInteractionDisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022D8273AB8E3008003F6 /* NavigationBarUserInteractionDisable.swift */; };
-		D6B02329273AB8E3008003F6 /* UpdateNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022D9273AB8E3008003F6 /* UpdateNavigationBar.swift */; };
-		D6B0232A273AB8E3008003F6 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022DA273AB8E3008003F6 /* CustomNavigationBar.swift */; };
-		D6B0232B273AB8E3008003F6 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022DB273AB8E3008003F6 /* WebView.swift */; };
-		D6B0232C273AB8E3008003F6 /* EdgePopGestureDisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022DC273AB8E3008003F6 /* EdgePopGestureDisable.swift */; };
-		D6B0232D273AB8E3008003F6 /* FullScreenColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022DE273AB8E3008003F6 /* FullScreenColor.swift */; };
-		D6B0232E273AB8E3008003F6 /* BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022DF273AB8E3008003F6 /* BackgroundColor.swift */; };
-		D6B0232F273AB8E3008003F6 /* ShadowColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E0273AB8E3008003F6 /* ShadowColor.swift */; };
-		D6B02330273AB8E3008003F6 /* Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E1273AB8E3008003F6 /* Transparent.swift */; };
-		D6B02331273AB8E3008003F6 /* Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E2273AB8E3008003F6 /* Present.swift */; };
-		D6B02332273AB8E3008003F6 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E3273AB8E3008003F6 /* ListView.swift */; };
-		D6B02333273AB8E3008003F6 /* ScrollViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E4273AB8E3008003F6 /* ScrollViewContent.swift */; };
-		D6B02334273AB8E3008003F6 /* CustomBackImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E5273AB8E3008003F6 /* CustomBackImage.swift */; };
-		D6B02335273AB8E3008003F6 /* BackgrounddImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E6273AB8E3008003F6 /* BackgrounddImage.swift */; };
-		D6B02336273AB8E3008003F6 /* BlurNavigationBarLikeSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E7273AB8E3008003F6 /* BlurNavigationBarLikeSystem.swift */; };
-		D6B02337273AB8E3008003F6 /* ShadowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E8273AB8E3008003F6 /* ShadowImage.swift */; };
-		D6B02338273AB8E3008003F6 /* CustomBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E9273AB8E3008003F6 /* CustomBackView.swift */; };
+		D6B02325273AB8E3008003F6 /* View03_BackButtonEventIntercept.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022D5273AB8E3008003F6 /* View03_BackButtonEventIntercept.swift */; };
+		D6B02326273AB8E3008003F6 /* View08_NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022D6273AB8E3008003F6 /* View08_NavigationRouter.swift */; };
+		D6B02327273AB8E3008003F6 /* View02_FullScreenPopGestureEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022D7273AB8E3008003F6 /* View02_FullScreenPopGestureEnable.swift */; };
+		D6B02328273AB8E3008003F6 /* View05_NavigationBarDisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022D8273AB8E3008003F6 /* View05_NavigationBarDisable.swift */; };
+		D6B02329273AB8E3008003F6 /* View07_UpdateNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022D9273AB8E3008003F6 /* View07_UpdateNavigationBar.swift */; };
+		D6B0232A273AB8E3008003F6 /* View04_CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022DA273AB8E3008003F6 /* View04_CustomNavigationBar.swift */; };
+		D6B0232B273AB8E3008003F6 /* View06_WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022DB273AB8E3008003F6 /* View06_WebView.swift */; };
+		D6B0232C273AB8E3008003F6 /* View01_EdgePopGestureDisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022DC273AB8E3008003F6 /* View01_EdgePopGestureDisable.swift */; };
+		D6B0232D273AB8E3008003F6 /* View09_FullScreenColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022DE273AB8E3008003F6 /* View09_FullScreenColor.swift */; };
+		D6B0232E273AB8E3008003F6 /* View01_BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022DF273AB8E3008003F6 /* View01_BackgroundColor.swift */; };
+		D6B0232F273AB8E3008003F6 /* View05_ShadowColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E0273AB8E3008003F6 /* View05_ShadowColor.swift */; };
+		D6B02330273AB8E3008003F6 /* View03_Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E1273AB8E3008003F6 /* View03_Transparent.swift */; };
+		D6B02331273AB8E3008003F6 /* View10_Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E2273AB8E3008003F6 /* View10_Present.swift */; };
+		D6B02332273AB8E3008003F6 /* View11_ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E3273AB8E3008003F6 /* View11_ListView.swift */; };
+		D6B02333273AB8E3008003F6 /* View12_ScrollViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E4273AB8E3008003F6 /* View12_ScrollViewContent.swift */; };
+		D6B02334273AB8E3008003F6 /* View07_CustomBackImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E5273AB8E3008003F6 /* View07_CustomBackImage.swift */; };
+		D6B02335273AB8E3008003F6 /* View02_BackgrounddImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E6273AB8E3008003F6 /* View02_BackgrounddImage.swift */; };
+		D6B02336273AB8E3008003F6 /* View04_LikeSystemNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E7273AB8E3008003F6 /* View04_LikeSystemNavigationBar.swift */; };
+		D6B02337273AB8E3008003F6 /* View06_ShadowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E8273AB8E3008003F6 /* View06_ShadowImage.swift */; };
+		D6B02338273AB8E3008003F6 /* View08_CustomBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022E9273AB8E3008003F6 /* View08_CustomBackView.swift */; };
 		D6B02339273AB8E3008003F6 /* ColorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022EB273AB8E3008003F6 /* ColorListView.swift */; };
 		D6B0233A273AB8E3008003F6 /* ColorScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022EC273AB8E3008003F6 /* ColorScrollView.swift */; };
 		D6B0233B273AB8E3008003F6 /* FeatureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022ED273AB8E3008003F6 /* FeatureDetailView.swift */; };
@@ -83,6 +85,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D64039D4273CB1AB0047F25E /* NXNavigationExtensionSwiftUI.framework in Embed Frameworks */,
 				D6B0236A273ABA7A008003F6 /* NXNavigationExtension.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -91,32 +94,33 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D64039D2273CB1AB0047F25E /* NXNavigationExtensionSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtensionSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6B022B4273AB780008003F6 /* NXNavigationExtensionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NXNavigationExtensionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6B022B7273AB780008003F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6B022C0273AB781008003F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6B022C3273AB781008003F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D6B022C5273AB781008003F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6B022CB273AB7AA008003F6 /* NXNavigationExtensionDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NXNavigationExtensionDemo.entitlements; sourceTree = "<group>"; };
-		D6B022D5273AB8E3008003F6 /* BackButtonEventIntercept.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackButtonEventIntercept.swift; sourceTree = "<group>"; };
-		D6B022D6273AB8E3008003F6 /* NavigationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
-		D6B022D7273AB8E3008003F6 /* FullScreenPopGestureEnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenPopGestureEnable.swift; sourceTree = "<group>"; };
-		D6B022D8273AB8E3008003F6 /* NavigationBarUserInteractionDisable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarUserInteractionDisable.swift; sourceTree = "<group>"; };
-		D6B022D9273AB8E3008003F6 /* UpdateNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateNavigationBar.swift; sourceTree = "<group>"; };
-		D6B022DA273AB8E3008003F6 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
-		D6B022DB273AB8E3008003F6 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		D6B022DC273AB8E3008003F6 /* EdgePopGestureDisable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgePopGestureDisable.swift; sourceTree = "<group>"; };
-		D6B022DE273AB8E3008003F6 /* FullScreenColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenColor.swift; sourceTree = "<group>"; };
-		D6B022DF273AB8E3008003F6 /* BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundColor.swift; sourceTree = "<group>"; };
-		D6B022E0273AB8E3008003F6 /* ShadowColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowColor.swift; sourceTree = "<group>"; };
-		D6B022E1273AB8E3008003F6 /* Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transparent.swift; sourceTree = "<group>"; };
-		D6B022E2273AB8E3008003F6 /* Present.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Present.swift; sourceTree = "<group>"; };
-		D6B022E3273AB8E3008003F6 /* ListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
-		D6B022E4273AB8E3008003F6 /* ScrollViewContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewContent.swift; sourceTree = "<group>"; };
-		D6B022E5273AB8E3008003F6 /* CustomBackImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBackImage.swift; sourceTree = "<group>"; };
-		D6B022E6273AB8E3008003F6 /* BackgrounddImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgrounddImage.swift; sourceTree = "<group>"; };
-		D6B022E7273AB8E3008003F6 /* BlurNavigationBarLikeSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurNavigationBarLikeSystem.swift; sourceTree = "<group>"; };
-		D6B022E8273AB8E3008003F6 /* ShadowImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowImage.swift; sourceTree = "<group>"; };
-		D6B022E9273AB8E3008003F6 /* CustomBackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBackView.swift; sourceTree = "<group>"; };
+		D6B022D5273AB8E3008003F6 /* View03_BackButtonEventIntercept.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View03_BackButtonEventIntercept.swift; sourceTree = "<group>"; };
+		D6B022D6273AB8E3008003F6 /* View08_NavigationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View08_NavigationRouter.swift; sourceTree = "<group>"; };
+		D6B022D7273AB8E3008003F6 /* View02_FullScreenPopGestureEnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View02_FullScreenPopGestureEnable.swift; sourceTree = "<group>"; };
+		D6B022D8273AB8E3008003F6 /* View05_NavigationBarDisable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View05_NavigationBarDisable.swift; sourceTree = "<group>"; };
+		D6B022D9273AB8E3008003F6 /* View07_UpdateNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View07_UpdateNavigationBar.swift; sourceTree = "<group>"; };
+		D6B022DA273AB8E3008003F6 /* View04_CustomNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View04_CustomNavigationBar.swift; sourceTree = "<group>"; };
+		D6B022DB273AB8E3008003F6 /* View06_WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View06_WebView.swift; sourceTree = "<group>"; };
+		D6B022DC273AB8E3008003F6 /* View01_EdgePopGestureDisable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View01_EdgePopGestureDisable.swift; sourceTree = "<group>"; };
+		D6B022DE273AB8E3008003F6 /* View09_FullScreenColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View09_FullScreenColor.swift; sourceTree = "<group>"; };
+		D6B022DF273AB8E3008003F6 /* View01_BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View01_BackgroundColor.swift; sourceTree = "<group>"; };
+		D6B022E0273AB8E3008003F6 /* View05_ShadowColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View05_ShadowColor.swift; sourceTree = "<group>"; };
+		D6B022E1273AB8E3008003F6 /* View03_Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View03_Transparent.swift; sourceTree = "<group>"; };
+		D6B022E2273AB8E3008003F6 /* View10_Present.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View10_Present.swift; sourceTree = "<group>"; };
+		D6B022E3273AB8E3008003F6 /* View11_ListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View11_ListView.swift; sourceTree = "<group>"; };
+		D6B022E4273AB8E3008003F6 /* View12_ScrollViewContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View12_ScrollViewContent.swift; sourceTree = "<group>"; };
+		D6B022E5273AB8E3008003F6 /* View07_CustomBackImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View07_CustomBackImage.swift; sourceTree = "<group>"; };
+		D6B022E6273AB8E3008003F6 /* View02_BackgrounddImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View02_BackgrounddImage.swift; sourceTree = "<group>"; };
+		D6B022E7273AB8E3008003F6 /* View04_LikeSystemNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View04_LikeSystemNavigationBar.swift; sourceTree = "<group>"; };
+		D6B022E8273AB8E3008003F6 /* View06_ShadowImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View06_ShadowImage.swift; sourceTree = "<group>"; };
+		D6B022E9273AB8E3008003F6 /* View08_CustomBackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View08_CustomBackView.swift; sourceTree = "<group>"; };
 		D6B022EB273AB8E3008003F6 /* ColorListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorListView.swift; sourceTree = "<group>"; };
 		D6B022EC273AB8E3008003F6 /* ColorScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorScrollView.swift; sourceTree = "<group>"; };
 		D6B022ED273AB8E3008003F6 /* FeatureDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureDetailView.swift; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D64039D3273CB1AB0047F25E /* NXNavigationExtensionSwiftUI.framework in Frameworks */,
 				D6B02369273ABA7A008003F6 /* NXNavigationExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,14 +232,14 @@
 		D6B022D4273AB8E3008003F6 /* Advanced */ = {
 			isa = PBXGroup;
 			children = (
-				D6B022D5273AB8E3008003F6 /* BackButtonEventIntercept.swift */,
-				D6B022DA273AB8E3008003F6 /* CustomNavigationBar.swift */,
-				D6B022DC273AB8E3008003F6 /* EdgePopGestureDisable.swift */,
-				D6B022D7273AB8E3008003F6 /* FullScreenPopGestureEnable.swift */,
-				D6B022D8273AB8E3008003F6 /* NavigationBarUserInteractionDisable.swift */,
-				D6B022D6273AB8E3008003F6 /* NavigationRouter.swift */,
-				D6B022D9273AB8E3008003F6 /* UpdateNavigationBar.swift */,
-				D6B022DB273AB8E3008003F6 /* WebView.swift */,
+				D6B022DC273AB8E3008003F6 /* View01_EdgePopGestureDisable.swift */,
+				D6B022D7273AB8E3008003F6 /* View02_FullScreenPopGestureEnable.swift */,
+				D6B022D5273AB8E3008003F6 /* View03_BackButtonEventIntercept.swift */,
+				D6B022DA273AB8E3008003F6 /* View04_CustomNavigationBar.swift */,
+				D6B022D8273AB8E3008003F6 /* View05_NavigationBarDisable.swift */,
+				D6B022DB273AB8E3008003F6 /* View06_WebView.swift */,
+				D6B022D9273AB8E3008003F6 /* View07_UpdateNavigationBar.swift */,
+				D6B022D6273AB8E3008003F6 /* View08_NavigationRouter.swift */,
 			);
 			path = Advanced;
 			sourceTree = "<group>";
@@ -242,18 +247,18 @@
 		D6B022DD273AB8E3008003F6 /* Basic */ = {
 			isa = PBXGroup;
 			children = (
-				D6B022DF273AB8E3008003F6 /* BackgroundColor.swift */,
-				D6B022E6273AB8E3008003F6 /* BackgrounddImage.swift */,
-				D6B022E7273AB8E3008003F6 /* BlurNavigationBarLikeSystem.swift */,
-				D6B022E5273AB8E3008003F6 /* CustomBackImage.swift */,
-				D6B022E9273AB8E3008003F6 /* CustomBackView.swift */,
-				D6B022DE273AB8E3008003F6 /* FullScreenColor.swift */,
-				D6B022E3273AB8E3008003F6 /* ListView.swift */,
-				D6B022E2273AB8E3008003F6 /* Present.swift */,
-				D6B022E4273AB8E3008003F6 /* ScrollViewContent.swift */,
-				D6B022E0273AB8E3008003F6 /* ShadowColor.swift */,
-				D6B022E8273AB8E3008003F6 /* ShadowImage.swift */,
-				D6B022E1273AB8E3008003F6 /* Transparent.swift */,
+				D6B022DF273AB8E3008003F6 /* View01_BackgroundColor.swift */,
+				D6B022E6273AB8E3008003F6 /* View02_BackgrounddImage.swift */,
+				D6B022E1273AB8E3008003F6 /* View03_Transparent.swift */,
+				D6B022E7273AB8E3008003F6 /* View04_LikeSystemNavigationBar.swift */,
+				D6B022E0273AB8E3008003F6 /* View05_ShadowColor.swift */,
+				D6B022E8273AB8E3008003F6 /* View06_ShadowImage.swift */,
+				D6B022E5273AB8E3008003F6 /* View07_CustomBackImage.swift */,
+				D6B022E9273AB8E3008003F6 /* View08_CustomBackView.swift */,
+				D6B022DE273AB8E3008003F6 /* View09_FullScreenColor.swift */,
+				D6B022E2273AB8E3008003F6 /* View10_Present.swift */,
+				D6B022E3273AB8E3008003F6 /* View11_ListView.swift */,
+				D6B022E4273AB8E3008003F6 /* View12_ScrollViewContent.swift */,
 			);
 			path = Basic;
 			sourceTree = "<group>";
@@ -388,6 +393,7 @@
 		D6B02367273ABA7A008003F6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D64039D2273CB1AB0047F25E /* NXNavigationExtensionSwiftUI.framework */,
 				D6B02368273ABA7A008003F6 /* NXNavigationExtension.framework */,
 			);
 			name = Frameworks;
@@ -466,20 +472,20 @@
 			files = (
 				D6B02353273AB8E3008003F6 /* ViewController08_CustomBackView.swift in Sources */,
 				D6B0235D273AB8E3008003F6 /* DrawerAnimationController.swift in Sources */,
-				D6B0232E273AB8E3008003F6 /* BackgroundColor.swift in Sources */,
+				D6B0232E273AB8E3008003F6 /* View01_BackgroundColor.swift in Sources */,
 				D6B02360273AB8E3008003F6 /* FullPopGesture_ScrollView.swift in Sources */,
 				D6B0233E273AB8E3008003F6 /* NavigationRedirect.swift in Sources */,
 				D6B02359273AB8E3008003F6 /* ViewController07_CustomBackImage.swift in Sources */,
 				D6B02343273AB8E3008003F6 /* SplitAdaptorViewController.swift in Sources */,
-				D6B02337273AB8E3008003F6 /* ShadowImage.swift in Sources */,
-				D6B02338273AB8E3008003F6 /* CustomBackView.swift in Sources */,
+				D6B02337273AB8E3008003F6 /* View06_ShadowImage.swift in Sources */,
+				D6B02338273AB8E3008003F6 /* View08_CustomBackView.swift in Sources */,
 				D6B02361273AB8E3008003F6 /* FullPopGesture_PageViewController.swift in Sources */,
 				D6B02354273AB8E3008003F6 /* ViewController02_BackgroundImage.swift in Sources */,
 				D6B0234D273AB8E3008003F6 /* ViewController02_FullScreenPopGestureEnable.swift in Sources */,
-				D6B0232F273AB8E3008003F6 /* ShadowColor.swift in Sources */,
+				D6B0232F273AB8E3008003F6 /* View05_ShadowColor.swift in Sources */,
 				D6B0234B273AB8E3008003F6 /* ViewController04_CustomNavigationBar.swift in Sources */,
 				D6B0235E273AB8E3008003F6 /* HierarchyViewController.swift in Sources */,
-				D6B02332273AB8E3008003F6 /* ListView.swift in Sources */,
+				D6B02332273AB8E3008003F6 /* View11_ListView.swift in Sources */,
 				D6B02351273AB8E3008003F6 /* ViewController04_LikeSystemNavigationBar.swift in Sources */,
 				D6B0233D273AB8E3008003F6 /* NavigationBackEvent.swift in Sources */,
 				D6B02357273AB8E3008003F6 /* ViewController13_CustomBlurNavigationBar.swift in Sources */,
@@ -488,45 +494,45 @@
 				D6B02355273AB8E3008003F6 /* ViewController01_BackgroundColor.swift in Sources */,
 				D6B0234C273AB8E3008003F6 /* ViewController09_ScrollChangeNavigationBar.swift in Sources */,
 				D6B02348273AB8E3008003F6 /* ViewController05_NavigationBarDisable.swift in Sources */,
-				D6B02325273AB8E3008003F6 /* BackButtonEventIntercept.swift in Sources */,
-				D6B0232C273AB8E3008003F6 /* EdgePopGestureDisable.swift in Sources */,
-				D6B0232B273AB8E3008003F6 /* WebView.swift in Sources */,
+				D6B02325273AB8E3008003F6 /* View03_BackButtonEventIntercept.swift in Sources */,
+				D6B0232C273AB8E3008003F6 /* View01_EdgePopGestureDisable.swift in Sources */,
+				D6B0232B273AB8E3008003F6 /* View06_WebView.swift in Sources */,
 				D6B02346273AB8E3008003F6 /* ViewController01_EdgePopGestureDisable.swift in Sources */,
 				D6B0233F273AB8E3008003F6 /* NavigationFeature.swift in Sources */,
 				D6B02341273AB8E3008003F6 /* BaseTableViewController.swift in Sources */,
 				D6B0233A273AB8E3008003F6 /* ColorScrollView.swift in Sources */,
-				D6B02335273AB8E3008003F6 /* BackgrounddImage.swift in Sources */,
-				D6B02331273AB8E3008003F6 /* Present.swift in Sources */,
-				D6B02333273AB8E3008003F6 /* ScrollViewContent.swift in Sources */,
+				D6B02335273AB8E3008003F6 /* View02_BackgrounddImage.swift in Sources */,
+				D6B02331273AB8E3008003F6 /* View10_Present.swift in Sources */,
+				D6B02333273AB8E3008003F6 /* View12_ScrollViewContent.swift in Sources */,
 				D6B02350273AB8E3008003F6 /* ViewController10_Present.swift in Sources */,
 				D6B0233B273AB8E3008003F6 /* FeatureDetailView.swift in Sources */,
 				D6B022B8273AB780008003F6 /* AppDelegate.swift in Sources */,
 				D6B0235B273AB8E3008003F6 /* DrawerViewController.swift in Sources */,
-				D6B02328273AB8E3008003F6 /* NavigationBarUserInteractionDisable.swift in Sources */,
+				D6B02328273AB8E3008003F6 /* View05_NavigationBarDisable.swift in Sources */,
 				D6B02362273AB8E3008003F6 /* FeatureTableViewController.swift in Sources */,
 				D6B0235F273AB8E3008003F6 /* ViewController07_UpdateNavigationBar.swift in Sources */,
 				D6B02358273AB8E3008003F6 /* ViewController09_FullScreenColor.swift in Sources */,
 				D6B02347273AB8E3008003F6 /* ViewController03_BackButtonEventIntercept.swift in Sources */,
-				D6B02330273AB8E3008003F6 /* Transparent.swift in Sources */,
+				D6B02330273AB8E3008003F6 /* View03_Transparent.swift in Sources */,
 				D6B02356273AB8E3008003F6 /* ViewController03_Transparent.swift in Sources */,
 				D6B02352273AB8E3008003F6 /* ViewController12_TableViewControllerWithFullScreen.swift in Sources */,
-				D6B02327273AB8E3008003F6 /* FullScreenPopGestureEnable.swift in Sources */,
+				D6B02327273AB8E3008003F6 /* View02_FullScreenPopGestureEnable.swift in Sources */,
 				D6B0234F273AB8E3008003F6 /* ViewController06_ShadowImage.swift in Sources */,
 				D6B0233C273AB8E3008003F6 /* FeatureListView.swift in Sources */,
 				D6B0235C273AB8E3008003F6 /* DrawAnimationTransitionDelegate.swift in Sources */,
 				D6B0234A273AB8E3008003F6 /* ViewController08_RedirectViewController.swift in Sources */,
 				D6B02345273AB8E3008003F6 /* ContentView.swift in Sources */,
 				D6B02349273AB8E3008003F6 /* ViewController06_WebView.swift in Sources */,
-				D6B02336273AB8E3008003F6 /* BlurNavigationBarLikeSystem.swift in Sources */,
-				D6B0232D273AB8E3008003F6 /* FullScreenColor.swift in Sources */,
-				D6B02329273AB8E3008003F6 /* UpdateNavigationBar.swift in Sources */,
-				D6B02326273AB8E3008003F6 /* NavigationRouter.swift in Sources */,
-				D6B02334273AB8E3008003F6 /* CustomBackImage.swift in Sources */,
+				D6B02336273AB8E3008003F6 /* View04_LikeSystemNavigationBar.swift in Sources */,
+				D6B0232D273AB8E3008003F6 /* View09_FullScreenColor.swift in Sources */,
+				D6B02329273AB8E3008003F6 /* View07_UpdateNavigationBar.swift in Sources */,
+				D6B02326273AB8E3008003F6 /* View08_NavigationRouter.swift in Sources */,
+				D6B02334273AB8E3008003F6 /* View07_CustomBackImage.swift in Sources */,
 				D6B02344273AB8E3008003F6 /* BaseNavigationController.swift in Sources */,
 				D6B02342273AB8E3008003F6 /* MainTabBarController.swift in Sources */,
 				D6B0235A273AB8E3008003F6 /* ViewController05_ShadowColor.swift in Sources */,
 				D6B02339273AB8E3008003F6 /* ColorListView.swift in Sources */,
-				D6B0232A273AB8E3008003F6 /* CustomNavigationBar.swift in Sources */,
+				D6B0232A273AB8E3008003F6 /* View04_CustomNavigationBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

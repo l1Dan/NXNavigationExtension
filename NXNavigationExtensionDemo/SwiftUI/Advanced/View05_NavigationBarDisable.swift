@@ -1,5 +1,5 @@
 //
-//  NavigationBarUserInteractionDisable.swift
+//  View05_NavigationBarDisable.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/15.
@@ -10,7 +10,7 @@ import SwiftUI
 #endif
 
 @available(iOS 13.0, *)
-struct NavigationBarUserInteractionDisable: View {
+struct View05_NavigationBarDisable: View {
     private let item: NavigationFeatureItem
     
     init(_ item: NavigationFeatureItem) {
@@ -38,10 +38,10 @@ struct NavigationBarUserInteractionDisable: View {
 }
 
 @available(iOS 13.0, *)
-struct NavigationBarUserInteractionDisable_Previews: PreviewProvider {
+struct View05_NavigationBarDisable_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            NavigationBarUserInteractionDisable(NavigationFeatureItem(style: .navigationBarDisable))
+            View05_NavigationBarDisable(NavigationFeatureItem(style: .navigationBarDisable))
         }
     }
 }

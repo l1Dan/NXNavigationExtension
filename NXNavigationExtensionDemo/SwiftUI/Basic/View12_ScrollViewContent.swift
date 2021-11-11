@@ -1,16 +1,18 @@
 //
-//  ScrollViewContent.swift
+//  View12_ScrollViewContent.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/15.
 //
+
+import NXNavigationExtensionSwiftUI
 
 #if canImport(SwiftUI)
 import SwiftUI
 #endif
 
 @available(iOS 13.0, *)
-struct ScrollViewContent: View {
+struct View12_ScrollViewContent: View {
     private let item: NavigationFeatureItem
     
     init(_ item: NavigationFeatureItem) {
@@ -36,10 +38,10 @@ struct ScrollViewContent: View {
 }
 
 @available(iOS 13.0, *)
-struct ScrollViewContent_Previews: PreviewProvider {
+struct View12_ScrollViewContent_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            ScrollViewContent(NavigationFeatureItem(style: .scrollViewContent))
+            View12_ScrollViewContent(NavigationFeatureItem(style: .scrollViewContent))
         }
     }
 }

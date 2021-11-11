@@ -21,46 +21,45 @@ struct FeatureDetailView: View {
         switch item.style {
             // Basic
         case .backgroundColor:
-            return AnyView(BackgroundColor(item))
+            return AnyView(View01_BackgroundColor(item))
         case .backgroundImage:
-            return AnyView(BackgrounddImage(item))
+            return AnyView(View02_BackgrounddImage(item))
         case .transparent:
-            return AnyView(Transparent(item))
+            return AnyView(View03_Transparent(item))
         case .likeSystemNavigationBar:
-            return AnyView(BlurNavigationBarLikeSystem(item))
+            return AnyView(View04_LikeSystemNavigationBar(item))
         case .shadowColor:
-            return AnyView(ShadowColor(item))
+            return AnyView(View05_ShadowColor(item))
         case .shadowImage:
-            return AnyView(ShadowImage(item))
+            return AnyView(View06_ShadowImage(item))
         case .customBackImage:
-            return AnyView(CustomBackImage(item))
+            return AnyView(View07_CustomBackImage(item))
         case .customBackView:
-            return AnyView(CustomBackView(item))
+            return AnyView(View08_CustomBackView(item))
         case .fullScreenColor:
-            return AnyView(FullScreenColor(item))
+            return AnyView(View09_FullScreenColor(item))
         case .listView:
-            return AnyView(ListView(item))
+            return AnyView(View11_ListView(item))
         case .scrollViewContent:
-            return AnyView(ScrollViewContent(item))
+            return AnyView(View12_ScrollViewContent(item))
             
             // Advanced
         case .edgePopGestureDisable:
-            return AnyView(EdgePopGestureDisable(item))
+            return AnyView(View01_EdgePopGestureDisable(item))
         case .fullScreenPopGestureEnable:
-            return AnyView(FullScreenPopGestureEnable(item))
-        case .navigationBarDisable:
-            return AnyView(NavigationBarUserInteractionDisable(item))
+            return AnyView(View02_FullScreenPopGestureEnable(item))
         case .backButtonEventIntercept:
-            return AnyView(BackButtonEventIntercept(item))
-        case .navigationRouter:
-            return AnyView(NavigationRouter(item))
+            return AnyView(View03_BackButtonEventIntercept(item))
         case .customNavigationBar:
-            return AnyView(CustomNavigationBar(item))
+            return AnyView(View04_CustomNavigationBar(item))
+        case .navigationBarDisable:
+            return AnyView(View05_NavigationBarDisable(item))
         case .webView:
-            return AnyView(WebView(item))
+            return AnyView(View06_WebView(item))
         case .updateNavigationBar:
-            return AnyView(UpdateNavigationBar(item))
-            
+            return AnyView(View07_UpdateNavigationBar(item))
+        case .navigationRouter:
+            return AnyView(View08_NavigationRouter(item))
         default:
             return AnyView(Text("No implementation").navigationBarTitle(item.title))
         }

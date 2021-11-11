@@ -1,5 +1,5 @@
 //
-//  UpdateNavigationBar.swift
+//  View07_UpdateNavigationBar.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/18.
@@ -12,7 +12,7 @@ import SwiftUI
 #endif
 
 @available(iOS 13.0, *)
-struct UpdateNavigationBar: View {
+struct View07_UpdateNavigationBar: View {
     @State private var context: NXNavigationRouter.Context
     @State private var title = "Custom"
     @State private var count = 0
@@ -54,9 +54,9 @@ struct UpdateNavigationBar: View {
         } label: {
             Text("Update")
                 .foregroundColor(Color(randomColor))
-                .frame(width: UpdateNavigationBar.buttonWidthAndHeight, height: UpdateNavigationBar.buttonWidthAndHeight)
+                .frame(width: View07_UpdateNavigationBar.buttonWidthAndHeight, height: View07_UpdateNavigationBar.buttonWidthAndHeight)
         }
-        .overlay(RoundedRectangle(cornerRadius: UpdateNavigationBar.buttonWidthAndHeight * 0.5, style: .circular).strokeBorder(Color(randomColor), lineWidth: 5))
+        .overlay(RoundedRectangle(cornerRadius: View07_UpdateNavigationBar.buttonWidthAndHeight * 0.5, style: .circular).strokeBorder(Color(randomColor), lineWidth: 5))
         .navigationBarTitle(item.title)
         .useNXNavigationView(context: $context, onPrepareConfiguration: { configuration in
             configuration.navigationBarAppearance.useSystemBackButton = true
@@ -70,10 +70,10 @@ struct UpdateNavigationBar: View {
 }
 
 @available(iOS 13.0, *)
-struct UpdateNavigationBar_Previews: PreviewProvider {
+struct View07_UpdateNavigationBar_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBar))
+            View07_UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBar))
         }
     }
 }

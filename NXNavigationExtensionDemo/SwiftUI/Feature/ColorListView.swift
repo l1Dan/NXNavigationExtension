@@ -16,7 +16,7 @@ struct ColorListView: View {
     var body: some View {
         List(0 ..< 30) { index in
             NavigationLink {
-                UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBar))
+                View07_UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBar))
             } label: {
                 Text(String(format: "Row: %02zd", index + 1))
             }
