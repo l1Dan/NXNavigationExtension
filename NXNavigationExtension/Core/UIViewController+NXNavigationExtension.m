@@ -154,6 +154,7 @@
 }
 
 - (void)nx_configureNavigationVirtualWrapperView {
+#ifdef NX_SWIFTUI
     if (self.nx_navigationVirtualWrapperViewNotFound) return;
     
     if (@available(iOS 13.0, *)) {
@@ -167,6 +168,7 @@
             }
         }
     }
+#endif
 }
 
 - (void)nx_setupNavigationBar {

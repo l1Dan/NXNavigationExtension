@@ -21,11 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import UIKit
-
-#if canImport(SwiftUI)
 import SwiftUI
-#endif
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public extension NXNavigationRouter {
@@ -84,7 +80,9 @@ public extension NXNavigationRouter {
 }
 
 
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
 public extension View {
     
     /// 通过 View 添加 `NXNavigationBar` 的包装对象，提供当前导航栏的外观的便利。
