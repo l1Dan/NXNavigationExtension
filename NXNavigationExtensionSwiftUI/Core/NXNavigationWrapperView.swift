@@ -23,6 +23,7 @@
 
 import SwiftUI
 
+
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public class NXNavigationVirtualView: NXNavigationVirtualWrapperView {
     
@@ -46,7 +47,34 @@ public class NXNavigationVirtualView: NXNavigationVirtualWrapperView {
                                                  interactiveType: NXNavigationInteractiveType) -> Bool {
         return self.onWillPopViewController?(interactiveType) ?? true
     }
+
+    /// 重写基类的查找规则。
+    public override class func configureWithDefaultRule(for hostingController: UIViewController) -> Self? {
+        guard let view = hostingController.view else { return nil }
+        if let navigationVirtualWrapperView = hostingController.nx_navigationVirtualWrapperView as? Self {
+            return navigationVirtualWrapperView
+        }
+        
+        let hostingViewClassName = NSStringFromClass(type(of: view))
+        guard hostingViewClassName.contains("SwiftUI") || hostingViewClassName.contains("HostingView") else { return nil }
+        
+        var navigationVirtualWrapperView: Self?
+        for wrapperView in view.subviews {
+            let wrapperViewClassName = NSStringFromClass(type(of: wrapperView))
+            if wrapperViewClassName.contains("ViewHost") && wrapperViewClassName.contains("NXNavigationWrapperView") {
+                for subview in wrapperView.subviews {
+                    if let virtualWrapperView = subview as? Self {
+                        navigationVirtualWrapperView = virtualWrapperView
+                        break
+                    }
+                }
+            }
+        }
+        
+        return navigationVirtualWrapperView
+    }
 }
+
 
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)

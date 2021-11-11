@@ -23,8 +23,6 @@
 
 #import "NXNavigationVirtualWrapperView.h"
 
-#import "NXNavigationExtensionInternal.h"
-
 
 @implementation NXNavigationVirtualWrapperView
 
@@ -34,29 +32,9 @@
     return YES;
 }
 
-+ (NXNavigationVirtualWrapperView *)filterNavigationVirtualWrapperViewWithViewController:(__kindof UIViewController *)hostingController {
-    if (!hostingController || !hostingController.view) return nil;
-    if (hostingController.nx_navigationVirtualWrapperView) return hostingController.nx_navigationVirtualWrapperView;
-    
-    UIView *view = hostingController.view;
-    NSString *hostingViewClassName = NSStringFromClass([view class]);
-    if (![hostingViewClassName containsString:@"SwiftUI"] || ![hostingViewClassName containsString:@"HostingView"]) {
-        return nil;
-    }
-    
-    NXNavigationVirtualWrapperView *virtualWrapperView = nil;
-    for (UIView *wrapperView in view.subviews) {
-        NSString *wrapperViewClassName = NSStringFromClass([wrapperView class]);
-        if ([wrapperViewClassName containsString:@"ViewHost"] && [wrapperViewClassName containsString:@"NXNavigationWrapperView"]) {
-            for (NXNavigationVirtualWrapperView *subview in wrapperView.subviews) {
-                if ([subview isKindOfClass:[NXNavigationVirtualWrapperView class]]) {
-                    virtualWrapperView = subview;
-                    break;
-                }
-            }
-        }
-    }
-    return virtualWrapperView;
++ (instancetype)configureWithDefaultRuleForViewController:(__kindof UIViewController *)hostingController {
+    // Subclass implements
+    return nil;
 }
 
 @end

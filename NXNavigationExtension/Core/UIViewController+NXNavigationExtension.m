@@ -28,6 +28,7 @@
 #import "NXNavigationExtensionHeaders.h"
 #import "NXNavigationExtensionInternal.h"
 #import "NXNavigationExtensionRuntime.h"
+#import "NXNavigationRouter.h"
 
 #import "UIViewController+NXNavigationExtension.h"
 
@@ -154,12 +155,12 @@
 }
 
 - (void)nx_configureNavigationVirtualWrapperView {
-#ifdef NX_SWIFTUI
     if (self.nx_navigationVirtualWrapperViewNotFound) return;
     
     if (@available(iOS 13.0, *)) {
-        if (self.nx_canSetupNavigationBar && !self.nx_navigationVirtualWrapperViewInitialize) {
-            self.nx_navigationVirtualWrapperView = [NXNavigationVirtualWrapperView filterNavigationVirtualWrapperViewWithViewController:self];
+        NXNavigatioVirtualWrapperViewFilterCallback callback = self.navigationController.nx_filterNavigationVirtualWrapperViewCallback;
+        if (callback && self.nx_canSetupNavigationBar && !self.nx_navigationVirtualWrapperViewInitialize) {
+            self.nx_navigationVirtualWrapperView = callback(self);
             if (self.nx_navigationVirtualWrapperView) {
                 self.nx_navigationVirtualWrapperViewInitialize = YES;
                 // 调用外部配置信息
@@ -168,7 +169,6 @@
             }
         }
     }
-#endif
 }
 
 - (void)nx_setupNavigationBar {
@@ -375,6 +375,16 @@
 }
 
 #pragma mark - Getter & Setter
+
+- (NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setNx_navigationVirtualWrapperView:(NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
+    nx_navigationVirtualWrapperView.context.hostingController = self;
+    self.nx_navigationInteractDelegate = (id<NXNavigationInteractable>)nx_navigationVirtualWrapperView;
+    objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperView), nx_navigationVirtualWrapperView, OBJC_ASSOCIATION_ASSIGN);
+}
 
 - (NXNavigationBar *)nx_navigationBar {
     // 如果之前已经创建过 NXNavigationBar 实例，则直接返回原来已经创建好的实例对象。

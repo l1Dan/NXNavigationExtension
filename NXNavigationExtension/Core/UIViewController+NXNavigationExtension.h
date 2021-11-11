@@ -30,6 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (NXNavigationExtension)
 
+/// For SwiftUI，拿到当前的 NXNavigationVirtualWrapperView
+@property (nonatomic, weak, nullable) __kindof NXNavigationVirtualWrapperView *nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0));
+
 /// 获取当前控制器的 NXNavigationBar
 @property (nonatomic, strong, readonly, nullable) NXNavigationBar *nx_navigationBar;
 

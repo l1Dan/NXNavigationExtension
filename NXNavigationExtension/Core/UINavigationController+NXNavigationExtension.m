@@ -226,6 +226,10 @@
     self.nx_prepareConfigureViewControllerCallback = callback;
 }
 
+- (void)nx_applyFilterNavigationVirtualWrapperViewRuleCallback:(NXNavigatioVirtualWrapperViewFilterCallback)callback {
+    self.nx_filterNavigationVirtualWrapperViewCallback = callback;
+}
+
 - (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController * _Nullable (^)(void))block {
     NSArray<__kindof UIViewController *> *viewControllers = [self nx_findViewControllerClass:aClass initializeStandbyViewControllerUsingBlock:block];
     [self setViewControllers:viewControllers animated:YES];

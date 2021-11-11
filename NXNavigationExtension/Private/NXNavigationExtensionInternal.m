@@ -301,6 +301,14 @@
 
 #pragma mark - Public
 
+- (NXNavigatioVirtualWrapperViewFilterCallback)nx_filterNavigationVirtualWrapperViewCallback {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setNx_filterNavigationVirtualWrapperViewCallback:(NXNavigatioVirtualWrapperViewFilterCallback)nx_filterNavigationVirtualWrapperViewCallback {
+    objc_setAssociatedObject(self, @selector(nx_filterNavigationVirtualWrapperViewCallback), nx_filterNavigationVirtualWrapperViewCallback, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
 - (NXScreenEdgePopGestureRecognizerDelegate *)nx_screenEdgePopGestureDelegate {
     return objc_getAssociatedObject(self, _cmd);
 }
@@ -495,16 +503,6 @@
 
 - (void)setNx_navigationInteractDelegate:(id<NXNavigationInteractable>)nx_navigationInteractDelegate {
     objc_setAssociatedObject(self, @selector(nx_navigationInteractDelegate), nx_navigationInteractDelegate, OBJC_ASSOCIATION_ASSIGN);
-}
-
-- (NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
-    return objc_getAssociatedObject(self, _cmd);
-}
-
-- (void)setNx_navigationVirtualWrapperView:(NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
-    nx_navigationVirtualWrapperView.context.hostingController = self;
-    self.nx_navigationInteractDelegate = (id<NXNavigationInteractable>)nx_navigationVirtualWrapperView;
-    objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperView), nx_navigationVirtualWrapperView, OBJC_ASSOCIATION_ASSIGN);
 }
 
 - (NXNavigationConfiguration *)nx_configuration {

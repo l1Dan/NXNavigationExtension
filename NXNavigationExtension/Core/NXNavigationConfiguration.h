@@ -26,7 +26,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-@class NXNavigationConfiguration;
+@class NXNavigationConfiguration, NXNavigationVirtualWrapperView;
+
+typedef __kindof NXNavigationVirtualWrapperView *_Nullable(^_Nullable NXNavigatioVirtualWrapperViewFilterCallback)(__kindof UIViewController *hostingController);
 
 typedef NXNavigationConfiguration *_Nullable(^_Nullable NXNavigationControllerPrepareConfigurationCallback)(__kindof UINavigationController *navigationController, NXNavigationConfiguration *configuration);
 

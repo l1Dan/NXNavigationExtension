@@ -101,6 +101,9 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 
 @interface UINavigationController (NXNavigationExtensionInternal)
 
+/// For SwiftUI，应用筛选 NXNavigationVirtualWrapperView 实例对象查找规则
+@property (nonatomic, copy, nullable) NXNavigatioVirtualWrapperViewFilterCallback nx_filterNavigationVirtualWrapperViewCallback API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
 /// 边缘返回手势代理对象
 @property (nonatomic, strong, readonly) NXScreenEdgePopGestureRecognizerDelegate *nx_screenEdgePopGestureDelegate;
 
@@ -152,9 +155,6 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 
 /// For SwiftUI，返回页面时交互事件代理
 @property (nonatomic, weak, nullable) id<NXNavigationInteractable> nx_navigationInteractDelegate;
-
-/// For SwiftUI，拿到当前的 NXNavigationVirtualWrapperView
-@property (nonatomic, weak, nullable) NXNavigationVirtualWrapperView *nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0));
 
 /// 获取当前导航控制器的配置
 @property (nonatomic, strong, nullable) NXNavigationConfiguration *nx_configuration;
