@@ -494,13 +494,13 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.6.4;
+				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.tclplus.NXNavigationExtensionSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -529,13 +529,13 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.6.4;
+				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.tclplus.NXNavigationExtensionSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -569,7 +569,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.6.4;
+				MARKETING_VERSION = 4.0.0;
 				MODULEMAP_FILE = "$(SRCROOT)/NXNavigationExtension/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.l1dan.NXNavigationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -603,7 +603,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.6.4;
+				MARKETING_VERSION = 4.0.0;
 				MODULEMAP_FILE = "$(SRCROOT)/NXNavigationExtension/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.l1dan.NXNavigationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
