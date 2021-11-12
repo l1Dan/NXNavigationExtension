@@ -92,7 +92,7 @@ struct ContentView: View {
 
 ### 修改返回按钮箭头颜色
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift#L106)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift#L106)
 
 ```swift
 Text("Destination")
@@ -103,7 +103,7 @@ Text("Destination")
 
 ## 修改系统返回按钮文字
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Advanced/View07_UpdateNavigationBar.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Advanced/View07_UpdateNavigationBar.swift)
 
 ```swift
 Text("Destination")
@@ -115,7 +115,7 @@ Text("Destination")
 
 ## 修改导航栏标题颜色
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Advanced/View07_UpdateNavigationBar.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Advanced/View07_UpdateNavigationBar.swift)
 
 ```swift
 Text("Destination")
@@ -128,7 +128,7 @@ Text("Destination")
 
 **导航栏背景颜色默认使用系统蓝色 `UIColor.systemBlue`，这样处理能够快速辨别框架是否生效，也可以使用以下方式进行重写：**
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Basic/View01_BackgroundColor.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View01_BackgroundColor.swift)
 
 ```swift
 // 全局统一修改（不会覆盖基于视图控制器的修改）
@@ -144,7 +144,7 @@ Text("Destination")
 
 #### 修改导航栏背景图片
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Basic/View02_BackgrounddImage.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View02_BackgrounddImage.swift)
 
 ```swift
 Text("Destination")
@@ -155,7 +155,7 @@ Text("Destination")
 
 #### 设置导航栏透明
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Basic/View03_Transparent.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View03_Transparent.swift)
 
 ```swift
 Text("Destination")
@@ -167,7 +167,7 @@ Text("Destination")
 
 #### 实现系统导航栏模糊效果
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Basic/View04_LikeSystemNavigationBar.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View04_LikeSystemNavigationBar.swift)
 
 ```swift
 Text("Destination")
@@ -179,7 +179,7 @@ Text("Destination")
 
 ### 修改导航栏底部线条颜色
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Basic/View05_ShadowColor.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View05_ShadowColor.swift)
 
 ```swift
 Text("Destination")
@@ -191,7 +191,7 @@ Text("Destination")
 
 ### 修改导航栏底部线条图片
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Basic/View06_ShadowImage.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View06_ShadowImage.swift)
 
 ```swift
 Text("Destination")
@@ -203,7 +203,7 @@ Text("Destination")
 
 ### 自定义返回按钮图片
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Basic/View07_CustomBackImage.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View07_CustomBackImage.swift)
 
 ```swift
 Text("Destination")
@@ -214,7 +214,7 @@ Text("Destination")
 
 ### 自定义返回按钮
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Basic/View08_CustomBackView.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View08_CustomBackView.swift)
 
 ```swift
 Text("Destination")
@@ -229,7 +229,7 @@ Text("Destination")
 
 #### 禁用滑动返回手势
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Basic/View01_EdgePopGestureDisable.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View01_EdgePopGestureDisable.swift)
 
 ```swift
 Text("Destination")
@@ -240,7 +240,7 @@ Text("Destination")
 
 #### 启用全屏滑动返回手势
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Basic/View02_FullScreenPopGestureEnable.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View02_FullScreenPopGestureEnable.swift)
 
 - 全局有效
 
@@ -260,7 +260,7 @@ Text("Destination")
 
 #### 导航栏返回事件拦截
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Basic/View03_BackButtonEventIntercept.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View03_BackButtonEventIntercept.swift)
 
 1. `.callNXPopMethod`: 调用 `nx_pop` 系列方法返回事件拦截。
 2. `.backButtonAction`: 点击返回按钮返回事件拦截。
@@ -284,7 +284,7 @@ Text("Destination")
 
 ### SwiftUI 路由
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Basic/View08_NavigationRouter.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View08_NavigationRouter.swift)
 
 ```swift
 struct DestinationView: View {
@@ -312,7 +312,7 @@ struct DestinationView: View {
 
 ### 导航栏点击事件穿透到底部
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Advanced/View05_NavigationBarDisable.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Advanced/View05_NavigationBarDisable.swift)
 
 ```swift
 Text("Destination")
@@ -323,7 +323,7 @@ Text("Destination")
 
 ### 更新导航栏样式
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Advanced/View07_UpdateNavigationBar.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Advanced/View07_UpdateNavigationBar.swift)
 
 ```swift
 Button {
@@ -335,7 +335,7 @@ Button {
 
 ### 长按返回按钮显示菜单功能
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/SwiftUI/Advanced/View08_NavigationRouter.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Advanced/View08_NavigationRouter.swift)
 
 ```swift
 Text("Destination")
