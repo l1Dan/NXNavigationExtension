@@ -4,11 +4,18 @@
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/NXNavigationExtension.svg?style=flat)](https://img.shields.io/cocoapods/v/NXNavigationExtension.svg) ![Language](https://img.shields.io/github/languages/top/l1dan/NXNavigationExtension.svg?style=flat) [![MIT License](https://img.shields.io/github/license/l1dan/NXNavigationExtension.svg?style=flat)](https://opensource.org/licenses/mit-license.php) [![Platform](https://img.shields.io/cocoapods/p/NXNavigationExtension.svg?style=flat)](https://github.com/l1Dan/NXNavigationExtension/blob/main/README.md) [![GitHub last commit](https://img.shields.io/github/last-commit/l1Dan/NXNavigationExtension.svg?style=flat)](https://img.shields.io/github/last-commit/l1Dan/NXNavigationExtension)
 
-🔥 NXNavigationExtension 是为 iOS 应用设计的一个轻量级的导航栏处理框架，同时支持 UIKit 和 SwiftUI。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。可能是最省心的一款 iOS 导航栏处理框架之一。NXNavigationExtension 框架本身和示例代码都已经适配暗黑模式可供大家参考。
+🔥 NXNavigationExtension 是为 iOS 应用设计的一个轻量级的导航栏处理框架，同时支持 SwiftUI 和 UIKit。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。可能是最省心的一款 iOS 导航栏处理框架之一。NXNavigationExtension 框架本身和示例代码都已经适配暗黑模式可供大家参考。
 
 ## 🎉 预览
 
-![Preview](https://raw.githubusercontent.com/l1Dan/NXNavigationExtension/main/Snapshots/Preview.png)
+[1]: https://raw.githubusercontent.com/l1Dan/NXNavigationExtension/main/Snapshots/Preview1.gif
+[2]: https://raw.githubusercontent.com/l1Dan/NXNavigationExtension/main/Snapshots/Preview2.gif
+[3]: https://raw.githubusercontent.com/l1Dan/NXNavigationExtension/main/Snapshots/Preview3.gif
+[4]: https://raw.githubusercontent.com/l1Dan/NXNavigationExtension/main/Snapshots/Preview4.gif
+
+| SwiftUI 路由 | 完全自定义导航栏 | 返回事件拦截 | 修改导航栏外观 |
+| :----------: | :--------------: | :----------: | :------------: |
+|    ![][1]    |      ![][2]      |    ![][3]    |     ![][4]     |
 
 ## 🌟 开始使用
 
@@ -44,11 +51,11 @@ github "l1Dan/NXNavigationExtension"
 
 最新版本最低支持 iOS 9.0
 
-| NXNavigationExtension Version | Minimum iOS Target | Minimum macOS Target |         Frameworks          |
-| :---------------------------: | :----------------: | :------------------: | :-------------------------: |
-|              4.x              |      iOS 9.0       |     macOS 10.15      | SwiftUI、UIKit、macCatalyst |
-|              3.x              |      iOS 9.0       |     macOS 10.15      |     UIKit、macCatalyst      |
-|              2.x              |      iOS 11.0      |     macOS 10.15      |     UIKit、macCatalyst      |
+| NXNavigationExtension Version | Minimum iOS Target | Minimum macOS Target |         Frameworks          | Note                 |
+| :---------------------------: | :----------------: | :------------------: | :-------------------------: | -------------------- |
+|              4.x              |      iOS 9.0       |     macOS 10.15      | SwiftUI、UIKit、macCatalyst | Xcode13、SwiftUI 2.0 |
+|              3.x              |      iOS 9.0       |     macOS 10.15      |     UIKit、macCatalyst      | /                    |
+|              2.x              |      iOS 11.0      |     macOS 10.15      |     UIKit、macCatalyst      | /                    |
 
 ## 优点
 

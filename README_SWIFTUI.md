@@ -1,6 +1,14 @@
 ## 🍽 使用
 
-`NXNavigationExtensionSwiftUI` 由 [NXNavigationExtension](https://github.com/l1Dan/NXNavigationExtension/blob/main/README_UIKIT.md) 框架提供强力支持，他们的功能基本保持一致。
+`NXNavigationExtensionSwiftUI` 由 [NXNavigationExtension](https://github.com/l1Dan/NXNavigationExtension/blob/main/README_UIKIT.md) 框架提供强力支持，他们的功能基本保持一致。注册完成之后在 `NavigationView` 的 `StackNavigationViewStyle` 样式中使用，目前仅支持 `StackNavigationViewStyle` 这种方式。后续会不断完善。
+
+下面是框架对 `NavigationView` 和 iOS 系统版本的支持情况：
+
+| NavigationViewStyle / iOS version | iOS 13 | iOS 14 | iOS 15 |
+| :-------------------------------: | :----: | :----: | :----: |
+|            .automatic             |   ❌   |   ❌   |   ❌   |
+|              .stack               |   ❌   |   ✅   |   ✅   |
+|             .columns              |   ❌   |   ❌   |   ❌   |
 
 1. 💉 导入模块。
 
@@ -35,8 +43,6 @@ var classes: [AnyClass] = []
 }
 ```
 
-注册完成之后在 `NavigationView` 的 `StackNavigationViewStyle` 样式中使用（目前仅支持 `StackNavigationViewStyle` 这种方式）。
-
 ```swift
 // Example: ContentView.swift
 import SwiftUI
@@ -50,7 +56,7 @@ struct DestinationView: View {
             // NXNavigationRouter.of(context).pop()
             NXNavigationRouter.of(context /* /destinationView */).popUntil("/contentView")
         } label: {
-            Text("Destination")
+            Text("Pop")
                 .padding()
         }
         .useNXNavigationView(context: $context, onPrepareConfiguration: { configuration in
@@ -69,7 +75,7 @@ struct ContentView: View {
             NavigationLink { // 1. 使用 NavigationView 包装
                 DestinationView()
             } label: {
-                Text("Hello, world!")
+                Text("Push")
                     .padding()
                     .useNXNavigationView(context: $context /* /contentView */, onPrepareConfiguration: { configuration in
                         // 3. 修改导航栏背景颜色 ... `Text` NavigationView backgroundColor

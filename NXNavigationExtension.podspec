@@ -2,10 +2,10 @@ Pod::Spec.new do |spec|
 
   spec.name     = 'NXNavigationExtension'
   spec.version  = '3.6.4'
-  spec.summary  = '🔥 NXNavigationExtension 是为 iOS 应用设计的一个轻量级的导航栏处理框架，同时支持 UIKit 和 SwiftUI。'
+  spec.summary  = '🔥 NXNavigationExtension 是为 iOS 应用设计的一个轻量级的导航栏处理框架，同时支持 SwiftUI 和 UIKit。'
 
   spec.description  = <<-DESC
-  '🔥 NXNavigationExtension 是为 iOS 应用设计的一个轻量级的导航栏处理框架，同时支持 UIKit 和 SwiftUI。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。'
+  '🔥 NXNavigationExtension 是为 iOS 应用设计的一个轻量级的导航栏处理框架，同时支持 SwiftUI 和 UIKit。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。可能是最省心的一款 iOS 导航栏处理框架之一。'
                    DESC
 
   spec.homepage = 'https://github.com/l1Dan/NXNavigationExtension'
