@@ -21,6 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+
+#if canImport(SwiftUI)
 import SwiftUI
 
 
@@ -76,9 +78,7 @@ public class NXNavigationVirtualView: NXNavigationVirtualWrapperView {
 }
 
 
-@available(iOS 13.0, tvOS 13.0, *)
-@available(macOS, unavailable)
-@available(watchOS, unavailable)
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct NXNavigationWrapperView: UIViewRepresentable {
     public typealias UIViewType = NXNavigationVirtualView
     
@@ -123,3 +123,5 @@ public struct NXNavigationWrapperView: UIViewRepresentable {
     }
     
 }
+
+#endif
