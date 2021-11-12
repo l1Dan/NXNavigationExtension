@@ -6,7 +6,6 @@
 
 - 添加 SwiftUI 支持
 - 添加 SwiftUI framework 支持
-- 添加 SPM 支持
 - 使用 Swift 重写示例程序代码
 - 文档更新
 

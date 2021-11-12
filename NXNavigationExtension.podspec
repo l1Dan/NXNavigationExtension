@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name     = 'NXNavigationExtension'
-  spec.version  = '3.6.4'
+  spec.version  = '4.0.0'
   spec.summary  = '🔥 NXNavigationExtension 是为 iOS 应用设计的一个轻量级的导航栏处理框架，同时支持 SwiftUI 和 UIKit。'
 
   spec.description  = <<-DESC
@@ -27,6 +27,7 @@ Pod::Spec.new do |spec|
   end
 
   spec.subspec 'SwiftUI' do |ss|
+    ss.ios.deployment_target  = '13.0'
     ss.source_files = 'NXNavigationExtensionSwiftUI/{Core}/*.swift'
     ss.frameworks   = 'SwiftUI'
     ss.dependency 'NXNavigationExtension/Sources'
