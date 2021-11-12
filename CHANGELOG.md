@@ -1,5 +1,15 @@
 # CHANGELOG.md
 
+## 4.0.0
+
+重要更新‼️
+
+- 添加 SwiftUI 支持
+- 添加 SwiftUI framework 支持
+- 添加 SPM 支持
+- 使用 Swift 重写示例程序代码
+- 文档更新
+
 ## 3.6.4
 
 - 单词拼写错误修正：fullscreen -> fullScreen, Fullscreen -> FullScreen, contentViewWithoutNavigtionBar -> contentViewWithoutNavigationBar
@@ -146,7 +156,7 @@ NXNavigationBar 可以跟随系统导航栏的显示隐藏。虽然不推荐使�
 ## 3.4.2
 
 之前使用 UIViewController 的 `edgesForExtendedLayout` 属性会导致导航栏往下移动，这也就是 `README.md` 文档中提到不要使用 `edgesForExtendedLayout` 属性的原因，现在该问题已经修复。详细信息查看：
-[示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/master/NXNavigationExtensionDemo/Feature/Advanced/Controllers/ViewController08_WebView.m)；
+[示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionDemo/UIKit/Advanced/ViewController06_WebView.swift)；
 
 - 修改: README.md 文件;
 - 示例代码优化。
