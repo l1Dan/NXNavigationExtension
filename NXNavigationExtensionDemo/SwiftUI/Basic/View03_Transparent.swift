@@ -20,9 +20,10 @@ struct View03_Transparent: View {
     var body: some View {
         ColorListView()
             .navigationBarTitle(item.title)
-            .useNXNavigationView { configuration in
+            .useNXNavigationView(onPrepareConfiguration: { configuration in
                 configuration.navigationBarAppearance.backgroundColor = .clear
-            }
+                configuration.navigationBarAppearance.shadowColor = .clear
+            })
     }
 }
 

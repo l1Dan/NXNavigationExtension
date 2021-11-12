@@ -5,8 +5,8 @@
 //  Created by lidan on 2021/10/14.
 //
 
-import NXNavigationExtension
 import UIKit
+import NXNavigationExtensionSwiftUI
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -32,8 +32,6 @@ extension AppDelegate {
         let featureConfiguration = NXNavigationConfiguration.default
         featureConfiguration.navigationBarAppearance.tintColor = .customTitle
         featureConfiguration.registerNavigationControllerClasses([FeatureNavigationController.self]) { navigationController, configuration in
-            configuration.navigationBarAppearance.backgroundColor = .brown
-            
             print("UIKit(navigationController):", navigationController, configuration)
             navigationController.nx_prepareConfigureViewControllersCallback { viewController, configuration in
                 print("UIKit(viewController):", viewController, configuration)
@@ -44,6 +42,32 @@ extension AppDelegate {
         
         // For SwiftUI
         if #available(iOS 13.0, *) {
+            // 自定义查找规则
+            func configureWithCustomRule(for hostingController: UIViewController) -> NXNavigationVirtualView? {
+                guard let view = hostingController.view else { return nil }
+                if let navigationVirtualWrapperView = hostingController.nx_navigationVirtualWrapperView as? NXNavigationVirtualView {
+                    return navigationVirtualWrapperView
+                }
+                
+                let hostingViewClassName = NSStringFromClass(type(of: view))
+                guard hostingViewClassName.contains("SwiftUI") || hostingViewClassName.contains("HostingView") else { return nil }
+                
+                var navigationVirtualWrapperView: NXNavigationVirtualView?
+                for wrapperView in view.subviews {
+                    let wrapperViewClassName = NSStringFromClass(type(of: wrapperView))
+                    if wrapperViewClassName.contains("ViewHost") && wrapperViewClassName.contains("NXNavigationWrapperView") {
+                        for subview in wrapperView.subviews {
+                            if let virtualWrapperView = subview as? NXNavigationVirtualView {
+                                navigationVirtualWrapperView = virtualWrapperView
+                                break
+                            }
+                        }
+                    }
+                }
+                
+                return navigationVirtualWrapperView
+            }
+            
             var classes: [AnyClass] = []
             if #available(iOS 15.0, *) {
                 classes = [
@@ -71,6 +95,11 @@ extension AppDelegate {
                 print("SwiftUI(navigationController):", navigationController, configuration)
                 navigationController.nx_prepareConfigureViewControllersCallback { viewController, configuration in
                     print("SwiftUI(viewController):", viewController, configuration)
+                }
+                
+                navigationController.nx_applyFilterNavigationVirtualWrapperViewRuleCallback { hostingController in
+//                    return configureWithCustomRule(for: hostingController)
+                    return NXNavigationVirtualView.configureWithDefaultRule(for: hostingController)
                 }
                 
                 return configuration
