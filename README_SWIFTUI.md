@@ -1,8 +1,8 @@
 ## 🍽 使用
 
-`NXNavigationExtensionSwiftUI` 由 [NXNavigationExtension](https://github.com/l1Dan/NXNavigationExtension/blob/main/README_UIKIT.md) 框架提供强力支持，他们的功能基本保持一致。注册完成之后在 `NavigationView` 的 `StackNavigationViewStyle` 样式中使用，目前仅支持 `StackNavigationViewStyle` 这种方式。后续会不断完善。
+`NXNavigationExtensionSwiftUI` 由 [NXNavigationExtension](https://github.com/l1Dan/NXNavigationExtension/blob/main/README_UIKIT.md) 框架提供强力支持，他们的功能基本保持一致。注册完成之后需要在 `NavigationView` 中指定使用 `.navigationViewStyle(.stack)` 风格，但是目前仅支持 iOS 14 及以上系统的 `StackNavigationViewStyle` 风格，其他系统和 `NavigationViewStyle` 后续会不断完善。
 
-下面是框架对 `NavigationView` 和 iOS 系统版本的支持情况：
+下面是框架对 `StackNavigationViewStyle` 风格和 iOS 系统版本的支持情况：
 
 | NavigationViewStyle / iOS version | iOS 13 | iOS 14 | iOS 15 |
 | :-------------------------------: | :----: | :----: | :----: |
@@ -83,7 +83,7 @@ struct ContentView: View {
                     })
             }
         }
-        .navigationViewStyle(.stack) // 2. 使用 StackNavigationViewStyle 样式
+        .navigationViewStyle(.stack) // 2. 使用 StackNavigationViewStyle 风格
     }
 }
 ```
