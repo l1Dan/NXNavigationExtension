@@ -30,8 +30,8 @@ class NavigationRedirect {
             NavigationRedirect(title: NSStringFromClass(ViewController03_Test.self), style: .test3),
             NavigationRedirect(title: NSStringFromClass(ViewController04_Test.self), style: .test4),
             NavigationRedirect(title: NSStringFromClass(ViewController05_Test.self), style: .test5),
-            NavigationRedirect(title: "🚀选择需要跳转的控制器类型", style: .choose),
-            NavigationRedirect(title: "⭐️重定向到：", style: .jump),
+            NavigationRedirect(title: NSLocalizedString("selectViewControllerClass", comment: ""), style: .choose),
+            NavigationRedirect(title: NSLocalizedString("redirectTo", comment: ""), style: .jump),
         ]
     }
     

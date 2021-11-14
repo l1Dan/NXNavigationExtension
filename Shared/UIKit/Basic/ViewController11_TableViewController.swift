@@ -27,12 +27,7 @@ class ViewController11_TableViewController: BaseTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier:reuseIdentifier) ?? UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
         cell.textLabel?.text = String(format: "Row: %02zd", indexPath.row + 1)
         cell.accessoryType = .disclosureIndicator
-        cell.backgroundColor = UIColor.customColor(lightModeColor: {
-            return .randomLight
-        }, darkModeColor: {
-            return .randomDark
-        })
-        
+        cell.backgroundColor = UIColor.customColor { .randomLight } darkModeColor: { .randomDark }
         return cell
     }
     
@@ -46,12 +41,7 @@ class ViewController11_TableViewController: BaseTableViewController {
 extension ViewController11_TableViewController {
     
     override var nx_shadowImageTintColor: UIColor? {
-        return UIColor.customColor {
-            return .lightGray
-        } darkModeColor: {
-            return .lightGray.withAlphaComponent(0.65)
-        }
-
+        return UIColor.customColor { .lightGray } darkModeColor: { .lightGray.withAlphaComponent(0.65) }
     }
     
 }

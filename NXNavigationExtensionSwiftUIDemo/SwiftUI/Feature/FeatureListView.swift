@@ -15,6 +15,12 @@ struct FeatureListView: View {
     
     init(_ sections: [NavigationFeatureSection]) {
         self.sections = sections
+        
+        for section in sections {
+            for item in section.items {
+                print(NSLocalizedString(item.title, comment: ""))
+            }
+        }
     }
     
     var body: some View {
@@ -34,7 +40,7 @@ struct FeatureListView: View {
                             Button(action: {
                                 presentingModal = true
                             }, label: {
-                                Text(String(format: "%02zd: %@", index + 1, section.items[index].title))
+                                Text(titleForItem(section.items[index], at: index))
                                     .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                             }).sheet(isPresented: $presentingModal) {
                                 NavigationView {
@@ -45,7 +51,7 @@ struct FeatureListView: View {
                             NavigationLink {
                                 FeatureDetailView(section.items[index])
                             } label: {
-                                Text(String(format: "%02zd: %@", index + 1, section.items[index].title))
+                                Text(titleForItem(section.items[index], at: index))
                             }
                         }
                     }
@@ -54,6 +60,10 @@ struct FeatureListView: View {
                 }
             }
         }
+    }
+    
+    private func titleForItem(_ item: NavigationFeatureItem, at index: Int) -> String {
+        return String(format: "%02zd: %@", index + 1, NSLocalizedString(item.title, comment: ""))
     }
 }
 

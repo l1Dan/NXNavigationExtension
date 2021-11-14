@@ -28,11 +28,7 @@ class MainTabBarController: UITabBarController {
         updateOtherNavigationControllerBorderStyle()
         viewControllers = [featureNavigationController, otherNavigationController]
         
-        tabBar.tintColor = UIColor.customColor(lightModeColor: {
-            return .customDarkGray
-        }, darkModeColor: {
-            return .customLightGray
-        })
+        tabBar.tintColor = UIColor.customColor { .customDarkGray } darkModeColor: { .customLightGray }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -79,11 +75,7 @@ class MainTabBarController: UITabBarController {
 extension MainTabBarController {
     
     private func updateOtherNavigationControllerBorderStyle() {
-        otherNavigationController.view.layer.borderColor = UIColor.customColor(lightModeColor: {
-            return .red
-        }, darkModeColor: {
-            return .orange
-        }).cgColor
+        otherNavigationController.view.layer.borderColor = UIColor.customColor { .red } darkModeColor: { .orange }.cgColor
     }
     
 }

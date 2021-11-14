@@ -46,12 +46,7 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.customColor(lightModeColor: {
-            return .white
-        }, darkModeColor: {
-            return .black
-        })
+        view.backgroundColor = UIColor.customColor(lightModeColor: { .white }, darkModeColor: { .black })
     }
     
     deinit {
@@ -71,12 +66,7 @@ extension BaseViewController {
     }
     
     override var nx_shadowImageTintColor: UIColor? {
-        return UIColor.customColor {
-            return .lightGray
-        } darkModeColor: {
-            return .lightGray.withAlphaComponent(0.65)
-        }
-
+        return UIColor.customColor { .lightGray } darkModeColor: { .lightGray.withAlphaComponent(0.65) }
     }
     
 }

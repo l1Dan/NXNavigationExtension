@@ -19,7 +19,7 @@ struct View12_ScrollViewContent: View {
     var body: some View {
         ColorScrollView()
         .edgesIgnoringSafeArea(.top)
-        .navigationBarTitle(item.title)
+        .navigationBarTitle(LocalizedStringKey(item.title))
         .useNXNavigationView { configuration in
             configuration.navigationBarAppearance.backgroundColor = .clear
         }

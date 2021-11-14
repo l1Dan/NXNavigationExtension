@@ -53,7 +53,7 @@ class FullPopGesture_PageViewController: BaseViewController, UIPageViewControlle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = "(UIPageViewController)解决手势冲突"
+        navigationItem.title = "(UIPageViewController)\(NSLocalizedString("resolveGestureConflicts", comment: ""))"
 
         // Step1: if use screen edge pop gesture
 //        disableInteractivePopGesture = false

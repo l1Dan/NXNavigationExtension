@@ -18,7 +18,7 @@ struct View01_EdgePopGestureDisable: View {
 
     var body: some View {
         ColorListView()
-            .navigationBarTitle(item.title)
+            .navigationBarTitle(LocalizedStringKey(item.title))
             .useNXNavigationView(onPrepareConfiguration: { configuration in
                 let userInterfaceStyle = configuration.viewControllerPreferences.traitCollection?.userInterfaceStyle ?? .light
                 configuration.navigationBarAppearance.backgroundColor = userInterfaceStyle == .dark ? randomDark : randomLight

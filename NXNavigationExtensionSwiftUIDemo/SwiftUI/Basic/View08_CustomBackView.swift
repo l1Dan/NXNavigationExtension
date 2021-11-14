@@ -16,7 +16,7 @@ struct View08_CustomBackView: View {
     
     var body: some View {
         ColorListView()
-            .navigationBarTitle(item.title)
+            .navigationBarTitle(LocalizedStringKey(item.title))
             .useNXNavigationView { configuration in
                 configuration.navigationBarAppearance.backButtonCustomView = View08_CustomBackView.backButton
             }

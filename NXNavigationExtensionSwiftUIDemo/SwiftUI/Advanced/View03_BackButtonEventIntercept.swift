@@ -32,7 +32,7 @@ struct View03_BackButtonEventIntercept: View {
                         selectedItemType = item.state
                     } label: {
                         HStack {
-                            Text("\(item.title)").foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                            Text(LocalizedStringKey(item.title)).foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                             if selectedItemType == item.state {
                                 Spacer()
                                 Image(systemName: "checkmark")
@@ -44,22 +44,22 @@ struct View03_BackButtonEventIntercept: View {
                 Button {
                     NXNavigationRouter.of(context).nx.pop()
                 } label: {
-                    Text("调用 “nx_pop” 方法返回")
+                    Text(LocalizedStringKey("popWithCallNXPopMethod"))
                         .font(.system(size: 18))
                         .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                         .frame(minWidth: 100, maxWidth: .infinity, minHeight: 60)
                 }
-                .overlay(RoundedRectangle(cornerRadius: 10, style: .circular).strokeBorder(Color.blue, lineWidth: 2.0))
+                .overlay(RoundedRectangle(cornerRadius: 10, style: .circular).strokeBorder(colorScheme == .dark ? Color.white : Color.black, lineWidth: 2.0))
             }
         }
         .listStyle(.grouped)
-        .navigationBarTitle(item.title)
+        .navigationBarTitle(LocalizedStringKey(item.title))
         .alert(isPresented: $isPresented, content: {
-            let cancel = Alert.Button.cancel(Text("取消"))
-            let destructive = Alert.Button.destructive(Text("返回")) {
+            let cancel = Alert.Button.cancel(Text(LocalizedStringKey("cancel")))
+            let destructive = Alert.Button.destructive(Text(LocalizedStringKey("yes"))) {
                 presentationMode.wrappedValue.dismiss()
             }
-            return Alert(title:Text("提示"), message: Text("是否继续返回？"), primaryButton: destructive, secondaryButton: cancel)
+            return Alert(title:Text(LocalizedStringKey("tips")), message: Text(LocalizedStringKey("message")), primaryButton: destructive, secondaryButton: cancel)
         })
         .useNXNavigationView(context: $context, onPrepareConfiguration: { configuration in
             configuration.navigationBarAppearance.backgroundImage = UIImage(named: "NavigationBarBackground88")

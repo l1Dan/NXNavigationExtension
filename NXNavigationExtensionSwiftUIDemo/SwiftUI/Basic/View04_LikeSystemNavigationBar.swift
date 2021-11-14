@@ -16,7 +16,7 @@ struct View04_LikeSystemNavigationBar: View {
     
     var body: some View {
         ColorListView()
-            .navigationBarTitle(item.title)
+            .navigationBarTitle(LocalizedStringKey(item.title))
             .useNXNavigationView(onPrepareConfiguration:  { configuration in
                 configuration.navigationBarAppearance.backgroundColor = .clear
                 configuration.viewControllerPreferences.useBlurNavigationBar = true

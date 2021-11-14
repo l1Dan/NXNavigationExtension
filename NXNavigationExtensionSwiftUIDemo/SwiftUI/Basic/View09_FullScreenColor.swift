@@ -16,7 +16,7 @@ struct View09_FullScreenColor: View {
 
     var body: some View {
         colorView
-            .navigationBarTitle(item.title)
+            .navigationBarTitle(LocalizedStringKey(item.title))
             .useNXNavigationView { configuration in                
                 configuration.navigationBarAppearance.backgroundColor = .clear
             }

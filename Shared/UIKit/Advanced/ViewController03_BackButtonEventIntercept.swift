@@ -19,14 +19,16 @@ class ViewController03_BackButtonEventIntercept: BaseTableViewController {
         let height = ViewController03_BackButtonEventIntercept.heightForFooterInSection
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height))
         
+        let color = UIColor.customColor { .black } darkModeColor: { .white }
         let button = UIButton()
-        button.layer.borderColor = UIColor.purple.cgColor;
+        button.layer.borderColor = color.cgColor;
+        button.setTitleColor(color, for: .normal)
+        
         button.layer.borderWidth = 2.0
         button.layer.cornerRadius = 10
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("调用 “nx_pop” 方法返回", for: .normal)
-        button.setTitleColor(.randomLight, for: .normal)
+        button.setTitle(NSLocalizedString("popWithCallNXPopMethod", comment: ""), for: .normal)
         button.addTarget(self, action: #selector(clickPopViewControllerButton(_:)), for: .touchUpInside)
         footerView.addSubview(button)
         
@@ -48,9 +50,9 @@ class ViewController03_BackButtonEventIntercept: BaseTableViewController {
     }
     
     private func showAlertController(in viewController: UIViewController) {
-        let alertController = UIAlertController(title: "提示", message: "是否继续返回？", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "确定", style: .destructive, handler: { [weak self] action in
+        let alertController = UIAlertController(title: NSLocalizedString("tips", comment: ""), message: NSLocalizedString("message", comment: ""), preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .destructive, handler: { [weak self] action in
             self?.navigationController?.popToViewController(viewController, animated: true)
         }))
         present(alertController, animated: true, completion: nil)
@@ -74,7 +76,7 @@ class ViewController03_BackButtonEventIntercept: BaseTableViewController {
         let reuseIdentifier = ViewController03_BackButtonEventIntercept.reuseIdentifier
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
         let item = items[indexPath.row]
-        cell.textLabel?.text = item.title
+        cell.textLabel?.text = NSLocalizedString(item.title, comment: "")
         cell.accessoryType = item.isSelected ? .checkmark : .none
         
         if item.isSelected {
@@ -106,11 +108,7 @@ class ViewController03_BackButtonEventIntercept: BaseTableViewController {
 extension ViewController03_BackButtonEventIntercept: NXNavigationInteractable {
     
     override var nx_shadowImageTintColor: UIColor? {
-        return UIColor.customColor {
-            return .lightGray
-        } darkModeColor: {
-            return .lightGray.withAlphaComponent(0.69)
-        }
+        return UIColor.customColor { .lightGray } darkModeColor: { .lightGray.withAlphaComponent(0.69) }
     }
     
     override var nx_useSystemBackButton: Bool {

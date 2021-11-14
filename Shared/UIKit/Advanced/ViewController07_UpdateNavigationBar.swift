@@ -60,7 +60,7 @@ class ViewController07_UpdateNavigationBar: BaseViewController {
     
     convenience init() {
         self.init(nibName: nil, bundle: nil)
-        navigationItem.title = NavigationFeatureItem.Style.updateNavigationBar.rawValue
+        navigationItem.title = NSLocalizedString(NavigationFeatureItem.Style.updateNavigationBar.rawValue, comment: "")
     }
 
     override func viewDidLoad() {

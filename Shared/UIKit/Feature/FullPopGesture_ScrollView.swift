@@ -14,11 +14,7 @@ class FullPopGesture_ScrollView: BaseViewController, UIScrollViewDelegate {
         scrollView.isPagingEnabled = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.delegate = self
-        scrollView.backgroundColor = UIColor.customColor(lightModeColor: {
-            return .randomLight
-        }, darkModeColor: {
-            return .randomDark
-        })
+        scrollView.backgroundColor = UIColor.customColor { .randomLight } darkModeColor: { .randomDark }
         return scrollView
     }()
     
@@ -63,7 +59,7 @@ class FullPopGesture_ScrollView: BaseViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = "(UIScrollView)解决手势冲突"
+        navigationItem.title = "(UIScrollView)\(NSLocalizedString("resolveGestureConflicts", comment: ""))"
         
         view.addSubview(scrollView)
         if #available(iOS 11.0, *) {

@@ -1,0 +1,69 @@
+/* 
+  Localizable.strings
+  NXNavigationExtensionDemo
+
+  Created by lidan on 2021/11/14.
+  
+*/
+
+// Basic
+"basic" = "基础功能";
+"backgroundColor" = "修改导航栏背景颜色";
+"backgroundImage" = "修改导航栏背景图片";
+"transparent" = "设置导航栏透明";
+"likeSystemNavigationBar" = "实现系统导航栏模糊效果";
+"shadowColor" = "设置导航栏底部线条颜色";
+"shadowImage" = "设置导航栏底部线条图片";
+"customBackImage" = "自定义返回按钮图片";
+"customBackView" = "自定义返回按钮";
+"fullScreenColor" = "全屏背景色";
+"present" = "Present";
+
+// UIKit only
+"tableViewController" = "使用 UITableViewController";
+"tableViewControllerWithFullScren" = "UITableViewController 全屏背景色";
+"customBlurNavigationBar" = "自定义导航栏模糊背景";
+
+// SwiftUI only
+"listView" = "List";
+"scrollViewContent" = "ScrollView";
+
+
+// Advanced
+"advanced" = "高级功能";
+"edgePopGestureDisable" = "禁用边缘手势滑动返回";
+"fullScreenPopGestureEnable" = "启用全屏手势滑动返回";
+"backButtonEventIntercept" = "导航栏返回事件拦截";
+"customNavigationBar" = "完全自定义导航栏";
+"navigationBarDisable" = "导航栏点击事件穿透到底部视图";
+"webView" = "使用 WKWebView";
+"updateNavigationBar" = "更新导航栏样式";
+
+// UIKit only
+"redirectViewController" = "重定向任一视图控制器跳转";
+"scrollChangeNavigationBar" = "滑动改变导航栏样式";
+"customViewControllerTransitionAnimation" = "自定义转场动画";
+
+// SwiftUI only
+"navigationRouter" = "SwiftUI 路由管理";
+
+
+// Interceptor
+"all" = "拦截所有返回页面途径";
+"backButtonAction" = "拦截返回按钮点击事件";
+"backButtonMenuAction" = "拦截返回按钮长按选择事件";
+"popGestureRecognizer" = "拦截手势滑动返回事件";
+"callNXPopMethod" = "拦截调用 `nx_pop` 方法返回事件";
+"popWithCallNXPopMethod" = "调用 `nx_pop` 方法返回";
+
+// Alert
+"tips" = "提示";
+"message" = "是否继续返回？";
+"cancel" = "取消";
+"yes" = "确定";
+
+"resolveGestureConflicts" = "解决手势冲突";
+"pushTo" = "点击跳转：";
+"selectViewControllerClass" = "🚀选择需要跳转的控制器类型";
+"redirectTo" = "⭐️重定向到：";
+"redirectMessage" = "功能💉:\n1.自定义跳转到指定控制器类型。\n2.如果跳转的控制器类型不存在则会创建一个新的控制器对象。\n3.目标控制器类型选择好之后可以点击“返回按钮返回”、“手势返回”和点击“⭐️重定向到”，这 3 种方式都可以回到选择类型的所对应的查找到的第一个视图控制器的实例中。\n\n注意⚠️:\n1.控制器类型的查找规则是从栈（ViewControllers）前面往后面查找的，只会判断是否为同一个“类”，而非同一个“实例对象”。查找到则返回对应的“类”，查找不到则创建一个“新的控制器对象实例”。\n2.在不同的导航栏控制器之间不能跳转，只有在同一个导航栏控制器中跳转功能才会生效。";

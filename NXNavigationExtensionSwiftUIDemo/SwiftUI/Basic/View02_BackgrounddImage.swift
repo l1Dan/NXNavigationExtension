@@ -17,7 +17,7 @@ struct View02_BackgrounddImage: View {
     
     var body: some View {
         ColorListView()
-            .navigationBarTitle(item.title)
+            .navigationBarTitle(LocalizedStringKey(item.title))
             .useNXNavigationView(onPrepareConfiguration: { configuration in
                 configuration.navigationBarAppearance.backgroundImage = UIImage(named: "NavigationBarBackground88")
                 configuration.navigationBarAppearance.tintColor = .white

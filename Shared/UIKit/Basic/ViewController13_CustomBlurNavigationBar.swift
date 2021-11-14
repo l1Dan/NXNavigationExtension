@@ -19,11 +19,7 @@ class ViewController13_CustomBlurNavigationBar: CustomTableViewController {
         
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.backgroundColor = UIColor.customColor(lightModeColor: {
-            return .purple
-        }, darkModeColor: {
-            return .brown
-        })
+        contentView.backgroundColor = UIColor.customColor { .purple } darkModeColor: { .brown }
         gaussianBlurView.contentView.addSubview(contentView)
         gaussianBlurView.contentView.alpha = 0.5
         

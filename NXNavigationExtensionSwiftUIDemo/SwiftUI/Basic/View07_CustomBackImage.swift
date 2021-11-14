@@ -16,7 +16,7 @@ struct View07_CustomBackImage: View {
     
     var body: some View {
         ColorListView()
-            .navigationBarTitle(item.title)
+            .navigationBarTitle(LocalizedStringKey(item.title))
             .useNXNavigationView { configuration in
                 configuration.navigationBarAppearance.backImage = UIImage(systemName: "arrow.left")
             }

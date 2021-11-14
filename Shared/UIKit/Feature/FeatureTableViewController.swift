@@ -110,7 +110,7 @@ class FeatureTableViewController: BaseTableViewController {
         let reuseIdentifier = FeatureTableViewController.reuseIdentifier
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .default, reuseIdentifier: restorationIdentifier)
         let item = sections[indexPath.section].items[indexPath.row]
-        cell.textLabel?.text = String(format: "%02zd: %@", indexPath.row + 1, item.title)
+        cell.textLabel?.text = String(format: "%02zd: %@", indexPath.row + 1, NSLocalizedString(item.title, comment: ""))
         cell.accessoryType = item.showsDisclosureIndicator ? .disclosureIndicator : .none
         return cell
     }
@@ -124,7 +124,7 @@ class FeatureTableViewController: BaseTableViewController {
             return
         }
         
-        viewController.title = item.title
+        viewController.title = NSLocalizedString(item.title, comment: "")
         let primaryNavigationController = type(of: navigationController).init(rootViewController: viewController)
         if viewController is ViewController10_Present {
             tableView.deselectRow(at: indexPath, animated: true)
@@ -144,7 +144,7 @@ class FeatureTableViewController: BaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section].title
+        return NSLocalizedString(sections[section].title, comment: "")
     }
 
 }

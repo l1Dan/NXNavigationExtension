@@ -21,13 +21,9 @@ class MainTabBarController: UITabBarController {
         if #available(iOS 15.0, *) {
             tabBar.scrollEdgeAppearance = tabBarAppearance
         }
+        
         viewControllers = [hostingController, featureNavigationController]
-
-        tabBar.tintColor = UIColor.customColor(lightModeColor: {
-            return .customDarkGray
-        }, darkModeColor: {
-            return .customLightGray
-        })
+        tabBar.tintColor = UIColor.customColor { .customDarkGray } darkModeColor: { .customLightGray }
     }
     
     private lazy var featureNavigationController: FeatureNavigationController = {

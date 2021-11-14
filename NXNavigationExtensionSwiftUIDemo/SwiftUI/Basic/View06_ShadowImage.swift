@@ -16,7 +16,7 @@ struct View06_ShadowImage: View {
 
     var body: some View {
         Text(item.title)
-            .navigationBarTitle(Text(item.title), displayMode: .inline)
+            .navigationBarTitle(LocalizedStringKey(item.title), displayMode: .inline)
             .useNXNavigationView(onPrepareConfiguration: { configuration in
                 configuration.navigationBarAppearance.backgroundColor = .systemBackground
                 configuration.navigationBarAppearance.shadowImage = UIImage(named: "NavigationBarShadowImage")

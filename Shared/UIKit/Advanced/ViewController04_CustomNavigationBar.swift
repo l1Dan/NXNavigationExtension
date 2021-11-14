@@ -15,7 +15,6 @@ class ViewController04_CustomNavigationBar: CustomTableViewController {
         searchBar.backgroundImage = UIImage()
         searchBar.tintColor = .systemGray
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.placeholder = "请输入关键字"
         return searchBar
     }()
     
@@ -25,11 +24,7 @@ class ViewController04_CustomNavigationBar: CustomTableViewController {
         backButton.layer.cornerRadius = 8.0
         backButton.setImage(UIImage(named: "NavigationBarBack"), for: .normal)
         backButton.addTarget(self, action: #selector(clickBackButton(_:)), for: .touchUpInside)
-        backButton.backgroundColor = UIColor.customColor(lightModeColor: {
-            return .white.withAlphaComponent(0.5)
-        }, darkModeColor: {
-            return .white.withAlphaComponent(0.25)
-        })
+        backButton.backgroundColor = UIColor.customColor { .white.withAlphaComponent(0.5) } darkModeColor: { .white.withAlphaComponent(0.25) }
         return backButton
     }()
     
@@ -39,11 +34,7 @@ class ViewController04_CustomNavigationBar: CustomTableViewController {
         backButton.layer.cornerRadius = 8.0
         backButton.setImage(UIImage(named: "NavigationBarAdd"), for: .normal)
         backButton.addTarget(self, action: #selector(clickAddButton(_:)), for: .touchUpInside)
-        backButton.backgroundColor = UIColor.customColor(lightModeColor: {
-            return .white.withAlphaComponent(0.5)
-        }, darkModeColor: {
-            return .white.withAlphaComponent(0.25)
-        })
+        backButton.backgroundColor = UIColor.customColor { .white.withAlphaComponent(0.5) } darkModeColor: { .white.withAlphaComponent(0.25) }
         return backButton
     }()
     

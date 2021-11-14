@@ -1,0 +1,69 @@
+/* 
+  Localizable.strings
+  NXNavigationExtensionDemo
+
+  Created by lidan on 2021/11/14.
+  
+*/
+
+// Basic
+"basic" = "Basic";
+"backgroundColor" = "Background color";
+"backgroundImage" = "Background image";
+"transparent" = "Transparent";
+"likeSystemNavigationBar" = "System blur bavigation bar";
+"shadowColor" = "Shadow color";
+"shadowImage" = "Shadow image";
+"customBackImage" = "Custom back image";
+"customBackView" = "Custom back button";
+"fullScreenColor" = "NavigationBar with full screen";
+"present" = "Present";
+
+// UIKit only
+"tableViewController" = "Use UITableViewController";
+"tableViewControllerWithFullScren" = "UITableViewController with full screen";
+"customBlurNavigationBar" = "Custom blur bavigation bar";
+
+// SwiftUI only
+"listView" = "List";
+"scrollViewContent" = "ScrollView";
+
+
+// Advanced
+"advanced" = "Advanced";
+"edgePopGestureDisable" = "Disable pop gesture";
+"fullScreenPopGestureEnable" = "Enable full screen pop gesture";
+"backButtonEventIntercept" = "Pop event interceptor";
+"customNavigationBar" = "Fully customize the navigation bar";
+"navigationBarDisable" = "User interaction disabled";
+"webView" = "Use WKWebView";
+"updateNavigationBar" = "Update navigation bar style";
+
+// UIKit only
+"redirectViewController" = "Redirect UIViewController";
+"scrollChangeNavigationBar" = "Dynamically change navigation bar";
+"customViewControllerTransitionAnimation" = "Custom Transition & Animation";
+
+// SwiftUI only
+"navigationRouter" = "SwiftUI Router";
+
+
+// Interceptor
+"all" = "Intercept all pop events";
+"backButtonAction" = "Intercept back event";
+"backButtonMenuAction" = "Intercept back menu event";
+"popGestureRecognizer" = "Intercept pop gesture event";
+"callNXPopMethod" = "Intercept the `nx_pop` method event";
+"popWithCallNXPopMethod" = "Called the `nx_pop` method";
+
+// Alert
+"tips" = "Tips";
+"message" = "Are you sure?";
+"cancel" = "Cancel";
+"yes" = "YES";
+
+"resolveGestureConflicts" = "Resolve gesture conflicts";
+"pushTo" = "Push to: ";
+"selectViewControllerClass" = "🚀Select view controller class type";
+"redirectTo" = "⭐️Redirect to: ";
+"redirectMessage" = "";

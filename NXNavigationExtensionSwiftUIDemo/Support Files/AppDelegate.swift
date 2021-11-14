@@ -29,6 +29,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     
     private func setupConfiguration() {
+        // For FeatureNavigationController
+        let featureConfiguration = NXNavigationConfiguration.default
+        featureConfiguration.navigationBarAppearance.tintColor = .customTitle
+        featureConfiguration.registerNavigationControllerClasses([FeatureNavigationController.self]) { navigationController, configuration in
+            print("UIKit(navigationController):", navigationController, configuration)
+            navigationController.nx_prepareConfigureViewControllersCallback { viewController, configuration in
+                print("UIKit(viewController):", viewController, configuration)
+            }
+            
+            return configuration
+        }
+        
         // 自定义查找规则
         func configureWithCustomRule(for hostingController: UIViewController) -> NXNavigationVirtualView? {
             guard let view = hostingController.view else { return nil }
@@ -55,6 +67,7 @@ extension AppDelegate {
             return navigationVirtualWrapperView
         }
         
+        // For SwiftUI
         var classes: [AnyClass] = []
         if #available(iOS 15.0, *) {
             classes = [
@@ -70,7 +83,7 @@ extension AppDelegate {
         
         NXNavigationConfiguration().registerNavigationControllerClasses(classes) { navigationController, configuration in
             // Default dynamic colors
-            let color = UIColor.customColor { return .black } darkModeColor: { return .white }
+            let color = UIColor.customColor { .black } darkModeColor: { .white }
             if let traitCollection = configuration.viewControllerPreferences.traitCollection {
                 configuration.navigationBarAppearance.tintColor = color.resolvedColor(with: traitCollection)
                 configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: color.resolvedColor(with: traitCollection)]

@@ -20,7 +20,7 @@ struct View10_Present: View {
     
     var body: some View {
         ColorListView()
-            .navigationBarTitle(item.title)
+            .navigationBarTitle(LocalizedStringKey(item.title))
             .navigationBarItems(leading:Button (action: {
                 self.presentedAsModal = false
             }, label: {

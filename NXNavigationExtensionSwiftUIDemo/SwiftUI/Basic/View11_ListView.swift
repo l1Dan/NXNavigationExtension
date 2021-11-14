@@ -16,7 +16,7 @@ struct View11_ListView: View {
     
     var body: some View {
         ColorListView()
-            .navigationBarTitle(item.title)
+            .navigationBarTitle(LocalizedStringKey(item.title))
             .useNXNavigationView { configuration in
                 configuration.navigationBarAppearance.backgroundColor = .clear
             }

@@ -53,7 +53,7 @@ struct View07_UpdateNavigationBar: View {
                 .frame(width: View07_UpdateNavigationBar.buttonWidthAndHeight, height: View07_UpdateNavigationBar.buttonWidthAndHeight)
         }
         .overlay(RoundedRectangle(cornerRadius: View07_UpdateNavigationBar.buttonWidthAndHeight * 0.5, style: .circular).strokeBorder(Color(randomColor), lineWidth: 5))
-        .navigationBarTitle(item.title)
+        .navigationBarTitle(LocalizedStringKey(item.title))        
         .useNXNavigationView(context: $context, onPrepareConfiguration: { configuration in
             configuration.navigationBarAppearance.useSystemBackButton = true
             configuration.navigationBarAppearance.tintColor = isLightTheme ? .black : .white

@@ -54,13 +54,8 @@ class CustomTableViewController: BaseViewController, UITableViewDelegate, UITabl
         let reuseIdentifier = CustomTableViewController.reuseIdentifier
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
         cell.textLabel?.text = String(format: "Row: %02zd", indexPath.row + 1)
-        cell.accessoryType = .disclosureIndicator        
-        cell.backgroundColor = UIColor.customColor(lightModeColor: {
-            return .randomLight
-        }, darkModeColor: {
-            return .randomDark
-        })
-        
+        cell.accessoryType = .disclosureIndicator
+        cell.backgroundColor = UIColor.customColor { .randomLight } darkModeColor: { .randomDark }        
         return cell
     }
     
