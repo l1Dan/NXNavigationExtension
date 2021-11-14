@@ -102,8 +102,8 @@ github "l1Dan/NXNavigationExtension"
 
 ## 使用教程
 
-- [**SwiftUI**](https://github.com/l1Dan/NXNavigationExtension/blob/main/README_SWIFTUI.md)
-- [**UIKit**](https://github.com/l1Dan/NXNavigationExtension/blob/main/README_UIKIT.md)
+- 阅读 [**SwiftUI Guide**](https://github.com/l1Dan/NXNavigationExtension/blob/main/README_SWIFTUI.md) 文档。
+- 阅读 [**UIKit Guide**](https://github.com/l1Dan/NXNavigationExtension/blob/main/README_UIKIT.md) 文档。
 
 ## FAQ 常见问题
 

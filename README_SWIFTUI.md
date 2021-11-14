@@ -92,12 +92,12 @@ struct ContentView: View {
 
 ### 修改返回按钮箭头颜色
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift#L106)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Advanced/View07_UpdateNavigationBar.swift)
 
 ```swift
 Text("Destination")
     .useNXNavigationView(onPrepareConfiguration: { configuration in
-        configuration.navigationBarAppearance.tintColor = .customTitle
+        configuration.navigationBarAppearance.tintColor = .red
     })
 ```
 
