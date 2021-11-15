@@ -15,12 +15,6 @@ struct FeatureListView: View {
     
     init(_ sections: [NavigationFeatureSection]) {
         self.sections = sections
-        
-        for section in sections {
-            for item in section.items {
-                print(NSLocalizedString(item.title, comment: ""))
-            }
-        }
     }
     
     var body: some View {

@@ -13,7 +13,9 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
     
     private var estimatedProgressObservation: NSKeyValueObservation?
     private var titleObservation: NSKeyValueObservation?
-
+    private var webViewTopLayoutConstraint: NSLayoutConstraint?
+    private var progressViewTopLayoutConstraint: NSLayoutConstraint?
+    
     private lazy var progressView: UIProgressView = {
         let progressView = UIProgressView()
         progressView.trackTintColor = .customLightGray
@@ -97,7 +99,7 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
         super.viewDidLoad()
 
         // comment fot testing dynamic change edgesForExtendedLayout instance.
-        edgesForExtendedLayout = UIRectEdge(rawValue: 0)
+//        edgesForExtendedLayout = UIRectEdge(rawValue: 0)
 
         // Uncomment fot testing dynamic change edgesForExtendedLayout instance.
 //        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) { [weak self] in
@@ -131,19 +133,22 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
         
         webView.load(URLRequest(url: URL(string: "https://www.apple.com/")!))
         view.addSubview(webView)
+        
+        let navigationBarHeight = navigationController?.navigationBar.frame.maxY ?? 0.0
+        webViewTopLayoutConstraint = webView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationBarHeight)
+        webViewTopLayoutConstraint?.isActive = true
         NSLayoutConstraint.activate([
-            webView.topAnchor.constraint(equalTo: view.topAnchor),
             webView.leftAnchor.constraint(equalTo: view.leftAnchor),
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             webView.rightAnchor.constraint(equalTo: view.rightAnchor),
         ])
         
-        guard let navigationBar = navigationController?.navigationBar else { return }
-        navigationBar.addSubview(progressView)
+        view.addSubview(progressView)
+        webViewTopLayoutConstraint = progressView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationBarHeight)
+        webViewTopLayoutConstraint?.isActive = true
         NSLayoutConstraint.activate([
-            progressView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
-            progressView.leftAnchor.constraint(equalTo: navigationBar.leftAnchor),
-            progressView.rightAnchor.constraint(equalTo: navigationBar.rightAnchor),
+            progressView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            progressView.rightAnchor.constraint(equalTo: view.rightAnchor),
             progressView.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale),
         ])
         
@@ -163,6 +168,14 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
             webView.backgroundColor = nil
         }
         
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        let navigationBarHeight = navigationController?.navigationBar.frame.maxY ?? 0.0
+        webViewTopLayoutConstraint?.constant = navigationBarHeight
+        progressViewTopLayoutConstraint?.constant = navigationBarHeight
     }
     
     override func viewDidDisappear(_ animated: Bool) {
