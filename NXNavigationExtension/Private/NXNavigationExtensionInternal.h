@@ -21,7 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NXNavigationConfiguration.h"
+#import <NXNavigationConfiguration.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

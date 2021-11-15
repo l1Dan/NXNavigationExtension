@@ -24,9 +24,9 @@
 #ifndef NXNavigationExtensionHeaders_h
 #define NXNavigationExtensionHeaders_h
 
-#import "NXNavigationBar.h"
+#import <NXNavigationBar.h>
 
-#import "NXNavigationConfiguration.h"
+#import <NXNavigationConfiguration.h>
 
 
 @interface NXNavigationBar ()
