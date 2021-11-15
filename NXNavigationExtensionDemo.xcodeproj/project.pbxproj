@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D6507E6C273EA40700293C6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6507E6B273EA40700293C6D /* ContentView.swift */; };
-		D6507E71273EA40800293C6D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6507E70273EA40800293C6D /* Preview Assets.xcassets */; };
 		D6507E76273EA4CB00293C6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6507E75273EA4CB00293C6D /* AppDelegate.swift */; };
 		D6507E79273EA5C900293C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6B022C0273AB781008003F6 /* Assets.xcassets */; };
 		D6507E7A273EA5D100293C6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6B022C2273AB781008003F6 /* LaunchScreen.storyboard */; };
@@ -152,7 +151,6 @@
 /* Begin PBXFileReference section */
 		D6507E67273EA40700293C6D /* NXNavigationExtensionSwiftUIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NXNavigationExtensionSwiftUIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6507E6B273EA40700293C6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		D6507E70273EA40800293C6D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D6507E75273EA4CB00293C6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6507E77273EA56200293C6D /* NXNavigationExtensionSwiftUIDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NXNavigationExtensionSwiftUIDemo.entitlements; sourceTree = "<group>"; };
 		D6507E78273EA58200293C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -255,20 +253,12 @@
 		D6507E68273EA40700293C6D /* NXNavigationExtensionSwiftUIDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D6507EC9273EAC2900293C6D /* Controllers */,
 				D6507EC8273EABF900293C6D /* SwiftUI */,
 				D6507EA4273EA98800293C6D /* Support Files */,
-				D6507E6F273EA40800293C6D /* Preview Content */,
 				D6507E77273EA56200293C6D /* NXNavigationExtensionSwiftUIDemo.entitlements */,
 			);
 			path = NXNavigationExtensionSwiftUIDemo;
-			sourceTree = "<group>";
-		};
-		D6507E6F273EA40800293C6D /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				D6507E70273EA40800293C6D /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		D6507E7B273EA60E00293C6D /* Support Files */ = {
@@ -325,7 +315,6 @@
 			children = (
 				D6B022D4273AB8E3008003F6 /* Advanced */,
 				D6B022DD273AB8E3008003F6 /* Basic */,
-				D6507EC9273EAC2900293C6D /* Controllers */,
 				D6B022EA273AB8E3008003F6 /* Feature */,
 			);
 			path = SwiftUI;
@@ -609,7 +598,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6507E71273EA40800293C6D /* Preview Assets.xcassets in Resources */,
 				D65B13DE2740AF820020C8A8 /* Localizable.strings in Resources */,
 				D6507E7A273EA5D100293C6D /* LaunchScreen.storyboard in Resources */,
 				D6507E79273EA5C900293C6D /* Assets.xcassets in Resources */,
@@ -777,7 +765,7 @@
 				CODE_SIGN_ENTITLEMENTS = NXNavigationExtensionSwiftUIDemo/NXNavigationExtensionSwiftUIDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"NXNavigationExtensionSwiftUIDemo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = VV54GVQ3K7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -813,7 +801,7 @@
 				CODE_SIGN_ENTITLEMENTS = NXNavigationExtensionSwiftUIDemo/NXNavigationExtensionSwiftUIDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"NXNavigationExtensionSwiftUIDemo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = VV54GVQ3K7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
