@@ -1,0 +1,1 @@
+../../NXNavigationExtension/Core/NXNavigationConfiguration.h

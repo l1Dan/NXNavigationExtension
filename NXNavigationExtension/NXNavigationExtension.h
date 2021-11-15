@@ -23,11 +23,6 @@
 
 #import <Foundation/Foundation.h>
 
-#ifndef NXNavigationExtension_h
-#define NXNavigationExtension_h
-
-#if __has_include(<NXNavigationExtension/NXNavigationExtension.h>)
-
 //! Project version number for NXNavigationExtension.
 FOUNDATION_EXPORT double NXNavigationExtensionVersionNumber;
 
@@ -44,18 +39,3 @@ FOUNDATION_EXPORT const unsigned char NXNavigationExtensionVersionString[];
 #import <NXNavigationExtension/UINavigationController+NXNavigationExtension.h>
 #import <NXNavigationExtension/UIViewController+NXNavigationExtension.h>
 
-#else
-
-#import "NXNavigationBar.h"
-#import "NXNavigationVirtualWrapperView.h"
-
-#import "NXNavigationConfiguration.h"
-#import "NXNavigationRouter.h"
-
-#import "NXNavigationExtension+Deprecated.h"
-#import "UINavigationController+NXNavigationExtension.h"
-#import "UIViewController+NXNavigationExtension.h"
-
-#endif /* __has_include */
-
-#endif /* NXNavigationExtension_h */
