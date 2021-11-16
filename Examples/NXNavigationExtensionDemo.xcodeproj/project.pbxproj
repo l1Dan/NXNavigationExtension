@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D603929C274404EA009D79ED /* NXNavigationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D603929B274404EA009D79ED /* NXNavigationExtension.framework */; };
+		D603929D274404EA009D79ED /* NXNavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D603929B274404EA009D79ED /* NXNavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D60392A1274404F3009D79ED /* NXNavigationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D603929F274404F3009D79ED /* NXNavigationExtension.framework */; };
+		D60392A2274404F3009D79ED /* NXNavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D603929F274404F3009D79ED /* NXNavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D60392A3274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60392A0274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework */; };
+		D60392A4274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D60392A0274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6507E6C273EA40700293C6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6507E6B273EA40700293C6D /* ContentView.swift */; };
 		D6507E76273EA4CB00293C6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6507E75273EA4CB00293C6D /* AppDelegate.swift */; };
 		D6507E79273EA5C900293C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6B022C0273AB781008003F6 /* Assets.xcassets */; };
@@ -72,12 +78,6 @@
 		D6507EC4273EAB3700293C6D /* SplitAdaptorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F9273AB8E3008003F6 /* SplitAdaptorViewController.swift */; };
 		D6507EC5273EAB3700293C6D /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F7273AB8E3008003F6 /* BaseTableViewController.swift */; };
 		D6507ECB273EAC3E00293C6D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6507ECA273EAC3E00293C6D /* MainTabBarController.swift */; };
-		D6507ECD273EB03500293C6D /* NXNavigationExtensionSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6507ECC273EB03500293C6D /* NXNavigationExtensionSwiftUI.framework */; };
-		D6507ECE273EB03500293C6D /* NXNavigationExtensionSwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6507ECC273EB03500293C6D /* NXNavigationExtensionSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D6507ED0273EB03E00293C6D /* NXNavigationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6507ECF273EB03E00293C6D /* NXNavigationExtension.framework */; };
-		D6507ED1273EB03E00293C6D /* NXNavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6507ECF273EB03E00293C6D /* NXNavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D6507ED2273EB06800293C6D /* NXNavigationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6507ECF273EB03E00293C6D /* NXNavigationExtension.framework */; };
-		D6507ED3273EB06800293C6D /* NXNavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6507ECF273EB03E00293C6D /* NXNavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D65B13DD2740AF820020C8A8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D65B13E02740AF820020C8A8 /* Localizable.strings */; };
 		D65B13DE2740AF820020C8A8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D65B13E02740AF820020C8A8 /* Localizable.strings */; };
 		D6B022B8273AB780008003F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022B7273AB780008003F6 /* AppDelegate.swift */; };
@@ -123,25 +123,25 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D6507E82273EA67B00293C6D /* Embed Frameworks */ = {
+		D603929E274404EA009D79ED /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D6507ED3273EB06800293C6D /* NXNavigationExtension.framework in Embed Frameworks */,
-				D6507ECE273EB03500293C6D /* NXNavigationExtensionSwiftUI.framework in Embed Frameworks */,
+				D603929D274404EA009D79ED /* NXNavigationExtension.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D6B0236B273ABA7A008003F6 /* Embed Frameworks */ = {
+		D60392A5274404F3009D79ED /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D6507ED1273EB03E00293C6D /* NXNavigationExtension.framework in Embed Frameworks */,
+				D60392A4274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework in Embed Frameworks */,
+				D60392A2274404F3009D79ED /* NXNavigationExtension.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,6 +149,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D603929B274404EA009D79ED /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D603929F274404F3009D79ED /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D60392A0274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtensionSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6507E67273EA40700293C6D /* NXNavigationExtensionSwiftUIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NXNavigationExtensionSwiftUIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6507E6B273EA40700293C6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D6507E75273EA4CB00293C6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -234,8 +237,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6507ED2273EB06800293C6D /* NXNavigationExtension.framework in Frameworks */,
-				D6507ECD273EB03500293C6D /* NXNavigationExtensionSwiftUI.framework in Frameworks */,
+				D60392A3274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework in Frameworks */,
+				D60392A1274404F3009D79ED /* NXNavigationExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,7 +246,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6507ED0273EB03E00293C6D /* NXNavigationExtension.framework in Frameworks */,
+				D603929C274404EA009D79ED /* NXNavigationExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +513,9 @@
 		D6B02367273ABA7A008003F6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D603929F274404F3009D79ED /* NXNavigationExtension.framework */,
+				D60392A0274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework */,
+				D603929B274404EA009D79ED /* NXNavigationExtension.framework */,
 				D6507ECF273EB03E00293C6D /* NXNavigationExtension.framework */,
 				D6507ECC273EB03500293C6D /* NXNavigationExtensionSwiftUI.framework */,
 			);
@@ -526,7 +532,7 @@
 				D6507E63273EA40700293C6D /* Sources */,
 				D6507E64273EA40700293C6D /* Frameworks */,
 				D6507E65273EA40700293C6D /* Resources */,
-				D6507E82273EA67B00293C6D /* Embed Frameworks */,
+				D60392A5274404F3009D79ED /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -544,7 +550,7 @@
 				D6B022B0273AB780008003F6 /* Sources */,
 				D6B022B1273AB780008003F6 /* Frameworks */,
 				D6B022B2273AB780008003F6 /* Resources */,
-				D6B0236B273ABA7A008003F6 /* Embed Frameworks */,
+				D603929E274404EA009D79ED /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
