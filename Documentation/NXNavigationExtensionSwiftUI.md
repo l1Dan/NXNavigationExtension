@@ -131,11 +131,11 @@ Text("Destination")
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View01_BackgroundColor.swift)
 
 ```swift
-// 全局统一修改（不会覆盖基于视图控制器的修改）
+// 全局统一修改
 let configuration = NXNavigationConfiguration.default
 configuration.navigationBarAppearance.backgroundColor = .red
 
-// 基于视图控制器修改（可以是基类视图控制器也是可以是特定需要修改的视图控制器）
+// 基于视图控制器修改
 Text("Destination")
     .useNXNavigationView(onPrepareConfiguration: { configuration in
         configuration.navigationBarAppearance.backgroundColor = .red

@@ -4,27 +4,28 @@
 
 重要更新‼️
 
-- 添加 SwiftUI 支持
-- 添加 SwiftUI framework 支持
-- 使用 Swift 重写示例程序代码
-- 文档更新
+- 添加 SwiftUI 支持；
+- 添加 SwiftUI framework 支持；
+- 添加 Swift Package Manager 支持，感谢 [@nrudnyk](https://github.com/nrudnyk) 的贡献[#5](https://github.com/l1Dan/NXNavigationExtension/pull/5/commits/9aa5eead35044fa4d70de349cbd813e01eb7be1e)；
+- 使用 Swift 重写示例程序代码；
+- 文档更新。
 
 ## 3.6.4
 
-- 单词拼写错误修正：fullscreen -> fullScreen, Fullscreen -> FullScreen, contentViewWithoutNavigtionBar -> contentViewWithoutNavigationBar
-- 修复调用 nx_setNeedsNavigationBarAppearanceUpdate 更新导航栏时会修改 rootViewController leftItem 的问题
-- 使 nx_popToViewController:animated: 函数更加符合 Swift 的命名规范
-- 修复 index 索引获取错误的问题
-- 1.示例代码优化 2.修改错别字
+- 单词拼写错误修正：fullscreen -> fullScreen, Fullscreen -> FullScreen, contentViewWithoutNavigtionBar -> contentViewWithoutNavigationBar；
+- 修复调用 nx_setNeedsNavigationBarAppearanceUpdate 更新导航栏时会修改 rootViewController leftItem 的问题；
+- 使 nx_popToViewController:animated: 函数更加符合 Swift 的命名规范；
+- 修复 index 索引获取错误的问题；
+- 1.示例代码优化 2.修改错别字。
 
 ## 3.6.3
 
-- 修复 UIViewController view frame 改变时 NXNavigationBar frame 不更新的问题
-- 移除 nx_navigationStackContained 变量，代码精简
+- 修复 UIViewController view frame 改变时 NXNavigationBar frame 不更新的问题；
+- 移除 nx_navigationStackContained 变量，代码精简。
 
 ## 3.6.2
 
-- 完善 SwiftUI 基础支持；
+- 完善 SwiftUI 基础支持。
 
 ## 3.6.1
 

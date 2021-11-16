@@ -4,7 +4,7 @@
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/NXNavigationExtension.svg?style=flat)](https://img.shields.io/cocoapods/v/NXNavigationExtension.svg) ![Language](https://img.shields.io/github/languages/top/l1dan/NXNavigationExtension.svg?style=flat) [![MIT License](https://img.shields.io/github/license/l1dan/NXNavigationExtension.svg?style=flat)](https://opensource.org/licenses/mit-license.php) [![Platform](https://img.shields.io/cocoapods/p/NXNavigationExtension.svg?style=flat)](https://github.com/l1Dan/NXNavigationExtension/blob/main/README.md) [![GitHub last commit](https://img.shields.io/github/last-commit/l1Dan/NXNavigationExtension.svg?style=flat)](https://img.shields.io/github/last-commit/l1Dan/NXNavigationExtension)
 
-🔥 NXNavigationExtension 是为 iOS 应用设计的一个轻量级的导航栏处理框架，同时支持 SwiftUI 和 UIKit。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。可能是最省心的一款 iOS 导航栏处理框架之一。NXNavigationExtension 框架本身和示例代码都已经适配暗黑模式可供大家参考。
+🔥 NXNavigationExtension 是为 iOS 应用设计的一个轻量级的导航栏处理框架，同时支持 SwiftUI 和 UIKit。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。可能是最省心的 iOS 导航栏处理框架之一。NXNavigationExtension 框架本身和示例代码都已经适配暗黑模式可供大家参考。
 
 ## 🎉 预览
 
@@ -21,9 +21,9 @@
 
 下载 [NXNavigationExtension](https://github.com/l1Dan/NXNavigationExtension/archive/refs/heads/main.zip) 示例代码。
 
-## 使用 CocoaPods 安装
+## 使用 CocoaPods 集成
 
-使用 `CocoaPods` 将 NXNavigationExtension 集成到 Xcode 项目中，需要在 `Podfile` 中指定：
+使用 [CocoaPods](https://cocoapods.org/) 将 NXNavigationExtension 集成到 Xcode 项目中，需要在 `Podfile` 中指定：
 
 ```ruby
 ## For SwiftUI
@@ -33,9 +33,9 @@ pod 'NXNavigationExtension/SwiftUI'
 pod 'NXNavigationExtension'
 ```
 
-### 使用 Carthage 安装
+### 使用 Carthage 管理
 
-[Carthage](https://github.com/Carthage/Carthage) 是一个去中心化的包管理器，它构建依赖项并为您提供二进制框架。 要集成 NXNavigationExtension，请将以下内容添加到您的 `Cartfile` 文件中：
+使用 [Carthage](https://github.com/Carthage/Carthage) 管理 NXNavigationExtension framework，请将以下内容添加到您的 `Cartfile` 文件中：
 
 ```yaml
 # For SwiftUI
@@ -45,6 +45,16 @@ github "l1Dan/NXNavigationExtensionSwiftUI"
 # For UIKit
 github "l1Dan/NXNavigationExtension"
 
+```
+
+### 使用 Swift Package Manager 集成
+
+使用 [Swift Package Manager](https://swift.org/package-manager/) 集成 NXNavigationExtension，请将以下内容添加到您的 `Package.swift` 文件的依赖中：
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.0.0"))
+]
 ```
 
 ## 🌈 要求
@@ -65,7 +75,7 @@ github "l1Dan/NXNavigationExtension"
 - 没有对原生导航栏视图层级进行修改，无需担心系统升级的兼容性问题。
 - 适配 iOS、iPadOS、macOS、横竖屏切换、暗黑模式。
 - 提供 SwiftUI、UIKit、macCatalyst 框架的支持。
-- 支持 CocoaPods、Carthage、Project 方式集成。
+- 支持 CocoaPods、Carthage、Project、Swift Package Manager 方式集成。
 
 ## 👏 功能
 
@@ -96,14 +106,14 @@ github "l1Dan/NXNavigationExtension"
 - ✅` 导航栏点击事件穿透到底部`
 - ✅` 动态修改导航栏样式`
 - ✅` 更新导航栏样式`
-- ✅` 渐变导航变样式`
+- ✅` 渐变导航栏样式`
 - ✅` 长按返回按钮显示菜单功能`
 - 更多功能请查看示例代码...
 
 ## 使用教程
 
-- 阅读 [**SwiftUI Guide**](https://github.com/l1Dan/NXNavigationExtension/blob/main/README_SWIFTUI.md) 文档。
-- 阅读 [**UIKit Guide**](https://github.com/l1Dan/NXNavigationExtension/blob/main/README_UIKIT.md) 文档。
+- 阅读 [**SwiftUI Guide**](https://github.com/l1Dan/NXNavigationExtension/blob/main/Documentation/NXNavigationExtensionSwiftUI.md) 文档。
+- 阅读 [**UIKit Guide**](https://github.com/l1Dan/NXNavigationExtension/blob/main/Documentation/NXNavigationExtensionUIKit.md) 文档。
 
 ## FAQ 常见问题
 
@@ -119,9 +129,9 @@ A：因为在 iOS13 之前导航栏中不包含 `UISearchBar`，iOS13 之后导�
 
 ---
 
-Q：如何解决 `UIScrollView` 和 `UIPageViewController` 手势冲突?
+Q：如何解决 `UIScrollView` 和 `UIPageViewController` 全屏手势冲突?
 
-A：使用 [UIScrollView](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Feature/FullPopGesture_ScrollView.swift) 和 [UIPageViewController](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Feature/FullPopGesture_PageViewController.swift) 手势冲突解决方案。
+A：使用 [UIScrollView](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Feature/FullPopGesture_ScrollView.swift) 和 [UIPageViewController](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Feature/FullPopGesture_PageViewController.swift) 全屏手势冲突解决方案。
 
 ---
 
