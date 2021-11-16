@@ -68,6 +68,7 @@
 - (BOOL)popWithAnimated:(BOOL)animated {
     UINavigationController *navigationController = self.context.hostingController.navigationController;
     if (!navigationController) {
+        self.callNXPopMethod = NO;
         return NO;
     }
     
@@ -77,7 +78,6 @@
     } else {
         return [navigationController popViewControllerAnimated:animated] ? YES : NO;
     }
-    return NO;
 }
 
 #pragma mark - Public
@@ -131,6 +131,7 @@
 
 - (BOOL)popWithRouteName:(NSString *)routeName animated:(BOOL)animated isReverse:(BOOL)isReverse {
     if (!self.context || !self.context.routeName) {
+        self.callNXPopMethod = NO;
         return NO;
     }
     
@@ -141,6 +142,7 @@
     
     UINavigationController *navigationController = self.context.hostingController.navigationController;
     if (!navigationController) {
+        self.callNXPopMethod = NO;
         return NO;
     }
     
@@ -163,6 +165,7 @@
         }
     }
     
+    self.callNXPopMethod = NO;
     return NO;
 }
 

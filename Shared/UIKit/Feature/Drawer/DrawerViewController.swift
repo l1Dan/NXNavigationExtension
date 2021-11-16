@@ -36,7 +36,7 @@ class DrawerViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // fix; 修复导航栏标题被 contentViewController 修改的问题
+        // fix: 修复导航栏标题被 contentViewController 修改的问题
         nx_setNeedsNavigationBarAppearanceUpdate()
     }
     
