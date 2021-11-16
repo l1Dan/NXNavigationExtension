@@ -31,5 +31,6 @@ let package = Package(
             dependencies: ["NXNavigationExtension"],
             path: "NXNavigationExtensionSwiftUI"
         )
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )
