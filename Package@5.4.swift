@@ -1,6 +1,6 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.4
 //
-// Package.swift
+// Package@5.4.swift
 //
 // Copyright (c) 2020 Leo Lee NXNavigationExtension (https://github.com/l1Dan/NXNavigationExtension)
 //
