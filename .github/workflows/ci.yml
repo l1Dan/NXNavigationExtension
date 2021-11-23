@@ -1,0 +1,83 @@
+name: "NXNavigationExtension CI"
+
+on: [push, pull_request]
+
+jobs:
+  Pods:
+    name: CocoaPods Lint
+    runs-on: macOS-11
+    env:
+      DEVELOPER_DIR: /Applications/Xcode.app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Switch Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Install CocoaPods
+        run: gem install cocoapods --no-document --quiet
+
+      - name: Install Xcpretty
+        run: gem install xcpretty --no-document --quiet
+
+      - name: Run NXNavigationExtension podspec lint
+        run: |
+          set -o pipefail
+          pod lib lint *.podspec --allow-warnings --skip-tests
+
+  Demo:
+    name: Run Demo
+    runs-on: macOS-11
+    env:
+      DEVELOPER_DIR: /Applications/Xcode.app
+      WORKSPACE_NAME: NXNavigationExtension.xcworkspace
+    strategy:
+      matrix:
+        swift_version: ["5.4"]
+        scheme:
+          - NXNavigationExtensionDemo
+          - NXNavigationExtensionSwiftUIDemo
+        iosDestination: ["name=iPhone 13 Pro"]
+        macCatalystDestination:
+          ["platform=macOS,arch=x86_64,variant=Mac Catalyst"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Switch Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Run Demo
+        run: |
+          set -o pipefail
+          xcodebuild build -workspace "${{ env.WORKSPACE_NAME }}" -scheme "${{ matrix.scheme }}" -destination "${{ matrix.iosDestination }}" -configuration Debug CODE_SIGNING_ALLOWED=NO | xcpretty -c
+          xcodebuild build -workspace "${{ env.WORKSPACE_NAME }}" -scheme "${{ matrix.scheme }}" -destination "${{ matrix.macCatalystDestination }}" -configuration Debug CODE_SIGNING_ALLOWED=NO | xcpretty -c
+
+  Build:
+    name: Build Library
+    runs-on: macOS-11
+    env:
+      DEVELOPER_DIR: /Applications/Xcode.app
+      WORKSPACE_NAME: NXNavigationExtension.xcworkspace
+    strategy:
+      matrix:
+        swift_version: ["5.3"]
+        scheme:
+          - NXNavigationExtension
+          - NXNavigationExtensionSwiftUI
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Switch Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Build as dynamic frameworks
+        run: |
+          set -o pipefail
+          xcodebuild build -workspace "${{ env.WORKSPACE_NAME }}" -scheme "${{ matrix.scheme }}" -sdk iphonesimulator PLATFORM_NAME=iphonesimulator -configuration Release CODE_SIGNING_ALLOWED=NO | xcpretty -c
+          xcodebuild build -workspace "${{ env.WORKSPACE_NAME }}" -scheme "${{ matrix.scheme }}" -destination "platform=macOS,arch=x86_64,variant=Mac Catalyst" -configuration Release CODE_SIGNING_ALLOWED=NO | xcpretty -c
+          rm -rf ~/Library/Developer/Xcode/DerivedData/
