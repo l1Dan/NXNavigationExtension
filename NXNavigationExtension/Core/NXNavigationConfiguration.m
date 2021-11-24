@@ -50,10 +50,11 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
         _landscapeBackImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
         _imageData = [[NSData alloc] initWithBase64EncodedString:NXNavigationBarBackImageBase64Data options:NSDataBase64DecodingIgnoreUnknownCharacters];
         
+        _tintColor = [UIColor whiteColor];
         if (@available(iOS 13.0, *)) {
-            _tintColor = [UIColor systemBackgroundColor];
-        } else {
-            _tintColor = [UIColor whiteColor];
+            _tintColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+                return (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) ? [UIColor whiteColor] : [UIColor blackColor];
+            }];
         }
     }
     return self;

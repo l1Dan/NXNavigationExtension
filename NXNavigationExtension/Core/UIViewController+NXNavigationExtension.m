@@ -117,6 +117,7 @@
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(traitCollectionDidChange:), BOOL, ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
             if (selfObject.nx_canSetupNavigationBar) {
                 selfObject.nx_configuration.viewControllerPreferences.traitCollection = selfObject.view.traitCollection;
+                [selfObject nx_setNeedsNavigationBarAppearanceUpdate];
             }
         });
     });
