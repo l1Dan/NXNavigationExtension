@@ -53,7 +53,7 @@ github "l1Dan/NXNavigationExtension"
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.0.0"))
+    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.0.1"))
 ]
 ```
 

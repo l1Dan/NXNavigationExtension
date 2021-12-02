@@ -1,5 +1,12 @@
 # CHANGELOG.md
 
+## 4.0.1
+
+- 修复启用全屏滑动返回手势后，在局部页面禁用滑动返回手势无效问题 [#6](https://github.com/l1Dan/NXNavigationExtension/issues/6)
+- 修复在 SwiftUI 中切换 Color Scheme 时默认配置没有立即生效的问题
+- Added GitHub Workflows
+- 示例程序代码归类到 Examples 文件夹
+
 ## 4.0.0
 
 重要更新‼️
