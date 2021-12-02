@@ -400,13 +400,10 @@
 }
 
 - (BOOL)nx_checkFullScreenInteractivePopGestureEnabledWithViewController:(__kindof UIViewController *)viewController {
-    if (viewController.nx_enableFullScreenInteractivePopGesture) {
+    if (self.nx_fullScreenInteractivePopGestureEnabled) {
         return viewController.nx_enableFullScreenInteractivePopGesture;
     }
-    if (self.nx_fullScreenInteractivePopGestureEnabled) {
-        return self.nx_fullScreenInteractivePopGestureEnabled;
-    }
-    return NO;
+    return viewController.nx_enableFullScreenInteractivePopGesture;
 }
 
 - (void)nx_adjustmentSystemBackButtonForViewController:(__kindof UIViewController *)currentViewController inViewControllers:(NSArray<__kindof UIViewController *> *)previousViewControllers {

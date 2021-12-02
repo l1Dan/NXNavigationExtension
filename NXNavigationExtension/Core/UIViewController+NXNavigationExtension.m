@@ -496,6 +496,9 @@
 }
 
 - (BOOL)nx_enableFullScreenInteractivePopGesture {
+    if (self.nx_configuration.navigationControllerPreferences.fullScreenInteractivePopGestureEnabled) {
+        return self.nx_configuration.navigationControllerPreferences.fullScreenInteractivePopGestureEnabled;
+    }
     return self.nx_configuration.viewControllerPreferences.enableFullScreenInteractivePopGesture;
 }
 
