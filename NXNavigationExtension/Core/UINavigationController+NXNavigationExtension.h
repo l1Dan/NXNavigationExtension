@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)nx_prepareConfigureViewControllersCallback:(NXViewControllerPrepareConfigurationCallback)callback;
 
 /// For SwiftUI，应用 NXNavigationVirtualWrapperView 实例对象的查找规则
-- (void)nx_applyFilterNavigationVirtualWrapperViewRuleCallback:(NXNavigatioVirtualWrapperViewFilterCallback)callback API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+- (void)nx_applyFilterNavigationVirtualWrapperViewRuleCallback:(NXNavigationVirtualWrapperViewFilterCallback)callback API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /// 重定向视图控制器。可以跳转同一导航控制器下的任一视图控制器
 /// 只会判断视图控制器实例对象的类型（`Class`）是否相同，而非判断视图控制器实例对象（`Instance`）相同

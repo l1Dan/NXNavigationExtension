@@ -300,11 +300,11 @@
 
 #pragma mark - Public
 
-- (NXNavigatioVirtualWrapperViewFilterCallback)nx_filterNavigationVirtualWrapperViewCallback {
+- (NXNavigationVirtualWrapperViewFilterCallback)nx_filterNavigationVirtualWrapperViewCallback {
     return objc_getAssociatedObject(self, _cmd);
 }
 
-- (void)setNx_filterNavigationVirtualWrapperViewCallback:(NXNavigatioVirtualWrapperViewFilterCallback)nx_filterNavigationVirtualWrapperViewCallback {
+- (void)setNx_filterNavigationVirtualWrapperViewCallback:(NXNavigationVirtualWrapperViewFilterCallback)nx_filterNavigationVirtualWrapperViewCallback {
     objc_setAssociatedObject(self, @selector(nx_filterNavigationVirtualWrapperViewCallback), nx_filterNavigationVirtualWrapperViewCallback, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 

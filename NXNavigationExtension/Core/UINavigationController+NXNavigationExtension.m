@@ -222,7 +222,7 @@
     self.nx_prepareConfigureViewControllerCallback = callback;
 }
 
-- (void)nx_applyFilterNavigationVirtualWrapperViewRuleCallback:(NXNavigatioVirtualWrapperViewFilterCallback)callback {
+- (void)nx_applyFilterNavigationVirtualWrapperViewRuleCallback:(NXNavigationVirtualWrapperViewFilterCallback)callback {
     self.nx_filterNavigationVirtualWrapperViewCallback = callback;
 }
 

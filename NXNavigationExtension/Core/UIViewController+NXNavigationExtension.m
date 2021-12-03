@@ -187,7 +187,7 @@
     if (self.nx_navigationVirtualWrapperViewNotFound) return;
     
     if (@available(iOS 13.0, *)) {
-        NXNavigatioVirtualWrapperViewFilterCallback callback = self.navigationController.nx_filterNavigationVirtualWrapperViewCallback;
+        NXNavigationVirtualWrapperViewFilterCallback callback = self.navigationController.nx_filterNavigationVirtualWrapperViewCallback;
         if (callback && self.nx_canSetupNavigationBar && !self.nx_navigationVirtualWrapperViewInitialize) {
             self.nx_navigationVirtualWrapperView = callback(self);
             if (self.nx_navigationVirtualWrapperView) {
