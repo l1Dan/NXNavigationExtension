@@ -21,4 +21,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import <objc/runtime.h>
+
 #import "NXNavigationExtension+Deprecated.h"
+
+#import "UIViewController+NXNavigationExtension.h"
+
+@implementation NXViewControllerPreferences (NXNavigationExtensionDeprecated)
+
+- (BOOL)contentViewWithoutNavigationBar {
+    return self.systemNavigationBarUserInteractionDisabled;
+}
+
+- (void)setContentViewWithoutNavigationBar:(BOOL)contentViewWithoutNavigationBar {
+    self.systemNavigationBarUserInteractionDisabled = contentViewWithoutNavigationBar;
+}
+
+@end
+
+@implementation UIViewController (NXNavigationExtensionDeprecated)
+
+- (BOOL)nx_contentViewWithoutNavigationBar {
+    return self.nx_systemNavigationBarUserInteractionDisabled;
+}
+
+@end

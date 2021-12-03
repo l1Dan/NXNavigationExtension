@@ -190,7 +190,6 @@
             if (selfObject.nx_navigationBar && selfObject.superview != selfObject.nx_navigationBar) {
                 [selfObject.superview addSubview:selfObject.nx_navigationBar];
                 [selfObject.superview bringSubviewToFront:selfObject.nx_navigationBar];
-                [selfObject.superview bringSubviewToFront:selfObject.nx_navigationBar.contentView];
             }
         });
     });
@@ -471,6 +470,18 @@
 
 - (void)setNx_isRootViewController:(BOOL)nx_isRootViewController {
     objc_setAssociatedObject(self, @selector(nx_isRootViewController), @(nx_isRootViewController), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)nx_isChildViewController {
+    NSNumber *number = objc_getAssociatedObject(self, _cmd);
+    if (number && [number isKindOfClass:[NSNumber class]]) {
+        return [number boolValue];
+    }
+    return NO;
+}
+
+- (void)setNx_isChildViewController:(BOOL)nx_isChildViewController {
+    objc_setAssociatedObject(self, @selector(nx_isChildViewController), @(nx_isChildViewController), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 /// 保证 self.navigationController 不为 nil，不要直接调研 navigationController 方法

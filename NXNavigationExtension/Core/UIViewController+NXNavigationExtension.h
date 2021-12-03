@@ -96,8 +96,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// The same as NXViewControllerPreferences `translucentNavigationBar` instance.
 @property (nonatomic, assign, readonly) BOOL nx_translucentNavigationBar;
 
-/// The same as NXViewControllerPreferences `contentViewWithoutNavigationBar` instance.
-@property (nonatomic, assign, readonly) BOOL nx_contentViewWithoutNavigationBar;
+/// The same as NXViewControllerPreferences `systemNavigationBarUserInteractionDisabled` instance.
+@property (nonatomic, assign, readonly) BOOL nx_systemNavigationBarUserInteractionDisabled;
 
 /// The same as NXViewControllerPreferences `interactivePopMaxAllowedDistanceToLeftEdge` instance.
 @property (nonatomic, assign, readonly) CGFloat nx_interactivePopMaxAllowedDistanceToLeftEdge;

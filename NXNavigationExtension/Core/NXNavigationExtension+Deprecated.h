@@ -23,7 +23,29 @@
 
 #import <UIKit/UIKit.h>
 
+#if __has_include(<NXNavigationExtension/NXNavigationExtension.h>)
+
+#import <NXNavigationExtension/NXNavigationConfiguration.h>
+
+#else
+
+#import "NXNavigationConfiguration.h"
+
+#endif /* __has_include */
+
 NS_ASSUME_NONNULL_BEGIN
 
+@interface NXViewControllerPreferences (NXNavigationExtensionDeprecated)
+
+@property (nonatomic, assign) BOOL contentViewWithoutNavigationBar API_DEPRECATED("Use systemNavigationBarUserInteractionDisabled instead.", ios(2.0, 2.0));
+
+@end
+
+
+@interface UIViewController (NXNavigationExtensionDeprecated)
+
+@property (nonatomic, assign, readonly) BOOL nx_contentViewWithoutNavigationBar API_DEPRECATED("Use nx_systemNavigationBarUserInteractionDisabled instead.", ios(2.0, 2.0));
+
+@end
 
 NS_ASSUME_NONNULL_END

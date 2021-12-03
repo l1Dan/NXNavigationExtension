@@ -63,6 +63,7 @@
         [self addSubview:self.backgroundImageView];
         [self addSubview:self.backgroundEffectView];
         [self addSubview:self.shadowImageView];
+        [self addSubview:self.contentView];
     }
     return self;
 }
@@ -74,6 +75,16 @@
 
 - (void)setFrame:(CGRect)frame {
     [self updateNavigationBarFrame:frame callSuper:YES];
+}
+
+- (void)setHidden:(BOOL)hidden {
+    [super setHidden:hidden];
+    self.contentView.hidden = hidden;
+}
+
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled {
+    [super setUserInteractionEnabled:userInteractionEnabled];
+    self.contentView.userInteractionEnabled = userInteractionEnabled;
 }
 
 #pragma mark - Private
@@ -95,12 +106,6 @@
     
     CGFloat shadowImageViewHeight = 1.0 / UIScreen.mainScreen.scale;
     self.shadowImageView.frame = CGRectMake(0, CGRectGetMaxY(_originalNavigationBarFrame) - shadowImageViewHeight, CGRectGetWidth(navigationBarFrame), shadowImageViewHeight);
-    
-    // 放在所有的 View 前面，防止 contentView 被遮挡
-    if (self.superview && self.superview != self.contentView && self.superview != self.contentView.superview) {
-        [self.superview addSubview:self.contentView];
-    }
-    [self.superview bringSubviewToFront:self.contentView];
     
     // 重新设置 NavigationBar frame
     if (callSuper) {

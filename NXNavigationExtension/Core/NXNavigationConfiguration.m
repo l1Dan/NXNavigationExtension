@@ -145,7 +145,7 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
         _enableFullScreenInteractivePopGesture = NO;
         _automaticallyHideNavigationBarInChildViewController = YES;
         _translucentNavigationBar = NO;
-        _contentViewWithoutNavigationBar = NO;
+        _systemNavigationBarUserInteractionDisabled = NO;
         _interactivePopMaxAllowedDistanceToLeftEdge = 0.0;
     }
     return self;
@@ -158,7 +158,7 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
     newPreferences.enableFullScreenInteractivePopGesture = self.enableFullScreenInteractivePopGesture;
     newPreferences.automaticallyHideNavigationBarInChildViewController = self.automaticallyHideNavigationBarInChildViewController;
     newPreferences.translucentNavigationBar = self.translucentNavigationBar;
-    newPreferences.contentViewWithoutNavigationBar = self.contentViewWithoutNavigationBar;
+    newPreferences.systemNavigationBarUserInteractionDisabled = self.systemNavigationBarUserInteractionDisabled;
     newPreferences.interactivePopMaxAllowedDistanceToLeftEdge = self.interactivePopMaxAllowedDistanceToLeftEdge;
     return newPreferences;
 }

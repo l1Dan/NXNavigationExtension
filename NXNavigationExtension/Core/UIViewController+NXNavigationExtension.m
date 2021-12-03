@@ -51,11 +51,13 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIViewController class], @selector(viewDidLoad), ^(__kindof UIViewController *_Nonnull selfObject) {
+            [selfObject nx_checkChildViewControllers];
             [selfObject nx_configureNXNavigationBar];
             [selfObject nx_configureNavigationVirtualWrapperView];
         });
         
         NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIViewController class], @selector(viewWillLayoutSubviews), ^(__kindof UIViewController *_Nonnull selfObject) {
+            [selfObject nx_checkChildViewControllers];
             [selfObject nx_configureNXNavigationBar];
             [selfObject nx_configureNavigationVirtualWrapperView];
             [selfObject nx_updateNavigationBarHierarchy];
@@ -66,6 +68,7 @@
                 BOOL (*originSelectorIMP)(id, SEL);
                 originSelectorIMP = (BOOL(*)(id, SEL))originalIMPProvider();
                 BOOL result = originSelectorIMP(selfObject, originCMD);
+                [selfObject nx_checkChildViewControllers];
                 // fix: edgesForExtendedLayoutEnabled instance dynamic changed.
                 if (selfObject.nx_canSetupNavigationBar) {
                     [selfObject nx_updateNavigationBarFrame];
@@ -79,6 +82,7 @@
                 UIRectEdge (*originSelectorIMP)(id, SEL);
                 originSelectorIMP = (UIRectEdge(*)(id, SEL))originalIMPProvider();
                 UIRectEdge result = originSelectorIMP(selfObject, originCMD);
+                [selfObject nx_checkChildViewControllers];
                 // fix: edgesForExtendedLayoutEnabled instance dynamic changed.
                 if (selfObject.nx_canSetupNavigationBar) {
                     [selfObject nx_updateNavigationBarFrame];
@@ -88,6 +92,7 @@
         });
 
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewWillAppear:), BOOL, ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
+            [selfObject nx_checkChildViewControllers];
             selfObject.nx_viewWillDisappearFinished = NO;
             if (selfObject.nx_canSetupNavigationBar) {
                 // fix: 修复 viewDidLoad 调用时，界面还没有显示无法获取到 navigationController 对象问题
@@ -101,6 +106,7 @@
         });
 
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewDidAppear:), BOOL, ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
+            [selfObject nx_checkChildViewControllers];
             if (selfObject.nx_canSetupNavigationBar) {
                 BOOL interactivePopGestureRecognizerEnabled = selfObject.navigationController.viewControllers.count > 1;
                 selfObject.navigationController.interactivePopGestureRecognizer.enabled = interactivePopGestureRecognizerEnabled;
@@ -111,13 +117,24 @@
         });
         
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewWillDisappear:), BOOL, ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
+            [selfObject nx_checkChildViewControllers];
             selfObject.nx_viewWillDisappearFinished = YES;
         });
         
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(traitCollectionDidChange:), BOOL, ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
+            [selfObject nx_checkChildViewControllers];
             if (selfObject.nx_canSetupNavigationBar) {
                 selfObject.nx_configuration.viewControllerPreferences.traitCollection = selfObject.view.traitCollection;
                 [selfObject nx_setNeedsNavigationBarAppearanceUpdate];
+            }
+        });
+        
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(addChildViewController:), UIViewController *, ^(__kindof UIViewController *_Nonnull selfObject, __kindof UIViewController *childViewController) {
+            if (![selfObject isKindOfClass:[UINavigationController class]]) {
+                childViewController.nx_isChildViewController = YES;
+                if (childViewController.nx_navigationBar.superview) {
+                    [childViewController.nx_navigationBar removeFromSuperview];
+                }
             }
         });
     });
@@ -127,7 +144,18 @@
 
 /// 检查是否符合导航栏设置的条件
 - (BOOL)nx_canSetupNavigationBar {
-    return self.navigationController && self.navigationController.nx_useNavigationBar;
+    return self.navigationController && self.navigationController.nx_useNavigationBar && !self.nx_isChildViewController;
+}
+
+- (void)nx_checkChildViewControllers {
+    if (self.childViewControllers.count && ![self isKindOfClass:[UINavigationController class]]) {
+        for (__kindof UIViewController *childViewController in self.childViewControllers) {
+            childViewController.nx_isChildViewController = YES;
+            if (childViewController.nx_navigationBar.superview) {
+                [childViewController.nx_navigationBar removeFromSuperview];
+            }
+        }
+    }
 }
 
 - (void)nx_checkNavigationVirtualWrapperViewState {
@@ -194,11 +222,21 @@
     };
 }
 
+- (void)nx_setNavigationBarHidden:(BOOL)hidden {
+    self.nx_navigationBar.hidden = hidden;
+    self.nx_navigationBar.userInteractionEnabled = !hidden;
+}
+
 - (void)nx_adjustmentNavigationBarAppearanceForUINavigationBar:(UINavigationBar *)navigationBar withViewController:(__kindof UIViewController *)viewController {
     // fix: delay call nx_updateNavigationBarAppearance method.
     if (self == viewController && viewController.nx_viewWillDisappearFinished) { return; }
     viewController.nx_navigationBar.frame = navigationBar.frame;
-    viewController.nx_navigationBar.hidden = navigationBar.hidden;
+    
+    if (navigationBar.hidden) {
+        [viewController nx_setNavigationBarHidden:YES];
+    } else {
+        [viewController nx_setNavigationBarHidden:viewController.nx_translucentNavigationBar];
+    }
 }
 
 - (void)nx_updateNavigationBarAppearance {
@@ -225,7 +263,7 @@
         self.nx_navigationBar.blurEffectEnabled = self.nx_useBlurNavigationBar;
         
         if (self.parentViewController && ![self.parentViewController isKindOfClass:[UINavigationController class]] && self.nx_automaticallyHideNavigationBarInChildViewController) {
-            self.nx_navigationBar.hidden = YES;
+            [self nx_setNavigationBarHidden:YES];
         }
     }
 }
@@ -251,7 +289,6 @@
             [self.view.superview addSubview:self.nx_navigationBar];
         } else {
             [self.view bringSubviewToFront:self.nx_navigationBar];
-            [self.view bringSubviewToFront:self.nx_navigationBar.contentView];
         }
     }
 }
@@ -259,18 +296,21 @@
 - (void)nx_updateNavigationBarSubviewState {
     if (self.nx_canSetupNavigationBar) {
         BOOL translucentNavigationBar = self.nx_translucentNavigationBar;
-        BOOL contentViewWithoutNavigationBar = self.nx_contentViewWithoutNavigationBar;
+        BOOL systemNavigationBarUserInteractionDisabled = self.nx_systemNavigationBarUserInteractionDisabled;
         if ([self isKindOfClass:[UIPageViewController class]] && !translucentNavigationBar) {
             // fix: 处理特殊情况，最后显示的为 UIPageViewController
             translucentNavigationBar = self.parentViewController.nx_translucentNavigationBar;
         }
         
         if (translucentNavigationBar) {
-            contentViewWithoutNavigationBar = NO;
+            [self nx_setNavigationBarHidden:YES];
             self.nx_navigationBar.shadowImageView.image = NXNavigationExtensionGetImageFromColor([UIColor clearColor]);
             self.nx_navigationBar.backgroundImageView.image = NXNavigationExtensionGetImageFromColor([UIColor clearColor]);
             self.nx_navigationBar.backgroundColor = [UIColor clearColor];
+            
             self.navigationItem.titleView.hidden = YES;
+            self.navigationController.navigationBar.nx_userInteractionEnabled = NO;
+            self.navigationController.navigationBar.userInteractionEnabled = NO;
             self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
             self.navigationController.navigationBar.tintColor = [UIColor clearColor];
             
@@ -279,20 +319,13 @@
             if (@available(iOS 11.0, *)) {
                 self.navigationController.navigationBar.largeTitleTextAttributes = textAttributes;
             }
+        } else {
+            [self nx_setNavigationBarHidden:NO];
+            self.nx_navigationBar.userInteractionEnabled = systemNavigationBarUserInteractionDisabled;
+            self.navigationController.navigationBar.nx_userInteractionEnabled = !systemNavigationBarUserInteractionDisabled;
+            self.navigationController.navigationBar.userInteractionEnabled = !systemNavigationBarUserInteractionDisabled;
         }
         
-        if (contentViewWithoutNavigationBar) { // 添加 subView 到 contentView 时可以不随 NavigationBar 的 alpha 变化
-            self.nx_navigationBar.contentView.userInteractionEnabled = YES;
-            self.nx_navigationBar.userInteractionEnabled = YES;
-            self.navigationController.navigationBar.nx_userInteractionEnabled = NO;
-            self.navigationController.navigationBar.userInteractionEnabled = NO;
-        } else {
-            self.nx_navigationBar.contentView.hidden = translucentNavigationBar;
-            self.nx_navigationBar.contentView.userInteractionEnabled = contentViewWithoutNavigationBar;
-            self.nx_navigationBar.userInteractionEnabled = !translucentNavigationBar;
-            self.navigationController.navigationBar.nx_userInteractionEnabled = !translucentNavigationBar;
-            self.navigationController.navigationBar.userInteractionEnabled = !translucentNavigationBar;
-        }
     }
 }
 
@@ -510,8 +543,8 @@
     return self.nx_configuration.viewControllerPreferences.translucentNavigationBar;
 }
 
-- (BOOL)nx_contentViewWithoutNavigationBar {
-    return self.nx_configuration.viewControllerPreferences.contentViewWithoutNavigationBar;
+- (BOOL)nx_systemNavigationBarUserInteractionDisabled {
+    return self.nx_configuration.viewControllerPreferences.systemNavigationBarUserInteractionDisabled;
 }
 
 - (CGFloat)nx_interactivePopMaxAllowedDistanceToLeftEdge {

@@ -153,6 +153,9 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 /// 记录当前视图控制器是否为导航控制器的 rootViewController
 @property (nonatomic, assign) BOOL nx_isRootViewController;
 
+/// 记录是否为 childViewControllers 中的控制器，并且当前控制器不是 UINavigationController 的情况下。
+@property (nonatomic, assign) BOOL nx_isChildViewController;
+
 /// For SwiftUI，返回页面时交互事件代理
 @property (nonatomic, weak, nullable) id<NXNavigationInteractable> nx_navigationInteractDelegate;
 
