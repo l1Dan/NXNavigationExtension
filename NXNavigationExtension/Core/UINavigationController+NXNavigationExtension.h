@@ -38,9 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UINavigationController (NXNavigationExtension)
 
-/// The same as NXNavigationControllerPreferences `fullScreenInteractivePopGestureEnabled` instance.
-@property (nonatomic, assign, readonly) BOOL nx_fullScreenInteractivePopGestureEnabled;
-
 /// 全屏手势识别器
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *nx_fullScreenPopGestureRecognizer;
 

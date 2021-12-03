@@ -399,9 +399,6 @@
 }
 
 - (BOOL)nx_checkFullScreenInteractivePopGestureEnabledWithViewController:(__kindof UIViewController *)viewController {
-    if (self.nx_fullScreenInteractivePopGestureEnabled) {
-        return viewController.nx_enableFullScreenInteractivePopGesture;
-    }
     return viewController.nx_enableFullScreenInteractivePopGesture;
 }
 

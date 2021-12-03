@@ -179,10 +179,6 @@
 
 #pragma mark - Getter & Setter
 
-- (BOOL)nx_fullScreenInteractivePopGestureEnabled {
-    return self.nx_configuration.navigationControllerPreferences.fullScreenInteractivePopGestureEnabled;
-}
-
 - (UIPanGestureRecognizer *)nx_fullScreenPopGestureRecognizer {
     UIPanGestureRecognizer *panGestureRecognizer = objc_getAssociatedObject(self, _cmd);
     if (panGestureRecognizer && [panGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {

@@ -27,6 +27,24 @@
 
 #import "UIViewController+NXNavigationExtension.h"
 
+
+@implementation NXNavigationControllerPreferences (NXNavigationExtensionDeprecated)
+
+- (BOOL)fullScreenInteractivePopGestureEnabled {
+    NSNumber *number = objc_getAssociatedObject(self, _cmd);
+    if (number && [number isKindOfClass:[NSNumber class]]) {
+        return [number boolValue];
+    }
+    return NO;
+}
+
+- (void)setFullScreenInteractivePopGestureEnabled:(BOOL)fullScreenInteractivePopGestureEnabled {
+    objc_setAssociatedObject(self, @selector(fullScreenInteractivePopGestureEnabled), @(fullScreenInteractivePopGestureEnabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+@end
+
+
 @implementation NXViewControllerPreferences (NXNavigationExtensionDeprecated)
 
 - (BOOL)contentViewWithoutNavigationBar {
@@ -38,6 +56,16 @@
 }
 
 @end
+
+
+@implementation UINavigationController (NXNavigationExtensionDeprecated)
+
+- (BOOL)nx_fullScreenInteractivePopGestureEnabled {
+    return NO;
+}
+
+@end
+
 
 @implementation UIViewController (NXNavigationExtensionDeprecated)
 

@@ -110,8 +110,6 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 
 @interface NXNavigationControllerPreferences : NSObject <NSCopying>
 
-/// 是否开启全屏手势；默认：NO
-@property (nonatomic, assign) BOOL fullScreenInteractivePopGestureEnabled;
 
 @end
 

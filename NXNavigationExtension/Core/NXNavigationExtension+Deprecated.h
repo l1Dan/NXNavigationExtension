@@ -35,9 +35,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+@interface NXNavigationControllerPreferences (NXNavigationExtensionDeprecated)
+
+@property (nonatomic, assign) BOOL fullScreenInteractivePopGestureEnabled API_DEPRECATED("Use NXViewControllerPreferences enableFullScreenInteractivePopGesture instead.", ios(2.0, 2.0));
+
+@end
+
+
 @interface NXViewControllerPreferences (NXNavigationExtensionDeprecated)
 
 @property (nonatomic, assign) BOOL contentViewWithoutNavigationBar API_DEPRECATED("Use systemNavigationBarUserInteractionDisabled instead.", ios(2.0, 2.0));
+
+@end
+
+
+@interface UINavigationController (NXNavigationExtensionDeprecated)
+
+@property (nonatomic, assign, readonly) BOOL nx_fullScreenInteractivePopGestureEnabled API_DEPRECATED("Use UIViewController nx_enableFullScreenInteractivePopGesture instead.", ios(2.0, 2.0));
 
 @end
 
@@ -47,5 +62,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL nx_contentViewWithoutNavigationBar API_DEPRECATED("Use nx_systemNavigationBarUserInteractionDisabled instead.", ios(2.0, 2.0));
 
 @end
+
 
 NS_ASSUME_NONNULL_END

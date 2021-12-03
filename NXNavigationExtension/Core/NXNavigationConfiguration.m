@@ -115,14 +115,12 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 
 - (instancetype)init {
     if (self = [super init]) {
-        _fullScreenInteractivePopGestureEnabled = NO;
     }
     return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone {
     NXNavigationControllerPreferences *newPreferences = [[NXNavigationControllerPreferences alloc] init];
-    newPreferences.fullScreenInteractivePopGestureEnabled = self.fullScreenInteractivePopGestureEnabled;
     return newPreferences;
 }
 
