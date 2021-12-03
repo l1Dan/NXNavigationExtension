@@ -71,7 +71,7 @@ class ViewController04_CustomNavigationBar: CustomTableViewController {
         nx_navigationBar.contentView.addSubview(searchBar)
         nx_navigationBar.contentView.addSubview(backButton)
         nx_navigationBar.contentView.addSubview(addButton)
-        nx_navigationBar.layer.addSublayer(gradientLayer)
+        nx_navigationBar.layer.insertSublayer(gradientLayer, below: nx_navigationBar.layer.sublayers?.first)
 
         let contentView = nx_navigationBar.contentView
         backButton.isHidden = !UIDevice.isPhoneDevice
@@ -125,8 +125,7 @@ extension ViewController04_CustomNavigationBar {
         return .clear
     }
     
-    /// 点击导航栏控件事件可以由 contentView 响应
-    override var nx_contentViewWithoutNavigationBar: Bool {
+    override var nx_systemNavigationBarUserInteractionDisabled: Bool {
         return true
     }
     

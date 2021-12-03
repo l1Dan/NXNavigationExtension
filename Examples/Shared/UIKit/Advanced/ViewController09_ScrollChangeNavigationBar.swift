@@ -56,7 +56,7 @@ class FakeNavigationBar: UIView {
         let change = UIColor.customColor {
             return UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
         } darkModeColor: {
-            return UIColor(red: 0.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            return UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0)
         }
         backButton.tintColor = UIColor.mix(color1: change, color2: white, ratio: alpha)
         rightButton.tintColor = UIColor.mix(color1: change, color2: white, ratio: alpha)
@@ -131,6 +131,7 @@ class ViewController09_ScrollChangeNavigationBar: CustomTableViewController, Fak
     }()
 
     private var barStyle: UIStatusBarStyle = .lightContent
+    private var barAlpha = CGFloat(0.0)
     
     private var navigationBarTitle: String?
     
@@ -152,7 +153,7 @@ class ViewController09_ScrollChangeNavigationBar: CustomTableViewController, Fak
         
         guard let nx_navigationBar = nx_navigationBar else { return }
         nx_navigationBar.contentView.addSubview(fakeNavigationBar)
-        nx_navigationBar.alpha = 0.0
+        barAlpha = 0.0
         
         let contentView = nx_navigationBar.contentView
         
@@ -206,7 +207,7 @@ class ViewController09_ScrollChangeNavigationBar: CustomTableViewController, Fak
         let imageViewHeight = imageView.frame.height
         let navigationBarHeight = nx_navigationBar.frame.height
         let alpha = CGFloat.maximum(0.0, CGFloat.minimum(1.0, (offsetY - imageViewHeight + navigationBarHeight) / nx_navigationBar.frame.height ))
-        nx_navigationBar.alpha = alpha
+        barAlpha = alpha
         
         if #available(iOS 13.0, *) {
             if view.traitCollection.userInterfaceStyle == .dark {
@@ -218,6 +219,7 @@ class ViewController09_ScrollChangeNavigationBar: CustomTableViewController, Fak
             barStyle = alpha > 0.0 ? .default : .lightContent
         }
         setNeedsStatusBarAppearanceUpdate()
+        nx_setNeedsNavigationBarAppearanceUpdate()
         fakeNavigationBar.updateAlpha(alpha)        
     }
     
@@ -242,7 +244,15 @@ extension ViewController09_ScrollChangeNavigationBar {
         return .clear
     }
     
-    override var nx_contentViewWithoutNavigationBar: Bool {
+    override var nx_shadowImageTintColor: UIColor? {
+        return .clear
+    }
+    
+    override var nx_navigationBarBackgroundColor: UIColor? {
+        return .systemBlue.withAlphaComponent(barAlpha)
+    }
+    
+    override var nx_systemNavigationBarUserInteractionDisabled: Bool {
         return true
     }
     
