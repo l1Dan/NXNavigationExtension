@@ -232,7 +232,7 @@ override var nx_enableFullScreenInteractivePopGesture: Bool {
 
 ```swift
 let configuration = NXNavigationConfiguration.default
-configuration.navigationControllerPreferences.fullScreenInteractivePopGestureEnabled = true
+configuration.viewControllerPreferences.enableFullScreenInteractivePopGesture = true
 ```
 
 #### 导航栏返回事件拦截

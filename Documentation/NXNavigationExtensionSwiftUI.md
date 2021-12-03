@@ -246,7 +246,7 @@ Text("Destination")
 
 ```swift
 let configuration = NXNavigationConfiguration.default
-configuration.navigationControllerPreferences.fullScreenInteractivePopGestureEnabled = true
+configuration.viewControllerPreferences.enableFullScreenInteractivePopGesture = true
 ```
 
 - 局部有效（在所处页面设置）
