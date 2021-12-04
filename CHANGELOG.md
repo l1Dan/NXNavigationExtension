@@ -1,5 +1,11 @@
 # CHANGELOG.md
 
+## 4.0.2
+
+- typo NXNavigatioVirtualWrapperViewFilterCallback -> NXNavigationVirtualWrapperViewFilterCallback
+- 废弃 fullScreenInteractivePopGestureEnabled 相关启用全局返回手势属性，使得逻辑更加清晰
+- 修复 NXNavigationBar contentView 在某些情况下无法隐藏的问题
+
 ## 4.0.1
 
 - 修复启用全屏滑动返回手势后，在局部页面禁用滑动返回手势无效问题 [#6](https://github.com/l1Dan/NXNavigationExtension/issues/6)
