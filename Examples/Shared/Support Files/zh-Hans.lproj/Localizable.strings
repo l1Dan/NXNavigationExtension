@@ -21,7 +21,7 @@
 
 // UIKit only
 "tableViewController" = "使用 UITableViewController";
-"tableViewControllerWithFullScren" = "UITableViewController 全屏背景色";
+"tableViewControllerWithFullScreen" = "UITableViewController 全屏背景色";
 "customBlurNavigationBar" = "自定义导航栏模糊背景";
 
 // SwiftUI only

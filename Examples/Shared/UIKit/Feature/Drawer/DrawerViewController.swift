@@ -12,13 +12,13 @@ class DrawerViewController: BaseViewController {
     private lazy var contentViewController =  ViewController11_TableViewController()
     
     private lazy var closeDrawerButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(named: "NavigationBarClose"), style: .plain, target: self, action: #selector(clickCloseDraweButtonItem(_:)))
+        let item = UIBarButtonItem(image: UIImage(named: "NavigationBarClose"), style: .plain, target: self, action: #selector(clickCloseDrawerButtonItem(_:)))
         item.tintColor = .white
         return item
     }()
     
     @objc
-    private func clickCloseDraweButtonItem(_ item: UIBarButtonItem) {
+    private func clickCloseDrawerButtonItem(_ item: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
 

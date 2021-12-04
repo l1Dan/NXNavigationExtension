@@ -19,7 +19,7 @@ class NavigationFeatureItem {
         case fullScreenColor
         case present
         case tableViewController // UIKit only
-        case tableViewControllerWithFullScren // UIKit only
+        case tableViewControllerWithFullScreen // UIKit only
         case customBlurNavigationBar // UIKit only
         case listView// SwiftUI only
         case scrollViewContent // SwiftUI only
@@ -88,7 +88,7 @@ class NavigationFeatureSection {
         
         if uikit {
             basicItems.append(NavigationFeatureItem(style: .tableViewController))
-            basicItems.append(NavigationFeatureItem(style: .tableViewControllerWithFullScren))
+            basicItems.append(NavigationFeatureItem(style: .tableViewControllerWithFullScreen))
             basicItems.append(NavigationFeatureItem(style: .customBlurNavigationBar))
         } else {
             basicItems.append(NavigationFeatureItem(style: .listView))

@@ -98,10 +98,10 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // comment fot testing dynamic change edgesForExtendedLayout instance.
+        // comment for testing dynamic change edgesForExtendedLayout instance.
 //        edgesForExtendedLayout = UIRectEdge(rawValue: 0)
 
-        // Uncomment fot testing dynamic change edgesForExtendedLayout instance.
+        // Uncomment for testing dynamic change edgesForExtendedLayout instance.
 //        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) { [weak self] in
 //            self?.edgesForExtendedLayout = .all
 //            self?.nx_setNeedsNavigationBarAppearanceUpdate()

@@ -20,7 +20,7 @@ struct FeatureDetailView: View {
         case .backgroundColor:
             return AnyView(View01_BackgroundColor(item))
         case .backgroundImage:
-            return AnyView(View02_BackgrounddImage(item))
+            return AnyView(View02_BackgroundImage(item))
         case .transparent:
             return AnyView(View03_Transparent(item))
         case .likeSystemNavigationBar:

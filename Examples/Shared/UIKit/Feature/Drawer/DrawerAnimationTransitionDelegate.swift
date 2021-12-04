@@ -1,5 +1,5 @@
 //
-//  DrawAnimationTransitionDelegate.swift
+//  DrawerAnimationTransitionDelegate.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/11/9.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DrawAnimationTransitionDelegate: NSObject {
+class DrawerAnimationTransitionDelegate: NSObject {
     
     private lazy var animationController = DrawerAnimationController()
     
@@ -15,7 +15,7 @@ class DrawAnimationTransitionDelegate: NSObject {
     
 }
 
-extension DrawAnimationTransitionDelegate {
+extension DrawerAnimationTransitionDelegate {
     
     func setupDrawer(with viewController: UIViewController, inView: UIView) {
         self.viewController = viewController
@@ -35,7 +35,7 @@ extension DrawAnimationTransitionDelegate {
     
 }
 
-extension DrawAnimationTransitionDelegate: UIViewControllerTransitioningDelegate {
+extension DrawerAnimationTransitionDelegate: UIViewControllerTransitioningDelegate {
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return animationController

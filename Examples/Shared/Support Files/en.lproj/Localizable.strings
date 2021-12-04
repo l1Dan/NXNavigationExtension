@@ -11,7 +11,7 @@
 "backgroundColor" = "Background color";
 "backgroundImage" = "Background image";
 "transparent" = "Transparent";
-"likeSystemNavigationBar" = "System blur bavigation bar";
+"likeSystemNavigationBar" = "System blur navigation bar";
 "shadowColor" = "Shadow color";
 "shadowImage" = "Shadow image";
 "customBackImage" = "Custom back image";
@@ -21,8 +21,8 @@
 
 // UIKit only
 "tableViewController" = "Use UITableViewController";
-"tableViewControllerWithFullScren" = "UITableViewController with full screen";
-"customBlurNavigationBar" = "Custom blur bavigation bar";
+"tableViewControllerWithFullScreen" = "UITableViewController with full screen";
+"customBlurNavigationBar" = "Custom blur navigation bar";
 
 // SwiftUI only
 "listView" = "List";

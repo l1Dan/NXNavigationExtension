@@ -25,13 +25,13 @@ class FeatureTableViewController: BaseTableViewController {
     }()
     
     private lazy var presentDrawerButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(named: "NavigationBarMore"), style: .plain, target: self, action: #selector(clickOpenDraweButtonItem(_:)))
+        let item = UIBarButtonItem(image: UIImage(named: "NavigationBarMore"), style: .plain, target: self, action: #selector(clickOpenDrawerButtonItem(_:)))
         item.tintColor = .white
         return item
     }()
     
-    private lazy var animationTransitionDelegate: DrawAnimationTransitionDelegate = {
-        let delegate = DrawAnimationTransitionDelegate()
+    private lazy var animationTransitionDelegate: DrawerAnimationTransitionDelegate = {
+        let delegate = DrawerAnimationTransitionDelegate()
         delegate.setupDrawer(with: self, inView: view)
         return delegate
     }()
@@ -52,7 +52,7 @@ class FeatureTableViewController: BaseTableViewController {
         case .fullScreenColor: return ViewController09_FullScreenColor()
         case .present: return ViewController10_Present()
         case .tableViewController: return ViewController11_TableViewController()
-        case .tableViewControllerWithFullScren: return ViewController12_TableViewControllerWithFullScreen()
+        case .tableViewControllerWithFullScreen: return ViewController12_TableViewControllerWithFullScreen()
         case .customBlurNavigationBar: return ViewController13_CustomBlurNavigationBar()
             // Advanced
         case .edgePopGestureDisable: return ViewController01_EdgePopGestureDisable()
@@ -72,7 +72,7 @@ class FeatureTableViewController: BaseTableViewController {
     }
     
     @objc
-    private func clickOpenDraweButtonItem(_ item: UIBarButtonItem) {
+    private func clickOpenDrawerButtonItem(_ item: UIBarButtonItem) {
         animationTransitionDelegate.openDrawer()
     }
 
