@@ -57,7 +57,7 @@ NXNavigationConfiguration().registerNavigationControllerClasses([UINavigationCon
 **注意**：
 
 - 👉 虽然示例程序代码使用的是 `Swift` 语言实现的，但框架还是可以支持 `Objective-C` 语言的，如果需要 `Objective-C` 示例程序的代码可以查看 [3.x](https://github.com/l1Dan/NXNavigationExtension/tree/3.x) 分支代码。
-- 👉 使用 `NXNavigationExtension` 之前需要先注册导航控制器，注册之后对导航栏的修改才会生效，也仅限于修改已经注册的导航控制器以及子类所管理的视图控制器，~~对于子类导航控制器所管理的视图控制器是不会生效的~~。*3.4.9*及以后的版本已经可以。
+- 👉 使用 `NXNavigationExtension` 之前需要先注册导航控制器，然后再去修改被注册的导航控制器所管理的视图控制器的导航栏外观。
 - 👉 为了有效避免框架污染到其他的导航控制器，请保持“谁使用，谁注册”的原则。
 - 🚫 不要直接注册 `UINavigationController`，会影响全局导航栏的外观，建议创建一个 `UINavigationController` 的子类，对这个子类进行外观的设置。
 - 🚫 不要使用 `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:` 等方法显示或隐藏系统导航栏。
@@ -65,15 +65,15 @@ NXNavigationConfiguration().registerNavigationControllerClasses([UINavigationCon
 - 🚫 不要使用系统导航栏或导航控制器 `appearance` 相关属性修改。
 - 🚫 不要使用全局 `edgesForExtendedLayout` 修改。
 - 🚫 不要使用 `<UIGestureRecognizerDelegate>` 相关方法禁用手势返回。
-- 💉 一句话“不要直接操作导航栏或者导航控制器，把这些都交给 `NXNavigationExtension` 处理吧“。
+- 💉 一句话“不要直接使用系统导航栏或者导航控制器来修改导航栏外观，把这些事情都交给 `NXNavigationExtension` 处理吧“。
 
-建议：除非你非常明白修改全局性东西的后果，否则不要修改，这么做的原因就是为了减少走一些弯路！
+建议：除非你很明确修改系统导航栏相关属性带来的后果，否则不建议修改。不修改原生系统导航栏可以让我们少走很多弯路！
 
 ## 🍻 基本功能
 
 ### 修改返回按钮箭头颜色
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift)
 
 ```swift
 override var nx_barTintColor: UIColor? {
@@ -83,7 +83,7 @@ override var nx_barTintColor: UIColor? {
 
 ## 修改系统返回按钮文字
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift)
 
 ```swift
 // 需要设置使用系统返回按钮，这样才会有效果
@@ -98,7 +98,7 @@ override var nx_systemBackButtonTitle: String? {
 
 ## 修改导航栏标题颜色
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift)
 
 ```swift
 override var nx_titleTextAttributes: [NSAttributedString.Key : Any]? {
@@ -110,7 +110,7 @@ override var nx_titleTextAttributes: [NSAttributedString.Key : Any]? {
 
 **导航栏背景颜色默认使用系统蓝色 `UIColor.systemBlue`，这样处理能够快速辨别框架是否生效，也可以使用以下方式进行重写：**
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Basic/ViewController01_BackgroundColor.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController01_BackgroundColor.swift)
 
 ```swift
 // 全局统一修改（不会覆盖基于视图控制器的修改）
@@ -125,7 +125,7 @@ override var nx_navigationBarBackgroundColor: UIColor? {
 
 #### 修改导航栏背景图片
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Basic/ViewController02_BackgroundImage.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController02_BackgroundImage.swift)
 
 ```swift
 override var nx_navigationBarBackgroundImage: UIImage? {
@@ -135,7 +135,7 @@ override var nx_navigationBarBackgroundImage: UIImage? {
 
 #### 设置导航栏透明
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Basic/ViewController03_Transparent.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController03_Transparent.swift)
 
 ```swift
 override var nx_navigationBarBackgroundColor: UIColor? {
@@ -150,7 +150,7 @@ override var nx_shadowImageTintColor: UIColor? {
 
 #### 实现系统导航栏模糊效果
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Basic/ViewController04_LikeSystemNavigationBar.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController04_LikeSystemNavigationBar.swift)
 
 ```swift
 override var nx_navigationBarBackgroundColor: UIColor? {
@@ -164,7 +164,7 @@ override var nx_useBlurNavigationBar: Bool {
 
 ### 修改导航栏底部线条颜色
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Basic/ViewController05_ShadowColor.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController05_ShadowColor.swift)
 
 ```swift
 override var nx_shadowImageTintColor: UIColor? {
@@ -174,7 +174,7 @@ override var nx_shadowImageTintColor: UIColor? {
 
 ### 修改导航栏底部线条图片
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Basic/ViewController06_ShadowImage.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController06_ShadowImage.swift)
 
 ```swift
 override var nx_shadowImage: UIImage? {
@@ -184,7 +184,7 @@ override var nx_shadowImage: UIImage? {
 
 ### 自定义返回按钮图片
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Basic/ViewController07_CustomBackImage.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController07_CustomBackImage.swift)
 
 ```swift
 override var nx_backImage: UIImage? {
@@ -194,7 +194,7 @@ override var nx_backImage: UIImage? {
 
 ### 自定义返回按钮
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Basic/ViewController08_CustomBackView.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController08_CustomBackView.swift)
 
 ```swift
 override var nx_backButtonCustomView: UIView? {
@@ -208,7 +208,7 @@ override var nx_backButtonCustomView: UIView? {
 
 #### 禁用滑动返回手势
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Advanced/ViewController01_EdgePopGestureDisable.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController01_EdgePopGestureDisable.swift)
 
 ```swift
 override var nx_disableInteractivePopGesture: Bool {
@@ -218,7 +218,7 @@ override var nx_disableInteractivePopGesture: Bool {
 
 #### 启用全屏滑动返回手势
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Advanced/ViewController02_FullScreenPopGestureEnable.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController02_FullScreenPopGestureEnable.swift)
 
 - 局部有效（在所处页面设置）
 
@@ -237,7 +237,7 @@ configuration.viewControllerPreferences.enableFullScreenInteractivePopGesture = 
 
 #### 导航栏返回事件拦截
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Advanced/ViewController03_BackButtonEventIntercept.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController03_BackButtonEventIntercept.swift)
 
 需要遵守协议 `<NXNavigationInteractable>`，实现代理方法：
 
@@ -274,7 +274,7 @@ func nx_navigationController(_ navigationController: UINavigationController, wil
 
 ### 重定向任一控制器跳转
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Advanced/ViewController08_RedirectViewController.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController08_RedirectViewController.swift)
 
 - 以重定向到 `ViewController08_RedirectViewController` 为例，如果之前有 Push 过 `ViewController08_RedirectViewController` 的实例，则最后会跳转到实例中，如果没有则会调用 `block`，如果 `block == nil` 或者 `return nil;` 则重定向跳转不会发生。
 - 执行重定向操作之后，并不会直接跳转到对应的视图控制器，如果需要 `跳转` 操作，可以调用 `popViewControllerAnimated:` 方法返回页面，也可以使用手势滑动返回页面，还可以点击返回按钮返回页面。
@@ -297,9 +297,9 @@ navigationController?.popViewController(animated: true)
 
 意思是：首先查找 `navigationController?.viewControllers` 是否存在一个类型为 `ViewController08_RedirectViewController.self` 的实例对象，如果存在则重定向到此视图控制器，没有则使用 `ViewController08_RedirectViewController()` 来创建一个新的实例对象。
 
-### 导航栏点击事件穿透到底部
+### 导航栏区域点击事件穿透到底部试图（整个导航栏区域不能处理用户交互）
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Advanced/ViewController05_NavigationBarDisable.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController05_NavigationBarDisable.swift)
 
 ```swift
 override var nx_translucentNavigationBar: Bool {
@@ -307,21 +307,19 @@ override var nx_translucentNavigationBar: Bool {
 }
 ```
 
-### 动态修改导航栏样式
+### 禁用系统导航栏用户交互（NXNavigationBar 可以处理用户交互）
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Advanced/ViewController09_ScrollChangeNavigationBar.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController09_ScrollChangeNavigationBar.swift)
 
 ```swift
-override var nx_contentViewWithoutNavigationBar: Bool {
+override var systemNavigationBarUserInteractionDisabled: Bool {
     return true
 }
 ```
 
-可以动态调整 contentView 透明度实现：`nx_navigationBar?.alpha = value`
-
 ### 更新导航栏样式
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift)
 
 ```swift
 nx_setNeedsNavigationBarAppearanceUpdate()
@@ -341,7 +339,7 @@ override var childForStatusBarHidden: UIViewController? {
 
 ### 长按返回按钮显示菜单功能
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Advanced/ViewController08_RedirectViewController.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController08_RedirectViewController.swift)
 
 ```swift
 override var nx_useSystemBackButton: Bool {

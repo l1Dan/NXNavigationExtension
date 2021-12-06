@@ -125,25 +125,25 @@ A：因为 `UIImagePickerController` 和 `PHPickerViewController` 里面的 UINa
 
 Q：为什么 iOS13 之前使用 `self.navigationItem.searchController` 设置的 `UISearchBar` 无法跟随导航栏的变化而变化，iOS13 之后的却可以呢？
 
-A：因为在 iOS13 之前导航栏中不包含 `UISearchBar`，iOS13 之后导航栏才包含 `UISearchBar` 的。具体使用请参考[示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Feature/FeatureTableViewController.swift)。
+A：因为在 iOS13 之前导航栏中不包含 `UISearchBar`，iOS13 之后导航栏才包含 `UISearchBar` 的。具体使用请参考[示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Feature/FeatureTableViewController.swift)。
 
 ---
 
 Q：如何解决 `UIScrollView` 和 `UIPageViewController` 全屏手势冲突?
 
-A：使用 [UIScrollView](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Feature/FullPopGesture_ScrollView.swift) 和 [UIPageViewController](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Feature/FullPopGesture_PageViewController.swift) 全屏手势冲突解决方案。
+A：使用 [UIScrollView](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Feature/FullPopGesture_ScrollView.swift) 和 [UIPageViewController](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Feature/FullPopGesture_PageViewController.swift) 全屏手势冲突解决方案。
 
 ---
 
 Q：为什么 `NXNavigationExtension` 框架不包含控制器的转场动画功能？
 
-A：原则就是尽可能的保持框架的简单轻量，将更多的精力花在框架本身的稳定性上，尽可能地使用系统原有功能。转场动画功能并不适用于所有业务场景，另外也不属于这个框架的功能。如果有转场动画的需求需要开发者自己实现，也可以参考[VCTransitionsLibrary](https://github.com/ColinEberhardt/VCTransitionsLibrary)，或者参考[示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Shared/UIKit/Feature/Drawer/DrawerViewController.swift)。
+A：原则就是尽可能的保持框架的简单轻量，将更多的精力花在框架本身的稳定性上，尽可能地使用系统原有功能。转场动画功能并不适用于所有业务场景，另外也不属于这个框架的功能。如果有转场动画的需求需要开发者自己实现，也可以参考[VCTransitionsLibrary](https://github.com/ColinEberhardt/VCTransitionsLibrary)，或者参考[示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Feature/Drawer/DrawerViewController.swift)。
 
 ---
 
 Q：为什么导航栏的系统返回按钮箭头和自定义返回按钮箭头的位置不一致？
 
-A：因为导航栏的系统返回按钮是用 `self.navigationItem.backBarButtonItem` 属性来设置的。而自定义返回按钮是用 `self.navigationItem.leftBarButtonItem` 属性来设置的，他们的位置本来就不一样。当然你可以使用系统返回按钮，通过 `(nx_)useSystemBackButton` 属性设置是否使用系统返回按钮，再配合 `(nx_)systemBackButtonTitle` 属性设置系统返回按钮的标题。还可以通过 `(nx_)backImageInsets` 或者 `(nx)landscapeBackImageInsets` 属性来控制自定义返回按钮图片的偏移量。
+A：因为导航栏的系统返回按钮是用 `self.navigationItem.backBarButtonItem` 属性来设置的。而自定义返回按钮是用 `self.navigationItem.leftBarButtonItem` 属性来设置的，他们的位置本来就不一样。当然你可以使用系统返回按钮，通过 `(nx_)useSystemBackButton` 属性设置是否使用系统返回按钮，再配合 `(nx_)systemBackButtonTitle` 属性设置系统返回按钮的标题。还可以通过 `(nx_)backImageInsets` 或者 `(nx_)landscapeBackImageInsets` 属性来控制自定义返回按钮图片的偏移量。
 
 - 返回按钮箭头在切图里尽量靠左而不要居中，右边可以保留透明背景。
 - 使用 `nx_backButtonCustomView` 属性自定义返回按钮时就需要开发者自己来修正箭头的偏移量了。
