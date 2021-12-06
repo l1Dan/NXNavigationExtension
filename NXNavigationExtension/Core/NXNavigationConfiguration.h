@@ -135,7 +135,7 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 /// 设置导航栏是否透明（类似导航栏隐藏的效果，当不是真正意思的隐藏）。不推荐直接设置系统导航栏的显示或隐藏。
 /// 开启这个属性会将 self.navigationController.navigationBar.barTintColor/tintColor/titleTextAttributes/largeTitleTextAttributes 的颜色都设置为：[UIColor clearColor]
 /// 还会将 self.navigationItem.titleView.hidden 属性设置为 `YES`，以及将 self.navigationController.navigationBar.userInteractionEnabled 属性设置为 `NO`，
-/// 这样可以实现导航栏“看起来”被隐藏了。设置为透明之后导航栏将无法接收到事件响应，底部的视图此时将会接收到事件响应。
+/// 这样可以实现导航栏“看起来”被隐藏了。设置为透明之后导航栏区域将无法处理用户交互，底部的视图此时将会处理用户交互。
 /// 将导航栏底部视图层接收到事件响应也符合导航栏被“隐藏”的行为。
 @property (nonatomic, assign) BOOL translucentNavigationBar;
 

@@ -31,6 +31,9 @@
 
 @interface NXNavigationBar ()
 
+/// 保存原始 UINavigationBar 的 frame
+@property (nonatomic, assign) CGRect originalNavigationBarFrame;
+
 /// 是否使用 NXNavigationBar 背景模糊效果；默认 NO
 @property (nonatomic, assign) BOOL blurEffectEnabled;
 

@@ -27,6 +27,7 @@
 @interface NXNavigationBar ()
 
 @property (nonatomic, strong) UIColor *originalBackgroundColor;
+@property (nonatomic, assign) CGRect originalNavigationBarFrame;
 @property (nonatomic, assign) BOOL blurEffectEnabled;
 
 @end

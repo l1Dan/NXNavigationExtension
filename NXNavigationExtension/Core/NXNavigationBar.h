@@ -28,9 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NXNavigationBar : UIView
 
-/// 保存原始 UINavigationBar 的 frame
-@property (nonatomic, assign) CGRect originalNavigationBarFrame;
-
 /// 设置 `contentView` 的外边距；默认 UIEdgeInsetsMake(0, 8, 0, 8)
 @property (nonatomic, assign) UIEdgeInsets contentViewEdgeInsets;
 
