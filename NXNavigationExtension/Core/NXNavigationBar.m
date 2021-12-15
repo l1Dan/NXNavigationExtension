@@ -88,11 +88,22 @@
     self.contentView.userInteractionEnabled = userInteractionEnabled;
 }
 
+- (void)setSemanticContentAttribute:(UISemanticContentAttribute)semanticContentAttribute {
+    [super setSemanticContentAttribute:semanticContentAttribute];
+    [self setSubviewsSemanticContentAttribute:semanticContentAttribute];
+}
+
 #pragma mark - Private
 
 - (void)setBlurEffectEnabled:(BOOL)blurEffectEnabled {
     _blurEffectEnabled = blurEffectEnabled;
     [self setBackgroundColor:self.originalBackgroundColor];
+}
+
+- (void)setSubviewsSemanticContentAttribute:(UISemanticContentAttribute)semanticContentAttribute {
+    for (UIView *subview in self.subviews) {
+        subview.semanticContentAttribute = semanticContentAttribute;
+    }
 }
 
 /// 更新导航栏 frame

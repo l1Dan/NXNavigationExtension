@@ -253,6 +253,7 @@
         [self.navigationController nx_configureNavigationBar];
         
         self.nx_navigationBar.backgroundColor = self.nx_navigationBarBackgroundColor;
+        self.nx_navigationBar.semanticContentAttribute = self.navigationController.navigationBar.semanticContentAttribute;
         self.nx_navigationBar.shadowImageView.image = self.nx_shadowImage;
         
         if (self.nx_shadowImageTintColor) {
@@ -325,7 +326,6 @@
             self.navigationController.navigationBar.nx_userInteractionEnabled = !systemNavigationBarUserInteractionDisabled;
             self.navigationController.navigationBar.userInteractionEnabled = !systemNavigationBarUserInteractionDisabled;
         }
-        
     }
 }
 

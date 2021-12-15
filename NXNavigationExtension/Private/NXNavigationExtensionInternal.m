@@ -556,15 +556,18 @@
     if (customView) {
         backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customView];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nx_triggerSystemPopViewController)];
+        customView.semanticContentAttribute = navigationController.navigationBar.semanticContentAttribute;
         customView.userInteractionEnabled = YES;
         [customView addGestureRecognizer:tap];
         self.nx_customBackButtonItem = backButtonItem;
     } else {
-        UIImage *backImage = self.nx_backImage;
-        UIImage *landscapeBackImage = self.nx_backImage;
-        backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage landscapeImagePhone:landscapeBackImage style:UIBarButtonItemStylePlain target:self action:@selector(nx_triggerSystemPopViewController)];
-        backButtonItem.imageInsets = navigationController.nx_backImageInsets;
-        backButtonItem.landscapeImagePhoneInsets = navigationController.nx_landscapeBackImageInsets;
+        BOOL isRightToLeft = navigationController.navigationBar.semanticContentAttribute == UISemanticContentAttributeForceRightToLeft;
+        SEL selector = @selector(nx_triggerSystemPopViewController);
+        UIImage *backImage = isRightToLeft ? self.nx_backImage.imageFlippedForRightToLeftLayoutDirection : self.nx_backImage;
+        UIImage *landscapeBackImage = isRightToLeft ? self.nx_landscapeBackImage.imageFlippedForRightToLeftLayoutDirection : self.nx_landscapeBackImage;
+        backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage landscapeImagePhone:landscapeBackImage style:UIBarButtonItemStylePlain target:self action:selector];
+        backButtonItem.imageInsets = self.nx_backImageInsets;
+        backButtonItem.landscapeImagePhoneInsets = self.nx_landscapeBackImageInsets;
         self.nx_customBackButtonItem = backButtonItem;
     }
     self.navigationItem.leftBarButtonItem = backButtonItem;
