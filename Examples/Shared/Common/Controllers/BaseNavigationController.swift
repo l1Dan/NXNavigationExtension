@@ -9,6 +9,12 @@ import UIKit
 
 class BaseNavigationController: UINavigationController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+//        view.semanticContentAttribute = .forceRightToLeft
+//        navigationBar.semanticContentAttribute = .forceRightToLeft
+    }
+    
     override var childForStatusBarStyle: UIViewController? {
         return topViewController
     }
@@ -47,6 +53,7 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.customColor(lightModeColor: { .white }, darkModeColor: { .black })
+//        view.semanticContentAttribute = .forceRightToLeft
     }
     
     deinit {

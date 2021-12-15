@@ -25,9 +25,9 @@ class ViewController13_CustomBlurNavigationBar: CustomTableViewController {
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: gaussianBlurView.topAnchor),
-            contentView.leftAnchor.constraint(equalTo: gaussianBlurView.leftAnchor),
+            contentView.leadingAnchor.constraint(equalTo: gaussianBlurView.leadingAnchor),
             contentView.bottomAnchor.constraint(equalTo: gaussianBlurView.bottomAnchor),
-            contentView.rightAnchor.constraint(equalTo: gaussianBlurView.rightAnchor),
+            contentView.trailingAnchor.constraint(equalTo: gaussianBlurView.trailingAnchor),
         ])
         
         return gaussianBlurView
@@ -40,9 +40,9 @@ class ViewController13_CustomBlurNavigationBar: CustomTableViewController {
         nx_navigationBar.addSubview(gaussianBlurView)
         NSLayoutConstraint.activate([
             gaussianBlurView.topAnchor.constraint(equalTo: nx_navigationBar.topAnchor),
-            gaussianBlurView.leftAnchor.constraint(equalTo: nx_navigationBar.leftAnchor),
+            gaussianBlurView.leadingAnchor.constraint(equalTo: nx_navigationBar.leadingAnchor),
             gaussianBlurView.bottomAnchor.constraint(equalTo: nx_navigationBar.bottomAnchor),
-            gaussianBlurView.rightAnchor.constraint(equalTo: nx_navigationBar.rightAnchor),
+            gaussianBlurView.trailingAnchor.constraint(equalTo: nx_navigationBar.trailingAnchor),
         ])
     }
     

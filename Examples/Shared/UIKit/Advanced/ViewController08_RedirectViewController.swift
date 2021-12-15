@@ -54,9 +54,9 @@ class ViewController08_RedirectViewController: BaseViewController, UITableViewDe
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
     

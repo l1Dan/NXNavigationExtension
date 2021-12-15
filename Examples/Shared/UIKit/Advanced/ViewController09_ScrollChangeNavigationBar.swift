@@ -85,21 +85,21 @@ class FakeNavigationBar: UIView {
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: topAnchor),
             backButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-            backButton.leftAnchor.constraint(equalTo: leftAnchor),
+            backButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             backButton.widthAnchor.constraint(equalToConstant: UIDevice.isPhoneDevice ? 44 : 0),
         ])
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            titleLabel.leftAnchor.constraint(equalTo: backButton.rightAnchor),
-            titleLabel.rightAnchor.constraint(equalTo: rightButton.leftAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: backButton.trailingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: rightButton.leadingAnchor),
         ])
         
         NSLayoutConstraint.activate([
             rightButton.topAnchor.constraint(equalTo: topAnchor),
             rightButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-            rightButton.rightAnchor.constraint(equalTo: rightAnchor),
+            rightButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             rightButton.widthAnchor.constraint(equalToConstant: 44),
         ])
     }
@@ -125,6 +125,7 @@ class ViewController09_ScrollChangeNavigationBar: CustomTableViewController, Fak
     
     private lazy var fakeNavigationBar: FakeNavigationBar = {
         let fakeNavigationBar = FakeNavigationBar()
+        fakeNavigationBar.semanticContentAttribute = self.navigationController?.navigationBar.semanticContentAttribute ?? .forceLeftToRight
         fakeNavigationBar.translatesAutoresizingMaskIntoConstraints = false
         fakeNavigationBar.delegate = self
         return fakeNavigationBar
@@ -160,13 +161,13 @@ class ViewController09_ScrollChangeNavigationBar: CustomTableViewController, Fak
         topConstraint = fakeNavigationBar.topAnchor.constraint(equalTo: contentView.topAnchor)
         topConstraint?.isActive = true
         
-        leftConstraint = fakeNavigationBar.leftAnchor.constraint(equalTo: contentView.leftAnchor)
+        leftConstraint = fakeNavigationBar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
         leftConstraint?.isActive = true
         
         bottomConstraint = fakeNavigationBar.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         bottomConstraint?.isActive = true
         
-        rightConstraint = fakeNavigationBar.rightAnchor.constraint(equalTo: contentView.rightAnchor)
+        rightConstraint = fakeNavigationBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         rightConstraint?.isActive = true
     }
     

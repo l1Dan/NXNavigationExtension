@@ -138,17 +138,17 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
         webViewTopLayoutConstraint = webView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationBarHeight)
         webViewTopLayoutConstraint?.isActive = true
         NSLayoutConstraint.activate([
-            webView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            webView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
         
         view.addSubview(progressView)
         webViewTopLayoutConstraint = progressView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationBarHeight)
         webViewTopLayoutConstraint?.isActive = true
         NSLayoutConstraint.activate([
-            progressView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            progressView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             progressView.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale),
         ])
         

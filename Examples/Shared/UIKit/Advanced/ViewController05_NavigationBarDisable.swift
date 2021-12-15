@@ -42,10 +42,10 @@ class ViewController05_NavigationBarDisable: CustomTableViewController {
         
         segmentedControl.bottomAnchor.constraint(equalTo: tableHeaderView.bottomAnchor, constant: -4).isActive = true
         
-        leftConstraint = segmentedControl.leftAnchor.constraint(equalTo: tableHeaderView.leftAnchor)
+        leftConstraint = segmentedControl.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor)
         leftConstraint?.isActive = true
         
-        rightConstraint = segmentedControl.rightAnchor.constraint(equalTo: tableHeaderView.rightAnchor)
+        rightConstraint = segmentedControl.trailingAnchor.constraint(equalTo: tableHeaderView.trailingAnchor)
         rightConstraint?.priority = .defaultHigh
         rightConstraint?.isActive = true
         

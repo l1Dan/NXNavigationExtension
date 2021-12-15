@@ -19,10 +19,12 @@ class ViewController04_CustomNavigationBar: CustomTableViewController {
     }()
     
     private lazy var backButton: UIButton = {
+        let isRightToLeft = navigationController?.navigationBar.semanticContentAttribute ?? .forceLeftToRight == .forceRightToLeft
+        let image = isRightToLeft ? UIImage(named: "NavigationBarBack")?.imageFlippedForRightToLeftLayoutDirection() : UIImage(named: "NavigationBarBack")
         let backButton = UIButton()
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButton.layer.cornerRadius = 8.0
-        backButton.setImage(UIImage(named: "NavigationBarBack"), for: .normal)
+        backButton.setImage(image, for: .normal)
         backButton.addTarget(self, action: #selector(clickBackButton(_:)), for: .touchUpInside)
         backButton.backgroundColor = UIColor.customColor { .white.withAlphaComponent(0.5) } darkModeColor: { .white.withAlphaComponent(0.25) }
         return backButton
@@ -76,7 +78,7 @@ class ViewController04_CustomNavigationBar: CustomTableViewController {
         let contentView = nx_navigationBar.contentView
         backButton.isHidden = !UIDevice.isPhoneDevice
         
-        leftConstraint = backButton.leftAnchor.constraint(equalTo: contentView.leftAnchor)
+        leftConstraint = backButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
         leftConstraint?.isActive = true
         NSLayoutConstraint.activate([
             backButton.heightAnchor.constraint(equalTo: searchBar.heightAnchor),
@@ -87,11 +89,11 @@ class ViewController04_CustomNavigationBar: CustomTableViewController {
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2.0),
             searchBar.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2.0),
-            searchBar.leftAnchor.constraint(equalTo: backButton.rightAnchor, constant: 8.0),
-            searchBar.rightAnchor.constraint(equalTo: addButton.leftAnchor, constant: -8.0),
+            searchBar.leadingAnchor.constraint(equalTo: backButton.trailingAnchor, constant: 8.0),
+            searchBar.trailingAnchor.constraint(equalTo: addButton.leadingAnchor, constant: -8.0),
         ])
         
-        rightConstraint = addButton.rightAnchor.constraint(equalTo: contentView.rightAnchor)
+        rightConstraint = addButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         rightConstraint?.isActive = true
         NSLayoutConstraint.activate([
             addButton.heightAnchor.constraint(equalTo: searchBar.heightAnchor),

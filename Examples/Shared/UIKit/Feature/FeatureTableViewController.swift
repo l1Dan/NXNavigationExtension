@@ -14,6 +14,7 @@ class FeatureTableViewController: BaseTableViewController {
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.backgroundImage = UIImage() // Remove shadow
+        searchController.searchBar.tintColor = .white
         
         if #available(iOS 13.0, *) {
             // Nothing...
