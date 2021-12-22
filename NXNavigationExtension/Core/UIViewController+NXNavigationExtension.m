@@ -230,7 +230,7 @@
 - (void)nx_adjustmentNavigationBarAppearanceForUINavigationBar:(UINavigationBar *)navigationBar withViewController:(__kindof UIViewController *)viewController {
     // fix: delay call nx_updateNavigationBarAppearance method.
     if (self == viewController && viewController.nx_viewWillDisappearFinished) { return; }
-    viewController.nx_navigationBar.frame = navigationBar.frame;
+//    viewController.nx_navigationBar.frame = navigationBar.frame;
     
     if (navigationBar.hidden) {
         [viewController nx_setNavigationBarHidden:YES];
