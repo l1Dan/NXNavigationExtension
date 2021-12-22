@@ -13,8 +13,6 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
     
     private var estimatedProgressObservation: NSKeyValueObservation?
     private var titleObservation: NSKeyValueObservation?
-    private var webViewTopLayoutConstraint: NSLayoutConstraint?
-    private var progressViewTopLayoutConstraint: NSLayoutConstraint?
     
     private lazy var progressView: UIProgressView = {
         let progressView = UIProgressView()
@@ -28,7 +26,6 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
     private lazy var webView: WKWebView = {
         let configuration = WKWebViewConfiguration()
         configuration.preferences.minimumFontSize = 9.0
-        configuration.preferences.javaScriptEnabled = true
         
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -97,15 +94,6 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // comment for testing dynamic change edgesForExtendedLayout instance.
-//        edgesForExtendedLayout = UIRectEdge(rawValue: 0)
-
-        // Uncomment for testing dynamic change edgesForExtendedLayout instance.
-//        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) { [weak self] in
-//            self?.edgesForExtendedLayout = .all
-//            self?.nx_setNeedsNavigationBarAppearanceUpdate()
-//        }
         
         navigationItem.title = "Loading..."
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickAddButton(_:)))
@@ -134,23 +122,38 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
         webView.load(URLRequest(url: URL(string: "https://www.apple.com/")!))
         view.addSubview(webView)
         
-        let navigationBarHeight = navigationController?.navigationBar.frame.maxY ?? 0.0
-        webViewTopLayoutConstraint = webView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationBarHeight)
-        webViewTopLayoutConstraint?.isActive = true
-        NSLayoutConstraint.activate([
-            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
+        if #available(iOS 11.0, *) {
+            NSLayoutConstraint.activate([
+                webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                webView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                webView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            ])
+        } else {
+            NSLayoutConstraint.activate([
+                webView.topAnchor.constraint(equalTo: view.topAnchor),
+                webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            ])
+        }
         
         view.addSubview(progressView)
-        webViewTopLayoutConstraint = progressView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationBarHeight)
-        webViewTopLayoutConstraint?.isActive = true
-        NSLayoutConstraint.activate([
-            progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            progressView.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale),
-        ])
+        if #available(iOS 11.0, *) {
+            NSLayoutConstraint.activate([
+                progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+                progressView.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale),
+            ])
+        } else {
+            NSLayoutConstraint.activate([
+                progressView.topAnchor.constraint(equalTo: view.topAnchor),
+                progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                progressView.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale),
+            ])
+        }
         
         
         if #available(iOS 13.0, *) {
@@ -168,14 +171,6 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
             webView.backgroundColor = nil
         }
         
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        let navigationBarHeight = navigationController?.navigationBar.frame.maxY ?? 0.0
-        webViewTopLayoutConstraint?.constant = navigationBarHeight
-        progressViewTopLayoutConstraint?.constant = navigationBarHeight
     }
     
     override func viewDidDisappear(_ animated: Bool) {
