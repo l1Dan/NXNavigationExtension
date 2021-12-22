@@ -29,6 +29,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 支持 UIEdgeInsets 适配 semanticContentAttribute 属性
+/// @param edgeInsets 普通的 UIEdgeInsets 属性
+/// @param semanticContentAttribute UISemanticContentAttribute 属性
+CG_INLINE UIEdgeInsets
+NXDirectionalEdgeInsetsMake(UIEdgeInsets edgeInsets, UISemanticContentAttribute semanticContentAttribute) {
+    if (semanticContentAttribute == UISemanticContentAttributeForceRightToLeft) {
+        return UIEdgeInsetsMake(edgeInsets.top, edgeInsets.right, edgeInsets.bottom, edgeInsets.left);
+    }
+    return UIEdgeInsetsMake(edgeInsets.top, edgeInsets.left, edgeInsets.bottom, edgeInsets.right);
+}
+
 /// 将颜色转换成图片
 /// @param color UIColor
 CG_INLINE UIImage *

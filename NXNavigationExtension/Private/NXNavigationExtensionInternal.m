@@ -566,8 +566,8 @@
         UIImage *backImage = isRightToLeft ? self.nx_backImage.imageFlippedForRightToLeftLayoutDirection : self.nx_backImage;
         UIImage *landscapeBackImage = isRightToLeft ? self.nx_landscapeBackImage.imageFlippedForRightToLeftLayoutDirection : self.nx_landscapeBackImage;
         backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage landscapeImagePhone:landscapeBackImage style:UIBarButtonItemStylePlain target:self action:selector];
-        backButtonItem.imageInsets = self.nx_backImageInsets;
-        backButtonItem.landscapeImagePhoneInsets = self.nx_landscapeBackImageInsets;
+        backButtonItem.imageInsets = NXDirectionalEdgeInsetsMake(self.nx_backImageInsets, navigationController.navigationBar.semanticContentAttribute);
+        backButtonItem.landscapeImagePhoneInsets = NXDirectionalEdgeInsetsMake(self.nx_landscapeBackImageInsets, navigationController.navigationBar.semanticContentAttribute);
         self.nx_customBackButtonItem = backButtonItem;
     }
     self.navigationItem.leftBarButtonItem = backButtonItem;

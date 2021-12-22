@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import "NXNavigationBar.h"
+#import "NXNavigationExtensionRuntime.h"
 
 
 @interface NXNavigationBar ()
@@ -114,7 +115,7 @@
     self.backgroundImageView.frame = navigationBarFrame;
     
     CGRect contentViewFrame = CGRectMake(0, CGRectGetMinY(_originalNavigationBarFrame), CGRectGetWidth(_originalNavigationBarFrame), CGRectGetHeight(_originalNavigationBarFrame));
-    self.contentView.frame = UIEdgeInsetsInsetRect(contentViewFrame, _contentViewEdgeInsets);
+    self.contentView.frame = UIEdgeInsetsInsetRect(contentViewFrame, NXDirectionalEdgeInsetsMake(_contentViewEdgeInsets, self.semanticContentAttribute));
     
     CGFloat shadowImageViewHeight = 1.0 / UIScreen.mainScreen.scale;
     self.shadowImageView.frame = CGRectMake(0, CGRectGetMaxY(_originalNavigationBarFrame) - shadowImageViewHeight, CGRectGetWidth(navigationBarFrame), shadowImageViewHeight);
