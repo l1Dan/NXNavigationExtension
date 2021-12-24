@@ -67,7 +67,7 @@ dependencies: [
 |              3.x              |      iOS 9.0       |     macOS 10.15      |     UIKit、macCatalyst      | /                    |
 |              2.x              |      iOS 11.0      |     macOS 10.15      |     UIKit、macCatalyst      | /                    |
 
-## 优点
+## 🤙 优点
 
 - API 设计通俗易懂，容易上手。
 - 没有继承关系，所有操作基于分类实现，低耦合。
@@ -110,12 +110,12 @@ dependencies: [
 - ✅` 长按返回按钮显示菜单功能`
 - 更多功能请查看示例代码...
 
-## 使用教程
+## 📖 使用教程
 
 - 阅读 [**SwiftUI Guide**](https://github.com/l1Dan/NXNavigationExtension/blob/main/Documentation/NXNavigationExtensionSwiftUI.md) 文档。
 - 阅读 [**UIKit Guide**](https://github.com/l1Dan/NXNavigationExtension/blob/main/Documentation/NXNavigationExtensionUIKit.md) 文档。
 
-## FAQ 常见问题
+## 🔍 FAQ 常见问题
 
 Q：iOS14 及之后的版本为什么注册了 `UIImagePickerController`、`PHPickerViewController` 类之后还是无法修改导航栏的外观？
 
@@ -147,6 +147,12 @@ A：因为导航栏的系统返回按钮是用 `self.navigationItem.backBarButto
 
 - 返回按钮箭头在切图里尽量靠左而不要居中，右边可以保留透明背景。
 - 使用 `nx_backButtonCustomView` 属性自定义返回按钮时就需要开发者自己来修正箭头的偏移量了。
+
+## 🙋 已知问题
+1. 在 UIViewController 中设置 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性，并且使用 [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager) 框架的同时键盘没有收起，此时返回上级页面 NXNavigationBar 会出现错位的现象。这是 IQKeyboardManager 框架所导致的，NXNavigationExtension 框架内部无法处理这种情况（其实已经最大程度适配 IQKeyboardManager 框架）。解决方法：
+- 不使用 IQKeyboardManager 框架（或者在使用的 UIViewController 中暂时禁用 IQKeyboardManager 框架）。
+- 不使用 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性。
+- 在 UIViewController 中不使用 UITextField/UITextView 等需要弹出键盘的控件。
 
 ---
 

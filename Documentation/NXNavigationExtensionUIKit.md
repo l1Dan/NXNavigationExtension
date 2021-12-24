@@ -63,7 +63,7 @@ NXNavigationConfiguration().registerNavigationControllerClasses([UINavigationCon
 - 🚫 不要使用 `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:` 等方法显示或隐藏系统导航栏。
 - 🚫 不要使用系统导航栏修改透明度。
 - 🚫 不要使用系统导航栏或导航控制器 `appearance` 相关属性修改。
-- 🚫 不要使用全局 `edgesForExtendedLayout` 修改。
+- ~~🚫 不要使用全局 `edgesForExtendedLayout` 修改。~~
 - 🚫 不要使用 `<UIGestureRecognizerDelegate>` 相关方法禁用手势返回。
 - 💉 一句话“不要直接使用系统导航栏或者导航控制器来修改导航栏外观，把这些事情都交给 `NXNavigationExtension` 处理吧“。
 
