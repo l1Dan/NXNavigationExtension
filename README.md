@@ -53,7 +53,7 @@ github "l1Dan/NXNavigationExtension"
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.0.2"))
+    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.0.3"))
 ]
 ```
 
@@ -67,13 +67,13 @@ dependencies: [
 |              3.x              |      iOS 9.0       |     macOS 10.15      |     UIKit、macCatalyst      | /                    |
 |              2.x              |      iOS 11.0      |     macOS 10.15      |     UIKit、macCatalyst      | /                    |
 
-## 🤙 优点
+## 🍭 优点
 
 - API 设计通俗易懂，容易上手。
 - 没有继承关系，所有操作基于分类实现，低耦合。
 - 白名单模式，按需注册所使用的导航控制器，这样才不会影响所有的导航控制器外观。
 - 没有对原生导航栏视图层级进行修改，无需担心系统升级的兼容性问题。
-- 适配 iOS、iPadOS、macOS、横竖屏切换、暗黑模式。
+- 适配 iOS、iPadOS、macOS、横竖屏切换、暗黑模式、[UISemanticContentAttribute](https://developer.apple.com/documentation/uikit/uisemanticcontentattribute)。
 - 提供 SwiftUI、UIKit、macCatalyst 框架的支持。
 - 支持 CocoaPods、Carthage、Project、Swift Package Manager 方式集成。
 
@@ -149,10 +149,19 @@ A：因为导航栏的系统返回按钮是用 `self.navigationItem.backBarButto
 - 使用 `nx_backButtonCustomView` 属性自定义返回按钮时就需要开发者自己来修正箭头的偏移量了。
 
 ## 🙋 已知问题
-1. 在 UIViewController 中设置 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性，并且使用 [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager) 框架的同时键盘没有收起，此时返回上级页面 NXNavigationBar 会出现错位的现象。这是 IQKeyboardManager 框架所导致的，NXNavigationExtension 框架内部无法处理这种情况（其实已经最大程度适配 IQKeyboardManager 框架）。解决方法：
+
+1. 在 UIViewController 中设置 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性，并且使用 [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager) 框架的同时键盘没有收起，此时返回上级页面 NXNavigationBar 会出现错位的现象。这是 IQKeyboardManager 框架本身处理这种情况就有问题（设置 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性，键盘没收起时返回上级页面导致界面下移的问题），NXNavigationExtension 框架内部无法处理这种情况（其实已经最大程度适配 IQKeyboardManager 框架）。解决方法：
+
 - 不使用 IQKeyboardManager 框架（或者在使用的 UIViewController 中暂时禁用 IQKeyboardManager 框架）。
 - 不使用 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性。
 - 在 UIViewController 中不使用 UITextField/UITextView 等需要弹出键盘的控件。
+
+---
+
+2. 在 UIViewController 中设置 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性，并且使用 NXNavigationBar 本身或者 `contentView` 中添加需要用户交互的控件时，里面添加的控件将无法接受到用户事件的响应（控件展示没有问题），但是添加没有用户交互事件的控件是不受限制的，比如在 [ViewController04_CustomNavigationBar](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController04_CustomNavigationBar.swift) 中设置 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性时，NXNavigationBar 上面的按钮将无法点击。解决方法：
+
+- 不要在 NXNavigationBar 本身或者 `contentView` 中添加需要用户交互的控件。
+- 不使用 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性。
 
 ---
 

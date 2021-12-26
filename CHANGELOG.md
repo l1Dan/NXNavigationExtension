@@ -1,5 +1,12 @@
 # CHANGELOG.md
 
+## 4.0.3
+
+- NXNavigationBar 支持 `semanticContentAttribute` 属性，方便从右往左的导航栏布局；
+- 将 NXNavigationBar `originalNavigationBarFrame` 属性移动到内部类中；
+- 添加对 UIViewController `edgesForExtendedLayout` 属性的全面支持 [#7](https://github.com/l1Dan/NXNavigationExtension/issues/7)；
+- 添加 issues 模版。
+
 ## 4.0.2
 
 - typo NXNavigatioVirtualWrapperViewFilterCallback -> NXNavigationVirtualWrapperViewFilterCallback
