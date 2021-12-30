@@ -790,7 +790,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.l1dan.NXNavigationExtensionSwiftUIDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.l1dan.NXNavigationExtensionSwiftUIDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -826,7 +826,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.l1dan.NXNavigationExtensionSwiftUIDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.l1dan.NXNavigationExtensionSwiftUIDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -978,7 +978,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.l1dan.NXNavigationExtensionDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.l1dan.NXNavigationExtensionDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1012,7 +1012,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.l1dan.NXNavigationExtensionDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.l1dan.NXNavigationExtensionDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
