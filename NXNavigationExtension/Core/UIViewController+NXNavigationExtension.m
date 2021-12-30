@@ -210,7 +210,7 @@
     }
     
     __weak typeof(self) weakSelf = self; // CurrentViewController handle nx_didUpdatePropertiesHandler callback
-    self.navigationController.navigationBar.nx_didUpdatePropertiesHandler = ^(UINavigationBar * _Nonnull navigationBar) {
+    self.navigationController.navigationBar.nx_didUpdatePropertiesHandler = ^(UINavigationBar *_Nonnull navigationBar) {
         __kindof UINavigationController *navigationController = (UINavigationController *)navigationBar.delegate;
         if ([navigationController isKindOfClass:[UINavigationController class]]) {
             for (__kindof UIViewController *viewController in navigationController.viewControllers) {
@@ -459,7 +459,7 @@
     
     UIColor *color = [UIColor blackColor];
     if (@available(iOS 13.0, *)) {
-        color = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+        color = [UIColor colorWithDynamicProvider:^UIColor *_Nonnull(UITraitCollection *_Nonnull traitCollection) {
             if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
                 return [UIColor whiteColor];
             }

@@ -28,9 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NXNavigationConfiguration, NXNavigationVirtualWrapperView;
 
-typedef __kindof NXNavigationVirtualWrapperView *_Nullable(^_Nullable NXNavigationVirtualWrapperViewFilterCallback)(__kindof UIViewController *hostingController);
+typedef __kindof NXNavigationVirtualWrapperView *_Nullable (^_Nullable NXNavigationVirtualWrapperViewFilterCallback)(__kindof UIViewController *hostingController);
 
-typedef NXNavigationConfiguration *_Nullable(^_Nullable NXNavigationControllerPrepareConfigurationCallback)(__kindof UINavigationController *navigationController, NXNavigationConfiguration *configuration);
+typedef NXNavigationConfiguration *_Nullable (^_Nullable NXNavigationControllerPrepareConfigurationCallback)(__kindof UINavigationController *navigationController, NXNavigationConfiguration *configuration);
 
 typedef void (^_Nullable NXViewControllerPrepareConfigurationCallback)(__kindof UIViewController *viewController, NXNavigationConfiguration *configuration);
 
@@ -57,7 +57,7 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
 @end
 
 
-NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance : NSObject <NSCopying>
+NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance : NSObject<NSCopying>
 
 /// 设置 NXNavigationBar 背景颜色，默认：[UIColor systemBlueColor]，这样处理能够快速辨别框架是否生效
 @property (nonatomic, strong) UIColor *backgroundColor;

@@ -52,7 +52,7 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
         
         _tintColor = [UIColor whiteColor];
         if (@available(iOS 13.0, *)) {
-            _tintColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            _tintColor = [UIColor colorWithDynamicProvider:^UIColor *_Nonnull(UITraitCollection *_Nonnull traitCollection) {
                 return (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) ? [UIColor whiteColor] : [UIColor blackColor];
             }];
         }
@@ -211,7 +211,7 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 
 #pragma mark - Getter
 
-- (NSMutableDictionary<NSString *,NSDictionary<NSString *,id> *> *)registerClassesInfo {
+- (NSMutableDictionary<NSString *, NSDictionary<NSString *, id> *> *)registerClassesInfo {
     if (!_registerClassesInfo) {
         _registerClassesInfo = [NSMutableDictionary dictionary];
     }

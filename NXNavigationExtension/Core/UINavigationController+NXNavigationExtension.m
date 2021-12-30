@@ -84,7 +84,7 @@
             });
         }
         
-        NXNavigationExtensionOverrideImplementation([UINavigationController class], @selector(pushViewController:animated:), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
+        NXNavigationExtensionOverrideImplementation([UINavigationController class], @selector(pushViewController:animated:), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
             return ^(UINavigationController *selfObject, UIViewController *viewController, BOOL animated) {
                 if (selfObject.nx_useNavigationBar) {
                     viewController.navigationItem.nx_viewController = viewController;
@@ -109,7 +109,7 @@
             };
         });
         
-        NXNavigationExtensionOverrideImplementation([UINavigationController class], @selector(setViewControllers:animated:), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^ _Nonnull originalIMPProvider)(void)) {
+        NXNavigationExtensionOverrideImplementation([UINavigationController class], @selector(setViewControllers:animated:), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
             return ^(UINavigationController *selfObject, NSArray<UIViewController *> *viewControllers, BOOL animated) {
                 if (selfObject.nx_useNavigationBar) {
                     for (UIViewController *viewController in viewControllers) {
@@ -146,7 +146,7 @@
     });
 }
 
-- (NSArray *)nx_findViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController * (^ __nullable)(void))block {
+- (NSArray *)nx_findViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController * (^__nullable)(void))block {
     NSArray<__kindof UIViewController *> *viewControllers = self.viewControllers;
     if (!aClass || (viewControllers.count <= 1)) return viewControllers;
     
@@ -196,7 +196,7 @@
     UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : nil;
     return [self nx_triggerSystemPopViewController:destinationViewController
                                    interactiveType:NXNavigationInteractiveTypeCallNXPopMethod
-                                           handler:^id _Nonnull(UINavigationController * _Nonnull navigationController) {
+                                           handler:^id _Nonnull(UINavigationController *_Nonnull navigationController) {
         return [navigationController popViewControllerAnimated:animated];
     }];
 }
@@ -204,7 +204,7 @@
 - (NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController animated:(BOOL)animated {
     return [self nx_triggerSystemPopViewController:viewController
                                    interactiveType:NXNavigationInteractiveTypeCallNXPopMethod
-                                           handler:^id _Nonnull(UINavigationController * _Nonnull navigationController) {
+                                           handler:^id _Nonnull(UINavigationController *_Nonnull navigationController) {
         return [navigationController popToViewController:viewController animated:animated];
     }];
 }
@@ -213,7 +213,7 @@
     UIViewController *destinationViewController = self.viewControllers.firstObject;
     return [self nx_triggerSystemPopViewController:destinationViewController
                                    interactiveType:NXNavigationInteractiveTypeCallNXPopMethod
-                                           handler:^id _Nonnull(UINavigationController * _Nonnull navigationController) {
+                                           handler:^id _Nonnull(UINavigationController *_Nonnull navigationController) {
         return [navigationController popToRootViewControllerAnimated:animated];
     }];
 }
@@ -226,7 +226,7 @@
     self.nx_filterNavigationVirtualWrapperViewCallback = callback;
 }
 
-- (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController * _Nullable (^)(void))block {
+- (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block {
     NSArray<__kindof UIViewController *> *viewControllers = [self nx_findViewControllerClass:aClass initializeStandbyViewControllerUsingBlock:block];
     [self setViewControllers:viewControllers animated:YES];
 }

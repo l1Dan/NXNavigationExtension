@@ -276,11 +276,13 @@
 
 @end
 
+
 @interface UINavigationController (NXNavigationExtensionInternal)
 
 @property (nonatomic, assign) BOOL nx_prepareConfigurationCompleted;
 
 @end
+
 
 @implementation UINavigationController (NXNavigationExtensionInternal)
 
