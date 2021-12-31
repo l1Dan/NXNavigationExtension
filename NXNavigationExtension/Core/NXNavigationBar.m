@@ -126,11 +126,8 @@
         [super setFrame:CGRectMake(0, navigationBarY, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame))];
     } else if ([self.superview isKindOfClass:NSClassFromString([NSString nx_stringByConcat:@"_", @"UI", @"Parallax", @"DimmingView", nil])]) {
         // fix: Use edgesForExtendedLayoutEnabled instance in UITableViewController & UICollectionViewController.
-        if (CGRectGetMaxY(_originalNavigationBarFrame) == CGRectGetMinY(self.superview.frame)) {
-            CGFloat navigationBarY = CGRectGetMinY(self.superview.frame) - CGRectGetMinY(_originalNavigationBarFrame);
-            CGRect rect = CGRectMake(0, -navigationBarY, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame));
-            self.frame = rect;
-        }
+        CGFloat navigationBarY = CGRectGetMinY(self.superview.frame) - CGRectGetMinY(_originalNavigationBarFrame);
+        self.frame = CGRectMake(0, -navigationBarY, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame));
     }
 }
 
