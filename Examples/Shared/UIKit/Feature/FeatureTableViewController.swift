@@ -11,20 +11,6 @@ class FeatureTableViewController: BaseTableViewController {
     
     private static let reuseIdentifier = "FeatureTableViewCellIdentifer"
     
-    private lazy var searchController: UISearchController = {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.backgroundImage = UIImage() // Remove shadow
-        searchController.searchBar.tintColor = .white
-        
-        if #available(iOS 13.0, *) {
-            // Nothing...
-        } else {
-            searchController.searchBar.backgroundColor = .customDarkGray
-            searchController.view.backgroundColor = .customDarkGray
-        }
-        return searchController
-    }()
-    
     private lazy var presentDrawerButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(named: "NavigationBarMore"), style: .plain, target: self, action: #selector(clickOpenDrawerButtonItem(_:)))
         item.tintColor = .white
@@ -82,13 +68,6 @@ class FeatureTableViewController: BaseTableViewController {
 
         navigationItem.leftBarButtonItem = presentDrawerButtonItem
         definesPresentationContext = true
-        
-        if #available(iOS 11.0, *) {
-            navigationItem.searchController = searchController
-            navigationItem.hidesSearchBarWhenScrolling = false
-        } else {
-            tableView.tableHeaderView = searchController.searchBar
-        }
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: FeatureTableViewController.reuseIdentifier)
     }

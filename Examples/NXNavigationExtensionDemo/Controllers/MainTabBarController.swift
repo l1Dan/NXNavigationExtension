@@ -48,7 +48,7 @@ class MainTabBarController: UITabBarController {
         let customSelected = UIImage(named: "TabBarCustomSelected")
         
         let featureNavigationController = FeatureNavigationController(rootViewController: featureTableViewController)
-        featureTableViewController.navigationItem.title = "NXNavigationBar🎉🎉🎉"
+        featureTableViewController.navigationItem.title = "NXNavigationBar"
         featureNavigationController.tabBarItem = UITabBarItem(title: "Custom", image: customNormal, selectedImage: customSelected)
         return featureNavigationController
     }()
@@ -59,7 +59,7 @@ class MainTabBarController: UITabBarController {
             featureTableViewController = FeatureTableViewController(style: .insetGrouped)
         }
         
-        featureTableViewController.navigationItem.title = "UINavigationBar❌❌❌"
+        featureTableViewController.navigationItem.title = "UINavigationBar"
         
         let systemNormal = UIImage(named: "TabBarSystemNormal")
         let systemSelected = UIImage(named: "TabBarSystemSelected")

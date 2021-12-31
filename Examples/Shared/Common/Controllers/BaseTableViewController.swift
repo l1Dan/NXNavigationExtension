@@ -8,6 +8,27 @@
 import UIKit
 
 class BaseTableViewController: UITableViewController {
+    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        edgesForExtendedLayout = UIRectEdge(rawValue: 0)
+//    }
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        if #available(iOS 11.0, *) {
+//            navigationController?.navigationBar.prefersLargeTitles = true
+//            navigationItem.largeTitleDisplayMode = .always
+//        }
+//    }
+//
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        if #available(iOS 11.0, *) {
+//            navigationController?.navigationBar.prefersLargeTitles = true
+//            navigationItem.largeTitleDisplayMode = .always
+//        }
+//    }
 
     deinit {
         print("Deinit: \(type(of: self))")

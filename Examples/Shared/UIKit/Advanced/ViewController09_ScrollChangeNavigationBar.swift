@@ -171,8 +171,8 @@ class ViewController09_ScrollChangeNavigationBar: CustomTableViewController, Fak
         rightConstraint?.isActive = true
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         guard let nx_navigationBar = nx_navigationBar else { return }
         let maxHeight = nx_navigationBar.frame.height
@@ -221,7 +221,7 @@ class ViewController09_ScrollChangeNavigationBar: CustomTableViewController, Fak
         }
         setNeedsStatusBarAppearanceUpdate()
         nx_setNeedsNavigationBarAppearanceUpdate()
-        fakeNavigationBar.updateAlpha(alpha)        
+        fakeNavigationBar.updateAlpha(alpha)
     }
     
     // MARK: - FakeNavigationBarDelegate

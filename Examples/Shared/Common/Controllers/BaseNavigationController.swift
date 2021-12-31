@@ -53,8 +53,25 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.customColor(lightModeColor: { .white }, darkModeColor: { .black })
+//        edgesForExtendedLayout = UIRectEdge(rawValue: 0)
 //        view.semanticContentAttribute = .forceRightToLeft
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        if #available(iOS 11.0, *) {
+//            navigationController?.navigationBar.prefersLargeTitles = true
+//            navigationItem.largeTitleDisplayMode = .always
+//        }
+//    }
+//
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        if #available(iOS 11.0, *) {
+//            navigationController?.navigationBar.prefersLargeTitles = true
+//            navigationItem.largeTitleDisplayMode = .always
+//        }
+//    }
     
     deinit {
         print("Deinit: \(type(of: self))")
