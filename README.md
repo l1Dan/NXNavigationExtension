@@ -17,6 +17,57 @@
 | :----------: | :--------------: | :----------: | :------------: |
 |    ![][1]    |      ![][2]      |    ![][3]    |     ![][4]     |
 
+## 🌈 要求
+
+| Version | Minimum iOS / macOS Target |         Frameworks          |         Note         |
+| :-----: | :------------------------: | :-------------------------: | :------------------: |
+|   4.x   |   iOS 9.0 / macOS 10.15    | SwiftUI、UIKit、macCatalyst | Xcode13、SwiftUI 2.0 |
+|   3.x   |   iOS 9.0 / macOS 10.15    |     UIKit、macCatalyst      |          /           |
+|   2.x   |   iOS 11.0 / macOS 10.15   |     UIKit、macCatalyst      |          /           |
+
+## 🍭 优点
+
+- API 设计通俗易懂，容易上手。
+- 没有继承关系，所有操作基于分类实现，低耦合。
+- 白名单模式：按需注册所使用的导航控制器，这样才不会影响所有的导航控制器外观。
+- 没有对原生导航栏视图层级进行修改，无需担心系统升级的兼容性问题。
+- 适配 iOS、iPadOS、macOS、横竖屏切换、暗黑模式、支持阿拉伯语等从右往左的布局方式。
+- 提供 SwiftUI、UIKit、macCatalyst 框架的支持。
+- 支持 CocoaPods、Carthage、Project、Swift Package Manager 方式集成。
+
+## 👏 功能
+
+下面这些特别实用的功能，总有一部分适合你的项目
+
+### 基本功能
+
+- ✅` 设置导航栏透明`
+- ✅` 实现系统导航栏模糊效果`
+- ✅` 自定义返回按钮图片`
+- ✅` 自定义返回按钮`
+- ✅` 自定义导航栏模糊背景`
+- ✅` 修改返回按钮箭头颜色`
+- ✅` 修改系统返回按钮文字`
+- ✅` 修改导航栏标题颜色`
+- ✅` 修改导航栏背景颜色`
+- ✅` 修改导航栏背景图片`
+- ✅` 修改导航栏底部线条颜色`
+- ✅` 修改导航栏底部线条图片`
+
+### 高级功能
+
+- ✅` 禁用滑动返回手势`
+- ✅` 启用全屏滑动返回手势`
+- ✅` 导航栏返回事件拦截`
+- ✅` 重定向任一控制器跳转`
+- ✅` SwiftUI 路由`
+- ✅` 导航栏点击事件穿透到底部`
+- ✅` 动态修改导航栏样式`
+- ✅` 更新导航栏样式`
+- ✅` 渐变导航栏样式`
+- ✅` 长按返回按钮显示菜单功能`
+- 更多功能请查看示例代码...
+
 ## 🌟 开始使用
 
 下载 [NXNavigationExtension](https://github.com/l1Dan/NXNavigationExtension/archive/refs/heads/main.zip) 示例代码。
@@ -56,59 +107,6 @@ dependencies: [
     .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.0.3"))
 ]
 ```
-
-## 🌈 要求
-
-最新版本最低支持 iOS 9.0
-
-| NXNavigationExtension Version | Minimum iOS Target | Minimum macOS Target |         Frameworks          | Note                 |
-| :---------------------------: | :----------------: | :------------------: | :-------------------------: | -------------------- |
-|              4.x              |      iOS 9.0       |     macOS 10.15      | SwiftUI、UIKit、macCatalyst | Xcode13、SwiftUI 2.0 |
-|              3.x              |      iOS 9.0       |     macOS 10.15      |     UIKit、macCatalyst      | /                    |
-|              2.x              |      iOS 11.0      |     macOS 10.15      |     UIKit、macCatalyst      | /                    |
-
-## 🍭 优点
-
-- API 设计通俗易懂，容易上手。
-- 没有继承关系，所有操作基于分类实现，低耦合。
-- 白名单模式，按需注册所使用的导航控制器，这样才不会影响所有的导航控制器外观。
-- 没有对原生导航栏视图层级进行修改，无需担心系统升级的兼容性问题。
-- 适配 iOS、iPadOS、macOS、横竖屏切换、暗黑模式、[UISemanticContentAttribute](https://developer.apple.com/documentation/uikit/uisemanticcontentattribute)。
-- 提供 SwiftUI、UIKit、macCatalyst 框架的支持。
-- 支持 CocoaPods、Carthage、Project、Swift Package Manager 方式集成。
-
-## 👏 功能
-
-下面这些特别实用的功能，总有一部分适合你的项目
-
-### 基本功能
-
-- ✅` 设置导航栏透明`
-- ✅` 实现系统导航栏模糊效果`
-- ✅` 自定义返回按钮图片`
-- ✅` 自定义返回按钮`
-- ✅` 自定义导航栏模糊背景`
-- ✅` 修改返回按钮箭头颜色`
-- ✅` 修改系统返回按钮文字`
-- ✅` 修改导航栏标题颜色`
-- ✅` 修改导航栏背景颜色`
-- ✅` 修改导航栏背景图片`
-- ✅` 修改导航栏底部线条颜色`
-- ✅` 修改导航栏底部线条图片`
-
-### 高级功能
-
-- ✅` 禁用滑动返回手势`
-- ✅` 启用全屏滑动返回手势`
-- ✅` 导航栏返回事件拦截`
-- ✅` 重定向任一控制器跳转`
-- ✅` SwiftUI 路由`
-- ✅` 导航栏点击事件穿透到底部`
-- ✅` 动态修改导航栏样式`
-- ✅` 更新导航栏样式`
-- ✅` 渐变导航栏样式`
-- ✅` 长按返回按钮显示菜单功能`
-- 更多功能请查看示例代码...
 
 ## 📖 使用教程
 
