@@ -120,12 +120,12 @@
     CGFloat shadowImageViewHeight = 1.0 / UIScreen.mainScreen.scale;
     self.shadowImageView.frame = CGRectMake(0, CGRectGetMaxY(_originalNavigationBarFrame) - shadowImageViewHeight, CGRectGetWidth(navigationBarFrame), shadowImageViewHeight);
     
-    // 重新设置 NavigationBar frame
     if (callSuper) {
+        // 重新设置 NavigationBar frame
         CGFloat navigationBarY = CGRectGetMinY(frame) - CGRectGetMinY(_originalNavigationBarFrame);
-        [super setFrame:CGRectMake(0, navigationBarY, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame))];
+        super.frame = CGRectMake(0, navigationBarY, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame));
     } else if ([self.superview isKindOfClass:NSClassFromString([NSString nx_stringByConcat:@"_", @"UI", @"Parallax", @"DimmingView", nil])]) {
-        // fix: Use edgesForExtendedLayoutEnabled instance in UITableViewController & UICollectionViewController.
+        // fix: Use edgesForExtendedLayoutEnabled instance in UITableViewController & UICollectionViewController
         CGFloat navigationBarY = CGRectGetMinY(self.superview.frame) - CGRectGetMinY(_originalNavigationBarFrame);
         self.frame = CGRectMake(0, -navigationBarY, CGRectGetWidth(_originalNavigationBarFrame), CGRectGetMaxY(_originalNavigationBarFrame));
     }
@@ -139,13 +139,12 @@
         self.backgroundImageView.hidden = YES;
         self.backgroundEffectView.hidden = NO;
         self.backgroundEffectView.contentView.backgroundColor = backgroundColor;
-        
-        [super setBackgroundColor:[UIColor clearColor]];
+        super.backgroundColor = UIColor.clearColor;
     } else {
         self.backgroundImageView.hidden = NO;
         self.backgroundEffectView.hidden = YES;
-        
-        [super setBackgroundColor:backgroundColor];
+        self.backgroundEffectView.contentView.backgroundColor = UIColor.clearColor;
+        super.backgroundColor = backgroundColor;
     }
 }
 

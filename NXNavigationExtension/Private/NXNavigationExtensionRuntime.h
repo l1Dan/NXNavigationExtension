@@ -37,7 +37,7 @@ NXDirectionalEdgeInsetsMake(UIEdgeInsets edgeInsets, UISemanticContentAttribute 
     if (semanticContentAttribute == UISemanticContentAttributeForceRightToLeft) {
         return UIEdgeInsetsMake(edgeInsets.top, edgeInsets.right, edgeInsets.bottom, edgeInsets.left);
     }
-    return UIEdgeInsetsMake(edgeInsets.top, edgeInsets.left, edgeInsets.bottom, edgeInsets.right);
+    return edgeInsets;
 }
 
 /// 将颜色转换成图片

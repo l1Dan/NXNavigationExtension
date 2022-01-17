@@ -182,6 +182,14 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
     return instance;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    NXNavigationConfiguration *newConfiguration = [[NXNavigationConfiguration alloc] init];
+    newConfiguration.navigationBarAppearance = [self.navigationBarAppearance copy];
+    newConfiguration.navigationControllerPreferences = [self.navigationControllerPreferences copy];
+    newConfiguration.viewControllerPreferences = [self.viewControllerPreferences copy];
+    return newConfiguration;
+}
+
 #pragma mark - Private
 
 + (NSDictionary<NSString *, id> *)lookupConfigurationInfoWithNavigationControllerClass:(__kindof Class)navigationControllerClass {
@@ -199,14 +207,6 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
         return [NXNavigationConfiguration defaultConfiguration].registerClassesInfo[NSStringFromClass(aClass)];
     }
     return nil;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    NXNavigationConfiguration *newConfiguration = [[NXNavigationConfiguration alloc] init];
-    newConfiguration.navigationBarAppearance = [self.navigationBarAppearance copy];
-    newConfiguration.navigationControllerPreferences = [self.navigationControllerPreferences copy];
-    newConfiguration.viewControllerPreferences = [self.viewControllerPreferences copy];
-    return newConfiguration;
 }
 
 #pragma mark - Getter

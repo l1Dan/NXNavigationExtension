@@ -57,7 +57,7 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
 @end
 
 
-NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance : NSObject<NSCopying>
+@interface NXNavigationBarAppearance : NSObject<NSCopying>
 
 /// 设置 NXNavigationBar 背景颜色，默认：[UIColor systemBlueColor]，这样处理能够快速辨别框架是否生效
 @property (nonatomic, strong) UIColor *backgroundColor;
@@ -139,7 +139,7 @@ NS_SWIFT_NAME(NXNavigationBar.Appearance) @interface NXNavigationBarAppearance :
 /// 将导航栏底部视图层接收到事件响应也符合导航栏被“隐藏”的行为。
 @property (nonatomic, assign) BOOL translucentNavigationBar;
 
-/// 设置系统导航栏能够处理用户交互；默认 NO。如果需要 NXNavigationBar 可以处理用户交互，则需要设置这个属性为 `YES`。
+/// 设置系统导航栏是否能够处理用户交互；默认 NO。如果需要 NXNavigationBar 可以处理用户交互，则需要设置这个属性为 `YES`。
 @property (nonatomic, assign) BOOL systemNavigationBarUserInteractionDisabled;
 
 /// 设置全屏手势触发距离
