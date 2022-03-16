@@ -22,7 +22,7 @@ class MainTabBarController: UITabBarController {
             tabBar.scrollEdgeAppearance = tabBarAppearance
         }
         
-        viewControllers = [hostingController, featureNavigationController]
+        viewControllers = [featureNavigationController, hostingController]
         tabBar.tintColor = UIColor.customColor { .customDarkGray } darkModeColor: { .customLightGray }
     }
     
@@ -38,7 +38,7 @@ class MainTabBarController: UITabBarController {
         return featureNavigationController
     }()
     
-        private lazy var hostingController: UIHostingController<ContentView> = {
+    private lazy var hostingController: UIHostingController<ContentView> = {
         let hostingController = UIHostingController(rootView: ContentView())
         let systemNormal = UIImage(named: "TabBarSystemNormal")
         let systemSelected = UIImage(named: "TabBarSystemSelected")
