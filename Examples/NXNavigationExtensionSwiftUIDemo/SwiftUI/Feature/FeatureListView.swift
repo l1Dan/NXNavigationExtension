@@ -29,7 +29,7 @@ struct FeatureListView: View {
         List {
             ForEach(sections, id:\.self.title) { section in
                 Section {
-                    ForEach(0..<section.items.count) { index in
+                    ForEach(0..<section.items.count, id: \.self) { index in
                         if section.items[index].style == .present {
                             Button(action: {
                                 presentingModal = true

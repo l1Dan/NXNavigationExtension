@@ -48,7 +48,7 @@ struct ColorScrollView: View {
             VStack {
                 if hasHeader {
                     Picker("", selection: $selection) {
-                        ForEach(0..<taps.count) { index in
+                        ForEach(0..<taps.count, id: \.self) { index in
                             Text(self.taps[index]).tag(index)
                         }
                     }
