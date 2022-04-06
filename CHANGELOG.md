@@ -1,5 +1,11 @@
 # CHANGELOG.md
 
+## 4.0.4
+
+- 修复 edgesForExtendedLayout = UIRectEdge(rawValue: 0) 时在大标题模式下 NXNavigationBar 位置不正确问题
+- 代码优化
+- 示例程序代码归类到 Examples 文件夹
+
 ## 4.0.3
 
 - NXNavigationBar 支持 `semanticContentAttribute` 属性，方便从右往左的导航栏布局；

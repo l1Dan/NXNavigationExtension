@@ -4,7 +4,7 @@
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/NXNavigationExtension.svg?style=flat)](https://img.shields.io/cocoapods/v/NXNavigationExtension.svg) ![Language](https://img.shields.io/github/languages/top/l1dan/NXNavigationExtension.svg?style=flat) [![MIT License](https://img.shields.io/github/license/l1dan/NXNavigationExtension.svg?style=flat)](https://opensource.org/licenses/mit-license.php) [![Platform](https://img.shields.io/cocoapods/p/NXNavigationExtension.svg?style=flat)](https://github.com/l1Dan/NXNavigationExtension/blob/main/README.md) [![GitHub last commit](https://img.shields.io/github/last-commit/l1Dan/NXNavigationExtension.svg?style=flat)](https://img.shields.io/github/last-commit/l1Dan/NXNavigationExtension)
 
-🔥 NXNavigationExtension 是为 iOS 应用设计的一个轻量级的导航栏处理框架，同时支持 SwiftUI 和 UIKit。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。可能是最省心的 iOS 导航栏处理框架之一。NXNavigationExtension 框架本身和示例代码都已经适配暗黑模式可供大家参考。
+🔥 NXNavigationExtension 是为 UINavigationBar 设计的轻量级的、简单的、可扩展的库，支持 SwiftUI 和 UIKit。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。可能是最省心的 iOS 导航栏处理框架之一。NXNavigationExtension 框架本身和示例代码都已经适配暗黑模式可供大家参考。
 
 ## 🎉 预览
 
@@ -104,7 +104,7 @@ github "l1Dan/NXNavigationExtension"
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.0.3"))
+    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.0.4"))
 ]
 ```
 
