@@ -177,7 +177,7 @@ Text("Destination")
     })
 ```
 
-### 修改导航栏底部线条颜色
+### 设置导航栏底部阴影颜色
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View05_ShadowColor.swift)
 
@@ -189,7 +189,7 @@ Text("Destination")
     })
 ```
 
-### 修改导航栏底部线条图片
+### 设置导航栏底部阴影图片
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View06_ShadowImage.swift)
 

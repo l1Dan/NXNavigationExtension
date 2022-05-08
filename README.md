@@ -51,15 +51,16 @@
 - ✅` 修改导航栏标题颜色`
 - ✅` 修改导航栏背景颜色`
 - ✅` 修改导航栏背景图片`
-- ✅` 修改导航栏底部线条颜色`
-- ✅` 修改导航栏底部线条图片`
+- ✅` 设置导航栏底部阴影颜色`
+- ✅` 设置导航栏底部阴影图片`
 
 ### 高级功能
 
 - ✅` 禁用滑动返回手势`
 - ✅` 启用全屏滑动返回手势`
 - ✅` 导航栏返回事件拦截`
-- ✅` 重定向任一控制器跳转`
+- ✅` 支持视图控制器转场周期事件`
+- ✅` 任一视图控制器跳转`
 - ✅` SwiftUI 路由`
 - ✅` 导航栏点击事件穿透到底部`
 - ✅` 动态修改导航栏样式`
@@ -104,7 +105,7 @@ github "l1Dan/NXNavigationExtension"
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.0.4"))
+    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.1.0"))
 ]
 ```
 
@@ -162,6 +163,11 @@ A：因为导航栏的系统返回按钮是用 `self.navigationItem.backBarButto
 - 不使用 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性。
 
 ---
+
+## ⭐️ 鸣谢
+
+- [QMUI_iOS](https://github.com/Tencent/QMUI_iOS)
+- [FDFullscreenPopGesture](https://github.com/forkingdog/FDFullscreenPopGesture)
 
 ## 📄 协议
 

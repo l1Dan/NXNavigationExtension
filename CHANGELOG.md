@@ -1,10 +1,39 @@
 # CHANGELOG.md
 
+## 4.1.0
+
+1. 添加视图控制器转场周期事件逻辑，方便业务使用；
+2. 新增多个导航控制器页面转场方法，添加动画完成时的回调；
+3. 新增多个 Pop 的同时 Push、Present 一个新的视图控制器方法；
+4. 优化全屏手势判断逻辑；
+5. 优化视图控制器栈 Pop 控制器时的逻辑。
+
+- 新增: `nx_navigationController:processViewController:navigationAction` 转场周期事件协议；
+- 过期: `NXNavigationInteractable` 协议，推荐使用 `NXNavigationControllerDelegate` 协议。
+
+对于 UIViewController
+
+- 新增: `nx_popViewControllerWithPresent:animated:completion` 方法；
+- 新增: `nx_popToViewController:withPresent:animated:completion` 方法；
+- 新增: `nx_popToRootViewControllerWithPresent:animated:completion` 方法。
+
+对于 UINavigationController
+
+- 新增: `nx_pushViewController:animated:completion` 方法；
+- 新增: `nx_popViewControllerAnimated:completion` 方法；
+- 新增: `nx_popToViewController:animated:completion` 方法；
+- 新增: `nx_popToRootViewControllerAnimated:completion` 方法；
+- 新增: `nx_popViewControllerWithPush:animated:completion` 方法；
+- 新增: `nx_popToViewController:withPush:animated:completion` 方法；
+- 新增: `nx_popToRootViewControllerWithPush:animated:completion` 方法；
+- 新增: `nx_setViewControllers:animated:completion` 方法；
+- 新增: `nx_removeViewControllersUntilClass:withNavigationStackPosition:insertsToBelowWhenNotFoundUsingBlock` 方法；
+- 过期: `nx_redirectViewControllerClass:initializeStandbyViewControllerUsingBlock:` 方法，推荐使用 `nx_removeViewControllersUntilClass:insertsToBelowWhenNotFoundUsingBlock:` 方法。
+
 ## 4.0.4
 
 - 修复 edgesForExtendedLayout = UIRectEdge(rawValue: 0) 时在大标题模式下 NXNavigationBar 位置不正确问题
 - 代码优化
-- 示例程序代码归类到 Examples 文件夹
 
 ## 4.0.3
 

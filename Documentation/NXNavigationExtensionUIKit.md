@@ -14,7 +14,7 @@
 NXNavigationConfiguration().registerNavigationControllerClasses([YourNavigationController.self])
 ```
 
-OR
+或者
 
 当然也可以同时注册多个导航控制器
 
@@ -22,7 +22,7 @@ OR
 NXNavigationConfiguration().registerNavigationControllerClasses([YourNavigationController.self, YourNavigationController2.self])
 ```
 
-OR
+或者
 
 还可以动态修改导航栏的外观（`NXNavigationExtensionSwiftUI` 框架就是基于这个特性实现的）
 
@@ -162,7 +162,7 @@ override var nx_useBlurNavigationBar: Bool {
 }
 ```
 
-### 修改导航栏底部线条颜色
+### 设置导航栏底部阴影颜色
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController05_ShadowColor.swift)
 
@@ -172,7 +172,7 @@ override var nx_shadowImageTintColor: UIColor? {
 }
 ```
 
-### 修改导航栏底部线条图片
+### 设置导航栏底部阴影图片
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController06_ShadowImage.swift)
 
@@ -239,14 +239,7 @@ configuration.viewControllerPreferences.enableFullScreenInteractivePopGesture = 
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController03_BackButtonEventIntercept.swift)
 
-需要遵守协议 `<NXNavigationInteractable>`，实现代理方法：
-
-```swift
-func nx_navigationController(_ navigationController: UINavigationController, willPop viewController: UIViewController, interactiveType: NXNavigationInteractiveType) -> Bool {
-    // TODO...
-    return true
-}
-```
+需要遵守协议 `<NXNavigationControllerDelegate>`，实现代理方法：
 
 1. `NXNavigationInteractiveTypeCallNXPopMethod`: 调用 `nx_pop` 系列方法返回事件拦截。
 2. `NXNavigationInteractiveTypeBackButtonAction`: 点击返回按钮返回事件拦截。
@@ -272,32 +265,49 @@ func nx_navigationController(_ navigationController: UINavigationController, wil
 
 自定义返回按钮事件需要拦截可以调用 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 等方法来触发上面的代理回调。
 
-### 重定向任一控制器跳转
+### 支持视图控制器转场周期事件
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController08_RedirectViewController.swift)
-
-- 以重定向到 `ViewController08_RedirectViewController` 为例，如果之前有 Push 过 `ViewController08_RedirectViewController` 的实例，则最后会跳转到实例中，如果没有则会调用 `block`，如果 `block == nil` 或者 `return nil;` 则重定向跳转不会发生。
-- 执行重定向操作之后，并不会直接跳转到对应的视图控制器，如果需要 `跳转` 操作，可以调用 `popViewControllerAnimated:` 方法返回页面，也可以使用手势滑动返回页面，还可以点击返回按钮返回页面。
+需要遵守协议 `<NXNavigationControllerDelegate>`，实现代理方法：
 
 ```swift
-navigationController?.nx_redirectViewControllerClass(ViewController08_RedirectViewController.self, initializeStandbyViewControllerUsing: {
-    return ViewController08_RedirectViewController()
-})
+func nx_navigationController(_ navigationController: UINavigationController, processViewController viewController: UIViewController, navigationAction: NXNavigationAction) {
+    switch navigationAction {
+    case .unspecified: print("Unspecified")
+    case .willPush: print("WillPush")
+    case .didPush: print("DidPush")
+    case .pushCancelled: print("PushCancelled")
+    case .pushCompleted: print("PushCompleted")
+    case .willPop: print("WillPop")
+    case .didPop: print("DidPop")
+    case .popCancelled: print("PopCancelled")
+    case .popCompleted: print("PopCompleted")
+    case .willSet: print("WillSet")
+    case .didSet: print("DidSet")
+    case .setCancelled: print("SetCancelled")
+    case .setCompleted: print("SetCompleted")
+    default: print("None")
+    }
+}
 ```
 
-**注意**：
-执行上面代码之后并不会立即跳转，下面代码可以实现立即跳转：
+### 任一视图控制器跳转
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController08_JumpToViewController.swift)
+
+- 以跳转到 `ViewController08_JumpToViewController` 为例，如果之前有 Push 过 `ViewController08_JumpToViewController` 的实例，则最后会跳转到这个视图控制器中，如果没有找到则会调用 `block` 执行插入新控制器的规则。
+- 执行此操作之后，并不会跳转到对应的视图控制器，仅仅是修改了 NavigationController 的 viewControllers 属性，如果需要跳转操作，可以调用 `pop` 系列方法返回上一个页面，也可以使用手势滑动返回页面，还可以点击返回按钮返回页面。
 
 ```swift
-navigationController?.nx_redirectViewControllerClass(ViewController08_RedirectViewController.self, initializeStandbyViewControllerUsing: {
-    return ViewController08_RedirectViewController()
+navigationController?.nx_removeViewControllers(until: ViewController08_JumpToViewController.self, insertsToBelowWhenNotFoundUsing: {
+    return ViewController08_JumpToViewController()
 })
+// 执行视图控制器跳转操作：
 navigationController?.popViewController(animated: true)
 ```
 
-意思是：首先查找 `navigationController?.viewControllers` 是否存在一个类型为 `ViewController08_RedirectViewController.self` 的实例对象，如果存在则重定向到此视图控制器，没有则使用 `ViewController08_RedirectViewController()` 来创建一个新的实例对象。
+意思是：首先查找 `navigationController?.viewControllers` 是否存在一个类型为 `ViewController08_JumpToViewController.self` 的实例对象，如果存在则上一页面会显示此视图控制器，没有找到则使用 `ViewController08_JumpToViewController()` 创建一个新的实例对象插入到 NavigationController 的 viewControllers 栈的上一个页面中。
 
-### 导航栏区域点击事件穿透到底部试图（整个导航栏区域不能处理用户交互）
+### 导航栏区域点击事件穿透到底部视图（整个导航栏区域不能处理用户交互）
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController05_NavigationBarDisable.swift)
 
@@ -339,7 +349,7 @@ override var childForStatusBarHidden: UIViewController? {
 
 ### 长按返回按钮显示菜单功能
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController08_RedirectViewController.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController08_JumpToViewController.swift)
 
 ```swift
 override var nx_useSystemBackButton: Bool {
