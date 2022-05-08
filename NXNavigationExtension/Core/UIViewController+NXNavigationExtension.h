@@ -33,77 +33,117 @@ NS_ASSUME_NONNULL_BEGIN
 /// For SwiftUI，拿到当前的 NXNavigationVirtualWrapperView
 @property (nonatomic, weak, nullable) __kindof NXNavigationVirtualWrapperView *nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0));
 
+/// 获取当前视图控制器转场周期事件
+@property (nonatomic, assign, readonly) NXNavigationAction nx_navigationAction;
+
 /// 获取当前控制器的 NXNavigationBar
 @property (nonatomic, strong, readonly, nullable) NXNavigationBar *nx_navigationBar;
 
-/// The same as NXNavigationBarAppearance `backgroundColor` instance.
+/// 设置 NXNavigationBar 背景颜色，默认：[UIColor systemBlueColor]，这样处理能够快速辨别框架是否生效
 @property (nonatomic, strong, readonly, nullable) UIColor *nx_navigationBarBackgroundColor;
 
-/// The same as NXNavigationBarAppearance `backgroundImage` instance.
+/// 设置 NXNavigationBar 背景图片
 @property (nonatomic, strong, readonly, nullable) UIImage *nx_navigationBarBackgroundImage;
 
-/// The same as NXNavigationBarAppearance `tintColor` instance.
+/// 设置 UINavigationBar tintColor（返回按钮颜色），默认：iOS13 之前 [UIColor whiteColor]，iOS13及以后 [UIColor systemBackgroundColor]
 @property (nonatomic, strong, readonly, nullable) UIColor *nx_barTintColor;
 
-/// The same as NXNavigationBarAppearance `barTintColor` instance.
+/// 设置 UINavigationBar barTintColor
 @property (nonatomic, strong, readonly, nullable) UIColor *nx_barBarTintColor;
 
-/// The same as NXNavigationBarAppearance `titleTextAttributes` instance.
+/// 设置 UINavigationBar titleTextAttributes
 @property (nonatomic, strong, readonly, nullable) NSDictionary<NSAttributedStringKey, id> *nx_titleTextAttributes;
 
-/// The same as NXNavigationBarAppearance `largeTitleTextAttributes` instance.
+/// 设置 UINavigationBar largeTitleTextAttributes
 @property (nonatomic, strong, readonly, nullable) NSDictionary<NSAttributedStringKey, id> *nx_largeTitleTextAttributes API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
 
-/// The same as NXNavigationBarAppearance `shadowImage` instance.
+/// 设置 NXNavigationBar 底部阴影图片
 @property (nonatomic, strong, readonly, nullable) UIImage *nx_shadowImage;
 
-/// The same as NXNavigationBarAppearance `shadowColor` instance.
+/// 设置 NXNavigationBar 底部阴影颜色
 @property (nonatomic, strong, readonly, nullable) UIColor *nx_shadowImageTintColor;
 
-/// The same as NXNavigationBarAppearance `backImage` instance.
+/// 设置返回按钮图片
 @property (nonatomic, strong, readonly, nullable) UIImage *nx_backImage;
 
-/// The same as NXNavigationBarAppearance `landscapeBackImage` instance.
+/// 设置横屏时显示的返回按钮图片
 @property (nonatomic, strong, readonly, nullable) UIImage *nx_landscapeBackImage;
 
-/// The same as NXNavigationBarAppearance `backButtonCustomView` instance.
+/// 自定义返回按钮
 @property (nonatomic, strong, readonly, nullable) UIView *nx_backButtonCustomView;
 
-/// The same as NXNavigationBarAppearance `systemBackButtonTitle` instance.
+/// 系统返回按钮的 2 种标题：1. 使用系统默认返回标题，2.自定义系统返回按钮标题(或者标题为空)；
+/// 默认：空字符串（不显示标题）。如果返回 nil，则使用系统返回按钮自带的标题
 @property (nonatomic, copy, readonly, nullable) NSString *nx_systemBackButtonTitle;
 
-/// The same as NXNavigationBarAppearance `backImageInsets` instance.
+/// 设置返回按钮图片 `backImage` 的偏移量，默认：backImageInsets = {0, -8, 0, 0}
 @property (nonatomic, assign, readonly) UIEdgeInsets nx_backImageInsets;
 
-/// The same as NXNavigationBarAppearance `landscapeBackImageInsets` instance.
+/// 设置横屏时显示返回按钮图片 `landscapeBackImage` 的偏移量，默认：landscapeBackImageInsets = {0, -8, 0, 0}
 @property (nonatomic, assign, readonly) UIEdgeInsets nx_landscapeBackImageInsets;
 
-/// The same as NXNavigationBarAppearance `useSystemBackButton` instance.
+/// 是否使用系统返回按钮；默认 NO
 @property (nonatomic, assign, readonly) BOOL nx_useSystemBackButton;
 
-/// The same as NXViewControllerPreferences `useBlurNavigationBar` instance.
+/// 是否使用模糊导航栏模糊；默认 NO。需要设置 nx_navigationBarBackgroundColor 的 alpha 颜色通道才会有效果
+/// 将 nx_navigationBarBackgroundColor 设置为 [UIColor clearColor]，可以实现类似系统导航栏的模糊效果
 @property (nonatomic, assign, readonly) BOOL nx_useBlurNavigationBar;
 
-/// The same as NXViewControllerPreferences `disableInteractivePopGesture` instance.
+/// 是否禁用边缘滑动返回手势；默认 NO
 @property (nonatomic, assign, readonly) BOOL nx_disableInteractivePopGesture;
 
-/// The same as NXViewControllerPreferences `enableFullScreenInteractivePopGesture` instance.
+/// 是否启用全屏返回；默认 NO
 @property (nonatomic, assign, readonly) BOOL nx_enableFullScreenInteractivePopGesture;
 
-/// The same as NXViewControllerPreferences `automaticallyHideNavigationBarInChildViewController` instance.
+/// 是否自动隐藏 childViewController 的 NavigationBar；默认 YES
 @property (nonatomic, assign, readonly) BOOL nx_automaticallyHideNavigationBarInChildViewController;
 
-/// The same as NXViewControllerPreferences `translucentNavigationBar` instance.
+/// 设置导航栏是否透明（类似导航栏隐藏的效果，当不是真正意思的隐藏）。不推荐直接设置系统导航栏的显示或隐藏。
+/// 开启这个属性会将 self.navigationController.navigationBar.barTintColor/tintColor/titleTextAttributes/largeTitleTextAttributes 的颜色都设置为：[UIColor clearColor]
+/// 还会将 self.navigationItem.titleView.hidden 属性设置为 `YES`，以及将 self.navigationController.navigationBar.userInteractionEnabled 属性设置为 `NO`，
+/// 这样可以实现导航栏“看起来”被隐藏了。设置为透明之后导航栏区域将无法处理用户交互，底部的视图此时将会处理用户交互。
+/// 将导航栏底部视图层接收到事件响应也符合导航栏被“隐藏”的行为。
 @property (nonatomic, assign, readonly) BOOL nx_translucentNavigationBar;
 
-/// The same as NXViewControllerPreferences `systemNavigationBarUserInteractionDisabled` instance.
+/// 设置系统导航栏是否能够处理用户交互；默认 NO。如果需要 NXNavigationBar 可以处理用户交互，则需要设置这个属性为 `YES`。
 @property (nonatomic, assign, readonly) BOOL nx_systemNavigationBarUserInteractionDisabled;
 
-/// The same as NXViewControllerPreferences `interactivePopMaxAllowedDistanceToLeftEdge` instance.
+/// 设置全屏手势触发距离
 @property (nonatomic, assign, readonly) CGFloat nx_interactivePopMaxAllowedDistanceToLeftEdge;
 
 /// 手动触发导航栏外观更新
 - (void)nx_setNeedsNavigationBarAppearanceUpdate;
+
+@end
+
+
+@interface UIViewController (NXNavigationExtensionTransition)
+
+/// Pop 视图控制器的同时 Present 一个新的视图控制器
+/// @param viewControllerToPresent 需要 Present 的视图控制器
+/// @param animated 默认 YES
+/// @param completion Present 动画完成时的回调
+- (nullable UIViewController *)nx_popViewControllerWithPresent:(UIViewController *)viewControllerToPresent
+                                                      animated:(BOOL)animated
+                                                    completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popViewControllerWithPresent(_:animated:completion:));
+
+/// Pop 视图控制器的同时 Present 一个新的视图控制器
+/// @param viewController 需要 Pop 的视图控制器
+/// @param viewControllerToPresent 需要 Present 的视图控制器
+/// @param animated 默认 YES
+/// @param completion Present 动画完成时的回调
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController
+                                                              withPresent:(UIViewController *)viewControllerToPresent
+                                                                 animated:(BOOL)animated
+                                                               completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToViewController(_:withPresent:animated:completion:));
+
+/// Pop 视图控制器的同时 Present 一个新的视图控制器
+/// @param viewControllerToPresent 需要 Present 的视图控制器
+/// @param animated 默认 YES
+/// @param completion Present 动画完成时的回调
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerWithPresent:(UIViewController *)viewControllerToPresent
+                                                                                animated:(BOOL)animated
+                                                                              completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToRootViewControllerWithPresent(_:animated:completion:));
 
 @end
 

@@ -84,7 +84,6 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
     
     newAppearance.useSystemBackButton = self.useSystemBackButton;
     newAppearance.systemBackButtonTitle = self.systemBackButtonTitle;
-
     return newAppearance;
 }
 

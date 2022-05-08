@@ -25,11 +25,11 @@
 
 #if __has_include(<NXNavigationExtension/NXNavigationExtension.h>)
 
-#import <NXNavigationExtension/NXNavigationConfiguration.h>
+#import <NXNavigationExtension/UINavigationController+NXNavigationExtension.h>
 
 #else
 
-#import "NXNavigationConfiguration.h"
+#import "UINavigationController+NXNavigationExtension.h"
 
 #endif /* __has_include */
 
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NXNavigationConfiguration, NXNavigationRouterContext;
 
 API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
-@interface NXNavigationVirtualWrapperView : UIView <NXNavigationInteractable>
+@interface NXNavigationVirtualWrapperView : UIView <NXNavigationControllerDelegate>
 
 /// 当前 UIHostingController ContentView 的 NXNavigationRouterContext 对象
 @property (nonatomic, strong, nullable) NXNavigationRouterContext *context;

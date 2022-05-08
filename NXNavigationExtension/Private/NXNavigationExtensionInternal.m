@@ -82,7 +82,7 @@
     
     // Ignore when the active view controller doesn't allow interactive pop.
     UIViewController *topViewController = self.navigationController.viewControllers.lastObject;
-    if (![self.navigationController nx_checkFullScreenInteractivePopGestureEnabledWithViewController:topViewController]) {
+    if (!topViewController.nx_enableFullScreenInteractivePopGesture) {
         return NO;
     }
     
@@ -180,13 +180,17 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIScrollView class], @selector(removeFromSuperview), ^(__kindof UIScrollView *_Nonnull selfObject) {
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIScrollView class],
+                                                                              @selector(removeFromSuperview),
+                                                                              ^(__kindof UIScrollView *_Nonnull selfObject) {
             if (selfObject.nx_navigationBar) {
                 [selfObject.nx_navigationBar removeFromSuperview];
             }
         });
         
-        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIScrollView class], @selector(didMoveToSuperview), ^(__kindof UIScrollView *_Nonnull selfObject) {
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIScrollView class],
+                                                                              @selector(didMoveToSuperview),
+                                                                              ^(__kindof UIScrollView *_Nonnull selfObject) {
             if (selfObject.nx_navigationBar && selfObject.superview != selfObject.nx_navigationBar) {
                 [selfObject.superview addSubview:selfObject.nx_navigationBar];
                 [selfObject.superview bringSubviewToFront:selfObject.nx_navigationBar];
@@ -203,7 +207,9 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NXNavigationExtensionOverrideImplementation([UINavigationItem class], @selector(setHidesBackButton:animated:), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
+        NXNavigationExtensionOverrideImplementation([UINavigationItem class],
+                                                    @selector(setHidesBackButton:animated:),
+                                                    ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
             return ^void(__unsafe_unretained __kindof UINavigationItem *selfObject, BOOL hidden, BOOL animated) {
                 void (*originSelectorIMP)(UINavigationItem *, SEL, BOOL, BOOL);
                 originSelectorIMP = (void (*)(UINavigationItem *, SEL, BOOL, BOOL))originalIMPProvider();
@@ -217,14 +223,18 @@
             };
         });
         
-        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UINavigationBar class], @selector(layoutSubviews), ^(__kindof UINavigationBar *_Nonnull selfObject) {
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UINavigationBar class],
+                                                                              @selector(layoutSubviews),
+                                                                              ^(__kindof UINavigationBar *_Nonnull selfObject) {
             UINavigationBarDidUpdatePropertiesHandler didUpdatePropertiesHandler = selfObject.nx_didUpdatePropertiesHandler;
             if (didUpdatePropertiesHandler) {
                 didUpdatePropertiesHandler(selfObject);
             }
         });
-        
-        NXNavigationExtensionOverrideImplementation([UINavigationBar class], @selector(setUserInteractionEnabled:), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
+
+        NXNavigationExtensionOverrideImplementation([UINavigationBar class],
+                                                    @selector(setUserInteractionEnabled:),
+                                                    ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
             return ^(UINavigationBar *selfObject, BOOL userInteractionEnabled) {
                 void (*originSelectorIMP)(id, SEL, BOOL);
                 originSelectorIMP = (void (*)(id, SEL, BOOL))originalIMPProvider();
@@ -236,8 +246,10 @@
                 originSelectorIMP(selfObject, originCMD, userInteractionEnabled);
             };
         });
-        
-        NXNavigationExtensionOverrideImplementation([UINavigationBar class], @selector(setHidden:), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
+
+        NXNavigationExtensionOverrideImplementation([UINavigationBar class],
+                                                    @selector(setHidden:),
+                                                    ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
             return ^(UINavigationBar *selfObject, BOOL hidden) {
                 void (*originSelectorIMP)(id, SEL, BOOL);
                 originSelectorIMP = (void (*)(id, SEL, BOOL))originalIMPProvider();
@@ -311,11 +323,13 @@
 }
 
 - (NXScreenEdgePopGestureRecognizerDelegate *)nx_screenEdgePopGestureDelegate {
-    return objc_getAssociatedObject(self, _cmd);
-}
-
-- (void)setNx_screenEdgePopGestureDelegate:(NXScreenEdgePopGestureRecognizerDelegate *_Nonnull)nx_screenEdgePopGestureDelegate {
-    objc_setAssociatedObject(self, @selector(nx_screenEdgePopGestureDelegate), nx_screenEdgePopGestureDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    NXScreenEdgePopGestureRecognizerDelegate *delegate = objc_getAssociatedObject(self, _cmd);
+    if (delegate && [delegate isKindOfClass:[NXScreenEdgePopGestureRecognizerDelegate class]]) {
+        return delegate;
+    }
+    delegate = [[NXScreenEdgePopGestureRecognizerDelegate alloc] initWithNavigationController:self];
+    objc_setAssociatedObject(self, _cmd, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return delegate;
 }
 
 - (NXFullScreenPopGestureRecognizerDelegate *)nx_fullScreenPopGestureDelegate {
@@ -360,51 +374,65 @@
     [self.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [self.navigationBar setShadowImage:[[UIImage alloc] init]];
     [self.navigationBar setTranslucent:YES];
-    
-    self.nx_screenEdgePopGestureDelegate = [[NXScreenEdgePopGestureRecognizerDelegate alloc] initWithNavigationController:self];
-    self.interactivePopGestureRecognizer.delegate = self.nx_screenEdgePopGestureDelegate;
 }
 
-- (void)nx_configureFullScreenPopGesture {
-    if (![self.interactivePopGestureRecognizer.view.gestureRecognizers containsObject:self.nx_fullScreenPopGestureRecognizer]) {
-        // Add our own gesture recognizer to where the onboard screen edge pan gesture recognizer is attached to.
-        [self.interactivePopGestureRecognizer.view addGestureRecognizer:self.nx_fullScreenPopGestureRecognizer];
-        
-        // Forward the gesture events to the private handler of the onboard gesture recognizer.
-        NSArray *internalTargets = [self.interactivePopGestureRecognizer valueForKey:@"targets"];
-        id internalTarget = [internalTargets.firstObject valueForKey:@"target"];
-        SEL internalAction = NSSelectorFromString(@"handleNavigationTransition:");
-        self.nx_fullScreenPopGestureRecognizer.delegate = self.nx_fullScreenPopGestureDelegate;
-        [self.nx_fullScreenPopGestureRecognizer addTarget:internalTarget action:internalAction];
-        
-        // Disable the onboard gesture recognizer.
-        self.interactivePopGestureRecognizer.enabled = NO;
-        [self.interactivePopGestureRecognizer.view addGestureRecognizer:self.nx_fullScreenPopGestureRecognizer];
+- (void)nx_configureInteractivePopGestureRecognizerWithViewController:(__kindof UIViewController *)viewController {
+    if (!self.interactivePopGestureRecognizer) return;
+    
+    if (viewController.nx_enableFullScreenInteractivePopGesture) {
+        if (![self.interactivePopGestureRecognizer.view.gestureRecognizers containsObject:self.nx_fullScreenPopGestureRecognizer]) {
+            // Add our own gesture recognizer to where the onboard screen edge pan gesture recognizer is attached to.
+            [self.interactivePopGestureRecognizer.view addGestureRecognizer:self.nx_fullScreenPopGestureRecognizer];
+            // Forward the gesture events to the private handler of the onboard gesture recognizer.
+            NSArray *internalTargets = [self.interactivePopGestureRecognizer valueForKey:@"targets"];
+            id internalTarget = [internalTargets.firstObject valueForKey:@"target"];
+            SEL internalAction = NSSelectorFromString(@"handleNavigationTransition:");
+            [self.nx_fullScreenPopGestureRecognizer addTarget:internalTarget action:internalAction];
+            
+            self.interactivePopGestureRecognizer.enabled = NO;
+            self.nx_fullScreenPopGestureRecognizer.delegate = self.nx_fullScreenPopGestureDelegate;
+        }
+    } else {
+        [self.interactivePopGestureRecognizer.view removeGestureRecognizer:self.nx_fullScreenPopGestureRecognizer];
+        self.interactivePopGestureRecognizer.enabled = YES;
+        self.interactivePopGestureRecognizer.delegate = self.nx_screenEdgePopGestureDelegate;
     }
 }
 
 - (id)nx_triggerSystemPopViewController:(__kindof UIViewController *)destinationViewController
                         interactiveType:(NXNavigationInteractiveType)interactiveType
-                                handler:(id (^)(UINavigationController *navigationController))handler {
+   animateAlongsideTransitionCompletion:(void (^)(void))completion
+                                handler:(id  _Nonnull (^)(UINavigationController * _Nonnull navigationController))handler {
     if (self.viewControllers.count <= 1) return nil;
     
     UIViewController *topViewController = self.topViewController;
+    UIViewController *viewController = destinationViewController ?: topViewController;
+    
+    // 统一处理完成动画
+    id (^animateAlongsideTransitionCompletedBlock)(void) = ^id {
+        id result = handler(topViewController.navigationController);
+        
+        if (completion) {
+            [viewController nx_animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+                completion();
+            }];
+        }
+
+        return result;
+    };
+    
     if (self.nx_useNavigationBar && topViewController) {
-        UIViewController *viewController = destinationViewController ?: topViewController;
         if ([self nx_viewController:topViewController preparePopViewController:viewController interactiveType:interactiveType]) {
-            return handler(topViewController.navigationController);
+            return animateAlongsideTransitionCompletedBlock();
         }
     } else {
-        return handler(topViewController.navigationController);
+        return animateAlongsideTransitionCompletedBlock();
     }
     return nil;
 }
 
-- (BOOL)nx_checkFullScreenInteractivePopGestureEnabledWithViewController:(__kindof UIViewController *)viewController {
-    return viewController.nx_enableFullScreenInteractivePopGesture;
-}
-
-- (void)nx_adjustmentSystemBackButtonForViewController:(__kindof UIViewController *)currentViewController inViewControllers:(NSArray<__kindof UIViewController *> *)previousViewControllers {
+- (void)nx_adjustmentSystemBackButtonForViewController:(__kindof UIViewController *)currentViewController
+                                     inViewControllers:(NSArray<__kindof UIViewController *> *)previousViewControllers {
     __kindof UIViewController *lastViewController = previousViewControllers.lastObject;
     if (lastViewController && lastViewController != currentViewController && currentViewController.nx_useSystemBackButton) {
         if (currentViewController.nx_systemBackButtonTitle) {
@@ -437,13 +465,24 @@
     }
 }
 
-- (BOOL)nx_viewController:(__kindof UIViewController *)currentViewController preparePopViewController:(__kindof UIViewController *)destinationViewController interactiveType:(NXNavigationInteractiveType)interactiveType {
-    if ([currentViewController.nx_navigationInteractDelegate respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
-        return [currentViewController.nx_navigationInteractDelegate nx_navigationController:self willPopViewController:destinationViewController interactiveType:interactiveType];
+- (BOOL)nx_viewController:(__kindof UIViewController *)currentViewController
+ preparePopViewController:(__kindof UIViewController *)destinationViewController
+          interactiveType:(NXNavigationInteractiveType)interactiveType {
+    if ([currentViewController.nx_navigationControllerDelegate respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
+        return [currentViewController.nx_navigationControllerDelegate nx_navigationController:self willPopViewController:destinationViewController interactiveType:interactiveType];
     } else if ([currentViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
         return [currentViewController nx_navigationController:self willPopViewController:destinationViewController interactiveType:interactiveType];
     }
     return YES;
+}
+
+- (void)nx_processViewController:(__kindof UIViewController *)appearingViewController
+                navigationAction:(NXNavigationAction)navigationAction {
+    appearingViewController.nx_navigationAction = navigationAction;
+    
+    if ([appearingViewController respondsToSelector:@selector(nx_navigationController:processViewController:navigationAction:)]) {
+        [(id<NXNavigationControllerDelegate>)appearingViewController nx_navigationController:self processViewController:appearingViewController navigationAction:navigationAction];
+    }
 }
 
 @end
@@ -483,17 +522,9 @@
     objc_setAssociatedObject(self, @selector(nx_isChildViewController), @(nx_isChildViewController), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-/// 保证 self.navigationController 不为 nil，不要直接调研 navigationController 方法
+/// 保证 self.navigationController 不为 nil，不要直接调用 navigationController 方法
 - (void)nx_triggerSystemPopViewController {
-    if (self.navigationController) {
-        NSArray<UIViewController *> *viewControllers = self.navigationController.viewControllers;
-        UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : nil;
-        [self.navigationController nx_triggerSystemPopViewController:destinationViewController
-                                                     interactiveType:NXNavigationInteractiveTypeBackButtonAction
-                                                             handler:^id _Nonnull(UINavigationController *_Nonnull navigationController) {
-            return [navigationController popViewControllerAnimated:YES];
-        }];
-    }
+    [self.navigationController nx_popViewControllerAnimated:YES completion:NULL];
 }
 
 - (UIBarButtonItem *)nx_customBackButtonItem {
@@ -504,12 +535,12 @@
     objc_setAssociatedObject(self, @selector(nx_customBackButtonItem), nx_customBackButtonItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (id<NXNavigationInteractable>)nx_navigationInteractDelegate {
+- (id<NXNavigationControllerDelegate>)nx_navigationControllerDelegate {
     return objc_getAssociatedObject(self, _cmd);
 }
 
-- (void)setNx_navigationInteractDelegate:(id<NXNavigationInteractable>)nx_navigationInteractDelegate {
-    objc_setAssociatedObject(self, @selector(nx_navigationInteractDelegate), nx_navigationInteractDelegate, OBJC_ASSOCIATION_ASSIGN);
+- (void)setNx_navigationControllerDelegate:(id<NXNavigationControllerDelegate>)nx_navigationControllerDelegate {
+    objc_setAssociatedObject(self, @selector(nx_navigationControllerDelegate), nx_navigationControllerDelegate, OBJC_ASSOCIATION_ASSIGN);
 }
 
 - (NXNavigationConfiguration *)nx_configuration {
@@ -573,6 +604,23 @@
         self.nx_customBackButtonItem = backButtonItem;
     }
     self.navigationItem.leftBarButtonItem = backButtonItem;
+}
+
+- (void)nx_animateAlongsideTransition:(void (^__nullable)(id<UIViewControllerTransitionCoordinatorContext> context))animation
+                           completion:(void (^__nullable)(id<UIViewControllerTransitionCoordinatorContext> context))completion {
+    if (self.transitionCoordinator) {
+        BOOL animationQueuedToRun = [self.transitionCoordinator animateAlongsideTransition:animation completion:completion];
+        // 某些情况下传给 animateAlongsideTransition 的 animation 不会被执行，这时候要自己手动调用一下
+        // 但即便如此，completion 也会在动画结束后才被调用，因此这样写不会导致 completion 比 animation block 先调用
+        // 某些情况包含：从 B 手势返回 A 的过程中，取消手势，animation 不会被调用
+        // https://github.com/Tencent/QMUI_iOS/issues/692
+        if (!animationQueuedToRun && animation) {
+            animation(nil);
+        }
+    } else {
+        if (animation) animation(nil);
+        if (completion) completion(nil);
+    }
 }
 
 @end

@@ -55,7 +55,7 @@ API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 /// @param context 当前使用的 NXNavigationRouterContext 对象
 + (instancetype)of:(NXNavigationRouterContext *)context;
 
-/// The same as UIViewController `nx_setNeedsNavigationBarAppearanceUpdate` instance.
+/// 手动触发导航栏外观更新
 - (void)setNeedsNavigationBarAppearanceUpdate;
 
 /// 通过路由名称得到可以弹出的目标视图控制器

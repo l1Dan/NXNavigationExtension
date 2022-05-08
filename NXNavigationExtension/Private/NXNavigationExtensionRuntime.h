@@ -21,13 +21,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-// https://github.com/Tencent/QMUI_iOS/blob/0f4a3eb3365c2a43ca175e37bf2cff6703d1b074/QMUIKit/QMUICore/QMUIRuntime.h
-// https://github.com/Tencent/QMUI_iOS/blob/0f4a3eb3365c2a43ca175e37bf2cff6703d1b074/QMUIKit/UIKitExtensions/NSString%2BQMUI.h
 
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+#ifdef DEBUG
+#define NXDebugLog(fmt, ...) NSLog((fmt), ##__VA_ARGS__)
+#else
+#define NXDebugLog(...)
+#endif
 
 /// 支持 UIEdgeInsets 适配 semanticContentAttribute 属性
 /// @param edgeInsets 普通的 UIEdgeInsets 属性
@@ -130,7 +134,7 @@ NXNavigationExtensionOverrideImplementation(Class targetClass, SEL targetSelecto
         // 空 block 虽然没有参数列表，但在业务那边被转换成 IMP 后就算传多个参数进来也不会 crash
         if (!result) {
             result = imp_implementationWithBlock(^(id selfObject) {
-                NSLog(([NSString stringWithFormat:@"%@", targetClass]), @"%@ 没有初始实现，%@\n%@", NSStringFromSelector(targetSelector), selfObject, [NSThread callStackSymbols]);
+                NXDebugLog(([NSString stringWithFormat:@"%@", targetClass]), @"%@ 没有初始实现，%@\n%@", NSStringFromSelector(targetSelector), selfObject, [NSThread callStackSymbols]);
             });
         }
         

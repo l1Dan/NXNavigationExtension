@@ -30,6 +30,7 @@
 #import "NXNavigationExtensionRuntime.h"
 #import "NXNavigationRouter.h"
 
+#import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
 
 
@@ -50,22 +51,29 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIViewController class], @selector(viewDidLoad), ^(__kindof UIViewController *_Nonnull selfObject) {
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIViewController class],
+                                                                              @selector(viewDidLoad),
+                                                                              ^(__kindof UIViewController *_Nonnull selfObject) {
             [selfObject nx_checkChildViewControllers];
             [selfObject nx_configureNXNavigationBar];
             [selfObject nx_configureNavigationVirtualWrapperView];
         });
         
-        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIViewController class], @selector(viewWillLayoutSubviews), ^(__kindof UIViewController *_Nonnull selfObject) {
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithoutArguments([UIViewController class],
+                                                                              @selector(viewWillLayoutSubviews),
+                                                                              ^(__kindof UIViewController *_Nonnull selfObject) {
             [selfObject nx_checkChildViewControllers];
             [selfObject nx_configureNXNavigationBar];
             [selfObject nx_configureNavigationVirtualWrapperView];
             [selfObject nx_updateNavigationBarHierarchy];
         });
         
-        NXNavigationExtensionOverrideImplementation([UIViewController class], @selector(extendedLayoutIncludesOpaqueBars), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
+        NXNavigationExtensionOverrideImplementation([UIViewController class],
+                                                    @selector(extendedLayoutIncludesOpaqueBars),
+                                                    ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
             return ^BOOL(__unsafe_unretained __kindof UIViewController *selfObject) {
-                BOOL (*originSelectorIMP)(id, SEL);
+                BOOL (*originSelectorIMP)
+                (id, SEL);
                 originSelectorIMP = (BOOL(*)(id, SEL))originalIMPProvider();
                 BOOL result = originSelectorIMP(selfObject, originCMD);
                 [selfObject nx_checkChildViewControllers];
@@ -77,7 +85,9 @@
             };
         });
         
-        NXNavigationExtensionOverrideImplementation([UIViewController class], @selector(edgesForExtendedLayout), ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
+        NXNavigationExtensionOverrideImplementation([UIViewController class],
+                                                    @selector(edgesForExtendedLayout),
+                                                    ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
             return ^UIRectEdge(__unsafe_unretained __kindof UIViewController *selfObject) {
                 UIRectEdge (*originSelectorIMP)(id, SEL);
                 originSelectorIMP = (UIRectEdge(*)(id, SEL))originalIMPProvider();
@@ -90,8 +100,11 @@
                 return result;
             };
         });
-
-        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewWillAppear:), BOOL, ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
+        
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class],
+                                                                                @selector(viewWillAppear:),
+                                                                                BOOL,
+                                                                                ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
             [selfObject nx_checkChildViewControllers];
             selfObject.nx_viewWillDisappearFinished = NO;
             if (selfObject.nx_canSetupNavigationBar) {
@@ -104,8 +117,11 @@
                 [selfObject nx_updateNavigationBarSubviewState];
             }
         });
-
-        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewDidAppear:), BOOL, ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
+        
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class],
+                                                                                @selector(viewDidAppear:),
+                                                                                BOOL,
+                                                                                ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
             [selfObject nx_checkChildViewControllers];
             if (selfObject.nx_canSetupNavigationBar) {
                 BOOL interactivePopGestureRecognizerEnabled = selfObject.navigationController.viewControllers.count > 1;
@@ -115,13 +131,19 @@
                 [selfObject nx_checkNavigationVirtualWrapperViewState];
             }
         });
-        
-        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewWillDisappear:), BOOL, ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
+
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class],
+                                                                                @selector(viewWillDisappear:),
+                                                                                BOOL,
+                                                                                ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
             [selfObject nx_checkChildViewControllers];
             selfObject.nx_viewWillDisappearFinished = YES;
         });
         
-        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(traitCollectionDidChange:), BOOL, ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class],
+                                                                                @selector(traitCollectionDidChange:),
+                                                                                BOOL,
+                                                                                ^(__kindof UIViewController *_Nonnull selfObject, BOOL animated) {
             [selfObject nx_checkChildViewControllers];
             if (selfObject.nx_canSetupNavigationBar) {
                 selfObject.nx_configuration.viewControllerPreferences.traitCollection = selfObject.view.traitCollection;
@@ -129,7 +151,9 @@
             }
         });
         
-        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(addChildViewController:), UIViewController *, ^(__kindof UIViewController *_Nonnull selfObject, __kindof UIViewController *childViewController) {
+        NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class],
+                                                                                @selector(addChildViewController:), UIViewController *,
+                                                                                ^(__kindof UIViewController *_Nonnull selfObject, __kindof UIViewController *childViewController) {
             if (![selfObject isKindOfClass:[UINavigationController class]]) {
                 childViewController.nx_isChildViewController = YES;
                 if (childViewController.nx_navigationBar.superview) {
@@ -174,6 +198,7 @@
         // fix: 修复 popToRootViewController 时调用 nx_setNeedsNavigationBarAppearanceUpdate 方法会设置 leftBarButtonItem 的问题
         [self.navigationController viewControllers].firstObject.nx_isRootViewController = YES;
         [self.navigationController nx_configureNavigationBar];
+        [self.navigationController nx_configureInteractivePopGestureRecognizerWithViewController:self];
         [self nx_setupNavigationBar];
         [self nx_updateNavigationBarAppearance];
         // UIViewController self.view.frame 发生改变的情况
@@ -250,6 +275,7 @@
             self.navigationController.navigationBar.largeTitleTextAttributes = self.nx_largeTitleTextAttributes;
         }
         [self.navigationController nx_configureNavigationBar];
+        [self.navigationController nx_configureInteractivePopGestureRecognizerWithViewController:self];
         
         self.nx_navigationBar.backgroundColor = self.nx_navigationBarBackgroundColor;
         self.nx_navigationBar.semanticContentAttribute = self.navigationController.navigationBar.semanticContentAttribute;
@@ -415,8 +441,22 @@
 
 - (void)setNx_navigationVirtualWrapperView:(NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
     nx_navigationVirtualWrapperView.context.hostingController = self;
-    self.nx_navigationInteractDelegate = (id<NXNavigationInteractable>)nx_navigationVirtualWrapperView;
+    self.nx_navigationControllerDelegate = (id<NXNavigationControllerDelegate>)nx_navigationVirtualWrapperView;
     objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperView), nx_navigationVirtualWrapperView, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (NXNavigationAction)nx_navigationAction {
+    NSNumber *number = objc_getAssociatedObject(self, _cmd);
+    if (!number || ![number isKindOfClass:[NSNumber class]]) {
+        NXNavigationAction navigationAction = NXNavigationActionUnspecified;
+        [self setNx_navigationAction:navigationAction];
+        return navigationAction;
+    }
+    return [number integerValue];
+}
+
+- (void)setNx_navigationAction:(NXNavigationAction)nx_navigationAction {
+    objc_setAssociatedObject(self, @selector(nx_navigationAction), @(nx_navigationAction), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NXNavigationBar *)nx_navigationBar {
@@ -560,14 +600,54 @@
         if (!self.nx_isRootViewController) {
             [self nx_configureNavigationBarWithNavigationController:self.navigationController];
         }
-        // 重新检查全屏返回手势是否动态修改
-        if ([self.navigationController nx_checkFullScreenInteractivePopGestureEnabledWithViewController:self]) {
-            [self.navigationController nx_configureFullScreenPopGesture];
-        }
+        // 重新检查返回手势是否动态修改
+        [self.navigationController nx_configureInteractivePopGestureRecognizerWithViewController:self];
     }
     [self nx_updateNavigationBarAppearance];
     [self nx_updateNavigationBarHierarchy];
     [self nx_updateNavigationBarSubviewState];
+}
+
+@end
+
+
+@implementation UIViewController (NXNavigationExtensionTransition)
+
+- (UIViewController *)nx_popViewControllerWithPresent:(UIViewController *)viewControllerToPresent
+                                             animated:(BOOL)animated
+                                           completion:(void (^)(void))completion {
+    UINavigationController *navigationController = self.navigationController;
+    if ([self isKindOfClass:[UINavigationController class]]) {
+        navigationController = (UINavigationController *)self;
+    }
+    return [navigationController nx_popViewControllerAnimated:NO completion:^{
+        [self presentViewController:viewControllerToPresent animated:animated completion:completion];
+    }];
+}
+
+- (NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController
+                                                     withPresent:(UIViewController *)viewControllerToPresent
+                                                        animated:(BOOL)animated
+                                                      completion:(void (^)(void))completion {
+    UINavigationController *navigationController = self.navigationController;
+    if ([self isKindOfClass:[UINavigationController class]]) {
+        navigationController = (UINavigationController *)self;
+    }
+    return [navigationController nx_popToViewController:viewController animated:NO completion:^{
+        [self presentViewController:viewControllerToPresent animated:animated completion:completion];
+    }];
+}
+
+- (NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerWithPresent:(UIViewController *)viewControllerToPresent
+                                                                       animated:(BOOL)animated
+                                                                     completion:(void (^)(void))completion {
+    UINavigationController *navigationController = self.navigationController;
+    if ([self isKindOfClass:[UINavigationController class]]) {
+        navigationController = (UINavigationController *)self;
+    }
+    return [navigationController nx_popToRootViewControllerAnimated:NO completion:^{
+        [self presentViewController:viewControllerToPresent animated:animated completion:completion];
+    }];
 }
 
 @end

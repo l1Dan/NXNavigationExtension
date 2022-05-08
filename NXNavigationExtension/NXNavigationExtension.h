@@ -30,12 +30,10 @@ FOUNDATION_EXPORT double NXNavigationExtensionVersionNumber;
 FOUNDATION_EXPORT const unsigned char NXNavigationExtensionVersionString[];
 
 #import <NXNavigationExtension/NXNavigationBar.h>
-#import <NXNavigationExtension/NXNavigationVirtualWrapperView.h>
-
 #import <NXNavigationExtension/NXNavigationConfiguration.h>
 #import <NXNavigationExtension/NXNavigationRouter.h>
+#import <NXNavigationExtension/NXNavigationVirtualWrapperView.h>
 
 #import <NXNavigationExtension/NXNavigationExtension+Deprecated.h>
 #import <NXNavigationExtension/UINavigationController+NXNavigationExtension.h>
 #import <NXNavigationExtension/UIViewController+NXNavigationExtension.h>
-

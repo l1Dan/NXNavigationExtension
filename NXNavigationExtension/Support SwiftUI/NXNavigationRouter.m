@@ -74,7 +74,7 @@
     
     if (self.callNXPopMethod) {
         self.callNXPopMethod = NO;
-        return [navigationController nx_popViewControllerAnimated:animated] ? YES : NO;
+        return [navigationController nx_popViewControllerAnimated:animated completion:NULL] ? YES : NO;
     } else {
         return [navigationController popViewControllerAnimated:animated] ? YES : NO;
     }
@@ -149,7 +149,7 @@
     if ([routeName isEqualToString:@"/"]) {
         if (self.callNXPopMethod) {
             self.callNXPopMethod = NO;
-            return [navigationController nx_popToRootViewControllerAnimated:animated] ? YES : NO;
+            return [navigationController nx_popToRootViewControllerAnimated:animated completion:NULL] ? YES : NO;
         } else {
             return [navigationController popToRootViewControllerAnimated:animated] ? YES : NO;
         }
@@ -159,7 +159,7 @@
     if (viewController) {
         if (self.callNXPopMethod) {
             self.callNXPopMethod = NO;
-            return [navigationController nx_popToViewController:viewController animated:animated] ? YES : NO;
+            return [navigationController nx_popToViewController:viewController animated:animated completion:NULL] ? YES : NO;
         } else {
             return [navigationController popToViewController:viewController animated:animated] ? YES : NO;
         }

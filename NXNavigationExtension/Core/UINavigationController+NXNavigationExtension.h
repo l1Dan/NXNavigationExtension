@@ -35,30 +35,73 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 处理视图控制器转场时的周期事件
+typedef NS_ENUM(NSUInteger, NXNavigationAction) {
+    NXNavigationActionUnspecified,   // 初始、各种动作的 completed 之后都会立即转入 unspecified 状态
+
+    NXNavigationActionWillPush,      // push 方法被触发，但尚未进行真正的 push 动作
+    NXNavigationActionDidPush,       // 系统的 push 已经执行完，viewControllers 已被刷新
+    NXNavigationActionPushCancelled, // 系统的 push 被取消，还是停留在当前页面
+    NXNavigationActionPushCompleted, // push 动画结束（如果没有动画，则在 did push 后立即进入 completed）
+
+    NXNavigationActionWillPop,      // pop 方法被触发，但尚未进行真正的 pop 动作
+    NXNavigationActionDidPop,       // 系统的 pop 已经执行完，viewControllers 已被刷新（注意可能有 pop 失败的情况）
+    NXNavigationActionPopCancelled, // 系统的 pop 被取消，还是停留在当前页面
+    NXNavigationActionPopCompleted, // pop 动画结束（如果没有动画，则在 did pop 后立即进入 completed）
+
+    NXNavigationActionWillSet,      // setViewControllers 方法被触发，但尚未进行真正的 set 动作
+    NXNavigationActionDidSet,       // 系统的 setViewControllers 已经执行完，viewControllers 已被刷新
+    NXNavigationActionSetCancelled, // 系统的 setViewControllers 被取消，还是停留在当前页面
+    NXNavigationActionSetCompleted, // setViewControllers 动画结束（如果没有动画，则在 did set 后立即进入 completed）
+};
+
+/// 匹配视图控制器在 UINavigationController 的 viewControllers 栈中的位置
+/// `NXNavigationStackPositionFirst` 匹配到栈的第一个视图控制器
+/// `NXNavigationStackPositionLast` 匹配到栈的最后一个视图控制器
+typedef NS_ENUM(NSUInteger, NXNavigationStackPosition) {
+    NXNavigationStackPositionLast = 0, // Default
+    NXNavigationStackPositionFirst = 1,
+};
+
+/// 返回页面使用的交互方式
+/// `NXNavigationInteractiveTypeCallNXPopMethod` 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 回调方式
+/// `NXNavigationInteractiveTypeBackButtonMenuAction` 需要设置 `useSystemBackButton = YES` 或者 `nx_useSystemBackButton = YES`
+typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
+    NXNavigationInteractiveTypeCallNXPopMethod,      // 调用 `nx_pop` 系列方法返回
+    NXNavigationInteractiveTypeBackButtonAction,     // 点击返回按钮返回
+    NXNavigationInteractiveTypeBackButtonMenuAction, // 长按返回按钮选择菜单返回
+    NXNavigationInteractiveTypePopGestureRecognizer, // 使用手势交互返回
+};
+
+@protocol NXNavigationControllerDelegate <NSObject>
+
+@optional
+
+/// 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作，某些业务场景中点击返回按钮或者手势滑动返回时需要弹框，可以直接使用这个代理拦截事件处理
+/// 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 等方法后也会触发这个代理回调
+/// @param navigationController 当前使用的导航控制器
+/// @param viewController 即将要 Pop 的视图控制器
+/// @param interactiveType 返回页面使用的交互方式
+/// @return `YES` 表示不中断返回操作继续执行；`NO` 表示中断返回操作
+- (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController
+          willPopViewController:(__kindof UIViewController *)viewController
+                interactiveType:(NXNavigationInteractiveType)interactiveType;
+
+/// 处理视图控制器转场的周期事件
+/// @param navigationController 当前使用的导航控制器
+/// @param viewController 正在处理的视图控制器
+/// @param navigationAction 当前转场周期实践
+- (void)nx_navigationController:(__kindof UINavigationController *)navigationController
+          processViewController:(__kindof UIViewController *)viewController
+               navigationAction:(NXNavigationAction)navigationAction;
+
+@end
+
 
 @interface UINavigationController (NXNavigationExtension)
 
 /// 全屏手势识别器
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *nx_fullScreenPopGestureRecognizer;
-
-/// 调用此方法可以触发调用 id<NXNavigationInteractable> 代理方法
-/// 可以统一处理手势滑动返回和自定义返回按钮点击返回的拦截操作
-/// 内部最终会调用系统方法：`popViewControllerAnimated:`
-/// @param animated 默认 YES
-- (nullable UIViewController *)nx_popViewControllerAnimated:(BOOL)animated;
-
-/// 调用此方法可以触发调用 id<NXNavigationInteractable> 代理方法
-/// 可以统一处理手势滑动返回和自定义返回按钮点击返回的拦截操作
-/// 内部最终会调用系统方法：`popToViewController:animated:`
-/// @param viewController UIViewController
-/// @param animated 默认 YES
-- (nullable NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController animated:(BOOL)animated NS_SWIFT_NAME(nx_popToViewController(_:animated:));
-
-/// 调用此方法可以触发调用 id<NXNavigationInteractable> 代理方法
-/// 可以统一处理手势滑动返回和自定义返回按钮点击返回的拦截操作
-/// 内部最终会调用系统方法：`popToRootViewControllerAnimated:`
-/// @param animated 默认 YES
-- (nullable NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerAnimated:(BOOL)animated;
 
 /// 即将应用配置到已经注册的导航控制器所管理的视图控制器的回调，每个视图控制器控实例对象只会调用一次。
 /// @param callback 设置将要配置的信息
@@ -67,13 +110,93 @@ NS_ASSUME_NONNULL_BEGIN
 /// For SwiftUI，应用 NXNavigationVirtualWrapperView 实例对象的查找规则
 - (void)nx_applyFilterNavigationVirtualWrapperViewRuleCallback:(NXNavigationVirtualWrapperViewFilterCallback)callback API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
-/// 重定向视图控制器。可以跳转同一导航控制器下的任一视图控制器
-/// 只会判断视图控制器实例对象的类型（`Class`）是否相同，而非判断视图控制器实例对象（`Instance`）相同
-/// 查找规则是从栈（ViewControllers）前往后查找，如果没有找到则调用 `block`，`block == NULL` 或者 `return nil;` 重定向都不会生效
-/// 执行操作之后调用 `popViewControllerAnimated:` 方法，就可以返回到指定视图控制器类型（`Class`）对应的实例中去
-/// @param aClass 指定需要跳转的视图控制器类型
-/// @param block 如果指定的视图控制器类型没有找到，则会使用回调来获取需要创建的视图控制器实例对象
-- (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController *_Nullable (^__nullable)(void))block;
+@end
+
+
+@interface UINavigationController (NXNavigationExtensionTransition)
+
+/// 调用 Push 视图控制器方法，并添加动画完成时的回调
+/// @param viewController 需要 Push 的视图控制器
+/// @param animated 默认 YES
+/// @param completion Push 动画完成时的回调
+- (void)nx_pushViewController:(UIViewController *)viewController
+                     animated:(BOOL)animated
+                   completion:(void (^__nullable)(void))completion NS_SWIFT_ASYNC_NAME(nx_pushViewController(_:animated:));
+
+/// 调用此方法可以触发调用 id<NXNavigationControllerDelegate> 代理方法
+/// 可以统一处理手势滑动返回和自定义返回按钮点击返回的拦截操作
+/// 内部最终会调用系统方法：`popViewControllerAnimated:`
+/// @param animated 默认 YES
+/// @param completion Pop 动画完成时的回调
+- (nullable UIViewController *)nx_popViewControllerAnimated:(BOOL)animated
+                                                 completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popViewController(animated:completion:));
+
+/// 调用此方法可以触发调用 id<NXNavigationControllerDelegate> 代理方法
+/// 可以统一处理手势滑动返回和自定义返回按钮点击返回的拦截操作
+/// 内部最终会调用系统方法：`popToViewController:animated:`
+/// @param viewController 需要 Pop 的视图控制器
+/// @param animated 默认 YES
+/// @param completion Pop 动画完成时的回调
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController
+                                                                 animated:(BOOL)animated
+                                                               completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToViewController(_:animated:completion:));
+
+/// 调用此方法可以触发调用 id<NXNavigationControllerDelegate> 代理方法
+/// 可以统一处理手势滑动返回和自定义返回按钮点击返回的拦截操作
+/// 内部最终会调用系统方法：`popToRootViewControllerAnimated:`
+/// @param animated 默认 YES
+/// @param completion Pop 动画完成时的回调
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerAnimated:(BOOL)animated
+                                                                           completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToRootViewController(animated:completion:));
+
+/// Pop 视图控制器的同时 Push 一个新的视图控制器
+/// @param viewControllerToPush 需要 Push 的视图控制器
+/// @param animated 默认 YES
+/// @param completion Push 动画完成时的回调
+- (nullable UIViewController *)nx_popViewControllerWithPush:(UIViewController *)viewControllerToPush
+                                                   animated:(BOOL)animated
+                                                 completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popViewControllerWithPush(_:animated:completion:));
+
+/// Pop 视图控制器的同时 Push 一个新的视图控制器
+/// @param viewController 需要 Pop 的视图控制器
+/// @param viewControllerToPush 需要 Push 的视图控制器
+/// @param animated 默认 YES
+/// @param completion Push 动画完成时的回调
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController
+                                                                 withPush:(UIViewController *)viewControllerToPush
+                                                                 animated:(BOOL)animated
+                                                               completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToViewController(_:withPush:animated:completion:));
+
+/// Pop 视图控制器的同时 Push 一个新的视图控制器
+/// @param viewControllerToPush 需要 Push 的视图控制器
+/// @param animated 默认 YES
+/// @param completion Push 动画完成时的回调
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerWithPush:(UIViewController *)viewControllerToPush
+                                                                             animated:(BOOL)animated
+                                                                           completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToRootViewControllerWithPush(_:animated:completion:));
+
+/// 设置 UINavigationController 的 viewControllers
+/// @param viewControllers 需要设置的 viewControllers
+/// @param animated 默认 YES
+/// @param completion Set  viewControllers 动画完成时的回调
+- (void)nx_setViewControllers:(NSArray<UIViewController *> *)viewControllers
+                     animated:(BOOL)animated
+                   completion:(void (^__nullable)(void))completion NS_SWIFT_ASYNC_NAME(nx_setViewControllers(_:animated:));
+
+/// 内部调用 `nx_removeViewControllersUntilClass:withNavigationStackPosition:insertsToBelowWhenNotFoundUsingBlock:`
+/// 默认匹配栈中最后一个视图控制器l类型，NXNavigationStackPositionLast
+- (void)nx_removeViewControllersUntilClass:(Class)aClass
+      insertsToBelowWhenNotFoundUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block;
+
+/// 此特性针对 UINavigationController 中的 viewControllers 栈属性操作。
+/// 主要处理当前页面的上一级页面该如何显示的问题，合理利用此特性能够增强使用手势滑动返回或者点击返回按钮返回页面时的体验。
+/// 如果匹配到视图控制器的类型，则丢弃栈中其他的 ViewControllers 实例，没有匹配到则添加从 block 返回的 ViewController 实例到栈中。
+/// @param aClass 需要匹配的 UIViewController 类型
+/// @param position 指定需要匹配视图控制器的类型的位置
+/// @param block 如果目标 UIViewController 类型没有匹配到需要创建一个新的 UIViewController 实例
+- (void)nx_removeViewControllersUntilClass:(Class)aClass
+               withNavigationStackPosition:(NXNavigationStackPosition)position
+      insertsToBelowWhenNotFoundUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block;
 
 @end
 

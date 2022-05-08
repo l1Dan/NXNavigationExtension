@@ -24,7 +24,7 @@
 #import <objc/runtime.h>
 
 #import "NXNavigationExtension+Deprecated.h"
-
+#import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
 
 
@@ -62,6 +62,22 @@
 
 - (BOOL)nx_fullScreenInteractivePopGestureEnabled {
     return NO;
+}
+
+- (UIViewController *)nx_popViewControllerAnimated:(BOOL)animated {
+    return [self nx_popViewControllerAnimated:animated completion:NULL];
+}
+
+- (NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    return [self nx_popToViewController:viewController animated:animated completion:NULL];
+}
+
+- (NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerAnimated:(BOOL)animated {
+    return [self nx_popToRootViewControllerAnimated:animated completion:NULL];
+}
+
+- (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block {
+    [self nx_removeViewControllersUntilClass:aClass insertsToBelowWhenNotFoundUsingBlock:block];
 }
 
 @end

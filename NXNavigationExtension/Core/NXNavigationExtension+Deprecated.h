@@ -25,15 +25,20 @@
 
 #if __has_include(<NXNavigationExtension/NXNavigationExtension.h>)
 
-#import <NXNavigationExtension/NXNavigationConfiguration.h>
+#import <NXNavigationExtension/UINavigationController+NXNavigationExtension.h>
 
 #else
 
-#import "NXNavigationConfiguration.h"
+#import "UINavigationController+NXNavigationExtension.h"
 
 #endif /* __has_include */
 
 NS_ASSUME_NONNULL_BEGIN
+
+API_DEPRECATED("Use NXNavigationControllerDelegate.", ios(2.0, 2.0))
+@protocol NXNavigationInteractable <NXNavigationControllerDelegate>
+
+@end
 
 
 @interface NXNavigationControllerPreferences (NXNavigationExtensionDeprecated)
@@ -54,6 +59,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readonly) BOOL nx_fullScreenInteractivePopGestureEnabled API_DEPRECATED("Use UIViewController nx_enableFullScreenInteractivePopGesture instead.", ios(2.0, 2.0));
 
+- (nullable UIViewController *)nx_popViewControllerAnimated:(BOOL)animated OBJC_SWIFT_UNAVAILABLE("")API_DEPRECATED("use UINavigationController nx_popViewController(animated:completion:) method.", ios(2.0, 2.0));
+
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController
+                                                                 animated:(BOOL)animated OBJC_SWIFT_UNAVAILABLE("")API_DEPRECATED("use UINavigationController nx_popToViewController(_:animated:completion:)) method.", ios(2.0, 2.0));
+
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerAnimated:(BOOL)animated OBJC_SWIFT_UNAVAILABLE("")API_DEPRECATED("use UINavigationController nx_popToRootViewController(animated:completion:) method", ios(2.0, 2.0));
+
+- (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController *_Nullable (^__nullable)(void))block API_DEPRECATED("Use UINavigationController - nx_removeViewControllersUntilClass:insertsToBelowWhenNotFoundUsingBlock: instead.", ios(2.0, 2.0));
+
 @end
 
 
@@ -62,6 +76,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL nx_contentViewWithoutNavigationBar API_DEPRECATED("Use nx_systemNavigationBarUserInteractionDisabled instead.", ios(2.0, 2.0));
 
 @end
-
 
 NS_ASSUME_NONNULL_END

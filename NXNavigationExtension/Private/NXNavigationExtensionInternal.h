@@ -21,7 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <NXNavigationConfiguration.h>
+#import <UINavigationController+NXNavigationExtension.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -119,36 +119,46 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 /// 配置 NXNavigationBar
 - (void)nx_configureNavigationBar;
 
-/// 配置全屏返回手势
-- (void)nx_configureFullScreenPopGesture;
+/// 配置返回手势
+- (void)nx_configureInteractivePopGestureRecognizerWithViewController:(__kindof UIViewController *)viewController;
 
 /// 控制器返回页面统一跳转逻辑
 /// @param destinationViewController 目标视图控制器
 /// @param interactiveType 当前返回执行的交互方式
+/// @param completion 转场动画完成或取消后的回调
 /// @param handler 处理跳转的回调
 - (id)nx_triggerSystemPopViewController:(__kindof UIViewController *)destinationViewController
                         interactiveType:(NXNavigationInteractiveType)interactiveType
+   animateAlongsideTransitionCompletion:(void (^__nullable)(void))completion
                                 handler:(id (^)(UINavigationController *navigationController))handler;
-
-/// 检查全屏返回手势是否可用
-/// @param viewController 当前的视图控制器
-- (BOOL)nx_checkFullScreenInteractivePopGestureEnabledWithViewController:(__kindof UIViewController *)viewController;
 
 /// 调整系统返回按钮设置
 /// @param currentViewController 当前需要调整系统返回按钮设置的视图控制器
 /// @param previousViewControllers 不包括 `currentViewController` 前面的所有视图控制器
-- (void)nx_adjustmentSystemBackButtonForViewController:(__kindof UIViewController *)currentViewController inViewControllers:(NSArray<__kindof UIViewController *> *)previousViewControllers;
+- (void)nx_adjustmentSystemBackButtonForViewController:(__kindof UIViewController *)currentViewController
+                                     inViewControllers:(NSArray<__kindof UIViewController *> *)previousViewControllers;
 
-/// 准备 Pop 视图控制器的最后检查。主要检查代理 `nx_navigationInteractDelegate` 和视图控制器是否有实现 `id<NXNavigationInteractable>` 代理逻辑。
+/// 准备 Pop 视图控制器的最后检查。主要检查代理 `nx_navigationInteractDelegate` 和视图控制器是否有实现 `id<NXNavigationControllerDelegate>` 代理逻辑。
 /// @param currentViewController 当前所处的视图控制器
 /// @param destinationViewController 需要 Pop 到的目标视图控制器
 /// @param interactiveType 当前 Pop 视图控制器的的交互类型
-- (BOOL)nx_viewController:(__kindof UIViewController *)currentViewController preparePopViewController:(__kindof UIViewController *)destinationViewController interactiveType:(NXNavigationInteractiveType)interactiveType;
+- (BOOL)nx_viewController:(__kindof UIViewController *)currentViewController
+    preparePopViewController:(__kindof UIViewController *)destinationViewController
+             interactiveType:(NXNavigationInteractiveType)interactiveType;
+
+/// 处理即将显示的视图控制器的转场周期事件
+/// @param appearingViewController 即将显示的视图控制器
+/// @param navigationAction 当前视图控制器的转场周期事件
+- (void)nx_processViewController:(__kindof UIViewController *)appearingViewController
+                navigationAction:(NXNavigationAction)navigationAction;
 
 @end
 
 
 @interface UIViewController (NXNavigationExtensionInternal)
+
+/// 获取当前视图控制器转场周期事件
+@property (nonatomic, assign) NXNavigationAction nx_navigationAction;
 
 /// 记录当前视图控制器是否为导航控制器的 rootViewController
 @property (nonatomic, assign) BOOL nx_isRootViewController;
@@ -157,7 +167,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 @property (nonatomic, assign) BOOL nx_isChildViewController;
 
 /// For SwiftUI，返回页面时交互事件代理
-@property (nonatomic, weak, nullable) id<NXNavigationInteractable> nx_navigationInteractDelegate;
+@property (nonatomic, weak, nullable) id<NXNavigationControllerDelegate> nx_navigationControllerDelegate;
 
 /// 获取当前导航控制器的配置
 @property (nonatomic, strong, nullable) NXNavigationConfiguration *nx_configuration;
@@ -168,6 +178,13 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 /// 设置 UINavigationBarItem
 /// @param navigationController 包含当前视图控制器的导航控制器
 - (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController;
+
+/// 可用于对  View 执行一些操作， 如果此时处于转场过渡中，这些操作会跟随转场进度以动画的形式展示过程
+/// 如果处于非转场过程中，也会执行 animation ，随后执行 completion，业务无需关心是否处于转场过程中。
+/// @param animation 要执行的操作
+/// @param completion 转场动画完成或取消后的回调
+- (void)nx_animateAlongsideTransition:(void (^__nullable)(id<UIViewControllerTransitionCoordinatorContext> context))animation
+                           completion:(void (^__nullable)(id<UIViewControllerTransitionCoordinatorContext> context))completion;
 
 @end
 

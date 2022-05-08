@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import "NXNavigationBar.h"
+
 #import "NXNavigationExtensionRuntime.h"
 
 

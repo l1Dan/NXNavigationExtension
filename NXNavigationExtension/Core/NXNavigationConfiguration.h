@@ -34,30 +34,8 @@ typedef NXNavigationConfiguration *_Nullable (^_Nullable NXNavigationControllerP
 
 typedef void (^_Nullable NXViewControllerPrepareConfigurationCallback)(__kindof UIViewController *viewController, NXNavigationConfiguration *configuration);
 
-/// 返回页面使用的交互方式
-/// `NXNavigationInteractiveTypeCallNXPopMethod` 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 回调方式
-/// `NXNavigationInteractiveTypeBackButtonMenuAction` 需要设置 `useSystemBackButton = YES` 或者 `nx_useSystemBackButton = YES`
-typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
-    NXNavigationInteractiveTypeCallNXPopMethod,      // 调用 `nx_pop` 系列方法返回
-    NXNavigationInteractiveTypeBackButtonAction,     // 点击返回按钮返回
-    NXNavigationInteractiveTypeBackButtonMenuAction, // 长按返回按钮选择菜单返回
-    NXNavigationInteractiveTypePopGestureRecognizer, // 使用手势交互返回
-};
 
-@protocol NXNavigationInteractable <NSObject>
-
-/// 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
-/// 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 等方法后也会触发这个代理回调
-/// @param navigationController 当前使用的导航控制器
-/// @param viewController 即将要 Pop 的视图控制器
-/// @param interactiveType 返回页面使用的交互方式
-/// @return `YES` 表示不中断返回操作继续执行；`NO` 表示中断返回操作
-- (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController willPopViewController:(__kindof UIViewController *)viewController interactiveType:(NXNavigationInteractiveType)interactiveType;
-
-@end
-
-
-@interface NXNavigationBarAppearance : NSObject<NSCopying>
+@interface NXNavigationBarAppearance : NSObject <NSCopying>
 
 /// 设置 NXNavigationBar 背景颜色，默认：[UIColor systemBlueColor]，这样处理能够快速辨别框架是否生效
 @property (nonatomic, strong) UIColor *backgroundColor;
@@ -71,7 +49,7 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
 /// 设置 NXNavigationBar 底部阴影图片
 @property (nonatomic, strong, nullable) UIImage *shadowImage;
 
-/// 设置 NXNavigationBar 底部阴影
+/// 设置 NXNavigationBar 底部阴影颜色
 @property (nonatomic, strong, nullable) UIColor *shadowColor;
 
 /// 设置 UINavigationBar titleTextAttributes
@@ -129,7 +107,7 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
 /// 是否启用全屏返回；默认 NO
 @property (nonatomic, assign) BOOL enableFullScreenInteractivePopGesture;
 
-/// 是否自动隐藏 NavigationBar；默认 YES
+/// 是否自动隐藏 childViewController 的 NavigationBar；默认 YES
 @property (nonatomic, assign) BOOL automaticallyHideNavigationBarInChildViewController;
 
 /// 设置导航栏是否透明（类似导航栏隐藏的效果，当不是真正意思的隐藏）。不推荐直接设置系统导航栏的显示或隐藏。
