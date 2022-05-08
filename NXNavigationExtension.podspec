@@ -1,8 +1,8 @@
 Pod::Spec.new do |spec|
 
   spec.name     = 'NXNavigationExtension'
-  spec.version  = '4.0.4'
-  spec.summary  = '🔥 NXNavigationExtension 是为 UINavigationBar 设计的轻量级的、简单的、可扩展的库，支持 SwiftUI 和 UIKit。'
+  spec.version  = '4.1.0'
+  spec.summary  = '🔥 Lightweight, simple, and easy-to-use NavigationBar library.'
 
   spec.description  = <<-DESC
   '🔥 NXNavigationExtension 是为 UINavigationBar 设计的轻量级的、简单的、可扩展的库，支持 SwiftUI 和 UIKit。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。可能是最省心的 iOS 导航栏处理框架之一。'
