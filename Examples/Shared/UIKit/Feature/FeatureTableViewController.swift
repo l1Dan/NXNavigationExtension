@@ -49,7 +49,7 @@ class FeatureTableViewController: BaseTableViewController {
         case .navigationBarDisable: return ViewController05_NavigationBarDisable()
         case .webView: return ViewController06_WebView()
         case .updateNavigationBar: return ViewController07_UpdateNavigationBar()
-        case .redirectViewController: return ViewController08_RedirectViewController()
+        case .jumpToViewController: return ViewController08_JumpToViewController()
         case .scrollChangeNavigationBar: return ViewController09_ScrollChangeNavigationBar()
         case .customViewControllerTransitionAnimation:
             animationTransitionDelegate.openDrawer()

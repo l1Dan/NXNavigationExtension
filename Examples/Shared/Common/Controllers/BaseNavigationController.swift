@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NXNavigationExtension
 
 class BaseNavigationController: UINavigationController {
     
@@ -79,8 +80,8 @@ class BaseViewController: UIViewController {
 
 }
 
-extension BaseViewController {
-    
+extension BaseViewController: NXNavigationControllerDelegate {
+
     override var nx_barTintColor: UIColor? {
         return .customTitle
     }
@@ -91,6 +92,10 @@ extension BaseViewController {
     
     override var nx_shadowImageTintColor: UIColor? {
         return UIColor.customColor { .lightGray } darkModeColor: { .lightGray.withAlphaComponent(0.65) }
+    }
+    
+    func nx_navigationController(_ navigationController: UINavigationController, processViewController viewController: UIViewController, navigationAction: NXNavigationAction) {
+        print("\(viewController) - \(NavigationBackEvent.toNavigationActionString(navigationAction))")
     }
     
 }

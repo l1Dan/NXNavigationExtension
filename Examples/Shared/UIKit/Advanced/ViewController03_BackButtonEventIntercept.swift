@@ -105,7 +105,7 @@ class ViewController03_BackButtonEventIntercept: BaseTableViewController {
 
 }
 
-extension ViewController03_BackButtonEventIntercept: NXNavigationInteractable {
+extension ViewController03_BackButtonEventIntercept {
     
     override var nx_shadowImageTintColor: UIColor? {
         return UIColor.customColor { .lightGray } darkModeColor: { .lightGray.withAlphaComponent(0.69) }

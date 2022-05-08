@@ -91,7 +91,7 @@ class HierarchyViewController: BaseViewController, UITableViewDelegate, UITableV
                 cell.backgroundColor = viewController.randomColor
             }
         } else {
-            cell.textLabel?.text = "(*)New a ViewController in stack"
+            cell.textLabel?.text = "(*)Inserts to below a Instance"
             cell.textLabel?.textColor = UIColor.systemRed
         }
         

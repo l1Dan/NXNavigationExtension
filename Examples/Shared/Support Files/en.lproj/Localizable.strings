@@ -40,7 +40,7 @@
 "updateNavigationBar" = "Update navigation bar style";
 
 // UIKit only
-"redirectViewController" = "Redirect UIViewController";
+"JumpToViewController" = "Jump To UIViewController";
 "scrollChangeNavigationBar" = "Dynamically change navigation bar";
 "customViewControllerTransitionAnimation" = "Custom Transition & Animation";
 
@@ -65,5 +65,5 @@
 "resolveGestureConflicts" = "Resolve gesture conflicts";
 "pushTo" = "Push to: ";
 "selectViewControllerClass" = "🚀Select view controller class type";
-"redirectTo" = "⭐️Redirect to: ";
-"redirectMessage" = "";
+"jumpTo" = "⭐️Jump to: ";
+"jumpMessage" = "";

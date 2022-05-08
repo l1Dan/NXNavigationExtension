@@ -191,13 +191,13 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
 
 }
 
-extension ViewController06_WebView: NXNavigationInteractable {
+extension ViewController06_WebView {
     
     override var nx_navigationBarBackgroundColor: UIColor? {
         return randomColor
     }
 
-    // MARK: - NXNavigationInteractable
+    // MARK: - NXNavigationControllerDelegate
 
     func nx_navigationController(_ navigationController: UINavigationController, willPop viewController: UIViewController, interactiveType: NXNavigationInteractiveType) -> Bool {
         if interactiveType != .popGestureRecognizer && webView.canGoBack {
