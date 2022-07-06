@@ -40,7 +40,7 @@
 "updateNavigationBar" = "Update navigation bar style";
 
 // UIKit only
-"JumpToViewController" = "Jump To UIViewController";
+"jumpToViewController" = "Jump To UIViewController";
 "scrollChangeNavigationBar" = "Dynamically change navigation bar";
 "customViewControllerTransitionAnimation" = "Custom Transition & Animation";
 
