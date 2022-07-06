@@ -388,12 +388,12 @@
             id internalTarget = [internalTargets.firstObject valueForKey:@"target"];
             SEL internalAction = NSSelectorFromString(@"handleNavigationTransition:");
             [self.nx_fullScreenPopGestureRecognizer addTarget:internalTarget action:internalAction];
-            
-            self.interactivePopGestureRecognizer.enabled = NO;
-            self.nx_fullScreenPopGestureRecognizer.delegate = self.nx_fullScreenPopGestureDelegate;
         }
+        self.interactivePopGestureRecognizer.enabled = NO;
+        self.nx_fullScreenPopGestureRecognizer.enabled = YES;
+        self.nx_fullScreenPopGestureRecognizer.delegate = self.nx_fullScreenPopGestureDelegate;
     } else {
-        [self.interactivePopGestureRecognizer.view removeGestureRecognizer:self.nx_fullScreenPopGestureRecognizer];
+        self.nx_fullScreenPopGestureRecognizer.enabled = NO;
         self.interactivePopGestureRecognizer.enabled = YES;
         self.interactivePopGestureRecognizer.delegate = self.nx_screenEdgePopGestureDelegate;
     }

@@ -81,8 +81,7 @@
                     }
                     
                     // call super
-                    BOOL (*originSelectorIMP)
-                    (id, SEL, id);
+                    BOOL (*originSelectorIMP)(id, SEL, id);
                     originSelectorIMP = (BOOL(*)(id, SEL, id))originalIMPProvider();
                     return originSelectorIMP(selfObject, originCMD, item);
                 };
@@ -130,7 +129,7 @@
                 if (selfObject.viewControllers.count > 0) {
                     [viewController nx_configureNavigationBarWithNavigationController:selfObject];
                 }
-                
+                // 重新检查返回手势是否动态修改
                 [selfObject nx_configureInteractivePopGestureRecognizerWithViewController:viewController];
                 
                 UIViewController *appearingViewController = viewController;
@@ -325,7 +324,7 @@
                             [viewController nx_configureNavigationBarWithNavigationController:selfObject];
                         }
                         [previousViewControllers addObject:viewController];
-
+                        // 重新检查返回手势是否动态修改
                         [selfObject nx_configureInteractivePopGestureRecognizerWithViewController:viewController];
                     }
                 }

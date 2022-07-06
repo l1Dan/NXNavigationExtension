@@ -72,8 +72,7 @@
                                                     @selector(extendedLayoutIncludesOpaqueBars),
                                                     ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
             return ^BOOL(__unsafe_unretained __kindof UIViewController *selfObject) {
-                BOOL (*originSelectorIMP)
-                (id, SEL);
+                BOOL (*originSelectorIMP)(id, SEL);
                 originSelectorIMP = (BOOL(*)(id, SEL))originalIMPProvider();
                 BOOL result = originSelectorIMP(selfObject, originCMD);
                 [selfObject nx_checkChildViewControllers];
@@ -198,7 +197,6 @@
         // fix: 修复 popToRootViewController 时调用 nx_setNeedsNavigationBarAppearanceUpdate 方法会设置 leftBarButtonItem 的问题
         [self.navigationController viewControllers].firstObject.nx_isRootViewController = YES;
         [self.navigationController nx_configureNavigationBar];
-        [self.navigationController nx_configureInteractivePopGestureRecognizerWithViewController:self];
         [self nx_setupNavigationBar];
         [self nx_updateNavigationBarAppearance];
         // UIViewController self.view.frame 发生改变的情况
@@ -275,7 +273,6 @@
             self.navigationController.navigationBar.largeTitleTextAttributes = self.nx_largeTitleTextAttributes;
         }
         [self.navigationController nx_configureNavigationBar];
-        [self.navigationController nx_configureInteractivePopGestureRecognizerWithViewController:self];
         
         self.nx_navigationBar.backgroundColor = self.nx_navigationBarBackgroundColor;
         self.nx_navigationBar.semanticContentAttribute = self.navigationController.navigationBar.semanticContentAttribute;
