@@ -114,6 +114,12 @@ dependencies: [
 - 阅读 [**SwiftUI Guide**](https://github.com/l1Dan/NXNavigationExtension/blob/main/Documentation/NXNavigationExtensionSwiftUI.md) 文档。
 - 阅读 [**UIKit Guide**](https://github.com/l1Dan/NXNavigationExtension/blob/main/Documentation/NXNavigationExtensionUIKit.md) 文档。
 
+## ❤️ 感谢 [JetBrains](https://jb.gg/OpenSourceSupport) 对开源项目的支持
+
+<p align="left" >
+  <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" alt="jb_beam" title="jb_beam" width="200px">
+</p>
+
 ## 🔍 FAQ 常见问题
 
 Q：iOS14 及之后的版本为什么注册了 `UIImagePickerController`、`PHPickerViewController` 类之后还是无法修改导航栏的外观？
@@ -164,7 +170,7 @@ A：因为导航栏的系统返回按钮是用 `self.navigationItem.backBarButto
 
 ---
 
-## ⭐️ 鸣谢
+## ⭐️ 参考链接
 
 - [QMUI_iOS](https://github.com/Tencent/QMUI_iOS)
 - [FDFullscreenPopGesture](https://github.com/forkingdog/FDFullscreenPopGesture)
