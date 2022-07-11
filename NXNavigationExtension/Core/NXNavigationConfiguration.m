@@ -87,22 +87,34 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
     return newAppearance;
 }
 
-#pragma mark - Getter
+- (UIImage *)backImageWithData:(NSData *)imageData scale:(CGFloat)scale {
+    UIImage *backImage = nil;
+    if (@available(iOS 14.0, *)) {
+        UIImageSymbolConfiguration *imageSymbolConfiguration = [UIImageSymbolConfiguration configurationWithWeight:UIImageSymbolWeightMedium];
+        backImage = [UIImage systemImageNamed:@"chevron.backward" withConfiguration:imageSymbolConfiguration];
+    } else if (@available(iOS 13.0, *)) {
+        UIFont *font = [UIFont systemFontOfSize:18.0 weight:UIFontWeightSemibold];
+        UIImageSymbolConfiguration *imageSymbolConfiguration = [UIImageSymbolConfiguration configurationWithFont:font scale:UIImageSymbolScaleLarge];
+        backImage = [UIImage systemImageNamed:@"chevron.left" withConfiguration:imageSymbolConfiguration];
+    }
+    
+    if (!backImage && imageData) {
+        backImage = [UIImage imageWithData:imageData scale:scale];
+    }
+    
+    return backImage;
+}
 
 - (UIImage *)backImage {
     if (!_backImage) {
-        if (self.imageData) {
-            _backImage = [UIImage imageWithData:self.imageData scale:2.0];
-        }
+        _backImage = [self backImageWithData:self.imageData scale:2.0];
     }
     return _backImage;
 }
 
 - (UIImage *)landscapeBackImage {
     if (!_landscapeBackImage) {
-        if (self.imageData) {
-            _landscapeBackImage = [UIImage imageWithData:self.imageData scale:3.0];
-        }
+        _landscapeBackImage = [self backImageWithData:self.imageData scale:3.0];
     }
     return _landscapeBackImage;
 }
