@@ -290,16 +290,6 @@
                     callSuperBlock();
                     return;
                 }
-                    NXDebugLog(@"popToRootViewController 时上一次的转场尚未完成，系统会忽略本次 pop，等上一次转场完成后再重新执行 pop, viewControllers = %@", selfObject.viewControllers);
-                NXNavigationAction action = selfObject.nx_navigationAction;
-                if (action != NXNavigationActionUnspecified) {
-                    
-                }
-
-                BOOL willPopActually = selfObject.viewControllers.count > 1 && action == NXNavigationActionUnspecified;
-                if (!willPopActually) {
-                    return callSuperBlock();
-                }
 
                 if (viewControllers.count != [NSSet setWithArray:viewControllers].count) {
                     NXDebugLog(@"setViewControllers 数组里不允许出现重复元素：%@", viewControllers);
