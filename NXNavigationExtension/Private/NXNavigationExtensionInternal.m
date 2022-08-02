@@ -524,7 +524,14 @@
 
 /// 保证 self.navigationController 不为 nil，不要直接调用 navigationController 方法
 - (void)nx_triggerSystemPopViewController {
-    [self.navigationController nx_popViewControllerAnimated:YES completion:NULL];
+    NSArray<UIViewController *> *viewControllers = self.navigationController.viewControllers;
+    UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : nil;
+    [self.navigationController nx_triggerSystemPopViewController:destinationViewController
+                                                 interactiveType:NXNavigationInteractiveTypeBackButtonAction
+                            animateAlongsideTransitionCompletion:NULL
+                                                         handler:^id _Nonnull(UINavigationController *_Nonnull navigationController) {
+        return [navigationController popViewControllerAnimated:YES];
+    }];
 }
 
 - (UIBarButtonItem *)nx_customBackButtonItem {
