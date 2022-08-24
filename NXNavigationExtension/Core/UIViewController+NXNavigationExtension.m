@@ -237,27 +237,24 @@
         __kindof UINavigationController *navigationController = (UINavigationController *)navigationBar.delegate;
         if ([navigationController isKindOfClass:[UINavigationController class]]) {
             for (__kindof UIViewController *viewController in navigationController.viewControllers) {
-                [weakSelf nx_adjustmentNavigationBarAppearanceForUINavigationBar:navigationBar withViewController:viewController];
+                [viewController nx_setNavigationBarHidden:navigationBar.hidden];
             }
         } else {
-            [weakSelf nx_adjustmentNavigationBarAppearanceForUINavigationBar:navigationBar withViewController:weakSelf];
+            [weakSelf nx_setNavigationBarHidden:navigationBar.hidden];
         }
     };
 }
 
 - (void)nx_setNavigationBarHidden:(BOOL)hidden {
-    self.nx_navigationBar.hidden = hidden;
-    self.nx_navigationBar.userInteractionEnabled = !hidden;
-}
-
-- (void)nx_adjustmentNavigationBarAppearanceForUINavigationBar:(UINavigationBar *)navigationBar withViewController:(__kindof UIViewController *)viewController {
     // fix: delay call nx_updateNavigationBarAppearance method.
-    if (self == viewController && viewController.nx_viewWillDisappearFinished) { return; }
+    if (self.nx_viewWillDisappearFinished) { return; }
     
-    if (navigationBar.hidden) {
-        [viewController nx_setNavigationBarHidden:YES];
+    if (self.navigationController.navigationBar.hidden || self.nx_translucentNavigationBar) {
+        self.nx_navigationBar.hidden = YES;
+        self.nx_navigationBar.userInteractionEnabled = NO;
     } else {
-        [viewController nx_setNavigationBarHidden:viewController.nx_translucentNavigationBar];
+        self.nx_navigationBar.hidden = hidden;
+        self.nx_navigationBar.userInteractionEnabled = !hidden;
     }
 }
 
