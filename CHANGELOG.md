@@ -1,5 +1,12 @@
 # CHANGELOG.md
 
+## 4.1.2
+
+1. 优化返回按钮图标显示效果；
+2. 统一返回按钮点击时的交互事件为 NXNavigationInteractiveTypeBackButtonAction；
+3. 修复初始化控制器时，interactivePopGestureRecognizer.delegate 没有设置的问题；
+4. 修复系统导航栏隐藏时 NXNavigationBar 没有隐藏的问题。
+
 ## 4.1.1
 
 1. 移除不必要的手势检查；
