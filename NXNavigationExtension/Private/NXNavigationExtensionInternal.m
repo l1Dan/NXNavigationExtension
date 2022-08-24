@@ -374,6 +374,12 @@
     [self.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [self.navigationBar setShadowImage:[[UIImage alloc] init]];
     [self.navigationBar setTranslucent:YES];
+    [self nx_setupInteractivePopGestureRecognizer];
+}
+
+- (void)nx_setupInteractivePopGestureRecognizer {
+    self.interactivePopGestureRecognizer.enabled = YES;
+    self.interactivePopGestureRecognizer.delegate = self.nx_screenEdgePopGestureDelegate;
 }
 
 - (void)nx_configureInteractivePopGestureRecognizerWithViewController:(__kindof UIViewController *)viewController {
@@ -394,8 +400,7 @@
         self.nx_fullScreenPopGestureRecognizer.delegate = self.nx_fullScreenPopGestureDelegate;
     } else {
         self.nx_fullScreenPopGestureRecognizer.enabled = NO;
-        self.interactivePopGestureRecognizer.enabled = YES;
-        self.interactivePopGestureRecognizer.delegate = self.nx_screenEdgePopGestureDelegate;
+        [self nx_setupInteractivePopGestureRecognizer];
     }
 }
 
