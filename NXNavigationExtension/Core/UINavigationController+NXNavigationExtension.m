@@ -451,9 +451,9 @@
     }];
 }
 
-- (UIViewController *)nx_popViewControllerWithPush:(UIViewController *)viewControllerToPush
-                                          animated:(BOOL)animated
-                                        completion:(void (^)(void))completion {
+- (UIViewController *)nx_popAndPushViewController:(UIViewController *)viewControllerToPush
+                                         animated:(BOOL)animated
+                                       completion:(void (^)(void))completion {
     __weak typeof(self) weakSelf = self;
     return [self nx_popViewControllerAnimated:NO completion:^{
         [weakSelf nx_pushViewController:viewControllerToPush animated:animated completion:completion];
@@ -461,7 +461,7 @@
 }
 
 - (NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController
-                                                        withPush:(UIViewController *)viewControllerToPush
+                                           andPushViewController:(UIViewController *)viewControllerToPush
                                                         animated:(BOOL)animated
                                                       completion:(void (^)(void))completion {
     __weak typeof(self) weakSelf = self;
@@ -470,9 +470,9 @@
     }];
 }
 
-- (NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerWithPush:(UIViewController *)viewControllerToPush
-                                                                    animated:(BOOL)animated
-                                                                  completion:(void (^)(void))completion {
+- (NSArray<__kindof UIViewController *> *)nx_popToRootAndPushViewController:(UIViewController *)viewControllerToPush
+                                                                   animated:(BOOL)animated
+                                                                 completion:(void (^)(void))completion {
     __weak typeof(self) weakSelf = self;
     return [self nx_popToRootViewControllerAnimated:NO completion:^{
         [weakSelf nx_pushViewController:viewControllerToPush animated:animated completion:completion];
@@ -490,18 +490,9 @@
     }
 }
 
-- (void)nx_removeViewControllersUntilClass:(Class)aClass
-      insertsToBelowWhenNotFoundUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block {
-    [self nx_removeViewControllersUntilClass:aClass
-                 withNavigationStackPosition:NXNavigationStackPositionLast
-        insertsToBelowWhenNotFoundUsingBlock:block];
-}
-
-- (void)nx_removeViewControllersUntilClass:(Class)aClass
-               withNavigationStackPosition:(NXNavigationStackPosition)position
-      insertsToBelowWhenNotFoundUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block {
-    BOOL isReverse = (position == NXNavigationStackPositionFirst);
-    NSArray<__kindof UIViewController *> *viewControllers = [self nx_rebuildStackWithViewControllerClass:aClass isReverse:isReverse block:block];
+- (void)nx_setPreviousViewControllerWithClass:(Class)aClass
+ insertsInstanceToBelowWhenNotFoundUsingBlock:(__kindof UIViewController * _Nullable (^)(void))block {
+    NSArray<__kindof UIViewController *> *viewControllers = [self nx_rebuildStackWithViewControllerClass:aClass isReverse:NO block:block];
     [self setViewControllers:viewControllers animated:YES];
 }
 

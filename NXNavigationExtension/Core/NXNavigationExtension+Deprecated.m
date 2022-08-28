@@ -76,8 +76,33 @@
     return [self nx_popToRootViewControllerAnimated:animated completion:NULL];
 }
 
+- (UIViewController *)nx_popViewControllerWithPush:(UIViewController *)viewControllerToPush animated:(BOOL)animated completion:(void (^)(void))completion {
+    return [self nx_popAndPushViewController:viewControllerToPush animated:animated completion:completion];
+}
+
+- (NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController withPush:(UIViewController *)viewControllerToPush animated:(BOOL)animated completion:(void (^)(void))completion {
+    return [self nx_popToViewController:viewController andPushViewController:viewControllerToPush animated:animated completion:completion];
+}
+
+- (NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerWithPush:(UIViewController *)viewControllerToPush animated:(BOOL)animated completion:(void (^)(void))completion {
+    return [self nx_popToRootAndPushViewController:viewControllerToPush animated:animated completion:completion];
+}
+
 - (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block {
     [self nx_removeViewControllersUntilClass:aClass insertsToBelowWhenNotFoundUsingBlock:block];
+}
+
+- (void)nx_removeViewControllersUntilClass:(Class)aClass
+      insertsToBelowWhenNotFoundUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block {
+    [self nx_removeViewControllersUntilClass:aClass
+                 withNavigationStackPosition:NXNavigationStackPositionLast
+        insertsToBelowWhenNotFoundUsingBlock:block];
+}
+
+- (void)nx_removeViewControllersUntilClass:(Class)aClass
+               withNavigationStackPosition:(NXNavigationStackPosition)position
+      insertsToBelowWhenNotFoundUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block {
+    [self nx_setPreviousViewControllerWithClass:aClass insertsInstanceToBelowWhenNotFoundUsingBlock:block];
 }
 
 @end
@@ -87,6 +112,18 @@
 
 - (BOOL)nx_contentViewWithoutNavigationBar {
     return self.nx_systemNavigationBarUserInteractionDisabled;
+}
+
+- (UIViewController *)nx_popViewControllerWithPresent:(UIViewController *)viewControllerToPresent animated:(BOOL)animated completion:(void (^)(void))completion {
+    return [self nx_popAndPresentViewController:viewControllerToPresent animated:animated completion:completion];
+}
+
+- (NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController withPresent:(UIViewController *)viewControllerToPresent animated:(BOOL)animated completion:(void (^)(void))completion {
+    return [self nx_popToViewController:viewController andPresentViewController:viewControllerToPresent animated:animated completion:completion];
+}
+
+- (NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerWithPresent:(UIViewController *)viewControllerToPresent animated:(BOOL)animated completion:(void (^)(void))completion {
+    return [self nx_popToRootAndPresentViewController:viewControllerToPresent animated:animated completion:completion];
 }
 
 @end

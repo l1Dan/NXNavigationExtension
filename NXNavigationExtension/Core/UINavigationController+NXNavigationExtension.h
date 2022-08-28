@@ -55,14 +55,6 @@ typedef NS_ENUM(NSUInteger, NXNavigationAction) {
     NXNavigationActionSetCompleted, // setViewControllers 动画结束（如果没有动画，则在 did set 后立即进入 completed）
 };
 
-/// 匹配视图控制器在 UINavigationController 的 viewControllers 栈中的位置
-/// `NXNavigationStackPositionFirst` 匹配到栈的第一个视图控制器
-/// `NXNavigationStackPositionLast` 匹配到栈的最后一个视图控制器
-typedef NS_ENUM(NSUInteger, NXNavigationStackPosition) {
-    NXNavigationStackPositionLast = 0, // Default
-    NXNavigationStackPositionFirst = 1,
-};
-
 /// 返回页面使用的交互方式
 /// `NXNavigationInteractiveTypeCallNXPopMethod` 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 回调方式
 /// `NXNavigationInteractiveTypeBackButtonMenuAction` 需要设置 `useSystemBackButton = YES` 或者 `nx_useSystemBackButton = YES`
@@ -153,9 +145,9 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
 /// @param viewControllerToPush 需要 Push 的视图控制器
 /// @param animated 默认 YES
 /// @param completion Push 动画完成时的回调
-- (nullable UIViewController *)nx_popViewControllerWithPush:(UIViewController *)viewControllerToPush
-                                                   animated:(BOOL)animated
-                                                 completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popViewControllerWithPush(_:animated:completion:));
+- (nullable UIViewController *)nx_popAndPushViewController:(UIViewController *)viewControllerToPush
+                                                  animated:(BOOL)animated
+                                                completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popAndPushViewController(_:animated:completion:));
 
 /// Pop 视图控制器的同时 Push 一个新的视图控制器
 /// @param viewController 需要 Pop 的视图控制器
@@ -163,17 +155,17 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
 /// @param animated 默认 YES
 /// @param completion Push 动画完成时的回调
 - (nullable NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController
-                                                                 withPush:(UIViewController *)viewControllerToPush
+                                                    andPushViewController:(UIViewController *)viewControllerToPush
                                                                  animated:(BOOL)animated
-                                                               completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToViewController(_:withPush:animated:completion:));
+                                                               completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToViewController(_:andPushViewController:animated:completion:));
 
 /// Pop 视图控制器的同时 Push 一个新的视图控制器
 /// @param viewControllerToPush 需要 Push 的视图控制器
 /// @param animated 默认 YES
 /// @param completion Push 动画完成时的回调
-- (nullable NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerWithPush:(UIViewController *)viewControllerToPush
-                                                                             animated:(BOOL)animated
-                                                                           completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToRootViewControllerWithPush(_:animated:completion:));
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToRootAndPushViewController:(UIViewController *)viewControllerToPush
+                                                                            animated:(BOOL)animated
+                                                                          completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToRootAndPushViewController(_:animated:completion:));
 
 /// 设置 UINavigationController 的 viewControllers
 /// @param viewControllers 需要设置的 viewControllers
@@ -183,20 +175,13 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
                      animated:(BOOL)animated
                    completion:(void (^__nullable)(void))completion NS_SWIFT_ASYNC_NAME(nx_setViewControllers(_:animated:));
 
-/// 内部调用 `nx_removeViewControllersUntilClass:withNavigationStackPosition:insertsToBelowWhenNotFoundUsingBlock:`
-/// 默认匹配栈中最后一个视图控制器l类型，NXNavigationStackPositionLast
-- (void)nx_removeViewControllersUntilClass:(Class)aClass
-      insertsToBelowWhenNotFoundUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block;
-
 /// 此特性针对 UINavigationController 中的 viewControllers 栈属性操作。
 /// 主要处理当前页面的上一级页面该如何显示的问题，合理利用此特性能够增强使用手势滑动返回或者点击返回按钮返回页面时的体验。
 /// 如果匹配到视图控制器的类型，则丢弃栈中其他的 ViewControllers 实例，没有匹配到则添加从 block 返回的 ViewController 实例到栈中。
 /// @param aClass 需要匹配的 UIViewController 类型
-/// @param position 指定需要匹配视图控制器的类型的位置
 /// @param block 如果目标 UIViewController 类型没有匹配到需要创建一个新的 UIViewController 实例
-- (void)nx_removeViewControllersUntilClass:(Class)aClass
-               withNavigationStackPosition:(NXNavigationStackPosition)position
-      insertsToBelowWhenNotFoundUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block;
+- (void)nx_setPreviousViewControllerWithClass:(Class)aClass
+ insertsInstanceToBelowWhenNotFoundUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block;
 
 @end
 

@@ -41,6 +41,13 @@ API_DEPRECATED("Use NXNavigationControllerDelegate.", ios(2.0, 2.0))
 @end
 
 
+API_DEPRECATED("", ios(2.0, 2.0))
+typedef NS_ENUM(NSUInteger, NXNavigationStackPosition) {
+    NXNavigationStackPositionLast = 0, // Default
+    NXNavigationStackPositionFirst = 1,
+};
+
+
 @interface NXNavigationControllerPreferences (NXNavigationExtensionDeprecated)
 
 @property (nonatomic, assign) BOOL fullScreenInteractivePopGestureEnabled API_DEPRECATED("Use NXViewControllerPreferences enableFullScreenInteractivePopGesture instead.", ios(2.0, 2.0));
@@ -59,14 +66,34 @@ API_DEPRECATED("Use NXNavigationControllerDelegate.", ios(2.0, 2.0))
 
 @property (nonatomic, assign, readonly) BOOL nx_fullScreenInteractivePopGestureEnabled API_DEPRECATED("Use UIViewController nx_enableFullScreenInteractivePopGesture instead.", ios(2.0, 2.0));
 
-- (nullable UIViewController *)nx_popViewControllerAnimated:(BOOL)animated OBJC_SWIFT_UNAVAILABLE("")API_DEPRECATED("use UINavigationController nx_popViewController(animated:completion:) method.", ios(2.0, 2.0));
+- (nullable UIViewController *)nx_popViewControllerAnimated:(BOOL)animated OBJC_SWIFT_UNAVAILABLE("") API_DEPRECATED("Use UINavigationController nx_popViewController(animated:completion:) instead.", ios(2.0, 2.0));
 
 - (nullable NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController
-                                                                 animated:(BOOL)animated OBJC_SWIFT_UNAVAILABLE("")API_DEPRECATED("use UINavigationController nx_popToViewController(_:animated:completion:)) method.", ios(2.0, 2.0));
+                                                                 animated:(BOOL)animated OBJC_SWIFT_UNAVAILABLE("") API_DEPRECATED("Use UINavigationController nx_popToViewController(_:animated:completion:)) instead.", ios(2.0, 2.0));
 
-- (nullable NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerAnimated:(BOOL)animated OBJC_SWIFT_UNAVAILABLE("")API_DEPRECATED("use UINavigationController nx_popToRootViewController(animated:completion:) method", ios(2.0, 2.0));
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerAnimated:(BOOL)animated OBJC_SWIFT_UNAVAILABLE("") API_DEPRECATED("Use UINavigationController nx_popToRootViewController(animated:completion:) method", ios(2.0, 2.0));
 
-- (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController *_Nullable (^__nullable)(void))block API_DEPRECATED("Use UINavigationController - nx_removeViewControllersUntilClass:insertsToBelowWhenNotFoundUsingBlock: instead.", ios(2.0, 2.0));
+- (nullable UIViewController *)nx_popViewControllerWithPush:(UIViewController *)viewControllerToPush
+                                                   animated:(BOOL)animated
+                                                 completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popViewControllerWithPush(_:animated:completion:)) API_DEPRECATED_WITH_REPLACEMENT("nx_popAndPushViewController:animated:completion:", ios(2.0, 9.0));
+
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController
+                                                                 withPush:(UIViewController *)viewControllerToPush
+                                                                 animated:(BOOL)animated
+                                                               completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToViewController(_:withPush:animated:completion:)) API_DEPRECATED_WITH_REPLACEMENT("nx_popToViewController:andPushViewController:animated:completion:", ios(2.0, 9.0));
+
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerWithPush:(UIViewController *)viewControllerToPush
+                                                                             animated:(BOOL)animated
+                                                                           completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToRootViewControllerWithPush(_:animated:completion:)) API_DEPRECATED_WITH_REPLACEMENT("nx_popToRootAndPushViewController:animated:completion:", ios(2.0, 9.0));
+
+- (void)nx_redirectViewControllerClass:(Class)aClass initializeStandbyViewControllerUsingBlock:(__kindof UIViewController *_Nullable (^__nullable)(void))block API_DEPRECATED("Use UINavigationController nx_setPreviousViewControllerWithClass:insertsInstanceToBelowWhenNotFoundUsingBlock: instead.", ios(2.0, 9.0));
+
+- (void)nx_removeViewControllersUntilClass:(Class)aClass
+      insertsToBelowWhenNotFoundUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block API_DEPRECATED_WITH_REPLACEMENT("nx_setPreviousViewControllerWithClass:insertsInstanceToBelowWhenNotFoundUsingBlock:", ios(2.0, 9.0));
+
+- (void)nx_removeViewControllersUntilClass:(Class)aClass
+               withNavigationStackPosition:(NXNavigationStackPosition)position
+      insertsToBelowWhenNotFoundUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block API_DEPRECATED("Use UINavigationController nx_setPreviousViewControllerWithClass:insertsInstanceToBelowWhenNotFoundUsingBlock: instead.", ios(2.0, 9.0));
 
 @end
 
@@ -74,6 +101,19 @@ API_DEPRECATED("Use NXNavigationControllerDelegate.", ios(2.0, 2.0))
 @interface UIViewController (NXNavigationExtensionDeprecated)
 
 @property (nonatomic, assign, readonly) BOOL nx_contentViewWithoutNavigationBar API_DEPRECATED("Use nx_systemNavigationBarUserInteractionDisabled instead.", ios(2.0, 2.0));
+
+- (nullable UIViewController *)nx_popViewControllerWithPresent:(UIViewController *)viewControllerToPresent
+                                                      animated:(BOOL)animated
+                                                    completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popViewControllerWithPresent(_:animated:completion:)) API_DEPRECATED_WITH_REPLACEMENT("nx_popAndPresentViewController:animated:completion:", ios(2.0, 9.0));
+
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController
+                                                              withPresent:(UIViewController *)viewControllerToPresent
+                                                                 animated:(BOOL)animated
+                                                               completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToViewController(_:withPresent:animated:completion:)) API_DEPRECATED_WITH_REPLACEMENT("nx_popToViewController:andPresentViewController:animated:completion:", ios(2.0, 9.0));
+
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerWithPresent:(UIViewController *)viewControllerToPresent
+                                                                                animated:(BOOL)animated
+                                                                              completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToRootViewControllerWithPresent(_:animated:completion:)) API_DEPRECATED_WITH_REPLACEMENT("nx_popToRootAndPresentViewController:animated:completion:", ios(2.0, 9.0));
 
 @end
 

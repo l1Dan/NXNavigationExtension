@@ -607,9 +607,9 @@
 
 @implementation UIViewController (NXNavigationExtensionTransition)
 
-- (UIViewController *)nx_popViewControllerWithPresent:(UIViewController *)viewControllerToPresent
-                                             animated:(BOOL)animated
-                                           completion:(void (^)(void))completion {
+- (UIViewController *)nx_popAndPresentViewController:(UIViewController *)viewControllerToPresent
+                                            animated:(BOOL)animated
+                                          completion:(void (^)(void))completion {
     UINavigationController *navigationController = self.navigationController;
     if ([self isKindOfClass:[UINavigationController class]]) {
         navigationController = (UINavigationController *)self;
@@ -620,7 +620,7 @@
 }
 
 - (NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController
-                                                     withPresent:(UIViewController *)viewControllerToPresent
+                                        andPresentViewController:(UIViewController *)viewControllerToPresent
                                                         animated:(BOOL)animated
                                                       completion:(void (^)(void))completion {
     UINavigationController *navigationController = self.navigationController;
@@ -632,9 +632,9 @@
     }];
 }
 
-- (NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerWithPresent:(UIViewController *)viewControllerToPresent
-                                                                       animated:(BOOL)animated
-                                                                     completion:(void (^)(void))completion {
+- (NSArray<__kindof UIViewController *> *)nx_popToRootAndPresentViewController:(UIViewController *)viewControllerToPresent
+                                                                      animated:(BOOL)animated
+                                                                    completion:(void (^)(void))completion {
     UINavigationController *navigationController = self.navigationController;
     if ([self isKindOfClass:[UINavigationController class]]) {
         navigationController = (UINavigationController *)self;

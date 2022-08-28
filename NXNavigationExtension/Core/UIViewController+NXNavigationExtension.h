@@ -123,9 +123,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param viewControllerToPresent 需要 Present 的视图控制器
 /// @param animated 默认 YES
 /// @param completion Present 动画完成时的回调
-- (nullable UIViewController *)nx_popViewControllerWithPresent:(UIViewController *)viewControllerToPresent
-                                                      animated:(BOOL)animated
-                                                    completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popViewControllerWithPresent(_:animated:completion:));
+- (nullable UIViewController *)nx_popAndPresentViewController:(UIViewController *)viewControllerToPresent
+                                                     animated:(BOOL)animated
+                                                   completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popAndPresentViewController(_:animated:completion:));
 
 /// Pop 视图控制器的同时 Present 一个新的视图控制器
 /// @param viewController 需要 Pop 的视图控制器
@@ -133,17 +133,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param animated 默认 YES
 /// @param completion Present 动画完成时的回调
 - (nullable NSArray<__kindof UIViewController *> *)nx_popToViewController:(UIViewController *)viewController
-                                                              withPresent:(UIViewController *)viewControllerToPresent
+                                                 andPresentViewController:(UIViewController *)viewControllerToPresent
                                                                  animated:(BOOL)animated
-                                                               completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToViewController(_:withPresent:animated:completion:));
+                                                               completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToViewController(_:andPresentViewController:animated:completion:));
 
 /// Pop 视图控制器的同时 Present 一个新的视图控制器
 /// @param viewControllerToPresent 需要 Present 的视图控制器
 /// @param animated 默认 YES
 /// @param completion Present 动画完成时的回调
-- (nullable NSArray<__kindof UIViewController *> *)nx_popToRootViewControllerWithPresent:(UIViewController *)viewControllerToPresent
-                                                                                animated:(BOOL)animated
-                                                                              completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToRootViewControllerWithPresent(_:animated:completion:));
+- (nullable NSArray<__kindof UIViewController *> *)nx_popToRootAndPresentViewController:(UIViewController *)viewControllerToPresent
+                                                                               animated:(BOOL)animated
+                                                                             completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToRootAndPresentViewController(_:animated:completion:));
 
 @end
 
