@@ -473,12 +473,60 @@
 - (BOOL)nx_viewController:(__kindof UIViewController *)currentViewController
  preparePopViewController:(__kindof UIViewController *)destinationViewController
           interactiveType:(NXNavigationInteractiveType)interactiveType {
+    BOOL alreadyPopped = [self nx_preparePopViewController:currentViewController destinationViewController:destinationViewController interactiveType:interactiveType];
+    if (alreadyPopped) {
+        [self nx_preparePopToViewController:destinationViewController fromViewController:currentViewController];
+    }
+    return alreadyPopped;
+}
+
+- (BOOL)nx_preparePopViewController:(__kindof UIViewController *)currentViewController
+          destinationViewController:(__kindof UIViewController *)destinationViewController
+                    interactiveType:(NXNavigationInteractiveType)interactiveType {
     if ([currentViewController.nx_navigationControllerDelegate respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
-        return [currentViewController.nx_navigationControllerDelegate nx_navigationController:self willPopViewController:destinationViewController interactiveType:interactiveType];
+        return [currentViewController.nx_navigationControllerDelegate nx_navigationController:self
+                                                                        willPopViewController:destinationViewController
+                                                                              interactiveType:interactiveType];
     } else if ([currentViewController respondsToSelector:@selector(nx_navigationController:willPopViewController:interactiveType:)]) {
-        return [currentViewController nx_navigationController:self willPopViewController:destinationViewController interactiveType:interactiveType];
+        return [(id<NXNavigationControllerDelegate>)currentViewController nx_navigationController:self
+                                                                            willPopViewController:destinationViewController
+                                                                                  interactiveType:interactiveType];
     }
     return YES;
+}
+
+- (void)nx_preparePopToViewController:(__kindof UIViewController *)toViewController
+                   fromViewController:(__kindof UIViewController *)fromViewController {
+    if (self.viewControllers.count < 2) return;
+    if ([fromViewController.nx_navigationControllerDelegate respondsToSelector:@selector(nx_navigationController:preparePopToViewController:fromViewController:)]) {
+        toViewController = [fromViewController.nx_navigationControllerDelegate nx_navigationController:self
+                                                                            preparePopToViewController:toViewController
+                                                                                    fromViewController:fromViewController];
+    } else if ([fromViewController respondsToSelector:@selector(nx_navigationController:preparePopToViewController:fromViewController:)]) {
+        toViewController = [(id<NXNavigationControllerDelegate>)fromViewController nx_navigationController:self
+                                                                                preparePopToViewController:toViewController
+                                                                                        fromViewController:fromViewController];
+    }
+    
+    __kindof UIViewController *currentViewController = self.viewControllers.lastObject;
+    NSUInteger count = self.viewControllers.count;
+    NSArray<__kindof UIViewController *> *exclusion = [self.viewControllers subarrayWithRange:NSMakeRange(count - 2, 2)];
+    if (!toViewController || [exclusion containsObject:toViewController]) return;
+    
+    NSMutableArray<__kindof UIViewController *> *subarray = [NSMutableArray arrayWithArray:self.viewControllers];
+    if ([self.viewControllers containsObject:toViewController]) {
+        NSUInteger index = [self.viewControllers indexOfObject:toViewController];
+        NSArray<__kindof UIViewController *> *filterViewControllers = [self.viewControllers subarrayWithRange:NSMakeRange(0, index + 1)];
+        subarray = [NSMutableArray arrayWithArray:filterViewControllers];
+        [subarray addObject:currentViewController];
+    } else {
+        NSArray<__kindof UIViewController *> *filterViewControllers = self.viewControllers;
+        subarray = [NSMutableArray arrayWithArray:filterViewControllers];
+        [subarray insertObject:toViewController atIndex:count - 1];
+    }
+    [self setViewControllers:[NSArray arrayWithArray:subarray]];
+    // 更新导航栏外观
+    [currentViewController nx_setNeedsNavigationBarAppearanceUpdate];
 }
 
 - (void)nx_processViewController:(__kindof UIViewController *)appearingViewController

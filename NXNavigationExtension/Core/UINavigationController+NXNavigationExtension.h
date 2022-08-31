@@ -69,8 +69,17 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
 
 @optional
 
-/// 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作，某些业务场景中点击返回按钮或者手势滑动返回时需要弹框，可以直接使用这个代理拦截事件处理
-/// 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 等方法后也会触发这个代理回调
+/// 当使用手势返回、点击返回按钮返回、调用 `nx_pop` 等系列方法返回时，会调用此代理方法。
+/// 可以根据不同的使用场景返回不同的视图控制器对象
+/// @param navigationController 当前使用的导航控制器
+/// @param toViewController 将要返回的页面
+/// @param fromViewController 当前所在页面
+- (nullable __kindof UIViewController *)nx_navigationController:(__kindof UINavigationController *)navigationController
+                                     preparePopToViewController:(__kindof UIViewController *)toViewController
+                                             fromViewController:(__kindof UIViewController *)fromViewController;
+
+/// 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作，某些业务场景中点击返回按钮或者手势滑动返回时需要弹框
+/// 可以直接使用这个代理拦截事件处理，调用 `nx_pop` 等系列方法返回时，会调用此代理方法。
 /// @param navigationController 当前使用的导航控制器
 /// @param viewController 即将要 Pop 的视图控制器
 /// @param interactiveType 返回页面使用的交互方式
