@@ -48,7 +48,7 @@ class ViewController08_JumpToViewController: BaseViewController, UITableViewDele
             guard let selectedViewController = selectedViewController, selectedViewController.isKind(of: UIViewController.self) else { return }
             // 设置 Cell 不能点击
             self?.setJumpViewControllerCellClickEnabled(false)
-            self?.navigationController?.nx_removeViewControllers(until: type(of: selectedViewController), insertsToBelowWhenNotFoundUsing: {
+            self?.navigationController?.nx_setPreviousViewController(with: type(of: selectedViewController), insertsInstanceToBelowWhenNotFoundUsing: {
                 let vc = type(of: selectedViewController).init()
                 vc.hidesBottomBarWhenPushed = true
                 return vc
@@ -155,9 +155,9 @@ extension ViewController08_JumpToViewController {
         let vc = ViewController_Transition()
         vc.hidesBottomBarWhenPushed = true
         if currentTransitionButtonTitle == popAndPush {
-            navigationController?.nx_popViewControllerWithPush(vc, animated: isAnimated)
+            navigationController?.nx_popAndPushViewController(vc, animated: isAnimated)
         } else {
-            navigationController?.nx_popViewControllerWithPresent(vc, animated: isAnimated)
+            navigationController?.nx_popAndPresentViewController(vc, animated: isAnimated)
         }
     }
     
