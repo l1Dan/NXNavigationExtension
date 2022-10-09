@@ -245,7 +245,7 @@ extension ViewController09_ScrollChangeNavigationBar {
         return .clear
     }
     
-    override var nx_shadowImageTintColor: UIColor? {
+    override var nx_shadowColor: UIColor? {
         return .clear
     }
     

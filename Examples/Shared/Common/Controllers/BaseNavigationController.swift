@@ -90,7 +90,7 @@ extension BaseViewController: NXNavigationControllerDelegate {
         return [NSAttributedString.Key.foregroundColor: nx_barTintColor ?? .customTitle]
     }
     
-    override var nx_shadowImageTintColor: UIColor? {
+    override var nx_shadowColor: UIColor? {
         return UIColor.customColor { .lightGray } darkModeColor: { .lightGray.withAlphaComponent(0.65) }
     }
     

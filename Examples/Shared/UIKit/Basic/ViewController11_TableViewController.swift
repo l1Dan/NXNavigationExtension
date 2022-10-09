@@ -40,7 +40,7 @@ class ViewController11_TableViewController: BaseTableViewController {
 
 extension ViewController11_TableViewController {
     
-    override var nx_shadowImageTintColor: UIColor? {
+    override var nx_shadowColor: UIColor? {
         return UIColor.customColor { .lightGray } darkModeColor: { .lightGray.withAlphaComponent(0.65) }
     }
     

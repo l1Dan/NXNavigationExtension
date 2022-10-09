@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D603929C274404EA009D79ED /* NXNavigationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D603929B274404EA009D79ED /* NXNavigationExtension.framework */; };
-		D603929D274404EA009D79ED /* NXNavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D603929B274404EA009D79ED /* NXNavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D60392A1274404F3009D79ED /* NXNavigationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D603929F274404F3009D79ED /* NXNavigationExtension.framework */; };
-		D60392A2274404F3009D79ED /* NXNavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D603929F274404F3009D79ED /* NXNavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D60392A3274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60392A0274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework */; };
-		D60392A4274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D60392A0274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6507E6C273EA40700293C6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6507E6B273EA40700293C6D /* ContentView.swift */; };
 		D6507E76273EA4CB00293C6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6507E75273EA4CB00293C6D /* AppDelegate.swift */; };
 		D6507E79273EA5C900293C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6B022C0273AB781008003F6 /* Assets.xcassets */; };
@@ -80,6 +74,12 @@
 		D6507ECB273EAC3E00293C6D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6507ECA273EAC3E00293C6D /* MainTabBarController.swift */; };
 		D65B13DD2740AF820020C8A8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D65B13E02740AF820020C8A8 /* Localizable.strings */; };
 		D65B13DE2740AF820020C8A8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D65B13E02740AF820020C8A8 /* Localizable.strings */; };
+		D6A1814628F31BC2009E4175 /* NXNavigationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A1814528F31BC2009E4175 /* NXNavigationExtension.framework */; };
+		D6A1814728F31BC2009E4175 /* NXNavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6A1814528F31BC2009E4175 /* NXNavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6A1814928F31BC7009E4175 /* NXNavigationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A1814828F31BC7009E4175 /* NXNavigationExtension.framework */; };
+		D6A1814A28F31BC7009E4175 /* NXNavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6A1814828F31BC7009E4175 /* NXNavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6A1814C28F31BCA009E4175 /* NXNavigationExtensionSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A1814B28F31BCA009E4175 /* NXNavigationExtensionSwiftUI.framework */; };
+		D6A1814D28F31BCA009E4175 /* NXNavigationExtensionSwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6A1814B28F31BCA009E4175 /* NXNavigationExtensionSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6B022B8273AB780008003F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022B7273AB780008003F6 /* AppDelegate.swift */; };
 		D6B022C1273AB781008003F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6B022C0273AB781008003F6 /* Assets.xcassets */; };
 		D6B022C4273AB781008003F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6B022C2273AB781008003F6 /* LaunchScreen.storyboard */; };
@@ -123,25 +123,25 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D603929E274404EA009D79ED /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D603929D274404EA009D79ED /* NXNavigationExtension.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D60392A5274404F3009D79ED /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D60392A4274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework in Embed Frameworks */,
-				D60392A2274404F3009D79ED /* NXNavigationExtension.framework in Embed Frameworks */,
+				D6A1814D28F31BCA009E4175 /* NXNavigationExtensionSwiftUI.framework in Embed Frameworks */,
+				D6A1814A28F31BC7009E4175 /* NXNavigationExtension.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D66BB99D28F31B79006085D6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D6A1814728F31BC2009E4175 /* NXNavigationExtension.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,20 +149,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D603929B274404EA009D79ED /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D603929F274404F3009D79ED /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D60392A0274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtensionSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6507E67273EA40700293C6D /* NXNavigationExtensionSwiftUIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NXNavigationExtensionSwiftUIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6507E6B273EA40700293C6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D6507E75273EA4CB00293C6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6507E77273EA56200293C6D /* NXNavigationExtensionSwiftUIDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NXNavigationExtensionSwiftUIDemo.entitlements; sourceTree = "<group>"; };
 		D6507E78273EA58200293C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6507ECA273EAC3E00293C6D /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		D6507ECC273EB03500293C6D /* NXNavigationExtensionSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtensionSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6507ECF273EB03E00293C6D /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65B13D12740AEDB0020C8A8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		D65B13DF2740AF820020C8A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D65B13E12740AF830020C8A8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D6A1814528F31BC2009E4175 /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6A1814828F31BC7009E4175 /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6A1814B28F31BCA009E4175 /* NXNavigationExtensionSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtensionSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6B022B4273AB780008003F6 /* NXNavigationExtensionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NXNavigationExtensionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6B022B7273AB780008003F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6B022C0273AB781008003F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -237,8 +235,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D60392A3274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework in Frameworks */,
-				D60392A1274404F3009D79ED /* NXNavigationExtension.framework in Frameworks */,
+				D6A1814C28F31BCA009E4175 /* NXNavigationExtensionSwiftUI.framework in Frameworks */,
+				D6A1814928F31BC7009E4175 /* NXNavigationExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,7 +244,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D603929C274404EA009D79ED /* NXNavigationExtension.framework in Frameworks */,
+				D6A1814628F31BC2009E4175 /* NXNavigationExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,11 +511,9 @@
 		D6B02367273ABA7A008003F6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D603929F274404F3009D79ED /* NXNavigationExtension.framework */,
-				D60392A0274404F3009D79ED /* NXNavigationExtensionSwiftUI.framework */,
-				D603929B274404EA009D79ED /* NXNavigationExtension.framework */,
-				D6507ECF273EB03E00293C6D /* NXNavigationExtension.framework */,
-				D6507ECC273EB03500293C6D /* NXNavigationExtensionSwiftUI.framework */,
+				D6A1814B28F31BCA009E4175 /* NXNavigationExtensionSwiftUI.framework */,
+				D6A1814828F31BC7009E4175 /* NXNavigationExtension.framework */,
+				D6A1814528F31BC2009E4175 /* NXNavigationExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -550,7 +546,7 @@
 				D6B022B0273AB780008003F6 /* Sources */,
 				D6B022B1273AB780008003F6 /* Frameworks */,
 				D6B022B2273AB780008003F6 /* Resources */,
-				D603929E274404EA009D79ED /* Embed Frameworks */,
+				D66BB99D28F31B79006085D6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

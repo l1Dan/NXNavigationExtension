@@ -36,7 +36,7 @@ extension ViewController12_TableViewControllerWithFullScreen {
         return .clear
     }
     
-    override var nx_shadowImageTintColor: UIColor? {
+    override var nx_shadowColor: UIColor? {
         return .clear
     }
     

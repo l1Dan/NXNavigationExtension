@@ -118,7 +118,7 @@ extension FullPopGesture_ScrollView {
         return .clear
     }
     
-    override var nx_shadowImageTintColor: UIColor? {
+    override var nx_shadowColor: UIColor? {
         return .clear
     }
     

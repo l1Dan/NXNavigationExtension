@@ -34,7 +34,7 @@ extension ViewController09_FullScreenColor {
         return randomColor
     }
     
-    override var nx_shadowImageTintColor: UIColor? {
+    override var nx_shadowColor: UIColor? {
         return .clear
     }
     

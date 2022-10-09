@@ -13,7 +13,7 @@ class ViewController05_ShadowColor: BaseViewController {
 
 extension ViewController05_ShadowColor {
     
-    override var nx_shadowImageTintColor: UIColor? {
+    override var nx_shadowColor: UIColor? {
         return .red
     }
     
