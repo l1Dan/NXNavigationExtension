@@ -122,22 +122,6 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 @end
 
 
-@implementation NXNavigationControllerPreferences
-
-- (instancetype)init {
-    if (self = [super init]) {
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    NXNavigationControllerPreferences *newPreferences = [[NXNavigationControllerPreferences alloc] init];
-    return newPreferences;
-}
-
-@end
-
-
 @interface NXViewControllerPreferences ()
 
 @property (nonatomic, strong) UITraitCollection *traitCollection;
@@ -196,7 +180,6 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 - (id)copyWithZone:(NSZone *)zone {
     NXNavigationConfiguration *newConfiguration = [[NXNavigationConfiguration alloc] init];
     newConfiguration.navigationBarAppearance = [self.navigationBarAppearance copy];
-    newConfiguration.navigationControllerPreferences = [self.navigationControllerPreferences copy];
     newConfiguration.viewControllerPreferences = [self.viewControllerPreferences copy];
     return newConfiguration;
 }
@@ -234,13 +217,6 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
         _navigationBarAppearance = [[NXNavigationBarAppearance alloc] init];
     }
     return _navigationBarAppearance;
-}
-
-- (NXNavigationControllerPreferences *)navigationControllerPreferences {
-    if (!_navigationControllerPreferences) {
-        _navigationControllerPreferences = [[NXNavigationControllerPreferences alloc] init];
-    }
-    return _navigationControllerPreferences;
 }
 
 - (NXViewControllerPreferences *)viewControllerPreferences {

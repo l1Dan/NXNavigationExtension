@@ -28,19 +28,8 @@
 #import "UIViewController+NXNavigationExtension.h"
 
 
-@implementation NXNavigationControllerPreferences (NXNavigationExtensionDeprecated)
+@implementation NXNavigationControllerPreferences
 
-- (BOOL)fullScreenInteractivePopGestureEnabled {
-    NSNumber *number = objc_getAssociatedObject(self, _cmd);
-    if (number && [number isKindOfClass:[NSNumber class]]) {
-        return [number boolValue];
-    }
-    return NO;
-}
-
-- (void)setFullScreenInteractivePopGestureEnabled:(BOOL)fullScreenInteractivePopGestureEnabled {
-    objc_setAssociatedObject(self, @selector(fullScreenInteractivePopGestureEnabled), @(fullScreenInteractivePopGestureEnabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
 
 @end
 
@@ -94,9 +83,7 @@
 
 - (void)nx_removeViewControllersUntilClass:(Class)aClass
       insertsToBelowWhenNotFoundUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block {
-    [self nx_removeViewControllersUntilClass:aClass
-                 withNavigationStackPosition:NXNavigationStackPositionLast
-        insertsToBelowWhenNotFoundUsingBlock:block];
+    [self nx_setPreviousViewControllerWithClass:aClass insertsInstanceToBelowWhenNotFoundUsingBlock:block];
 }
 
 - (void)nx_removeViewControllersUntilClass:(Class)aClass
@@ -112,6 +99,10 @@
 
 - (BOOL)nx_contentViewWithoutNavigationBar {
     return self.nx_systemNavigationBarUserInteractionDisabled;
+}
+
+- (UIColor *)nx_shadowImageTintColor {
+    return self.nx_shadowColor;
 }
 
 - (UIViewController *)nx_popViewControllerWithPresent:(UIViewController *)viewControllerToPresent animated:(BOOL)animated completion:(void (^)(void))completion {

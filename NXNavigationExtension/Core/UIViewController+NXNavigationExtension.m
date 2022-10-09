@@ -273,10 +273,13 @@
         
         self.nx_navigationBar.backgroundColor = self.nx_navigationBarBackgroundColor;
         self.nx_navigationBar.semanticContentAttribute = self.navigationController.navigationBar.semanticContentAttribute;
-        self.nx_navigationBar.shadowImageView.image = self.nx_shadowImage;
         
-        if (self.nx_shadowImageTintColor) {
-            self.nx_navigationBar.shadowImageView.image = NXNavigationExtensionGetImageFromColor(self.nx_shadowImageTintColor);
+        if (self.nx_shadowColor) {
+            self.nx_navigationBar.shadowImageView.image = NXNavigationExtensionGetImageFromColor(self.nx_shadowColor);
+        }
+        
+        if (self.nx_shadowImage) {
+            self.nx_navigationBar.shadowImageView.image = self.nx_shadowImage;
         }
         
         self.nx_navigationBar.backgroundImageView.image = self.nx_navigationBarBackgroundImage;
@@ -521,7 +524,7 @@
     return self.nx_configuration.navigationBarAppearance.shadowImage;
 }
 
-- (UIColor *)nx_shadowImageTintColor {
+- (UIColor *)nx_shadowColor {
     return self.nx_configuration.navigationBarAppearance.shadowColor;
 }
 

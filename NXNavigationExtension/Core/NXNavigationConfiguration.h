@@ -86,12 +86,6 @@ typedef void (^_Nullable NXViewControllerPrepareConfigurationCallback)(__kindof 
 @end
 
 
-@interface NXNavigationControllerPreferences : NSObject <NSCopying>
-
-
-@end
-
-
 @interface NXViewControllerPreferences : NSObject <NSCopying>
 
 /// 当前视图控制器的 traitCollection 对象
@@ -133,9 +127,6 @@ typedef void (^_Nullable NXViewControllerPrepareConfigurationCallback)(__kindof 
 
 /// 默认导航栏外观
 @property (nonatomic, strong) NXNavigationBarAppearance *navigationBarAppearance;
-
-/// 默认导航控制器偏好设置
-@property (nonatomic, strong) NXNavigationControllerPreferences *navigationControllerPreferences;
 
 /// 默认视图控制器偏好设置
 @property (nonatomic, strong) NXViewControllerPreferences *viewControllerPreferences;

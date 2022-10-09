@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly, nullable) UIImage *nx_shadowImage;
 
 /// 设置 NXNavigationBar 底部阴影颜色
-@property (nonatomic, strong, readonly, nullable) UIColor *nx_shadowImageTintColor;
+@property (nonatomic, strong, readonly, nullable) UIColor *nx_shadowColor;
 
 /// 设置返回按钮图片
 @property (nonatomic, strong, readonly, nullable) UIImage *nx_backImage;

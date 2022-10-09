@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, NXNavigationStackPosition) {
 };
 
 
-@interface NXNavigationControllerPreferences (NXNavigationExtensionDeprecated)
+@interface NXNavigationControllerPreferences : NSObject
 
 @property (nonatomic, assign) BOOL fullScreenInteractivePopGestureEnabled API_DEPRECATED("Use NXViewControllerPreferences enableFullScreenInteractivePopGesture instead.", ios(2.0, 2.0));
 
@@ -101,6 +101,8 @@ typedef NS_ENUM(NSUInteger, NXNavigationStackPosition) {
 @interface UIViewController (NXNavigationExtensionDeprecated)
 
 @property (nonatomic, assign, readonly) BOOL nx_contentViewWithoutNavigationBar API_DEPRECATED("Use nx_systemNavigationBarUserInteractionDisabled instead.", ios(2.0, 2.0));
+
+@property (nonatomic, strong, readonly, nullable) UIColor *nx_shadowImageTintColor API_DEPRECATED_WITH_REPLACEMENT("nx_shadowColor", ios(2.0, 9.0));
 
 - (nullable UIViewController *)nx_popViewControllerWithPresent:(UIViewController *)viewControllerToPresent
                                                       animated:(BOOL)animated
