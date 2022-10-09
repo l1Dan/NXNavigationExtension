@@ -468,6 +468,8 @@
             lastViewController.navigationItem.backBarButtonItem = nil;
         }
     }
+    // 统一设置所有返回按钮颜色
+    lastViewController.navigationItem.backBarButtonItem.tintColor = currentViewController.nx_barTintColor;
 }
 
 - (BOOL)nx_viewController:(__kindof UIViewController *)currentViewController
