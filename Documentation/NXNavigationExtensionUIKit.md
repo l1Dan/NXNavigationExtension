@@ -142,8 +142,8 @@ override var nx_navigationBarBackgroundColor: UIColor? {
     return .clear
 }
 
-// 设置导航栏底部颜色
-override var nx_shadowImageTintColor: UIColor? {
+// 设置导航栏底部阴影颜色
+override var nx_shadowColor: UIColor? {
     return .clear
 }
 ```
@@ -167,7 +167,7 @@ override var nx_useBlurNavigationBar: Bool {
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController05_ShadowColor.swift)
 
 ```swift
-override var nx_shadowImageTintColor: UIColor? {
+override var nx_shadowColor: UIColor? {
     return .red
 }
 ```

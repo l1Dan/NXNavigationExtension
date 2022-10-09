@@ -27,10 +27,10 @@
 
 ## 🍭 优点
 
-- API 设计通俗易懂，容易上手。
+- 没有对原生导航栏视图层级进行修改，无需担心系统升级的兼容性问题。
+- API 设计通俗易懂，容易使用。
 - 没有继承关系，所有操作基于分类实现，低耦合。
 - 白名单模式：按需注册所使用的导航控制器，这样才不会影响所有的导航控制器外观。
-- 没有对原生导航栏视图层级进行修改，无需担心系统升级的兼容性问题。
 - 适配 iOS、iPadOS、macOS、横竖屏切换、暗黑模式、支持阿拉伯语等从右往左的布局方式。
 - 提供 SwiftUI、UIKit、macCatalyst 框架的支持。
 - 支持 CocoaPods、Carthage、Project、Swift Package Manager 方式集成。
@@ -105,7 +105,7 @@ github "l1Dan/NXNavigationExtension"
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.1.3"))
+    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.1.4"))
 ]
 ```
 
