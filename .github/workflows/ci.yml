@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   Pods:
     name: CocoaPods Lint
-    runs-on: macOS-11
+    runs-on: macOS-12
     env:
       DEVELOPER_DIR: /Applications/Xcode.app
     steps:
@@ -28,7 +28,7 @@ jobs:
 
   Demo:
     name: Run Demo
-    runs-on: macOS-11
+    runs-on: macOS-12
     env:
       DEVELOPER_DIR: /Applications/Xcode.app
       WORKSPACE_NAME: NXNavigationExtension.xcworkspace
@@ -38,7 +38,7 @@ jobs:
         scheme:
           - NXNavigationExtensionDemo
           - NXNavigationExtensionSwiftUIDemo
-        iosDestination: ["name=iPhone 13 Pro"]
+        iosDestination: ["name=iPhone 14 Pro"]
         macCatalystDestination:
           ["platform=macOS,arch=x86_64,variant=Mac Catalyst"]
 
@@ -57,13 +57,13 @@ jobs:
 
   Build:
     name: Build Library
-    runs-on: macOS-11
+    runs-on: macOS-12
     env:
       DEVELOPER_DIR: /Applications/Xcode.app
       WORKSPACE_NAME: NXNavigationExtension.xcworkspace
     strategy:
       matrix:
-        swift_version: ["5.3"]
+        swift_version: ["5.4"]
         scheme:
           - NXNavigationExtension
           - NXNavigationExtensionSwiftUI
