@@ -63,7 +63,7 @@ struct ColorScrollView: View {
 
 struct ColorScrollView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationViewAdaptor {
             ColorScrollView()
         }
     }

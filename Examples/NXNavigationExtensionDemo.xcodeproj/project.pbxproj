@@ -120,6 +120,7 @@
 		D6B02360273AB8E3008003F6 /* FullPopGesture_ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0231C273AB8E3008003F6 /* FullPopGesture_ScrollView.swift */; };
 		D6B02361273AB8E3008003F6 /* FullPopGesture_PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0231D273AB8E3008003F6 /* FullPopGesture_PageViewController.swift */; };
 		D6B02362273AB8E3008003F6 /* FeatureTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0231E273AB8E3008003F6 /* FeatureTableViewController.swift */; };
+		D6F9052D28F41C1A00A7A021 /* NavigationViewAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F9052C28F41C1A00A7A021 /* NavigationViewAdaptor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -228,6 +229,7 @@
 		D6B0231C273AB8E3008003F6 /* FullPopGesture_ScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullPopGesture_ScrollView.swift; sourceTree = "<group>"; };
 		D6B0231D273AB8E3008003F6 /* FullPopGesture_PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullPopGesture_PageViewController.swift; sourceTree = "<group>"; };
 		D6B0231E273AB8E3008003F6 /* FeatureTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureTableViewController.swift; sourceTree = "<group>"; };
+		D6F9052C28F41C1A00A7A021 /* NavigationViewAdaptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewAdaptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,6 +412,7 @@
 				D6507E6B273EA40700293C6D /* ContentView.swift */,
 				D6B022ED273AB8E3008003F6 /* FeatureDetailView.swift */,
 				D6B022EE273AB8E3008003F6 /* FeatureListView.swift */,
+				D6F9052C28F41C1A00A7A021 /* NavigationViewAdaptor.swift */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				D6507E9D273EA74700293C6D /* ColorListView.swift in Sources */,
 				D6507E6C273EA40700293C6D /* ContentView.swift in Sources */,
 				D6507EA8273EAAF600293C6D /* ViewController03_BackButtonEventIntercept.swift in Sources */,
+				D6F9052D28F41C1A00A7A021 /* NavigationViewAdaptor.swift in Sources */,
 				D6507EB2273EAAFA00293C6D /* ViewController03_Transparent.swift in Sources */,
 				D6507E9B273EA74000293C6D /* View06_ShadowImage.swift in Sources */,
 				D6507EAE273EAAFA00293C6D /* ViewController02_BackgroundImage.swift in Sources */,

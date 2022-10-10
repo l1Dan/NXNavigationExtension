@@ -33,7 +33,7 @@ struct View09_FullScreenColor: View {
 
 struct View09_FullScreenColor_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationViewAdaptor {
             View09_FullScreenColor(NavigationFeatureItem(style: .fullScreenColor))
         }
     }

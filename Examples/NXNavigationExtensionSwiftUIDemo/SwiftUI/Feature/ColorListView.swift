@@ -26,7 +26,7 @@ struct ColorListView: View {
 
 struct ColorListView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationViewAdaptor {
             ColorListView()
         }
     }

@@ -29,7 +29,7 @@ struct View02_FullScreenPopGestureEnable: View {
 
 struct View02_FullScreenPopGestureEnable_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationViewAdaptor {
             View02_FullScreenPopGestureEnable(NavigationFeatureItem(style: .fullScreenPopGestureEnable))            
         }
     }

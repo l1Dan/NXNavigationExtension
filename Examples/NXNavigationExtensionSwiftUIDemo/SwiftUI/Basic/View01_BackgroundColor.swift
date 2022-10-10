@@ -28,7 +28,7 @@ struct View01_BackgroundColor: View {
 
 struct View01_BackgroundColor_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationViewAdaptor {
             View01_BackgroundColor(NavigationFeatureItem(style: .backgroundColor))
         }
     }

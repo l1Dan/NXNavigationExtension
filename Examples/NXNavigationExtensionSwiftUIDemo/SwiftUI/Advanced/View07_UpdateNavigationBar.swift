@@ -67,7 +67,7 @@ struct View07_UpdateNavigationBar: View {
 
 struct View07_UpdateNavigationBar_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationViewAdaptor {
             View07_UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBar))
         }
     }

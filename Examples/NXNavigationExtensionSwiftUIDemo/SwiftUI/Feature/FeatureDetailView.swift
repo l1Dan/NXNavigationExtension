@@ -65,7 +65,7 @@ struct FeatureDetailView: View {
 
 struct FeatureDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationViewAdaptor {
             FeatureDetailView(NavigationFeatureItem(style: .scrollViewContent))
         }
     }

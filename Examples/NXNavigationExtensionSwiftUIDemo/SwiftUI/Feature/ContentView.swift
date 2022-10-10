@@ -11,7 +11,7 @@ struct ContentView: View {
     let sections = NavigationFeatureSection.sections(for: false)
     
     var body: some View {
-        NavigationView {
+        NavigationViewAdaptor {
             FeatureListView(sections)
                 .navigationBarTitle("SwiftUI🎉🎉🎉")
                 .useNXNavigationView(onPrepareConfiguration: { configuration in

@@ -28,7 +28,7 @@ struct View02_BackgroundImage: View {
 
 struct View02_BackgroundImage_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationViewAdaptor {
             View02_BackgroundImage(NavigationFeatureItem(style: .backgroundImage))
         }
     }

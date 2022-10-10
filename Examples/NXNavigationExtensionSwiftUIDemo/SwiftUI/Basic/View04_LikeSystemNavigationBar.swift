@@ -26,7 +26,7 @@ struct View04_LikeSystemNavigationBar: View {
 
 struct View04_LikeSystemNavigationBar_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationViewAdaptor {
             View04_LikeSystemNavigationBar(NavigationFeatureItem(style: .likeSystemNavigationBar))
         }
     }

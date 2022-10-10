@@ -26,7 +26,7 @@ struct View05_ShadowColor: View {
 
 struct View05_ShadowColor_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationViewAdaptor {
             View05_ShadowColor(NavigationFeatureItem(style: .shadowColor))
         }
     }
