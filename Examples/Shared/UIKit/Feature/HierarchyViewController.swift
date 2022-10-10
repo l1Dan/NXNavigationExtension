@@ -34,13 +34,7 @@ class HierarchyViewController: BaseViewController, UITableViewDelegate, UITableV
 
         view.backgroundColor = .black.withAlphaComponent(0.5)
         view.addSubview(tableView)
-        
-        if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = .never
-        } else {
-            automaticallyAdjustsScrollViewInsets = false
-        }
-        
+        tableView.contentInsetAdjustmentBehavior = .never
         tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         

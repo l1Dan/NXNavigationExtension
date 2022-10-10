@@ -19,11 +19,12 @@
 
 ## 🌈 要求
 
-| Version | Minimum iOS / macOS Target |         Frameworks          |         Note         |
-| :-----: | :------------------------: | :-------------------------: | :------------------: |
-|   4.x   |   iOS 9.0 / macOS 10.15    | SwiftUI、UIKit、macCatalyst | Xcode13、SwiftUI 2.0 |
-|   3.x   |   iOS 9.0 / macOS 10.15    |     UIKit、macCatalyst      |          /           |
-|   2.x   |   iOS 11.0 / macOS 10.15   |     UIKit、macCatalyst      |          /           |
+| Version  | Minimum iOS / macOS Target |          Frameworks           |  Note   |
+| :------: | :------------------------: | :---------------------------: | :-----: |
+| >= 4.2.0 |    iOS 11.0/macOS 10.15    | SwiftUI 3.0/UIKit/macCatalyst | Xcode14 |
+|  4.1.4   |    iOS 9.0/macOS 10.15     | SwiftUI 2.0/UIKit/macCatalyst | Xcode13 |
+|   3.x    |    iOS 9.0/macOS 10.15     |       UIKit/macCatalyst       |    /    |
+|   2.x    |    iOS 11.0/macOS 10.15    |       UIKit/macCatalyst       |    /    |
 
 ## 🍭 优点
 

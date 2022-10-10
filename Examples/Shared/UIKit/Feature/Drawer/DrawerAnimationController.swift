@@ -35,19 +35,13 @@ extension DrawerAnimationController {
         containerView?.insertSubview(backgroundColorView, belowSubview: toVC.view)
         
         let toViewFinalFrame = transitionContext?.finalFrame(for: toVC) ?? .zero
-        let screenBounds = UIScreen.main.bounds
+        let screenBounds = fromVC.view.frame
         toVC.view.frame = toViewFinalFrame.offsetBy(dx: -screenBounds.width, dy: 0)
         
         let duration = transitionDuration(using: transitionContext)
         UIView.animate(withDuration: duration, delay: 0.0, options: .curveLinear) { [weak self] in
-            toVC.view.frame = screenBounds.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: screenBounds.width * 0.15))
-            toVC.view.layer.cornerRadius = 10
-            toVC.view.clipsToBounds = true
-            
+            toVC.view.frame = screenBounds.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: screenBounds.width * 0.1))
             fromVC.view.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            fromVC.view.layer.cornerRadius = 10
-            fromVC.view.clipsToBounds = true
-            
             self?.backgroundColorView.alpha = 1.0
         } completion: { finished in
             transitionContext?.completeTransition(!(transitionContext?.transitionWasCancelled ?? true))
@@ -65,8 +59,6 @@ extension DrawerAnimationController {
         let duration = transitionDuration(using: transitionContext)
         
         UIView.animate(withDuration: duration, delay: 0.0, options: .curveLinear) { [weak self] in
-            toVC.view.layer.cornerRadius = 0
-            toVC.view.clipsToBounds = false
             toVC.view.transform = .identity
             
             fromVC.view.frame = fromViewFinalFrame.offsetBy(dx: -fromViewFinalFrame.width, dy: 0)
@@ -75,8 +67,6 @@ extension DrawerAnimationController {
         } completion: { [weak self] finished in
             self?.isReverse = false
             if transitionContext?.transitionWasCancelled ?? true {
-                toVC.view.layer.cornerRadius = 0
-                toVC.view.clipsToBounds = false
                 toVC.view.transform = .identity
                 
                 self?.backgroundColorView.alpha = 1.0

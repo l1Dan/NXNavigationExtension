@@ -20,7 +20,7 @@ class FullPopGesture_ScrollView: BaseViewController, UIScrollViewDelegate {
     
     private var imageNames: [String] = [] {
         didSet {
-            let bounds = UIScreen.main.bounds
+            let bounds = view.bounds
             for index in 0 ..< imageNames.count {
                 let imageView = UIImageView(image: UIImage(named: imageNames[index]))
                 imageView.frame = CGRect(x: bounds.width * CGFloat(index), y: 0, width: bounds.width, height: bounds.height)
@@ -62,13 +62,9 @@ class FullPopGesture_ScrollView: BaseViewController, UIScrollViewDelegate {
         navigationItem.title = "(UIScrollView)\(NSLocalizedString("resolveGestureConflicts", comment: ""))"
         
         view.addSubview(scrollView)
-        if #available(iOS 11.0, *) {
-            scrollView.contentInsetAdjustmentBehavior = .never
-        } else {
-            automaticallyAdjustsScrollViewInsets = false
-        }
+        scrollView.contentInsetAdjustmentBehavior = .never
         
-        setupContentWithSize(UIScreen.main.bounds.size)
+        setupContentWithSize(view.bounds.size)
         NSLayoutConstraint.activate([
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
             scrollView.heightAnchor.constraint(equalTo: view.heightAnchor),

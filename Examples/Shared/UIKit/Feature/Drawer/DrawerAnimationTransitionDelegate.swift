@@ -25,7 +25,6 @@ extension DrawerAnimationTransitionDelegate {
         let navigationController = FeatureNavigationController(rootViewController: DrawerViewController())
         navigationController.transitioningDelegate = self
         navigationController.modalPresentationStyle = .custom
-        navigationController.modalPresentationCapturesStatusBarAppearance = true // 隐藏导航栏
         viewController?.present(navigationController, animated: true, completion: nil)
     }
     

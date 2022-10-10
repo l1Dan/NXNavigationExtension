@@ -54,18 +54,10 @@ class ViewController02_FullScreenPopGestureEnable: BaseViewController {
         contentView.addArrangedSubview(scrollViewTypeButton)
         contentView.addArrangedSubview(pageViewControllerTypeButton)
         
-        if #available(iOS 11.0, *) {
-            NSLayoutConstraint.activate([
-                contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50)
-            ])
-        } else {
-            NSLayoutConstraint.activate([
-                contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                contentView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100)
-            ])
-        }
-        
+        NSLayoutConstraint.activate([
+            contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50)
+        ])
     }
     
 }

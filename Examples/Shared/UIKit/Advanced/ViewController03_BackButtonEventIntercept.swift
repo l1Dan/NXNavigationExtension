@@ -17,7 +17,7 @@ class ViewController03_BackButtonEventIntercept: BaseTableViewController {
     
     private lazy var footerView: UIView = {
         let height = ViewController03_BackButtonEventIntercept.heightForFooterInSection
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height))
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: height))
         
         let color = UIColor.customColor { .black } darkModeColor: { .white }
         let button = UIButton()

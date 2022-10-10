@@ -237,19 +237,11 @@ class ViewController_Transition: BaseViewController {
         
         [toggleView, chooseTransitionButton].forEach(view.addSubview)
         
-        if #available(iOS 11.0, *) {
-            NSLayoutConstraint.activate([
-                toggleView.heightAnchor.constraint(equalToConstant: 60),
-                toggleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
-                toggleView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
-            ])
-        } else {
-            NSLayoutConstraint.activate([
-                toggleView.heightAnchor.constraint(equalToConstant: 60),
-                toggleView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-                toggleView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
-            ])
-        }
+        NSLayoutConstraint.activate([
+            toggleView.heightAnchor.constraint(equalToConstant: 60),
+            toggleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
+            toggleView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+        ])
         
         NSLayoutConstraint.activate([
             chooseTransitionButton.topAnchor.constraint(equalTo: toggleView.bottomAnchor, constant: 8),

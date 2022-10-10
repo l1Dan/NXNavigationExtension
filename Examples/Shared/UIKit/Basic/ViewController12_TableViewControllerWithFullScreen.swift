@@ -13,11 +13,7 @@ class ViewController12_TableViewControllerWithFullScreen: ViewController11_Table
         super.viewDidLoad()
         navigationItem.title = nil
         
-        if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = .never
-        } else {
-            automaticallyAdjustsScrollViewInsets = false
-        }
+        tableView.contentInsetAdjustmentBehavior = .never
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
