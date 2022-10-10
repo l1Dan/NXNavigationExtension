@@ -56,7 +56,7 @@ typedef void (^_Nullable NXViewControllerPrepareConfigurationCallback)(__kindof 
 @property (nonatomic, strong, nullable) NSDictionary<NSAttributedStringKey, id> *titleTextAttributes;
 
 /// 设置 UINavigationBar largeTitleTextAttributes
-@property (nonatomic, strong, nullable) NSDictionary<NSAttributedStringKey, id> *largeTitleTextAttributes API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, strong, nullable) NSDictionary<NSAttributedStringKey, id> *largeTitleTextAttributes API_UNAVAILABLE(tvos);
 
 /// 设置 NXNavigationBar 背景图片
 @property (nonatomic, strong, nullable) UIImage *backgroundImage;
