@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name     = 'NXNavigationExtension'
-  spec.version  = '4.1.4'
+  spec.version  = '4.1.5'
   spec.summary  = '🔥 Lightweight, simple, and easy-to-use NavigationBar library.'
 
   spec.description  = <<-DESC
@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
   spec.author   = { 'Leo Lee' => 'l1dan@hotmail.com' }
   spec.social_media_url = 'https://github.com/l1Dan'
 
-  spec.ios.deployment_target  = '9.0'
+  spec.ios.deployment_target  = '11.0'
   spec.default_subspec = 'Sources'
   spec.swift_version = '5.0'
   spec.module_map = 'NXNavigationExtension/module.modulemap'
