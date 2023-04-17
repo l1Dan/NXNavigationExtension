@@ -62,11 +62,7 @@ class FullPopGesture_ScrollView: BaseViewController, UIScrollViewDelegate {
         navigationItem.title = "(UIScrollView)\(NSLocalizedString("resolveGestureConflicts", comment: ""))"
         
         view.addSubview(scrollView)
-        if #available(iOS 11.0, *) {
-            scrollView.contentInsetAdjustmentBehavior = .never
-        } else {
-            automaticallyAdjustsScrollViewInsets = false
-        }
+        scrollView.contentInsetAdjustmentBehavior = .never
         
         setupContentWithSize(UIScreen.main.bounds.size)
         NSLayoutConstraint.activate([

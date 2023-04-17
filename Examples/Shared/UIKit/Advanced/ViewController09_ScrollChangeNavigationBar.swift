@@ -178,12 +178,7 @@ class ViewController09_ScrollChangeNavigationBar: CustomTableViewController, Fak
         let maxHeight = nx_navigationBar.frame.height
         tableView.contentInset = UIEdgeInsets(top: -maxHeight, left: 0, bottom: 0, right: 0)
         
-        var safeAreaInsets = navigationController?.navigationBar.layoutMargins
-        if #available(iOS 11.0, *) {
-            safeAreaInsets = navigationController?.navigationBar.safeAreaInsets
-        }
-        
-        guard let safeAreaInsets = safeAreaInsets else { return }
+        guard let safeAreaInsets = navigationController?.navigationBar.safeAreaInsets else { return }
         topConstraint?.constant = safeAreaInsets.top
         leftConstraint?.constant = safeAreaInsets.left
         bottomConstraint?.constant = safeAreaInsets.bottom

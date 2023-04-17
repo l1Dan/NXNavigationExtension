@@ -104,12 +104,8 @@ class ViewController04_CustomNavigationBar: CustomTableViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        var safeAreaInsets = navigationController?.navigationBar.layoutMargins
-        if #available(iOS 11.0, *) {
-            safeAreaInsets = navigationController?.navigationBar.safeAreaInsets
-        }
         
-        guard let safeAreaInsets = safeAreaInsets else { return }
+        guard let safeAreaInsets = navigationController?.navigationBar.safeAreaInsets else { return }
         leftConstraint?.constant = safeAreaInsets.left
         rightConstraint?.constant = safeAreaInsets.right
         gradientLayer.frame = nx_navigationBar?.bounds ?? .zero

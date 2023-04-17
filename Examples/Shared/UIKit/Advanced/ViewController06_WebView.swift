@@ -122,39 +122,20 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
         webView.load(URLRequest(url: URL(string: "https://www.apple.com/")!))
         view.addSubview(webView)
         
-        if #available(iOS 11.0, *) {
-            NSLayoutConstraint.activate([
-                webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                webView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                webView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            ])
-        } else {
-            NSLayoutConstraint.activate([
-                webView.topAnchor.constraint(equalTo: view.topAnchor),
-                webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            ])
-        }
+        NSLayoutConstraint.activate([
+            webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            webView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            webView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+        ])
         
         view.addSubview(progressView)
-        if #available(iOS 11.0, *) {
-            NSLayoutConstraint.activate([
-                progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-                progressView.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale),
-            ])
-        } else {
-            NSLayoutConstraint.activate([
-                progressView.topAnchor.constraint(equalTo: view.topAnchor),
-                progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                progressView.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale),
-            ])
-        }
-        
+        NSLayoutConstraint.activate([
+            progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            progressView.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale),
+        ])
         
         if #available(iOS 13.0, *) {
             webView.backgroundColor = UIColor(dynamicProvider: { [weak self] traitCollection in

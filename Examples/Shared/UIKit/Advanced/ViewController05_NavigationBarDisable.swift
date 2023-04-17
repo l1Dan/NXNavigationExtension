@@ -32,11 +32,7 @@ class ViewController05_NavigationBarDisable: CustomTableViewController {
         super.viewDidLoad()
         
         navigationItem.title = nil
-        if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = .never
-        } else {
-            automaticallyAdjustsScrollViewInsets = false
-        }
+        tableView.contentInsetAdjustmentBehavior = .never
         
         tableHeaderView.addSubview(segmentedControl)
         
@@ -65,12 +61,7 @@ class ViewController05_NavigationBarDisable: CustomTableViewController {
         tableHeaderView.frame = CGRect(x: tableHeaderViewX, y: tableHeaderViewY, width: tableHeaderViewWidth, height: tableHeaderViewHeight)
         tableView.tableHeaderView = tableHeaderView
         
-        var safeAreaInsets = navigationController?.navigationBar.layoutMargins
-        if #available(iOS 11.0, *) {
-            safeAreaInsets = navigationController?.navigationBar.safeAreaInsets
-        }
-        
-        guard let safeAreaInsets = safeAreaInsets else { return }
+        guard let safeAreaInsets = navigationController?.navigationBar.safeAreaInsets else { return }
         heightConstraint?.constant = navigationBarFrame.height * 0.8
         leftConstraint?.constant = safeAreaInsets.left
         rightConstraint?.constant = -safeAreaInsets.right
