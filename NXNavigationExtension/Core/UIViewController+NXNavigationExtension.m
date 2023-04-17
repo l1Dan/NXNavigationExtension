@@ -266,9 +266,7 @@
         self.navigationController.navigationBar.barTintColor = self.nx_barBarTintColor;
         self.navigationController.navigationBar.tintColor = self.nx_barTintColor;
         self.navigationController.navigationBar.titleTextAttributes = self.nx_titleTextAttributes;
-        if (@available(iOS 11.0, *)) {
-            self.navigationController.navigationBar.largeTitleTextAttributes = self.nx_largeTitleTextAttributes;
-        }
+        self.navigationController.navigationBar.largeTitleTextAttributes = self.nx_largeTitleTextAttributes;
         [self.navigationController nx_configureNavigationBar];
         
         self.nx_navigationBar.backgroundColor = self.nx_navigationBarBackgroundColor;
@@ -339,9 +337,7 @@
             
             NSDictionary *textAttributes = @{NSForegroundColorAttributeName: [UIColor clearColor]};
             self.navigationController.navigationBar.titleTextAttributes = textAttributes;
-            if (@available(iOS 11.0, *)) {
-                self.navigationController.navigationBar.largeTitleTextAttributes = textAttributes;
-            }
+            self.navigationController.navigationBar.largeTitleTextAttributes = textAttributes;
         } else {
             [self nx_setNavigationBarHidden:NO];
             self.nx_navigationBar.userInteractionEnabled = systemNavigationBarUserInteractionDisabled;

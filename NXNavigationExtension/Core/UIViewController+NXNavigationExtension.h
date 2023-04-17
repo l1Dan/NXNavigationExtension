@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly, nullable) NSDictionary<NSAttributedStringKey, id> *nx_titleTextAttributes;
 
 /// 设置 UINavigationBar largeTitleTextAttributes
-@property (nonatomic, strong, readonly, nullable) NSDictionary<NSAttributedStringKey, id> *nx_largeTitleTextAttributes API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, strong, readonly, nullable) NSDictionary<NSAttributedStringKey, id> *nx_largeTitleTextAttributes API_UNAVAILABLE(tvos);
 
 /// 设置 NXNavigationBar 底部阴影图片
 @property (nonatomic, strong, readonly, nullable) UIImage *nx_shadowImage;

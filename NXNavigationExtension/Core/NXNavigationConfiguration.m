@@ -69,9 +69,7 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
     newAppearance.shadowColor = self.shadowColor;
     
     newAppearance.titleTextAttributes = self.titleTextAttributes;
-    if (@available(iOS 11.0, *)) {
-        newAppearance.largeTitleTextAttributes = self.largeTitleTextAttributes;
-    }
+    newAppearance.largeTitleTextAttributes = self.largeTitleTextAttributes;
     
     newAppearance.backgroundColor = self.backgroundColor;
     newAppearance.backgroundImage = self.backgroundImage;
