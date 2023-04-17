@@ -19,11 +19,12 @@
 
 ## 🌈 要求
 
-| Version | Minimum iOS / macOS Target |         Frameworks          |         Note         |
-| :-----: | :------------------------: | :-------------------------: | :------------------: |
-|   4.x   |   iOS 9.0 / macOS 10.15    | SwiftUI、UIKit、macCatalyst | Xcode13、SwiftUI 2.0 |
-|   3.x   |   iOS 9.0 / macOS 10.15    |     UIKit、macCatalyst      |          /           |
-|   2.x   |   iOS 11.0 / macOS 10.15   |     UIKit、macCatalyst      |          /           |
+|   Version   | Minimum iOS / macOS Target |         Frameworks          |  Note   |
+| :---------: | :------------------------: | :-------------------------: | :-----: |
+| 4.1.5 Later |   iOS 11.0 / macOS 10.15   | SwiftUI、UIKit、macCatalyst | Xcode14 |
+|    4.1.4    |   iOS 9.0 / macOS 10.15    | SwiftUI、UIKit、macCatalyst | Xcode13 |
+|     3.x     |   iOS 9.0 / macOS 10.15    |     UIKit、macCatalyst      |    /    |
+|     2.x     |   iOS 11.0 / macOS 10.15   |     UIKit、macCatalyst      |    /    |
 
 ## 🍭 优点
 
@@ -105,7 +106,7 @@ github "l1Dan/NXNavigationExtension"
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.1.4"))
+    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.1.5"))
 ]
 ```
 
