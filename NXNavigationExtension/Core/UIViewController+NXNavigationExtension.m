@@ -194,8 +194,6 @@
         self.nx_navigationBarInitialize = YES;
         // 调用外部配置信息
         [self nx_executePrepareConfigurationViewControllerCallback];
-        // fix: 修复 popToRootViewController 时调用 nx_setNeedsNavigationBarAppearanceUpdate 方法会设置 leftBarButtonItem 的问题
-        [self.navigationController viewControllers].firstObject.nx_isRootViewController = YES;
         [self.navigationController nx_configureNavigationBar];
         [self nx_setupNavigationBar];
         [self nx_updateNavigationBarAppearance];
@@ -438,20 +436,6 @@
     objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperView), nx_navigationVirtualWrapperView, OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (NXNavigationAction)nx_navigationAction {
-    NSNumber *number = objc_getAssociatedObject(self, _cmd);
-    if (!number || ![number isKindOfClass:[NSNumber class]]) {
-        NXNavigationAction navigationAction = NXNavigationActionUnspecified;
-        [self setNx_navigationAction:navigationAction];
-        return navigationAction;
-    }
-    return [number integerValue];
-}
-
-- (void)setNx_navigationAction:(NXNavigationAction)nx_navigationAction {
-    objc_setAssociatedObject(self, @selector(nx_navigationAction), @(nx_navigationAction), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 - (NXNavigationBar *)nx_navigationBar {
     // 如果之前已经创建过 NXNavigationBar 实例，则直接返回原来已经创建好的实例对象。
     NXNavigationBar *bar = objc_getAssociatedObject(self, _cmd);
@@ -590,9 +574,8 @@
             [self.navigationController nx_adjustmentSystemBackButtonForViewController:self inViewControllers:previousViewControllers];
         }
         
-        if (!self.nx_isRootViewController) {
-            [self nx_configureNavigationBarWithNavigationController:self.navigationController];
-        }
+        [self nx_configureNavigationBarWithNavigationController:self.navigationController];
+
         // 重新检查返回手势是否动态修改
         [self.navigationController nx_configureInteractivePopGestureRecognizerWithViewController:self];
     }

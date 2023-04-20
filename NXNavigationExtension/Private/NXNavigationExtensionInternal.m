@@ -31,6 +31,10 @@
 #import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
 
+@implementation NXBackButtonItem
+
+@end
+
 
 @implementation NXScreenEdgePopGestureRecognizerDelegate
 
@@ -382,6 +386,11 @@
     self.interactivePopGestureRecognizer.delegate = self.nx_screenEdgePopGestureDelegate;
 }
 
+- (void)nx_resetInteractivePopGestureRecognizer {
+    self.interactivePopGestureRecognizer.enabled = NO;
+    self.nx_fullScreenPopGestureRecognizer.enabled = NO;    
+}
+
 - (void)nx_configureInteractivePopGestureRecognizerWithViewController:(__kindof UIViewController *)viewController {
     if (!self.interactivePopGestureRecognizer) return;
     
@@ -443,7 +452,7 @@
         if (currentViewController.nx_systemBackButtonTitle) {
             // 去掉前后空格
             NSString *title = [currentViewController.nx_systemBackButtonTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:nil action:nil];
+            NXBackButtonItem *backItem = [[NXBackButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:nil action:nil];
             if ([title isEqualToString:@""]) {
                 if (@available(iOS 14.0, *)) {
                     /**
@@ -451,7 +460,7 @@
                      * lastViewController.navigationItem.backBarButtonItem = nil; 恢复系统返回按钮默认样式。长按返回按钮还会出现上一级导航栏的标题
                      * lastViewController.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal; 隐藏返回按钮标题
                      * #2
-                     * UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil]; // 隐藏返回按钮标题
+                     * NXBackButtonItem *backItem = [[NXBackButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil]; // 隐藏返回按钮标题
                      * lastViewController.navigationItem.backBarButtonItem = backItem; 长按返回按钮将无法出现上一级导航栏的标题
                      */
                     lastViewController.navigationItem.backBarButtonItem = nil;
@@ -543,26 +552,20 @@
 @end
 
 
-@interface UIViewController (NXNavigationExtensionInternal)
-
-/// 记录自定义返回按钮对象，用于后续对比是否为同一个对象
-@property (nonatomic, strong) UIBarButtonItem *nx_customBackButtonItem;
-
-@end
-
-
 @implementation UIViewController (NXNavigationExtensionInternal)
 
-- (BOOL)nx_isRootViewController {
+- (NXNavigationAction)nx_navigationAction {
     NSNumber *number = objc_getAssociatedObject(self, _cmd);
-    if (number && [number isKindOfClass:[NSNumber class]]) {
-        return [number boolValue];
+    if (!number || ![number isKindOfClass:[NSNumber class]]) {
+        NXNavigationAction navigationAction = NXNavigationActionUnspecified;
+        [self setNx_navigationAction:navigationAction];
+        return navigationAction;
     }
-    return NO;
+    return [number integerValue];
 }
 
-- (void)setNx_isRootViewController:(BOOL)nx_isRootViewController {
-    objc_setAssociatedObject(self, @selector(nx_isRootViewController), @(nx_isRootViewController), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setNx_navigationAction:(NXNavigationAction)nx_navigationAction {
+    objc_setAssociatedObject(self, @selector(nx_navigationAction), @(nx_navigationAction), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)nx_isChildViewController {
@@ -587,14 +590,6 @@
                                                          handler:^id _Nonnull(UINavigationController *_Nonnull navigationController) {
         return [navigationController popViewControllerAnimated:YES];
     }];
-}
-
-- (UIBarButtonItem *)nx_customBackButtonItem {
-    return objc_getAssociatedObject(self, _cmd);
-}
-
-- (void)setNx_customBackButtonItem:(UIBarButtonItem *)nx_customBackButtonItem {
-    objc_setAssociatedObject(self, @selector(nx_customBackButtonItem), nx_customBackButtonItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (id<NXNavigationControllerDelegate>)nx_navigationControllerDelegate {
@@ -634,36 +629,50 @@
 
 - (void)nx_configureNavigationBarWithNavigationController:(__kindof UINavigationController *)navigationController {
     [self.navigationItem setHidesBackButton:!self.nx_useSystemBackButton animated:NO];
+        
+    // 统一处理 rootViewController 发生改变的情况
+    UIViewController *rootViewController = [navigationController.viewControllers firstObject];
+    if (rootViewController) {
+        UIBarButtonItem *backButton = rootViewController.navigationItem.leftBarButtonItem;
+        if (backButton && [backButton isKindOfClass:[NXBackButtonItem class]]) {
+            rootViewController.navigationItem.leftBarButtonItem = nil;
+        }
+        // 当前控制器为 rootViewController 则不需要处理
+        if (self == rootViewController) {
+            return;
+        }
+    }
+
+    // 使用系统返回按钮时移除自定义返回按钮
     if (self.nx_useSystemBackButton) {
-        UIBarButtonItem *customBackButtonItem = self.nx_customBackButtonItem;
-        UIBarButtonItem *leftBarButtonItem = self.navigationItem.leftBarButtonItem;
-        // 如果导航栏不同时支持返回按钮和 leftItems 则清空 left 区域，或者 left 为自定义返回按钮也要清空。
-        if (!self.navigationItem.leftItemsSupplementBackButton ||
-            (customBackButtonItem && leftBarButtonItem && customBackButtonItem == leftBarButtonItem)) {
-            self.navigationItem.leftBarButtonItem = nil;
-            self.navigationItem.leftBarButtonItems = nil;
+        UIBarButtonItem *backButton = self.navigationItem.leftBarButtonItem;
+        if (backButton && [backButton isKindOfClass:[NXBackButtonItem class]]) {
+            rootViewController.navigationItem.leftBarButtonItem = nil;
         }
         return;
     }
     
+    // 仅当 leftBarButtonItem 为 nil 的情况才添加返回按钮
     UIBarButtonItem *backButtonItem = self.navigationItem.leftBarButtonItem;
+    if (backButtonItem) {
+        return;
+    }
+    
     UIView *customView = self.nx_backButtonCustomView;
     if (customView) {
-        backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customView];
+        backButtonItem = [[NXBackButtonItem alloc] initWithCustomView:customView];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nx_triggerSystemPopViewController)];
         customView.semanticContentAttribute = navigationController.navigationBar.semanticContentAttribute;
         customView.userInteractionEnabled = YES;
         [customView addGestureRecognizer:tap];
-        self.nx_customBackButtonItem = backButtonItem;
     } else {
         BOOL isRightToLeft = navigationController.navigationBar.semanticContentAttribute == UISemanticContentAttributeForceRightToLeft;
         SEL selector = @selector(nx_triggerSystemPopViewController);
         UIImage *backImage = isRightToLeft ? self.nx_backImage.imageFlippedForRightToLeftLayoutDirection : self.nx_backImage;
         UIImage *landscapeBackImage = isRightToLeft ? self.nx_landscapeBackImage.imageFlippedForRightToLeftLayoutDirection : self.nx_landscapeBackImage;
-        backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage landscapeImagePhone:landscapeBackImage style:UIBarButtonItemStylePlain target:self action:selector];
+        backButtonItem = [[NXBackButtonItem alloc] initWithImage:backImage landscapeImagePhone:landscapeBackImage style:UIBarButtonItemStylePlain target:self action:selector];
         backButtonItem.imageInsets = NXDirectionalEdgeInsetsMake(self.nx_backImageInsets, navigationController.navigationBar.semanticContentAttribute);
         backButtonItem.landscapeImagePhoneInsets = NXDirectionalEdgeInsetsMake(self.nx_landscapeBackImageInsets, navigationController.navigationBar.semanticContentAttribute);
-        self.nx_customBackButtonItem = backButtonItem;
     }
     self.navigationItem.leftBarButtonItem = backButtonItem;
 }

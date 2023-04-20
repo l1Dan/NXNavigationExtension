@@ -296,6 +296,12 @@
                     viewControllers = [NSOrderedSet orderedSetWithArray:viewControllers].array; // 这里会保留该 vc 第一次出现的位置不变
                 }
 
+                // setViewControllers 执行前后 topViewController 没有变化，则赋值为 nil，表示没有任何界面有“重新显示”。
+                UIViewController *appearingViewController = selfObject.topViewController != viewControllers.lastObject ? viewControllers.lastObject : nil;
+                [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionWillSet];
+
+                callSuperBlock();
+                
                 for (UIViewController *viewController in viewControllers) {
                     viewController.navigationItem.nx_viewController = viewController;
                     // 先赋值一次
@@ -317,13 +323,12 @@
                         // 重新检查返回手势是否动态修改
                         [selfObject nx_configureInteractivePopGestureRecognizerWithViewController:viewController];
                     }
+                } else {
+                    // 处理 rootViewController
+                    [selfObject nx_configureNavigationBarWithNavigationController:selfObject];
+                    // 在 rootViewController 中禁止使用返回手势
+                    [selfObject nx_resetInteractivePopGestureRecognizer];
                 }
-
-                // setViewControllers 执行前后 topViewController 没有变化，则赋值为 nil，表示没有任何界面有“重新显示”。
-                UIViewController *appearingViewController = selfObject.topViewController != viewControllers.lastObject ? viewControllers.lastObject : nil;
-                [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionWillSet];
-
-                callSuperBlock();
 
                 [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionDidSet];
                 [selfObject nx_animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {

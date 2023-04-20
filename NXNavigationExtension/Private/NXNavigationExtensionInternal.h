@@ -44,6 +44,11 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 
 @end
 
+@interface NXBackButtonItem : UIBarButtonItem
+
+@end
+
+
 /// 全屏滑动返回手势代理
 @interface NXFullScreenPopGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
 
@@ -119,6 +124,10 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 /// 配置 NXNavigationBar
 - (void)nx_configureNavigationBar;
 
+
+/// 重置返回手势
+- (void)nx_resetInteractivePopGestureRecognizer;
+
 /// 配置返回手势
 - (void)nx_configureInteractivePopGestureRecognizerWithViewController:(__kindof UIViewController *)viewController;
 
@@ -159,9 +168,6 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 
 /// 获取当前视图控制器转场周期事件
 @property (nonatomic, assign) NXNavigationAction nx_navigationAction;
-
-/// 记录当前视图控制器是否为导航控制器的 rootViewController
-@property (nonatomic, assign) BOOL nx_isRootViewController;
 
 /// 记录是否为 childViewControllers 中的控制器，并且当前控制器不是 UINavigationController 的情况下。
 @property (nonatomic, assign) BOOL nx_isChildViewController;
