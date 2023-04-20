@@ -455,14 +455,7 @@
             NXBackButtonItem *backItem = [[NXBackButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:nil action:nil];
             if ([title isEqualToString:@""]) {
                 if (@available(iOS 14.0, *)) {
-                    /**
-                     * #1
-                     * lastViewController.navigationItem.backBarButtonItem = nil; 恢复系统返回按钮默认样式。长按返回按钮还会出现上一级导航栏的标题
-                     * lastViewController.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal; 隐藏返回按钮标题
-                     * #2
-                     * NXBackButtonItem *backItem = [[NXBackButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil]; // 隐藏返回按钮标题
-                     * lastViewController.navigationItem.backBarButtonItem = backItem; 长按返回按钮将无法出现上一级导航栏的标题
-                     */
+                    // 重置为 `nil`，可以支持 iOS14.0 新特性：长按返回按钮可以出现 Menu Actions
                     lastViewController.navigationItem.backBarButtonItem = nil;
                     lastViewController.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal;
                 } else {
@@ -647,7 +640,7 @@
     if (self.nx_useSystemBackButton) {
         UIBarButtonItem *backButton = self.navigationItem.leftBarButtonItem;
         if (backButton && [backButton isKindOfClass:[NXBackButtonItem class]]) {
-            rootViewController.navigationItem.leftBarButtonItem = nil;
+            self.navigationItem.leftBarButtonItem = nil;
         }
         return;
     }
