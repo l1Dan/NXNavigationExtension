@@ -1,5 +1,10 @@
 # CHANGELOG.md
 
+## 4.1.6
+
+1. fix: 移除 ViewControllers 中 rootViewController 之后，新的 rootViewController 返回按钮显示不正确问题 #16
+2. 代码优化
+
 ## 4.1.5
 
 最低支持 iOS11.0
