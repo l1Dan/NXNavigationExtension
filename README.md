@@ -115,61 +115,379 @@ dependencies: [
 - 阅读 [**SwiftUI Guide**](https://github.com/l1Dan/NXNavigationExtension/blob/main/Documentation/NXNavigationExtensionSwiftUI.md) 文档。
 - 阅读 [**UIKit Guide**](https://github.com/l1Dan/NXNavigationExtension/blob/main/Documentation/NXNavigationExtensionUIKit.md) 文档。
 
+## 🍽 使用
+
+所有对导航栏外观的修改都是基于视图控制器 `UIViewController` 修改的，而不是基于导航控制器 `UINavigationController` 修改，这种设计逻辑更加符合实际应用场景。也就是说视图控制器管理自己的导航栏，而不是使用导航控制器来全局管理。
+
+1. 💉 导入模块 `import NXNavigationExtension`。
+2. 💉 使用之前需要先在 `AppDelegate` 中注册需要修改的导航控制器。
+
+✅ 推荐
+
+只需要下面这一行代码就完成导航控制器的注册，现在你可以尽情地修改导航栏的外观了。
+
+```swift
+// For YourNavigationController
+NXNavigationConfiguration().registerNavigationControllerClasses([YourNavigationController.self])
+```
+
+或者
+
+当然也可以同时注册多个导航控制器
+
+```swift
+NXNavigationConfiguration().registerNavigationControllerClasses([YourNavigationController.self, YourNavigationController2.self])
+```
+
+或者
+
+还可以动态修改导航栏的外观（`NXNavigationExtensionSwiftUI` 框架就是基于这个特性实现的）
+
+```swift
+let configuration = NXNavigationConfiguration.default
+// 默认首选配置（单利对象意味着对所有注册的导航控制器生效）
+configuration.navigationBarAppearance.tintColor = .customTitle
+configuration.registerNavigationControllerClasses([YourNavigationController.self, YourNavigationController2.self]) { navigationController, configuration in
+    // For UINavigationController，针对不同导航控制器的修改
+    if navigationController is YourNavigationController {
+        // 动态修改导航控制器的默认首选配置
+        configuration.navigationBarAppearance.backgroundColor = .brown
+        // 动态修改视图控制器的默认首选配置
+        navigationController.nx_prepareConfigureViewControllersCallback { viewController, configuration in
+            // For UIViewController 针对不同视图控制器的修改
+            if viewController is MyViewController {
+                configuration.navigationBarAppearance.backgroundColor = .red
+            }
+        }
+    }
+    return configuration
+}
+```
+
+❌ 不推荐
+
+```swift
+// UINavigationController 会影响所有的导航控制器，所以不推荐使用这种方式注册
+NXNavigationConfiguration().registerNavigationControllerClasses([UINavigationController.self])
+```
+
+**注意**：
+
+- 👉 虽然示例程序代码使用的是 `Swift` 语言实现的，但框架还是可以支持 `Objective-C` 语言的，如果需要 `Objective-C` 示例程序的代码可以查看 [3.x](https://github.com/l1Dan/NXNavigationExtension/tree/3.x) 分支代码。
+- 👉 使用这个框架之前需要先注册导航控制器，然后再去修改被注册的导航控制器所管理的视图控制器的导航栏外观。
+- 👉 为了有效避免框架污染到其他的导航控制器，请保持“谁使用，谁注册”的原则。
+- 🚫 不要直接注册 `UINavigationController`，会影响全局导航栏的外观，建议创建一个 `UINavigationController` 的子类，对这个子类进行外观的设置。
+- 🚫 不要使用 `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:` 等方法显示或隐藏系统导航栏。
+- 🚫 不要使用系统导航栏修改透明度。
+- 🚫 不要使用系统导航栏或导航控制器 `appearance` 相关属性修改。
+- 🚫 不要使用 `<UIGestureRecognizerDelegate>` 相关方法禁用手势返回。
+- ❗️ 在某些条件下，不推荐使用 UIViewController 的 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性设置，使用默认方式即可，具体原因请[查看](https://github.com/l1Dan/NXNavigationExtension/issues/17)。
+- 一句话总结：原则就是不要直接修改系统导航栏或者导航控制器的外观，可以让我们少走弯路，把这些繁琐的事情都交给这个框架处理吧。
+
+## 🍻 基本功能
+
+### 修改返回按钮箭头颜色
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift)
+
+```swift
+override var nx_barTintColor: UIColor? {
+    return isDarkMode ? .white : .black
+}
+```
+
+## 修改系统返回按钮文字
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift)
+
+```swift
+// 需要设置使用系统返回按钮，这样才会有效果
+override var nx_useSystemBackButton: Bool {
+    return true
+}
+
+override var nx_systemBackButtonTitle: String? {
+    return backButtonTitle
+}
+```
+
+## 修改导航栏标题颜色
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift)
+
+```swift
+override var nx_titleTextAttributes: [NSAttributedString.Key : Any]? {
+    return [NSAttributedString.Key.foregroundColor: nx_barTintColor ?? (isDarkMode ? .white : .black)]
+}
+```
+
+#### 修改导航栏背景颜色
+
+**导航栏背景颜色默认使用系统蓝色 `UIColor.systemBlue`，这样处理能够快速辨别框架是否生效，也可以使用以下方式进行重写：**
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController01_BackgroundColor.swift)
+
+```swift
+// 全局统一修改（不会覆盖基于视图控制器的修改）
+let configuration = NXNavigationConfiguration.default
+configuration.navigationBarAppearance.backgroundColor = .red
+
+// 基于视图控制器修改（可以是基类视图控制器也是可以是特定需要修改的视图控制器）
+override var nx_navigationBarBackgroundColor: UIColor? {
+    return randomColor
+}
+```
+
+#### 修改导航栏背景图片
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController02_BackgroundImage.swift)
+
+```swift
+override var nx_navigationBarBackgroundImage: UIImage? {
+    return UIImage.navigationBarBackground
+}
+```
+
+#### 设置导航栏透明
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController03_Transparent.swift)
+
+```swift
+override var nx_navigationBarBackgroundColor: UIColor? {
+    return .clear
+}
+
+// 设置导航栏底部阴影颜色
+override var nx_shadowColor: UIColor? {
+    return .clear
+}
+```
+
+#### 实现系统导航栏模糊效果
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController04_LikeSystemNavigationBar.swift)
+
+```swift
+override var nx_navigationBarBackgroundColor: UIColor? {
+    return .clear
+}
+
+override var nx_useBlurNavigationBar: Bool {
+    return true
+}
+```
+
+### 设置导航栏底部阴影颜色
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController05_ShadowColor.swift)
+
+```swift
+override var nx_shadowColor: UIColor? {
+    return .red
+}
+```
+
+### 设置导航栏底部阴影图片
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController06_ShadowImage.swift)
+
+```swift
+override var nx_shadowImage: UIImage? {
+    return UIImage(named: "NavigationBarShadowImage")
+}
+```
+
+### 自定义返回按钮图片
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController07_CustomBackImage.swift)
+
+```swift
+override var nx_backImage: UIImage? {
+    return UIImage(named: "NavigationBarBack")
+}
+```
+
+### 自定义返回按钮
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Basic/ViewController08_CustomBackView.swift)
+
+```swift
+override var nx_backButtonCustomView: UIView? {
+    return backButton
+}
+```
+
+---
+
+## 🍺 高级功能
+
+#### 禁用滑动返回手势
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController01_EdgePopGestureDisable.swift)
+
+```swift
+override var nx_disableInteractivePopGesture: Bool {
+    return true
+}
+```
+
+#### 启用全屏滑动返回手势
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController02_FullScreenPopGestureEnable.swift)
+
+- 局部有效（在所处页面设置）
+
+```swift
+override var nx_enableFullScreenInteractivePopGesture: Bool {
+    return true
+}
+```
+
+- 全局有效
+
+```swift
+let configuration = NXNavigationConfiguration.default
+configuration.viewControllerPreferences.enableFullScreenInteractivePopGesture = true
+```
+
+### 设置导航栏隐藏（并不是真的隐藏，只是看起来隐藏了，整个导航栏区域不能处理用户交互）
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController05_NavigationBarDisable.swift)
+
+```swift
+// 此操作会将导航栏的背景设置为透明、导航栏所在区域的底部能够接收到点击事件、返回按钮也将不存在。
+// “隐藏”导航栏时不要添加 UINavigationBar 的 barButtonItem(s)，这样就可以看起来真的像导航栏隐藏了。
+// 不隐藏系统导航栏的原因是：可以让整个导航栏的过渡更加平滑自然，当然也不推荐除此之外任何隐藏系统导航栏的方式。
+override var nx_translucentNavigationBar: Bool {
+    return true
+}
+```
+
+### 禁用**系统**导航栏用户交互（NXNavigationBar 可以处理用户交互）
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController09_ScrollChangeNavigationBar.swift)
+
+```swift
+override var systemNavigationBarUserInteractionDisabled: Bool {
+    return true
+}
+```
+
+### 更新导航栏样式
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift)
+
+```swift
+nx_setNeedsNavigationBarAppearanceUpdate()
+```
+
+如果**状态栏**样式没有发生变化，请检查是否需要调用方法 `setNeedsStatusBarAppearanceUpdate()`，或者在 `UINavigationController` 的子类中设置如下代码：
+
+```swift
+override var childForStatusBarStyle: UIViewController? {
+    return topViewController
+}
+
+override var childForStatusBarHidden: UIViewController? {
+    return topViewController
+}
+```
+
+#### 导航栏返回事件拦截
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController03_BackButtonEventIntercept.swift)
+
+需要遵守协议 `<NXNavigationControllerDelegate>`，实现代理方法：
+
+1. `NXNavigationInteractiveTypeCallNXPopMethod`: 调用 `nx_pop` 系列方法返回事件拦截。
+2. `NXNavigationInteractiveTypeBackButtonAction`: 点击返回按钮返回事件拦截。
+3. `NXNavigationInteractiveTypeBackButtonMenuAction`: 长按返回按钮选择菜单返回事件拦截。
+4. `NXNavigationInteractiveTypePopGestureRecognizer`: 使用手势交互返回事件拦截。
+
+```swift
+func nx_navigationController(_ navigationController: UINavigationController, willPop viewController: UIViewController, interactiveType: NXNavigationInteractiveType) -> Bool {
+    switch interactiveType {
+    case .backButtonAction:
+        // Do something
+        return false
+    case .backButtonMenuAction:
+        // Do something
+        return false
+    case .popGestureRecognizer:
+        // Do something
+        return false
+    case .callNXPopMethod:
+        // Do something
+        return false
+    default:
+        // Continue back
+        return true
+    }
+}
+```
+
+自定义返回按钮事件需要拦截可以调用 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 等方法来触发上面的代理回调。
+
+### 支持视图控制器转场周期事件
+
+需要遵守协议 `<NXNavigationControllerDelegate>`，实现代理方法：
+
+```swift
+func nx_navigationController(_ navigationController: UINavigationController, processViewController viewController: UIViewController, navigationAction: NXNavigationAction) {
+    switch navigationAction {
+    case .unspecified: print("Unspecified")
+    case .willPush: print("WillPush")
+    case .didPush: print("DidPush")
+    case .pushCancelled: print("PushCancelled")
+    case .pushCompleted: print("PushCompleted")
+    case .willPop: print("WillPop")
+    case .didPop: print("DidPop")
+    case .popCancelled: print("PopCancelled")
+    case .popCompleted: print("PopCompleted")
+    case .willSet: print("WillSet")
+    case .didSet: print("DidSet")
+    case .setCancelled: print("SetCancelled")
+    case .setCompleted: print("SetCompleted")
+    default: print("None")
+    }
+}
+```
+
+### 任一视图控制器跳转
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController08_JumpToViewController.swift)
+
+- 以跳转到 `ViewController08_JumpToViewController` 为例，如果之前有 Push 过 `ViewController08_JumpToViewController` 的实例，则最后会跳转到这个视图控制器中，如果没有找到则会调用 `block` 执行插入新控制器的规则。
+- 执行此操作之后，并不会跳转到对应的视图控制器，仅仅是修改了 NavigationController 的 viewControllers 属性，如果需要跳转操作，可以调用 `pop` 系列方法返回上一个页面，也可以使用手势滑动返回页面，还可以点击返回按钮返回页面。
+
+```swift
+navigationController?.nx_setPreviousViewController(with: ViewController08_JumpToViewController.self, insertsInstanceToBelowWhenNotFoundUsing: {
+    return ViewController08_JumpToViewController()
+})
+// 执行视图控制器跳转操作：
+navigationController?.popViewController(animated: true)
+```
+
+意思是：首先查找 `navigationController?.viewControllers` 是否存在一个类型为 `ViewController08_JumpToViewController.self` 的实例对象，如果存在则上一页面会显示此视图控制器，没有找到则使用 `ViewController08_JumpToViewController()` 创建一个新的实例对象插入到 NavigationController 的 viewControllers 栈的上一个页面中。
+
+### 长按返回按钮显示菜单功能
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController08_JumpToViewController.swift)
+
+```swift
+override var nx_useSystemBackButton: Bool {
+    return true
+}
+```
+
+![BackButtonMenu](https://raw.githubusercontent.com/l1Dan/NXNavigationExtension/main/Snapshots/BackButtonMenu.png)
+
+
 ## ❤️ 感谢 [JetBrains](https://jb.gg/OpenSourceSupport) 对开源项目的支持
 
 <p align="left" >
   <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" alt="jb_beam" title="jb_beam" width="200px">
 </p>
-
-## 🔍 FAQ 常见问题
-
-Q：iOS14 及之后的版本为什么注册了 `UIImagePickerController`、`PHPickerViewController` 类之后还是无法修改导航栏的外观？
-
-A：因为 `UIImagePickerController` 和 `PHPickerViewController` 里面的 UINavigationBar 是隐藏的，NXNavigationBar 会跟随系统导航栏隐藏与显示，所以无法修改（**iOS14 之前系统的 `UIImagePickerController` 是可以修改的**）。另外 PHPickerViewController 其实是一个 UIViewController 的子类，你既可以用 `push` 的方式显示控制器也可以用 `present` 的方式显示控制器，他们有个共同特点：使用的都是一个 “假” 的导航栏。
-
----
-
-Q：为什么 iOS13 之前使用 `self.navigationItem.searchController` 设置的 `UISearchBar` 无法跟随导航栏的变化而变化，iOS13 之后的却可以呢？
-
-A：因为在 iOS13 之前导航栏中不包含 `UISearchBar`，iOS13 之后导航栏才包含 `UISearchBar` 的。具体使用请参考[示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Feature/FeatureTableViewController.swift)。
-
----
-
-Q：如何解决 `UIScrollView` 和 `UIPageViewController` 全屏手势冲突?
-
-A：使用 [UIScrollView](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Feature/FullPopGesture_ScrollView.swift) 和 [UIPageViewController](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Feature/FullPopGesture_PageViewController.swift) 全屏手势冲突解决方案。
-
----
-
-Q：为什么 `NXNavigationExtension` 框架不包含控制器的转场动画功能？
-
-A：原则就是尽可能的保持框架的简单轻量，将更多的精力花在框架本身的稳定性上，尽可能地使用系统原有功能。转场动画功能并不适用于所有业务场景，另外也不属于这个框架的功能。如果有转场动画的需求需要开发者自己实现，也可以参考[VCTransitionsLibrary](https://github.com/ColinEberhardt/VCTransitionsLibrary)，或者参考[示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Feature/Drawer/DrawerViewController.swift)。
-
----
-
-Q：为什么导航栏的系统返回按钮箭头和自定义返回按钮箭头的位置不一致？
-
-A：因为导航栏的系统返回按钮是用 `self.navigationItem.backBarButtonItem` 属性来设置的。而自定义返回按钮是用 `self.navigationItem.leftBarButtonItem` 属性来设置的，他们的位置本来就不一样。当然你可以使用系统返回按钮，通过 `(nx_)useSystemBackButton` 属性设置是否使用系统返回按钮，再配合 `(nx_)systemBackButtonTitle` 属性设置系统返回按钮的标题。还可以通过 `(nx_)backImageInsets` 或者 `(nx_)landscapeBackImageInsets` 属性来控制自定义返回按钮图片的偏移量。
-
-- 返回按钮箭头在切图里尽量靠左而不要居中，右边可以保留透明背景。
-- 使用 `nx_backButtonCustomView` 属性自定义返回按钮时就需要开发者自己来修正箭头的偏移量了。
-
-## 🙋 已知问题
-
-1. 在 UIViewController 中设置 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性，并且使用 [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager) 框架的同时键盘没有收起，此时返回上级页面 NXNavigationBar 会出现错位的现象。这是 IQKeyboardManager 框架本身处理这种情况就有问题（设置 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性，键盘没收起时返回上级页面导致界面下移的问题），NXNavigationExtension 框架内部无法处理这种情况（其实已经最大程度适配 IQKeyboardManager 框架）。解决方法：
-
-- 不使用 IQKeyboardManager 框架（或者在使用的 UIViewController 中暂时禁用 IQKeyboardManager 框架）。
-- 不使用 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性。
-- 在 UIViewController 中不使用 UITextField/UITextView 等需要弹出键盘的控件。
-
----
-
-2. 在 UIViewController 中设置 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性，并且使用 NXNavigationBar 本身或者 `contentView` 中添加需要用户交互的控件时，里面添加的控件将无法接受到用户事件的响应（控件展示没有问题），但是添加没有用户交互事件的控件是不受限制的，比如在 [ViewController04_CustomNavigationBar](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController04_CustomNavigationBar.swift) 中设置 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性时，NXNavigationBar 上面的按钮将无法点击。解决方法：
-
-- 不要在 NXNavigationBar 本身或者 `contentView` 中添加需要用户交互的控件。
-- 不使用 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性。
-
----
 
 ## ⭐️ 参考链接
 

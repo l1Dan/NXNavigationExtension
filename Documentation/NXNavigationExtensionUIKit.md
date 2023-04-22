@@ -57,17 +57,15 @@ NXNavigationConfiguration().registerNavigationControllerClasses([UINavigationCon
 **注意**：
 
 - 👉 虽然示例程序代码使用的是 `Swift` 语言实现的，但框架还是可以支持 `Objective-C` 语言的，如果需要 `Objective-C` 示例程序的代码可以查看 [3.x](https://github.com/l1Dan/NXNavigationExtension/tree/3.x) 分支代码。
-- 👉 使用 `NXNavigationExtension` 之前需要先注册导航控制器，然后再去修改被注册的导航控制器所管理的视图控制器的导航栏外观。
+- 👉 使用这个框架之前需要先注册导航控制器，然后再去修改被注册的导航控制器所管理的视图控制器的导航栏外观。
 - 👉 为了有效避免框架污染到其他的导航控制器，请保持“谁使用，谁注册”的原则。
 - 🚫 不要直接注册 `UINavigationController`，会影响全局导航栏的外观，建议创建一个 `UINavigationController` 的子类，对这个子类进行外观的设置。
 - 🚫 不要使用 `setNavigationBarHidden:`、`setNavigationBarHidden:animated`、`setHidden:` 等方法显示或隐藏系统导航栏。
 - 🚫 不要使用系统导航栏修改透明度。
 - 🚫 不要使用系统导航栏或导航控制器 `appearance` 相关属性修改。
 - 🚫 不要使用 `<UIGestureRecognizerDelegate>` 相关方法禁用手势返回。
-- ❗️ 不推荐使用 UIViewController 的 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性设置，使用默认方式即可，具体原因请[查看](https://github.com/l1Dan/NXNavigationExtension#-%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98)。
-- 💉 一句话“不要直接使用系统导航栏或者导航控制器来修改导航栏外观，把这些事情都交给 `NXNavigationExtension` 处理吧“。
-
-建议：除非你很明确修改系统导航栏相关属性带来的后果，否则不建议修改。不修改原生系统导航栏可以让我们少走很多弯路！
+- ❗️ 在某些条件下，不推荐使用 UIViewController 的 `edgesForExtendedLayout = UIRectEdge(rawValue: 0)` 属性设置，使用默认方式即可，具体原因请[查看](https://github.com/l1Dan/NXNavigationExtension/issues/17)。
+- 一句话总结：原则就是不要直接修改系统导航栏或者导航控制器的外观，可以让我们少走弯路，把这些繁琐的事情都交给这个框架处理吧。
 
 ## 🍻 基本功能
 
@@ -235,6 +233,49 @@ let configuration = NXNavigationConfiguration.default
 configuration.viewControllerPreferences.enableFullScreenInteractivePopGesture = true
 ```
 
+### 设置导航栏隐藏（并不是真的隐藏，只是看起来隐藏了，整个导航栏区域不能处理用户交互）
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController05_NavigationBarDisable.swift)
+
+```swift
+// 此操作会将导航栏的背景设置为透明、导航栏所在区域的底部能够接收到点击事件、返回按钮也将不存在。
+// “隐藏”导航栏时不要添加 UINavigationBar 的 barButtonItem(s)，这样就可以看起来真的像导航栏隐藏了。
+// 不隐藏系统导航栏的原因是：可以让整个导航栏的过渡更加平滑自然，当然也不推荐除此之外任何隐藏系统导航栏的方式。
+override var nx_translucentNavigationBar: Bool {
+    return true
+}
+```
+
+### 禁用**系统**导航栏用户交互（NXNavigationBar 可以处理用户交互）
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController09_ScrollChangeNavigationBar.swift)
+
+```swift
+override var systemNavigationBarUserInteractionDisabled: Bool {
+    return true
+}
+```
+
+### 更新导航栏样式
+
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift)
+
+```swift
+nx_setNeedsNavigationBarAppearanceUpdate()
+```
+
+如果**状态栏**样式没有发生变化，请检查是否需要调用方法 `setNeedsStatusBarAppearanceUpdate()`，或者在 `UINavigationController` 的子类中设置如下代码：
+
+```swift
+override var childForStatusBarStyle: UIViewController? {
+    return topViewController
+}
+
+override var childForStatusBarHidden: UIViewController? {
+    return topViewController
+}
+```
+
 #### 导航栏返回事件拦截
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController03_BackButtonEventIntercept.swift)
@@ -248,18 +289,23 @@ configuration.viewControllerPreferences.enableFullScreenInteractivePopGesture = 
 
 ```swift
 func nx_navigationController(_ navigationController: UINavigationController, willPop viewController: UIViewController, interactiveType: NXNavigationInteractiveType) -> Bool {
-    print("interactiveType: \(interactiveType), viewController: \(viewController)")
-
-    if selectedItemType == .backButtonAction && interactiveType == .backButtonAction ||
-        selectedItemType == .backButtonMenuAction && interactiveType == .backButtonMenuAction ||
-        selectedItemType == .popGestureRecognizer && interactiveType == .popGestureRecognizer ||
-        selectedItemType == .callNXPopMethod && interactiveType == .callNXPopMethod ||
-        selectedItemType == .all {
-        showAlertController(in: viewController)
+    switch interactiveType {
+    case .backButtonAction:
+        // Do something
         return false
+    case .backButtonMenuAction:
+        // Do something
+        return false
+    case .popGestureRecognizer:
+        // Do something
+        return false
+    case .callNXPopMethod:
+        // Do something
+        return false
+    default:
+        // Continue back
+        return true
     }
-
-    return true
 }
 ```
 
@@ -298,7 +344,7 @@ func nx_navigationController(_ navigationController: UINavigationController, pro
 - 执行此操作之后，并不会跳转到对应的视图控制器，仅仅是修改了 NavigationController 的 viewControllers 属性，如果需要跳转操作，可以调用 `pop` 系列方法返回上一个页面，也可以使用手势滑动返回页面，还可以点击返回按钮返回页面。
 
 ```swift
-navigationController?.nx_removeViewControllers(until: ViewController08_JumpToViewController.self, insertsToBelowWhenNotFoundUsing: {
+navigationController?.nx_setPreviousViewController(with: ViewController08_JumpToViewController.self, insertsInstanceToBelowWhenNotFoundUsing: {
     return ViewController08_JumpToViewController()
 })
 // 执行视图控制器跳转操作：
@@ -306,46 +352,6 @@ navigationController?.popViewController(animated: true)
 ```
 
 意思是：首先查找 `navigationController?.viewControllers` 是否存在一个类型为 `ViewController08_JumpToViewController.self` 的实例对象，如果存在则上一页面会显示此视图控制器，没有找到则使用 `ViewController08_JumpToViewController()` 创建一个新的实例对象插入到 NavigationController 的 viewControllers 栈的上一个页面中。
-
-### 导航栏区域点击事件穿透到底部视图（整个导航栏区域不能处理用户交互）
-
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController05_NavigationBarDisable.swift)
-
-```swift
-override var nx_translucentNavigationBar: Bool {
-    return true
-}
-```
-
-### 禁用系统导航栏用户交互（NXNavigationBar 可以处理用户交互）
-
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController09_ScrollChangeNavigationBar.swift)
-
-```swift
-override var systemNavigationBarUserInteractionDisabled: Bool {
-    return true
-}
-```
-
-### 更新导航栏样式
-
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController07_UpdateNavigationBar.swift)
-
-```swift
-nx_setNeedsNavigationBarAppearanceUpdate()
-```
-
-如果**状态栏**样式没有发生变化，请检查是否需要调用方法 `setNeedsStatusBarAppearanceUpdate()`，或者在 `UINavigationController` 的子类中设置如下代码：
-
-```swift
-override var childForStatusBarStyle: UIViewController? {
-    return topViewController
-}
-
-override var childForStatusBarHidden: UIViewController? {
-    return topViewController
-}
-```
 
 ### 长按返回按钮显示菜单功能
 
