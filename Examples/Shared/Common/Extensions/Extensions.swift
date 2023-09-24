@@ -125,7 +125,6 @@ extension UIApplication {
         }
     }
     
-    @available(iOS 12.0, *)
     func setStatusBarStyle(_ style: UIUserInterfaceStyle) {
         if #available(iOS 13.0, *) {
             currentKeyWindow?.overrideUserInterfaceStyle = style
