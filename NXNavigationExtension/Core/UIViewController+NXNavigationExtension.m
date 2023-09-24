@@ -33,15 +33,81 @@
 #import "UINavigationController+NXNavigationExtension.h"
 #import "UIViewController+NXNavigationExtension.h"
 
-
-@interface UIViewController (NXNavigationExtension)
+@interface UIViewController (NXNavigationExtensionPrivate)
 
 @property (nonatomic, assign) BOOL nx_navigationBarInitialize;
 @property (nonatomic, assign) BOOL nx_navigationVirtualWrapperViewInitialize;
 @property (nonatomic, assign) BOOL nx_navigationVirtualWrapperViewNotFound;
 @property (nonatomic, assign) BOOL nx_viewWillDisappearFinished;
+
 @property (nonatomic, assign, readonly) BOOL nx_canSetupNavigationBar;
 @property (nonatomic, strong, readonly) NXNavigationObservationDelegate *nx_navigationObservationDelegate;
+
+@end
+
+@implementation UIViewController (NXNavigationExtensionPrivate)
+
+- (BOOL)nx_navigationBarInitialize {
+    NSNumber *navigationBarInitialize = objc_getAssociatedObject(self, _cmd);
+    if (navigationBarInitialize && [navigationBarInitialize isKindOfClass:[NSNumber class]]) {
+        return [navigationBarInitialize boolValue];
+    }
+    return NO;
+}
+
+- (void)setNx_navigationBarInitialize:(BOOL)nx_navigationBarInitialize {
+    objc_setAssociatedObject(self, @selector(nx_navigationBarInitialize), @(nx_navigationBarInitialize), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)nx_navigationVirtualWrapperViewInitialize {
+    NSNumber *navigationVirtualWrapperViewInitialize = objc_getAssociatedObject(self, _cmd);
+    if (navigationVirtualWrapperViewInitialize && [navigationVirtualWrapperViewInitialize isKindOfClass:[NSNumber class]]) {
+        return [navigationVirtualWrapperViewInitialize boolValue];
+    }
+    return NO;
+}
+
+- (void)setNx_navigationVirtualWrapperViewInitialize:(BOOL)nx_navigationVirtualWrapperViewInitialize {
+    objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperViewInitialize), @(nx_navigationVirtualWrapperViewInitialize), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)nx_navigationVirtualWrapperViewNotFound {
+    NSNumber *navigationVirtualWrapperNotFound = objc_getAssociatedObject(self, _cmd);
+    if (navigationVirtualWrapperNotFound && [navigationVirtualWrapperNotFound isKindOfClass:[NSNumber class]]) {
+        return [navigationVirtualWrapperNotFound boolValue];
+    }
+    return NO;
+}
+
+- (void)setNx_navigationVirtualWrapperViewNotFound:(BOOL)nx_navigationVirtualWrapperViewNotFound {
+    objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperViewNotFound), @(nx_navigationVirtualWrapperViewNotFound), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)nx_viewWillDisappearFinished {
+    NSNumber *viewWillDisappearFinished = objc_getAssociatedObject(self, _cmd);
+    if (viewWillDisappearFinished && [viewWillDisappearFinished isKindOfClass:[NSNumber class]]) {
+        return [viewWillDisappearFinished boolValue];
+    }
+    return NO;
+}
+
+- (void)setNx_viewWillDisappearFinished:(BOOL)nx_viewWillDisappearFinished {
+    objc_setAssociatedObject(self, @selector(nx_viewWillDisappearFinished), @(nx_viewWillDisappearFinished), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+/// 检查是否符合导航栏设置的条件
+- (BOOL)nx_canSetupNavigationBar {
+    return self.navigationController && self.navigationController.nx_useNavigationBar && !self.nx_isChildViewController;
+}
+
+- (NXNavigationObservationDelegate *)nx_navigationObservationDelegate {
+    NXNavigationObservationDelegate *delegate = objc_getAssociatedObject(self, _cmd);
+    if (!delegate) {
+        delegate = [[NXNavigationObservationDelegate alloc] initWithObserve:self];
+        objc_setAssociatedObject(self, _cmd, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return delegate;
+}
 
 @end
 
@@ -164,11 +230,6 @@
 }
 
 #pragma mark - Private
-
-/// 检查是否符合导航栏设置的条件
-- (BOOL)nx_canSetupNavigationBar {
-    return self.navigationController && self.navigationController.nx_useNavigationBar && !self.nx_isChildViewController;
-}
 
 - (void)nx_checkChildViewControllers {
     if (self.childViewControllers.count && ![self isKindOfClass:[UINavigationController class]]) {
@@ -363,65 +424,6 @@
             }
         }
     }
-}
-
-#pragma mark - Private Getter & Setter
-
-- (BOOL)nx_navigationBarInitialize {
-    NSNumber *navigationBarInitialize = objc_getAssociatedObject(self, _cmd);
-    if (navigationBarInitialize && [navigationBarInitialize isKindOfClass:[NSNumber class]]) {
-        return [navigationBarInitialize boolValue];
-    }
-    return NO;
-}
-
-- (void)setNx_navigationBarInitialize:(BOOL)nx_navigationBarInitialize {
-    objc_setAssociatedObject(self, @selector(nx_navigationBarInitialize), @(nx_navigationBarInitialize), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (BOOL)nx_navigationVirtualWrapperViewInitialize {
-    NSNumber *navigationVirtualWrapperViewInitialize = objc_getAssociatedObject(self, _cmd);
-    if (navigationVirtualWrapperViewInitialize && [navigationVirtualWrapperViewInitialize isKindOfClass:[NSNumber class]]) {
-        return [navigationVirtualWrapperViewInitialize boolValue];
-    }
-    return NO;
-}
-
-- (void)setNx_navigationVirtualWrapperViewInitialize:(BOOL)nx_navigationVirtualWrapperViewInitialize {
-    objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperViewInitialize), @(nx_navigationVirtualWrapperViewInitialize), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (BOOL)nx_navigationVirtualWrapperViewNotFound {
-    NSNumber *navigationVirtualWrapperNotFound = objc_getAssociatedObject(self, _cmd);
-    if (navigationVirtualWrapperNotFound && [navigationVirtualWrapperNotFound isKindOfClass:[NSNumber class]]) {
-        return [navigationVirtualWrapperNotFound boolValue];
-    }
-    return NO;
-}
-
-- (void)setNx_navigationVirtualWrapperViewNotFound:(BOOL)nx_navigationVirtualWrapperViewNotFound {
-    objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperViewNotFound), @(nx_navigationVirtualWrapperViewNotFound), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (BOOL)nx_viewWillDisappearFinished {
-    NSNumber *viewWillDisappearFinished = objc_getAssociatedObject(self, _cmd);
-    if (viewWillDisappearFinished && [viewWillDisappearFinished isKindOfClass:[NSNumber class]]) {
-        return [viewWillDisappearFinished boolValue];
-    }
-    return NO;
-}
-
-- (void)setNx_viewWillDisappearFinished:(BOOL)nx_viewWillDisappearFinished {
-    objc_setAssociatedObject(self, @selector(nx_viewWillDisappearFinished), @(nx_viewWillDisappearFinished), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NXNavigationObservationDelegate *)nx_navigationObservationDelegate {
-    NXNavigationObservationDelegate *delegate = objc_getAssociatedObject(self, _cmd);
-    if (!delegate) {
-        delegate = [[NXNavigationObservationDelegate alloc] initWithObserve:self];
-        objc_setAssociatedObject(self, _cmd, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
-    return delegate;
 }
 
 #pragma mark - Getter & Setter

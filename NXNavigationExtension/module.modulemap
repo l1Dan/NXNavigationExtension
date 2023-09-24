@@ -1,7 +1,0 @@
-framework module NXNavigationExtension {
-  umbrella header "NXNavigationExtension.h"
-
-  export *
-  module * { export * }
-}
-

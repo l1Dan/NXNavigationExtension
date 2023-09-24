@@ -293,16 +293,13 @@
 @end
 
 
-@interface UINavigationController (NXNavigationExtensionInternal)
+@interface UINavigationController (NXNavigationExtensionPrivate)
 
 @property (nonatomic, assign) BOOL nx_prepareConfigurationCompleted;
 
 @end
 
-
-@implementation UINavigationController (NXNavigationExtensionInternal)
-
-#pragma mark - Private
+@implementation UINavigationController (NXNavigationExtensionPrivate)
 
 - (BOOL)nx_prepareConfigurationCompleted {
     NSNumber *number = objc_getAssociatedObject(self, _cmd);
@@ -315,6 +312,11 @@
 - (void)setNx_prepareConfigurationCompleted:(BOOL)nx_prepareConfigurationCompleted {
     objc_setAssociatedObject(self, @selector(nx_prepareConfigurationCompleted), @(nx_prepareConfigurationCompleted), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
+
+@end
+
+
+@implementation UINavigationController (NXNavigationExtensionInternal)
 
 #pragma mark - Public
 
