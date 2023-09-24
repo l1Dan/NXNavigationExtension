@@ -1,6 +1,10 @@
 # CHANGELOG.md
 
 ## 4.1.6
+1. 适配 Xcode15
+2. 移除 过期方法
+
+## 4.1.6
 
 1. fix: 移除 ViewControllers 中 rootViewController 之后，新的 rootViewController 返回按钮显示不正确问题 #16
 2. 代码优化
