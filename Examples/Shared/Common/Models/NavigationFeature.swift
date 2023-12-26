@@ -31,7 +31,6 @@ class NavigationFeatureItem {
         case navigationBarDisable
         case webView
         case updateNavigationBar
-        case jumpToViewController // UIKit only
         case scrollChangeNavigationBar // UIKit only
         case customViewControllerTransitionAnimation // UIKit only
         case navigationRouter // SwiftUI only
@@ -107,7 +106,6 @@ class NavigationFeatureSection {
         ]
         
         if uikit {
-            advancedItems.append(NavigationFeatureItem(style: .jumpToViewController))
             advancedItems.append(NavigationFeatureItem(style: .scrollChangeNavigationBar))
             advancedItems.append(NavigationFeatureItem(style: .customViewControllerTransitionAnimation))
         } else {

@@ -49,7 +49,6 @@ class FeatureTableViewController: BaseTableViewController {
         case .navigationBarDisable: return ViewController05_NavigationBarDisable()
         case .webView: return ViewController06_WebView()
         case .updateNavigationBar: return ViewController07_UpdateNavigationBar()
-        case .jumpToViewController: return ViewController08_JumpToViewController()
         case .scrollChangeNavigationBar: return ViewController09_ScrollChangeNavigationBar()
         case .customViewControllerTransitionAnimation:
             animationTransitionDelegate.openDrawer()
@@ -105,9 +104,9 @@ class FeatureTableViewController: BaseTableViewController {
         }
         
         viewController.title = NSLocalizedString(item.title, comment: "")
-        let primaryNavigationController = type(of: navigationController).init(rootViewController: viewController)
         if viewController is ViewController10_Present {
             tableView.deselectRow(at: indexPath, animated: true)
+            let primaryNavigationController = type(of: navigationController).init(rootViewController: viewController)
             present(primaryNavigationController, animated: true, completion: nil)
         } else {
             if UIDevice.isPhoneDevice {
@@ -116,6 +115,7 @@ class FeatureTableViewController: BaseTableViewController {
             } else {
                 if let secondaryNavigationController = self.splitViewController?.viewControllers.last as? UINavigationController{
                     if !(secondaryNavigationController.viewControllers.last?.isKind(of: type(of: viewController)) ?? false) {
+                        let primaryNavigationController = type(of: navigationController).init(rootViewController: viewController)
                         showDetailViewController(primaryNavigationController, sender: nil)
                     }
                 }

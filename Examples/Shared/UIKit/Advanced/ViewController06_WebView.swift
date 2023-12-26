@@ -180,8 +180,8 @@ extension ViewController06_WebView {
 
     // MARK: - NXNavigationControllerDelegate
 
-    func nx_navigationController(_ navigationController: UINavigationController, willPop viewController: UIViewController, interactiveType: NXNavigationInteractiveType) -> Bool {
-        if interactiveType != .popGestureRecognizer && webView.canGoBack {
+    func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
+        if action != .interactionGesture && webView.canGoBack {
             webView.goBack()
             return false
         }

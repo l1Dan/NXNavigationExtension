@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupConfiguration()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = SplitAdaptorViewController(nibName: nil, bundle: nil)
+        window?.rootViewController = SplitAdaptiveViewController(nibName: nil, bundle: nil)
         window?.makeKeyAndVisible()
         return true
     }

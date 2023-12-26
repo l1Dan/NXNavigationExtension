@@ -181,7 +181,7 @@ struct View08_NavigationRouter: View {
 
 struct View08_NavigationRouter_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        AdaptiveNavigationView {
             View08_NavigationRouter(NavigationFeatureItem(style: .navigationRouter))
         }
     }

@@ -44,7 +44,6 @@
 		D6507EA8273EAAF600293C6D /* ViewController03_BackButtonEventIntercept.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02300273AB8E3008003F6 /* ViewController03_BackButtonEventIntercept.swift */; };
 		D6507EA9273EAAF600293C6D /* ViewController09_ScrollChangeNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02305273AB8E3008003F6 /* ViewController09_ScrollChangeNavigationBar.swift */; };
 		D6507EAA273EAAF600293C6D /* ViewController07_UpdateNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0231B273AB8E3008003F6 /* ViewController07_UpdateNavigationBar.swift */; };
-		D6507EAB273EAAF600293C6D /* ViewController08_JumpToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02303273AB8E3008003F6 /* ViewController08_JumpToViewController.swift */; };
 		D6507EAC273EAAF600293C6D /* ViewController02_FullScreenPopGestureEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02306273AB8E3008003F6 /* ViewController02_FullScreenPopGestureEnable.swift */; };
 		D6507EAD273EAAF600293C6D /* ViewController04_CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02304273AB8E3008003F6 /* ViewController04_CustomNavigationBar.swift */; };
 		D6507EAE273EAAFA00293C6D /* ViewController02_BackgroundImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0230E273AB8E3008003F6 /* ViewController02_BackgroundImage.swift */; };
@@ -67,9 +66,8 @@
 		D6507EBF273EAB0000293C6D /* DrawerAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02319273AB8E3008003F6 /* DrawerAnimationController.swift */; };
 		D6507EC0273EAB0000293C6D /* FullPopGesture_PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0231D273AB8E3008003F6 /* FullPopGesture_PageViewController.swift */; };
 		D6507EC1273EAB0000293C6D /* DrawerAnimationTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02318273AB8E3008003F6 /* DrawerAnimationTransitionDelegate.swift */; };
-		D6507EC2273EAB0700293C6D /* NavigationJump.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F2273AB8E3008003F6 /* NavigationJump.swift */; };
 		D6507EC3273EAB3700293C6D /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022FA273AB8E3008003F6 /* BaseNavigationController.swift */; };
-		D6507EC4273EAB3700293C6D /* SplitAdaptorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F9273AB8E3008003F6 /* SplitAdaptorViewController.swift */; };
+		D6507EC4273EAB3700293C6D /* SplitAdaptiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F9273AB8E3008003F6 /* SplitAdaptiveViewController.swift */; };
 		D6507EC5273EAB3700293C6D /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F7273AB8E3008003F6 /* BaseTableViewController.swift */; };
 		D6507ECB273EAC3E00293C6D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6507ECA273EAC3E00293C6D /* MainTabBarController.swift */; };
 		D65B13DD2740AF820020C8A8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D65B13E02740AF820020C8A8 /* Localizable.strings */; };
@@ -80,22 +78,21 @@
 		D6A1814A28F31BC7009E4175 /* NXNavigationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6A1814828F31BC7009E4175 /* NXNavigationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6A1814C28F31BCA009E4175 /* NXNavigationExtensionSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A1814B28F31BCA009E4175 /* NXNavigationExtensionSwiftUI.framework */; };
 		D6A1814D28F31BCA009E4175 /* NXNavigationExtensionSwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6A1814B28F31BCA009E4175 /* NXNavigationExtensionSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6A1FCEB2B39644E00FD1D37 /* AdaptiveNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A1FCEA2B39644E00FD1D37 /* AdaptiveNavigationView.swift */; };
 		D6B022B8273AB780008003F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022B7273AB780008003F6 /* AppDelegate.swift */; };
 		D6B022C1273AB781008003F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6B022C0273AB781008003F6 /* Assets.xcassets */; };
 		D6B022C4273AB781008003F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6B022C2273AB781008003F6 /* LaunchScreen.storyboard */; };
 		D6B0233D273AB8E3008003F6 /* NavigationBackEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F1273AB8E3008003F6 /* NavigationBackEvent.swift */; };
-		D6B0233E273AB8E3008003F6 /* NavigationJump.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F2273AB8E3008003F6 /* NavigationJump.swift */; };
 		D6B0233F273AB8E3008003F6 /* NavigationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F3273AB8E3008003F6 /* NavigationFeature.swift */; };
 		D6B02340273AB8E3008003F6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F5273AB8E3008003F6 /* Extensions.swift */; };
 		D6B02341273AB8E3008003F6 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F7273AB8E3008003F6 /* BaseTableViewController.swift */; };
 		D6B02342273AB8E3008003F6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F8273AB8E3008003F6 /* MainTabBarController.swift */; };
-		D6B02343273AB8E3008003F6 /* SplitAdaptorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F9273AB8E3008003F6 /* SplitAdaptorViewController.swift */; };
+		D6B02343273AB8E3008003F6 /* SplitAdaptiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F9273AB8E3008003F6 /* SplitAdaptiveViewController.swift */; };
 		D6B02344273AB8E3008003F6 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022FA273AB8E3008003F6 /* BaseNavigationController.swift */; };
 		D6B02346273AB8E3008003F6 /* ViewController01_EdgePopGestureDisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022FF273AB8E3008003F6 /* ViewController01_EdgePopGestureDisable.swift */; };
 		D6B02347273AB8E3008003F6 /* ViewController03_BackButtonEventIntercept.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02300273AB8E3008003F6 /* ViewController03_BackButtonEventIntercept.swift */; };
 		D6B02348273AB8E3008003F6 /* ViewController05_NavigationBarDisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02301273AB8E3008003F6 /* ViewController05_NavigationBarDisable.swift */; };
 		D6B02349273AB8E3008003F6 /* ViewController06_WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02302273AB8E3008003F6 /* ViewController06_WebView.swift */; };
-		D6B0234A273AB8E3008003F6 /* ViewController08_JumpToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02303273AB8E3008003F6 /* ViewController08_JumpToViewController.swift */; };
 		D6B0234B273AB8E3008003F6 /* ViewController04_CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02304273AB8E3008003F6 /* ViewController04_CustomNavigationBar.swift */; };
 		D6B0234C273AB8E3008003F6 /* ViewController09_ScrollChangeNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02305273AB8E3008003F6 /* ViewController09_ScrollChangeNavigationBar.swift */; };
 		D6B0234D273AB8E3008003F6 /* ViewController02_FullScreenPopGestureEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02306273AB8E3008003F6 /* ViewController02_FullScreenPopGestureEnable.swift */; };
@@ -161,6 +158,7 @@
 		D6A1814528F31BC2009E4175 /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6A1814828F31BC7009E4175 /* NXNavigationExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6A1814B28F31BCA009E4175 /* NXNavigationExtensionSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NXNavigationExtensionSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6A1FCEA2B39644E00FD1D37 /* AdaptiveNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveNavigationView.swift; sourceTree = "<group>"; };
 		D6B022B4273AB780008003F6 /* NXNavigationExtensionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NXNavigationExtensionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6B022B7273AB780008003F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6B022C0273AB781008003F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -192,18 +190,16 @@
 		D6B022ED273AB8E3008003F6 /* FeatureDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureDetailView.swift; sourceTree = "<group>"; };
 		D6B022EE273AB8E3008003F6 /* FeatureListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureListView.swift; sourceTree = "<group>"; };
 		D6B022F1273AB8E3008003F6 /* NavigationBackEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBackEvent.swift; sourceTree = "<group>"; };
-		D6B022F2273AB8E3008003F6 /* NavigationJump.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationJump.swift; sourceTree = "<group>"; };
 		D6B022F3273AB8E3008003F6 /* NavigationFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationFeature.swift; sourceTree = "<group>"; };
 		D6B022F5273AB8E3008003F6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D6B022F7273AB8E3008003F6 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		D6B022F8273AB8E3008003F6 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		D6B022F9273AB8E3008003F6 /* SplitAdaptorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitAdaptorViewController.swift; sourceTree = "<group>"; };
+		D6B022F9273AB8E3008003F6 /* SplitAdaptiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitAdaptiveViewController.swift; sourceTree = "<group>"; };
 		D6B022FA273AB8E3008003F6 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		D6B022FF273AB8E3008003F6 /* ViewController01_EdgePopGestureDisable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController01_EdgePopGestureDisable.swift; sourceTree = "<group>"; };
 		D6B02300273AB8E3008003F6 /* ViewController03_BackButtonEventIntercept.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController03_BackButtonEventIntercept.swift; sourceTree = "<group>"; };
 		D6B02301273AB8E3008003F6 /* ViewController05_NavigationBarDisable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController05_NavigationBarDisable.swift; sourceTree = "<group>"; };
 		D6B02302273AB8E3008003F6 /* ViewController06_WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController06_WebView.swift; sourceTree = "<group>"; };
-		D6B02303273AB8E3008003F6 /* ViewController08_JumpToViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController08_JumpToViewController.swift; sourceTree = "<group>"; };
 		D6B02304273AB8E3008003F6 /* ViewController04_CustomNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController04_CustomNavigationBar.swift; sourceTree = "<group>"; };
 		D6B02305273AB8E3008003F6 /* ViewController09_ScrollChangeNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController09_ScrollChangeNavigationBar.swift; sourceTree = "<group>"; };
 		D6B02306273AB8E3008003F6 /* ViewController02_FullScreenPopGestureEnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController02_FullScreenPopGestureEnable.swift; sourceTree = "<group>"; };
@@ -306,7 +302,7 @@
 			children = (
 				D6B022FA273AB8E3008003F6 /* BaseNavigationController.swift */,
 				D6B022F7273AB8E3008003F6 /* BaseTableViewController.swift */,
-				D6B022F9273AB8E3008003F6 /* SplitAdaptorViewController.swift */,
+				D6B022F9273AB8E3008003F6 /* SplitAdaptiveViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -314,6 +310,7 @@
 		D6507EC8273EABF900293C6D /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				D6A1FCE72B39639100FD1D37 /* Common */,
 				D6B022D4273AB8E3008003F6 /* Advanced */,
 				D6B022DD273AB8E3008003F6 /* Basic */,
 				D6B022EA273AB8E3008003F6 /* Feature */,
@@ -327,6 +324,14 @@
 				D6507ECA273EAC3E00293C6D /* MainTabBarController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D6A1FCE72B39639100FD1D37 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D6A1FCEA2B39644E00FD1D37 /* AdaptiveNavigationView.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		D6B022AB273AB780008003F6 = {
@@ -419,7 +424,6 @@
 			children = (
 				D6B022F1273AB8E3008003F6 /* NavigationBackEvent.swift */,
 				D6B022F3273AB8E3008003F6 /* NavigationFeature.swift */,
-				D6B022F2273AB8E3008003F6 /* NavigationJump.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -460,7 +464,6 @@
 				D6B02301273AB8E3008003F6 /* ViewController05_NavigationBarDisable.swift */,
 				D6B02302273AB8E3008003F6 /* ViewController06_WebView.swift */,
 				D6B0231B273AB8E3008003F6 /* ViewController07_UpdateNavigationBar.swift */,
-				D6B02303273AB8E3008003F6 /* ViewController08_JumpToViewController.swift */,
 				D6B02305273AB8E3008003F6 /* ViewController09_ScrollChangeNavigationBar.swift */,
 			);
 			path = Advanced;
@@ -565,7 +568,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					D6507E66273EA40700293C6D = {
 						CreatedOnToolsVersion = 13.1;
@@ -639,6 +642,7 @@
 				D6507EB0273EAAFA00293C6D /* ViewController10_Present.swift in Sources */,
 				D6507E8A273EA73900293C6D /* View08_NavigationRouter.swift in Sources */,
 				D6507E8E273EA73900293C6D /* View02_FullScreenPopGestureEnable.swift in Sources */,
+				D6A1FCEB2B39644E00FD1D37 /* AdaptiveNavigationView.swift in Sources */,
 				D6507EB7273EAAFA00293C6D /* ViewController08_CustomBackView.swift in Sources */,
 				D6507E86273EA70B00293C6D /* NavigationFeature.swift in Sources */,
 				D6507E88273EA73900293C6D /* View03_BackButtonEventIntercept.swift in Sources */,
@@ -652,8 +656,7 @@
 				D6507E89273EA73900293C6D /* View05_NavigationBarDisable.swift in Sources */,
 				D6507E92273EA74000293C6D /* View03_Transparent.swift in Sources */,
 				D6507E9C273EA74700293C6D /* FeatureListView.swift in Sources */,
-				D6507EAB273EAAF600293C6D /* ViewController08_JumpToViewController.swift in Sources */,
-				D6507EC4273EAB3700293C6D /* SplitAdaptorViewController.swift in Sources */,
+				D6507EC4273EAB3700293C6D /* SplitAdaptiveViewController.swift in Sources */,
 				D6507E90273EA74000293C6D /* View11_ListView.swift in Sources */,
 				D6507E9F273EA74700293C6D /* FeatureDetailView.swift in Sources */,
 				D6507E99273EA74000293C6D /* View08_CustomBackView.swift in Sources */,
@@ -670,7 +673,6 @@
 				D6507EB2273EAAFA00293C6D /* ViewController03_Transparent.swift in Sources */,
 				D6507E9B273EA74000293C6D /* View06_ShadowImage.swift in Sources */,
 				D6507EAE273EAAFA00293C6D /* ViewController02_BackgroundImage.swift in Sources */,
-				D6507EC2273EAB0700293C6D /* NavigationJump.swift in Sources */,
 				D6507EBF273EAB0000293C6D /* DrawerAnimationController.swift in Sources */,
 				D6507E94273EA74000293C6D /* View12_ScrollViewContent.swift in Sources */,
 				D6507E8F273EA73900293C6D /* View04_CustomNavigationBar.swift in Sources */,
@@ -696,9 +698,8 @@
 				D6B02353273AB8E3008003F6 /* ViewController08_CustomBackView.swift in Sources */,
 				D6B0235D273AB8E3008003F6 /* DrawerAnimationController.swift in Sources */,
 				D6B02360273AB8E3008003F6 /* FullPopGesture_ScrollView.swift in Sources */,
-				D6B0233E273AB8E3008003F6 /* NavigationJump.swift in Sources */,
 				D6B02359273AB8E3008003F6 /* ViewController07_CustomBackImage.swift in Sources */,
-				D6B02343273AB8E3008003F6 /* SplitAdaptorViewController.swift in Sources */,
+				D6B02343273AB8E3008003F6 /* SplitAdaptiveViewController.swift in Sources */,
 				D6B02361273AB8E3008003F6 /* FullPopGesture_PageViewController.swift in Sources */,
 				D6B02354273AB8E3008003F6 /* ViewController02_BackgroundImage.swift in Sources */,
 				D6B0234D273AB8E3008003F6 /* ViewController02_FullScreenPopGestureEnable.swift in Sources */,
@@ -726,7 +727,6 @@
 				D6B02352273AB8E3008003F6 /* ViewController12_TableViewControllerWithFullScreen.swift in Sources */,
 				D6B0234F273AB8E3008003F6 /* ViewController06_ShadowImage.swift in Sources */,
 				D6B0235C273AB8E3008003F6 /* DrawerAnimationTransitionDelegate.swift in Sources */,
-				D6B0234A273AB8E3008003F6 /* ViewController08_JumpToViewController.swift in Sources */,
 				D6B02349273AB8E3008003F6 /* ViewController06_WebView.swift in Sources */,
 				D6B02344273AB8E3008003F6 /* BaseNavigationController.swift in Sources */,
 				D6B02342273AB8E3008003F6 /* MainTabBarController.swift in Sources */,

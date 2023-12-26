@@ -37,7 +37,7 @@ struct FeatureListView: View {
                                 Text(titleForItem(section.items[index], at: index))
                                     .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                             }).sheet(isPresented: $presentingModal) {
-                                NavigationView {
+                                AdaptiveNavigationView {
                                     View10_Present(section.items[index], presentedAsModal: $presentingModal)
                                 }
                             }
@@ -63,7 +63,7 @@ struct FeatureListView: View {
 
 struct FeatureListView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        AdaptiveNavigationView {
             FeatureListView(NavigationFeatureSection.sections(for: false))
         }
     }

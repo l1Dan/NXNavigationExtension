@@ -11,7 +11,7 @@ struct ContentView: View {
     let sections = NavigationFeatureSection.sections(for: false)
     
     var body: some View {
-        NavigationView {
+        AdaptiveNavigationView {
             FeatureListView(sections)
                 .navigationBarTitle("SwiftUI🎉🎉🎉")
                 .useNXNavigationView(onPrepareConfiguration: { configuration in
@@ -19,7 +19,6 @@ struct ContentView: View {
                     configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
                 })
         }
-        .navigationViewStyle(.stack)
     }
 }
 

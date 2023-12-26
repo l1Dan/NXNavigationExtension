@@ -66,11 +66,11 @@ struct View03_BackButtonEventIntercept: View {
             configuration.navigationBarAppearance.tintColor = .white
             configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             configuration.navigationBarAppearance.useSystemBackButton = true
-        }, onWillPopViewController: { interactiveType in
-            if selectedItemType == .backButtonAction && interactiveType == .backButtonAction ||
-                selectedItemType == .backButtonMenuAction && interactiveType == .backButtonMenuAction ||
-                selectedItemType == .popGestureRecognizer && interactiveType == .popGestureRecognizer ||
-                selectedItemType == .callNXPopMethod && interactiveType == .callNXPopMethod ||
+        }, onTransitionViewController: { action in
+            if selectedItemType == .backButtonAction && action == .clickBackButton ||
+                selectedItemType == .backButtonMenuAction && action == .clickBackButtonMenu ||
+                selectedItemType == .popGestureRecognizer && action == .interactionGesture ||
+                selectedItemType == .callNXPopMethod && action == .callingNXPopMethod ||
                 selectedItemType == .all {
                 isPresented = true
                 return false

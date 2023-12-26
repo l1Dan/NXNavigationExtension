@@ -90,8 +90,8 @@ class CustomTableViewController: BaseViewController, UITableViewDelegate, UITabl
 
 }
 
-extension BaseTableViewController: NXNavigationControllerDelegate {
-    func nx_navigationController(_ navigationController: UINavigationController, processViewController viewController: UIViewController, navigationAction: NXNavigationAction) {
-        print("\(type(of: viewController)) - \(NavigationBackEvent.toNavigationActionString(navigationAction))")
+extension BaseTableViewController: NXNavigationTransitionDelegate {
+    func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationTransitionState state: NXNavigationTransitionState) {
+        print("\(type(of: viewController)) - \(state.description)")
     }
 }

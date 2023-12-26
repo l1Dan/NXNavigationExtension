@@ -94,7 +94,7 @@ struct View04_CustomNavigationBar: View {
 
 struct View04_CustomNavigationBar_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        AdaptiveNavigationView {
             View04_CustomNavigationBar(NavigationFeatureItem(style: .customNavigationBar))
         }
     }

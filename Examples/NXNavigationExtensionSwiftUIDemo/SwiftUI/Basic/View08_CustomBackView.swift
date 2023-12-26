@@ -32,7 +32,7 @@ struct View08_CustomBackView: View {
 
 struct View08_CustomBackView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        AdaptiveNavigationView {
             View08_CustomBackView(NavigationFeatureItem(style: .customBackView))
         }
     }

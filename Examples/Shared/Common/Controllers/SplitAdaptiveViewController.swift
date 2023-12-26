@@ -1,5 +1,5 @@
 //
-//  SplitAdaptorViewController.swift
+//  SplitAdaptiveViewController.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/14.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SplitAdaptorViewController: UISplitViewController {
+class SplitAdaptiveViewController: UISplitViewController {
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)

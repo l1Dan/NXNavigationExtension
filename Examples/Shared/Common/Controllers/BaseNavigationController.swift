@@ -76,7 +76,7 @@ class BaseViewController: UIViewController {
 
 }
 
-extension BaseViewController: NXNavigationControllerDelegate {
+extension BaseViewController: NXNavigationTransitionDelegate {
 
     override var nx_barTintColor: UIColor? {
         return .customTitle
@@ -90,8 +90,8 @@ extension BaseViewController: NXNavigationControllerDelegate {
         return UIColor.customColor { .lightGray } darkModeColor: { .lightGray.withAlphaComponent(0.65) }
     }
     
-    func nx_navigationController(_ navigationController: UINavigationController, processViewController viewController: UIViewController, navigationAction: NXNavigationAction) {
-        print("\(type(of: viewController)) - \(NavigationBackEvent.toNavigationActionString(navigationAction))")
+    func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationTransitionState state: NXNavigationTransitionState) {
+        print("\(type(of: viewController)) - \(state)")
     }
     
 }

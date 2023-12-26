@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NXNavigationExtension
 
 extension UIColor {
     
@@ -149,4 +150,26 @@ extension String {
         return self.components(separatedBy: ".").last ?? ""
     }
     
+}
+
+extension NXNavigationTransitionState: CustomStringConvertible {
+    public var description: String {
+        let prefix = "TransitionState: "
+        switch self {
+        case .unspecified: return prefix + "Unspecified"
+        case .willPush: return prefix + "WillPush"
+        case .didPush: return prefix + "DidPush"
+        case .pushCancelled: return prefix + "PushCancelled"
+        case .pushCompleted: return prefix + "PushCompleted"
+        case .willPop: return prefix + "WillPop"
+        case .didPop: return prefix + "DidPop"
+        case .popCancelled: return prefix + "PopCancelled"
+        case .popCompleted: return prefix + "PopCompleted"
+        case .willSet: return prefix + "WillSet"
+        case .didSet: return prefix + "DidSet"
+        case .setCancelled: return prefix + "SetCancelled"
+        case .setCompleted: return prefix + "SetCompleted"
+        @unknown default: return prefix + "None"
+        }
+    }
 }
