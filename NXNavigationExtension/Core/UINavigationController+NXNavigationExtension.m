@@ -29,6 +29,25 @@
 
 #import "UINavigationController+NXNavigationExtension.h"
 
+@implementation UINavigationItem (NXNavigationExtension)
+
+- (NXNavigationTransitionStateHandler)nx_transitionStateHandler {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setNx_transitionStateHandler:(NXNavigationTransitionStateHandler)nx_transitionStateHandler {
+    objc_setAssociatedObject(self, @selector(nx_transitionStateHandler), nx_transitionStateHandler, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (NXNavigationBackActionHandler)nx_backActionHandler {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setNx_backActionHandler:(NXNavigationBackActionHandler)nx_backActionHandler {
+    objc_setAssociatedObject(self, @selector(nx_backActionHandler), nx_backActionHandler, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+@end
 
 @implementation UINavigationController (NXNavigationExtension)
 
@@ -49,7 +68,7 @@
                             }
                         }
                         
-                        if (![selfObject nx_viewController:topViewController preparePopViewController:destinationViewController interactiveType:NXNavigationInteractiveTypeBackButtonMenuAction]) {
+                        if (![selfObject nx_viewController:topViewController preparePopViewController:destinationViewController navigationBackAction:NXNavigationBackActionClickBackButtonMenu]) {
                             return NO;
                         }
                     }
@@ -74,7 +93,7 @@
                         NSArray<UIViewController *> *viewControllers = navigationController.viewControllers;
                         UIViewController *destinationViewController = (viewControllers && viewControllers.count >= 2) ? viewControllers[viewControllers.count - 2] : topViewController;
                         if (navigationController.nx_useNavigationBar && topViewController) {
-                            if (![navigationController nx_viewController:topViewController preparePopViewController:destinationViewController interactiveType:NXNavigationInteractiveTypeBackButtonAction]) {
+                            if (![navigationController nx_viewController:topViewController preparePopViewController:destinationViewController navigationBackAction:NXNavigationBackActionClickBackButton]) {
                                 return;
                             }
                         }
@@ -133,16 +152,16 @@
                 [selfObject nx_configureInteractivePopGestureRecognizerWithViewController:viewController];
                 
                 UIViewController *appearingViewController = viewController;
-                [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionWillPush];
+                [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateWillPush];
                 
                 callSuperBlock();
                 
-                [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionDidPush];
+                [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateDidPush];
                 
                 [selfObject nx_animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
-                    NXNavigationAction navigationAction = context.isCancelled ? NXNavigationActionPushCancelled : NXNavigationActionPushCompleted;
-                    [selfObject nx_processViewController:appearingViewController navigationAction:navigationAction];
-                    [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionUnspecified];
+                    NXNavigationTransitionState state = context.isCancelled ? NXNavigationTransitionStatePushCancelled : NXNavigationTransitionStatePushCompleted;
+                    [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:state];
+                    [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateUnspecified];
                 }];
             };
         });
@@ -163,27 +182,27 @@
                     return callSuperBlock();
                 }
                 
-                NXNavigationAction action = selfObject.nx_navigationAction;
-                if (action != NXNavigationActionUnspecified) {
+                NXNavigationTransitionState action = selfObject.nx_navigationTransitionState;
+                if (action != NXNavigationTransitionStateUnspecified) {
                     NXDebugLog(@"popViewController 时上一次的转场尚未完成，系统会忽略本次 pop，等上一次转场完成后再重新执行 pop, viewControllers = %@", selfObject.viewControllers);
                 }
                 
                 // 系统文档里说 rootViewController 是不能被 pop 的，当只剩下 rootViewController 时当前方法什么事都不会做
-                BOOL willPopActually = selfObject.viewControllers.count > 1 && action == NXNavigationActionUnspecified;
+                BOOL willPopActually = selfObject.viewControllers.count > 1 && action == NXNavigationTransitionStateUnspecified;
                 if (!willPopActually) {
                     return callSuperBlock();
                 }
                 
                 UIViewController *appearingViewController = selfObject.viewControllers[selfObject.viewControllers.count - 2];
-                [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionWillPop];
+                [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateWillPop];
                 
                 UIViewController *result = callSuperBlock();
                 
-                [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionDidPop];
+                [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateDidPop];
                 [selfObject nx_animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
-                    NXNavigationAction navigationAction = context.isCancelled ? NXNavigationActionPopCancelled : NXNavigationActionPopCompleted;
-                    [selfObject nx_processViewController:appearingViewController navigationAction:navigationAction];
-                    [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionUnspecified];
+                    NXNavigationTransitionState state = context.isCancelled ? NXNavigationTransitionStatePopCancelled : NXNavigationTransitionStatePopCompleted;
+                    [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:state];
+                    [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateUnspecified];
                 }];
                 
                 return result;
@@ -206,33 +225,33 @@
                     return callSuperBlock();
                 }
                 
-                NXNavigationAction action = selfObject.nx_navigationAction;
-                if (action != NXNavigationActionUnspecified) {
+                NXNavigationTransitionState action = selfObject.nx_navigationTransitionState;
+                if (action != NXNavigationTransitionStateUnspecified) {
                     NXDebugLog(@"popToViewController 时上一次的转场尚未完成，系统会忽略本次 pop，等上一次转场完成后再重新执行 pop, currentViewControllers = %@, viewController = %@", selfObject.viewControllers, viewController);
                 }
                 
                 // 系统文档里说 rootViewController 是不能被 pop 的，当只剩下 rootViewController 时当前方法什么事都不会做
-                BOOL willPopActually = selfObject.viewControllers.count > 1 && [selfObject.viewControllers containsObject:viewController] && selfObject.topViewController != viewController && action == NXNavigationActionUnspecified;
+                BOOL willPopActually = selfObject.viewControllers.count > 1 && [selfObject.viewControllers containsObject:viewController] && selfObject.topViewController != viewController && action == NXNavigationTransitionStateUnspecified;
                 if (!willPopActually) {
                     return callSuperBlock();
                 }
                 
                 UIViewController *appearingViewController = viewController;
-                [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionWillPop];
+                [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateWillPop];
                 
                 NSArray<UIViewController *> *result = callSuperBlock();
                 
-                [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionDidPop];
+                [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateDidPop];
                 [selfObject nx_animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
-                    NXNavigationAction navigationAction = context.isCancelled ? NXNavigationActionPopCancelled : NXNavigationActionPopCompleted;
-                    [selfObject nx_processViewController:appearingViewController navigationAction:navigationAction];
-                    [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionUnspecified];
+                    NXNavigationTransitionState state = context.isCancelled ? NXNavigationTransitionStatePopCancelled : NXNavigationTransitionStatePopCompleted;
+                    [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:state];
+                    [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateUnspecified];
                 }];
                 
                 return result;
             };
         });
-
+        
         NXNavigationExtensionOverrideImplementation([UINavigationController class],
                                                     @selector(popToRootViewControllerAnimated:),
                                                     ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
@@ -244,37 +263,37 @@
                     NSArray<UIViewController *> *result = originSelectorIMP(selfObject, originCMD, animated);
                     return result;
                 };
-
+                
                 if (!selfObject.nx_useNavigationBar) {
                     return callSuperBlock();
                 }
-
-                NXNavigationAction action = selfObject.nx_navigationAction;
-                if (action != NXNavigationActionUnspecified) {
+                
+                NXNavigationTransitionState action = selfObject.nx_navigationTransitionState;
+                if (action != NXNavigationTransitionStateUnspecified) {
                     NXDebugLog(@"popToRootViewController 时上一次的转场尚未完成，系统会忽略本次 pop，等上一次转场完成后再重新执行 pop, viewControllers = %@", selfObject.viewControllers);
                 }
-
-                BOOL willPopActually = selfObject.viewControllers.count > 1 && action == NXNavigationActionUnspecified;
+                
+                BOOL willPopActually = selfObject.viewControllers.count > 1 && action == NXNavigationTransitionStateUnspecified;
                 if (!willPopActually) {
                     return callSuperBlock();
                 }
-
+                
                 UIViewController *appearingViewController = selfObject.viewControllers.firstObject;
-                [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionWillPop];
-
+                [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateWillPop];
+                
                 NSArray<UIViewController *> *result = callSuperBlock();
-
-                [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionDidPop];
+                
+                [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateDidPop];
                 [selfObject nx_animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
-                    NXNavigationAction navigationAction = context.isCancelled ? NXNavigationActionPopCancelled : NXNavigationActionPopCompleted;
-                    [selfObject nx_processViewController:appearingViewController navigationAction:navigationAction];
-                    [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionUnspecified];
+                    NXNavigationTransitionState state = context.isCancelled ? NXNavigationTransitionStatePopCancelled : NXNavigationTransitionStatePopCompleted;
+                    [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:state];
+                    [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateUnspecified];
                 }];
-
+                
                 return result;
             };
         });
-
+        
         NXNavigationExtensionOverrideImplementation([UINavigationController class],
                                                     @selector(setViewControllers:animated:),
                                                     ^id _Nonnull(__unsafe_unretained Class _Nonnull originClass, SEL _Nonnull originCMD, IMP _Nonnull (^_Nonnull originalIMPProvider)(void)) {
@@ -285,21 +304,21 @@
                     originSelectorIMP = (void (*)(id, SEL, NSArray<UIViewController *> *, BOOL))originalIMPProvider();
                     originSelectorIMP(selfObject, originCMD, viewControllers, animated);
                 };
-
+                
                 if (!selfObject.nx_useNavigationBar) {
                     callSuperBlock();
                     return;
                 }
-
+                
                 if (viewControllers.count != [NSSet setWithArray:viewControllers].count) {
                     NXDebugLog(@"setViewControllers 数组里不允许出现重复元素：%@", viewControllers);
                     viewControllers = [NSOrderedSet orderedSetWithArray:viewControllers].array; // 这里会保留该 vc 第一次出现的位置不变
                 }
-
+                
                 // setViewControllers 执行前后 topViewController 没有变化，则赋值为 nil，表示没有任何界面有“重新显示”。
                 UIViewController *appearingViewController = selfObject.topViewController != viewControllers.lastObject ? viewControllers.lastObject : nil;
-                [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionWillSet];
-
+                [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateWillSet];
+                
                 callSuperBlock();
                 
                 for (UIViewController *viewController in viewControllers) {
@@ -308,12 +327,12 @@
                     viewController.nx_configuration = selfObject.nx_configuration;
                     viewController.nx_prepareConfigureViewControllerCallback = selfObject.nx_prepareConfigureViewControllerCallback;
                 }
-
+                
                 if (viewControllers.count > 1) {
                     NSMutableArray<__kindof UIViewController *> *previousViewControllers = [NSMutableArray array];
                     for (NSUInteger index = 0; index < viewControllers.count; index++) {
                         UIViewController *viewController = viewControllers[index];
-
+                        
                         if (index != 0) {
                             // 设置返回按钮
                             [selfObject nx_adjustmentSystemBackButtonForViewController:viewController inViewControllers:previousViewControllers];
@@ -329,60 +348,16 @@
                     // 在 rootViewController 中禁止使用返回手势
                     [selfObject nx_resetInteractivePopGestureRecognizer];
                 }
-
-                [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionDidSet];
+                
+                [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateDidSet];
                 [selfObject nx_animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
-                    NXNavigationAction navigationAction = context.isCancelled ? NXNavigationActionSetCancelled : NXNavigationActionSetCompleted;
-                    [selfObject nx_processViewController:appearingViewController navigationAction:navigationAction];
-                    [selfObject nx_processViewController:appearingViewController navigationAction:NXNavigationActionUnspecified];
+                    NXNavigationTransitionState state = context.isCancelled ? NXNavigationTransitionStateSetCancelled : NXNavigationTransitionStateSetCompleted;
+                    [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:state];
+                    [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateUnspecified];
                 }];
             };
         });
     });
-}
-
-- (NSArray<UIViewController *> *)nx_rebuildStackWithViewControllerClass:(Class)aClass
-                                                              isReverse:(BOOL)isReverse
-                                                                  block:(__kindof UIViewController * (^__nullable)(void))block {
-    NSMutableArray<__kindof UIViewController *> *tempViewControllers = [NSMutableArray arrayWithArray:self.viewControllers];
-    if (!aClass || (tempViewControllers.count <= 1)) return [NSArray arrayWithArray:tempViewControllers];
-    
-    // 当前界面显示的 ViewController
-    __kindof UIViewController *topViewController = tempViewControllers.lastObject;
-    // 排除当前界面显示的 ViewController
-    [tempViewControllers removeLastObject];
-    
-    NSMutableArray<__kindof UIViewController *> *collections = [NSMutableArray array];
-    NSArray<__kindof UIViewController *> *viewControllers = [NSMutableArray arrayWithArray:tempViewControllers];
-    if (isReverse) {
-        collections = [NSMutableArray arrayWithArray:tempViewControllers];
-        viewControllers = viewControllers.reverseObjectEnumerator.allObjects;
-    }
-    
-    for (__kindof UIViewController *viewController in viewControllers) {
-        // 添加
-        if (!isReverse) [collections addObject:viewController];
-        
-        // 找到相同类型的 ViewController 就立即停止
-        if ([NSStringFromClass([viewController class]) isEqualToString:NSStringFromClass(aClass)]) {
-            break;
-        }
-        // 没找到，已经到最后了
-        if (viewController == viewControllers.lastObject && block) {
-            __kindof UIViewController *appendsViewController = block();
-            if (appendsViewController) {
-                [collections addObject:appendsViewController];
-                break;
-            }
-        }
-        
-        // 移除
-        if (isReverse) [collections removeObject:viewController];
-    }
-    
-    // 补上当前正在显示的 ViewController
-    [collections addObject:topViewController];
-    return [NSArray arrayWithArray:collections];
 }
 
 #pragma mark - Getter & Setter
@@ -427,7 +402,7 @@
     NSArray<UIViewController *> *viewControllers = self.viewControllers;
     UIViewController *destinationViewController = (viewControllers && viewControllers.count > 1) ? viewControllers[viewControllers.count - 2] : nil;
     return [self nx_triggerSystemPopViewController:destinationViewController
-                                   interactiveType:NXNavigationInteractiveTypeCallNXPopMethod
+                              navigationBackAction:NXNavigationBackActionCallingNXPopMethod
               animateAlongsideTransitionCompletion:completion
                                            handler:^id _Nonnull(UINavigationController *_Nonnull navigationController) {
         return [navigationController popViewControllerAnimated:animated];
@@ -438,7 +413,7 @@
                                                         animated:(BOOL)animated
                                                       completion:(void (^)(void))completion {
     return [self nx_triggerSystemPopViewController:viewController
-                                   interactiveType:NXNavigationInteractiveTypeCallNXPopMethod
+                              navigationBackAction:NXNavigationBackActionCallingNXPopMethod
               animateAlongsideTransitionCompletion:completion
                                            handler:^id _Nonnull(UINavigationController *_Nonnull navigationController) {
         return [navigationController popToViewController:viewController animated:animated];
@@ -449,7 +424,7 @@
                                                                   completion:(void (^)(void))completion {
     UIViewController *destinationViewController = self.viewControllers.firstObject;
     return [self nx_triggerSystemPopViewController:destinationViewController
-                                   interactiveType:NXNavigationInteractiveTypeCallNXPopMethod
+                              navigationBackAction:NXNavigationBackActionCallingNXPopMethod
               animateAlongsideTransitionCompletion:completion
                                            handler:^id _Nonnull(UINavigationController *_Nonnull navigationController) {
         return [navigationController popToRootViewControllerAnimated:animated];
@@ -493,12 +468,6 @@
             completion();
         }];
     }
-}
-
-- (void)nx_setPreviousViewControllerWithClass:(Class)aClass
- insertsInstanceToBelowWhenNotFoundUsingBlock:(__kindof UIViewController * _Nullable (^)(void))block {
-    NSArray<__kindof UIViewController *> *viewControllers = [self nx_rebuildStackWithViewControllerClass:aClass isReverse:NO block:block];
-    [self setViewControllers:viewControllers animated:YES];
 }
 
 @end

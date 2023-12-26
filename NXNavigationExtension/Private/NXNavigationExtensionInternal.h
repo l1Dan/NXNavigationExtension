@@ -105,9 +105,9 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 
 
 @interface UINavigationController (NXNavigationExtensionInternal)
-
-/// For SwiftUI，应用筛选 NXNavigationVirtualWrapperView 实例对象查找规则
 @property (nonatomic, copy, nullable) NXNavigationVirtualWrapperViewFilterCallback nx_filterNavigationVirtualWrapperViewCallback API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+/// For SwiftUI，应用筛选 NXNavigationVirtualWrapperView 实例对象查找规则
+
 
 /// 边缘返回手势代理对象
 @property (nonatomic, strong, readonly) NXScreenEdgePopGestureRecognizerDelegate *nx_screenEdgePopGestureDelegate;
@@ -133,11 +133,11 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 
 /// 控制器返回页面统一跳转逻辑
 /// @param destinationViewController 目标视图控制器
-/// @param interactiveType 当前返回执行的交互方式
+/// @param action 当前返回执行的交互方式
 /// @param completion 转场动画完成或取消后的回调
 /// @param handler 处理跳转的回调
 - (id)nx_triggerSystemPopViewController:(__kindof UIViewController *)destinationViewController
-                        interactiveType:(NXNavigationInteractiveType)interactiveType
+                   navigationBackAction:(NXNavigationBackAction)action
    animateAlongsideTransitionCompletion:(void (^__nullable)(void))completion
                                 handler:(id (^)(UINavigationController *navigationController))handler;
 
@@ -150,16 +150,16 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 /// 准备 Pop 视图控制器的最后检查。主要检查代理 `nx_navigationInteractDelegate` 和视图控制器是否有实现 `id<NXNavigationControllerDelegate>` 代理逻辑。
 /// @param currentViewController 当前所处的视图控制器
 /// @param destinationViewController 需要 Pop 到的目标视图控制器
-/// @param interactiveType 当前 Pop 视图控制器的的交互类型
+/// @param action 当前 Pop 视图控制器的的交互类型
 - (BOOL)nx_viewController:(__kindof UIViewController *)currentViewController
-    preparePopViewController:(__kindof UIViewController *)destinationViewController
-             interactiveType:(NXNavigationInteractiveType)interactiveType;
+ preparePopViewController:(__kindof UIViewController *)destinationViewController
+     navigationBackAction:(NXNavigationBackAction)action;
 
 /// 处理即将显示的视图控制器的转场周期事件
 /// @param appearingViewController 即将显示的视图控制器
-/// @param navigationAction 当前视图控制器的转场周期事件
-- (void)nx_processViewController:(__kindof UIViewController *)appearingViewController
-                navigationAction:(NXNavigationAction)navigationAction;
+/// @param state 当前视图控制器的转场周期事件
+- (void)nx_transitionViewController:(__kindof UIViewController *)appearingViewController
+          navigationTransitionState:(NXNavigationTransitionState)state;
 
 @end
 
@@ -167,13 +167,13 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 @interface UIViewController (NXNavigationExtensionInternal)
 
 /// 获取当前视图控制器转场周期事件
-@property (nonatomic, assign) NXNavigationAction nx_navigationAction;
+@property (nonatomic, assign) NXNavigationTransitionState nx_navigationTransitionState;
 
 /// 记录是否为 childViewControllers 中的控制器，并且当前控制器不是 UINavigationController 的情况下。
 @property (nonatomic, assign) BOOL nx_isChildViewController;
 
 /// For SwiftUI，返回页面时交互事件代理
-@property (nonatomic, weak, nullable) id<NXNavigationControllerDelegate> nx_navigationControllerDelegate;
+@property (nonatomic, weak, nullable) id<NXNavigationTransitionDelegate> nx_navigationTransitionDelegate;
 
 /// 获取当前导航控制器的配置
 @property (nonatomic, strong, nullable) NXNavigationConfiguration *nx_configuration;

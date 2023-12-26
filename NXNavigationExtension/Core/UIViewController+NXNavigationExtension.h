@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) __kindof NXNavigationVirtualWrapperView *nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0));
 
 /// 获取当前视图控制器转场周期事件
-@property (nonatomic, assign, readonly) NXNavigationAction nx_navigationAction;
+@property (nonatomic, assign, readonly) NXNavigationTransitionState nx_navigationTransitionState;
 
 /// 获取当前控制器的 NXNavigationBar
 @property (nonatomic, strong, readonly, nullable) NXNavigationBar *nx_navigationBar;

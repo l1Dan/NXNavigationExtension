@@ -196,7 +196,7 @@
                 [selfObject nx_checkNavigationVirtualWrapperViewState];
             }
         });
-
+        
         NXNavigationExtensionExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class],
                                                                                 @selector(viewWillDisappear:),
                                                                                 BOOL,
@@ -434,7 +434,7 @@
 
 - (void)setNx_navigationVirtualWrapperView:(NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
     nx_navigationVirtualWrapperView.context.hostingController = self;
-    self.nx_navigationControllerDelegate = (id<NXNavigationControllerDelegate>)nx_navigationVirtualWrapperView;
+    self.nx_navigationTransitionDelegate = (id<NXNavigationTransitionDelegate>)nx_navigationVirtualWrapperView;
     objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperView), nx_navigationVirtualWrapperView, OBJC_ASSOCIATION_ASSIGN);
 }
 
@@ -577,7 +577,7 @@
         }
         
         [self nx_configureNavigationBarWithNavigationController:self.navigationController];
-
+        
         // 重新检查返回手势是否动态修改
         [self.navigationController nx_configureInteractivePopGestureRecognizerWithViewController:self];
     }

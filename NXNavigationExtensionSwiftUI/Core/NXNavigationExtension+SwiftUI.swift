@@ -119,7 +119,7 @@ public extension View {
     ///     }
     /// }
     func useNXNavigationView(context: Binding<NXNavigationRouter.Context>) -> some View {
-        useNXNavigationView(context: context, onPrepareConfiguration: nil, onWillPopViewController: nil)
+        useNXNavigationView(context: context, onPrepareConfiguration: nil, onTransitionViewController: nil)
     }
     
     /// 通过 View 添加 `NXNavigationBar` 的包装对象，提供当前导航栏的外观的便利。
@@ -146,11 +146,11 @@ public extension View {
     ///     }
     /// }
     func useNXNavigationView(onPrepareConfiguration: @escaping (NXNavigationConfiguration) -> Void) -> some View {
-        useNXNavigationView(context: .constant(NXNavigationRouter.Context(routeName: "")), onPrepareConfiguration: onPrepareConfiguration, onWillPopViewController: nil)
+        useNXNavigationView(context: .constant(NXNavigationRouter.Context(routeName: "")), onPrepareConfiguration: onPrepareConfiguration, onTransitionViewController: nil)
     }
     
     /// 通过 View 添加 `NXNavigationBar` 的包装对象，提供当前导航栏的外观的便利。
-    /// - Parameter onWillPopViewController: 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
+    /// - Parameter onTransitionViewController: 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
     /// 执行 `NXNavigationRouter.of(context).nx.\pop()\popToRoot()\popUntil("routeName")\popToFirstUntil("routeName")\popToLastUntil("routeName")` 等方法后也会触发这个代理回调
     /// - Returns: 返回高度为 0，宽度为 0，并且是隐藏的 View
     ///
@@ -166,7 +166,7 @@ public extension View {
     ///             } label: {
     ///                 Text("NXNavigationExtension")
     ///                     .padding()
-    ///                     .useNXNavigationView(onWillPopViewController: { interactiveType in
+    ///                     .useNXNavigationView(onTransitionViewController: { action in
     ///                         switch interactiveType {
     ///                         case .backButtonAction, .backButtonMenuAction, .callNXPopMethod, .popGestureRecognizer:
     ///                             /// Do something...
@@ -180,23 +180,23 @@ public extension View {
     ///         }
     ///     }
     /// }
-    func useNXNavigationView(onWillPopViewController: @escaping (NXNavigationInteractiveType) -> Bool) -> some View {
-        useNXNavigationView(context: .constant(NXNavigationRouter.Context(routeName: "")), onPrepareConfiguration: nil, onWillPopViewController: onWillPopViewController)
+    func useNXNavigationView(onTransitionViewController: @escaping (NXNavigationBackAction) -> Bool) -> some View {
+        useNXNavigationView(context: .constant(NXNavigationRouter.Context(routeName: "")), onPrepareConfiguration: nil, onTransitionViewController: onTransitionViewController)
     }
     
     /// 通过 View 添加 `NXNavigationBar` 的包装对象，提供当前导航栏的外观的便利。
     /// - Parameters:
     ///   - context: 当前对象的 NXNavigationRouter.Context 实例对象
     ///   - onPrepareConfiguration: 即将应用配置到当前视图控制器的回调，执行 `setNeedsNavigationBarAppearanceUpdate` 方法时也会触发此回调。
-    ///   - onWillPopViewController: 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
+    ///   - onTransitionViewController: 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
     ///   执行 `NXNavigationRouter.of(context).nx.\pop()\popToRoot()\popUntil("routeName")\popToFirstUntil("routeName")\popToLastUntil("routeName")` 等方法后也会触发这个代理回调
     /// - Returns: 返回高度为 0，宽度为 0，并且是隐藏的 View
     func useNXNavigationView(context: Binding<NXNavigationRouter.Context>,
                              onPrepareConfiguration: ((NXNavigationConfiguration) -> Void)? = nil,
-                             onWillPopViewController: ((NXNavigationInteractiveType) -> Bool)? = nil) -> some View {
+                             onTransitionViewController: ((NXNavigationBackAction) -> Bool)? = nil) -> some View {
         let view = NXNavigationWrapperView(context: context,
                                            onPrepareConfiguration: onPrepareConfiguration,
-                                           onWillPopViewController: onWillPopViewController)
+                                           onTransitionViewController: onTransitionViewController)
             .frame(width: 0, height: 0)
         
         return ZStack {

@@ -21,3 +21,58 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import "NXNavigationExtension+Deprecated.h"
+
+@implementation UINavigationController (NXNavigationExtensionDeprecated)
+
+- (NSArray<UIViewController *> *)nx_rebuildStackWithViewControllerClass:(Class)aClass
+                                                              isReverse:(BOOL)isReverse
+                                                                  block:(__kindof UIViewController * (^__nullable)(void))block {
+    NSMutableArray<__kindof UIViewController *> *tempViewControllers = [NSMutableArray arrayWithArray:self.viewControllers];
+    if (!aClass || (tempViewControllers.count <= 1)) return [NSArray arrayWithArray:tempViewControllers];
+    
+    // 当前界面显示的 ViewController
+    __kindof UIViewController *topViewController = tempViewControllers.lastObject;
+    // 排除当前界面显示的 ViewController
+    [tempViewControllers removeLastObject];
+    
+    NSMutableArray<__kindof UIViewController *> *collections = [NSMutableArray array];
+    NSArray<__kindof UIViewController *> *viewControllers = [NSMutableArray arrayWithArray:tempViewControllers];
+    if (isReverse) {
+        collections = [NSMutableArray arrayWithArray:tempViewControllers];
+        viewControllers = viewControllers.reverseObjectEnumerator.allObjects;
+    }
+    
+    for (__kindof UIViewController *viewController in viewControllers) {
+        // 添加
+        if (!isReverse) [collections addObject:viewController];
+        
+        // 找到相同类型的 ViewController 就立即停止
+        if ([NSStringFromClass([viewController class]) isEqualToString:NSStringFromClass(aClass)]) {
+            break;
+        }
+        // 没找到，已经到最后了
+        if (viewController == viewControllers.lastObject && block) {
+            __kindof UIViewController *appendsViewController = block();
+            if (appendsViewController) {
+                [collections addObject:appendsViewController];
+                break;
+            }
+        }
+        
+        // 移除
+        if (isReverse) [collections removeObject:viewController];
+    }
+    
+    // 补上当前正在显示的 ViewController
+    [collections addObject:topViewController];
+    return [NSArray arrayWithArray:collections];
+}
+
+- (void)nx_setPreviousViewControllerWithClass:(Class)aClass
+ insertsInstanceToBelowWhenNotFoundUsingBlock:(__kindof UIViewController * _Nullable (^)(void))block {
+    NSArray<__kindof UIViewController *> *viewControllers = [self nx_rebuildStackWithViewControllerClass:aClass isReverse:NO block:block];
+    [self setViewControllers:viewControllers animated:YES];
+}
+
+@end

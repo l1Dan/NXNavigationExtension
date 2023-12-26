@@ -27,8 +27,8 @@
 @implementation NXNavigationVirtualWrapperView
 
 - (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController
-          willPopViewController:(__kindof UIViewController *)viewController
-                interactiveType:(NXNavigationInteractiveType)interactiveType {
+       transitionViewController:(__kindof UIViewController *)viewController
+           navigationBackAction:(NXNavigationBackAction)action {
     return YES;
 }
 

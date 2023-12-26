@@ -35,66 +35,70 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 处理视图控制器转场时的周期事件
-typedef NS_ENUM(NSUInteger, NXNavigationAction) {
-    NXNavigationActionUnspecified,   // 初始、各种动作的 completed 之后都会立即转入 unspecified 状态
-
-    NXNavigationActionWillPush,      // push 方法被触发，但尚未进行真正的 push 动作
-    NXNavigationActionDidPush,       // 系统的 push 已经执行完，viewControllers 已被刷新
-    NXNavigationActionPushCancelled, // 系统的 push 被取消，还是停留在当前页面
-    NXNavigationActionPushCompleted, // push 动画结束（如果没有动画，则在 did push 后立即进入 completed）
-
-    NXNavigationActionWillPop,      // pop 方法被触发，但尚未进行真正的 pop 动作
-    NXNavigationActionDidPop,       // 系统的 pop 已经执行完，viewControllers 已被刷新（注意可能有 pop 失败的情况）
-    NXNavigationActionPopCancelled, // 系统的 pop 被取消，还是停留在当前页面
-    NXNavigationActionPopCompleted, // pop 动画结束（如果没有动画，则在 did pop 后立即进入 completed）
-
-    NXNavigationActionWillSet,      // setViewControllers 方法被触发，但尚未进行真正的 set 动作
-    NXNavigationActionDidSet,       // 系统的 setViewControllers 已经执行完，viewControllers 已被刷新
-    NXNavigationActionSetCancelled, // 系统的 setViewControllers 被取消，还是停留在当前页面
-    NXNavigationActionSetCompleted, // setViewControllers 动画结束（如果没有动画，则在 did set 后立即进入 completed）
+/// 视图控制器转场状态
+typedef NS_ENUM(NSUInteger, NXNavigationTransitionState) {
+    NXNavigationTransitionStateUnspecified,   // 初始、各种动作的 completed 之后都会立即转入 unspecified 状态
+    
+    NXNavigationTransitionStateWillPush,      // push 方法被触发，但尚未进行真正的 push 动作
+    NXNavigationTransitionStateDidPush,       // 系统的 push 已经执行完，viewControllers 已被刷新
+    NXNavigationTransitionStatePushCancelled, // 系统的 push 被取消，还是停留在当前页面
+    NXNavigationTransitionStatePushCompleted, // push 动画结束（如果没有动画，则在 did push 后立即进入 completed）
+    
+    NXNavigationTransitionStateWillPop,      // pop 方法被触发，但尚未进行真正的 pop 动作
+    NXNavigationTransitionStateDidPop,       // 系统的 pop 已经执行完，viewControllers 已被刷新（注意可能有 pop 失败的情况）
+    NXNavigationTransitionStatePopCancelled, // 系统的 pop 被取消，还是停留在当前页面
+    NXNavigationTransitionStatePopCompleted, // pop 动画结束（如果没有动画，则在 did pop 后立即进入 completed）
+    
+    NXNavigationTransitionStateWillSet,      // setViewControllers 方法被触发，但尚未进行真正的 set 动作
+    NXNavigationTransitionStateDidSet,       // 系统的 setViewControllers 已经执行完，viewControllers 已被刷新
+    NXNavigationTransitionStateSetCancelled, // 系统的 setViewControllers 被取消，还是停留在当前页面
+    NXNavigationTransitionStateSetCompleted, // setViewControllers 动画结束（如果没有动画，则在 did set 后立即进入 completed）
 };
 
-/// 返回页面使用的交互方式
-/// `NXNavigationInteractiveTypeCallNXPopMethod` 执行 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 回调方式
-/// `NXNavigationInteractiveTypeBackButtonMenuAction` 需要设置 `useSystemBackButton = YES` 或者 `nx_useSystemBackButton = YES`
-typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
-    NXNavigationInteractiveTypeCallNXPopMethod,      // 调用 `nx_pop` 系列方法返回
-    NXNavigationInteractiveTypeBackButtonAction,     // 点击返回按钮返回
-    NXNavigationInteractiveTypeBackButtonMenuAction, // 长按返回按钮选择菜单返回
-    NXNavigationInteractiveTypePopGestureRecognizer, // 使用手势交互返回
+/// 试图控制器返回事件
+typedef NS_ENUM(NSUInteger, NXNavigationBackAction) {
+    NXNavigationBackActionCallingNXPopMethod,   // 调用 `nx_pop` 系列方法返回
+    NXNavigationBackActionClickBackButton,      // 点击返回按钮
+    NXNavigationBackActionClickBackButtonMenu,  // 长按返回按钮选择菜单返回；需要设置 `useSystemBackButton = YES` 或者 `nx_useSystemBackButton = YES`
+    NXNavigationBackActionInteractionGesture,   // 使用交互手势
 };
 
-@protocol NXNavigationControllerDelegate <NSObject>
+
+typedef void (^NXNavigationTransitionStateHandler) (UINavigationController *, UIViewController *, NXNavigationTransitionState);
+typedef BOOL (^NXNavigationBackActionHandler) (UINavigationController *, UIViewController *, NXNavigationBackAction);
+
+@protocol NXNavigationTransitionDelegate <NSObject>
 
 @optional
 
-/// 当使用手势返回、点击返回按钮返回、调用 `nx_pop` 等系列方法返回时，会调用此代理方法。
-/// 可以根据不同的使用场景返回不同的视图控制器对象
-/// @param navigationController 当前使用的导航控制器
-/// @param toViewController 将要返回的页面
-/// @param fromViewController 当前所在页面
-- (nullable __kindof UIViewController *)nx_navigationController:(__kindof UINavigationController *)navigationController
-                                     preparePopToViewController:(__kindof UIViewController *)toViewController
-                                             fromViewController:(__kindof UIViewController *)fromViewController;
-
-/// 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作，某些业务场景中点击返回按钮或者手势滑动返回时需要弹框
-/// 可以直接使用这个代理拦截事件处理，调用 `nx_pop` 等系列方法返回时，会调用此代理方法。
-/// @param navigationController 当前使用的导航控制器
-/// @param viewController 即将要 Pop 的视图控制器
-/// @param interactiveType 返回页面使用的交互方式
-/// @return `YES` 表示不中断返回操作继续执行；`NO` 表示中断返回操作
-- (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController
-          willPopViewController:(__kindof UIViewController *)viewController
-                interactiveType:(NXNavigationInteractiveType)interactiveType;
-
-/// 处理视图控制器转场的周期事件
-/// @param navigationController 当前使用的导航控制器
-/// @param viewController 正在处理的视图控制器
-/// @param navigationAction 当前转场周期实践
+/// 视图控制器转场状态
+/// @param navigationController 当前导航控制器
+/// @param viewController 转场视图控制器
+/// @param state 视图控制器转场状态
 - (void)nx_navigationController:(__kindof UINavigationController *)navigationController
-          processViewController:(__kindof UIViewController *)viewController
-               navigationAction:(NXNavigationAction)navigationAction;
+       transitionViewController:(__kindof UIViewController *)viewController
+      navigationTransitionState:(NXNavigationTransitionState)state;
+
+/// 拦截视图控制器返回操作
+/// @param navigationController 当前导航控制器
+/// @param viewController 转场视图控制器
+/// @param action 试图控制器返回事件
+/// @return `YES` 表示继续返回操作；`NO` 表示中断返回操作
+- (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController
+       transitionViewController:(__kindof UIViewController *)viewController
+           navigationBackAction:(NXNavigationBackAction)action;
+
+@end
+
+
+@interface UINavigationItem (NXNavigationExtension)
+
+/// 处理视图控制器转场状态；优先调用 NXNavigationControllerDelegate
+/// 只有在 `UIViewController` 的 `init` 方法中设置属性才能拿到到完整的 `Push` 状态
+@property (nonatomic, copy, nullable) NXNavigationTransitionStateHandler nx_transitionStateHandler;
+
+/// 拦截视图控制器返回操作；优先调用 NXNavigationControllerDelegate
+@property (nonatomic, copy, nullable) NXNavigationBackActionHandler nx_backActionHandler;
 
 @end
 
@@ -183,14 +187,6 @@ typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
 - (void)nx_setViewControllers:(NSArray<UIViewController *> *)viewControllers
                      animated:(BOOL)animated
                    completion:(void (^__nullable)(void))completion NS_SWIFT_ASYNC_NAME(nx_setViewControllers(_:animated:));
-
-/// 此特性针对 UINavigationController 中的 viewControllers 栈属性操作。
-/// 主要处理当前页面的上一级页面该如何显示的问题，合理利用此特性能够增强使用手势滑动返回或者点击返回按钮返回页面时的体验。
-/// 如果匹配到视图控制器的类型，则丢弃栈中其他的 ViewControllers 实例，没有匹配到则添加从 block 返回的 ViewController 实例到栈中。
-/// @param aClass 需要匹配的 UIViewController 类型
-/// @param block 如果目标 UIViewController 类型没有匹配到需要创建一个新的 UIViewController 实例
-- (void)nx_setPreviousViewControllerWithClass:(Class)aClass
- insertsInstanceToBelowWhenNotFoundUsingBlock:(__kindof UIViewController *_Nullable (^)(void))block;
 
 @end
 
