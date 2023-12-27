@@ -36,7 +36,6 @@ extension AppDelegate {
             navigationController.nx_prepareConfigureViewControllersCallback { viewController, configuration in
                 print("UIKit(viewController):", viewController, configuration)
             }
-            
             return configuration
         }
     }

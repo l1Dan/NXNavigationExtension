@@ -66,7 +66,7 @@ struct View03_BackButtonEventIntercept: View {
             configuration.navigationBarAppearance.tintColor = .white
             configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             configuration.navigationBarAppearance.useSystemBackButton = true
-        }, onTransitionViewController: { action in
+        }, onBackHandler: { action in
             if selectedItemType == .clickBackButton && action == .clickBackButton ||
                 selectedItemType == .clickBackButtonMenu && action == .clickBackButtonMenu ||
                 selectedItemType == .interactionGesture && action == .interactionGesture ||

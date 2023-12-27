@@ -76,8 +76,8 @@ extension AppDelegate {
             ].compactMap { $0 }
         } else {
             classes = [
-                NSClassFromString("SwiftUI.SplitViewNavigationController"), // iOS14
-                UINavigationController.self, // Requirements for SwiftUI in iOS13
+                NSClassFromString("SwiftUI.SplitViewNavigationController"),
+                UINavigationController.self,
             ].compactMap { $0 }
         }
         
