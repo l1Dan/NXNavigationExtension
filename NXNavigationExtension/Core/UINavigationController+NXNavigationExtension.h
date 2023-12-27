@@ -55,7 +55,7 @@ typedef NS_ENUM(NSUInteger, NXNavigationTransitionState) {
     NXNavigationTransitionStateSetCompleted, // setViewControllers 动画结束（如果没有动画，则在 did set 后立即进入 completed）
 };
 
-/// 试图控制器返回事件
+/// 视图控制器返回事件
 typedef NS_ENUM(NSUInteger, NXNavigationBackAction) {
     NXNavigationBackActionCallingNXPopMethod,   // 调用 `nx_pop` 系列方法返回
     NXNavigationBackActionClickBackButton,      // 点击返回按钮
