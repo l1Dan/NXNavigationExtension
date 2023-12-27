@@ -31,53 +31,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_DEPRECATED_WITH_REPLACEMENT("NXNavigationTransitionState", ios(2.0, 9.0))
-typedef NS_ENUM(NSUInteger, NXNavigationAction) {
-    NXNavigationActionUnspecified,
-
-    NXNavigationActionWillPush,
-    NXNavigationActionDidPush,
-    NXNavigationActionPushCancelled,
-    NXNavigationActionPushCompleted,
-
-    NXNavigationActionWillPop,
-    NXNavigationActionDidPop,
-    NXNavigationActionPopCancelled,
-    NXNavigationActionPopCompleted,
-
-    NXNavigationActionWillSet,
-    NXNavigationActionDidSet,
-    NXNavigationActionSetCancelled,
-    NXNavigationActionSetCompleted,
-};
-
-API_DEPRECATED_WITH_REPLACEMENT("NXNavigationBackAction", ios(2.0, 11.0))
-typedef NS_ENUM(NSUInteger, NXNavigationInteractiveType) {
-    NXNavigationInteractiveTypeCallNXPopMethod,
-    NXNavigationInteractiveTypeBackButtonAction,
-    NXNavigationInteractiveTypeBackButtonMenuAction,
-    NXNavigationInteractiveTypePopGestureRecognizer,
-};
-
-API_DEPRECATED_WITH_REPLACEMENT("NXNavigationTransitionDelegate", ios(2.0, 11.0))
-@protocol NXNavigationControllerDelegate <NSObject>
-
-@optional
-
-- (nullable __kindof UIViewController *)nx_navigationController:(__kindof UINavigationController *)navigationController
-                                     preparePopToViewController:(__kindof UIViewController *)toViewController
-                                             fromViewController:(__kindof UIViewController *)fromViewController API_DEPRECATED("Unavailable.", ios(2.0, 2.0));
-
-- (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController
-          willPopViewController:(__kindof UIViewController *)viewController
-                interactiveType:(NXNavigationInteractiveType)interactiveType API_DEPRECATED_WITH_REPLACEMENT("nx_navigationController:transitionViewController:navigationAction", ios(2.0, 11.0));
-
-- (void)nx_navigationController:(__kindof UINavigationController *)navigationController
-          processViewController:(__kindof UIViewController *)viewController
-               navigationAction:(NXNavigationAction)navigationAction API_DEPRECATED_WITH_REPLACEMENT("nx_navigationController:transitionViewController:navigationBackAction", ios(2.0, 11.0));
-
-@end
-
 @interface UINavigationController (NXNavigationExtensionDeprecated)
 
 - (void)nx_setPreviousViewControllerWithClass:(Class)aClass
