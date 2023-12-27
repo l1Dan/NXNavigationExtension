@@ -182,13 +182,13 @@
                     return callSuperBlock();
                 }
                 
-                NXNavigationTransitionState action = selfObject.nx_navigationTransitionState;
-                if (action != NXNavigationTransitionStateUnspecified) {
+                NXNavigationTransitionState state = selfObject.nx_navigationTransitionState;
+                if (state != NXNavigationTransitionStateUnspecified) {
                     NXDebugLog(@"popViewController 时上一次的转场尚未完成，系统会忽略本次 pop，等上一次转场完成后再重新执行 pop, viewControllers = %@", selfObject.viewControllers);
                 }
                 
                 // 系统文档里说 rootViewController 是不能被 pop 的，当只剩下 rootViewController 时当前方法什么事都不会做
-                BOOL willPopActually = selfObject.viewControllers.count > 1 && action == NXNavigationTransitionStateUnspecified;
+                BOOL willPopActually = selfObject.viewControllers.count > 1 && state == NXNavigationTransitionStateUnspecified;
                 if (!willPopActually) {
                     return callSuperBlock();
                 }
@@ -225,13 +225,13 @@
                     return callSuperBlock();
                 }
                 
-                NXNavigationTransitionState action = selfObject.nx_navigationTransitionState;
-                if (action != NXNavigationTransitionStateUnspecified) {
+                NXNavigationTransitionState state = selfObject.nx_navigationTransitionState;
+                if (state != NXNavigationTransitionStateUnspecified) {
                     NXDebugLog(@"popToViewController 时上一次的转场尚未完成，系统会忽略本次 pop，等上一次转场完成后再重新执行 pop, currentViewControllers = %@, viewController = %@", selfObject.viewControllers, viewController);
                 }
                 
                 // 系统文档里说 rootViewController 是不能被 pop 的，当只剩下 rootViewController 时当前方法什么事都不会做
-                BOOL willPopActually = selfObject.viewControllers.count > 1 && [selfObject.viewControllers containsObject:viewController] && selfObject.topViewController != viewController && action == NXNavigationTransitionStateUnspecified;
+                BOOL willPopActually = selfObject.viewControllers.count > 1 && [selfObject.viewControllers containsObject:viewController] && selfObject.topViewController != viewController && state == NXNavigationTransitionStateUnspecified;
                 if (!willPopActually) {
                     return callSuperBlock();
                 }
@@ -268,12 +268,12 @@
                     return callSuperBlock();
                 }
                 
-                NXNavigationTransitionState action = selfObject.nx_navigationTransitionState;
-                if (action != NXNavigationTransitionStateUnspecified) {
+                NXNavigationTransitionState state = selfObject.nx_navigationTransitionState;
+                if (state != NXNavigationTransitionStateUnspecified) {
                     NXDebugLog(@"popToRootViewController 时上一次的转场尚未完成，系统会忽略本次 pop，等上一次转场完成后再重新执行 pop, viewControllers = %@", selfObject.viewControllers);
                 }
                 
-                BOOL willPopActually = selfObject.viewControllers.count > 1 && action == NXNavigationTransitionStateUnspecified;
+                BOOL willPopActually = selfObject.viewControllers.count > 1 && state == NXNavigationTransitionStateUnspecified;
                 if (!willPopActually) {
                     return callSuperBlock();
                 }
@@ -323,8 +323,11 @@
                 
                 for (UIViewController *viewController in viewControllers) {
                     viewController.navigationItem.nx_viewController = viewController;
-                    // 先赋值一次
-                    viewController.nx_configuration = selfObject.nx_configuration;
+                    if (!viewController.nx_configuration) {
+                        // 先赋值一次
+                        // fixed: https://github.com/l1Dan/NXNavigationExtension/issues/23
+                        viewController.nx_configuration = selfObject.nx_configuration;
+                    }
                     viewController.nx_prepareConfigureViewControllerCallback = selfObject.nx_prepareConfigureViewControllerCallback;
                 }
                 
