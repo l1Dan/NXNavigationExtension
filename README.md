@@ -12,7 +12,7 @@
 2. 解决操作不当导致导航栏错乱问题。
 3. 解决导航栏显示、隐藏时页面之间过渡动画有割裂感、不流畅问题。
 4. 解决点击返回按钮事件无法拦截、手势滑动返回事件无法拦截问题。
-5. 您用过之后觉得还不错的话，麻烦回来给我个 Star 🌟 鼓励下哦。
+5. 您用过之后觉得还不错的话，麻烦回来给我个 Star 🌟 鼓励下哦，不胜感激！
 
 ## 🎉 预览
 
@@ -69,8 +69,7 @@
 - ✅` 禁用滑动返回手势`
 - ✅` 启用全屏滑动返回手势`
 - ✅` 导航栏返回事件拦截`
-- ✅` 支持视图控制器转场周期事件`
-- ✅` 任一视图控制器跳转`
+- ✅` 支持视图控制器转场状态`
 - ✅` SwiftUI 路由`
 - ✅` 导航栏点击事件穿透到底部`
 - ✅` 动态修改导航栏样式`
@@ -406,7 +405,7 @@ override var childForStatusBarHidden: UIViewController? {
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController03_BackButtonEventIntercept.swift)
 
-需要遵守协议 `<NXNavigationControllerDelegate>`，实现代理方法：
+需要遵守协议 `<NXNavigationTransitionDelegate>`，实现代理方法：
 
 1. `NXNavigationBackActionCallingNXPopMethod`: 调用 `nx_pop` 系列方法返回事件拦截。
 2. `NXNavigationBackActionClickBackButton`: 点击返回按钮返回事件拦截。
@@ -437,9 +436,9 @@ func nx_navigationController(_ navigationController: UINavigationController, tra
 
 自定义返回按钮事件需要拦截可以调用 `nx_popViewControllerAnimated:`、`nx_popToViewController:animated:` 或 `nx_popToRootViewControllerAnimated:` 等方法来触发上面的代理回调。
 
-### 支持视图控制器转场周期事件
+### 支持视图控制器转场状态
 
-需要遵守协议 `<NXNavigationControllerDelegate>`，实现代理方法：
+需要遵守协议 `<NXNavigationTransitionDelegate>`，实现代理方法：
 
 ```swift
 func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationTransitionState state: NXNavigationTransitionState) {
@@ -462,26 +461,9 @@ func nx_navigationController(_ navigationController: UINavigationController, tra
 }
 ```
 
-### 任一视图控制器跳转
-
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController08_JumpToViewController.swift)
-
-- 以跳转到 `ViewController08_JumpToViewController` 为例，如果之前有 Push 过 `ViewController08_JumpToViewController` 的实例，则最后会跳转到这个视图控制器中，如果没有找到则会调用 `block` 执行插入新控制器的规则。
-- 执行此操作之后，并不会跳转到对应的视图控制器，仅仅是修改了 NavigationController 的 viewControllers 属性，如果需要跳转操作，可以调用 `pop` 系列方法返回上一个页面，也可以使用手势滑动返回页面，还可以点击返回按钮返回页面。
-
-```swift
-navigationController?.nx_setPreviousViewController(with: ViewController08_JumpToViewController.self, insertsInstanceToBelowWhenNotFoundUsing: {
-    return ViewController08_JumpToViewController()
-})
-// 执行视图控制器跳转操作：
-navigationController?.popViewController(animated: true)
-```
-
-意思是：首先查找 `navigationController?.viewControllers` 是否存在一个类型为 `ViewController08_JumpToViewController.self` 的实例对象，如果存在则上一页面会显示此视图控制器，没有找到则使用 `ViewController08_JumpToViewController()` 创建一个新的实例对象插入到 NavigationController 的 viewControllers 栈的上一个页面中。
-
 ### 长按返回按钮显示菜单功能
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController08_JumpToViewController.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController03_BackButtonEventIntercept.swift)
 
 ```swift
 override var nx_useSystemBackButton: Bool {

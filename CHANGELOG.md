@@ -2,7 +2,7 @@
 
 ## 4.2.0
 
-1. 更新 NXNavigationExtensionSwiftUI 最低支持版本为 14.0
+1. 更新 NXNavigationExtensionSwiftUI 最低支持版本为 14.0。
 
 ## 4.1.9
 
@@ -17,7 +17,7 @@
 5. 新增 `NXNavigationBackAction` 视图控制器返回事件枚举类型
 6. 废弃 `NXNavigationAction` 使用 `NXNavigationTransitionState` 替代
 7. 废弃 `NXNavigationInteractiveType` 使用 `NXNavigationBackAction` 替代
-8. 废弃 `NXNavigationTransitionDelegate` 使用 `NXNavigationControllerDelegate` 替代
+8. 废弃 `NXNavigationControllerDelegate` 使用 `NXNavigationTransitionDelegate` 替代
 9. 废弃 `nx_setPreviousViewControllerWithClass:insertsInstanceToBelowWhenNotFoundUsingBlock`
 
 ## 4.1.7
