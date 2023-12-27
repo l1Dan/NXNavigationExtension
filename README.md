@@ -6,12 +6,13 @@
 
 🔥 NXNavigationExtension 是为 UINavigationBar 设计的轻量级的、简单的、可扩展的库，支持 SwiftUI 和 UIKit。框架对现有代码入侵非常小，只需要简单的几个方法调用就可以满足大部分的应用场景。可能是最省心的 iOS 导航栏处理框架之一。NXNavigationExtension 框架本身和示例代码都已经适配暗黑模式可供大家参考。
 
-## 介绍太长不看系列
-### 🎯 解决导航栏存在的多个痛点
+## 🎯 介绍太长不看系列
+### 解决导航栏存在的多个痛点
 1. 解决导航栏背景修改不方便问题。
 2. 解决操作不当导致导航栏错乱问题。
 3. 解决导航栏显示、隐藏时页面之间过渡动画有割裂感、不流畅问题。
 4. 解决点击返回按钮事件无法拦截、手势滑动返回事件无法拦截问题。
+5. 您用过之后觉得还不错的话，麻烦回来给我个 Star 🌟 鼓励下哦。
 
 ## 🎉 预览
 
@@ -114,7 +115,7 @@ github "l1Dan/NXNavigationExtension"
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.1.8"))
+    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.1.9"))
 ]
 ```
 
