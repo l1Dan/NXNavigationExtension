@@ -282,24 +282,24 @@ override var childForStatusBarHidden: UIViewController? {
 
 需要遵守协议 `<NXNavigationControllerDelegate>`，实现代理方法：
 
-1. `NXNavigationInteractiveTypeCallNXPopMethod`: 调用 `nx_pop` 系列方法返回事件拦截。
-2. `NXNavigationInteractiveTypeBackButtonAction`: 点击返回按钮返回事件拦截。
-3. `NXNavigationInteractiveTypeBackButtonMenuAction`: 长按返回按钮选择菜单返回事件拦截。
-4. `NXNavigationInteractiveTypePopGestureRecognizer`: 使用手势交互返回事件拦截。
+1. `NXNavigationBackActionCallingNXPopMethod`: 调用 `nx_pop` 系列方法返回事件拦截。
+2. `NXNavigationBackActionClickBackButton`: 点击返回按钮返回事件拦截。
+3. `NXNavigationBackActionClickBackButtonMenu`: 长按返回按钮选择菜单返回事件拦截。
+4. `NXNavigationBackActionInteractionGesture`: 使用手势交互返回事件拦截。
 
 ```swift
-func nx_navigationController(_ navigationController: UINavigationController, willPop viewController: UIViewController, interactiveType: NXNavigationInteractiveType) -> Bool {
-    switch interactiveType {
-    case .backButtonAction:
+func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
+    switch action {
+    case .clickBackButton:
         // Do something
         return false
-    case .backButtonMenuAction:
+    case .clickBackButtonMenu:
         // Do something
         return false
-    case .popGestureRecognizer:
+    case .interactionGesture:
         // Do something
         return false
-    case .callNXPopMethod:
+    case .callingNXPopMethod:
         // Do something
         return false
     default:
@@ -316,8 +316,8 @@ func nx_navigationController(_ navigationController: UINavigationController, wil
 需要遵守协议 `<NXNavigationControllerDelegate>`，实现代理方法：
 
 ```swift
-func nx_navigationController(_ navigationController: UINavigationController, processViewController viewController: UIViewController, navigationAction: NXNavigationAction) {
-    switch navigationAction {
+func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationTransitionState state: NXNavigationTransitionState) {
+    switch state {
     case .unspecified: print("Unspecified")
     case .willPush: print("WillPush")
     case .didPush: print("DidPush")

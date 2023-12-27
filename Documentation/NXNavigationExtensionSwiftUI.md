@@ -1,14 +1,13 @@
 ## 🍽 使用
 
-`NXNavigationExtensionSwiftUI` 由 [NXNavigationExtension](https://github.com/l1Dan/NXNavigationExtension/blob/main/Documentation/NXNavigationExtensionUIKit.md) 框架提供强力支持，他们的功能基本保持一致。注册完成之后需要在 `NavigationView` 中指定使用 `.navigationViewStyle(.stack)` 风格，但是目前仅支持 iOS 14 及以上系统的 `StackNavigationViewStyle` 风格，其他系统和 `NavigationViewStyle` 后续会不断完善。
+`NXNavigationExtensionSwiftUI` 由 [NXNavigationExtension](https://github.com/l1Dan/NXNavigationExtension/blob/main/Documentation/NXNavigationExtensionUIKit.md) 框架提供强力支持，两者功能基本保持一致。目前仅对 iOS 14 及以上系统的 SwiftUI 进行支持，参考如下：
 
-下面是框架对 `StackNavigationViewStyle` 风格和 iOS 系统版本的支持情况：
-
-| NavigationViewStyle / iOS version | iOS 13 | iOS 14 | iOS 15 |
-| :-------------------------------: | :----: | :----: | :----: |
-|            .automatic             |   ❌   |   ❌   |   ❌   |
-|              .stack               |   ❌   |   ✅   |   ✅   |
-|             .columns              |   ❌   |   ❌   |   ❌   |
+| NavigationView  | iOS 14 | iOS 15 | iOS 16 | iOS 17 |
+| :-------------: | :----: | :----: | :----: | :----: |
+|   .automatic    |   ❌    |   ❌    |   ❌    |   ❌    |
+|    .columns     |   ❌    |   ❌    |   ❌    |   ❌    |
+|     .stack      |   ✅    |   ✅    |   ✅    |   ✅    |
+| NavigationStack |   ❌    |   ❌    |   ✅    |   ✅    |
 
 1. 💉 导入模块。
 
@@ -262,18 +261,18 @@ Text("Destination")
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View03_BackButtonEventIntercept.swift)
 
-1. `.callNXPopMethod`: 调用 `nx_pop` 系列方法返回事件拦截。
-2. `.backButtonAction`: 点击返回按钮返回事件拦截。
-3. `.backButtonMenuAction`: 长按返回按钮选择菜单返回事件拦截。
-4. `.popGestureRecognizer`: 使用手势交互返回事件拦截。
+1. `.callingNXPopMethod`: 调用 `nx_pop` 系列方法返回事件拦截。
+2. `.clickBackButton`: 点击返回按钮返回事件拦截。
+3. `.clickBackButtonMenu`: 长按返回按钮选择菜单返回事件拦截。
+4. `.interactionGesture`: 使用手势交互返回事件拦截。
 
 ```swift
 Text("Destination")
-    .useNXNavigationView(onWillPopViewController: { interactiveType in
-        if selectedItemType == .backButtonAction && interactiveType == .backButtonAction ||
-            selectedItemType == .backButtonMenuAction && interactiveType == .backButtonMenuAction ||
-            selectedItemType == .popGestureRecognizer && interactiveType == .popGestureRecognizer ||
-            selectedItemType == .callNXPopMethod && interactiveType == .callNXPopMethod ||
+    .useNXNavigationView(onBackHandler: { action in
+        if selectedItemType == .clickBackButton && action == .clickBackButton ||
+            selectedItemType == .clickBackButtonMenu && action == .clickBackButtonMenu ||
+            selectedItemType == .interactionGesture && action == .interactionGesture ||
+            selectedItemType == .callingNXPopMethod && action == .callingNXPopMethod ||
             selectedItemType == .all {
             isPresented = true
             return false
@@ -308,7 +307,7 @@ struct DestinationView: View {
 ```
 
 1. 需要注意的是 `NXNavigationRouter.of(context)` 和 `NXNavigationRouter.of(context).nx` 用于调用系统 `pop` 和框架 `nx_pop` 系列方法
-2. 使用 `NXNavigationRouter.of(context).nx` 方法弹出页面时会触发 `onWillPopViewController` 的回调。
+2. 使用 `NXNavigationRouter.of(context).nx` 方法退出页面时会触发 `onBackHandler` 的回调。
 
 ### 导航栏点击事件穿透到底部
 

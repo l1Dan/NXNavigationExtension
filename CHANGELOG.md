@@ -1,5 +1,9 @@
 # CHANGELOG.md
 
+## 4.2.0
+
+1. 更新 NXNavigationExtensionSwiftUI 最低支持版本为 14.0
+
 ## 4.1.9
 
 1. 为避免开发人员不及更新废弃接口引起问题，现彻底移除废弃接口。
