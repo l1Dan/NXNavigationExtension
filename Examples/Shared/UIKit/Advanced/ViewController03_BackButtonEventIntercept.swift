@@ -118,10 +118,10 @@ extension ViewController03_BackButtonEventIntercept {
     func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
         print("navigationBackAction: \(action), viewController: \(viewController)")
         
-        if selectedItemType == .backButtonAction && action == .clickBackButton ||
-            selectedItemType == .backButtonMenuAction && action == .clickBackButtonMenu ||
-            selectedItemType == .popGestureRecognizer && action == .interactionGesture ||
-            selectedItemType == .callNXPopMethod && action == .callingNXPopMethod ||
+        if selectedItemType == .clickBackButton && action == .clickBackButton ||
+            selectedItemType == .clickBackButtonMenu && action == .clickBackButtonMenu ||
+            selectedItemType == .interactionGesture && action == .interactionGesture ||
+            selectedItemType == .callingNXPopMethod && action == .callingNXPopMethod ||
             selectedItemType == .all {
             showAlertController(in: viewController)
             return false

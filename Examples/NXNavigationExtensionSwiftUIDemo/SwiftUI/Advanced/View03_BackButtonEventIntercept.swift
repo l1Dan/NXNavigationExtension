@@ -67,10 +67,10 @@ struct View03_BackButtonEventIntercept: View {
             configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             configuration.navigationBarAppearance.useSystemBackButton = true
         }, onTransitionViewController: { action in
-            if selectedItemType == .backButtonAction && action == .clickBackButton ||
-                selectedItemType == .backButtonMenuAction && action == .clickBackButtonMenu ||
-                selectedItemType == .popGestureRecognizer && action == .interactionGesture ||
-                selectedItemType == .callNXPopMethod && action == .callingNXPopMethod ||
+            if selectedItemType == .clickBackButton && action == .clickBackButton ||
+                selectedItemType == .clickBackButtonMenu && action == .clickBackButtonMenu ||
+                selectedItemType == .interactionGesture && action == .interactionGesture ||
+                selectedItemType == .callingNXPopMethod && action == .callingNXPopMethod ||
                 selectedItemType == .all {
                 isPresented = true
                 return false

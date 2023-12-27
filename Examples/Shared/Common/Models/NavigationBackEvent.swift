@@ -10,7 +10,7 @@ import Foundation
 class NavigationBackEvent {
     
     enum State: String {
-        case all, backButtonAction, backButtonMenuAction, popGestureRecognizer, callNXPopMethod
+        case all, clickBackButton, clickBackButtonMenu, interactionGesture, callingNXPopMethod
     }
     
     let state: NavigationBackEvent.State
@@ -29,10 +29,10 @@ class NavigationBackEvent {
     static var items: [NavigationBackEvent] {
         return [
             NavigationBackEvent(state: .all, isSelected: true),
-            NavigationBackEvent(state: .backButtonAction),
-            NavigationBackEvent(state: .backButtonMenuAction),
-            NavigationBackEvent(state: .popGestureRecognizer),
-            NavigationBackEvent(state: .callNXPopMethod),
+            NavigationBackEvent(state: .clickBackButton),
+            NavigationBackEvent(state: .clickBackButtonMenu),
+            NavigationBackEvent(state: .interactionGesture),
+            NavigationBackEvent(state: .callingNXPopMethod),
         ]
     }
     
