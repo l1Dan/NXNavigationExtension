@@ -24,10 +24,8 @@ struct ColorListView: View {
 
 }
 
-struct ColorListView_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptiveNavigationView {
-            ColorListView()
-        }
+#Preview {
+    AdaptiveNavigationView {
+        ColorListView()
     }
 }

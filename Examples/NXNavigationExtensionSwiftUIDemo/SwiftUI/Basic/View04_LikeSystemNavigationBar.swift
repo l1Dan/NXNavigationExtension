@@ -24,10 +24,8 @@ struct View04_LikeSystemNavigationBar: View {
     }
 }
 
-struct View04_LikeSystemNavigationBar_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptiveNavigationView {
-            View04_LikeSystemNavigationBar(NavigationFeatureItem(style: .likeSystemNavigationBar))
-        }
+#Preview {
+    AdaptiveNavigationView {
+        View04_LikeSystemNavigationBar(NavigationFeatureItem(style: .likeSystemNavigationBar))
     }
 }

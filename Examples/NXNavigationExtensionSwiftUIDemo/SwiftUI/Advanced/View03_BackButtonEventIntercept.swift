@@ -80,8 +80,6 @@ struct View03_BackButtonEventIntercept: View {
     }
 }
 
-struct View03_BackButtonEventIntercept_Previews: PreviewProvider {
-    static var previews: some View {
-        View03_BackButtonEventIntercept(NavigationFeatureItem(style: .backButtonEventIntercept))
-    }
+#Preview {
+    View03_BackButtonEventIntercept(NavigationFeatureItem(style: .backButtonEventIntercept))
 }

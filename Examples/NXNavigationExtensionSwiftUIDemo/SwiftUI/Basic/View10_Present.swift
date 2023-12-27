@@ -33,11 +33,10 @@ struct View10_Present: View {
     }
 }
 
-struct View10_Present_Previews: PreviewProvider {
-    @State static var presentedAsModal = false
-    static var previews: some View {
-        AdaptiveNavigationView {
-            View10_Present(NavigationFeatureItem(style: .present), presentedAsModal: $presentedAsModal)
-        }
+#Preview {
+    AdaptiveNavigationView {
+        @State var presentedAsModal = false
+        View10_Present(NavigationFeatureItem(style: .present), presentedAsModal: $presentedAsModal)
     }
 }
+

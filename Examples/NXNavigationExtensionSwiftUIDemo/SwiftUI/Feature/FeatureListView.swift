@@ -61,10 +61,8 @@ struct FeatureListView: View {
     }
 }
 
-struct FeatureListView_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptiveNavigationView {
-            FeatureListView(NavigationFeatureSection.sections(for: false))
-        }
+#Preview {
+    AdaptiveNavigationView {
+        FeatureListView(NavigationFeatureSection.sections(for: false))
     }
 }

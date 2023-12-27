@@ -31,10 +31,8 @@ struct View09_FullScreenColor: View {
     }
 }
 
-struct View09_FullScreenColor_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptiveNavigationView {
-            View09_FullScreenColor(NavigationFeatureItem(style: .fullScreenColor))
-        }
+#Preview {
+    AdaptiveNavigationView {
+        View09_FullScreenColor(NavigationFeatureItem(style: .fullScreenColor))
     }
 }

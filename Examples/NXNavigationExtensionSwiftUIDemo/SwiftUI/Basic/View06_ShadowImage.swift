@@ -24,10 +24,8 @@ struct View06_ShadowImage: View {
     }
 }
 
-struct View06_ShadowImage_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptiveNavigationView {
-            View06_ShadowImage(NavigationFeatureItem(style: .shadowImage))
-        }
+#Preview {
+    AdaptiveNavigationView {
+        View06_ShadowImage(NavigationFeatureItem(style: .shadowImage))
     }
 }

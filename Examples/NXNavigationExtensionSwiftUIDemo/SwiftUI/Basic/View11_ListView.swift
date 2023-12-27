@@ -23,10 +23,8 @@ struct View11_ListView: View {
     }
 }
 
-struct View11_ListView_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptiveNavigationView {
-            View11_ListView(NavigationFeatureItem(style: .listView))            
-        }
+#Preview {
+    AdaptiveNavigationView {
+        View11_ListView(NavigationFeatureItem(style: .listView))            
     }
 }

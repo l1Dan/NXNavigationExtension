@@ -179,10 +179,8 @@ struct View08_NavigationRouter: View {
     }
 }
 
-struct View08_NavigationRouter_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptiveNavigationView {
-            View08_NavigationRouter(NavigationFeatureItem(style: .navigationRouter))
-        }
+#Preview {
+    AdaptiveNavigationView {
+        View08_NavigationRouter(NavigationFeatureItem(style: .navigationRouter))
     }
 }

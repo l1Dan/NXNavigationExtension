@@ -39,10 +39,8 @@ struct View06_WebView: View {
     }
 }
 
-struct View06_WebView_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptiveNavigationView {
-            View06_WebView(NavigationFeatureItem(style: .webView))
-        }
+#Preview {
+    AdaptiveNavigationView {
+        View06_WebView(NavigationFeatureItem(style: .webView))
     }
 }

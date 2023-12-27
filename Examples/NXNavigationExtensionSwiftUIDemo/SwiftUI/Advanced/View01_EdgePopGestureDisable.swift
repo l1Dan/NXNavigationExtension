@@ -27,10 +27,8 @@ struct View01_EdgePopGestureDisable: View {
     }
 }
 
-struct View01_EdgePopGestureDisable_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptiveNavigationView {
-            View01_EdgePopGestureDisable(NavigationFeatureItem(style: .edgePopGestureDisable))
-        }
+#Preview {
+    AdaptiveNavigationView {
+        View01_EdgePopGestureDisable(NavigationFeatureItem(style: .edgePopGestureDisable))
     }
 }

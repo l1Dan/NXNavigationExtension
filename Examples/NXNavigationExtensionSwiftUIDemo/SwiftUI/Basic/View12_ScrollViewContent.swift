@@ -34,10 +34,8 @@ struct View12_ScrollViewContent: View {
     }
 }
 
-struct View12_ScrollViewContent_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView{
-            View12_ScrollViewContent(NavigationFeatureItem(style: .scrollViewContent))
-        }
+#Preview {
+    NavigationView{
+        View12_ScrollViewContent(NavigationFeatureItem(style: .scrollViewContent))
     }
 }

@@ -34,10 +34,8 @@ struct View05_NavigationBarDisable: View {
     }
 }
 
-struct View05_NavigationBarDisable_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptiveNavigationView {
-            View05_NavigationBarDisable(NavigationFeatureItem(style: .navigationBarDisable))
-        }
+#Preview {
+    AdaptiveNavigationView {
+        View05_NavigationBarDisable(NavigationFeatureItem(style: .navigationBarDisable))
     }
 }

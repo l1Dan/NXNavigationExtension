@@ -26,10 +26,8 @@ struct View01_BackgroundColor: View {
     }
 }
 
-struct View01_BackgroundColor_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptiveNavigationView {
-            View01_BackgroundColor(NavigationFeatureItem(style: .backgroundColor))
-        }
+#Preview {
+    AdaptiveNavigationView {
+        View01_BackgroundColor(NavigationFeatureItem(style: .backgroundColor))
     }
 }

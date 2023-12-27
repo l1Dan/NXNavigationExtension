@@ -24,10 +24,8 @@ struct View03_Transparent: View {
     }
 }
 
-struct View03_Transparent_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptiveNavigationView {
-            View03_Transparent(NavigationFeatureItem(style: .transparent))
-        }
+#Preview {
+    AdaptiveNavigationView {
+        View03_Transparent(NavigationFeatureItem(style: .transparent))
     }
 }

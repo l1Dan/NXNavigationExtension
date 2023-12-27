@@ -24,10 +24,8 @@ struct View07_CustomBackImage: View {
     }
 }
 
-struct View07_CustomBackImage_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptiveNavigationView {
-            View07_CustomBackImage(NavigationFeatureItem(style: .customBackImage))
-        }
+#Preview {
+    AdaptiveNavigationView {
+        View07_CustomBackImage(NavigationFeatureItem(style: .customBackImage))
     }
 }

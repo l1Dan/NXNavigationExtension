@@ -26,10 +26,8 @@ struct View02_BackgroundImage: View {
     }
 }
 
-struct View02_BackgroundImage_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptiveNavigationView {
-            View02_BackgroundImage(NavigationFeatureItem(style: .backgroundImage))
-        }
+#Preview {
+    AdaptiveNavigationView {
+        View02_BackgroundImage(NavigationFeatureItem(style: .backgroundImage))
     }
 }
