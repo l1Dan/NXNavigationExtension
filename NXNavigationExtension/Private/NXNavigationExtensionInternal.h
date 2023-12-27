@@ -147,7 +147,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 - (void)nx_adjustmentSystemBackButtonForViewController:(__kindof UIViewController *)currentViewController
                                      inViewControllers:(NSArray<__kindof UIViewController *> *)previousViewControllers;
 
-/// 准备 Pop 视图控制器的最后检查。主要检查代理 `nx_navigationInteractDelegate` 和视图控制器是否有实现 `id<NXNavigationControllerDelegate>` 代理逻辑。
+/// 准备 Pop 视图控制器的最后检查。主要检查代理 `nx_navigationTransitionDelegate` 和视图控制器是否有实现 `id<NXNavigationTransitionDelegate>` 代理逻辑。
 /// @param currentViewController 当前所处的视图控制器
 /// @param destinationViewController 需要 Pop 到的目标视图控制器
 /// @param action 当前 Pop 视图控制器的的交互类型
@@ -155,9 +155,9 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
  preparePopViewController:(__kindof UIViewController *)destinationViewController
      navigationBackAction:(NXNavigationBackAction)action;
 
-/// 处理即将显示的视图控制器的转场周期事件
+/// 处理即将显示的视图控制器的转场状态
 /// @param appearingViewController 即将显示的视图控制器
-/// @param state 当前视图控制器的转场周期事件
+/// @param state 当前视图控制器的转场状态
 - (void)nx_transitionViewController:(__kindof UIViewController *)appearingViewController
           navigationTransitionState:(NXNavigationTransitionState)state;
 
@@ -166,7 +166,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 
 @interface UIViewController (NXNavigationExtensionInternal)
 
-/// 获取当前视图控制器转场周期事件
+/// 获取当前视图控制器转场状态
 @property (nonatomic, assign) NXNavigationTransitionState nx_navigationTransitionState;
 
 /// 记录是否为 childViewControllers 中的控制器，并且当前控制器不是 UINavigationController 的情况下。

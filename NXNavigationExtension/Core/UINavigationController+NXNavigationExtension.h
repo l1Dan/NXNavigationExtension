@@ -93,11 +93,11 @@ typedef BOOL (^NXNavigationBackActionHandler) (UINavigationController *, UIViewC
 
 @interface UINavigationItem (NXNavigationExtension)
 
-/// 处理视图控制器转场状态；优先调用 NXNavigationControllerDelegate
+/// 处理视图控制器转场状态；优先调用 NXNavigationTransitionDelegate
 /// 只有在 `UIViewController` 的 `init` 方法中设置属性才能拿到到完整的 `Push` 状态
 @property (nonatomic, copy, nullable) NXNavigationTransitionStateHandler nx_transitionStateHandler;
 
-/// 拦截视图控制器返回操作；优先调用 NXNavigationControllerDelegate
+/// 拦截视图控制器返回操作；优先调用 NXNavigationTransitionDelegate
 @property (nonatomic, copy, nullable) NXNavigationBackActionHandler nx_backActionHandler;
 
 @end
@@ -128,7 +128,7 @@ typedef BOOL (^NXNavigationBackActionHandler) (UINavigationController *, UIViewC
                      animated:(BOOL)animated
                    completion:(void (^__nullable)(void))completion NS_SWIFT_ASYNC_NAME(nx_pushViewController(_:animated:));
 
-/// 调用此方法可以触发调用 id<NXNavigationControllerDelegate> 代理方法
+/// 调用此方法可以触发调用 id<NXNavigationTransitionDelegate> 代理方法
 /// 可以统一处理手势滑动返回和自定义返回按钮点击返回的拦截操作
 /// 内部最终会调用系统方法：`popViewControllerAnimated:`
 /// @param animated 默认 YES
@@ -136,7 +136,7 @@ typedef BOOL (^NXNavigationBackActionHandler) (UINavigationController *, UIViewC
 - (nullable UIViewController *)nx_popViewControllerAnimated:(BOOL)animated
                                                  completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popViewController(animated:completion:));
 
-/// 调用此方法可以触发调用 id<NXNavigationControllerDelegate> 代理方法
+/// 调用此方法可以触发调用 id<NXNavigationTransitionDelegate> 代理方法
 /// 可以统一处理手势滑动返回和自定义返回按钮点击返回的拦截操作
 /// 内部最终会调用系统方法：`popToViewController:animated:`
 /// @param viewController 需要 Pop 的视图控制器
@@ -146,7 +146,7 @@ typedef BOOL (^NXNavigationBackActionHandler) (UINavigationController *, UIViewC
                                                                  animated:(BOOL)animated
                                                                completion:(void (^__nullable)(void))completion NS_SWIFT_NAME(nx_popToViewController(_:animated:completion:));
 
-/// 调用此方法可以触发调用 id<NXNavigationControllerDelegate> 代理方法
+/// 调用此方法可以触发调用 id<NXNavigationTransitionDelegate> 代理方法
 /// 可以统一处理手势滑动返回和自定义返回按钮点击返回的拦截操作
 /// 内部最终会调用系统方法：`popToRootViewControllerAnimated:`
 /// @param animated 默认 YES
