@@ -1,6 +1,18 @@
 # CHANGELOG.md
 
-## 4.1.6
+## 4.1.8
+
+1. 新增 `nx_transitionStateHandler` 处理视图控制器转场状态
+2. 新增 `nx_backActionHandler` 拦截视图控制器返回操作
+3. 新增 `NXNavigationTransitionDelegate`
+4. 新增 `NXNavigationTransitionState` 视图控制器转场状态枚举类型
+5. 新增 `NXNavigationBackAction` 视图控制器返回事件枚举类型
+6. 废弃 `NXNavigationAction` 使用 `NXNavigationTransitionState` 替代
+7. 废弃 `NXNavigationInteractiveType` 使用 `NXNavigationBackAction` 替代
+8. 废弃 `NXNavigationTransitionDelegate` 使用 `NXNavigationControllerDelegate` 替代
+9. 废弃 `nx_setPreviousViewControllerWithClass:insertsInstanceToBelowWhenNotFoundUsingBlock`
+
+## 4.1.7
 1. 适配 Xcode15
 2. 移除 过期方法
 
