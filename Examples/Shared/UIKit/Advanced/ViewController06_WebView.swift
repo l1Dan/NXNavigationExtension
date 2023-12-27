@@ -178,7 +178,7 @@ extension ViewController06_WebView {
         return randomColor
     }
 
-    // MARK: - NXNavigationControllerDelegate
+    // MARK: - NXNavigationTransitionDelegate
 
     func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
         if action != .interactionGesture && webView.canGoBack {

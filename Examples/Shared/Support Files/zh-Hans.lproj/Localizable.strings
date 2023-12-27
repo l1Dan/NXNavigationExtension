@@ -40,7 +40,6 @@
 "updateNavigationBar" = "更新导航栏样式";
 
 // UIKit only
-"jumpToViewController" = "任一视图控制器跳转";
 "scrollChangeNavigationBar" = "滑动改变导航栏样式";
 "customViewControllerTransitionAnimation" = "自定义转场动画";
 
