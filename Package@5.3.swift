@@ -27,7 +27,7 @@ import PackageDescription
 let package = Package(
     name: "NXNavigationExtension",
     platforms: [
-        .iOS(.v13),
+        .iOS(.v14),
     ],
     products: [
         .library(name: "NXNavigationExtension", targets: ["NXNavigationExtension"]),
