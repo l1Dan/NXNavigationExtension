@@ -168,7 +168,7 @@ public extension View {
     ///                     .padding()
     ///                     .useNXNavigationView(onTransitionViewController: { action in
     ///                         switch action {
-    ///                         case .clickBackButton, .clickBackButtonMenu, .callingNXPopMethod, .popGestureRecognizer:
+    ///                         case .clickBackButton, .clickBackButtonMenu, .callingNXPopMethod, .interactionGesture:
     ///                             /// Do something...
     ///                             return false
     ///                         default:
