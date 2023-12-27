@@ -26,7 +26,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
 NS_SWIFT_NAME(NXNavigationRouter.Context) @interface NXNavigationRouterContext : NSObject
 
 /// 路由名称
@@ -45,7 +45,7 @@ NS_SWIFT_NAME(NXNavigationRouter.Context) @interface NXNavigationRouterContext :
 
 @end
 
-API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
 @interface NXNavigationRouter : NSObject
 
 /// 调用 `nx_` 开头的方法；比如：NXNavigationRouter.of(context).nx./pop()/popUntil("routeName")...
@@ -58,15 +58,15 @@ API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 /// 手动触发导航栏外观更新
 - (void)setNeedsNavigationBarAppearanceUpdate;
 
-/// 通过路由名称得到可以弹出的目标视图控制器
+/// 通过路由名称得到可以退出的目标视图控制器
 /// @param routeName 路由名称
-/// @param isReverse 遇到相同的路由名称时，是从栈头还是栈尾弹出视图控制器。
+/// @param isReverse 遇到相同的路由名称时，是从栈头还是栈尾退出视图控制器。
 - (nullable __kindof UIViewController *)destinationViewControllerWithRouteName:(NSString *)routeName isReverse:(BOOL)isReverse;
 
 /// 用于适配调用系统 `pop` 系列或者 `nx_pop` 系列方法
 /// @param routeName 路由名称
 /// @param animated 是否使用转场动画
-/// @param isReverse 遇到相同的路由名称时，是从栈头还是栈尾弹出视图控制器。
+/// @param isReverse 遇到相同的路由名称时，是从栈头还是栈尾退出视图控制器。
 - (BOOL)popWithRouteName:(NSString *)routeName animated:(BOOL)animated isReverse:(BOOL)isReverse NS_REFINED_FOR_SWIFT;
 
 @end

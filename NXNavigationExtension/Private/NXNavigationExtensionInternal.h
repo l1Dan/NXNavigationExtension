@@ -105,7 +105,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 
 
 @interface UINavigationController (NXNavigationExtensionInternal)
-@property (nonatomic, copy, nullable) NXNavigationVirtualWrapperViewFilterCallback nx_filterNavigationVirtualWrapperViewCallback API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+@property (nonatomic, copy, nullable) NXNavigationVirtualWrapperViewFilterCallback nx_filterNavigationVirtualWrapperViewCallback API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 /// For SwiftUI，应用筛选 NXNavigationVirtualWrapperView 实例对象查找规则
 
 
@@ -116,7 +116,7 @@ typedef void (^UIViewControllerDidUpdateFrameHandler)(UIViewController *viewCont
 @property (nonatomic, strong, readonly) NXFullScreenPopGestureRecognizerDelegate *nx_fullScreenPopGestureDelegate;
 
 /// For SwiftUI，保存 NXNavigationRouter 的实例对象。可以保持 UINavigationController 实例和 NXNavigationRouter 实例的对应关系
-@property (nonatomic, strong, readonly) NXNavigationRouter *nx_navigationRouter API_AVAILABLE(ios(13.0));
+@property (nonatomic, strong, readonly) NXNavigationRouter *nx_navigationRouter API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 
 /// 是否使用 NXNavigationBar，默认 NO；如果导航控制器没有注册则使用系统导航栏
 @property (nonatomic, assign, readonly) BOOL nx_useNavigationBar;

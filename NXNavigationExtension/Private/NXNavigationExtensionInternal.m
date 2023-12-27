@@ -348,7 +348,7 @@
     return delegate;
 }
 
-- (NXNavigationRouter *)nx_navigationRouter API_AVAILABLE(ios(13.0)) {
+- (NXNavigationRouter *)nx_navigationRouter API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) {
     NXNavigationRouter *navigationRouter = objc_getAssociatedObject(self, _cmd);
     if (!navigationRouter) {
         navigationRouter = [[NXNavigationRouter alloc] init];

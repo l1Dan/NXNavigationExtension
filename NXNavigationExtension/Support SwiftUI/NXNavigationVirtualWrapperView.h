@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NXNavigationConfiguration, NXNavigationRouterContext;
 
-API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
 @interface NXNavigationVirtualWrapperView : UIView <NXNavigationTransitionDelegate>
 
 /// 当前 UIHostingController ContentView 的 NXNavigationRouterContext 对象

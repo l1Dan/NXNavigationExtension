@@ -29,11 +29,11 @@ import SwiftUI
 import NXNavigationExtension
 #endif
 
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public class NXNavigationVirtualView: NXNavigationVirtualWrapperView {
     
     /// 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
-    var onTransitionViewController: ((NXNavigationBackAction) -> Bool)?
+    var onBackHandler: ((NXNavigationBackAction) -> Bool)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,7 +50,7 @@ public class NXNavigationVirtualView: NXNavigationVirtualWrapperView {
     public override func nx_navigationController(_ navigationController: UINavigationController,
                                                  transitionViewController: UIViewController,
                                                  navigationBackAction: NXNavigationBackAction) -> Bool {
-        return self.onTransitionViewController?(navigationBackAction) ?? true
+        return self.onBackHandler?(navigationBackAction) ?? true
     }
     
     /// 重写基类的查找规则。
@@ -80,8 +80,7 @@ public class NXNavigationVirtualView: NXNavigationVirtualWrapperView {
     }
 }
 
-
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct NXNavigationWrapperView: UIViewRepresentable {
     public typealias UIViewType = NXNavigationVirtualView
     
@@ -92,24 +91,24 @@ public struct NXNavigationWrapperView: UIViewRepresentable {
     private var onPrepareConfiguration: ((NXNavigationConfiguration) -> Void)?
     
     /// 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
-    private var onTransitionViewController: ((NXNavigationBackAction) -> Bool)?
+    private var onBackHandler: ((NXNavigationBackAction) -> Bool)?
     
     /// 初始化方法
     /// - Parameters:
     ///   - context: 当前对象的 NXNavigationRouter.Context 实例对象
     ///   - onPrepareConfiguration: 即将应用配置到当前视图控制器的回调，执行 `setNeedsNavigationBarAppearanceUpdate` 方法时也会触发此回调。
-    ///   - onTransitionViewController: 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
+    ///   - onBackHandler: 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
     init(context: Binding<NXNavigationRouter.Context>,
          onPrepareConfiguration: ((NXNavigationConfiguration) -> Void)? = nil,
-         onTransitionViewController: ((NXNavigationBackAction) -> Bool)? = nil) {
+         onBackHandler: ((NXNavigationBackAction) -> Bool)? = nil) {
         self.virtualView.context = context.wrappedValue
         self.onPrepareConfiguration = onPrepareConfiguration
-        self.onTransitionViewController = onTransitionViewController
+        self.onBackHandler = onBackHandler
     }
     
     public func makeUIView(context: Context) -> NXNavigationVirtualView {
         virtualView.prepareConfigurationCallback = onPrepareConfiguration;
-        virtualView.onTransitionViewController = onTransitionViewController
+        virtualView.onBackHandler = onBackHandler
         return virtualView
     }
     

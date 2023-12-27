@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIViewController (NXNavigationExtension)
 
 /// For SwiftUI，拿到当前的 NXNavigationVirtualWrapperView
-@property (nonatomic, weak, nullable) __kindof NXNavigationVirtualWrapperView *nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0));
+@property (nonatomic, weak, nullable) __kindof NXNavigationVirtualWrapperView *nx_navigationVirtualWrapperView API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 
 /// 获取当前视图控制器转场周期事件
 @property (nonatomic, assign, readonly) NXNavigationTransitionState nx_navigationTransitionState;

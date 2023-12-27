@@ -28,11 +28,11 @@ import SwiftUI
 import NXNavigationExtension
 #endif
 
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public extension NXNavigationRouter {
     
     @discardableResult
-    /// 弹出当前页面。
+    /// 退出当前页面。
     /// 比如：`["/", "/index"]` called: pop()  -> `["/"]`
     /// - Parameter animated: 是否使用转场动画
     /// - Returns: 本次操作是否成功
@@ -41,7 +41,7 @@ public extension NXNavigationRouter {
     }
     
     @discardableResult
-    /// 弹出到根页面。
+    /// 退出到根页面。
     /// 比如：`["/", "/index", "/custom"]` called: `popToRoot()` -> `["/"]`
     /// - Parameter animated: 是否使用转场动画
     /// - Returns: 本次操作是否成功
@@ -50,7 +50,7 @@ public extension NXNavigationRouter {
     }
     
     @discardableResult
-    /// 弹出到 `routeName` 指定的页面。
+    /// 退出到 `routeName` 指定的页面。
     /// 比如：`["/", "/index", "/custom"]` called: `popUntil("/index")` -> `["/", "index"]`
     /// - Parameters:
     ///   - routeName: 指定跳转的路由名称
@@ -61,7 +61,7 @@ public extension NXNavigationRouter {
     }
     
     @discardableResult
-    /// 弹出到 `routeName` 指定的第一个页面。
+    /// 退出到 `routeName` 指定的第一个页面。
     /// 比如：`["/", "/index", "/index", "/custom", "/index"]` called: `popToFirstUntil("/index")` -> `["/", "index"]`
     /// - Parameters:
     ///   - routeName: 指定跳转的路由名称
@@ -72,7 +72,7 @@ public extension NXNavigationRouter {
     }
     
     @discardableResult
-    /// 弹出到 `routeName` 指定的第最后一个页面。
+    /// 退出到 `routeName` 指定的第最后一个页面。
     /// 比如：`["/", "/index", "/index", "/custom", "/index"]` called: `popToLastUntil("/index")` -> `["/", "/index", "/index"]`
     /// - Parameters:
     ///   - routeName: 指定跳转的路由名称
@@ -84,8 +84,7 @@ public extension NXNavigationRouter {
     
 }
 
-
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public extension View {
     
     /// 通过 View 添加 `NXNavigationBar` 的包装对象，提供当前导航栏的外观的便利。
@@ -119,7 +118,7 @@ public extension View {
     ///     }
     /// }
     func useNXNavigationView(context: Binding<NXNavigationRouter.Context>) -> some View {
-        useNXNavigationView(context: context, onPrepareConfiguration: nil, onTransitionViewController: nil)
+        useNXNavigationView(context: context, onPrepareConfiguration: nil, onBackHandler: nil)
     }
     
     /// 通过 View 添加 `NXNavigationBar` 的包装对象，提供当前导航栏的外观的便利。
@@ -146,11 +145,11 @@ public extension View {
     ///     }
     /// }
     func useNXNavigationView(onPrepareConfiguration: @escaping (NXNavigationConfiguration) -> Void) -> some View {
-        useNXNavigationView(context: .constant(NXNavigationRouter.Context(routeName: "")), onPrepareConfiguration: onPrepareConfiguration, onTransitionViewController: nil)
+        useNXNavigationView(context: .constant(NXNavigationRouter.Context(routeName: "")), onPrepareConfiguration: onPrepareConfiguration, onBackHandler: nil)
     }
     
     /// 通过 View 添加 `NXNavigationBar` 的包装对象，提供当前导航栏的外观的便利。
-    /// - Parameter onTransitionViewController: 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
+    /// - Parameter onBackHandler: 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
     /// 执行 `NXNavigationRouter.of(context).nx.\pop()\popToRoot()\popUntil("routeName")\popToFirstUntil("routeName")\popToLastUntil("routeName")` 等方法后也会触发这个代理回调
     /// - Returns: 返回高度为 0，宽度为 0，并且是隐藏的 View
     ///
@@ -166,7 +165,7 @@ public extension View {
     ///             } label: {
     ///                 Text("NXNavigationExtension")
     ///                     .padding()
-    ///                     .useNXNavigationView(onTransitionViewController: { action in
+    ///                     .useNXNavigationView(onBackHandler: { action in
     ///                         switch action {
     ///                         case .clickBackButton, .clickBackButtonMenu, .callingNXPopMethod, .interactionGesture:
     ///                             /// Do something...
@@ -180,23 +179,23 @@ public extension View {
     ///         }
     ///     }
     /// }
-    func useNXNavigationView(onTransitionViewController: @escaping (NXNavigationBackAction) -> Bool) -> some View {
-        useNXNavigationView(context: .constant(NXNavigationRouter.Context(routeName: "")), onPrepareConfiguration: nil, onTransitionViewController: onTransitionViewController)
+    func useNXNavigationView(onBackHandler: @escaping (NXNavigationBackAction) -> Bool) -> some View {
+        useNXNavigationView(context: .constant(NXNavigationRouter.Context(routeName: "")), onPrepareConfiguration: nil, onBackHandler: onBackHandler)
     }
     
     /// 通过 View 添加 `NXNavigationBar` 的包装对象，提供当前导航栏的外观的便利。
     /// - Parameters:
     ///   - context: 当前对象的 NXNavigationRouter.Context 实例对象
     ///   - onPrepareConfiguration: 即将应用配置到当前视图控制器的回调，执行 `setNeedsNavigationBarAppearanceUpdate` 方法时也会触发此回调。
-    ///   - onTransitionViewController: 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
+    ///   - onBackHandler: 使用手势滑动返回或点击系统返回按钮过程中可以拦截或中断返回继而执行其他操作
     ///   执行 `NXNavigationRouter.of(context).nx.\pop()\popToRoot()\popUntil("routeName")\popToFirstUntil("routeName")\popToLastUntil("routeName")` 等方法后也会触发这个代理回调
     /// - Returns: 返回高度为 0，宽度为 0，并且是隐藏的 View
     func useNXNavigationView(context: Binding<NXNavigationRouter.Context>,
                              onPrepareConfiguration: ((NXNavigationConfiguration) -> Void)? = nil,
-                             onTransitionViewController: ((NXNavigationBackAction) -> Bool)? = nil) -> some View {
+                             onBackHandler: ((NXNavigationBackAction) -> Bool)? = nil) -> some View {
         let view = NXNavigationWrapperView(context: context,
                                            onPrepareConfiguration: onPrepareConfiguration,
-                                           onTransitionViewController: onTransitionViewController)
+                                           onBackHandler: onBackHandler)
             .frame(width: 0, height: 0)
         
         return ZStack {

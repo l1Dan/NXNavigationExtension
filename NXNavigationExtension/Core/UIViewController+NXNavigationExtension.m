@@ -243,7 +243,7 @@
 }
 
 - (void)nx_checkNavigationVirtualWrapperViewState {
-    if (@available(iOS 13.0, *)) {
+    if (@available(iOS 14.0, *)) {
         self.nx_navigationVirtualWrapperViewNotFound = self.nx_navigationVirtualWrapperView ? NO : YES;
     } else {
         self.nx_navigationVirtualWrapperViewNotFound = YES;
@@ -268,7 +268,7 @@
 - (void)nx_configureNavigationVirtualWrapperView {
     if (self.nx_navigationVirtualWrapperViewNotFound) return;
     
-    if (@available(iOS 13.0, *)) {
+    if (@available(iOS 14.0, *)) {
         NXNavigationVirtualWrapperViewFilterCallback callback = self.navigationController.nx_filterNavigationVirtualWrapperViewCallback;
         if (callback && self.nx_canSetupNavigationBar && !self.nx_navigationVirtualWrapperViewInitialize) {
             self.nx_navigationVirtualWrapperView = callback(self);
@@ -416,7 +416,7 @@
 }
 
 - (void)nx_executePrepareConfigurationNavigationVirtualWrapperViewCallback {
-    if (@available(iOS 13.0, *)) {
+    if (@available(iOS 14.0, *)) {
         if ([self nx_canSetupNavigationBar] && self.nx_navigationVirtualWrapperViewInitialize) {
             NXViewControllerPrepareConfigurationCallback callback = self.nx_navigationVirtualWrapperView.prepareConfigurationCallback;
             if (callback) {
@@ -428,11 +428,11 @@
 
 #pragma mark - Getter & Setter
 
-- (NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
+- (NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) {
     return objc_getAssociatedObject(self, _cmd);
 }
 
-- (void)setNx_navigationVirtualWrapperView:(NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(ios(13.0)) {
+- (void)setNx_navigationVirtualWrapperView:(NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) {
     nx_navigationVirtualWrapperView.context.hostingController = self;
     self.nx_navigationTransitionDelegate = (id<NXNavigationTransitionDelegate>)nx_navigationVirtualWrapperView;
     objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperView), nx_navigationVirtualWrapperView, OBJC_ASSOCIATION_ASSIGN);
