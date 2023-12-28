@@ -91,7 +91,7 @@ class CustomTableViewController: BaseViewController, UITableViewDelegate, UITabl
 }
 
 extension BaseTableViewController: NXNavigationTransitionDelegate {
-    func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationTransitionState state: NXNavigationTransitionState) {
-        print("\(type(of: viewController)) - \(state.description)")
+    func nx_navigationTransition(_ transitionViewController: UIViewController, navigationTransitionState state: NXNavigationTransitionState) {
+        print("\(type(of: transitionViewController)) - \(state.description)")
     }
 }

@@ -173,19 +173,17 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
 }
 
 extension ViewController06_WebView {
-    
     override var nx_navigationBarBackgroundColor: UIColor? {
         return randomColor
     }
+}
 
-    // MARK: - NXNavigationTransitionDelegate
-
-    func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
+extension ViewController06_WebView {
+    func nx_navigationTransition(_ transitionViewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
         if action != .interactionGesture && webView.canGoBack {
             webView.goBack()
             return false
         }
         return true
     }
-
 }

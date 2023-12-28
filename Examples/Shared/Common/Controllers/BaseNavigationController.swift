@@ -90,8 +90,8 @@ extension BaseViewController: NXNavigationTransitionDelegate {
         return UIColor.customColor { .lightGray } darkModeColor: { .lightGray.withAlphaComponent(0.65) }
     }
     
-    func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationTransitionState state: NXNavigationTransitionState) {
-        print("\(type(of: viewController)) - \(state)")
+    func nx_navigationTransition(_ transitionViewController: UIViewController, navigationTransitionState state: NXNavigationTransitionState) {
+        print("\(type(of: transitionViewController)) - \(state)")
     }
     
 }

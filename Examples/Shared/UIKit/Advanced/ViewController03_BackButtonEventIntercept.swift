@@ -114,21 +114,22 @@ extension ViewController03_BackButtonEventIntercept {
     override var nx_useSystemBackButton: Bool {
         return true
     }
-    
-    func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
-        print("navigationBackAction: \(action), viewController: \(viewController)")
+}
+
+extension ViewController03_BackButtonEventIntercept {
+    func nx_navigationTransition(_ transitionViewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
+        print("navigationBackAction: \(action), viewController: \(transitionViewController)")
         
         if selectedItemType == .clickBackButton && action == .clickBackButton ||
             selectedItemType == .clickBackButtonMenu && action == .clickBackButtonMenu ||
             selectedItemType == .interactionGesture && action == .interactionGesture ||
             selectedItemType == .callingNXPopMethod && action == .callingNXPopMethod ||
             selectedItemType == .all {
-            showAlertController(in: viewController)
+            showAlertController(in: transitionViewController)
             return false
         }
         
         return true
     }
-
 }
 
