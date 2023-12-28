@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NXNavigationExtensionSwiftUI
 
 struct View09_FullScreenColor: View {
     private let item: NavigationFeatureItem

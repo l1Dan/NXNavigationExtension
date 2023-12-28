@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NXNavigationExtensionSwiftUI
 
 struct View04_LikeSystemNavigationBar: View {
     private let item: NavigationFeatureItem

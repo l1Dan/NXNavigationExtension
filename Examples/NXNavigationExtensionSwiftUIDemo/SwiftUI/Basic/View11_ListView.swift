@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NXNavigationExtensionSwiftUI
 
 struct View11_ListView: View {
     private let item: NavigationFeatureItem

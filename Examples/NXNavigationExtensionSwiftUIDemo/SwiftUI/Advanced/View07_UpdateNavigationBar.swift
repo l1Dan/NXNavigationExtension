@@ -7,6 +7,7 @@
 
 import SwiftUI
 import NXNavigationExtension
+import NXNavigationExtensionSwiftUI
 
 struct View07_UpdateNavigationBar: View {
     @State private var context: NXNavigationRouter.Context

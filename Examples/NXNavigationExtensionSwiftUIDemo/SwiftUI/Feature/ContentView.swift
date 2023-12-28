@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NXNavigationExtensionSwiftUI
 
 struct ContentView: View {
     let sections = NavigationFeatureSection.sections(for: false)

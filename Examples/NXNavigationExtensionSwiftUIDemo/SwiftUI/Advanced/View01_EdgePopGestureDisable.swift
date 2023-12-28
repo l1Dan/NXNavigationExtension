@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NXNavigationExtensionSwiftUI
 
 struct View01_EdgePopGestureDisable: View {
     private let randomDark = UIColor.randomDark
@@ -22,7 +23,11 @@ struct View01_EdgePopGestureDisable: View {
             .useNXNavigationView(onPrepareConfiguration: { configuration in
                 let userInterfaceStyle = configuration.viewControllerPreferences.traitCollection?.userInterfaceStyle ?? .light
                 configuration.navigationBarAppearance.backgroundColor = userInterfaceStyle == .dark ? randomDark : randomLight
-                configuration.viewControllerPreferences.disableInteractivePopGesture = true
+            }, onBackActionHandler: { action in
+                if case .interactionGesture = action {
+                    return false
+                }
+                return true
             })
     }
 }

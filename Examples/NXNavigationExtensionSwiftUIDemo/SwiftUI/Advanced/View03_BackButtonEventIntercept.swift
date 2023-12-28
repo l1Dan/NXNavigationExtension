@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import NXNavigationExtension
+import NXNavigationExtensionSwiftUI
 
 struct View03_BackButtonEventIntercept: View {
     @Environment(\.colorScheme) private var colorScheme
@@ -66,7 +66,7 @@ struct View03_BackButtonEventIntercept: View {
             configuration.navigationBarAppearance.tintColor = .white
             configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             configuration.navigationBarAppearance.useSystemBackButton = true
-        }, onBackHandler: { action in
+        }, onBackActionHandler: { action in
             if selectedItemType == .clickBackButton && action == .clickBackButton ||
                 selectedItemType == .clickBackButtonMenu && action == .clickBackButtonMenu ||
                 selectedItemType == .interactionGesture && action == .interactionGesture ||

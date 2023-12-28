@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NXNavigationExtensionSwiftUI
 
 struct View06_ShadowImage: View {
     private let item: NavigationFeatureItem

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import NXNavigationExtension
+import NXNavigationExtensionSwiftUI
 
 private enum PopType: String {
     case pop = "Pop"

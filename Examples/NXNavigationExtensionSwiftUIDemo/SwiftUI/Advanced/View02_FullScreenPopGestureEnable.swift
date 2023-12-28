@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NXNavigationExtensionSwiftUI
 
 struct View02_FullScreenPopGestureEnable: View {
     private let randomDark = UIColor.randomDark

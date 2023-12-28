@@ -31,8 +31,8 @@
 
 // Advanced
 "advanced" = "高级功能";
-"edgePopGestureDisable" = "禁用边缘手势滑动返回";
-"fullScreenPopGestureEnable" = "启用全屏手势滑动返回";
+"edgePopGestureDisable" = "禁用右滑手势返回";
+"fullScreenPopGestureEnable" = "启用全屏右滑手势返回";
 "backButtonEventIntercept" = "导航栏返回事件拦截";
 "customNavigationBar" = "完全自定义导航栏";
 "navigationBarDisable" = "导航栏点击事件穿透到底部视图";

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NXNavigationExtensionSwiftUI
 
 struct View07_CustomBackImage: View {
     private let item: NavigationFeatureItem

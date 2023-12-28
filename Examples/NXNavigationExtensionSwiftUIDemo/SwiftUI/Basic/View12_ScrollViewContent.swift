@@ -8,6 +8,7 @@
 //import NXNavigationExtensionSwiftUI
 
 import SwiftUI
+import NXNavigationExtensionSwiftUI
 
 struct View12_ScrollViewContent: View {
     private let item: NavigationFeatureItem

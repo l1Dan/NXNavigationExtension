@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NXNavigationExtensionSwiftUI
 
 struct View03_Transparent: View {
     private let item: NavigationFeatureItem

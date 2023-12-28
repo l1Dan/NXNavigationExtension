@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NXNavigationExtensionSwiftUI
 
 struct View05_NavigationBarDisable: View {
     private let item: NavigationFeatureItem

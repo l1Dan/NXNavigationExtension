@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NXNavigationExtensionSwiftUI
 
 struct View02_BackgroundImage: View {
     @State private var isPresented = false

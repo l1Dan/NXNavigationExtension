@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NXNavigationExtensionSwiftUI
 
 struct FakeNavigationView<Content>: View where Content : View {
     @Environment(\.presentationMode) private var presentationMode;

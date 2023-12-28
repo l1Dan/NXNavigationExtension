@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WebKit
+import NXNavigationExtensionSwiftUI
 
 struct WebViewWrapperView: UIViewRepresentable {
     typealias UIViewType = WKWebView
