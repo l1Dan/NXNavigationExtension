@@ -194,6 +194,8 @@
                 [selfObject nx_updateNavigationBarSubviewState];
                 // perf: 当前 ViewController 以及展示完成，可以检查 NXNavigationVirtualWrapperView 是否存在
                 [selfObject nx_checkNavigationVirtualWrapperViewState];
+                // fixed: 从其他页面返回时全屏手势无法生效问题
+                [selfObject.navigationController nx_configureInteractivePopGestureRecognizerWithViewController:selfObject];
             }
         });
         

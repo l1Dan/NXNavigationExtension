@@ -148,8 +148,6 @@
                 if (selfObject.viewControllers.count > 0) {
                     [viewController nx_configureNavigationBarWithNavigationController:selfObject];
                 }
-                // 重新检查返回手势是否动态修改
-                [selfObject nx_configureInteractivePopGestureRecognizerWithViewController:viewController];
                 
                 UIViewController *appearingViewController = viewController;
                 [selfObject nx_transitionViewController:appearingViewController navigationTransitionState:NXNavigationTransitionStateWillPush];
