@@ -89,8 +89,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 将 nx_navigationBarBackgroundColor 设置为 [UIColor clearColor]，可以实现类似系统导航栏的模糊效果
 @property (nonatomic, assign, readonly) BOOL nx_useBlurNavigationBar;
 
-/// 是否禁用边缘滑动返回手势；默认 NO
-@property (nonatomic, assign, readonly) BOOL nx_disableInteractivePopGesture;
+/// 过期：是否禁用边缘滑动返回手势；默认 NO
+/// 使用 `NXNavigationTransitionDelegate` 代理方法 `nx_navigationController:transitionViewController:navigationBackAction`替代
+/// SwiftUI 使用 `useNXNavigationView(onBackActionHandler:)` 替代
+@property (nonatomic, assign, readonly) BOOL nx_disableInteractivePopGesture API_DEPRECATED("No longer supported.)", ios(2.0, 2.0));
 
 /// 是否启用全屏返回；默认 NO
 @property (nonatomic, assign, readonly) BOOL nx_enableFullScreenInteractivePopGesture;
