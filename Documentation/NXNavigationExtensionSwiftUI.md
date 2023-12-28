@@ -89,7 +89,7 @@ struct ContentView: View {
 
 ## 🍻 基本功能
 
-### 修改返回按钮箭头颜色
+#### 修改返回按钮箭头颜色
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Advanced/View07_UpdateNavigationBar.swift)
 
@@ -100,7 +100,7 @@ Text("Destination")
     })
 ```
 
-## 修改系统返回按钮文字
+#### 修改系统返回按钮文字
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Advanced/View07_UpdateNavigationBar.swift)
 
@@ -112,7 +112,7 @@ Text("Destination")
     })
 ```
 
-## 修改导航栏标题颜色
+#### 修改导航栏标题颜色
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Advanced/View07_UpdateNavigationBar.swift)
 
@@ -176,7 +176,7 @@ Text("Destination")
     })
 ```
 
-### 设置导航栏底部阴影颜色
+#### 设置导航栏底部阴影颜色
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View05_ShadowColor.swift)
 
@@ -188,7 +188,7 @@ Text("Destination")
     })
 ```
 
-### 设置导航栏底部阴影图片
+#### 设置导航栏底部阴影图片
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View06_ShadowImage.swift)
 
@@ -200,7 +200,7 @@ Text("Destination")
     })
 ```
 
-### 自定义返回按钮图片
+#### 自定义返回按钮图片
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View07_CustomBackImage.swift)
 
@@ -211,7 +211,7 @@ Text("Destination")
     })
 ```
 
-### 自定义返回按钮
+#### 自定义返回按钮
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View08_CustomBackView.swift)
 
@@ -226,18 +226,21 @@ Text("Destination")
 
 ## 🍺 高级功能
 
-#### 禁用滑动返回手势
+#### 禁用右滑手势返回
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Advanced/View01_EdgePopGestureDisable.swift)
 
 ```swift
 Text("Destination")
-    .useNXNavigationView(onPrepareConfiguration: { configuration in
-        configuration.viewControllerPreferences.disableInteractivePopGesture = true
+    .useNXNavigationView(onBackActionHandler: { action in
+        if case .interactionGesture = action {
+            return false
+        }
+        return true
     })
 ```
 
-#### 启用全屏滑动返回手势
+#### 启用全屏右滑手势返回
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View02_FullScreenPopGestureEnable.swift)
 
@@ -268,7 +271,7 @@ Text("Destination")
 
 ```swift
 Text("Destination")
-    .useNXNavigationView(onBackHandler: { action in
+    .useNXNavigationView(onBackActionHandler: { action in
         if selectedItemType == .clickBackButton && action == .clickBackButton ||
             selectedItemType == .clickBackButtonMenu && action == .clickBackButtonMenu ||
             selectedItemType == .interactionGesture && action == .interactionGesture ||
@@ -281,7 +284,7 @@ Text("Destination")
     })
 ```
 
-### SwiftUI 路由
+#### SwiftUI 路由
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Basic/View08_NavigationRouter.swift)
 
@@ -307,9 +310,9 @@ struct DestinationView: View {
 ```
 
 1. 需要注意的是 `NXNavigationRouter.of(context)` 和 `NXNavigationRouter.of(context).nx` 用于调用系统 `pop` 和框架 `nx_pop` 系列方法
-2. 使用 `NXNavigationRouter.of(context).nx` 方法退出页面时会触发 `onBackHandler` 的回调。
+2. 使用 `NXNavigationRouter.of(context).nx` 方法退出页面时会触发 `onBackActionHandler` 的回调。
 
-### 导航栏点击事件穿透到底部
+#### 导航栏点击事件穿透到底部
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Advanced/View05_NavigationBarDisable.swift)
 
@@ -320,7 +323,7 @@ Text("Destination")
     })
 ```
 
-### 更新导航栏样式
+#### 更新导航栏样式
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Advanced/View07_UpdateNavigationBar.swift)
 
@@ -332,7 +335,7 @@ Button {
 }
 ```
 
-### 长按返回按钮显示菜单功能
+#### 长按返回按钮显示菜单功能
 
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionSwiftUIDemo/SwiftUI/Advanced/View08_NavigationRouter.swift)
 

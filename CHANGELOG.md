@@ -1,5 +1,10 @@
 # CHANGELOG.md
 
+## 4.2.2
+
+1. 过期 `disableInteractivePopGesture` 和 `nx_disableInteractivePopGesture` 属性，功能重复，可使用 `NXNavigationTransitionDelegate` 代理方法 `nx_navigationController:transitionViewController:navigationBackAction` 替代。
+2. SwiftUI 接口优化，移除部分接口。
+
 ## 4.2.1
 
 修复：页面全屏手势开启后从其他页面返回时，全屏手势失效问题。
