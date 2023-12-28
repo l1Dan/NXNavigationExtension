@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NXNavigationExtension
 
 class FullPopGesture_ScrollView: BaseViewController, UIScrollViewDelegate {
     
@@ -31,8 +32,7 @@ class FullPopGesture_ScrollView: BaseViewController, UIScrollViewDelegate {
         }
     }
     
-    private var disableInteractivePopGesture = false
-    private var enableFullScreenInteractivePopGesture = true
+    private var canBackAction = true
     
     private func setupContentWithSize(_ size: CGSize) {
         guard imageNames.count > 0 else { return }
@@ -71,18 +71,12 @@ class FullPopGesture_ScrollView: BaseViewController, UIScrollViewDelegate {
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
-        
-        // Step1: if use screen edge pop gesture
-//        disableInteractivePopGesture = false
-        enableFullScreenInteractivePopGesture = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if let navigationController = navigationController {
-            // Step2: if use screen edge pop gesture
-//            scrollView.panGestureRecognizer.require(toFail: navigationController.interactivePopGestureRecognizer)
             scrollView.panGestureRecognizer.require(toFail: navigationController.nx_fullScreenPopGestureRecognizer)
         }
     }
@@ -96,13 +90,9 @@ class FullPopGesture_ScrollView: BaseViewController, UIScrollViewDelegate {
     // MARK: - UIScrollViewDelegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x <= 0 {
-            // Step4: if use screen edge pop gesture
-//            disableInteractivePopGesture = false
-            enableFullScreenInteractivePopGesture = true
+            canBackAction = true
         } else {
-            // Step5: if use screen edge pop gesture
-//            disableInteractivePopGesture = true
-            enableFullScreenInteractivePopGesture = false
+            canBackAction = false
         }
     }
 
@@ -118,13 +108,17 @@ extension FullPopGesture_ScrollView {
         return .clear
     }
     
-    // Step3: if use screen edge pop gesture
-//    override var nx_disableInteractivePopGesture: Bool {
-//        return disableInteractivePopGesture
-//    }
-    
     override var nx_enableFullScreenInteractivePopGesture: Bool {
-        return enableFullScreenInteractivePopGesture
+        return true
     }
     
+}
+
+extension FullPopGesture_ScrollView {
+    func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
+        if case .interactionGesture = action {
+            return canBackAction
+        }
+        return true
+    }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NXNavigationExtension
 
 class FullPopGesture_PageViewController: BaseViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
@@ -20,8 +21,7 @@ class FullPopGesture_PageViewController: BaseViewController, UIPageViewControlle
     private var pageViewControllers: [FullPopGesture_ScrollView] = []
     private var imageNames: [String] = []
     
-    private var disableInteractivePopGesture = false
-    private var enableFullScreenInteractivePopGesture = true
+    private var canBackAction = true
     
     private var currentViewController: FullPopGesture_ScrollView?
     
@@ -55,14 +55,8 @@ class FullPopGesture_PageViewController: BaseViewController, UIPageViewControlle
 
         navigationItem.title = "(UIPageViewController)\(NSLocalizedString("resolveGestureConflicts", comment: ""))"
 
-        // Step1: if use screen edge pop gesture
-//        disableInteractivePopGesture = false
-        enableFullScreenInteractivePopGesture = true
-        
         for subview in pageViewController.view.subviews {
             if let subview = subview as? UIScrollView, let navigationController = navigationController {
-                // Step2: if use screen edge pop gesture
-//                subview.panGestureRecognizer.require(toFail: navigationController.interactivePopGestureRecognizer)
                 subview.panGestureRecognizer.require(toFail: navigationController.nx_fullScreenPopGestureRecognizer)
             }
         }
@@ -102,10 +96,7 @@ class FullPopGesture_PageViewController: BaseViewController, UIPageViewControlle
         
         guard let lhs = pageViewController.viewControllers?.first,
               let rhs = pageViewControllers.first else { return }
-        
-        // Step4: if use screen edge pop gesture
-//        disableInteractivePopGesture = !(lhs == rhs)
-        enableFullScreenInteractivePopGesture = (lhs == rhs)
+        canBackAction = (lhs == rhs)
     }
 
 }
@@ -119,13 +110,16 @@ extension FullPopGesture_PageViewController {
         return .clear
     }
     
-    // Step3: if use screen edge pop gesture
-//    override var nx_disableInteractivePopGesture: Bool {
-//        return disableInteractivePopGesture
-//    }
-    
     override var nx_enableFullScreenInteractivePopGesture: Bool {
-        return enableFullScreenInteractivePopGesture
+        return true
     }
-    
+}
+
+extension FullPopGesture_PageViewController {
+    func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
+        if case .interactionGesture = action {
+            return canBackAction
+        }
+        return true
+    }
 }
