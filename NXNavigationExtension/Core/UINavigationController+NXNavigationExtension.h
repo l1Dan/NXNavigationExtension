@@ -64,28 +64,24 @@ typedef NS_ENUM(NSUInteger, NXNavigationBackAction) {
 };
 
 
-typedef void (^NXNavigationTransitionStateHandler) (UINavigationController *, UIViewController *, NXNavigationTransitionState);
-typedef BOOL (^NXNavigationBackActionHandler) (UINavigationController *, UIViewController *, NXNavigationBackAction);
+typedef void (^NXNavigationTransitionStateHandler) (UIViewController *, NXNavigationTransitionState);
+typedef BOOL (^NXNavigationBackActionHandler) (UIViewController *, NXNavigationBackAction);
 
 @protocol NXNavigationTransitionDelegate <NSObject>
 
 @optional
 
 /// 视图控制器转场状态
-/// @param navigationController 当前导航控制器
-/// @param viewController 转场视图控制器
+/// @param transitionViewController 转场视图控制器
 /// @param state 视图控制器转场状态
-- (void)nx_navigationController:(__kindof UINavigationController *)navigationController
-       transitionViewController:(__kindof UIViewController *)viewController
+- (void)nx_navigationTransition:(__kindof UIViewController *)transitionViewController
       navigationTransitionState:(NXNavigationTransitionState)state;
 
 /// 拦截视图控制器返回操作
-/// @param navigationController 当前导航控制器
-/// @param viewController 转场视图控制器
+/// @param transitionViewController 转场视图控制器
 /// @param action 试图控制器返回事件
 /// @return `YES` 表示继续返回操作；`NO` 表示中断返回操作
-- (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController
-       transitionViewController:(__kindof UIViewController *)viewController
+- (BOOL)nx_navigationTransition:(__kindof UIViewController *)transitionViewController
            navigationBackAction:(NXNavigationBackAction)action;
 
 @end

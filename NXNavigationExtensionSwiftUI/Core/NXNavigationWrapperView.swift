@@ -47,10 +47,9 @@ public class NXNavigationVirtualView: NXNavigationVirtualWrapperView {
     }
     
     /// 重写基类的代理方法。
-    public override func nx_navigationController(_ navigationController: UINavigationController,
-                                                 transitionViewController: UIViewController,
-                                                 navigationBackAction: NXNavigationBackAction) -> Bool {
-        return self.onBackActionHandler?(navigationBackAction) ?? true
+    public override func nx_navigationTransition(_ transitionViewController: UIViewController, 
+                                                 navigationBackAction action: NXNavigationBackAction) -> Bool {
+        return self.onBackActionHandler?(action) ?? true
     }
     
     /// 重写基类的查找规则。

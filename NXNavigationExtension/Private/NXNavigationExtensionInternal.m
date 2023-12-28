@@ -489,16 +489,14 @@
 - (BOOL)nx_preparePopViewController:(__kindof UIViewController *)currentViewController
           destinationViewController:(__kindof UIViewController *)destinationViewController
                navigationBackAction:(NXNavigationBackAction)action {
-    if ([currentViewController.nx_navigationTransitionDelegate respondsToSelector:@selector(nx_navigationController:transitionViewController:navigationBackAction:)]) {
-        return [currentViewController.nx_navigationTransitionDelegate nx_navigationController:self
-                                                                     transitionViewController:destinationViewController
+    if ([currentViewController.nx_navigationTransitionDelegate respondsToSelector:@selector(nx_navigationTransition:navigationBackAction:)]) {
+        return [currentViewController.nx_navigationTransitionDelegate nx_navigationTransition:destinationViewController 
                                                                          navigationBackAction:action];
-    } else if ([currentViewController respondsToSelector:@selector(nx_navigationController:transitionViewController:navigationBackAction:)]) {
-        return [(id<NXNavigationTransitionDelegate>)currentViewController nx_navigationController:self
-                                                                         transitionViewController:destinationViewController
+    } else if ([currentViewController respondsToSelector:@selector(nx_navigationTransition:navigationBackAction:)]) {
+        return [(id<NXNavigationTransitionDelegate>)currentViewController nx_navigationTransition:destinationViewController
                                                                              navigationBackAction:action];
     } else if (currentViewController.navigationItem.nx_backActionHandler) {
-        return currentViewController.navigationItem.nx_backActionHandler(self, destinationViewController, action);
+        return currentViewController.navigationItem.nx_backActionHandler(destinationViewController, action);
     }
     return YES;
 }
@@ -532,10 +530,10 @@
           navigationTransitionState:(NXNavigationTransitionState)state {
     appearingViewController.nx_navigationTransitionState = state;
     
-    if ([appearingViewController respondsToSelector:@selector(nx_navigationController:transitionViewController:navigationTransitionState:)]) {
-        [(id<NXNavigationTransitionDelegate>)appearingViewController nx_navigationController:self transitionViewController:appearingViewController navigationTransitionState:state];
+    if ([appearingViewController respondsToSelector:@selector(nx_navigationTransition:navigationTransitionState:)]) {
+        [(id<NXNavigationTransitionDelegate>)appearingViewController nx_navigationTransition:appearingViewController navigationTransitionState:state];
     } else if (appearingViewController.navigationItem.nx_transitionStateHandler) {
-        appearingViewController.navigationItem.nx_transitionStateHandler(self, appearingViewController, state);
+        appearingViewController.navigationItem.nx_transitionStateHandler(appearingViewController, state);
     }
 }
 

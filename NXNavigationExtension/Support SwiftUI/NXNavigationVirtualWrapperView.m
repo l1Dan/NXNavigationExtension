@@ -26,8 +26,7 @@
 
 @implementation NXNavigationVirtualWrapperView
 
-- (BOOL)nx_navigationController:(__kindof UINavigationController *)navigationController
-       transitionViewController:(__kindof UIViewController *)viewController
+- (BOOL)nx_navigationTransition:(__kindof UIViewController *)transitionViewController
            navigationBackAction:(NXNavigationBackAction)action {
     return YES;
 }
