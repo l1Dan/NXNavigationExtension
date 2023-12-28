@@ -209,7 +209,7 @@ override var nx_backButtonCustomView: UIView? {
 📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/Shared/UIKit/Advanced/ViewController01_EdgePopGestureDisable.swift)
 
 ```swift
-func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
+func nx_navigationTransition(_ transitionViewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
     if case .interactionGesture = action {
         return false
     }
@@ -291,7 +291,7 @@ override var childForStatusBarHidden: UIViewController? {
 4. `NXNavigationBackActionInteractionGesture`: 使用手势交互返回事件拦截。
 
 ```swift
-func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
+func nx_navigationTransition(_ transitionViewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
     switch action {
     case .clickBackButton:
         // Do something
@@ -319,7 +319,7 @@ func nx_navigationController(_ navigationController: UINavigationController, tra
 需要遵守协议 `<NXNavigationTransitionDelegate>`，实现代理方法：
 
 ```swift
-func nx_navigationController(_ navigationController: UINavigationController, transitionViewController viewController: UIViewController, navigationTransitionState state: NXNavigationTransitionState) {
+func nx_navigationTransition(_ transitionViewController: UIViewController, navigationTransitionState state: NXNavigationTransitionState) {
     switch state {
     case .unspecified: print("Unspecified")
     case .willPush: print("WillPush")
