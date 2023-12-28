@@ -1,5 +1,9 @@
 # CHANGELOG.md
 
+## 4.2.1
+
+修复：页面全屏手势开启后从其他页面返回时，全屏手势失效问题。
+
 ## 4.2.0
 
 1. 更新 NXNavigationExtensionSwiftUI 最低支持版本为 14.0。
