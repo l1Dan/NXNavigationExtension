@@ -14,6 +14,15 @@ class ViewController11_TableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier:ViewController11_TableViewController.reuseIdentifier)
+        
+        guard navigationItem.leftBarButtonItem == nil else { return }
+        let item = UIBarButtonItem(image: UIImage(named: "NavigationBarClose"), style: .plain, target: self, action: #selector(clickCloseDrawerButtonItem(_:)))
+        item.tintColor = UIColor.customColor(lightModeColor: {
+            return .black
+        }, darkModeColor: {
+            return .white
+        })
+        navigationItem.rightBarButtonItem = item
     }
 
     // MARK: - Table view data source
@@ -35,7 +44,11 @@ class ViewController11_TableViewController: BaseTableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         navigationController?.pushViewController(ViewController07_UpdateNavigationBar(), animated: true)
     }
-
+    
+    @objc
+    private func clickCloseDrawerButtonItem(_ item: UIBarButtonItem?) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 extension ViewController11_TableViewController {
@@ -44,4 +57,12 @@ extension ViewController11_TableViewController {
         return UIColor.customColor { .lightGray } darkModeColor: { .lightGray.withAlphaComponent(0.65) }
     }
     
+}
+
+extension ViewController11_TableViewController: SlidingInteractiveNavigation {
+    var swipeDirectionAction: SlidingSwipeDirectionAction {
+        return .right { [weak self] in
+            self?.clickCloseDrawerButtonItem(nil)
+        }
+    }
 }

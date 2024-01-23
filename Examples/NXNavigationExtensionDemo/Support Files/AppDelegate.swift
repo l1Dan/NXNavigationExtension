@@ -28,10 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     
     private func setupConfiguration() {
-        // For FeatureNavigationController
+        // For SlidingNavigationController
         let featureConfiguration = NXNavigationConfiguration.default
         featureConfiguration.navigationBarAppearance.tintColor = .customTitle
-        featureConfiguration.registerNavigationControllerClasses([FeatureNavigationController.self]) { navigationController, configuration in
+        featureConfiguration.registerNavigationControllerClasses([SlidingNavigationController.self]) { navigationController, configuration in
             print("UIKit(navigationController):", navigationController, configuration)
             navigationController.nx_prepareConfigureViewControllersCallback { viewController, configuration in
                 print("UIKit(viewController):", viewController, configuration)

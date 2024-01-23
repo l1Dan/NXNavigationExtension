@@ -15,7 +15,7 @@ class SplitAdaptiveViewController: UISplitViewController {
         let tabBarController = MainTabBarController()
         let viewController = ViewController01_BackgroundColor()
         viewController.navigationItem.title = NavigationFeatureSection.sections(for: true).first?.items.first?.title;
-        viewControllers = [tabBarController, FeatureNavigationController(rootViewController: viewController)]
+        viewControllers = [tabBarController, SlidingNavigationController(rootViewController: viewController)]
     }
     
     required init?(coder: NSCoder) {

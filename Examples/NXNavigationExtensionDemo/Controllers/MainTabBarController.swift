@@ -26,7 +26,7 @@ class MainTabBarController: UITabBarController {
         // fix: iOS Modal -> Dismiss -> Push, TabBar BUG
         tabBar.isTranslucent = false
         updateOtherNavigationControllerBorderStyle()
-        viewControllers = [featureNavigationController, otherNavigationController]
+        viewControllers = [slidingNavigationController, otherNavigationController]
         
         tabBar.tintColor = UIColor.customColor { .customDarkGray } darkModeColor: { .customLightGray }
     }
@@ -38,36 +38,36 @@ class MainTabBarController: UITabBarController {
         }
     }
     
-    private lazy var featureNavigationController: FeatureNavigationController = {
-        var featureTableViewController = FeatureTableViewController(style: .grouped)
+    private lazy var slidingNavigationController: SlidingNavigationController = {
+        var viewController = FeatureTableViewController(style: .grouped)
         if #available(iOS 13.0, *) {
-            featureTableViewController = FeatureTableViewController(style: .insetGrouped)
+            viewController = FeatureTableViewController(style: .insetGrouped)
         }
         
         let customNormal = UIImage(named: "TabBarCustomNormal")
         let customSelected = UIImage(named: "TabBarCustomSelected")
         
-        let featureNavigationController = FeatureNavigationController(rootViewController: featureTableViewController)
-        featureTableViewController.navigationItem.title = "NXNavigationBar"
-        featureNavigationController.tabBarItem = UITabBarItem(title: "Custom", image: customNormal, selectedImage: customSelected)
-        return featureNavigationController
+        let navigationController = SlidingNavigationController(rootViewController: viewController)
+        viewController.navigationItem.title = "NXNavigationBar"
+        navigationController.tabBarItem = UITabBarItem(title: "Custom", image: customNormal, selectedImage: customSelected)
+        return navigationController
     }()
     
     private lazy var otherNavigationController: OtherNavigationController = {
-        var featureTableViewController = FeatureTableViewController(style: .grouped)
+        var viewController = FeatureTableViewController(style: .grouped)
         if #available(iOS 13.0, *) {
-            featureTableViewController = FeatureTableViewController(style: .insetGrouped)
+            viewController = FeatureTableViewController(style: .insetGrouped)
         }
         
-        featureTableViewController.navigationItem.title = "UINavigationBar"
+        viewController.navigationItem.title = "UINavigationBar"
         
         let systemNormal = UIImage(named: "TabBarSystemNormal")
         let systemSelected = UIImage(named: "TabBarSystemSelected")
         
-        let otherNavigationController = OtherNavigationController(rootViewController: featureTableViewController)
-        otherNavigationController.tabBarItem = UITabBarItem(title: "System", image: systemNormal, selectedImage: systemSelected)
-        otherNavigationController.view.layer.borderWidth = 3.0
-        return otherNavigationController
+        let navigationController = OtherNavigationController(rootViewController: viewController)
+        navigationController.tabBarItem = UITabBarItem(title: "System", image: systemNormal, selectedImage: systemSelected)
+        navigationController.view.layer.borderWidth = 3.0
+        return navigationController
     }()
     
 }

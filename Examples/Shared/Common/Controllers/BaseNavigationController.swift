@@ -30,10 +30,6 @@ class BaseNavigationController: UINavigationController {
 
 }
 
-class FeatureNavigationController: BaseNavigationController {
-    
-}
-
 class OtherNavigationController: BaseNavigationController {
     
 }

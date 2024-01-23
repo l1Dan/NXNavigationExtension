@@ -22,20 +22,20 @@ class MainTabBarController: UITabBarController {
             tabBar.scrollEdgeAppearance = tabBarAppearance
         }
         
-        viewControllers = [featureNavigationController, hostingController]
+        viewControllers = [slidingNavigationController, hostingController]
         tabBar.tintColor = UIColor.customColor { .customDarkGray } darkModeColor: { .customLightGray }
     }
     
-    private lazy var featureNavigationController: FeatureNavigationController = {
-        var featureTableViewController = FeatureTableViewController(style: .grouped)
-        featureTableViewController = FeatureTableViewController(style: .insetGrouped)
+    private lazy var slidingNavigationController: SlidingNavigationController = {
+        var viewController = FeatureTableViewController(style: .grouped)
+        viewController = FeatureTableViewController(style: .insetGrouped)
         let customNormal = UIImage(named: "TabBarCustomNormal")
         let customSelected = UIImage(named: "TabBarCustomSelected")
         
-        let featureNavigationController = FeatureNavigationController(rootViewController: featureTableViewController)
-        featureTableViewController.navigationItem.title = "UIKit🎉🎉🎉"
-        featureNavigationController.tabBarItem = UITabBarItem(title: "UIKit", image: customNormal, selectedImage: customSelected)
-        return featureNavigationController
+        let navigationController = SlidingNavigationController(rootViewController: viewController)
+        viewController.navigationItem.title = "UIKit🎉🎉🎉"
+        navigationController.tabBarItem = UITabBarItem(title: "UIKit", image: customNormal, selectedImage: customSelected)
+        return navigationController
     }()
     
     private lazy var hostingController: UIHostingController<ContentView> = {

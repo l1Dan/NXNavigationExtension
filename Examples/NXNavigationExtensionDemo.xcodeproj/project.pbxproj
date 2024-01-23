@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D61B5CCA2B5FDEC9005EED1C /* SlidingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B5CC72B5FDEC9005EED1C /* SlidingNavigationController.swift */; };
+		D61B5CCB2B5FDEC9005EED1C /* SlidingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B5CC72B5FDEC9005EED1C /* SlidingNavigationController.swift */; };
+		D61B5CCC2B5FDEC9005EED1C /* SlidingInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B5CC82B5FDEC9005EED1C /* SlidingInteractionController.swift */; };
+		D61B5CCD2B5FDEC9005EED1C /* SlidingInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B5CC82B5FDEC9005EED1C /* SlidingInteractionController.swift */; };
+		D61B5CCE2B5FDEC9005EED1C /* SlidingAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B5CC92B5FDEC9005EED1C /* SlidingAnimationController.swift */; };
+		D61B5CCF2B5FDEC9005EED1C /* SlidingAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B5CC92B5FDEC9005EED1C /* SlidingAnimationController.swift */; };
 		D6507E6C273EA40700293C6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6507E6B273EA40700293C6D /* ContentView.swift */; };
 		D6507E76273EA4CB00293C6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6507E75273EA4CB00293C6D /* AppDelegate.swift */; };
 		D6507E79273EA5C900293C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6B022C0273AB781008003F6 /* Assets.xcassets */; };
@@ -61,11 +67,8 @@
 		D6507EBA273EAAFA00293C6D /* ViewController11_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02308273AB8E3008003F6 /* ViewController11_TableViewController.swift */; };
 		D6507EBB273EAB0000293C6D /* FeatureTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0231E273AB8E3008003F6 /* FeatureTableViewController.swift */; };
 		D6507EBC273EAB0000293C6D /* FullPopGesture_ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0231C273AB8E3008003F6 /* FullPopGesture_ScrollView.swift */; };
-		D6507EBD273EAB0000293C6D /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02317273AB8E3008003F6 /* DrawerViewController.swift */; };
 		D6507EBE273EAB0000293C6D /* HierarchyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0231A273AB8E3008003F6 /* HierarchyViewController.swift */; };
-		D6507EBF273EAB0000293C6D /* DrawerAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02319273AB8E3008003F6 /* DrawerAnimationController.swift */; };
 		D6507EC0273EAB0000293C6D /* FullPopGesture_PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0231D273AB8E3008003F6 /* FullPopGesture_PageViewController.swift */; };
-		D6507EC1273EAB0000293C6D /* DrawerAnimationTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02318273AB8E3008003F6 /* DrawerAnimationTransitionDelegate.swift */; };
 		D6507EC3273EAB3700293C6D /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022FA273AB8E3008003F6 /* BaseNavigationController.swift */; };
 		D6507EC4273EAB3700293C6D /* SplitAdaptiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F9273AB8E3008003F6 /* SplitAdaptiveViewController.swift */; };
 		D6507EC5273EAB3700293C6D /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B022F7273AB8E3008003F6 /* BaseTableViewController.swift */; };
@@ -109,9 +112,6 @@
 		D6B02358273AB8E3008003F6 /* ViewController09_FullScreenColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02312273AB8E3008003F6 /* ViewController09_FullScreenColor.swift */; };
 		D6B02359273AB8E3008003F6 /* ViewController07_CustomBackImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02313273AB8E3008003F6 /* ViewController07_CustomBackImage.swift */; };
 		D6B0235A273AB8E3008003F6 /* ViewController05_ShadowColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02314273AB8E3008003F6 /* ViewController05_ShadowColor.swift */; };
-		D6B0235B273AB8E3008003F6 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02317273AB8E3008003F6 /* DrawerViewController.swift */; };
-		D6B0235C273AB8E3008003F6 /* DrawerAnimationTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02318273AB8E3008003F6 /* DrawerAnimationTransitionDelegate.swift */; };
-		D6B0235D273AB8E3008003F6 /* DrawerAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B02319273AB8E3008003F6 /* DrawerAnimationController.swift */; };
 		D6B0235E273AB8E3008003F6 /* HierarchyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0231A273AB8E3008003F6 /* HierarchyViewController.swift */; };
 		D6B0235F273AB8E3008003F6 /* ViewController07_UpdateNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0231B273AB8E3008003F6 /* ViewController07_UpdateNavigationBar.swift */; };
 		D6B02360273AB8E3008003F6 /* FullPopGesture_ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0231C273AB8E3008003F6 /* FullPopGesture_ScrollView.swift */; };
@@ -146,6 +146,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D61B5CC72B5FDEC9005EED1C /* SlidingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingNavigationController.swift; sourceTree = "<group>"; };
+		D61B5CC82B5FDEC9005EED1C /* SlidingInteractionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingInteractionController.swift; sourceTree = "<group>"; };
+		D61B5CC92B5FDEC9005EED1C /* SlidingAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingAnimationController.swift; sourceTree = "<group>"; };
 		D6507E67273EA40700293C6D /* NXNavigationExtensionSwiftUIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NXNavigationExtensionSwiftUIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6507E6B273EA40700293C6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D6507E75273EA4CB00293C6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -216,9 +219,6 @@
 		D6B02312273AB8E3008003F6 /* ViewController09_FullScreenColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController09_FullScreenColor.swift; sourceTree = "<group>"; };
 		D6B02313273AB8E3008003F6 /* ViewController07_CustomBackImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController07_CustomBackImage.swift; sourceTree = "<group>"; };
 		D6B02314273AB8E3008003F6 /* ViewController05_ShadowColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController05_ShadowColor.swift; sourceTree = "<group>"; };
-		D6B02317273AB8E3008003F6 /* DrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
-		D6B02318273AB8E3008003F6 /* DrawerAnimationTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerAnimationTransitionDelegate.swift; sourceTree = "<group>"; };
-		D6B02319273AB8E3008003F6 /* DrawerAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerAnimationController.swift; sourceTree = "<group>"; };
 		D6B0231A273AB8E3008003F6 /* HierarchyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HierarchyViewController.swift; sourceTree = "<group>"; };
 		D6B0231B273AB8E3008003F6 /* ViewController07_UpdateNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController07_UpdateNavigationBar.swift; sourceTree = "<group>"; };
 		D6B0231C273AB8E3008003F6 /* FullPopGesture_ScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullPopGesture_ScrollView.swift; sourceTree = "<group>"; };
@@ -247,6 +247,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D61B5CC62B5FDEC9005EED1C /* Sliding */ = {
+			isa = PBXGroup;
+			children = (
+				D61B5CC92B5FDEC9005EED1C /* SlidingAnimationController.swift */,
+				D61B5CC82B5FDEC9005EED1C /* SlidingInteractionController.swift */,
+				D61B5CC72B5FDEC9005EED1C /* SlidingNavigationController.swift */,
+			);
+			path = Sliding;
+			sourceTree = "<group>";
+		};
 		D6507E68273EA40700293C6D /* NXNavigationExtensionSwiftUIDemo */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,23 +502,13 @@
 		D6B02315273AB8E3008003F6 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				D6B02316273AB8E3008003F6 /* Drawer */,
+				D61B5CC62B5FDEC9005EED1C /* Sliding */,
 				D6B0231E273AB8E3008003F6 /* FeatureTableViewController.swift */,
 				D6B0231D273AB8E3008003F6 /* FullPopGesture_PageViewController.swift */,
 				D6B0231C273AB8E3008003F6 /* FullPopGesture_ScrollView.swift */,
 				D6B0231A273AB8E3008003F6 /* HierarchyViewController.swift */,
 			);
 			path = Feature;
-			sourceTree = "<group>";
-		};
-		D6B02316273AB8E3008003F6 /* Drawer */ = {
-			isa = PBXGroup;
-			children = (
-				D6B02319273AB8E3008003F6 /* DrawerAnimationController.swift */,
-				D6B02318273AB8E3008003F6 /* DrawerAnimationTransitionDelegate.swift */,
-				D6B02317273AB8E3008003F6 /* DrawerViewController.swift */,
-			);
-			path = Drawer;
 			sourceTree = "<group>";
 		};
 		D6B02367273ABA7A008003F6 /* Frameworks */ = {
@@ -646,10 +646,10 @@
 				D6507EB7273EAAFA00293C6D /* ViewController08_CustomBackView.swift in Sources */,
 				D6507E86273EA70B00293C6D /* NavigationFeature.swift in Sources */,
 				D6507E88273EA73900293C6D /* View03_BackButtonEventIntercept.swift in Sources */,
-				D6507EBD273EAB0000293C6D /* DrawerViewController.swift in Sources */,
 				D6507EBB273EAB0000293C6D /* FeatureTableViewController.swift in Sources */,
 				D6507EA9273EAAF600293C6D /* ViewController09_ScrollChangeNavigationBar.swift in Sources */,
 				D6507EB5273EAAFA00293C6D /* ViewController04_LikeSystemNavigationBar.swift in Sources */,
+				D61B5CCD2B5FDEC9005EED1C /* SlidingInteractionController.swift in Sources */,
 				D6507E97273EA74000293C6D /* View04_LikeSystemNavigationBar.swift in Sources */,
 				D6507E93273EA74000293C6D /* View07_CustomBackImage.swift in Sources */,
 				D6507EB3273EAAFA00293C6D /* ViewController09_FullScreenColor.swift in Sources */,
@@ -661,6 +661,7 @@
 				D6507E9F273EA74700293C6D /* FeatureDetailView.swift in Sources */,
 				D6507E99273EA74000293C6D /* View08_CustomBackView.swift in Sources */,
 				D6507EAD273EAAF600293C6D /* ViewController04_CustomNavigationBar.swift in Sources */,
+				D61B5CCB2B5FDEC9005EED1C /* SlidingNavigationController.swift in Sources */,
 				D6507EAC273EAAF600293C6D /* ViewController02_FullScreenPopGestureEnable.swift in Sources */,
 				D6507E91273EA74000293C6D /* View02_BackgroundImage.swift in Sources */,
 				D6507EB6273EAAFA00293C6D /* ViewController07_CustomBackImage.swift in Sources */,
@@ -673,9 +674,9 @@
 				D6507EB2273EAAFA00293C6D /* ViewController03_Transparent.swift in Sources */,
 				D6507E9B273EA74000293C6D /* View06_ShadowImage.swift in Sources */,
 				D6507EAE273EAAFA00293C6D /* ViewController02_BackgroundImage.swift in Sources */,
-				D6507EBF273EAB0000293C6D /* DrawerAnimationController.swift in Sources */,
 				D6507E94273EA74000293C6D /* View12_ScrollViewContent.swift in Sources */,
 				D6507E8F273EA73900293C6D /* View04_CustomNavigationBar.swift in Sources */,
+				D61B5CCF2B5FDEC9005EED1C /* SlidingAnimationController.swift in Sources */,
 				D6507EAF273EAAFA00293C6D /* ViewController12_TableViewControllerWithFullScreen.swift in Sources */,
 				D6507EA5273EAAF600293C6D /* ViewController05_NavigationBarDisable.swift in Sources */,
 				D6507E85273EA70900293C6D /* NavigationBackEvent.swift in Sources */,
@@ -686,7 +687,6 @@
 				D6507EBA273EAAFA00293C6D /* ViewController11_TableViewController.swift in Sources */,
 				D6507EB8273EAAFA00293C6D /* ViewController13_CustomBlurNavigationBar.swift in Sources */,
 				D6507EBE273EAB0000293C6D /* HierarchyViewController.swift in Sources */,
-				D6507EC1273EAB0000293C6D /* DrawerAnimationTransitionDelegate.swift in Sources */,
 				D6507EC0273EAB0000293C6D /* FullPopGesture_PageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,14 +696,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6B02353273AB8E3008003F6 /* ViewController08_CustomBackView.swift in Sources */,
-				D6B0235D273AB8E3008003F6 /* DrawerAnimationController.swift in Sources */,
 				D6B02360273AB8E3008003F6 /* FullPopGesture_ScrollView.swift in Sources */,
+				D61B5CCA2B5FDEC9005EED1C /* SlidingNavigationController.swift in Sources */,
 				D6B02359273AB8E3008003F6 /* ViewController07_CustomBackImage.swift in Sources */,
 				D6B02343273AB8E3008003F6 /* SplitAdaptiveViewController.swift in Sources */,
 				D6B02361273AB8E3008003F6 /* FullPopGesture_PageViewController.swift in Sources */,
 				D6B02354273AB8E3008003F6 /* ViewController02_BackgroundImage.swift in Sources */,
 				D6B0234D273AB8E3008003F6 /* ViewController02_FullScreenPopGestureEnable.swift in Sources */,
 				D6B0234B273AB8E3008003F6 /* ViewController04_CustomNavigationBar.swift in Sources */,
+				D61B5CCC2B5FDEC9005EED1C /* SlidingInteractionController.swift in Sources */,
 				D6B0235E273AB8E3008003F6 /* HierarchyViewController.swift in Sources */,
 				D6B02351273AB8E3008003F6 /* ViewController04_LikeSystemNavigationBar.swift in Sources */,
 				D6B0233D273AB8E3008003F6 /* NavigationBackEvent.swift in Sources */,
@@ -718,7 +719,6 @@
 				D6B02341273AB8E3008003F6 /* BaseTableViewController.swift in Sources */,
 				D6B02350273AB8E3008003F6 /* ViewController10_Present.swift in Sources */,
 				D6B022B8273AB780008003F6 /* AppDelegate.swift in Sources */,
-				D6B0235B273AB8E3008003F6 /* DrawerViewController.swift in Sources */,
 				D6B02362273AB8E3008003F6 /* FeatureTableViewController.swift in Sources */,
 				D6B0235F273AB8E3008003F6 /* ViewController07_UpdateNavigationBar.swift in Sources */,
 				D6B02358273AB8E3008003F6 /* ViewController09_FullScreenColor.swift in Sources */,
@@ -726,10 +726,10 @@
 				D6B02356273AB8E3008003F6 /* ViewController03_Transparent.swift in Sources */,
 				D6B02352273AB8E3008003F6 /* ViewController12_TableViewControllerWithFullScreen.swift in Sources */,
 				D6B0234F273AB8E3008003F6 /* ViewController06_ShadowImage.swift in Sources */,
-				D6B0235C273AB8E3008003F6 /* DrawerAnimationTransitionDelegate.swift in Sources */,
 				D6B02349273AB8E3008003F6 /* ViewController06_WebView.swift in Sources */,
 				D6B02344273AB8E3008003F6 /* BaseNavigationController.swift in Sources */,
 				D6B02342273AB8E3008003F6 /* MainTabBarController.swift in Sources */,
+				D61B5CCE2B5FDEC9005EED1C /* SlidingAnimationController.swift in Sources */,
 				D6B0235A273AB8E3008003F6 /* ViewController05_ShadowColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

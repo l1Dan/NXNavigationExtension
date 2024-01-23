@@ -17,12 +17,6 @@ class FeatureTableViewController: BaseTableViewController {
         return item
     }()
     
-    private lazy var animationTransitionDelegate: DrawerAnimationTransitionDelegate = {
-        let delegate = DrawerAnimationTransitionDelegate()
-        delegate.setupDrawer(with: self, inView: view)
-        return delegate
-    }()
-    
     private lazy var sections = NavigationFeatureSection.sections(for: true)
     
     private func viewController(for itemType: NavigationFeatureItem.Style) -> UIViewController? {
@@ -51,15 +45,18 @@ class FeatureTableViewController: BaseTableViewController {
         case .updateNavigationBar: return ViewController07_UpdateNavigationBar()
         case .scrollChangeNavigationBar: return ViewController09_ScrollChangeNavigationBar()
         case .customViewControllerTransitionAnimation:
-            animationTransitionDelegate.openDrawer()
+            self.clickOpenDrawerButtonItem(nil)
             return nil
         default: return nil
         }
     }
     
     @objc
-    private func clickOpenDrawerButtonItem(_ item: UIBarButtonItem) {
-        animationTransitionDelegate.openDrawer()
+    private func clickOpenDrawerButtonItem(_ item: UIBarButtonItem?) {
+        let navigationController = SlidingNavigationController(rootViewController: ViewController11_TableViewController())
+        navigationController.modalPresentationStyle = .custom
+        navigationController.modalPresentationCapturesStatusBarAppearance = true // 隐藏导航栏
+        self.navigationController?.present(navigationController, animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
@@ -143,4 +140,12 @@ extension FeatureTableViewController {
         return .clear
     }
     
+}
+
+extension FeatureTableViewController: SlidingInteractiveNavigation {
+    var swipeDirectionAction: SlidingSwipeDirectionAction {
+        return .left { [weak self] in
+            self?.clickOpenDrawerButtonItem(nil)
+        }
+    }
 }
