@@ -142,10 +142,10 @@ extension FeatureTableViewController {
     
 }
 
-extension FeatureTableViewController: SlidingInteractiveNavigation {
-    var swipeDirectionAction: SlidingSwipeDirectionAction {
-        return .left { [weak self] in
-            self?.clickOpenDrawerButtonItem(nil)
-        }
-    }
-}
+//extension FeatureTableViewController: SlidingInteractiveNavigation {
+//    var swipeDirectionAction: SlidingSwipeDirectionAction {
+//        return .left { [weak self] in
+//            self?.clickOpenDrawerButtonItem(nil)
+//        }
+//    }
+//}
