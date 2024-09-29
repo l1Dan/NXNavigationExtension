@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name     = 'NXNavigationExtension'
-  spec.version  = '4.2.3'
+  spec.version  = '4.2.4'
   spec.summary  = '🔥 Lightweight, simple, and easy-to-use NavigationBar library.'
 
   spec.description  = <<-DESC
