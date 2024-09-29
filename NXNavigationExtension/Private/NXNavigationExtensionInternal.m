@@ -46,6 +46,11 @@
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    // Ignore when no view controller is pushed into the navigation stack.
+    if (self.navigationController.viewControllers.count <= 1) {
+        return NO;
+    }
+    
     if (!self.navigationController) {
         return YES;
     }
