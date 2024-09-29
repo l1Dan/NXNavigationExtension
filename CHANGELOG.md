@@ -1,5 +1,8 @@
 # CHANGELOG.md
 
+## 4.2.4
+Fixed: [手指在屏幕左边边缘往右滑动不能正确跳转下一个页面](https://github.com/l1Dan/NXNavigationExtension/issues/26)
+
 ## 4.2.3
 
 代码优化
