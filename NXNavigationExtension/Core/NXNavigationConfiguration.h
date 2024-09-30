@@ -98,7 +98,7 @@ typedef void (^_Nullable NXViewControllerPrepareConfigurationCallback)(__kindof 
 /// 过期：是否禁用边缘滑动返回手势；默认 NO
 /// 使用 `NXNavigationTransitionDelegate` 代理方法 `nx_navigationTransition:navigationBackAction:`替代
 /// SwiftUI 使用 `useNXNavigationView(onBackActionHandler:)` 替代
-@property (nonatomic, assign) BOOL disableInteractivePopGesture API_DEPRECATED("No longer supported.", ios(2.0, 2.0));
+@property (nonatomic, assign) BOOL disableInteractivePopGesture;
 
 /// 是否启用全屏返回；默认 NO
 @property (nonatomic, assign) BOOL enableFullScreenInteractivePopGesture;

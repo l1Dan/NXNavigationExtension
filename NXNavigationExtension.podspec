@@ -26,7 +26,7 @@ Pod::Spec.new do |spec|
   end
 
   spec.subspec 'SwiftUI' do |ss|
-    ss.ios.deployment_target  = '13.0'
+    ss.ios.deployment_target  = '14.0'
     ss.source_files = 'NXNavigationExtensionSwiftUI/Core/*.swift'
     ss.frameworks   = 'SwiftUI'
     ss.dependency 'NXNavigationExtension/Sources'

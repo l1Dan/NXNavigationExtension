@@ -21,8 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+
 #import <Foundation/Foundation.h>
-#import <NXNavigationExtension/NXNavigationExtension.h>
 
 //! Project version number for NXNavigationExtensionSwiftUI.
 FOUNDATION_EXPORT double NXNavigationExtensionSwiftUIVersionNumber;

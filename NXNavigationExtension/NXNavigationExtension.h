@@ -21,6 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+
 #import <Foundation/Foundation.h>
 
 //! Project version number for NXNavigationExtension.
@@ -28,6 +29,8 @@ FOUNDATION_EXPORT double NXNavigationExtensionVersionNumber;
 
 //! Project version string for NXNavigationExtension.
 FOUNDATION_EXPORT const unsigned char NXNavigationExtensionVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <NXNavigationExtension/PublicHeader.h>
 
 #import <NXNavigationExtension/NXNavigationBar.h>
 #import <NXNavigationExtension/NXNavigationConfiguration.h>
