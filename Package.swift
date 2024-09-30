@@ -37,9 +37,6 @@ let package = Package(
         .target(
             name: "NXNavigationExtension",
             path: "NXNavigationExtension",
-            exclude: [
-                "Info.plist"
-            ],
             publicHeadersPath: "include",
             cSettings: [
                 CSetting.headerSearchPath("include"),
