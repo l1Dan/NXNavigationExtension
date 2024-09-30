@@ -137,6 +137,7 @@ extension UIApplication {
 
 extension UIImage {
     
+    @MainActor
     static var navigationBarBackground: UIImage? {
         let statusBarHeight = UIApplication.shared.statusBarHeight
         return statusBarHeight <= 20.0 ? UIImage(named: "NavigationBarBackground64") : UIImage(named: "NavigationBarBackground88")

@@ -7,6 +7,7 @@
 
 import UIKit
 
+@MainActor
 protocol FakeNavigationBarDelegate: AnyObject {
     func fakeNavigationBar(_ navigationBar: FakeNavigationBar, didClickNavigationItemWith itemType: FakeNavigationBar.ItemType)
 }
@@ -79,7 +80,7 @@ class FakeNavigationBar: UIView {
         backgroundColor = .clear
         titleLabel.alpha = 0.0
         
-        [backButton, titleLabel, rightButton].forEach(addSubview)
+        try? [backButton, titleLabel, rightButton].forEach(addSubview)
         
         backButton.isHidden = !UIDevice.isPhoneDevice
         NSLayoutConstraint.activate([

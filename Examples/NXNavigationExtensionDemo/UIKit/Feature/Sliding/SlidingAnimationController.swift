@@ -7,6 +7,7 @@
 
 import UIKit
 
+@MainActor
 class SlidingAnimationController: NSObject {
     private lazy var backgroundColorView: UIVisualEffectView = {
         var effect = UIBlurEffect(style: .extraLight)

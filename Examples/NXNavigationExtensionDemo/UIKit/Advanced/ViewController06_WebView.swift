@@ -99,20 +99,24 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickAddButton(_:)))
         
         estimatedProgressObservation = webView.observe(\.self.estimatedProgress, options: .new) { [weak self] webView, value in
-            self?.progressView.alpha = 1.0
-            self?.progressView.setProgress(Float(webView.estimatedProgress), animated: true)
-            
-            if webView.estimatedProgress >= 1.0 {
-                UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseOut) {
-                    self?.progressView.alpha = 0.0
-                } completion: { finished in
-                    self?.progressView.setProgress(0.0, animated: true)
+            Task { @MainActor in
+                self?.progressView.alpha = 1.0
+                self?.progressView.setProgress(Float(webView.estimatedProgress), animated: true)
+                
+                if webView.estimatedProgress >= 1.0 {
+                    UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseOut) {
+                        self?.progressView.alpha = 0.0
+                    } completion: { finished in
+                        self?.progressView.setProgress(0.0, animated: true)
+                    }
                 }
             }
         }
         
         titleObservation = webView.observe(\.self.title, options: .new, changeHandler: { [weak self] webView, value in
-            self?.navigationItem.title = webView.title
+            Task { @MainActor in
+                self?.navigationItem.title = webView.title
+            }
         })
         
         if UIDevice.isPhoneDevice {

@@ -7,6 +7,7 @@
 
 import UIKit
 
+@MainActor
 protocol SlidingInteractiveNavigation {
     var swipeDirectionAction: SlidingSwipeDirectionAction { get }
 }
@@ -17,6 +18,7 @@ enum SlidingSwipeDirectionAction {
 }
 
 
+@MainActor
 fileprivate class SlidingNavigationManager: NSObject {
     static let `default` = SlidingNavigationManager()
 
