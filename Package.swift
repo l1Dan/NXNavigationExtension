@@ -1,4 +1,4 @@
-// swift-tools-version:5.5
+// swift-tools-version:6.0
 //
 // Package.swift
 //
@@ -52,5 +52,5 @@ let package = Package(
             path: "NXNavigationExtensionSwiftUI"
         )
     ],
-    swiftLanguageVersions: [.v5]
+    swiftLanguageModes: [.v5, .v6]
 )

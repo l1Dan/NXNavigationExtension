@@ -67,6 +67,7 @@ typedef NS_ENUM(NSUInteger, NXNavigationBackAction) {
 typedef void (^NXNavigationTransitionStateHandler) (UIViewController *, NXNavigationTransitionState);
 typedef BOOL (^NXNavigationBackActionHandler) (UIViewController *, NXNavigationBackAction);
 
+NS_SWIFT_UI_ACTOR
 @protocol NXNavigationTransitionDelegate <NSObject>
 
 @optional

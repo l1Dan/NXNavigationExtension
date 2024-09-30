@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name     = 'NXNavigationExtension'
-  spec.version  = '4.2.4'
+  spec.version  = '4.2.5'
   spec.summary  = '🔥 Lightweight, simple, and easy-to-use NavigationBar library.'
 
   spec.description  = <<-DESC
@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
 
   spec.ios.deployment_target  = '12.0'
   spec.default_subspec = 'Sources'
-  spec.swift_version = '5.0'
+  spec.swift_version = '6.0'
   spec.frameworks = 'UIKit'
 
   spec.subspec 'Sources' do |ss|
