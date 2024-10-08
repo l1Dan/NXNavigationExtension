@@ -1,6 +1,6 @@
 //
 //  View09_FullScreenColor.swift
-//  NXNavigationExtensionSwiftUIDemo
+//  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/15.
 //

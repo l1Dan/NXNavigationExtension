@@ -1,6 +1,6 @@
 //
 //  AdaptiveNavigationView.swift
-//  NXNavigationExtensionSwiftUIDemo
+//  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2023/12/25.
 //

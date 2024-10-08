@@ -38,7 +38,7 @@ jobs:
         scheme:
           - NXNavigationExtensionDemo
         iosDestination: ["OS=18.0,name=iPhone 16 Pro"]
-        macCatalystDestination: ["platform=macOS,arch=x86_64,variant=Mac Catalyst"]
+        macCatalystDestination: ["platform=macOS,arch=arm64,variant=Designed for iPad"]
 
     steps:
       - name: Checkout

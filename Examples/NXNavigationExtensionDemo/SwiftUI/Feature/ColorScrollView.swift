@@ -1,6 +1,6 @@
 //
 //  ColorScrollView.swift
-//  NXNavigationExtensionSwiftUIDemo
+//  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/10/18.
 //
