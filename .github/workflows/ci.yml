@@ -5,15 +5,15 @@ on: [push, pull_request]
 jobs:
   Pods:
     name: CocoaPods Lint
-    runs-on: macOS-13
+    runs-on: macOS-15
     env:
-      DEVELOPER_DIR: /Applications/Xcode_15.1.app
+      DEVELOPER_DIR: /Applications/Xcode_16.0.app
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Switch Xcode
-        run: sudo xcode-select -s /Applications/Xcode_15.1.app
+        run: sudo xcode-select -s /Applications/Xcode_16.0.app
 
       - name: Install CocoaPods
         run: gem install cocoapods --no-document --quiet
@@ -28,17 +28,16 @@ jobs:
 
   Demo:
     name: Run Demo
-    runs-on: macOS-13
+    runs-on: macOS-15
     env:
-      DEVELOPER_DIR: /Applications/Xcode_15.1.app
+      DEVELOPER_DIR: /Applications/Xcode_16.0.app
       WORKSPACE_NAME: NXNavigationExtension.xcworkspace
     strategy:
       matrix:
-        swift_version: ["5.4"]
+        swift_version: ["6.0"]
         scheme:
           - NXNavigationExtensionDemo
-          - NXNavigationExtensionSwiftUIDemo
-        iosDestination: ["OS=17.0,name=iPhone 14 Pro"]
+        iosDestination: ["OS=18.0,name=iPhone 16 Pro"]
         macCatalystDestination: ["platform=macOS,arch=x86_64,variant=Mac Catalyst"]
 
     steps:
@@ -46,7 +45,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Switch Xcode
-        run: sudo xcode-select -s /Applications/Xcode_15.1.app
+        run: sudo xcode-select -s /Applications/Xcode_16.0.app
 
       - name: Run Demo
         run: |
@@ -56,13 +55,13 @@ jobs:
 
   Build:
     name: Build Library
-    runs-on: macOS-13
+    runs-on: macOS-15
     env:
-      DEVELOPER_DIR: /Applications/Xcode_15.1.app
+      DEVELOPER_DIR: /Applications/Xcode_16.0.app
       WORKSPACE_NAME: NXNavigationExtension.xcworkspace
     strategy:
       matrix:
-        swift_version: ["5.4"]
+        swift_version: ["6.0"]
         scheme:
           - NXNavigationExtension
           - NXNavigationExtensionSwiftUI
@@ -72,7 +71,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Switch Xcode
-        run: sudo xcode-select -s /Applications/Xcode_15.1.app
+        run: sudo xcode-select -s /Applications/Xcode_16.0.app
 
       - name: Build as dynamic frameworks
         run: |

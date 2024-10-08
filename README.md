@@ -27,13 +27,14 @@
 
 ## 🌈 要求
 
-|   Version   | Minimum iOS / macOS Target |         Frameworks          |  Note   |
-| :---------: | :------------------------: | :-------------------------: | :-----: |
-| 4.1.7 Later |   iOS 12.0 / macOS 10.15   | SwiftUI、UIKit、macCatalyst | Xcode15 |
-| 4.1.5 Later |   iOS 11.0 / macOS 10.15   | SwiftUI、UIKit、macCatalyst | Xcode14 |
-|    4.1.4    |   iOS 9.0 / macOS 10.15    | SwiftUI、UIKit、macCatalyst | Xcode13 |
-|     3.x     |   iOS 9.0 / macOS 10.15    |     UIKit、macCatalyst      |    /    |
-|     2.x     |   iOS 11.0 / macOS 10.15   |     UIKit、macCatalyst      |    /    |
+|   Version   | Minimum iOS / macOS Target | Requirements |
+| :---------: | :------------------------: | :----------: |
+| 4.2.5 Later |   iOS 12.0 / macOS 10.15   |   Xcode16    |
+| 4.1.7 Later |   iOS 12.0 / macOS 10.15   |   Xcode15    |
+| 4.1.5 Later |   iOS 11.0 / macOS 10.15   |   Xcode14    |
+|    4.1.4    |   iOS 9.0 / macOS 10.15    |   Xcode13    |
+|     3.x     |   iOS 9.0 / macOS 10.15    |      /       |
+|     2.x     |   iOS 11.0 / macOS 10.15   |      /       |
 
 ## 🍭 优点
 
