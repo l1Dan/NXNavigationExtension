@@ -5,23 +5,17 @@
 //  Created by lidan on 2021/11/9.
 //
 
+import NXNavigationExtension
 import UIKit
 
 class FeatureTableViewController: BaseTableViewController {
-    
     private static let reuseIdentifier = "FeatureTableViewCellIdentifer"
-    
-    private lazy var presentDrawerButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(named: "NavigationBarMore"), style: .plain, target: self, action: #selector(clickOpenDrawerButtonItem(_:)))
-        item.tintColor = .white
-        return item
-    }()
-    
+
     private lazy var sections = NavigationFeatureSection.sections(for: true)
-    
+
     private func viewController(for itemType: NavigationFeatureItem.Style) -> UIViewController? {
-        switch (itemType) {
-            // Basic
+        switch itemType {
+        // Basic
         case .backgroundColor: return ViewController01_BackgroundColor()
         case .backgroundImage: return ViewController02_BackgroundImage()
         case .transparent: return ViewController03_Transparent()
@@ -35,7 +29,7 @@ class FeatureTableViewController: BaseTableViewController {
         case .tableViewController: return ViewController11_TableViewController()
         case .tableViewControllerWithFullScreen: return ViewController12_TableViewControllerWithFullScreen()
         case .customBlurNavigationBar: return ViewController13_CustomBlurNavigationBar()
-            // Advanced
+        // Advanced
         case .edgePopGestureDisable: return ViewController01_EdgePopGestureDisable()
         case .fullScreenPopGestureEnable: return ViewController02_FullScreenPopGestureEnable()
         case .backButtonEventIntercept: return ViewController03_BackButtonEventIntercept(style: .grouped)
@@ -43,16 +37,16 @@ class FeatureTableViewController: BaseTableViewController {
         case .navigationBarDisable: return ViewController05_NavigationBarDisable()
         case .webView: return ViewController06_WebView()
         case .updateNavigationBar: return ViewController07_UpdateNavigationBar()
-        case .scrollChangeNavigationBar: return ViewController09_ScrollChangeNavigationBar()
+        case .scrollChangeNavigationBar: return ViewController08_ScrollChangeNavigationBar()
         case .customViewControllerTransitionAnimation:
-            self.clickOpenDrawerButtonItem(nil)
+            clickOpenDrawerButtonItem(nil)
             return nil
         default: return nil
         }
     }
-    
+
     @objc
-    private func clickOpenDrawerButtonItem(_ item: UIBarButtonItem?) {
+    private func clickOpenDrawerButtonItem(_: UIBarButtonItem?) {
         let navigationController = SlidingNavigationController(rootViewController: ViewController11_TableViewController())
         navigationController.modalPresentationStyle = .custom
         navigationController.modalPresentationCapturesStatusBarAppearance = true // 隐藏导航栏
@@ -62,12 +56,11 @@ class FeatureTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.leftBarButtonItem = presentDrawerButtonItem
         definesPresentationContext = true
-        
+
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: FeatureTableViewController.reuseIdentifier)
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -81,7 +74,7 @@ class FeatureTableViewController: BaseTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].items.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let reuseIdentifier = FeatureTableViewController.reuseIdentifier
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .default, reuseIdentifier: restorationIdentifier)
@@ -90,16 +83,16 @@ class FeatureTableViewController: BaseTableViewController {
         cell.accessoryType = item.showsDisclosureIndicator ? .disclosureIndicator : .none
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = sections[indexPath.section].items[indexPath.row]
         let itemType = item.style
-        
-        guard let viewController = viewController(for: itemType), let navigationController = navigationController else {
+
+        guard let viewController = viewController(for: itemType), let navigationController else {
             tableView.deselectRow(at: indexPath, animated: true)
             return
         }
-        
+
         viewController.title = NSLocalizedString(item.title, comment: "")
         if viewController is ViewController10_Present {
             tableView.deselectRow(at: indexPath, animated: true)
@@ -110,7 +103,7 @@ class FeatureTableViewController: BaseTableViewController {
                 viewController.hidesBottomBarWhenPushed = true
                 navigationController.pushViewController(viewController, animated: true)
             } else {
-                if let secondaryNavigationController = self.splitViewController?.viewControllers.last as? UINavigationController{
+                if let secondaryNavigationController = splitViewController?.viewControllers.last as? UINavigationController {
                     if !(secondaryNavigationController.viewControllers.last?.isKind(of: type(of: viewController)) ?? false) {
                         let primaryNavigationController = type(of: navigationController).init(rootViewController: viewController)
                         showDetailViewController(primaryNavigationController, sender: nil)
@@ -119,27 +112,24 @@ class FeatureTableViewController: BaseTableViewController {
             }
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return NSLocalizedString(sections[section].title, comment: "")
     }
-
 }
 
 extension FeatureTableViewController {
-    
-    override var nx_titleTextAttributes: [NSAttributedString.Key : Any]? {
+    override var nx_titleTextAttributes: [NSAttributedString.Key: Any]? {
         return [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
-    
+
     override var nx_navigationBarBackgroundColor: UIColor? {
         return .customDarkGray
     }
-    
+
     override var nx_shadowColor: UIColor? {
         return .clear
     }
-    
 }
 
 extension FeatureTableViewController: SlidingInteractiveNavigation {

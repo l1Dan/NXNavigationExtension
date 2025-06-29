@@ -5,13 +5,14 @@
 //  Created by lidan on 2021/10/15.
 //
 
-import SwiftUI
+import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
+import SwiftUI
 
 @available(iOS 14.0, *)
 struct View09_FullScreenColor: View {
     private let item: NavigationFeatureItem
-    
+
     init(_ item: NavigationFeatureItem) {
         self.item = item
     }
@@ -19,11 +20,11 @@ struct View09_FullScreenColor: View {
     var body: some View {
         colorView
             .navigationBarTitle(LocalizedStringKey(item.title))
-            .useNXNavigationView { configuration in                
+            .useNXNavigationView { configuration in
                 configuration.navigationBarAppearance.backgroundColor = .clear
             }
     }
-    
+
     private var colorView: some View {
         if #available(iOS 14.0, *) {
             return AnyView(Color(UIColor.randomLight).ignoresSafeArea())

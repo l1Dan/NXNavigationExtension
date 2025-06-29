@@ -251,7 +251,7 @@ override var nx_translucentNavigationBar: Bool {
 
 #### 禁用**系统**导航栏用户交互（NXNavigationBar 可以处理用户交互）
 
-📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionDemo/UIKit/Advanced/ViewController09_ScrollChangeNavigationBar.swift)
+📝 [示例代码](https://github.com/l1Dan/NXNavigationExtension/blob/main/Examples/NXNavigationExtensionDemo/UIKit/Advanced/ViewController08_ScrollChangeNavigationBar.swift)
 
 ```swift
 override var systemNavigationBarUserInteractionDisabled: Bool {

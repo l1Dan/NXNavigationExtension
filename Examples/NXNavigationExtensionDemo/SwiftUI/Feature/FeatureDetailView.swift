@@ -10,14 +10,14 @@ import SwiftUI
 @available(iOS 14.0, *)
 struct FeatureDetailView: View {
     private let item: NavigationFeatureItem
-    
+
     init(_ item: NavigationFeatureItem) {
         self.item = item
     }
-    
+
     var body: some View {
         switch item.style {
-            // Basic
+        // Basic
         case .backgroundColor:
             return AnyView(View01_BackgroundColor(item))
         case .backgroundImage:
@@ -40,8 +40,7 @@ struct FeatureDetailView: View {
             return AnyView(View11_ListView(item))
         case .scrollViewContent:
             return AnyView(View12_ScrollViewContent(item))
-            
-            // Advanced
+        // Advanced
         case .edgePopGestureDisable:
             return AnyView(View01_EdgePopGestureDisable(item))
         case .fullScreenPopGestureEnable:

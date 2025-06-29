@@ -5,17 +5,18 @@
 //  Created by lidan on 2021/10/20.
 //
 
-import SwiftUI
+import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
+import SwiftUI
 
 @available(iOS 14.0, *)
 struct View08_CustomBackView: View {
     private let item: NavigationFeatureItem
-    
+
     init(_ item: NavigationFeatureItem) {
         self.item = item
     }
-    
+
     var body: some View {
         ColorListView()
             .navigationBarTitle(LocalizedStringKey(item.title))
@@ -23,12 +24,12 @@ struct View08_CustomBackView: View {
                 configuration.navigationBarAppearance.backButtonCustomView = View08_CustomBackView.backButton
             }
     }
-    
+
     private static var backButton: UIButton = {
         let backButton = UIButton(type: .system)
         backButton.setTitle("😋", for: .normal)
         backButton.setImage(UIImage(systemName: "chevron.left.2")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        return backButton;
+        return backButton
     }()
 }
 

@@ -5,15 +5,14 @@
 //  Created by lidan on 2021/11/8.
 //
 
+import NXNavigationExtension
 import UIKit
 import WebKit
-import NXNavigationExtension
 
 class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
-    
     private var estimatedProgressObservation: NSKeyValueObservation?
     private var titleObservation: NSKeyValueObservation?
-    
+
     private lazy var progressView: UIProgressView = {
         let progressView = UIProgressView()
         progressView.trackTintColor = .customLightGray
@@ -22,11 +21,11 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
         progressView.alpha = 0.0
         return progressView
     }()
-    
+
     private lazy var webView: WKWebView = {
         let configuration = WKWebViewConfiguration()
         configuration.preferences.minimumFontSize = 9.0
-        
+
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.scrollView.decelerationRate = .normal
@@ -36,25 +35,25 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
         webView.navigationDelegate = self
         return webView
     }()
-    
+
     private lazy var backBarButtonItem: UIBarButtonItem = {
         let customView = UIButton(type: .custom)
-        customView.setImage(UIImage(named: "NavigationBarBack")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        customView.setImage(UIImage(systemName: "arrow.left")?.withRenderingMode(.alwaysTemplate), for: .normal)
         customView.tintColor = .customTitle
         customView.sizeToFit()
         customView.addTarget(self, action: #selector(clickBackButton(_:)), for: .touchUpInside)
         return UIBarButtonItem(customView: customView)
     }()
-    
+
     private lazy var closeBarButtonItem: UIBarButtonItem = {
         let customView = UIButton(type: .custom)
-        customView.setImage(UIImage(named: "NavigationBarClose")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        customView.setImage(UIImage(systemName: "xmark")?.withRenderingMode(.alwaysTemplate), for: .normal)
         customView.tintColor = .customTitle
         customView.sizeToFit()
         customView.addTarget(self, action: #selector(clickCloseButton(_:)), for: .touchUpInside)
         return UIBarButtonItem(customView: customView)
     }()
-    
+
     private func updateLeftButtonItems() {
         if UIDevice.isPhoneDevice {
             if webView.canGoBack {
@@ -70,7 +69,7 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
             }
         }
     }
-    
+
     @objc
     private func clickBackButton(_ button: UIButton) {
         if UIDevice.isPhoneDevice {
@@ -81,12 +80,12 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
             }
         }
     }
-    
+
     @objc
     private func clickCloseButton(_ button: UIButton) {
         navigationController?.popViewController(animated: true)
     }
-    
+
     @objc
     private func clickAddButton(_ button: UIButton) {
         navigationController?.pushViewController(ViewController07_UpdateNavigationBar(), animated: true)
@@ -94,56 +93,56 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationItem.title = "Loading..."
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickAddButton(_:)))
-        
-        estimatedProgressObservation = webView.observe(\.self.estimatedProgress, options: .new) { [weak self] webView, value in
+
+        estimatedProgressObservation = webView.observe(\.estimatedProgress, options: .new) { [weak self] webView, value in
             Task { @MainActor in
                 self?.progressView.alpha = 1.0
                 self?.progressView.setProgress(Float(webView.estimatedProgress), animated: true)
-                
+
                 if webView.estimatedProgress >= 1.0 {
                     UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseOut) {
                         self?.progressView.alpha = 0.0
-                    } completion: { finished in
+                    } completion: { _ in
                         self?.progressView.setProgress(0.0, animated: true)
                     }
                 }
             }
         }
-        
-        titleObservation = webView.observe(\.self.title, options: .new, changeHandler: { [weak self] webView, value in
+
+        titleObservation = webView.observe(\.title, options: .new, changeHandler: { [weak self] webView, _ in
             Task { @MainActor in
                 self?.navigationItem.title = webView.title
             }
         })
-        
+
         if UIDevice.isPhoneDevice {
             navigationItem.leftBarButtonItems = [backBarButtonItem]
         }
-        
+
         webView.load(URLRequest(url: URL(string: "https://www.apple.com/")!))
         view.addSubview(webView)
-        
+
         NSLayoutConstraint.activate([
             webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             webView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            webView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            webView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
-        
+
         view.addSubview(progressView)
         NSLayoutConstraint.activate([
             progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            progressView.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale),
+            progressView.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale)
         ])
-        
+
         if #available(iOS 13.0, *) {
-            webView.backgroundColor = UIColor(dynamicProvider: { [weak self] traitCollection in
-                guard let self = self else { return .white }
+            webView.backgroundColor = UIColor(dynamicProvider: { [weak self] _ in
+                guard let self else { return .white }
                 if self.view.traitCollection.userInterfaceStyle == .dark {
                     self.webView.isOpaque = false
                     return .clear
@@ -155,25 +154,23 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
             webView.isOpaque = true
             webView.backgroundColor = nil
         }
-        
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         progressView.isHidden = true
     }
 
     // MARK: - WKNavigationDelegate
-    
+
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction) async -> WKNavigationActionPolicy {
         updateLeftButtonItems()
         return .allow
     }
-    
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         updateLeftButtonItems()
     }
-
 }
 
 extension ViewController06_WebView {
@@ -184,7 +181,7 @@ extension ViewController06_WebView {
 
 extension ViewController06_WebView {
     func nx_navigationTransition(_ transitionViewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
-        if action != .interactionGesture && webView.canGoBack {
+        if action != .interactionGesture, webView.canGoBack {
             webView.goBack()
             return false
         }

@@ -5,26 +5,27 @@
 //  Created by lidan on 2021/10/15.
 //
 
-import SwiftUI
+import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
+import SwiftUI
 
 @available(iOS 14.0, *)
 struct View12_ScrollViewContent: View {
     private let item: NavigationFeatureItem
-    
+
     init(_ item: NavigationFeatureItem) {
         self.item = item
     }
-    
+
     var body: some View {
         ColorScrollView()
-        .edgesIgnoringSafeArea(.top)
-        .navigationBarTitle(LocalizedStringKey(item.title))
-        .useNXNavigationView { configuration in
-            configuration.navigationBarAppearance.backgroundColor = .clear
-        }
+            .edgesIgnoringSafeArea(.top)
+            .navigationBarTitle(LocalizedStringKey(item.title))
+            .useNXNavigationView { configuration in
+                configuration.navigationBarAppearance.backgroundColor = .clear
+            }
     }
-    
+
     private var listView: some View {
         if #available(iOS 14.0, *) {
             return AnyView(ColorListView().ignoresSafeArea())
@@ -36,7 +37,7 @@ struct View12_ScrollViewContent: View {
 
 @available(iOS 14.0, *)
 #Preview {
-    NavigationView{
+    NavigationView {
         View12_ScrollViewContent(NavigationFeatureItem(style: .scrollViewContent))
     }
 }

@@ -5,9 +5,9 @@
 //  Created by lidan on 2021/10/25.
 //
 
-import SwiftUI
 import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
+import SwiftUI
 
 private enum PopType: String {
     case pop = "Pop"
@@ -22,11 +22,11 @@ private struct NavigationShowPopTypeView: View {
 
     @Binding private var isPresented: Bool
     @Binding private var popType: PopType
-    
+
     private let names: [String]
     private let context: NXNavigationRouter.Context
     private let onDismissed: (String) -> Void
-    
+
     init(names: [String],
          context: NXNavigationRouter.Context,
          popType: Binding<PopType>,
@@ -36,11 +36,11 @@ private struct NavigationShowPopTypeView: View {
         routeNames.insert("/", at: 0)
         self.names = routeNames
         self.context = context
-        self._popType = popType
-        self._isPresented = isPresented
+        _popType = popType
+        _isPresented = isPresented
         self.onDismissed = onDismissed
     }
-    
+
     var body: some View {
         GeometryReader { geometry in
             let width = CGFloat.minimum(geometry.size.width, geometry.size.height) * 0.8
@@ -66,21 +66,19 @@ private struct NavigationShowPopTypeView: View {
             }
         }
     }
-    
+
     private func canPop(_ routeName: String) -> Bool {
         if routeName == names[0] { return true }
         return NXNavigationRouter.of(context).destinationViewController(withRouteName: routeName, isReverse: true) != nil
     }
-    
+
     private func buttonDisabled(routeName: String, popType: PopType) -> Bool {
-        if routeName == names[0] && popType != .popUntil {
+        if routeName == names[0], popType != .popUntil {
             return true
         }
         return !canPop(routeName)
     }
-    
 }
-
 
 @available(iOS 14.0, *)
 private struct NavigationDestinationRouteView: View {
@@ -92,20 +90,20 @@ private struct NavigationDestinationRouteView: View {
     private let popTypes: [PopType] = [.pop, .popUntil, .popToFirstUntil, .popToLastUntil]
     private var randomDark = UIColor.randomDark
     private var randomLight = UIColor.randomLight
-    
+
     private var popRouteNames: [String] {
-        var names = self.names
+        var names = names
         names.insert(NavigationFeatureItem.Style.navigationRouter.rawValue, at: 0)
         return names
     }
-    
+
     private let title: String
-    
+
     init(title: String) {
         self.title = title
-        self.context = NXNavigationRouter.Context(routeName: title)
+        context = NXNavigationRouter.Context(routeName: title)
     }
-    
+
     var body: some View {
         ZStack {
             List {
@@ -118,8 +116,8 @@ private struct NavigationDestinationRouteView: View {
                         }
                     }
                 }
-                
-                ForEach(popTypes, id: \.self.rawValue) { type in
+
+                ForEach(popTypes, id: \.rawValue) { type in
                     Button {
                         switch type {
                         case .pop: NXNavigationRouter.of(context).pop()
@@ -131,7 +129,7 @@ private struct NavigationDestinationRouteView: View {
                         HStack {
                             Text(type.rawValue)
                             Spacer()
-                            
+
                             if type != .pop {
                                 Image(systemName: "chevron.right")
                             }
@@ -139,7 +137,7 @@ private struct NavigationDestinationRouteView: View {
                     }
                 }
             }.listStyle(.grouped)
-            
+
             if isPresented {
                 NavigationShowPopTypeView(names: popRouteNames, context: context, popType: $popType, isPresented: $isPresented) { routeName in
                     switch popType {
@@ -157,27 +155,25 @@ private struct NavigationDestinationRouteView: View {
             }
         }
         .navigationBarTitle(title)
-        .useNXNavigationView(context: $context,
-                             onPrepareConfiguration: { configuration in
+        .useNXNavigationView(context: $context, onPrepareConfiguration: { configuration in
             let userInterfaceStyle = configuration.viewControllerPreferences.traitCollection?.userInterfaceStyle ?? .light
             configuration.navigationBarAppearance.backgroundColor = userInterfaceStyle == .dark ? randomDark : randomLight
             configuration.navigationBarAppearance.useSystemBackButton = true
         })
     }
-    
 }
 
 @available(iOS 14.0, *)
 struct View08_NavigationRouter: View {
     private var randomDark = UIColor.randomDark
     private var randomLight = UIColor.randomLight
-    
+
     private let item: NavigationFeatureItem
-    
+
     init(_ item: NavigationFeatureItem) {
         self.item = item
     }
-    
+
     var body: some View {
         NavigationDestinationRouteView(title: item.title)
     }

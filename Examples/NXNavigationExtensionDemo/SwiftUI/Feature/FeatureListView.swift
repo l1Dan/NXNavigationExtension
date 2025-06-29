@@ -5,19 +5,18 @@
 //  Created by lidan on 2021/10/15.
 //
 
-
 import SwiftUI
 
 @available(iOS 14.0, *)
 struct FeatureListView: View {
     @Environment(\.colorScheme) private var colorScheme
     @State private var presentingModal = false
-    private let sections:[NavigationFeatureSection]
-    
+    private let sections: [NavigationFeatureSection]
+
     init(_ sections: [NavigationFeatureSection]) {
         self.sections = sections
     }
-    
+
     var body: some View {
         if #available(iOS 14.0, *) {
             listView().listStyle(.insetGrouped)
@@ -25,12 +24,12 @@ struct FeatureListView: View {
             listView().listStyle(.grouped)
         }
     }
-    
+
     private func listView() -> some View {
         List {
-            ForEach(sections, id:\.self.title) { section in
+            ForEach(sections, id: \.title) { section in
                 Section {
-                    ForEach(0..<section.items.count, id: \.self) { index in
+                    ForEach(0 ..< section.items.count, id: \.self) { index in
                         if section.items[index].style == .present {
                             Button(action: {
                                 presentingModal = true
@@ -56,7 +55,7 @@ struct FeatureListView: View {
             }
         }
     }
-    
+
     private func titleForItem(_ item: NavigationFeatureItem, at index: Int) -> String {
         return String(format: "%02zd: %@", index + 1, NSLocalizedString(item.title, comment: ""))
     }

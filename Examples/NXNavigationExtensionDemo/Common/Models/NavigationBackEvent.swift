@@ -8,24 +8,23 @@
 import Foundation
 
 class NavigationBackEvent {
-    
     enum State: String {
         case all, clickBackButton, clickBackButtonMenu, interactionGesture, callingNXPopMethod
     }
-    
+
     let state: NavigationBackEvent.State
-    
+
     var isSelected: Bool = false
-    
+
     var title: String {
-        return self.state.rawValue
+        return state.rawValue
     }
-    
+
     init(state: NavigationBackEvent.State, isSelected: Bool = false) {
         self.state = state
         self.isSelected = isSelected
     }
-    
+
     static var items: [NavigationBackEvent] {
         return [
             NavigationBackEvent(state: .all, isSelected: true),
@@ -35,5 +34,4 @@ class NavigationBackEvent {
             NavigationBackEvent(state: .callingNXPopMethod),
         ]
     }
-    
 }

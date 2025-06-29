@@ -11,20 +11,20 @@ import SwiftUI
 struct ColorScrollView: View {
     @Environment(\.colorScheme) private var colorScheme;
     @State private var selection = 0
-    
+
     private var taps = ["Tap1", "Tap2"]
     private let hasHeader: Bool
-    
+
     init(_ hasHeader: Bool = false) {
         self.hasHeader = hasHeader
     }
-    
+
     var body: some View {
         contentView(hasHeader: hasHeader)
     }
-    
+
     private func contentView(hasHeader: Bool) -> some View {
-        let list = ForEach(0..<30) { index in
+        let list = ForEach(0 ..< 30) { index in
             NavigationLink {
                 View07_UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBar))
             } label: {
@@ -42,15 +42,15 @@ struct ColorScrollView: View {
             }
             .frame(height: 40)
             .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
-            .background(Color( colorScheme == .dark ? UIColor.randomDark : UIColor.randomLight))
+            .background(Color(colorScheme == .dark ? UIColor.randomDark : UIColor.randomLight))
         }
-        
+
         return ScrollView {
             VStack {
                 if hasHeader {
                     Picker("", selection: $selection) {
-                        ForEach(0..<taps.count, id: \.self) { index in
-                            Text(self.taps[index]).tag(index)
+                        ForEach(0 ..< taps.count, id: \.self) { index in
+                            Text(taps[index]).tag(index)
                         }
                     }
                     .pickerStyle(.segmented)

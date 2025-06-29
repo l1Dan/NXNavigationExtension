@@ -17,9 +17,8 @@ enum SlidingSwipeDirectionAction {
     case right(handler: () -> Void)
 }
 
-
 @MainActor
-fileprivate class SlidingNavigationManager: NSObject {
+private class SlidingNavigationManager: NSObject {
     static let `default` = SlidingNavigationManager()
 
     private(set) lazy var animationController = SlidingAnimationController()
@@ -113,10 +112,10 @@ extension SlidingNavigationController {
                 let rightToLeftSwipe = velocity.x < 0
                 interactionController.isInteracting = true
                 interactionController.isRightToLeftSwipe = rightToLeftSwipe
-                if case let .right(handler) = currentViewController.swipeDirectionAction, rightToLeftSwipe {
+                if case .right(let handler) = currentViewController.swipeDirectionAction, rightToLeftSwipe {
                     handler()
                 }
-                if case let .left(handler) = currentViewController.swipeDirectionAction, !rightToLeftSwipe {
+                if case .left(let handler) = currentViewController.swipeDirectionAction, !rightToLeftSwipe {
                     handler()
                 }
             }

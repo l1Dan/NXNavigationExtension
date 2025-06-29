@@ -5,12 +5,10 @@
 //  Created by lidan on 2021/11/8.
 //
 
-import UIKit
 import NXNavigationExtension
+import UIKit
 
-class ViewController01_EdgePopGestureDisable: CustomTableViewController {
-
-}
+class ViewController01_EdgePopGestureDisable: CustomTableViewController {}
 
 extension ViewController01_EdgePopGestureDisable {
     func nx_navigationTransition(_ transitionViewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {

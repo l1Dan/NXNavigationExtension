@@ -5,13 +5,14 @@
 //  Created by lidan on 2021/10/15.
 //
 
-import SwiftUI
+import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
+import SwiftUI
 
 @available(iOS 14.0, *)
 struct View06_ShadowImage: View {
     private let item: NavigationFeatureItem
-    
+
     init(_ item: NavigationFeatureItem) {
         self.item = item
     }

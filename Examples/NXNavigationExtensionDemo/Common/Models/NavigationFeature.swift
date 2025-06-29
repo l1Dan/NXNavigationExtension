@@ -6,7 +6,6 @@
 //
 
 class NavigationFeatureItem {
-    
     enum Style: String {
         case backgroundColor
         case backgroundImage
@@ -21,9 +20,9 @@ class NavigationFeatureItem {
         case tableViewController // UIKit only
         case tableViewControllerWithFullScreen // UIKit only
         case customBlurNavigationBar // UIKit only
-        case listView// SwiftUI only
+        case listView // SwiftUI only
         case scrollViewContent // SwiftUI only
-        
+
         case edgePopGestureDisable
         case fullScreenPopGestureEnable
         case backButtonEventIntercept
@@ -35,42 +34,40 @@ class NavigationFeatureItem {
         case customViewControllerTransitionAnimation // UIKit only
         case navigationRouter // SwiftUI only
     }
-    
+
     let style: Style
-    
+
     var title: String {
-        return self.style.rawValue
+        return style.rawValue
     }
-    
+
     var showsDisclosureIndicator: Bool {
         return true
     }
-    
+
     init(style: Style) {
         self.style = style
     }
-    
 }
 
 class NavigationFeatureSection {
-    
     enum Style: String {
         case basic
         case advanced
     }
-    
+
     let style: Style
     let items: [NavigationFeatureItem]
-    
+
     var title: String {
-        return self.style.rawValue
+        return style.rawValue
     }
-    
+
     init(style: Style, items: [NavigationFeatureItem]) {
         self.style = style
         self.items = items
     }
-    
+
     static func sections(for uikit: Bool) -> [NavigationFeatureSection] {
         var basicItems = [
             NavigationFeatureItem(style: .backgroundColor),
@@ -84,7 +81,7 @@ class NavigationFeatureSection {
             NavigationFeatureItem(style: .fullScreenColor),
             NavigationFeatureItem(style: .present),
         ]
-        
+
         if uikit {
             basicItems.append(NavigationFeatureItem(style: .tableViewController))
             basicItems.append(NavigationFeatureItem(style: .tableViewControllerWithFullScreen))
@@ -94,7 +91,7 @@ class NavigationFeatureSection {
             basicItems.append(NavigationFeatureItem(style: .scrollViewContent))
         }
         let basicSection = NavigationFeatureSection(style: .basic, items: basicItems)
-        
+
         var advancedItems = [
             NavigationFeatureItem(style: .edgePopGestureDisable),
             NavigationFeatureItem(style: .fullScreenPopGestureEnable),
@@ -104,7 +101,7 @@ class NavigationFeatureSection {
             NavigationFeatureItem(style: .webView),
             NavigationFeatureItem(style: .updateNavigationBar),
         ]
-        
+
         if uikit {
             advancedItems.append(NavigationFeatureItem(style: .scrollChangeNavigationBar))
             advancedItems.append(NavigationFeatureItem(style: .customViewControllerTransitionAnimation))
@@ -112,8 +109,7 @@ class NavigationFeatureSection {
             advancedItems.append(NavigationFeatureItem(style: .navigationRouter))
         }
         let advancedSection = NavigationFeatureSection(style: .advanced, items: advancedItems)
-        
+
         return [basicSection, advancedSection]
     }
-    
 }

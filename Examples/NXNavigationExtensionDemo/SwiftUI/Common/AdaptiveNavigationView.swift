@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct AdaptiveNavigationView<Root> : View where Root : View {
-    private let root: (() -> Root)
-    
+struct AdaptiveNavigationView<Root>: View where Root: View {
+    private let root: () -> Root
+
     init(@ViewBuilder root: @escaping () -> Root) {
         self.root = root
     }

@@ -1,21 +1,23 @@
 //
-//  ContentView.swift
+//  SwiftUIContentView.swift
 //  NXNavigationExtensionDemo
 //
 //  Created by lidan on 2021/11/12.
 //
 
-import SwiftUI
+import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
+import SwiftUI
 
-struct ContentView: View {
+struct SwiftUIContentView: View {
     let sections = NavigationFeatureSection.sections(for: false)
-    
+
     var body: some View {
         AdaptiveNavigationView {
             if #available(iOS 14.0, *) {
                 FeatureListView(sections)
                     .navigationBarTitle("SwiftUI🎉🎉🎉")
+                    .navigationBarTitleDisplayMode(.inline)
                     .useNXNavigationView(onPrepareConfiguration: { configuration in
                         configuration.navigationBarAppearance.backgroundColor = .customDarkGray
                         configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -28,6 +30,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    SwiftUIContentView()
 }
-

@@ -5,9 +5,9 @@
 //  Created by lidan on 2021/10/18.
 //
 
-import SwiftUI
 import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
+import SwiftUI
 
 @available(iOS 14.0, *)
 struct View07_UpdateNavigationBar: View {
@@ -20,9 +20,9 @@ struct View07_UpdateNavigationBar: View {
     @State private var isLightTheme = true
 
     private static let buttonWidthAndHeight = 160.0
-    
+
     private let item: NavigationFeatureItem
-    
+
     private var randomColor: UIColor {
         if isLightTheme {
             return lightColor
@@ -30,24 +30,24 @@ struct View07_UpdateNavigationBar: View {
             return darkColor
         }
     }
-    
+
     init(_ item: NavigationFeatureItem) {
         self.item = item
-        self.context = NXNavigationRouter.Context(routeName: "/UpdateNavigationBar")
+        context = NXNavigationRouter.Context(routeName: "/UpdateNavigationBar")
     }
-    
+
     var body: some View {
         Button {
             count += 1
             title = "😜(\(count))"
             isLightTheme.toggle()
-            
+
             if isLightTheme {
                 lightColor = UIColor.randomLight
             } else {
                 darkColor = UIColor.randomDark
             }
-            
+
             NXNavigationRouter.of(context).setNeedsNavigationBarAppearanceUpdate()
         } label: {
             Text("Update")
@@ -55,7 +55,7 @@ struct View07_UpdateNavigationBar: View {
                 .frame(width: View07_UpdateNavigationBar.buttonWidthAndHeight, height: View07_UpdateNavigationBar.buttonWidthAndHeight)
         }
         .overlay(RoundedRectangle(cornerRadius: View07_UpdateNavigationBar.buttonWidthAndHeight * 0.5, style: .circular).strokeBorder(Color(randomColor), lineWidth: 5))
-        .navigationBarTitle(LocalizedStringKey(item.title))        
+        .navigationBarTitle(LocalizedStringKey(item.title))
         .useNXNavigationView(context: $context, onPrepareConfiguration: { configuration in
             configuration.navigationBarAppearance.useSystemBackButton = true
             configuration.navigationBarAppearance.tintColor = isLightTheme ? .black : .white
@@ -64,7 +64,6 @@ struct View07_UpdateNavigationBar: View {
             configuration.navigationBarAppearance.backgroundColor = randomColor
         })
     }
-    
 }
 
 @available(iOS 14.0, *)

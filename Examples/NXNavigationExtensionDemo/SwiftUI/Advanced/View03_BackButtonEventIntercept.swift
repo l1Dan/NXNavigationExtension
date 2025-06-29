@@ -5,31 +5,31 @@
 //  Created by lidan on 2021/10/17.
 //
 
-import SwiftUI
 import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
+import SwiftUI
 
 @available(iOS 14.0, *)
 struct View03_BackButtonEventIntercept: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.presentationMode) private var presentationMode;
-    
+
     @State private var context: NXNavigationRouter.Context = .init(routeName: "")
     @State private var navigationPopToViewController = false
     @State private var selectedItemType = NavigationBackEvent.State.all
-    @State private var isPresented: Bool = false
-    
+    @State private var isPresented = false
+
     private let events = NavigationBackEvent.items
     private let item: NavigationFeatureItem
-    
+
     init(_ item: NavigationFeatureItem) {
         self.item = item
     }
-    
+
     var body: some View {
         List {
             Section {
-                ForEach(events, id:\.self.title) { item in
+                ForEach(events, id: \.title) { item in
                     Button {
                         selectedItemType = item.state
                     } label: {
@@ -61,7 +61,7 @@ struct View03_BackButtonEventIntercept: View {
             let destructive = Alert.Button.destructive(Text(LocalizedStringKey("yes"))) {
                 presentationMode.wrappedValue.dismiss()
             }
-            return Alert(title:Text(LocalizedStringKey("tips")), message: Text(LocalizedStringKey("message")), primaryButton: destructive, secondaryButton: cancel)
+            return Alert(title: Text(LocalizedStringKey("tips")), message: Text(LocalizedStringKey("message")), primaryButton: destructive, secondaryButton: cancel)
         })
         .useNXNavigationView(context: $context, onPrepareConfiguration: { configuration in
             configuration.navigationBarAppearance.backgroundImage = UIImage(named: "NavigationBarBackground88")

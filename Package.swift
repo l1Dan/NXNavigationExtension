@@ -27,7 +27,7 @@ import PackageDescription
 let package = Package(
     name: "NXNavigationExtension",
     platforms: [
-        .iOS(.v14),
+        .iOS(.v14)
     ],
     products: [
         .library(name: "NXNavigationExtension", targets: ["NXNavigationExtension"]),
@@ -42,7 +42,7 @@ let package = Package(
                 CSetting.headerSearchPath("include"),
                 CSetting.headerSearchPath("Core"),
                 CSetting.headerSearchPath("Private"),
-                CSetting.headerSearchPath("Support SwiftUI"),
+                CSetting.headerSearchPath("Support SwiftUI")
             ],
             linkerSettings: [.linkedFramework("UIKit")]
         ),

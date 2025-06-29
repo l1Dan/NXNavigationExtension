@@ -5,20 +5,17 @@
 //  Created by lidan on 2021/11/8.
 //
 
+import NXNavigationExtension
 import UIKit
 
-class ViewController05_ShadowColor: BaseViewController {
-
-}
+class ViewController05_ShadowColor: BaseViewController {}
 
 extension ViewController05_ShadowColor {
-    
     override var nx_shadowColor: UIColor? {
         return .red
     }
-    
+
     override var nx_navigationBarBackgroundColor: UIColor? {
         return view.backgroundColor
     }
-    
 }
