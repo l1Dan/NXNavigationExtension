@@ -636,6 +636,15 @@
         }
     }
     
+    // 导航栏全透明或者导航栏 Disabled 的时候返回按钮隐藏
+    if (self.nx_translucentNavigationBar || self.nx_systemNavigationBarUserInteractionDisabled) {
+        UIBarButtonItem *backButton = self.navigationItem.leftBarButtonItem;
+        if (backButton && [backButton isKindOfClass:[NXBackButtonItem class]]) {
+            self.navigationItem.leftBarButtonItem = nil;
+        }
+        return;
+    }
+    
     // 使用系统返回按钮时移除自定义返回按钮
     if (self.nx_useSystemBackButton) {
         UIBarButtonItem *backButton = self.navigationItem.leftBarButtonItem;
