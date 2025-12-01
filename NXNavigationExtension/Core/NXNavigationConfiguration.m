@@ -24,7 +24,7 @@
 #import "NXNavigationConfiguration.h"
 #import "NXNavigationExtensionRuntime.h"
 
-// chevron.left@2x.png, SF Pro-Medium, compression, 默认颜色：tintColor = [UIColor whiteColor]
+// chevron.left@2x.png, SF Pro-Medium, compression
 static NSString *NXNavigationBarBackImageBase64Data = @"iVBORw0KGgoAAAANSUhEUgAAABQAAAAjCAMAAACjKNoqAAAAgVBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9d3yJTAAAAK3RSTlMA2QUR1K2xGAzHwaWblI+Ld2hQJ83Mu7e1n5iJfXJsY11IQC0dCINYOSIHKsEspwAAAKhJREFUKM990ckSgjAURNEEJKDMCDIo4Dz9/wcqnU06przLs3ld9YTds6h+bJZSlpaV8ptim+RSTjbCWt+0AtaRHWDKYQHZXVtk2h4Wk+XabgZ5GawnS2GJZ9oAG8gSWGrau4dlMN6SC6rGDcGpBVdnxkvt1AZ6Yt2u/2jlUmnpawN9sF61Hp06s4Y7aOnUydIWOrL6HbSwVNkboAGeL7ho0VTYmjVx+AEgOgfYXg2whAAAAABJRU5ErkJggg==";
 
 
@@ -46,9 +46,14 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
         _backgroundColor = [UIColor systemBlueColor];
         _useSystemBackButton = NO;
         _systemBackButtonTitle = @"";
-        _backImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
-        _landscapeBackImageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
         _imageData = [[NSData alloc] initWithBase64EncodedString:NXNavigationBarBackImageBase64Data options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        
+        UIEdgeInsets insets = UIEdgeInsetsMake(0, -8, 0, 0);
+        if (@available(iOS 26.0, *)) {
+            insets = UIEdgeInsetsZero;
+        }
+        _backImageInsets = insets;
+        _landscapeBackImageInsets = insets;
         
         _tintColor = [UIColor whiteColor];
         if (@available(iOS 13.0, *)) {
