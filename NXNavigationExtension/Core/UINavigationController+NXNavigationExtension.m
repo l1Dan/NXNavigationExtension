@@ -54,32 +54,30 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        if (@available(iOS 14.0, *)) {
-            NXNavigationExtensionOverrideImplementation([UINavigationController class],
-                                                        NSSelectorFromString(@"_tryRequestPopToItem:"),
-                                                        ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                return ^BOOL(UINavigationController *selfObject, UINavigationItem *item) {
-                    UIViewController *topViewController = selfObject.topViewController;
-                    if (selfObject.nx_useNavigationBar && topViewController) {
-                        UIViewController *destinationViewController = topViewController;
-                        for (UIViewController *viewController in selfObject.viewControllers) {
-                            if (viewController.navigationItem == item) {
-                                destinationViewController = viewController;
-                            }
-                        }
-                        
-                        if (![selfObject nx_viewController:topViewController preparePopViewController:destinationViewController navigationBackAction:NXNavigationBackActionClickBackButtonMenu]) {
-                            return NO;
+        NXNavigationExtensionOverrideImplementation([UINavigationController class],
+                                                    NSSelectorFromString(@"_tryRequestPopToItem:"),
+                                                    ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^BOOL(UINavigationController *selfObject, UINavigationItem *item) {
+                UIViewController *topViewController = selfObject.topViewController;
+                if (selfObject.nx_useNavigationBar && topViewController) {
+                    UIViewController *destinationViewController = topViewController;
+                    for (UIViewController *viewController in selfObject.viewControllers) {
+                        if (viewController.navigationItem == item) {
+                            destinationViewController = viewController;
                         }
                     }
                     
-                    // call super
-                    BOOL (*originSelectorIMP)(id, SEL, id);
-                    originSelectorIMP = (BOOL(*)(id, SEL, id))originalIMPProvider();
-                    return originSelectorIMP(selfObject, originCMD, item);
-                };
-            });
-        }
+                    if (![selfObject nx_viewController:topViewController preparePopViewController:destinationViewController navigationBackAction:NXNavigationBackActionClickBackButtonMenu]) {
+                        return NO;
+                    }
+                }
+                
+                // call super
+                BOOL (*originSelectorIMP)(id, SEL, id);
+                originSelectorIMP = (BOOL(*)(id, SEL, id))originalIMPProvider();
+                return originSelectorIMP(selfObject, originCMD, item);
+            };
+        });
         
         NXNavigationExtensionOverrideImplementation(NSClassFromString([NSString nx_stringByConcat:@"_", @"UINavigationBar", @"ContentView", nil]),
                                                     NSSelectorFromString(@"__backButtonAction:"),

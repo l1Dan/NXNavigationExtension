@@ -15,9 +15,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D64C12292CA996DA00D1BF15"
-               BuildableName = "NXNavigationExtension.framework"
-               BlueprintName = "NXNavigationExtension"
+               BlueprintIdentifier = "D64C12702CA9979F00D1BF15"
+               BuildableName = "NXNavigationExtensionSwiftUI.framework"
                ReferencedContainer = "container:NXNavigationExtension.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -39,7 +38,8 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
+      allowLocationSimulation = "YES"
+      queueDebuggingEnabled = "No">
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -50,9 +50,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D64C12292CA996DA00D1BF15"
-            BuildableName = "NXNavigationExtension.framework"
-            BlueprintName = "NXNavigationExtension"
+            BlueprintIdentifier = "D64C12702CA9979F00D1BF15"
+            BuildableName = "NXNavigationExtensionSwiftUI.framework"
             ReferencedContainer = "container:NXNavigationExtension.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

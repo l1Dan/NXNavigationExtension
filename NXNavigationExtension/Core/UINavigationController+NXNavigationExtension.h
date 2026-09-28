@@ -110,7 +110,7 @@ NS_SWIFT_UI_ACTOR
 - (void)nx_prepareConfigureViewControllersCallback:(NXViewControllerPrepareConfigurationCallback)callback;
 
 /// For SwiftUI，应用 NXNavigationVirtualWrapperView 实例对象的查找规则
-- (void)nx_applyFilterNavigationVirtualWrapperViewRuleCallback:(NXNavigationVirtualWrapperViewFilterCallback)callback API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+- (void)nx_applyFilterNavigationVirtualWrapperViewRuleCallback:(NXNavigationVirtualWrapperViewFilterCallback)callback;
 
 @end
 

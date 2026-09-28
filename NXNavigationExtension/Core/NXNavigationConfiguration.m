@@ -55,12 +55,9 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
         _backImageInsets = insets;
         _landscapeBackImageInsets = insets;
         
-        _tintColor = [UIColor whiteColor];
-        if (@available(iOS 13.0, *)) {
-            _tintColor = [UIColor colorWithDynamicProvider:^UIColor *_Nonnull(UITraitCollection *_Nonnull traitCollection) {
-                return (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) ? [UIColor whiteColor] : [UIColor blackColor];
-            }];
-        }
+        _tintColor = [UIColor colorWithDynamicProvider:^UIColor *_Nonnull(UITraitCollection *_Nonnull traitCollection) {
+            return (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) ? [UIColor whiteColor] : [UIColor blackColor];
+        }];
     }
     return self;
 }
@@ -91,15 +88,8 @@ static NSString *NXNavigationConfigurationCallbackKey = @"NXNavigationConfigurat
 }
 
 - (UIImage *)backImageWithData:(NSData *)imageData scale:(CGFloat)scale {
-    UIImage *backImage = nil;
-    if (@available(iOS 14.0, *)) {
-        UIImageSymbolConfiguration *imageSymbolConfiguration = [UIImageSymbolConfiguration configurationWithWeight:UIImageSymbolWeightMedium];
-        backImage = [UIImage systemImageNamed:@"chevron.backward" withConfiguration:imageSymbolConfiguration];
-    } else if (@available(iOS 13.0, *)) {
-        UIFont *font = [UIFont systemFontOfSize:18.0 weight:UIFontWeightSemibold];
-        UIImageSymbolConfiguration *imageSymbolConfiguration = [UIImageSymbolConfiguration configurationWithFont:font scale:UIImageSymbolScaleLarge];
-        backImage = [UIImage systemImageNamed:@"chevron.left" withConfiguration:imageSymbolConfiguration];
-    }
+    UIImageSymbolConfiguration *imageSymbolConfiguration = [UIImageSymbolConfiguration configurationWithWeight:UIImageSymbolWeightMedium];
+    UIImage *backImage = [UIImage systemImageNamed:@"chevron.backward" withConfiguration:imageSymbolConfiguration];
     
     if (!backImage && imageData) {
         backImage = [UIImage imageWithData:imageData scale:scale];

@@ -26,7 +26,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
 NS_SWIFT_NAME(NXNavigationRouter.Context) @interface NXNavigationRouterContext : NSObject
 
 /// 路由名称
@@ -45,7 +44,6 @@ NS_SWIFT_NAME(NXNavigationRouter.Context) @interface NXNavigationRouterContext :
 
 @end
 
-API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
 @interface NXNavigationRouter : NSObject
 
 /// 调用 `nx_` 开头的方法；比如：NXNavigationRouter.of(context).nx./pop()/popUntil("routeName")...

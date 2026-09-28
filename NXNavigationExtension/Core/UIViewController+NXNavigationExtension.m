@@ -245,11 +245,7 @@
 }
 
 - (void)nx_checkNavigationVirtualWrapperViewState {
-    if (@available(iOS 14.0, *)) {
-        self.nx_navigationVirtualWrapperViewNotFound = self.nx_navigationVirtualWrapperView ? NO : YES;
-    } else {
-        self.nx_navigationVirtualWrapperViewNotFound = YES;
-    }
+    self.nx_navigationVirtualWrapperViewNotFound = self.nx_navigationVirtualWrapperView ? NO : YES;
 }
 
 - (void)nx_configureNXNavigationBar {
@@ -270,16 +266,14 @@
 - (void)nx_configureNavigationVirtualWrapperView {
     if (self.nx_navigationVirtualWrapperViewNotFound) return;
     
-    if (@available(iOS 14.0, *)) {
-        NXNavigationVirtualWrapperViewFilterCallback callback = self.navigationController.nx_filterNavigationVirtualWrapperViewCallback;
-        if (callback && self.nx_canSetupNavigationBar && !self.nx_navigationVirtualWrapperViewInitialize) {
-            self.nx_navigationVirtualWrapperView = callback(self);
-            if (self.nx_navigationVirtualWrapperView) {
-                self.nx_navigationVirtualWrapperViewInitialize = YES;
-                // 调用外部配置信息
-                [self nx_executePrepareConfigurationNavigationVirtualWrapperViewCallback];
-                [self nx_setNeedsNavigationBarAppearanceUpdate];
-            }
+    NXNavigationVirtualWrapperViewFilterCallback callback = self.navigationController.nx_filterNavigationVirtualWrapperViewCallback;
+    if (callback && self.nx_canSetupNavigationBar && !self.nx_navigationVirtualWrapperViewInitialize) {
+        self.nx_navigationVirtualWrapperView = callback(self);
+        if (self.nx_navigationVirtualWrapperView) {
+            self.nx_navigationVirtualWrapperViewInitialize = YES;
+            // 调用外部配置信息
+            [self nx_executePrepareConfigurationNavigationVirtualWrapperViewCallback];
+            [self nx_setNeedsNavigationBarAppearanceUpdate];
         }
     }
 }
@@ -418,23 +412,21 @@
 }
 
 - (void)nx_executePrepareConfigurationNavigationVirtualWrapperViewCallback {
-    if (@available(iOS 14.0, *)) {
-        if ([self nx_canSetupNavigationBar] && self.nx_navigationVirtualWrapperViewInitialize) {
-            NXViewControllerPrepareConfigurationCallback callback = self.nx_navigationVirtualWrapperView.prepareConfigurationCallback;
-            if (callback) {
-                callback(self, self.nx_configuration);
-            }
+    if ([self nx_canSetupNavigationBar] && self.nx_navigationVirtualWrapperViewInitialize) {
+        NXViewControllerPrepareConfigurationCallback callback = self.nx_navigationVirtualWrapperView.prepareConfigurationCallback;
+        if (callback) {
+            callback(self, self.nx_configuration);
         }
     }
 }
 
 #pragma mark - Getter & Setter
 
-- (NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) {
+- (NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView {
     return objc_getAssociatedObject(self, _cmd);
 }
 
-- (void)setNx_navigationVirtualWrapperView:(NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) {
+- (void)setNx_navigationVirtualWrapperView:(NXNavigationVirtualWrapperView *)nx_navigationVirtualWrapperView {
     nx_navigationVirtualWrapperView.context.hostingController = self;
     self.nx_navigationTransitionDelegate = (id<NXNavigationTransitionDelegate>)nx_navigationVirtualWrapperView;
     objc_setAssociatedObject(self, @selector(nx_navigationVirtualWrapperView), nx_navigationVirtualWrapperView, OBJC_ASSOCIATION_ASSIGN);
@@ -478,20 +470,14 @@
         return titleTextAttributes;
     }
     
-    UIColor *color = [UIColor blackColor];
-    if (@available(iOS 13.0, *)) {
-        color = [UIColor colorWithDynamicProvider:^UIColor *_Nonnull(UITraitCollection *_Nonnull traitCollection) {
-            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                return [UIColor whiteColor];
-            }
-            return [UIColor blackColor];
-        }];
-    }
+    UIColor *color = [UIColor colorWithDynamicProvider:^UIColor *_Nonnull(UITraitCollection *_Nonnull traitCollection) {
+        if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+            return [UIColor whiteColor];
+        }
+        return [UIColor blackColor];
+    }];
     
-    titleTextAttributes = @{NSForegroundColorAttributeName: color};
-    if (@available(iOS 13.0, *)) {
-        titleTextAttributes = @{NSForegroundColorAttributeName: [color resolvedColorWithTraitCollection:self.view.traitCollection]};
-    }
+    titleTextAttributes = @{NSForegroundColorAttributeName: [color resolvedColorWithTraitCollection:self.view.traitCollection]};
     return titleTextAttributes;
 }
 

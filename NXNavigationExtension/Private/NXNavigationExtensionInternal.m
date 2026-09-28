@@ -353,7 +353,7 @@
     return delegate;
 }
 
-- (NXNavigationRouter *)nx_navigationRouter API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) {
+- (NXNavigationRouter *)nx_navigationRouter {
     NXNavigationRouter *navigationRouter = objc_getAssociatedObject(self, _cmd);
     if (!navigationRouter) {
         navigationRouter = [[NXNavigationRouter alloc] init];
@@ -461,13 +461,8 @@
             NSString *title = [currentViewController.nx_systemBackButtonTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             NXBackButtonItem *backItem = [[NXBackButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:nil action:nil];
             if ([title isEqualToString:@""]) {
-                if (@available(iOS 14.0, *)) {
-                    // 重置为 `nil`，可以支持 iOS14.0 新特性：长按返回按钮可以出现 Menu Actions
-                    lastViewController.navigationItem.backBarButtonItem = nil;
-                    lastViewController.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal;
-                } else {
-                    lastViewController.navigationItem.backBarButtonItem = backItem;
-                }
+                lastViewController.navigationItem.backBarButtonItem = nil;
+                lastViewController.navigationItem.backButtonDisplayMode = UINavigationItemBackButtonDisplayModeMinimal;
             } else {
                 // 自定义返回按钮标题
                 lastViewController.navigationItem.backBarButtonItem = backItem;

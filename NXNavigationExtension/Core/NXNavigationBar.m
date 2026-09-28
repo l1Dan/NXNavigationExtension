@@ -52,12 +52,7 @@
         _contentView.backgroundColor = [UIColor clearColor];
         _contentViewEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 8);
         
-        UIBlurEffect *effect;
-        if (@available(iOS 13.0, *)) {
-            effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemChromeMaterial];
-        } else {
-            effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
-        }
+        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemChromeMaterial];
         
         _backgroundEffectView = [[UIVisualEffectView alloc] initWithEffect:effect];
         _backgroundEffectView.hidden = YES;
