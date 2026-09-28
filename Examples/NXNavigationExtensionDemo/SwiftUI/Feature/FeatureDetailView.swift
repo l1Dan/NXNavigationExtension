@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct FeatureDetailView: View {
+
     private let item: NavigationFeatureItem
 
     init(_ item: NavigationFeatureItem) {
@@ -63,7 +63,6 @@ struct FeatureDetailView: View {
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     AdaptiveNavigationView {
         FeatureDetailView(NavigationFeatureItem(style: .scrollViewContent))

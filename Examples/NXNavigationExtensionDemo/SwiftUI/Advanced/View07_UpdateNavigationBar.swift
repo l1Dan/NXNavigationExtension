@@ -9,8 +9,8 @@ import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct View07_UpdateNavigationBar: View {
+
     @State private var context: NXNavigationRouter.Context
     @State private var title = "Custom"
     @State private var count = 0
@@ -66,7 +66,6 @@ struct View07_UpdateNavigationBar: View {
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     AdaptiveNavigationView {
         View07_UpdateNavigationBar(NavigationFeatureItem(style: .updateNavigationBar))

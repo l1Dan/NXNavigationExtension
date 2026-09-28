@@ -9,8 +9,8 @@ import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct View05_NavigationBarDisable: View {
+
     private let item: NavigationFeatureItem
 
     init(_ item: NavigationFeatureItem) {
@@ -37,7 +37,6 @@ struct View05_NavigationBarDisable: View {
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     AdaptiveNavigationView {
         View05_NavigationBarDisable(NavigationFeatureItem(style: .navigationBarDisable))

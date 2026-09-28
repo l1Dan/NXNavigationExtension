@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct UIKitContentView: UIViewControllerRepresentable {
+
     typealias UIViewControllerType = SlidingNavigationController
 
     func makeUIViewController(context: Context) -> SlidingNavigationController {

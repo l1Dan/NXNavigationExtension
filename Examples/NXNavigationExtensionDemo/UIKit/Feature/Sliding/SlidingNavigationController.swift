@@ -9,16 +9,19 @@ import UIKit
 
 @MainActor
 protocol SlidingInteractiveNavigation {
+
     var swipeDirectionAction: SlidingSwipeDirectionAction { get }
 }
 
 enum SlidingSwipeDirectionAction {
+
     case left(handler: () -> Void)
     case right(handler: () -> Void)
 }
 
 @MainActor
 private class SlidingNavigationManager: NSObject {
+
     static let `default` = SlidingNavigationManager()
 
     private(set) lazy var animationController = SlidingAnimationController()
@@ -26,6 +29,7 @@ private class SlidingNavigationManager: NSObject {
 }
 
 extension SlidingNavigationManager: UIViewControllerTransitioningDelegate {
+
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         var viewController: UIViewController? = presented
         if let presented = viewController as? SlidingNavigationController {
@@ -69,6 +73,7 @@ extension SlidingNavigationManager: UIViewControllerTransitioningDelegate {
 }
 
 class SlidingNavigationController: BaseNavigationController {
+
     private lazy var panGestureRecognizer: UIPanGestureRecognizer = {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         pan.delegate = self
@@ -84,6 +89,7 @@ class SlidingNavigationController: BaseNavigationController {
 }
 
 extension SlidingNavigationController {
+
     private var animationController: SlidingAnimationController {
         return SlidingNavigationManager.default.animationController
     }
@@ -94,6 +100,7 @@ extension SlidingNavigationController {
 }
 
 extension SlidingNavigationController {
+
     @objc
     private func handlePan(_ gesture: UIScreenEdgePanGestureRecognizer) {
         guard let gestureView = gesture.view else { return }
@@ -112,10 +119,10 @@ extension SlidingNavigationController {
                 let rightToLeftSwipe = velocity.x < 0
                 interactionController.isInteracting = true
                 interactionController.isRightToLeftSwipe = rightToLeftSwipe
-                if case .right(let handler) = currentViewController.swipeDirectionAction, rightToLeftSwipe {
+                if case let .right(handler) = currentViewController.swipeDirectionAction, rightToLeftSwipe {
                     handler()
                 }
-                if case .left(let handler) = currentViewController.swipeDirectionAction, !rightToLeftSwipe {
+                if case let .left(handler) = currentViewController.swipeDirectionAction, !rightToLeftSwipe {
                     handler()
                 }
             }
@@ -153,6 +160,7 @@ extension SlidingNavigationController {
 }
 
 extension SlidingNavigationController: UIGestureRecognizerDelegate {
+
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         guard viewControllers.count == 1,
               let pan = gestureRecognizer as? UIPanGestureRecognizer,

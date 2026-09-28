@@ -9,11 +9,9 @@ import NXNavigationExtension
 import UIKit
 
 class ViewController13_CustomBlurNavigationBar: CustomTableViewController {
+
     private lazy var gaussianBlurView: UIVisualEffectView = {
-        var effect = UIBlurEffect(style: .extraLight)
-        if #available(iOS 13.0, *) {
-            effect = UIBlurEffect(style: .systemChromeMaterial)
-        }
+        let effect = UIBlurEffect(style: .systemChromeMaterial)
         let gaussianBlurView = UIVisualEffectView(effect: effect)
         gaussianBlurView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -48,6 +46,7 @@ class ViewController13_CustomBlurNavigationBar: CustomTableViewController {
 }
 
 extension ViewController13_CustomBlurNavigationBar {
+
     override var nx_navigationBarBackgroundColor: UIColor? {
         return .clear
     }

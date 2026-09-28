@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 class ViewController03_BackButtonEventIntercept: BaseTableViewController {
+
     private static let heightForFooterInSection = CGFloat(60.0)
     private static let reuseIdentifier = String(describing: UITableViewCell.self)
 
@@ -105,6 +106,7 @@ class ViewController03_BackButtonEventIntercept: BaseTableViewController {
 }
 
 extension ViewController03_BackButtonEventIntercept {
+
     override var nx_shadowColor: UIColor? {
         return UIColor.customColor { .lightGray } darkModeColor: { .lightGray.withAlphaComponent(0.69) }
     }
@@ -115,6 +117,7 @@ extension ViewController03_BackButtonEventIntercept {
 }
 
 extension ViewController03_BackButtonEventIntercept {
+
     func nx_navigationTransition(_ transitionViewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
         print("navigationBackAction: \(action), viewController: \(transitionViewController)")
 

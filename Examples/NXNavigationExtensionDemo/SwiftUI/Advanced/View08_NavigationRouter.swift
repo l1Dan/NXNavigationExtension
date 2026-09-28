@@ -10,14 +10,15 @@ import NXNavigationExtensionSwiftUI
 import SwiftUI
 
 private enum PopType: String {
+
     case pop = "Pop"
     case popUntil = "PopUntil"
     case popToFirstUntil = "PopToFirstUntil"
     case popToLastUntil = "PopToLastUntil"
 }
 
-@available(iOS 14.0, *)
 private struct NavigationShowPopTypeView: View {
+
     @Environment(\.colorScheme) private var colorScheme
 
     @Binding private var isPresented: Bool
@@ -80,8 +81,8 @@ private struct NavigationShowPopTypeView: View {
     }
 }
 
-@available(iOS 14.0, *)
 private struct NavigationDestinationRouteView: View {
+
     @State private var isPresented = false
     @State private var popType: PopType = .pop
     @State private var context: NXNavigationRouter.Context
@@ -163,8 +164,8 @@ private struct NavigationDestinationRouteView: View {
     }
 }
 
-@available(iOS 14.0, *)
 struct View08_NavigationRouter: View {
+
     private var randomDark = UIColor.randomDark
     private var randomLight = UIColor.randomLight
 
@@ -179,7 +180,6 @@ struct View08_NavigationRouter: View {
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     AdaptiveNavigationView {
         View08_NavigationRouter(NavigationFeatureItem(style: .navigationRouter))

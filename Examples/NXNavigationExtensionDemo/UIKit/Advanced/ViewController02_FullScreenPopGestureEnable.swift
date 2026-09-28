@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 class ViewController02_FullScreenPopGestureEnable: BaseViewController {
+
     private lazy var contentView: UIStackView = {
         let contentView = UIStackView()
         contentView.axis = .vertical
@@ -62,6 +63,7 @@ class ViewController02_FullScreenPopGestureEnable: BaseViewController {
 }
 
 extension ViewController02_FullScreenPopGestureEnable {
+
     override var nx_enableFullScreenInteractivePopGesture: Bool {
         return true
     }

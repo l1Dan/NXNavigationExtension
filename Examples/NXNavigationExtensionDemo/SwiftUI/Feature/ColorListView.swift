@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct ColorListView: View {
+
     @Environment(\.colorScheme) private var colorScheme;
 
     var body: some View {
@@ -24,7 +24,6 @@ struct ColorListView: View {
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     AdaptiveNavigationView {
         ColorListView()

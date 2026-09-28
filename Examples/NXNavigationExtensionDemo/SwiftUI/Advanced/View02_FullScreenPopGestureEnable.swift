@@ -9,8 +9,8 @@ import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct View02_FullScreenPopGestureEnable: View {
+
     private let randomDark = UIColor.randomDark
     private let randomLight = UIColor.randomLight
     private let item: NavigationFeatureItem
@@ -30,7 +30,6 @@ struct View02_FullScreenPopGestureEnable: View {
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     AdaptiveNavigationView {
         View02_FullScreenPopGestureEnable(NavigationFeatureItem(style: .fullScreenPopGestureEnable))

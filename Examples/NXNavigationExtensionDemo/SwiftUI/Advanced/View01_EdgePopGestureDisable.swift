@@ -9,8 +9,8 @@ import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct View01_EdgePopGestureDisable: View {
+
     private let randomDark = UIColor.randomDark
     private let randomLight = UIColor.randomLight
     private let item: NavigationFeatureItem
@@ -34,7 +34,6 @@ struct View01_EdgePopGestureDisable: View {
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     AdaptiveNavigationView {
         View01_EdgePopGestureDisable(NavigationFeatureItem(style: .edgePopGestureDisable))

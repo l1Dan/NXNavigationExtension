@@ -10,21 +10,18 @@ import NXNavigationExtensionSwiftUI
 import SwiftUI
 
 struct SwiftUIContentView: View {
+
     let sections = NavigationFeatureSection.sections(for: false)
 
     var body: some View {
         AdaptiveNavigationView {
-            if #available(iOS 14.0, *) {
-                FeatureListView(sections)
-                    .navigationBarTitle("SwiftUI🎉🎉🎉")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .useNXNavigationView(onPrepareConfiguration: { configuration in
-                        configuration.navigationBarAppearance.backgroundColor = .customDarkGray
-                        configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-                    })
-            } else {
-                Text("Hello, NXNavigationExtension")
-            }
+            FeatureListView(sections)
+                .navigationBarTitle("SwiftUI🎉🎉🎉")
+                .navigationBarTitleDisplayMode(.inline)
+                .useNXNavigationView(onPrepareConfiguration: { configuration in
+                    configuration.navigationBarAppearance.backgroundColor = .customDarkGray
+                    configuration.navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+                })
         }
     }
 }

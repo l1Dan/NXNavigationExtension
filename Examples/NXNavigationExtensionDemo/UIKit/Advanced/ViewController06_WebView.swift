@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 
 class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
+
     private var estimatedProgressObservation: NSKeyValueObservation?
     private var titleObservation: NSKeyValueObservation?
 
@@ -140,20 +141,15 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
             progressView.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale)
         ])
 
-        if #available(iOS 13.0, *) {
-            webView.backgroundColor = UIColor(dynamicProvider: { [weak self] _ in
-                guard let self else { return .white }
-                if self.view.traitCollection.userInterfaceStyle == .dark {
-                    self.webView.isOpaque = false
-                    return .clear
-                }
-                self.webView.isOpaque = true
-                return .white
-            })
-        } else {
+        webView.backgroundColor = UIColor(dynamicProvider: { [weak self] _ in
+            guard let self else { return .white }
+            if view.traitCollection.userInterfaceStyle == .dark {
+                webView.isOpaque = false
+                return .clear
+            }
             webView.isOpaque = true
-            webView.backgroundColor = nil
-        }
+            return .white
+        })
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -174,12 +170,14 @@ class ViewController06_WebView: BaseViewController, WKNavigationDelegate {
 }
 
 extension ViewController06_WebView {
+
     override var nx_navigationBarBackgroundColor: UIColor? {
         return randomColor
     }
 }
 
 extension ViewController06_WebView {
+
     func nx_navigationTransition(_ transitionViewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
         if action != .interactionGesture, webView.canGoBack {
             webView.goBack()

@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 class ViewController08_CustomBackView: CustomTableViewController {
+
     private lazy var backButton: UIButton = {
         let isRightToLeft = navigationController?.navigationBar.semanticContentAttribute ?? .forceLeftToRight == .forceRightToLeft
         let image = isRightToLeft ? UIImage(systemName: "paperplane")?.imageFlippedForRightToLeftLayoutDirection() : UIImage(systemName: "paperplane")
@@ -20,6 +21,7 @@ class ViewController08_CustomBackView: CustomTableViewController {
 }
 
 extension ViewController08_CustomBackView {
+
     override var nx_backButtonCustomView: UIView? {
         return backButton
     }

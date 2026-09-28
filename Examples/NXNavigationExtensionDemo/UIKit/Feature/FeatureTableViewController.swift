@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 class FeatureTableViewController: BaseTableViewController {
+
     private static let reuseIdentifier = "FeatureTableViewCellIdentifer"
 
     private lazy var sections = NavigationFeatureSection.sections(for: true)
@@ -119,6 +120,7 @@ class FeatureTableViewController: BaseTableViewController {
 }
 
 extension FeatureTableViewController {
+
     override var nx_titleTextAttributes: [NSAttributedString.Key: Any]? {
         return [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
@@ -133,6 +135,7 @@ extension FeatureTableViewController {
 }
 
 extension FeatureTableViewController: SlidingInteractiveNavigation {
+
     var swipeDirectionAction: SlidingSwipeDirectionAction {
         return .left { [weak self] in
             self?.clickOpenDrawerButtonItem(nil)

@@ -8,6 +8,7 @@
 import UIKit
 
 class SlidingInteractionController: UIPercentDrivenInteractiveTransition {
+
     var isInteracting = false
     var isRightToLeftSwipe = false
 }

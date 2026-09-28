@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 class ViewController07_UpdateNavigationBar: BaseViewController {
+
     private static let randomColorButtonWidthAndHeight = CGFloat(160.0)
 
     private lazy var randomColorButton: UIButton = {
@@ -52,10 +53,7 @@ class ViewController07_UpdateNavigationBar: BaseViewController {
 
     private func updateRandomColorButtonState() {
         randomColorButton.layer.borderColor = currentRandom.cgColor
-        randomColorButton.setTitleColor(currentRandom, for: .normal)
-        if #available(iOS 13.0, *) {
-            randomColorButton.setTitleColor(currentRandom.resolvedColor(with: view.traitCollection), for: .normal)
-        }
+        randomColorButton.setTitleColor(currentRandom.resolvedColor(with: view.traitCollection), for: .normal)
     }
 
     convenience init() {
@@ -79,11 +77,7 @@ class ViewController07_UpdateNavigationBar: BaseViewController {
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            return isDarkMode ? .lightContent : .darkContent
-        } else {
-            return isDarkMode ? .lightContent : .default
-        }
+        return isDarkMode ? .lightContent : .darkContent
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -97,6 +91,7 @@ class ViewController07_UpdateNavigationBar: BaseViewController {
 }
 
 extension ViewController07_UpdateNavigationBar {
+
     override var nx_navigationBarBackgroundColor: UIColor? {
         return currentRandom
     }

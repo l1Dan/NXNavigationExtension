@@ -6,7 +6,9 @@
 //
 
 class NavigationFeatureItem {
+
     enum Style: String {
+
         case backgroundColor
         case backgroundImage
         case transparent
@@ -51,7 +53,9 @@ class NavigationFeatureItem {
 }
 
 class NavigationFeatureSection {
+
     enum Style: String {
+
         case basic
         case advanced
     }
@@ -79,7 +83,7 @@ class NavigationFeatureSection {
             NavigationFeatureItem(style: .customBackImage),
             NavigationFeatureItem(style: .customBackView),
             NavigationFeatureItem(style: .fullScreenColor),
-            NavigationFeatureItem(style: .present),
+            NavigationFeatureItem(style: .present)
         ]
 
         if uikit {
@@ -99,7 +103,7 @@ class NavigationFeatureSection {
             NavigationFeatureItem(style: .customNavigationBar),
             NavigationFeatureItem(style: .navigationBarDisable),
             NavigationFeatureItem(style: .webView),
-            NavigationFeatureItem(style: .updateNavigationBar),
+            NavigationFeatureItem(style: .updateNavigationBar)
         ]
 
         if uikit {

@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct ColorScrollView: View {
+
     @Environment(\.colorScheme) private var colorScheme;
     @State private var selection = 0
 
@@ -62,7 +62,6 @@ struct ColorScrollView: View {
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     AdaptiveNavigationView {
         ColorScrollView()

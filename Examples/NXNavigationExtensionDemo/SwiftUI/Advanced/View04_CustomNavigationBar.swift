@@ -9,8 +9,8 @@ import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct FakeNavigationView<Content>: View where Content: View {
+
     @Environment(\.presentationMode) private var presentationMode;
     @Environment(\.colorScheme) private var colorScheme;
 
@@ -78,8 +78,8 @@ struct FakeNavigationView<Content>: View where Content: View {
     }
 }
 
-@available(iOS 14.0, *)
 struct View04_CustomNavigationBar: View {
+
     private let item: NavigationFeatureItem
 
     init(_ item: NavigationFeatureItem) {
@@ -96,7 +96,6 @@ struct View04_CustomNavigationBar: View {
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     AdaptiveNavigationView {
         View04_CustomNavigationBar(NavigationFeatureItem(style: .customNavigationBar))

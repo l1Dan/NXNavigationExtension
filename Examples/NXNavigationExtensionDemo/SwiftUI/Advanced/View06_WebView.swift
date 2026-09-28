@@ -11,6 +11,7 @@ import SwiftUI
 import WebKit
 
 struct WebViewWrapperView: UIViewRepresentable {
+
     typealias UIViewType = WKWebView
 
     func makeUIView(context: Context) -> WKWebView {
@@ -23,8 +24,8 @@ struct WebViewWrapperView: UIViewRepresentable {
     }
 }
 
-@available(iOS 14.0, *)
 struct View06_WebView: View {
+
     private let item: NavigationFeatureItem
     private let randomColor = UIColor.randomLight
 
@@ -40,7 +41,6 @@ struct View06_WebView: View {
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     AdaptiveNavigationView {
         View06_WebView(NavigationFeatureItem(style: .webView))

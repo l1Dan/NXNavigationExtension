@@ -9,8 +9,8 @@ import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct View12_ScrollViewContent: View {
+
     private let item: NavigationFeatureItem
 
     init(_ item: NavigationFeatureItem) {
@@ -27,15 +27,10 @@ struct View12_ScrollViewContent: View {
     }
 
     private var listView: some View {
-        if #available(iOS 14.0, *) {
-            return AnyView(ColorListView().ignoresSafeArea())
-        } else {
-            return AnyView(ColorListView().edgesIgnoringSafeArea(.all))
-        }
+        return AnyView(ColorListView().ignoresSafeArea())
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     NavigationView {
         View12_ScrollViewContent(NavigationFeatureItem(style: .scrollViewContent))

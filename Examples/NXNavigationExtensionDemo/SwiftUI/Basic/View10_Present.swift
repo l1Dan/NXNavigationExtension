@@ -9,8 +9,8 @@ import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct View10_Present: View {
+
     @Environment(\.colorScheme) private var colorScheme
     @Binding private var presentedAsModal: Bool
 

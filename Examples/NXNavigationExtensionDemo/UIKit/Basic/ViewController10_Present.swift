@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 class ViewController10_Present: CustomTableViewController {
+
     private lazy var closeBarButtonItem: UIBarButtonItem = {
         let closeButton = UIButton(type: .custom)
         closeButton.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
@@ -25,11 +26,7 @@ class ViewController10_Present: CustomTableViewController {
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            return .darkContent
-        } else {
-            return .default
-        }
+        return .darkContent
     }
 
     @objc
@@ -39,6 +36,7 @@ class ViewController10_Present: CustomTableViewController {
 }
 
 extension ViewController10_Present {
+
     override var nx_navigationBarBackgroundColor: UIColor? {
         return .clear
     }

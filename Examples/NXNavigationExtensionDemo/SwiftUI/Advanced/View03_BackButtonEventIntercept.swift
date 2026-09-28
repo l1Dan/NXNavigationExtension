@@ -9,8 +9,8 @@ import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct View03_BackButtonEventIntercept: View {
+
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.presentationMode) private var presentationMode;
 
@@ -82,7 +82,6 @@ struct View03_BackButtonEventIntercept: View {
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     View03_BackButtonEventIntercept(NavigationFeatureItem(style: .backButtonEventIntercept))
 }

@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 class FullPopGesture_ScrollView: BaseViewController, UIScrollViewDelegate {
+
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isPagingEnabled = true
@@ -97,6 +98,7 @@ class FullPopGesture_ScrollView: BaseViewController, UIScrollViewDelegate {
 }
 
 extension FullPopGesture_ScrollView {
+
     override var nx_navigationBarBackgroundColor: UIColor? {
         return .clear
     }
@@ -111,6 +113,7 @@ extension FullPopGesture_ScrollView {
 }
 
 extension FullPopGesture_ScrollView {
+
     func nx_navigationTransition(_ transitionViewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
         if case .interactionGesture = action {
             return canBackAction

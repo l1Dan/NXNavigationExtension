@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 class BaseNavigationController: UINavigationController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
 //        view.semanticContentAttribute = .forceRightToLeft
@@ -31,6 +32,7 @@ class BaseNavigationController: UINavigationController {
 class OtherNavigationController: BaseNavigationController {}
 
 class BaseViewController: UIViewController {
+
     private lazy var dark = UIColor.randomDark
     private lazy var light = UIColor.randomLight
 
@@ -65,6 +67,7 @@ class BaseViewController: UIViewController {
 }
 
 extension BaseViewController: NXNavigationTransitionDelegate {
+
     override var nx_barTintColor: UIColor? {
         return .customTitle
     }

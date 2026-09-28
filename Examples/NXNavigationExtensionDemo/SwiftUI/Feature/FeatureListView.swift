@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct FeatureListView: View {
+
     @Environment(\.colorScheme) private var colorScheme
     @State private var presentingModal = false
     private let sections: [NavigationFeatureSection]
@@ -18,11 +18,7 @@ struct FeatureListView: View {
     }
 
     var body: some View {
-        if #available(iOS 14.0, *) {
-            listView().listStyle(.insetGrouped)
-        } else {
-            listView().listStyle(.grouped)
-        }
+        listView().listStyle(.insetGrouped)
     }
 
     private func listView() -> some View {
@@ -61,7 +57,6 @@ struct FeatureListView: View {
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     AdaptiveNavigationView {
         FeatureListView(NavigationFeatureSection.sections(for: false))

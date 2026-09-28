@@ -9,8 +9,8 @@ import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct View09_FullScreenColor: View {
+
     private let item: NavigationFeatureItem
 
     init(_ item: NavigationFeatureItem) {
@@ -26,15 +26,10 @@ struct View09_FullScreenColor: View {
     }
 
     private var colorView: some View {
-        if #available(iOS 14.0, *) {
-            return AnyView(Color(UIColor.randomLight).ignoresSafeArea())
-        } else {
-            return AnyView(Color(UIColor.randomLight).edgesIgnoringSafeArea(.all))
-        }
+        return AnyView(Color(UIColor.randomLight).ignoresSafeArea())
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     AdaptiveNavigationView {
         View09_FullScreenColor(NavigationFeatureItem(style: .fullScreenColor))

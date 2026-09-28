@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 class ViewController09_FullScreenColor: BaseViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = randomColor
@@ -20,6 +21,7 @@ class ViewController09_FullScreenColor: BaseViewController {
 }
 
 extension ViewController09_FullScreenColor {
+
     override var nx_barTintColor: UIColor? {
         return .white
     }

@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 class ViewController05_NavigationBarDisable: CustomTableViewController {
+
     private lazy var tableHeaderView = UIView(frame: .zero)
 
     private lazy var segmentedControl: UISegmentedControl = {
@@ -69,6 +70,7 @@ class ViewController05_NavigationBarDisable: CustomTableViewController {
 }
 
 extension ViewController05_NavigationBarDisable {
+
     override var nx_translucentNavigationBar: Bool {
         return true
     }

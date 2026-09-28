@@ -8,6 +8,7 @@
 import UIKit
 
 class HierarchyViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+
     private static let reuseIdentifier = String(describing: UITableViewCell.self)
     private static let chooseJumpTableViewHeight = CGFloat(44.0)
 
@@ -115,6 +116,7 @@ class HierarchyViewController: BaseViewController, UITableViewDelegate, UITableV
 }
 
 extension HierarchyViewController {
+
     static func show(from viewController: UIViewController?, viewControllers: [UIViewController]?, completionHandler: ((UIViewController?) -> Void)? = nil) {
         guard let viewController, let viewControllers, !viewControllers.isEmpty else {
             return

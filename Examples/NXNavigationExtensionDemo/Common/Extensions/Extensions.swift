@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 extension UIColor {
+
     private static var randomColor: UIColor {
         let red = CGFloat.random(in: 10 ... 350) / 360.0
         let green = CGFloat.random(in: 10 ... 350) / 360.0
@@ -82,54 +83,44 @@ extension UIColor {
     }
 
     static func customColor(lightModeColor: @escaping () -> UIColor, darkModeColor: @escaping () -> UIColor) -> UIColor {
-        if #available(iOS 13.0, *) {
-            return UIColor { traitCollection in
-                if traitCollection.userInterfaceStyle == .dark {
-                    return darkModeColor()
-                }
-                return lightModeColor()
+        return UIColor { traitCollection in
+            if traitCollection.userInterfaceStyle == .dark {
+                return darkModeColor()
             }
+            return lightModeColor()
         }
-        return lightModeColor()
     }
 }
 
 extension UIDevice {
+
     static var isPhoneDevice: Bool {
         return UIDevice.current.userInterfaceIdiom == .phone
     }
 }
 
 extension UIApplication {
+
     var currentKeyWindow: UIWindow? {
-        if #available(iOS 15.0, *) {
-            return connectedScenes
-                .filter { $0.activationState == .foregroundActive }
-                .first(where: { $0 is UIWindowScene })
-                .flatMap { $0 as? UIWindowScene }?.windows
-                .first(where: \.isKeyWindow)
-        } else {
-            return windows.filter { $0.isKeyWindow }.first
-        }
+        return connectedScenes
+            .filter { $0.activationState == .foregroundActive }
+            .first(where: { $0 is UIWindowScene })
+            .flatMap { $0 as? UIWindowScene }?.windows
+            .first(where: \.isKeyWindow)
     }
 
     var statusBarHeight: CGFloat {
-        if #available(iOS 13.0, *) {
-            return currentKeyWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        } else {
-            return UIApplication.shared.statusBarFrame.height
-        }
+        return currentKeyWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
     }
 
     func setStatusBarStyle(_ style: UIUserInterfaceStyle) {
-        if #available(iOS 13.0, *) {
-            currentKeyWindow?.overrideUserInterfaceStyle = style
-            currentKeyWindow?.setNeedsLayout()
-        }
+        currentKeyWindow?.overrideUserInterfaceStyle = style
+        currentKeyWindow?.setNeedsLayout()
     }
 }
 
 extension UIImage {
+
     @MainActor
     static var navigationBarBackground: UIImage? {
         let statusBarHeight = UIApplication.shared.statusBarHeight
@@ -138,12 +129,14 @@ extension UIImage {
 }
 
 extension String {
+
     var removeModuleName: String {
         return components(separatedBy: ".").last ?? ""
     }
 }
 
 extension NXNavigationTransitionState: @retroactive CustomStringConvertible {
+
     public var description: String {
         let prefix = "TransitionState: "
         switch self {

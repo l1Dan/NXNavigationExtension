@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 class ViewController11_TableViewController: BaseTableViewController {
+
     private static let reuseIdentifier = String(describing: UITableViewCell.self)
 
     override func viewDidLoad() {
@@ -52,12 +53,14 @@ class ViewController11_TableViewController: BaseTableViewController {
 }
 
 extension ViewController11_TableViewController {
+
     override var nx_shadowColor: UIColor? {
         return UIColor.customColor { .lightGray } darkModeColor: { .lightGray.withAlphaComponent(0.65) }
     }
 }
 
 extension ViewController11_TableViewController: SlidingInteractiveNavigation {
+
     var swipeDirectionAction: SlidingSwipeDirectionAction {
         return .right { [weak self] in
             self?.clickCloseDrawerButtonItem(nil)

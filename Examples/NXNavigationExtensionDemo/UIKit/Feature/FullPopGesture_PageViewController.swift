@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 class FullPopGesture_PageViewController: BaseViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+
     private lazy var pageViewController: UIPageViewController = {
         let options = [UIPageViewController.OptionsKey.spineLocation: UIPageViewController.SpineLocation.none]
         let viewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: options)
@@ -99,6 +100,7 @@ class FullPopGesture_PageViewController: BaseViewController, UIPageViewControlle
 }
 
 extension FullPopGesture_PageViewController {
+
     override var nx_navigationBarBackgroundColor: UIColor? {
         return .clear
     }
@@ -113,6 +115,7 @@ extension FullPopGesture_PageViewController {
 }
 
 extension FullPopGesture_PageViewController {
+
     func nx_navigationTransition(_ transitionViewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
         if case .interactionGesture = action {
             return canBackAction

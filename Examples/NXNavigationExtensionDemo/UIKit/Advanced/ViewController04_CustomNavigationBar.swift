@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 class ViewController04_CustomNavigationBar: CustomTableViewController {
+
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar(frame: .zero)
         searchBar.backgroundColor = .clear
@@ -117,6 +118,7 @@ class ViewController04_CustomNavigationBar: CustomTableViewController {
 }
 
 extension ViewController04_CustomNavigationBar {
+
     override var nx_barTintColor: UIColor? {
         return .clear
     }

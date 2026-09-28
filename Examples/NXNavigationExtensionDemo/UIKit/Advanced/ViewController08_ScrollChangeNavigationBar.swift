@@ -10,11 +10,16 @@ import UIKit
 
 @MainActor
 protocol FakeNavigationBarDelegate: AnyObject {
+
     func fakeNavigationBar(_ navigationBar: FakeNavigationBar, didClickNavigationItemWith itemType: FakeNavigationBar.ItemType)
 }
 
 class FakeNavigationBar: UIView {
-    enum ItemType { case back, add }
+
+    enum ItemType {
+
+        case back, add
+    }
 
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -117,6 +122,7 @@ class FakeNavigationBar: UIView {
 }
 
 class ViewController08_ScrollChangeNavigationBar: CustomTableViewController, FakeNavigationBarDelegate {
+
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "TableViewHeader"))
         imageView.sizeToFit()
@@ -205,14 +211,10 @@ class ViewController08_ScrollChangeNavigationBar: CustomTableViewController, Fak
         let alpha = CGFloat.maximum(0.0, CGFloat.minimum(1.0, (offsetY - imageViewHeight + navigationBarHeight) / nx_navigationBar.frame.height))
         barAlpha = alpha
 
-        if #available(iOS 13.0, *) {
-            if view.traitCollection.userInterfaceStyle == .dark {
-                barStyle = .lightContent
-            } else {
-                barStyle = alpha > 0.0 ? .darkContent : .lightContent
-            }
+        if view.traitCollection.userInterfaceStyle == .dark {
+            barStyle = .lightContent
         } else {
-            barStyle = alpha > 0.0 ? .default : .lightContent
+            barStyle = alpha > 0.0 ? .darkContent : .lightContent
         }
         setNeedsStatusBarAppearanceUpdate()
         nx_setNeedsNavigationBarAppearanceUpdate()
@@ -234,6 +236,7 @@ class ViewController08_ScrollChangeNavigationBar: CustomTableViewController, Fak
 }
 
 extension ViewController08_ScrollChangeNavigationBar {
+
     override var nx_barTintColor: UIColor? {
         return .clear
     }

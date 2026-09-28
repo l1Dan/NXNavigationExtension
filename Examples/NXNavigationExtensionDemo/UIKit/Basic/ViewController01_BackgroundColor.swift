@@ -9,12 +9,14 @@ import NXNavigationExtension
 import UIKit
 
 class ViewController01_BackgroundColor: CustomTableViewController {
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 }
 
 extension ViewController01_BackgroundColor {
+
     override var nx_barTintColor: UIColor? {
         return .white
     }

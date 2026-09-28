@@ -11,6 +11,7 @@ import UIKit
 class ViewController06_ShadowImage: BaseViewController {}
 
 extension ViewController06_ShadowImage {
+
     override var nx_shadowImage: UIImage? {
         return UIImage(named: "NavigationBarShadowImage")
     }

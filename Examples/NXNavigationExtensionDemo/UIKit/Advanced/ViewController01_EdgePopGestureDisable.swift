@@ -11,6 +11,7 @@ import UIKit
 class ViewController01_EdgePopGestureDisable: CustomTableViewController {}
 
 extension ViewController01_EdgePopGestureDisable {
+
     func nx_navigationTransition(_ transitionViewController: UIViewController, navigationBackAction action: NXNavigationBackAction) -> Bool {
         if case .interactionGesture = action {
             return false

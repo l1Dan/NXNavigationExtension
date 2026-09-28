@@ -9,6 +9,7 @@ import NXNavigationExtension
 import UIKit
 
 class BaseTableViewController: UITableViewController {
+
 //    override func viewDidLoad() {
 //        super.viewDidLoad()
 //        edgesForExtendedLayout = UIRectEdge(rawValue: 0)
@@ -32,6 +33,7 @@ class BaseTableViewController: UITableViewController {
 }
 
 class CustomTableViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+
     private static let reuseIdentifier = String(describing: UITableViewCell.self)
 
     private(set) lazy var tableView: UITableView = {
@@ -84,6 +86,7 @@ class CustomTableViewController: BaseViewController, UITableViewDelegate, UITabl
 }
 
 extension BaseTableViewController: NXNavigationTransitionDelegate {
+
     func nx_navigationTransition(_ transitionViewController: UIViewController, navigationTransitionState state: NXNavigationTransitionState) {
         print("\(type(of: transitionViewController)) - \(state.description)")
     }

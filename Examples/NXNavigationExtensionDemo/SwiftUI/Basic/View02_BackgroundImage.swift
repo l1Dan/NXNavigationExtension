@@ -9,8 +9,8 @@ import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct View02_BackgroundImage: View {
+
     @State private var isPresented = false
     private let item: NavigationFeatureItem
 
@@ -29,7 +29,6 @@ struct View02_BackgroundImage: View {
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     AdaptiveNavigationView {
         View02_BackgroundImage(NavigationFeatureItem(style: .backgroundImage))

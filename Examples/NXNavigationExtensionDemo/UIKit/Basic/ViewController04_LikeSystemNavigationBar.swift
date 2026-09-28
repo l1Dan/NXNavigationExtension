@@ -11,6 +11,7 @@ import UIKit
 class ViewController04_LikeSystemNavigationBar: CustomTableViewController {}
 
 extension ViewController04_LikeSystemNavigationBar {
+
     override var nx_navigationBarBackgroundColor: UIColor? {
 //        return .purple.withAlphaComponent(0.5)
         return .clear

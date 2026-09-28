@@ -9,8 +9,8 @@ import NXNavigationExtension
 import NXNavigationExtensionSwiftUI
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct View04_LikeSystemNavigationBar: View {
+
     private let item: NavigationFeatureItem
 
     init(_ item: NavigationFeatureItem) {
@@ -27,7 +27,6 @@ struct View04_LikeSystemNavigationBar: View {
     }
 }
 
-@available(iOS 14.0, *)
 #Preview {
     AdaptiveNavigationView {
         View04_LikeSystemNavigationBar(NavigationFeatureItem(style: .likeSystemNavigationBar))

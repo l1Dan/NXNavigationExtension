@@ -11,6 +11,7 @@ import UIKit
 class ViewController03_Transparent: CustomTableViewController {}
 
 extension ViewController03_Transparent {
+
     override var nx_navigationBarBackgroundColor: UIColor? {
         return .clear
     }

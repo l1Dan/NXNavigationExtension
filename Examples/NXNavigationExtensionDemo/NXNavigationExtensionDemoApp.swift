@@ -11,6 +11,7 @@ import SwiftUI
 
 @main
 struct NXNavigationExtensionDemoApp: App {
+
     init() {
         setupConfiguration()
     }
@@ -23,6 +24,7 @@ struct NXNavigationExtensionDemoApp: App {
 }
 
 extension NXNavigationExtensionDemoApp {
+
     private func setupConfiguration() {
         // For SlidingNavigationController
         let featureConfiguration = NXNavigationConfiguration.default
@@ -37,7 +39,6 @@ extension NXNavigationExtensionDemoApp {
         }
 
         // 自定义查找规则
-        @available(iOS 14.0, *)
         func configureWithCustomRule(for hostingController: UIViewController) -> NXNavigationVirtualView? {
             guard let view = hostingController.view else { return nil }
             if let navigationVirtualWrapperView = hostingController.nx_navigationVirtualWrapperView as? NXNavigationVirtualView {
@@ -64,18 +65,10 @@ extension NXNavigationExtensionDemoApp {
         }
 
         // For SwiftUI
-        var classes: [AnyClass] = []
-        if #available(iOS 15.0, *) {
-            classes = [
-                NSClassFromString("SwiftUI.SplitViewNavigationController"),
-                NSClassFromString("SwiftUI.UIKitNavigationController")
-            ].compactMap { $0 }
-        } else {
-            classes = [
-                NSClassFromString("SwiftUI.SplitViewNavigationController"),
-                UINavigationController.self
-            ].compactMap { $0 }
-        }
+        let classes = [
+            NSClassFromString("SwiftUI.SplitViewNavigationController"),
+            NSClassFromString("SwiftUI.UIKitNavigationController")
+        ].compactMap { $0 }
 
         NXNavigationConfiguration().registerNavigationControllerClasses(classes) { navigationController, configuration in
             // Default dynamic colors
@@ -93,13 +86,9 @@ extension NXNavigationExtensionDemoApp {
                 print("SwiftUI(viewController):", viewController, configuration)
             }
 
-            if #available(iOS 14.0, *) {
-                navigationController.nx_applyFilterNavigationVirtualWrapperViewRuleCallback { hostingController in
-//                    return configureWithCustomRule(for: hostingController)
-                    NXNavigationVirtualView.configureWithDefaultRule(for: hostingController)
-                }
-            } else {
-                // Fallback on earlier versions
+            navigationController.nx_applyFilterNavigationVirtualWrapperViewRuleCallback { hostingController in
+                //                    return configureWithCustomRule(for: hostingController)
+                NXNavigationVirtualView.configureWithDefaultRule(for: hostingController)
             }
 
             return configuration

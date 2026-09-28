@@ -9,12 +9,9 @@ import UIKit
 
 @MainActor
 class SlidingAnimationController: NSObject {
-    private lazy var backgroundColorView: UIVisualEffectView = {
-        var effect = UIBlurEffect(style: .extraLight)
-        if #available(iOS 13.0, *) {
-            effect = UIBlurEffect(style: .systemChromeMaterial)
-        }
 
+    private lazy var backgroundColorView: UIVisualEffectView = {
+        let effect = UIBlurEffect(style: .systemChromeMaterial)
         let backgroundColorView = UIVisualEffectView(effect: effect)
         backgroundColorView.alpha = 0.0
         return backgroundColorView
@@ -24,6 +21,7 @@ class SlidingAnimationController: NSObject {
 }
 
 extension SlidingAnimationController {
+
     private func executeForwardsAnimation(using transitionContext: UIViewControllerContextTransitioning?, fromVC: UIViewController, toVC: UIViewController) {
         let containerView = transitionContext?.containerView
 
@@ -68,6 +66,7 @@ extension SlidingAnimationController {
 }
 
 extension SlidingAnimationController: UIViewControllerAnimatedTransitioning {
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.25
     }
