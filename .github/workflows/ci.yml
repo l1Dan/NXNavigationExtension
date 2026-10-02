@@ -5,15 +5,15 @@ on: [push, pull_request]
 jobs:
   Pods:
     name: CocoaPods Lint
-    runs-on: macOS-15
+    runs-on: macOS-26
     env:
-      DEVELOPER_DIR: /Applications/Xcode_16.0.app
+      DEVELOPER_DIR: /Applications/Xcode_26.0.app
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Switch Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.0.app
+        run: sudo xcode-select -s /Applications/Xcode_26.0.app
 
       - name: Install CocoaPods
         run: gem install cocoapods --no-document --quiet
@@ -28,24 +28,24 @@ jobs:
 
   Demo:
     name: Run Demo
-    runs-on: macOS-15
+    runs-on: macOS-26
     env:
-      DEVELOPER_DIR: /Applications/Xcode_16.0.app
+      DEVELOPER_DIR: /Applications/Xcode_26.0.app
       WORKSPACE_NAME: NXNavigationExtension.xcworkspace
     strategy:
       matrix:
         swift_version: ["6.0"]
         scheme:
           - NXNavigationExtensionDemo
-        iosDestination: ["OS=18.0,name=iPhone 16 Pro"]
+        iosDestination: ["OS=26.0,name=iPhone 17 Pro"]
         macCatalystDestination: ["platform=macOS,arch=arm64,variant=Designed for iPad"]
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Switch Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.0.app
+        run: sudo xcode-select -s /Applications/Xcode_26.0.app
 
       - name: Run Demo
         run: |
@@ -55,9 +55,9 @@ jobs:
 
   Build:
     name: Build Library
-    runs-on: macOS-15
+    runs-on: macOS-26
     env:
-      DEVELOPER_DIR: /Applications/Xcode_16.0.app
+      DEVELOPER_DIR: /Applications/Xcode_26.0.app
       WORKSPACE_NAME: NXNavigationExtension.xcworkspace
     strategy:
       matrix:
@@ -68,10 +68,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Switch Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.0.app
+        run: sudo xcode-select -s /Applications/Xcode_26.0.app
 
       - name: Build as dynamic frameworks
         run: |
