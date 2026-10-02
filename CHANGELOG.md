@@ -1,5 +1,10 @@
 # CHANGELOG.md
 
+## 5.0.0
+1、适配 Xcode27，iOS27
+2、最低支持 iOS 版本为 iOS15
+3、移除过时 API 支持
+
 ## 4.2.5
 1、适配 Xcode26，iOS26
 Fixed: iOS26 下导航栏透明时或者导航栏不可用时返回按钮没有隐藏的问题

@@ -27,15 +27,16 @@
 
 ## 🌈 要求
 
-|   Version   | Minimum iOS / macOS Target | Requirements |
-| :---------: | :------------------------: | :----------: |
-| 4.2.6 Later |   iOS 12.0 / macOS 10.15   |   Xcode26    |
-| 4.2.5 Later |   iOS 12.0 / macOS 10.15   |   Xcode16    |
-| 4.1.7 Later |   iOS 12.0 / macOS 10.15   |   Xcode15    |
-| 4.1.5 Later |   iOS 11.0 / macOS 10.15   |   Xcode14    |
-|    4.1.4    |   iOS 9.0 / macOS 10.15    |   Xcode13    |
-|     3.x     |   iOS 9.0 / macOS 10.15    |      /       |
-|     2.x     |   iOS 11.0 / macOS 10.15   |      /       |
+|   Version   | Minimum iOS | Requirements |
+| :---------: | :---------: | :----------: |
+|     5.x     |  iOS 15.0   |   Xcode27    |
+| 4.2.6 Later |  iOS 12.0   |   Xcode26    |
+| 4.2.5 Later |  iOS 12.0   |   Xcode16    |
+| 4.1.7 Later |  iOS 12.0   |   Xcode15    |
+| 4.1.5 Later |  iOS 11.0   |   Xcode14    |
+|    4.1.4    |   iOS 9.0   |   Xcode13    |
+|     3.x     |   iOS 9.0   |      /       |
+|     2.x     |  iOS 11.0   |      /       |
 
 ## 🍭 优点
 
@@ -116,7 +117,7 @@ github "l1Dan/NXNavigationExtension"
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "4.2.7"))
+    .package(url: "https://github.com/l1Dan/NXNavigationExtension.git", .upToNextMajor(from: "5.0.0"))
 ]
 ```
 

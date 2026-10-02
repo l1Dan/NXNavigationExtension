@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name     = 'NXNavigationExtension'
-  spec.version  = '4.2.7'
+  spec.version  = '5.0.0'
   spec.summary  = '🔥 Lightweight, simple, and easy-to-use NavigationBar library.'
 
   spec.description  = <<-DESC
@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
   spec.author   = { 'Leo Lee' => 'l1dan@hotmail.com' }
   spec.social_media_url = 'https://github.com/l1Dan'
 
-  spec.ios.deployment_target  = '12.0'
+  spec.ios.deployment_target  = '15.0'
   spec.default_subspec = 'Sources'
   spec.swift_version = '6.0'
   spec.frameworks = 'UIKit'
@@ -26,7 +26,7 @@ Pod::Spec.new do |spec|
   end
 
   spec.subspec 'SwiftUI' do |ss|
-    ss.ios.deployment_target  = '14.0'
+    ss.ios.deployment_target  = '15.0'
     ss.source_files = 'NXNavigationExtensionSwiftUI/Core/*.swift'
     ss.frameworks   = 'SwiftUI'
     ss.dependency 'NXNavigationExtension/Sources'
